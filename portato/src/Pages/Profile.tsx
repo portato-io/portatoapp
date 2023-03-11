@@ -1,8 +1,7 @@
 import React, {ReactElement, FC} from "react";
-import {Box, Typography, Button} from "@mui/material";
-import SendIcon from '@mui/icons-material/Send';
+import {Box, Typography} from "@mui/material";
 
-const Home: FC<any> = (): ReactElement => {
+const Profile: FC<any> = (): ReactElement => {
     return (
         <Box sx={{
             flexGrow: 1,
@@ -11,10 +10,9 @@ const Home: FC<any> = (): ReactElement => {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
-            <Typography variant="h3">Home</Typography>
-
+            <Typography variant="h3">Profile</Typography>
         </Box>
     );
 };
 
-export default Home;
+export default Profile;

@@ -14,7 +14,7 @@ root.render(
   </React.StrictMode>
 );
 
-// Mehdi: If we want the app to work offline, we need register, 
+// Mehdi: If we want the app to work offline, we need register,
 // If not change to unregister()
 serviceWorkerRegistration.register();
 
