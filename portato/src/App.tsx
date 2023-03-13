@@ -4,6 +4,7 @@ import { createTheme } from "@mui/material/styles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import BottomBar from "./Components/BottomBar";
 
 // import routes
 import { routes as appRoutes } from "./routes";
@@ -12,7 +13,7 @@ import { routes as appRoutes } from "./routes";
 const theme = createTheme({
   palette: {
     primary: {
-      light: "#63b8ff",
+      light: "#fed206",
       main: "#0989e3",
       dark: "#005db0",
       contrastText: "#000",
@@ -44,7 +45,7 @@ const App: React.FC = () => (
               ))}
         </Routes>
       </Suspense>
-      <Footer />
+      <BottomBar />
     </Router>
     </Box>
   </ThemeProvider>

@@ -1,7 +1,7 @@
 import React, {ReactElement, FC} from "react";
 import {Box, Typography} from "@mui/material";
 
-const About: FC<any> = (): ReactElement => {
+const Send: FC<any> = (): ReactElement => {
     return (
         <Box sx={{
             flexGrow: 1,
@@ -10,9 +10,9 @@ const About: FC<any> = (): ReactElement => {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
-            <Typography variant="h3">Shippements</Typography>
+            <Typography variant="h3">Send</Typography>
         </Box>
     );
 };
 
-export default About;
+export default Send;
