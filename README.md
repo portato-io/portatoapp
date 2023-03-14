@@ -6,7 +6,6 @@ Instead of installing the toolchain on your system, another more scalable way is
 #### Docker
 In order to use the containerized toolchain you need to install Docker.
 - For Linux, install Docker Engine by following the instructions under [this link](https://docs.docker.com/engine/install/ubuntu/).
-Furthermore Docker needs to be executable by a non-root user. To enable this follow the [post installation step here](https://docs.docker.com/engine/install/linux-postinstall/)
 - For Windows, please install [Docker Desktop](https://docs.docker.com/desktop/release-notes/)
 
 #### VSCode
