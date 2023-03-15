@@ -1,18 +1,15 @@
-import React, {ReactElement, FC} from "react";
-import {Box, Typography} from "@mui/material";
+import React from "react";
 
-const About: FC<any> = (): ReactElement => {
-    return (
-        <Box sx={{
-            flexGrow: 1,
-            backgroundColor: 'whitesmoke',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Typography variant="h3">Shippements</Typography>
-        </Box>
-    );
+import { Typography } from 'antd';
+
+const { Title } = Typography;
+
+const About: React.FC = () => {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <Title level={2}>About</Title>
+    </div>
+  );
 };
 
 export default About;

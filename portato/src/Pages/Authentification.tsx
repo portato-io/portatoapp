@@ -1,20 +1,15 @@
-import React, {ReactElement, FC} from "react";
-import {Box, Typography, Button} from "@mui/material";
-import SendIcon from '@mui/icons-material/Send';
+import React from "react";
 
-const Authentification: FC<any> = (): ReactElement => {
-    return (
-        <Box sx={{
-            flexGrow: 1,
-            backgroundColor: 'whitesmoke',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Typography> This is Authentification</Typography>
-        </Box>     
-        
-    );
+import { Typography } from 'antd';
+
+const { Title } = Typography;
+
+const Authentification: React.FC = () => {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <Title level={2}>Authentification</Title>
+    </div>
+  );
 };
 
 export default Authentification;

@@ -9,7 +9,7 @@ import {
 
 const { Footer } = Layout;
 
-const BottomNavigation: React.FC = () => {
+const BottomBar: React.FC = () => {
   const [current, setCurrent] = useState<string>('home');
 
   const handleClick = (e: any) => {
@@ -36,4 +36,4 @@ const BottomNavigation: React.FC = () => {
   );
 };
 
-export default BottomNavigation;
+export default BottomBar;

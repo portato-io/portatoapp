@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width:400px) {
+  .HeaderMenu{
+    display: none;
+  }
+}
+@media (min-width:400px) {
+  .HeaderButton{
+      display: none;
+    }
+  
+}

@@ -1,18 +1,15 @@
-import React, {ReactElement, FC} from "react";
-import {Box, Typography} from "@mui/material";
+import React from "react";
 
-const Profile: FC<any> = (): ReactElement => {
-    return (
-        <Box sx={{
-            flexGrow: 1,
-            backgroundColor: 'whitesmoke',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Typography variant="h3">Profile</Typography>
-        </Box>
-    );
+import { Typography } from 'antd';
+
+const { Title } = Typography;
+
+const Profile: React.FC = () => {
+  return (
+    <div >
+      <Title level={2}>Profile</Title>
+    </div>
+  );
 };
 
 export default Profile;

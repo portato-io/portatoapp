@@ -1,71 +1,29 @@
-import React, {ReactElement, FC} from "react";
+import React from 'react';
+import { Typography, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import {Box, Typography, Button, Grid} from "@mui/material";
-import SendIcon from '@mui/icons-material/Send';
 
-const Home: FC<any> = (): ReactElement => {
-    const navigate = useNavigate();
-    return (
+const { Title } = Typography;
 
-        <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-            sx={{ height: '100vh' }}
-        >
-            <Grid item>
-                <Typography variant="h5" align="center" >
-                    What do you want to do ?
-                </Typography>
-            </Grid>
-            <Grid item sx={{textAlign: "center", width: "100%"}}>
-                <Button variant="contained" color="primary" onClick={()=>{navigate("/send")
-                }}>
-                    Send
-                </Button>
-            </Grid>
-            <Grid item sx={{textAlign: "center",width: "100%"}}>
-                <Button variant="contained" color="secondary" onClick={()=>{navigate("/deliver")
-                }}>
-                    Deliver
-                </Button>
-            </Grid>
-        
-        </Grid>
-        /*<Box sx={{
-            flexGrow: 1,
-            backgroundColor: 'whitesmoke',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Box sx={{
-                flexGrow: 1,
-                backgroundColor: 'whitesmoke',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Typography variant="h3">Home</Typography>
-                
+const Home: React.FC = () => {
+  const navigate = useNavigate();
 
-            </Box>
-            <Box sx={{  flexGrow: 1,
-                backgroundColor: 'whitesmoke',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                
-                <Button variant="contained"> Send </Button>
-                <Button variant="contained"> Deliver </Button> 
+  const handleSendClick = () => {
+    navigate('/send');
+  };
 
-            </Box>
-        </Box> */    
-        
-    );
+  const handleDeliverClick = () => {
+    navigate('/deliver');
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <Title level={2} style={{ textAlign: 'center' }}>What do you want to do?</Title>
+      <div style={{ display: 'flex', marginTop: '24px' }}>
+        <Button type="primary" size="large" style={{ marginRight: '16px' }} onClick={handleSendClick}>Send</Button>
+        <Button size="large" onClick={handleDeliverClick}>Deliver</Button>
+      </div>
+    </div>
+  );
 };
 
 export default Home;
