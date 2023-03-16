@@ -7,10 +7,14 @@ import BottomNavigation from "./Components/BottomBar";
 import SideNavigator from "./Components/SideBarNav";
 import ButtomHeaderBar from "./Components/ButtonHeaderBar";
 import {MenuOutlined} from "@ant-design/icons"
+import {Layout} from "antd";
+
 
 // import routes
 import { routes as appRoutes } from "./routes";
 
+
+const { Header } = Layout;
 
 const App: React.FC = () => {
   
@@ -19,12 +23,7 @@ const App: React.FC = () => {
   return (
     <div>
       <Router>
-        <span className = "HeaderMenu">
-          <HeaderBar />
-        </span>
-        <span className="HeaderButton">
-        <ButtomHeaderBar setOpenMenu = {setOpenMenu} />
-        </span>       
+        
             <SideNavigator openMenu = {openMenu} setOpenMenu = {setOpenMenu} />
               <Suspense fallback={<div>Loading...</div>}>
                 <Routes>

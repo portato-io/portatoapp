@@ -1,17 +1,13 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { Layout, Menu } from 'antd';
 import { HomeOutlined, MailOutlined, DeliveredProcedureOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
 
-const { Header } = Layout;
-
-
-
 function HeaderBar({isInline = false, setOpenMenu}:any){
   const navigate = useNavigate();
   return (
-    <div style={{height : "100vh"}}>
+    <div style={{height : "100vh",width:"100%"}}>
       <Menu
           onClick={({key}) =>{
               navigate(key);
@@ -45,6 +41,12 @@ function HeaderBar({isInline = false, setOpenMenu}:any){
               icon: <UserOutlined />,
               label: 'Profile',
             },
+            {
+              key: '/about',
+              label: 'About',
+              
+            }
+
           ]
           
         }>
