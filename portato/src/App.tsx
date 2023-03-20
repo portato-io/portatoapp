@@ -17,13 +17,13 @@ import { routes as appRoutes } from "./routes";
 const { Header } = Layout;
 
 const App: React.FC = () => {
-  
+
   const [openMenu, setOpenMenu] = useState(false)
-  
+
   return (
     <div>
       <Router>
-        
+
             <SideNavigator openMenu = {openMenu} setOpenMenu = {setOpenMenu} />
               <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
@@ -36,7 +36,7 @@ const App: React.FC = () => {
                       ))}
                 </Routes>
               </Suspense>
-          </Router>    
+          </Router>
     </div>
   );
 };

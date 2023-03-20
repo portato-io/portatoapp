@@ -23,14 +23,14 @@ function HeaderBar({isInline = false, setOpenMenu}:any){
               key: '/',
               icon: <HomeOutlined />,
               label: 'Home',
-              
-            },  
+
+            },
             {
               key: '/chat',
               icon: <MailOutlined />,
               label: 'Chat',
-              
-            },  
+
+            },
             {
               key: '/shippments',
               icon: <DeliveredProcedureOutlined />,
@@ -44,14 +44,14 @@ function HeaderBar({isInline = false, setOpenMenu}:any){
             {
               key: '/about',
               label: 'About',
-              
+
             }
 
           ]
-          
+
         }>
       </Menu>
-    </div> 
+    </div>
   );
 };
 

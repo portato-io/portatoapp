@@ -20,7 +20,7 @@ const MainLayout = (props: Props) => {
           </span>
           <span className="HeaderButton">
           <ButtomHeaderBar setOpenMenu = {setOpenMenu} />
-        </span>   
+        </span>
       </Header>
       <SideBarNav openMenu = {openMenu} setOpenMenu = {setOpenMenu} />
       <Content className="layout-children">

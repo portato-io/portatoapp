@@ -4,12 +4,12 @@ import { MenuOutlined } from '@ant-design/icons';
 
 
 function ButtomHeaderBar({setOpenMenu}:any){
-  
+
   return (
-    <div 
+    <div
     className='MenuButton'
     style={{height : "100vh" }}>
-      
+
       <div
       style={{textAlign: 'right',backgroundColor : "#1875BC", height : 50,fontSize :20}}
       >
