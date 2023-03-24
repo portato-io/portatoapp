@@ -32,9 +32,9 @@ function HeaderBar({isInline = false, setOpenMenu}:any){
 
             },
             {
-              key: '/shippments',
+              key: '/shipments',
               icon: <DeliveredProcedureOutlined />,
-              label: 'Shippments',
+              label: 'Shipments',
             },
             {
               key: '/profile',

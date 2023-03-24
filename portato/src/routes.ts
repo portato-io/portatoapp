@@ -9,6 +9,8 @@ const Profile = lazy(() => import('./Pages/Profile'))
 const Send = lazy(() => import('./Pages/Send'));
 const Deliver = lazy(() => import('./Pages/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
+const Shipments = lazy(() => import('./Pages/Shipments'));
+
 
 
 
@@ -63,5 +65,12 @@ export const routes: Array<Route> = [
         path: '/chat',
         enabled: true,
         component: Chat
+    },
+    {
+        key: 'shipments-route',
+        title: 'Shipments',
+        path: '/shipments',
+        enabled: true,
+        component: Shipments
     }
 ]

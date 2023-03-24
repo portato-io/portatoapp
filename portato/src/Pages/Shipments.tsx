@@ -5,14 +5,14 @@ import { Typography } from 'antd';
 
 const { Title } = Typography;
 
-const Profile: React.FC = () => {
+const Shipments: React.FC = () => {
   return (
     <PageLayout>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <Title level={2}>Profile</Title>
+      <Title level={2}>Shipments</Title>
     </div>
     </PageLayout>
   );
 };
 
-export default Profile;
+export default Shipments;
