@@ -9,12 +9,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
     <App />
-  </React.StrictMode>
 );
 
-// Mehdi: If we want the app to work offline, we need register, 
+// Mehdi: If we want the app to work offline, we need register,
 // If not change to unregister()
 serviceWorkerRegistration.register();
 
