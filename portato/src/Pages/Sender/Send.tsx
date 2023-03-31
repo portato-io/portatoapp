@@ -1,6 +1,6 @@
 import React from "react";
-import PageLayout from "./PageLayout"
-import NextButton from "../Components/NextButton";
+import PageLayout from "../PageLayout"
+import NextButton from "../../Components/NextButton";
 import { Typography, Form, DatePicker, Upload, Input, Radio} from 'antd';
 import {PlusOutlined} from "@ant-design/icons"
 
@@ -9,6 +9,8 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const Send: React.FC = () => {
+  const nextScreen = "/enter_address"
+
   return (
     <PageLayout>
         <Title style={{textAlign: 'center'}}> What would you like to ship</Title>
@@ -65,8 +67,7 @@ const Send: React.FC = () => {
             </Upload>
           </Form.Item>
         </Form>
-
-        <NextButton/>
+        <NextButton nextScreen = {nextScreen} />
     </PageLayout>
   );
 };
