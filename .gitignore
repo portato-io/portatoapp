@@ -118,5 +118,4 @@ docs/build
 
 # Data
 *.pdf
-*.jpg
-*.png
+*.jpg   
