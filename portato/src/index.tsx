@@ -13,16 +13,15 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-require('dotenv').config();
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "portatoapp.firebaseapp.com",
   databaseURL: "https://portatoapp-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "portatoapp",
   storageBucket: "portatoapp.appspot.com",
   messagingSenderId: "22027928847",
-  appId: "1:22027928847:web:c98f61498ea7101d6f2a7a",
-  measurementId: "G-0XSWEVBGXP"
+  appId: "1:22027928847:web:3588209ce56727486f2a7a",
+  measurementId: "G-Y4VZJ8CMPY"
 };
 
 // Initialize Firebase
