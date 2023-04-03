@@ -1,13 +1,16 @@
 import React from "react";
 import PageLayout from "../PageLayout"
 import NextButton from "../../Components/NextButton";
-import { Typography, Form, Input} from 'antd';
+import { Typography, Form, DatePicker, Radio, Checkbox} from 'antd';
 import {SearchOutlined} from '@ant-design/icons'
 
 const { Title } = Typography;
+const { RangePicker } = DatePicker;
+const plainOptions = ['Morning', 'Mid day', 'Evenings'];
+const CheckboxGroup = Checkbox.Group;
 
-const EnterAddress: React.FC = () => {
-    const nextScreen = "/enter_time"
+const EnterTime: React.FC = () => {
+    const nextScreen = "/enter_price"
     return (
         <PageLayout>
             <Form
@@ -16,18 +19,12 @@ const EnterAddress: React.FC = () => {
             layout="horizontal"
             style={{ maxWidth: 600 }}
             >
-            <Title style={{textAlign: 'center'}}>Pick-up address</Title>
-            <Form.Item
-                name="Pickup address"
-            >
-                <Input prefix = {<SearchOutlined/>}/>
+            <Form.Item label = "Dates">
+                <RangePicker />
             </Form.Item>
 
-            <Title style={{textAlign: 'center'}}>Delivery address</Title>
-            <Form.Item
-                name="Delivery address"
-            >
-                <Input prefix = {<SearchOutlined/>}/>
+            <Form.Item label = "Time">
+                <CheckboxGroup options={plainOptions}/>
             </Form.Item>
 
             </Form>
@@ -37,4 +34,4 @@ const EnterAddress: React.FC = () => {
   );
 };
 
-export default EnterAddress;
+export default EnterTime;

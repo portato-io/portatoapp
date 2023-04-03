@@ -2,6 +2,8 @@ import {lazy} from "react";
 
 // other
 import {FC} from "react";
+
+
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
@@ -11,6 +13,9 @@ const Deliver = lazy(() => import('./Pages/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
 const Shipments = lazy(() => import('./Pages/Shipments'));
 const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
+const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
+const EnterPrice = lazy(()=> import('./Pages/Sender/EnterPrice'));
+const Summary = lazy(()=>import("./Pages/Sender/Summary"));
 
 
 
@@ -80,5 +85,26 @@ export const routes: Array<Route> = [
         path: '/enter_address',
         enabled: true,
         component: EnterAddress
+    },
+    {
+        key: 'enterTime-route',
+        title: 'EnterTime',
+        path: '/enter_time',
+        enabled: true,
+        component: EnterTime
+    },
+    {
+        key: 'enterPrice-route',
+        title: 'EnterPrice',
+        path: '/enter_price',
+        enabled: true,
+        component: EnterPrice
+    },
+    {
+        key: 'summary-route',
+        title: 'Summary',
+        path: '/summary',
+        enabled: true,
+        component: Summary
     }
 ]

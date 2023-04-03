@@ -23,7 +23,6 @@ const App: React.FC = () => {
   return (
     <div>
       <Router>
-
             <SideNavigator openMenu = {openMenu} setOpenMenu = {setOpenMenu} />
               <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
