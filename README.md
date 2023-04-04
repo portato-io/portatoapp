@@ -2,11 +2,32 @@
 
 ## How to build
 
+Execute the following command to build the application locally:
 
+```
+cd portato
+npm install
+npm start
+```
 
 ## Deployment with Firebase
 
+Start by adding the API key to your environment file. To do so, create a .env.local in the portato directory if you don't already have it.
 
+Add the following to your environment file:
+```
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key_here
+```
+Then go to the [firebase project settings](https://console.firebase.google.com/project/portatoapp/settings/general/web:MDIyZWQwZjktMjRlNy00ZjNmLWFhOTgtYWRjMWRkZWEyOGFk) and copy the API key to your environment file includeing the quotation marks.
+
+Then to deploy run the following commands within the portato directory:
+
+```
+npm install
+npm run build
+firebase login
+firebase deploy
+```
 
 ### Pre-commit hook
 
