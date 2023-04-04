@@ -1,5 +1,11 @@
 # portatoapp
+
+## How to build
+
+
  
+## Deployment with Firebase
+
 
 
 ### Pre-commit hook
