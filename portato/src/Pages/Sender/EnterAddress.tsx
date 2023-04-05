@@ -1,6 +1,7 @@
 import React from "react";
 import PageLayout from "../PageLayout"
-import NextButton from "../../Components/NextButton";
+import NextButton from "../../Components/Buttons/NextButton";
+import BackButton from "../../Components/Buttons/BackButton";
 import { Typography, Form, Input} from 'antd';
 import {SearchOutlined} from '@ant-design/icons'
 
@@ -11,12 +12,12 @@ const EnterAddress: React.FC = () => {
     return (
         <PageLayout>
             <Form
+            className="form-sender"
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
             layout="horizontal"
-            style={{ maxWidth: 600 }}
             >
-            <Title style={{textAlign: 'center'}}>Pick-up address</Title>
+            <Title style={{backgroundColor:"white", textAlign: 'center'}}>Pick-up address</Title>
             <Form.Item
                 name="Pickup address"
             >
@@ -33,6 +34,7 @@ const EnterAddress: React.FC = () => {
             </Form>
 
             <NextButton nextScreen = {nextScreen}/>
+            <BackButton/>
         </PageLayout>
   );
 };

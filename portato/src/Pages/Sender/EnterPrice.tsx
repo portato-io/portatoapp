@@ -1,6 +1,7 @@
 import React from "react";
 import PageLayout from "../PageLayout"
-import NextButton from "../../Components/NextButton";
+import NextButton from "../../Components/Buttons/NextButton";
+import BackButton from "../../Components/Buttons/BackButton";
 import { Typography, Form, Input, Card} from 'antd';
 import {InfoCircleOutlined} from '@ant-design/icons'
 
@@ -11,10 +12,10 @@ const EnterPrice: React.FC = () => {
     return (
         <PageLayout>
             <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
+            className="form-sender"
+            //labelCol={{ span: 4 }}
+            //wrapperCol={{ span: 14 }}
             layout="horizontal"
-            style={{ maxWidth: 600 }}
             >
                 <Title > How much is the transport cost for you?</Title>
                 <Form.Item
@@ -22,8 +23,8 @@ const EnterPrice: React.FC = () => {
                 >
                     <Input placeholder="E.g : 30 CHF"/>
                 </Form.Item>
-                <Form.Item>
-                    <Card bordered={true}>
+                <Form.Item >
+                    <Card bordered={true} style={{background:"#F8F9FE",width:"80%", left:'10%'}}>
                         <div style={{textAlign:"center"}}>
                             <InfoCircleOutlined />
                         </div>
@@ -34,7 +35,10 @@ const EnterPrice: React.FC = () => {
                 </Form.Item>
             </Form>
 
-            <NextButton nextScreen = {nextScreen}/>
+
+                <NextButton nextScreen = {nextScreen}/>
+                <BackButton/>
+
         </PageLayout>
   );
 };

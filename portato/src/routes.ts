@@ -8,7 +8,7 @@ import {FC} from "react";
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
 const Profile = lazy(() => import('./Pages/Profile'))
-const Send = lazy(() => import('./Pages/Sender/Send'));
+const EnterObjInfo = lazy(() => import('./Pages/Sender/EnterObjInfo'));
 const Deliver = lazy(() => import('./Pages/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
 const Shipments = lazy(() => import('./Pages/Shipments'));
@@ -52,11 +52,11 @@ export const routes: Array<Route> = [
         component: Profile
     },
     {
-        key: 'send-route',
-        title: 'Send',
-        path: '/send',
+        key: 'enterObjInfo-route',
+        title: 'EnterObjInfo',
+        path: '/enterObjInfo',
         enabled: true,
-        component: Send
+        component: EnterObjInfo
     },
     {
         key: 'deliver-route',

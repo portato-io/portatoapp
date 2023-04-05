@@ -1,6 +1,7 @@
 import React from "react";
 import PageLayout from "../PageLayout"
-import NextButton from "../../Components/NextButton";
+import NextButton from "../../Components/Buttons/NextButton";
+import BackButton from "../../Components/Buttons/BackButton";
 import { Typography, Form, DatePicker, Upload, Input, Radio} from 'antd';
 import {PlusOutlined} from "@ant-design/icons"
 
@@ -8,24 +9,25 @@ const { Title } = Typography;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-const Send: React.FC = () => {
+
+const EnterObjInfo: React.FC = () => {
   const nextScreen = "/enter_address"
 
   return (
     <PageLayout>
-        <Title style={{textAlign: 'center'}}> What would you like to ship</Title>
+        <Title style={{background: "#fff", textAlign: 'center'}}> What would you like to ship</Title>
         <Form
+          className="form-sender"
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
-          style={{ maxWidth: 600 }}
         >
           <Form.Item
             label="Name"
             name="name"
             rules={[{ required: true, message: 'Please input your username!' }]}
           >
-              <Input placeholder="The title of your shipment"/>
+              <Input  placeholder="The title of your shipment"/>
           </Form.Item>
 
           <Form.Item
@@ -66,10 +68,12 @@ const Send: React.FC = () => {
               </div>
             </Upload>
           </Form.Item>
+          <NextButton nextScreen = {nextScreen}/>
+          <BackButton/>
         </Form>
-        <NextButton nextScreen = {nextScreen} />
+
     </PageLayout>
   );
 };
 
-export default Send;
+export default EnterObjInfo;

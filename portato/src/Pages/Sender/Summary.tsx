@@ -2,7 +2,7 @@ import React from "react";
 import PageLayout from "../PageLayout"
 import { Typography, Form, Input, Card} from 'antd';
 import {InfoCircleOutlined} from '@ant-design/icons'
-import ConfirmButtom from "../../Components/ConfirmButton";
+import ConfirmButtom from "../../Components/Buttons/ConfirmButton";
 
 const { Title } = Typography;
 

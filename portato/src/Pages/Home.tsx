@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSendClick = () => {
-    navigate('/send');
+    navigate('/enterObjInfo');
   };
 
   const handleDeliverClick = () => {
