@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+functions/node_modules/
 eggs/
 .eggs/
 lib/
@@ -83,6 +84,8 @@ celerybeat-schedule
 
 # Environments
 .env
+.env.local
+.firebase/
 .venv
 env/
 venv/
@@ -118,4 +121,3 @@ docs/build
 # Data
 *.pdf
 *.jpg
-*.png
