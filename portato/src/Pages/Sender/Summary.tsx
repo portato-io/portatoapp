@@ -1,33 +1,39 @@
 import React from "react";
 import PageLayout from "../PageLayout"
-import { Typography, Form, Input, Card} from 'antd';
+import { Typography, Card, ConfigProvider} from 'antd';
+import ProgressBar from "../../Components/ProgressBar";
 import {InfoCircleOutlined} from '@ant-design/icons'
 import ConfirmButtom from "../../Components/Buttons/ConfirmButton";
+import BackButton from "../../Components/Buttons/BackButton";
 
 const { Title } = Typography;
+const progress = 100
 
 const Summary: React.FC = () => {
     const nextScreen = "/"
     return (
         <PageLayout>
-              <Card bordered={false} style={{backgroundColor:"#FFF4E4"}}>
+            <ProgressBar progress = {progress}/>
+              <Card bordered={true} style={{marginLeft:'10%', width:'80%', marginTop:'10%',backgroundColor:"#FFF4E4"}}>
+                <Title level = {2}> Summary </Title>
                         <div >
-                            <Title> Title</Title>
+                            <Title level = {4}> Title</Title>
                         </div>
                         <div >
-                            <Title> Pickup address</Title>
+                            <Title level = {4}> Pickup address</Title>
                         </div>
                         <div >
-                            <Title> Delivery address</Title>
+                            <Title level = {4}> Delivery address</Title>
                         </div>
                         <div >
-                            <Title> Time</Title>
+                            <Title level = {4}> Time</Title>
                         </div>
                         <div >
-                            <Title> Price</Title>
+                            <Title level = {4}> Price</Title>
                         </div>
             </Card>
             <ConfirmButtom/>
+            <BackButton/>
         </PageLayout>
   );
 };

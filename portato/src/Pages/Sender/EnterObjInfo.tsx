@@ -1,7 +1,8 @@
 import React from "react";
-import PageLayout from "../PageLayout"
+import PageLayout from "../PageLayoutTest"
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
+import ProgressBar from "../../Components/ProgressBar";
 import { Typography, Form, DatePicker, Upload, Input, Radio} from 'antd';
 import {PlusOutlined} from "@ant-design/icons"
 
@@ -10,37 +11,42 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 
+
 const EnterObjInfo: React.FC = () => {
   const nextScreen = "/enter_address"
 
   return (
     <PageLayout>
-        <Title style={{background: "#fff", textAlign: 'center'}}> What would you like to ship</Title>
+        <ProgressBar />
+
         <Form
           className="form-sender"
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
         >
+          <Title level = {3} style={{background: "#fff"}}> What would you like to ship?</Title>
           <Form.Item
-            label="Name"
+            label={<label className="item-form-label">Name</label>}
             name="name"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            //rules={[{ required: true, message: 'Please input your username!' }]}
           >
-              <Input  placeholder="The title of your shipment"/>
+              <Input  placeholder="The title of your shipment" style={{width:'90%'}}/>
           </Form.Item>
 
           <Form.Item
-            label="Description"
+            label={<label className="item-form-label">Description</label>}
             name="description"
-            rules={[{ required: true, message: 'Please input description!' }]}
+            //rules={[{ required: true, message: 'Please input description!' }]}
           >
-            <TextArea rows={4} placeholder="eg: It’s a good idea to specify the dimensions of large items." maxLength={6} />
+            <TextArea rows={4} placeholder="eg: It’s a good idea to specify the dimensions of large items." maxLength={6} style={{width:'90%'}} />
 
           </Form.Item>
 
-          <Form.Item label="Size">
-          <Radio.Group style={{display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
+          <Form.Item
+            label={<label className="item-form-label">Size</label>}
+          >
+          <Radio.Group style={{marginLeft:'18%'}}>
             <Radio value={1}>S</Radio>
             <Radio value={2}>M</Radio>
             <Radio value={3}>L</Radio>
@@ -49,9 +55,9 @@ const EnterObjInfo: React.FC = () => {
 
           </Form.Item>
 
-          <Form.Item label="Weight">
+          <Form.Item label={<label className="item-form-label">Weight</label>} >
 
-          <Radio.Group style={{display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
+          <Radio.Group style={{marginLeft:'15%'}}>
             <Radio.Button value="small">-5 kg</Radio.Button>
             <Radio.Button value="medium">5-20 kg</Radio.Button>
             <Radio.Button value="heavy">+20 kg</Radio.Button>
@@ -60,11 +66,11 @@ const EnterObjInfo: React.FC = () => {
           </Form.Item>
 
 
-          <Form.Item label="Upload images" valuePropName="fileList">
+          <Form.Item label = {<label className="item-form-label">Upload imagesSize</label>} valuePropName="fileList" >
             <Upload action="/upload.do" listType="picture-card">
               <div>
                 <PlusOutlined />
-                <div style={{ marginTop: 8 }}>Image</div>
+                <div style={{ marginTop: 2 }}>Image</div>
               </div>
             </Upload>
           </Form.Item>

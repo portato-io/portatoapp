@@ -12,8 +12,8 @@ function NextButton({nextScreen = "/"}:any){
     navigate(nextScreen);
   };
     return (
-      <div className = "div_button_next" style={{position: 'absolute', bottom: '5%',left:'45%', width:'50%', background:"#fff" }}>
-        <Button type="primary" size="large" onClick={handleNextClick} style={{ marginRight: '16px', width:"100%"}} >Next</Button>
+      <div className = "div_button_next" style={{position: 'absolute', bottom: '10%',left:'45%', width:'50%', background:"#fff" }}>
+        <Button type="primary" size="large" onClick={handleNextClick} style={{ width:"100%"}} >Next</Button>
       </div>
     );
   };

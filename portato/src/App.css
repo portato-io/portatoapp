@@ -34,8 +34,14 @@
   background-color: #fff;
 }
 .form-sender{
+  margin-top: 10%;
   height: "100vh";
   background-color: #fff;
+  margin-left: 10%;
+}
+
+.item-form-label{
+  font-weight:bold;
 }
 
 @keyframes App-logo-spin {
