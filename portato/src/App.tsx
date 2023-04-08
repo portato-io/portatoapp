@@ -16,29 +16,29 @@ const App: React.FC = () => {
   const [openMenu, setOpenMenu] = useState(false)
 
   return (
-    <ConfigProvider
-    theme={{
-      token: {
-        colorPrimary: '#2897FF',
-      },
-    }}>
-    <div>
-      <Router>
-            <SideNavigator openMenu = {openMenu} setOpenMenu = {setOpenMenu} />
-              <Suspense fallback={<div>Loading...</div>}>
-                <Routes>
-                      {appRoutes.map((route) => (
-                        <Route
-                          key={route.key}
-                          path={route.path}
-                          element={<route.component />}
-                        />
-                      ))}
-                </Routes>
-              </Suspense>
-          </Router>
-    </div>
-    </ConfigProvider>
+      <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#2897FF',
+        },
+      }}>
+      <div>
+        <Router>
+              <SideNavigator openMenu = {openMenu} setOpenMenu = {setOpenMenu} />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Routes>
+                        {appRoutes.map((route) => (
+                          <Route
+                            key={route.key}
+                            path={route.path}
+                            element={<route.component />}
+                          />
+                        ))}
+                  </Routes>
+                </Suspense>
+            </Router>
+      </div>
+      </ConfigProvider>
   );
 };
 export default App;

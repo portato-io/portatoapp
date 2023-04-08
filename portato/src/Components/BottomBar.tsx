@@ -25,7 +25,7 @@ const tabs = [
     badge: Badge.dot,
   },
   {
-    key: '/enterObjInfo',
+    key: '/createSendRequest',
     title: 'send',
     icon: <SendOutline />,
     badge: '5',
@@ -55,9 +55,9 @@ function BottomBar(){
     //<Footer style={{background:'white',width:'100vh'}}>
       <TabBar activeKey={pathname}
        onChange={value => setRouteActive(value)}
-       style={{position:'absolute',bottom:'0%',background:'#2897FF', width:'100%'}}>
+       style={{position:'absolute',bottom:'0%', width:'100%',borderTop:'solid', borderTopColor:'#E8E9F1'}}>
           {tabs.map(item => (
-            <TabBar.Item key={item.key} icon={item.icon} title={item.title} style={{color:'white'}}/>
+            <TabBar.Item key={item.key} icon={item.icon} title={item.title} style={{ backgroundColor:'white'}}/>
           ))}
         </TabBar>
     //</Footer>

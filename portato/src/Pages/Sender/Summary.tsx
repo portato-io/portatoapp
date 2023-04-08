@@ -2,7 +2,6 @@ import React from "react";
 import PageLayout from "../Layouts/PageLayoutTest"
 import { Typography, Card, ConfigProvider} from 'antd';
 import ProgressBar from "../../Components/ProgressBar";
-import {InfoCircleOutlined} from '@ant-design/icons'
 import ConfirmButtom from "../../Components/Buttons/ConfirmButton";
 import BackButton from "../../Components/Buttons/BackButton";
 

@@ -4,6 +4,7 @@ import {lazy} from "react";
 import {FC} from "react";
 
 
+
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
@@ -16,6 +17,7 @@ const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
 const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
 const EnterPrice = lazy(()=> import('./Pages/Sender/EnterPrice'));
 const Summary = lazy(()=>import("./Pages/Sender/Summary"));
+const CreateSendRequest = lazy(()=>import("./Pages/Sender/CreateSendRequest"));
 
 
 
@@ -50,6 +52,13 @@ export const routes: Array<Route> = [
         path: '/profile',
         enabled: true,
         component: Profile
+    },
+    {
+        key: 'createSendRequest-route',
+        title: 'CreateSendRequest',
+        path: '/createSendRequest',
+        enabled: true,
+        component: CreateSendRequest
     },
     {
         key: 'enterObjInfo-route',
