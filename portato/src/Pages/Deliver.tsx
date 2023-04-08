@@ -1,5 +1,5 @@
 import React from "react";
-import PageLayout from "./PageLayout"
+import PageLayout from "./Layouts/PageLayoutTest"
 import { Typography } from 'antd';
 
 const { Title } = Typography;

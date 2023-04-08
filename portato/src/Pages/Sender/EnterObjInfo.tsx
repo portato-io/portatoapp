@@ -1,5 +1,5 @@
 import React from "react";
-import PageLayout from "../PageLayoutTest"
+import PageLayout from "../Layouts/PageLayoutTest"
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
@@ -39,7 +39,7 @@ const EnterObjInfo: React.FC = () => {
             name="description"
             //rules={[{ required: true, message: 'Please input description!' }]}
           >
-            <TextArea rows={4} placeholder="eg: It’s a good idea to specify the dimensions of large items." maxLength={6} style={{width:'90%'}} />
+            <TextArea rows={3} placeholder="eg: It’s a good idea to specify the dimensions of large items." maxLength={6} style={{width:'90%'}} />
 
           </Form.Item>
 
@@ -58,15 +58,15 @@ const EnterObjInfo: React.FC = () => {
           <Form.Item label={<label className="item-form-label">Weight</label>} >
 
           <Radio.Group style={{marginLeft:'15%'}}>
-            <Radio.Button value="small">-5 kg</Radio.Button>
-            <Radio.Button value="medium">5-20 kg</Radio.Button>
-            <Radio.Button value="heavy">+20 kg</Radio.Button>
+            <Radio.Button value="small" style={{background:'#F8F9FE'}}>-5 kg</Radio.Button>
+            <Radio.Button value="medium" style={{background:'#F8F9FE'}}>5-20 kg</Radio.Button>
+            <Radio.Button value="heavy" style={{background:'#F8F9FE'}}>+20 kg</Radio.Button>
           </Radio.Group>
 
           </Form.Item>
 
 
-          <Form.Item label = {<label className="item-form-label">Upload imagesSize</label>} valuePropName="fileList" >
+          <Form.Item label = {<label className="item-form-label">Upload images</label>} valuePropName="fileList" >
             <Upload action="/upload.do" listType="picture-card">
               <div>
                 <PlusOutlined />

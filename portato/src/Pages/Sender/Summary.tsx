@@ -1,5 +1,5 @@
 import React from "react";
-import PageLayout from "../PageLayout"
+import PageLayout from "../Layouts/PageLayoutTest"
 import { Typography, Card, ConfigProvider} from 'antd';
 import ProgressBar from "../../Components/ProgressBar";
 import {InfoCircleOutlined} from '@ant-design/icons'
@@ -14,7 +14,7 @@ const Summary: React.FC = () => {
     return (
         <PageLayout>
             <ProgressBar progress = {progress}/>
-              <Card bordered={true} style={{marginLeft:'10%', width:'80%', marginTop:'10%',backgroundColor:"#FFF4E4"}}>
+              <Card bordered={true} style={{marginLeft:'10%', width:'80%', marginTop:'40%',backgroundColor:"#FFF4E4"}}>
                 <Title level = {2}> Summary </Title>
                         <div >
                             <Title level = {4}> Title</Title>

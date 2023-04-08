@@ -34,7 +34,7 @@
   background-color: #fff;
 }
 .form-sender{
-  margin-top: 10%;
+  margin-top: 20%;
   height: "100vh";
   background-color: #fff;
   margin-left: 10%;
@@ -56,6 +56,9 @@
 @media (max-width:400px) {
   .HeaderMenu{
     display: none;
+  }
+  .ant-picker-panels {
+    flex-direction: column !important;
   }
 }
 @media (min-width:400px) {

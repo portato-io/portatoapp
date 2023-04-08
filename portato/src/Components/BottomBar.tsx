@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { Badge, TabBar } from 'antd-mobile'
+import { useNavigate,useLocation } from 'react-router-dom';
 import {
   AppOutline,
-  MessageOutline,
-  MessageFill,
+  SendOutline,
   UnorderedListOutline,
   UserOutline,
+  TruckOutline
 } from 'antd-mobile-icons'
 import {
   HomeOutlined,
@@ -18,37 +19,45 @@ import {
 const { Footer } = Layout;
 const tabs = [
   {
-    key: 'home',
+    key: '/home',
     title: 'home',
     icon: <AppOutline />,
     badge: Badge.dot,
   },
   {
-    key: 'todo',
+    key: '/enterObjInfo',
     title: 'send',
-    icon: <UnorderedListOutline />,
+    icon: <SendOutline />,
     badge: '5',
   },
   {
-    key: 'message',
+    key: '/deliver',
     title: 'deliver',
-    icon: (active: boolean) =>
-      active ? <MessageFill /> : <MessageOutline />,
-    badge: '99+',
+    icon: <TruckOutline/>,
   },
   {
-    key: 'personalCenter',
+    key: '/profile',
     title: 'profile',
     icon: <UserOutline />,
   },
 ]
 
+
 function BottomBar(){
+  const location = useLocation()
+  const { pathname } = location
+  const navigate = useNavigate();
+  const setRouteActive = (value: string) => {
+
+    navigate(value)
+  }
   return (
     //<Footer style={{background:'white',width:'100vh'}}>
-      <TabBar style={{position:'absolute',bottom:'0%',background:'#2897FF', width:'100%'}}>
+      <TabBar activeKey={pathname}
+       onChange={value => setRouteActive(value)}
+       style={{position:'absolute',bottom:'0%',background:'#2897FF', width:'100%'}}>
           {tabs.map(item => (
-            <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
+            <TabBar.Item key={item.key} icon={item.icon} title={item.title} style={{color:'white'}}/>
           ))}
         </TabBar>
     //</Footer>

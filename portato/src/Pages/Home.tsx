@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import PageLayout from "./PageLayout"
+import PageLayout from "./Layouts/PageLayoutTest"
 
 const { Title } = Typography;
 
@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   };
 
   return (
+
     <PageLayout>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         <Title level={2} style={{ textAlign: 'center'}}>What do you want to do?</Title>

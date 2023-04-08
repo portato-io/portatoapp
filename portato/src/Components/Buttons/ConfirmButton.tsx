@@ -12,7 +12,7 @@ function ConfirmButtom({nextScreen = "/"}:any){
     navigate("/");
   };
     return (
-      <div className = "div_button_next" style={{position: 'absolute', bottom: '5%',left:'45%', width:'50%', background:"#fff" }}>
+      <div className = "div_button_next" style={{position: 'absolute', bottom: '10%',left:'45%', width:'50%', background:"#fff" }}>
         <Button type="primary" size="large" onClick={handleConfirmClick} style={{width : '100%' }} >Confirm</Button>
       </div>
     );

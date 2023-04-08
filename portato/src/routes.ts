@@ -33,7 +33,7 @@ export const routes: Array<Route> = [
     {
         key: 'home-route',
         title: 'Home',
-        path: '/',
+        path: '/home',
         enabled: true,
         component: Home
     },

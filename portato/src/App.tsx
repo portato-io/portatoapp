@@ -1,13 +1,8 @@
 import "./App.css"
 import React,{Suspense,useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {Drawer} from "antd";
-import HeaderBar from "./Components/HeaderBar";
-import BottomNavigation from "./Components/BottomBar";
 import SideNavigator from "./Components/SideBarNav";
-import ButtomHeaderBar from "./Components/ButtonHeaderBar";
-import {MenuOutlined} from "@ant-design/icons"
-import {Layout} from "antd";
+import {Layout, ConfigProvider} from "antd";
 
 
 // import routes
@@ -21,6 +16,12 @@ const App: React.FC = () => {
   const [openMenu, setOpenMenu] = useState(false)
 
   return (
+    <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: '#2897FF',
+      },
+    }}>
     <div>
       <Router>
             <SideNavigator openMenu = {openMenu} setOpenMenu = {setOpenMenu} />
@@ -37,6 +38,7 @@ const App: React.FC = () => {
               </Suspense>
           </Router>
     </div>
+    </ConfigProvider>
   );
 };
 export default App;
