@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import PageLayout from "./PageLayout"
-import axios from 'axios';
+import { httpsCallable } from 'firebase/functions';
+import { functions } from '../firebaseConfig';
+
+
 
 const { Title } = Typography;
 
@@ -12,7 +15,9 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSendClick = () => {
-      //fetchRoute();
+    console.log('About to call fetchOpenRoute()');
+    fetchOpenRoute();
+
     navigate('/send');
   };
 
@@ -20,23 +25,17 @@ const Home: React.FC = () => {
     navigate('/deliver');
   };
 
+  // Call the fetchOpenRoute function
+const fetchOpenRoute = async () => {
+  try {
+    const fetchOpenRouteFunction = httpsCallable(functions, 'fetchOpenRoute');
+    const response = await fetchOpenRouteFunction();
+    console.log('Route data:', response.data);
+} catch (error) {
+    console.error('Error calling fetchOpenRoute function:', error);
+}
+};
 
-  const fetchRoute = async () => {
-    const apiKey = process.env.REACT_APP_OPENROUTESERVICE_API_KEY;
-
-    const coordinates = '8.681495,49.41461|8.686507,49.41943'; // Replace with your desired coordinates
-    const profile = 'driving-car'; // Change the profile according to your needs (e.g., 'foot-walking', 'cycling-regular', etc.)
-
-    const url = `https://api.openrouteservice.org/v2/directions/${profile}?api_key=${apiKey}&coordinates=${coordinates}`;
-
-    try {
-      const response = await axios.get(url);
-      setRouteData(response.data);
-      console.log(response.data, routeData);
-    } catch (error) {
-      console.error('Error fetching route data:', error);
-    }
-  };
 
   return (
     <PageLayout>
