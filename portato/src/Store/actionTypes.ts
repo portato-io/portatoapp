@@ -1,1 +1,1 @@
-export const ADD_OBJECT= "ADD_OBJECT"
+export const SET_OBJECT= "SET_OBJECT"

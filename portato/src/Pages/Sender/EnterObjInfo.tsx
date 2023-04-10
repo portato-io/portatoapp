@@ -5,20 +5,40 @@ import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
 import { Typography, Form, DatePicker, Upload, Input, Radio} from 'antd';
 import {PlusOutlined} from "@ant-design/icons"
+import {useDispatch} from 'react-redux'
+
+//TMP
+
+import { Button } from "antd";
+import { setObject } from "../../Store/actionCreators";
+import {IObjectInfo} from "../../type"
 
 const { Title } = Typography;
-const { RangePicker } = DatePicker;
 const { TextArea } = Input;
+//type IObjectInfo = typeof IObjectInfo
 
 
 
 const EnterObjInfo: React.FC = () => {
   const nextScreen = "/enter_address"
+  const dispatch = useDispatch();
+
+  const objectInfo: IObjectInfo = {
+    name: 'Product A',
+    description: 'A very cool product',
+    size: '10',
+    weight: 2.5,
+  };
+
+  const sendForm = () => {
+    console.log("SEND VAR")
+    console.log({objectInfo})
+    dispatch(setObject(objectInfo));
+  };
 
   return (
     <PageLayout>
         <ProgressBar />
-
         <Form
           className="form-sender"
           labelCol={{ span: 4 }}
@@ -74,6 +94,7 @@ const EnterObjInfo: React.FC = () => {
               </div>
             </Upload>
           </Form.Item>
+          <Button onClick = {sendForm} style = {{position: 'absolute',top:'5%'}}> test</Button>
           <NextButton nextScreen = {nextScreen}/>
           <BackButton/>
         </Form>
