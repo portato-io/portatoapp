@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { httpsCallable } from 'firebase/functions';
+import { functions } from '../firebaseConfig';
 import PageLayout from "./Layouts/PageLayoutTest"
 
 const { Title } = Typography;
 
 const Home: React.FC = () => {
+
+  const [routeData, setRouteData] = useState(null);
   const navigate = useNavigate();
 
   const handleSendClick = () => {
     navigate('/enterObjInfo');
+    console.log('About to call fetchOpenRoute()');
+    fetchOpenRoute();
+
+    navigate('/send');
   };
 
   const handleDeliverClick = () => {
     navigate('/deliver');
   };
+
+  // Call the fetchOpenRoute function
+const fetchOpenRoute = async () => {
+  try {
+    const fetchOpenRouteFunction = httpsCallable(functions, 'fetchOpenRoute');
+    const response = await fetchOpenRouteFunction();
+    console.log('Route data:', response.data);
+} catch (error) {
+    console.error('Error calling fetchOpenRoute function:', error);
+}
+};
+
 
   return (
 
