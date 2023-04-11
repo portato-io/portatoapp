@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import PageLayout from "./PageLayout"
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../firebaseConfig';
-
-
+import PageLayout from "./Layouts/PageLayoutTest"
 
 const { Title } = Typography;
 
@@ -15,6 +13,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSendClick = () => {
+    navigate('/enterObjInfo');
     console.log('About to call fetchOpenRoute()');
     fetchOpenRoute();
 
@@ -38,6 +37,7 @@ const fetchOpenRoute = async () => {
 
 
   return (
+
     <PageLayout>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         <Title level={2} style={{ textAlign: 'center'}}>What do you want to do?</Title>

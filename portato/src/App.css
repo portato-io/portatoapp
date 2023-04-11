@@ -24,8 +24,24 @@
   color: white;
 }
 
+
 .App-link {
   color: #61dafb;
+}
+
+.main-layout{
+  height: "100vh";
+  background-color: #fff;
+}
+.form-sender{
+  margin-top: 20%;
+  height: "100vh";
+  background-color: #fff;
+  margin-left: 10%;
+}
+
+.item-form-label{
+  font-weight:bold;
 }
 
 @keyframes App-logo-spin {
@@ -40,6 +56,9 @@
 @media (max-width:400px) {
   .HeaderMenu{
     display: none;
+  }
+  .ant-picker-panels {
+    flex-direction: column !important;
   }
 }
 @media (min-width:400px) {
