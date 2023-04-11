@@ -16,6 +16,7 @@
         "@types/react-router-dom": "^5.3.3",
         "antd": "^5.4.0",
         "antd-mobile": "^5.29.0",
+        "firebase": "^9.19.0",
         "react": "^18.2.0",
         "react-datepicker": "^4.11.0",
         "react-dom": "^18.2.0",
