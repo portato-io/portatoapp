@@ -9,7 +9,7 @@ function ConfirmButtom({nextScreen = "/"}:any){
   const handleConfirmClick = () => {
 
     console.log(nextScreen);
-    navigate("/home");
+    navigate("/");
   };
     return (
       <div className = "div_button_next" style={{position: 'absolute', bottom: '10%',left:'45%', width:'50%', background:"#fff" }}>

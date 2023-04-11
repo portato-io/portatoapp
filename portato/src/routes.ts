@@ -35,7 +35,7 @@ export const routes: Array<Route> = [
     {
         key: 'home-route',
         title: 'Home',
-        path: '/home',
+        path: '/',
         enabled: true,
         component: Home
     },

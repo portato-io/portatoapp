@@ -19,7 +19,7 @@ import {
 const { Footer } = Layout;
 const tabs = [
   {
-    key: '/home',
+    key: '/',
     title: 'home',
     icon: <AppOutline />,
     badge: Badge.dot,
