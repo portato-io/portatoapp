@@ -2,14 +2,22 @@ import {lazy} from "react";
 
 // other
 import {FC} from "react";
+
+
+
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
 const Profile = lazy(() => import('./Pages/Profile'))
-const Send = lazy(() => import('./Pages/Send'));
+const EnterObjInfo = lazy(() => import('./Pages/Sender/EnterObjInfo'));
 const Deliver = lazy(() => import('./Pages/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
 const Shipments = lazy(() => import('./Pages/Shipments'));
+const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
+const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
+const EnterPrice = lazy(()=> import('./Pages/Sender/EnterPrice'));
+const Summary = lazy(()=>import("./Pages/Sender/Summary"));
+const CreateSendRequest = lazy(()=>import("./Pages/Sender/CreateSendRequest"));
 
 
 
@@ -27,7 +35,7 @@ export const routes: Array<Route> = [
     {
         key: 'home-route',
         title: 'Home',
-        path: '/',
+        path: '/home',
         enabled: true,
         component: Home
     },
@@ -46,11 +54,18 @@ export const routes: Array<Route> = [
         component: Profile
     },
     {
-        key: 'send-route',
-        title: 'Send',
-        path: '/send',
+        key: 'createSendRequest-route',
+        title: 'CreateSendRequest',
+        path: '/createSendRequest',
         enabled: true,
-        component: Send
+        component: CreateSendRequest
+    },
+    {
+        key: 'enterObjInfo-route',
+        title: 'EnterObjInfo',
+        path: '/enterObjInfo',
+        enabled: true,
+        component: EnterObjInfo
     },
     {
         key: 'deliver-route',
@@ -72,5 +87,33 @@ export const routes: Array<Route> = [
         path: '/shipments',
         enabled: true,
         component: Shipments
+    },
+    {
+        key: 'enterAddress-route',
+        title: 'EnterAddress',
+        path: '/enter_address',
+        enabled: true,
+        component: EnterAddress
+    },
+    {
+        key: 'enterTime-route',
+        title: 'EnterTime',
+        path: '/enter_time',
+        enabled: true,
+        component: EnterTime
+    },
+    {
+        key: 'enterPrice-route',
+        title: 'EnterPrice',
+        path: '/enter_price',
+        enabled: true,
+        component: EnterPrice
+    },
+    {
+        key: 'summary-route',
+        title: 'Summary',
+        path: '/summary',
+        enabled: true,
+        component: Summary
     }
 ]
