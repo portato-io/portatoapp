@@ -20,10 +20,6 @@ const Home: React.FC = () => {
     navigate('/send');
   };
 
-  const handleDeliverClick = () => {
-    navigate('/deliver');
-  };
-
   // Call the fetchOpenRoute function
 const fetchOpenRoute = async () => {
   try {
