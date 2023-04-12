@@ -13,7 +13,7 @@ import { createStore} from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 import {reducer} from "./Store/reducer"
-import { uploadReduxStoreToFirebase } from "./uploadStoreToFirebase";
+import { uploadReduxStoreToFirebase } from "./linksStoreToFirebase";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
