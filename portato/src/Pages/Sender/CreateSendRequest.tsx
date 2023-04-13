@@ -15,7 +15,8 @@ const CreateSendRequest: React.FC = () => {
   };
     return (
         <PageLayout>
-            <Button type="primary" size="large" style={{ marginRight: '16px' }} onClick={handleSendClick}>Create new request</Button>
+            <Title level={4} style={{position:'absolute', left:'26%',top:'10%'}}>Current send requests </Title>
+            <Button type="primary" size="large" style={{ position:'absolute',left:'30%', top:'20%' }} onClick={handleSendClick}>Create new request</Button>
         </PageLayout>
   );
 };
