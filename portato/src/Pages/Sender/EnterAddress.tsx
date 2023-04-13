@@ -29,7 +29,7 @@ const EnterAddress: React.FC = () => {
 
             <Title level = {4} style={{backgroundColor:"white"}}>Delivery address</Title>
             <Form.Item
-                name="Pickup address"
+                name="Delivery address"
             >
                 <Input prefix = {<SearchOutlined/>} style = {{background :'', width:'90%'}}/>
             </Form.Item>

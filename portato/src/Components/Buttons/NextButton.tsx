@@ -13,7 +13,7 @@ function NextButton({nextScreen = "/"}:any){
   };
     return (
       <div className = "div_button_next" style={{position: 'absolute', bottom: '10%',left:'45%', width:'50%', background:"#fff" }}>
-        <Button type="primary" size="large" onClick={handleNextClick} style={{ width:"100%"}} >Next</Button>
+        <Button form = 'sender-forms' type="primary" size="large" onClick={handleNextClick} htmlType = 'submit' style={{ width:"100%"}} >Next</Button>
       </div>
     );
   };

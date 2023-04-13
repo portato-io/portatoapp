@@ -56,6 +56,7 @@ const EnterObjInfo: React.FC = () => {
     <PageLayout>
         <ProgressBar />
         <Form
+          id="sender-forms"
           onFinish={onFinish}
           className="form-sender"
           labelCol={{ span: 4 }}
@@ -117,7 +118,7 @@ const EnterObjInfo: React.FC = () => {
               </div>
             </Upload>
           </Form.Item>
-          <Button  style = {{position: 'absolute',top:'5%'}}> test</Button>
+          <Button  style = {{position: 'absolute',top:'5%'}} htmlType="submit"> test</Button>
           <NextButton nextScreen = {nextScreen}/>
           <BackButton/>
         </Form>
