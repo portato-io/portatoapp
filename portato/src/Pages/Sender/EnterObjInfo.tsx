@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{Component, useState} from "react";
 import PageLayout from "../Layouts/PageLayoutTest"
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
@@ -13,6 +13,7 @@ import { Button } from "antd";
 import { setObject } from "../../Store/actionCreators";
 import {IObjectInfo} from "../../type"
 
+
 const { Title } = Typography;
 const { TextArea } = Input;
 //type IObjectInfo = typeof IObjectInfo
@@ -21,35 +22,38 @@ const { TextArea } = Input;
 
 const EnterObjInfo: React.FC = () => {
 
-  const [nameValue, setNameValue] = useState('');
-  const [descriptionValue,setDescValue] = useState('');
-  const nextScreen = "/enter_address";
-  const onFinish = (values:any) =>{
-    console.log(values)
-  }
-
-  const dispatch = useDispatch();
-
-  const objectInfo: IObjectInfo = {
+  const [values, setValues] = useState({
     name: 'Product A',
     description: 'A very cool product',
     size: '10',
     weight: 2.5,
+  });
+
+
+  React.useEffect(() => {
+    dispatch(setObject(values))
+  }, [values]);
+
+  const nextScreen = "/enter_address";
+
+  const onFinish = (values:any) =>{
+    console.log({values})
+  }
+
+  const dispatch = useDispatch();
+
+  const submitForm = (e:any) => {
+    e.preventDefault();
+    // dispatch FORM_SUBMIT action
   };
 
-  const handlePressEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      // Do something with the value, such as saving it to redux
-      console.log(nameValue);
-      sendForm(nameValue);
+  const handleInputChange = (e:any) => {
+    setValues({
+      ...values,
+      [e.target.id]: e.target.value
     }
-  };
+    );
 
-  const sendForm = (value:string) => {
-    console.log("SEND VAR")
-    objectInfo.name = nameValue;
-    console.log({objectInfo});
-    dispatch(setObject(objectInfo));
   };
 
   return (
@@ -69,9 +73,9 @@ const EnterObjInfo: React.FC = () => {
             name="name"
             //rules={[{ required: true, message: 'Please input your username!' }]}
           >
-              <Input  value={nameValue}
-              onChange={(e) => setNameValue(e.target.value)}
-              onPressEnter={handlePressEnter}
+              <Input
+              value={values.name}
+              onChange={handleInputChange}
               placeholder="The title of your shipment" style={{width:'90%'}}/>
           </Form.Item>
 
@@ -81,16 +85,16 @@ const EnterObjInfo: React.FC = () => {
             //rules={[{ required: true, message: 'Please input description!' }]}
           >
             <TextArea
-            value={descriptionValue}
-            onChange={(e) => setDescValue(e.target.value)}
-            rows={3} placeholder="eg: It’s a good idea to specify the dimensions of large items." maxLength={6} style={{width:'90%'}} />
+            value={values.description}
+            onChange={handleInputChange}
+            rows={3} placeholder="eg: It’s a good idea to specify the dimensions of large items."  style={{width:'90%'}} />
 
           </Form.Item>
 
           <Form.Item
             label={<label className="item-form-label">Size</label>}
           >
-          <Radio.Group style={{marginLeft:'18%'}}>
+          <Radio.Group  style={{marginLeft:'18%'}}>
             <Radio value={1}>S</Radio>
             <Radio value={2}>M</Radio>
             <Radio value={3}>L</Radio>
@@ -124,7 +128,9 @@ const EnterObjInfo: React.FC = () => {
         </Form>
 
     </PageLayout>
+
   );
+
 };
 
 export default EnterObjInfo;

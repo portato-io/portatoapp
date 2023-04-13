@@ -2,7 +2,12 @@ export interface IObjectInfo{
     name: string,
     description: string,
     size: string,
-    weight: number
+    weight: number,
+    /*price:number,
+    pickup_adress:string,
+    delivery_adress:string,
+    time:string*/
+
 }
 
 export type ObjectInfoState = {

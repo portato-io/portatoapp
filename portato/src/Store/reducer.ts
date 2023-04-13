@@ -8,7 +8,11 @@ const initialState: ObjectInfoState = {
         name: 'test',
         description: "test",
         size:'test',
-        weight:0
+        weight:0,
+        /*price:0,
+        pickup_adress:"test",
+        delivery_adress:"test",
+        time:"test"*/
       }
 
   }
@@ -18,6 +22,7 @@ const initialState: ObjectInfoState = {
     console.log(action.type)
     switch (action.type) {
       case 'SET_OBJECT': {
+
         console.log("DANS LE PUTAIN DE REDUCER")
         return { ...state, object: action.payload };}
       default:{

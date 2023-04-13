@@ -13,7 +13,7 @@ const progress = 100
 
 const Summary: React.FC = () => {
     const nextScreen = "/"
-    const myVariable = useSelector((state: ObjectInfoState) => state.object);
+    const objecInfo = useSelector((state: ObjectInfoState) => state.object);
 
     return (
         <PageLayout>
@@ -21,7 +21,8 @@ const Summary: React.FC = () => {
               <Card bordered={true} style={{marginLeft:'10%', width:'80%', marginTop:'40%',backgroundColor:"#FFF4E4"}}>
                 <Title level = {2}> Summary </Title>
                         <div >
-                            <Title level = {4}>  {myVariable.name}</Title>
+                            <Title level = {4}>  {objecInfo.name}</Title>
+                            <Typography >  {objecInfo.description}</Typography>
                         </div>
                         <div >
                             <Title level = {4}> Pickup address</Title>
