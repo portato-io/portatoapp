@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import PageLayout from "../Layouts/PageLayoutTest"
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
@@ -20,14 +20,7 @@ const { TextArea } = Input;
 
 
 const EnterObjInfo: React.FC = () => {
-
-  const [nameValue, setNameValue] = useState('');
-  const [descriptionValue,setDescValue] = useState('');
-  const nextScreen = "/enter_address";
-  const onFinish = (values:any) =>{
-    console.log(values)
-  }
-
+  const nextScreen = "/enter_address"
   const dispatch = useDispatch();
 
   const objectInfo: IObjectInfo = {
@@ -37,18 +30,9 @@ const EnterObjInfo: React.FC = () => {
     weight: 2.5,
   };
 
-  const handlePressEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      // Do something with the value, such as saving it to redux
-      console.log(nameValue);
-      sendForm(nameValue);
-    }
-  };
-
-  const sendForm = (value:string) => {
+  const sendForm = () => {
     console.log("SEND VAR")
-    objectInfo.name = nameValue;
-    console.log({objectInfo});
+    console.log({objectInfo})
     dispatch(setObject(objectInfo));
   };
 
@@ -56,7 +40,6 @@ const EnterObjInfo: React.FC = () => {
     <PageLayout>
         <ProgressBar />
         <Form
-          onFinish={onFinish}
           className="form-sender"
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
@@ -68,10 +51,7 @@ const EnterObjInfo: React.FC = () => {
             name="name"
             //rules={[{ required: true, message: 'Please input your username!' }]}
           >
-              <Input  value={nameValue}
-              onChange={(e) => setNameValue(e.target.value)}
-              onPressEnter={handlePressEnter}
-              placeholder="The title of your shipment" style={{width:'90%'}}/>
+              <Input  placeholder="The title of your shipment" style={{width:'90%'}}/>
           </Form.Item>
 
           <Form.Item
@@ -79,10 +59,7 @@ const EnterObjInfo: React.FC = () => {
             name="description"
             //rules={[{ required: true, message: 'Please input description!' }]}
           >
-            <TextArea
-            value={descriptionValue}
-            onChange={(e) => setDescValue(e.target.value)}
-            rows={3} placeholder="eg: It’s a good idea to specify the dimensions of large items." maxLength={6} style={{width:'90%'}} />
+            <TextArea rows={3} placeholder="eg: It’s a good idea to specify the dimensions of large items." maxLength={6} style={{width:'90%'}} />
 
           </Form.Item>
 
@@ -117,7 +94,7 @@ const EnterObjInfo: React.FC = () => {
               </div>
             </Upload>
           </Form.Item>
-          <Button  style = {{position: 'absolute',top:'5%'}}> test</Button>
+          <Button onClick = {sendForm} style = {{position: 'absolute',top:'5%'}}> test</Button>
           <NextButton nextScreen = {nextScreen}/>
           <BackButton/>
         </Form>
