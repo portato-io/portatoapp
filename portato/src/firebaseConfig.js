@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFunctions } from 'firebase/functions';
 import { getDatabase } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 
 // Your Firebase configuration object
@@ -23,3 +24,5 @@ export const functions = getFunctions(app);
 
 // Get a reference to the Realtime Database service
 export const database = getDatabase(app);
+
+export const auth = getAuth();
