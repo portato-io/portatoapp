@@ -3,15 +3,15 @@ import PageLayout from "../Layouts/PageLayoutTest"
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
-import { Typography, Form, DatePicker, Upload, Input, Radio} from 'antd';
+import { Typography, Form, Upload, Input, Radio} from 'antd';
 import {PlusOutlined} from "@ant-design/icons"
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 
 //TMP
 
 import { Button } from "antd";
 import { setObject } from "../../Store/actionCreators";
-import {IObjectInfo} from "../../type"
+import {IObjectInfo,ObjectInfoState} from "../../type"
 
 
 const { Title } = Typography;
@@ -22,17 +22,24 @@ const { TextArea } = Input;
 
 const EnterObjInfo: React.FC = () => {
 
-  const [values, setValues] = useState({
-    name: 'Product A',
-    description: 'A very cool product',
-    size: '10',
-    weight: 2.5,
+  const objecInfo = useSelector((state: ObjectInfoState) => state.object);
+
+  const [object, setValues] = useState<IObjectInfo>(
+    {
+      name: objecInfo.name,
+      description: objecInfo.description,
+      size: objecInfo.size,
+      weight: objecInfo.weight,
+      price:0,
+      pickup_adress:"test",
+      delivery_adress:"test",
+      time:"test"
   });
 
 
   React.useEffect(() => {
-    dispatch(setObject(values))
-  }, [values]);
+    dispatch(setObject(object))
+  }, [object]);
 
   const nextScreen = "/enter_address";
 
@@ -49,10 +56,10 @@ const EnterObjInfo: React.FC = () => {
 
   const handleInputChange = (e:any) => {
     setValues({
-      ...values,
-      [e.target.id]: e.target.value
-    }
-    );
+      ...object,
+      [e.target.name]: e.target.value
+    });
+    console.log(e.target.name);
 
   };
 
@@ -70,22 +77,24 @@ const EnterObjInfo: React.FC = () => {
           <Title level = {3} style={{background: "#fff"}}> What would you like to ship?</Title>
           <Form.Item
             label={<label className="item-form-label">Name</label>}
-            name="name"
+            //name="name"
             //rules={[{ required: true, message: 'Please input your username!' }]}
           >
               <Input
-              value={values.name}
+              name = "name"
+              value={object.name}
               onChange={handleInputChange}
               placeholder="The title of your shipment" style={{width:'90%'}}/>
           </Form.Item>
 
           <Form.Item
             label={<label className="item-form-label">Description</label>}
-            name="description"
+
             //rules={[{ required: true, message: 'Please input description!' }]}
           >
             <TextArea
-            value={values.description}
+            name="description"
+            value={object.description}
             onChange={handleInputChange}
             rows={3} placeholder="eg: It’s a good idea to specify the dimensions of large items."  style={{width:'90%'}} />
 
@@ -94,21 +103,21 @@ const EnterObjInfo: React.FC = () => {
           <Form.Item
             label={<label className="item-form-label">Size</label>}
           >
-          <Radio.Group  style={{marginLeft:'18%'}}>
-            <Radio value={1}>S</Radio>
-            <Radio value={2}>M</Radio>
-            <Radio value={3}>L</Radio>
-            <Radio value={4}>XL</Radio>
+          <Radio.Group name = "size" onChange = {handleInputChange} style={{marginLeft:'18%'}}>
+            <Radio value={"S"}>S</Radio>
+            <Radio value={"M"}>M</Radio>
+            <Radio value={"L"}>L</Radio>
+            <Radio value={"XL"}>XL</Radio>
           </Radio.Group>
 
           </Form.Item>
 
           <Form.Item label={<label className="item-form-label">Weight</label>} >
 
-          <Radio.Group style={{marginLeft:'15%'}}>
-            <Radio.Button value="small" style={{background:'#F8F9FE'}}>-5 kg</Radio.Button>
-            <Radio.Button value="medium" style={{background:'#F8F9FE'}}>5-20 kg</Radio.Button>
-            <Radio.Button value="heavy" style={{background:'#F8F9FE'}}>+20 kg</Radio.Button>
+          <Radio.Group name = "weight" onChange = {handleInputChange} style={{marginLeft:'15%'}}>
+            <Radio.Button value="-5 kg" style={{background:'#F8F9FE'}}>-5 kg</Radio.Button>
+            <Radio.Button value="5-20 kg" style={{background:'#F8F9FE'}}>5-20 kg</Radio.Button>
+            <Radio.Button value="+20 kg" style={{background:'#F8F9FE'}}>+20 kg</Radio.Button>
           </Radio.Group>
 
           </Form.Item>

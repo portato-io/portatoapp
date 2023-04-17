@@ -3,10 +3,10 @@ export interface IObjectInfo{
     description: string,
     size: string,
     weight: number,
-    /*price:number,
+    price:number,
     pickup_adress:string,
     delivery_adress:string,
-    time:string*/
+    time:string
 
 }
 

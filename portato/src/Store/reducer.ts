@@ -9,10 +9,10 @@ const initialState: ObjectInfoState = {
         description: "test",
         size:'test',
         weight:0,
-        /*price:0,
+        price:0,
         pickup_adress:"test",
         delivery_adress:"test",
-        time:"test"*/
+        time:"test"
       }
 
   }
@@ -22,11 +22,15 @@ const initialState: ObjectInfoState = {
     console.log(action.type)
     switch (action.type) {
       case 'SET_OBJECT': {
-
-        console.log("DANS LE PUTAIN DE REDUCER")
+        console.log("DANS LE REDUCER DU SET OBJECT")
         return { ...state, object: action.payload };}
+
+      case 'SET_ADRESS': {
+          console.log("DANS LE REDUCER du SET ADRESS")
+          return { ...state, object.pickup_adress: action.payload[0] };}
+
       default:{
-        console.log("DANS LE PUTAIN DE REDUCER MAIS PAS DANS LE BON STATE")
+        console.log("DANS LE REDUCER MAIS PAS DANS LE BON STATE")
         return state;}
     }
   }

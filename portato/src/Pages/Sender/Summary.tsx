@@ -22,7 +22,7 @@ const Summary: React.FC = () => {
                 <Title level = {2}> Summary </Title>
                         <div >
                             <Title level = {4}>  {objecInfo.name}</Title>
-                            <Typography >  {objecInfo.description}</Typography>
+                            <Typography >  {objecInfo.description} / Size: {objecInfo.size} / Weight: {objecInfo.weight}</Typography>
                         </div>
                         <div >
                             <Title level = {4}> Pickup address</Title>
