@@ -1,16 +1,45 @@
-import React from "react";
+import React, {useState} from "react";
 import PageLayout from "../Layouts/PageLayoutTest"
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
 import { Typography, Form, Input} from 'antd';
 import {SearchOutlined} from '@ant-design/icons'
+import { IObjectInfo, ObjectInfoState } from "../../type";
+import {useDispatch,useSelector} from 'react-redux'
+import { setObjectAdress } from "../../Store/actionCreators";
 
 const { Title } = Typography;
 const progress = 25;
 
 const EnterAddress: React.FC = () => {
+
     const nextScreen = "/enter_time"
+
+    const objecInfo = useSelector((state: ObjectInfoState) => state.object);
+
+    const [adresses, setValues] = useState(
+        {
+          pickup_adress:objecInfo.pickup_adress,
+          delivery_adress:objecInfo.delivery_adress,
+        });
+
+        const dispatch = useDispatch();
+
+    React.useEffect(() => {
+            dispatch(setObjectAdress(adresses.pickup_adress, adresses.delivery_adress))
+        }, [adresses]);
+
+    const handleInputChange = (e:any) => {
+            setValues({
+              ...adresses,
+              [e.target.name]: e.target.value
+            });
+            console.log(e.target.name);
+
+          };
+
+
     return (
         <PageLayout>
             <ProgressBar progress = {progress}/>
@@ -24,16 +53,21 @@ const EnterAddress: React.FC = () => {
             <Form.Item
                 name="Pickup address"
             >
-                <Input prefix = {<SearchOutlined/>} style = {{background :'', width:'90%'}}/>
+                <Input name="pickup_adress"
+                value={adresses.pickup_adress}
+                onChange={handleInputChange}
+                prefix = {<SearchOutlined/>} style = {{background :'', width:'90%'}}/>
             </Form.Item>
 
             <Title level = {4} style={{backgroundColor:"white"}}>Delivery address</Title>
             <Form.Item
                 name="Delivery address"
             >
-                <Input prefix = {<SearchOutlined/>} style = {{background :'', width:'90%'}}/>
+                <Input name = "delivery_adress"
+                value={adresses.delivery_adress}
+                onChange={handleInputChange}
+                prefix = {<SearchOutlined/>} style = {{background :'', width:'90%'}}/>
             </Form.Item>
-
             </Form>
 
             <NextButton nextScreen = {nextScreen}/>

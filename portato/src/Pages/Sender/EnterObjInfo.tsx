@@ -30,10 +30,11 @@ const EnterObjInfo: React.FC = () => {
       description: objecInfo.description,
       size: objecInfo.size,
       weight: objecInfo.weight,
-      price:0,
-      pickup_adress:"test",
-      delivery_adress:"test",
-      time:"test"
+      price:objecInfo.price,
+      pickup_adress:objecInfo.pickup_adress,
+      delivery_adress:objecInfo.delivery_adress,
+      dateRange:objecInfo.dateRange,
+      time:objecInfo.time
   });
 
 
@@ -103,7 +104,11 @@ const EnterObjInfo: React.FC = () => {
           <Form.Item
             label={<label className="item-form-label">Size</label>}
           >
-          <Radio.Group name = "size" onChange = {handleInputChange} style={{marginLeft:'18%'}}>
+          <Radio.Group
+          name = "size"
+          value = {object.size}
+          onChange = {handleInputChange}
+          style={{marginLeft:'18%'}}>
             <Radio value={"S"}>S</Radio>
             <Radio value={"M"}>M</Radio>
             <Radio value={"L"}>L</Radio>
@@ -114,7 +119,11 @@ const EnterObjInfo: React.FC = () => {
 
           <Form.Item label={<label className="item-form-label">Weight</label>} >
 
-          <Radio.Group name = "weight" onChange = {handleInputChange} style={{marginLeft:'15%'}}>
+          <Radio.Group
+          name = "weight"
+          value = {object.weight}
+          onChange = {handleInputChange}
+          style={{marginLeft:'15%'}}>
             <Radio.Button value="-5 kg" style={{background:'#F8F9FE'}}>-5 kg</Radio.Button>
             <Radio.Button value="5-20 kg" style={{background:'#F8F9FE'}}>5-20 kg</Radio.Button>
             <Radio.Button value="+20 kg" style={{background:'#F8F9FE'}}>+20 kg</Radio.Button>

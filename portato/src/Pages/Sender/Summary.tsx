@@ -14,11 +14,13 @@ const progress = 100
 const Summary: React.FC = () => {
     const nextScreen = "/"
     const objecInfo = useSelector((state: ObjectInfoState) => state.object);
+    console.log(objecInfo)
+
 
     return (
         <PageLayout>
             <ProgressBar progress = {progress}/>
-              <Card bordered={true} style={{marginLeft:'10%', width:'80%', marginTop:'40%',backgroundColor:"#FFF4E4"}}>
+              <Card bordered={true} style={{marginLeft:'10%', width:'80%', marginTop:'20%',backgroundColor:"#FFF4E4"}}>
                 <Title level = {2}> Summary </Title>
                         <div >
                             <Title level = {4}>  {objecInfo.name}</Title>
@@ -26,15 +28,19 @@ const Summary: React.FC = () => {
                         </div>
                         <div >
                             <Title level = {4}> Pickup address</Title>
+                            <Typography >  {objecInfo.pickup_adress} </Typography>
                         </div>
                         <div >
                             <Title level = {4}> Delivery address</Title>
+                            <Typography >  {objecInfo.delivery_adress} </Typography>
                         </div>
                         <div >
-                            <Title level = {4}> Time</Title>
+                            <Title level = {4}> {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}</Title>
+                            <Typography >  In: {objecInfo.time} </Typography>
                         </div>
                         <div >
                             <Title level = {4}> Price</Title>
+                            <Typography >  {objecInfo.price} CHF </Typography>
                         </div>
             </Card>
             <ConfirmButtom/>

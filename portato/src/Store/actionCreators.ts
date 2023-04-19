@@ -17,5 +17,24 @@ export const setObject = (variable: IObjectInfo): AnyAction => ({
 
 export const setObjectAdress = (pickup_adress:string, delivery_adress:string): AnyAction => ({
   type: actionTypes.SET_ADRESS,
-  payload: pickup_adress,delivery_adress,
+  payload: {
+    pickup_adress,
+    delivery_adress
+  },
 });
+
+export const setObjectPrice = (price:number):AnyAction => ({
+  type: actionTypes.SET_PRICE,
+  payload:price
+})
+
+
+export const setObjectDateRange = (dateRange:string[]):AnyAction => ({
+  type: actionTypes.SET_DATE_RANGE,
+  payload:dateRange
+})
+
+export const setObjectTime = (time:string):AnyAction => ({
+  type: actionTypes.SET_TIME,
+  payload:time
+})

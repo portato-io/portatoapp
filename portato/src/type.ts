@@ -6,8 +6,8 @@ export interface IObjectInfo{
     price:number,
     pickup_adress:string,
     delivery_adress:string,
+    dateRange:string[],
     time:string
-
 }
 
 export type ObjectInfoState = {
