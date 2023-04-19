@@ -12,9 +12,12 @@ import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
+
 
 declare const self: ServiceWorkerGlobalScope;
+const CACHE_VERSION = 'v0.1.2'; // Change this to a new version (e.g., 'v3')
+
 
 clientsClaim();
 
@@ -69,12 +72,97 @@ registerRoute(
   })
 );
 
+const networkFirstHandler = new NetworkFirst({
+  cacheName: CACHE_VERSION,
+  plugins: [
+    new ExpirationPlugin({ maxEntries: 50 }),
+  ],
+});
+
+async function fetchAndCache(url: string) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  const cache = await caches.open(CACHE_VERSION);
+  cache.put(url, response.clone());
+  return response;
+}
+
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
+});
+
+// 'install' event listener to cache necessary assets and directories
+self.addEventListener('install', (event: ExtendableEvent) => {
+  // Function to fetch and cache content of multiple directories
+  const fetchDirectories = async (directories: string[]) => {
+    // Function to fetch and cache content of a single directory
+    const fetchDirectoryContents = async (dirUrl: string) => {
+      const response = await fetch(dirUrl);
+      const content = await response.text();
+      const urls = content.match(/href="(.*?)"/g);
+      if (urls !== null) {
+        await Promise.all(urls.map((url: string) => fetchAndCache(url.slice(6, -1))));
+      }
+
+    };
+
+    await Promise.all(directories.map((dirUrl: string) => fetchDirectoryContents(dirUrl)));
+  };
+
+  // Cache necessary assets and then fetch directories
+  event.waitUntil(
+    caches.open(CACHE_VERSION).then((cache: Cache) => {
+      return cache.addAll([
+        '/',
+        '/index.html',
+        '/css/styles.css',
+        '/js/app.js',
+        // Add or update assets here
+      ]);
+    }).then(() => fetchDirectories([
+        '/Pages/',
+        '/Components/',
+        '/Store/',
+      ])
+    )
+  );
+});
+
+// 'activate' event listener to delete old caches
+self.addEventListener('activate', (event: ExtendableEvent) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames: string[]) => {
+      return Promise.all(
+        cacheNames.map((cacheName: string) => {
+          // Delete cache if the cache name is not equal to the current CACHE_VERSION
+          if (cacheName !== CACHE_VERSION) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim()) // Force the new service worker to take control immediately
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    (async () => {
+      const response = await networkFirstHandler.handle(event);
+      if (!response) {
+        return caches.match(event.request).then((cachedResponse) => {
+          return cachedResponse || new Response('Fallback content', { status: 200, statusText: 'OK' });
+        });
+      }
+      return response;
+    })()
+  );
 });
 
 // Any other custom service worker logic can go here.
