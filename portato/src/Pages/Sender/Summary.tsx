@@ -7,6 +7,7 @@ import BackButton from "../../Components/Buttons/BackButton";
 
 import { useSelector } from "react-redux";
 import {ObjectInfoState, IObjectInfo} from '../../type'
+import { fetchDataOnce } from "../../linksStoreToFirebase";
 
 const { Title } = Typography;
 const progress = 100
@@ -15,7 +16,8 @@ const Summary: React.FC = () => {
     const nextScreen = "/"
     const objecInfo = useSelector((state: IObjectInfo) => state);
     console.log(objecInfo)
-
+    // Fetch data once
+    fetchDataOnce();
 
     return (
         <PageLayout>

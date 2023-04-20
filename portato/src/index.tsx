@@ -14,6 +14,7 @@ import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 import {reducer} from "./Store/reducer"
 import { IObjectInfo, ObjectInfoState } from './type';
+import { uploadReduxStoreToFirebase } from "./linksStoreToFirebase";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -56,6 +57,10 @@ const initialState: IObjectInfo = {
 const store = createStore(reducer,initialState);
 
 
+
+store.subscribe(() => {
+  uploadReduxStoreToFirebase(store);
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -121,3 +121,6 @@ docs/build
 # Data
 *.pdf
 *.jpg
+
+# Firebase project settings
+.firebase
