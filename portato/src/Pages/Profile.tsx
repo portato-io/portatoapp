@@ -1,42 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PageLayout from './Layouts/PageLayoutTest'
 import "firebaseui/dist/firebaseui.css";
 import { auth } from '../firebaseConfig';
-import { GoogleAuthProvider, EmailAuthProvider } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import * as firebaseui from "firebaseui";
-
+import { onAuthStateChanged, User } from "firebase/auth";
+import FirebaseAuth from '../Components/FirebaseAuth';
 
 
 import { Typography } from 'antd';
 
 const { Title } = Typography;
 
-const uiConfig = {
-  signInSuccessUrl: "/enterObjInfo", // e.g., "index.html"
-  signInOptions: [
-    // List the authentication providers you want to support
-    GoogleAuthProvider.PROVIDER_ID,
-    EmailAuthProvider.PROVIDER_ID,
-  ],
-};
-
-// Initialize the FirebaseUI widget
-const ui = new firebaseui.auth.AuthUI(auth);
-
 const Profile: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
-    ui.start("#firebaseui-auth-container", uiConfig);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        console.log("User signed in:", currentUser); // Added console log
+        setUser(currentUser);
+      } else {
+        console.log("User signed out"); // Added console log
+        setUser(null);
+      }
+    });
 
-    // Clean up the UI widget when the component is unmounted
     return () => {
-      ui.reset();
+      unsubscribe();
     };
   }, []);
 
   return (
-    <PageLayout>
-      <div id="firebaseui-auth-container"></div>
-    </PageLayout>
+    <div>
+      <FirebaseAuth />
+      {user ? (
+        <>
+          <h1>Welcome, {user.displayName || user.email}!</h1>
+          <button onClick={() => signOut(auth)}>Sign out</button>
+        </>
+      ) : (
+        <FirebaseAuth />
+      )}
+    </div>
   );
 };
 

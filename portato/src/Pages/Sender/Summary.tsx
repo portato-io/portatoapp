@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import PageLayout from "../Layouts/PageLayoutTest"
-import { Typography, Card } from 'antd';
+import PageLayout from "../Layouts/PageLayoutTest";
+import { Typography, Card } from "antd";
 import ProgressBar from "../../Components/ProgressBar";
-import ConfirmButtom from "../../Components/Buttons/ConfirmButton";
+import ConfirmButton from "../../Components/Buttons/ConfirmButton"; // Rename to ConfirmButton
 import BackButton from "../../Components/Buttons/BackButton";
-import SignInButton from "../../Components/Buttons/SignInButton"; // Import the SignInButton component
+import SignInButton from "../../Components/Buttons/SignInButton";
 
 import { useSelector } from "react-redux";
-import { IObjectInfo } from '../../type';
+import { IObjectInfo } from "../../type";
 import { fetchDataOnce } from "../../linksStoreToFirebase";
-import { auth } from "../../firebaseConfig"; // Import the auth instance
-import { onAuthStateChanged, User } from "firebase/auth"; // Import the onAuthStateChanged function
+import { auth } from "../../firebaseConfig";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // Import useHistory
+import FirebaseAuth from "../../Components/FirebaseAuth";
+
 
 
 const { Title } = Typography;
@@ -20,12 +23,15 @@ const Summary: React.FC = () => {
   const nextScreen = "/";
   const objecInfo = useSelector((state: IObjectInfo) => state);
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate(); // Initialize useHistory
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
+        console.log("User signed in:", currentUser); // Added console log
         setUser(currentUser);
       } else {
+        console.log("User signed out"); // Added console log
         setUser(null);
       }
     });
@@ -37,6 +43,10 @@ const Summary: React.FC = () => {
 
   console.log(objecInfo);
   fetchDataOnce();
+
+  const handleSignInClick = () => {
+    navigate("/firebase_auth");
+  };
 
 
     return (
@@ -67,12 +77,12 @@ const Summary: React.FC = () => {
                             <Typography >  {objecInfo.price} CHF </Typography>
                         </div>
                         </Card>
-      {user ? (
-        <ConfirmButtom />
+                        {user ? (
+        <ConfirmButton />
       ) : (
-        <SignInButton onClick={() => {
-          // Redirect to the sign-in page or open a sign-in modal
-        }} />
+        <SignInButton
+            onClick={handleSignInClick}
+        />
       )}
       <BackButton />
     </PageLayout>

@@ -4,7 +4,6 @@ import {lazy} from "react";
 import {FC} from "react";
 
 
-
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
