@@ -1,27 +1,51 @@
 import * as actionTypes from "./actionTypes"
 import { AnyAction } from 'redux';
-import { ObjectInfoState } from "../type";
-
-const initialState: ObjectInfoState = {
-    object:
-      {
-        name: 'test',
-        description: "test",
-        size:'test',
-        weight:0
-      }
-
-  }
+import { IObjectInfo, ObjectInfoState } from "../type";
 
 
-  export function reducer(state = initialState, action: AnyAction) {
+  export function reducer(state: any, action: AnyAction): IObjectInfo {
     console.log(action.type)
     switch (action.type) {
+
       case 'SET_OBJECT': {
-        console.log("DANS LE PUTAIN DE REDUCER")
-        return { ...state, object: action.payload };}
+        console.log(action.payload)
+        return { ...state,
+        name : action.payload.name,
+        description: action.payload.description,
+        size : action.payload.size,
+        weight: action.payload.weight
+        }}
+
+      case 'SET_ADRESS': {
+          console.log(state)
+          return{
+            ...state,
+            pickup_adress: action.payload.pickup_adress,
+            delivery_adress: action.payload.delivery_adress,
+          }}
+
+      case 'SET_PRICE':{
+
+        return { ...state,
+          price:action.payload,
+        } ;}
+
+      case 'SET_TIME':{
+
+        return{...state,
+          time: action.payload,} ;
+
+      }
+
+      case 'SET_DATE_RANGE':{
+
+        return{...state,
+            dateRange:action.payload
+          }
+      }
+
       default:{
-        console.log("DANS LE PUTAIN DE REDUCER MAIS PAS DANS LE BON STATE")
+        console.log("DANS LE REDUCER MAIS PAS DANS LE BON STATE")
         return state;}
     }
   }

@@ -13,6 +13,7 @@ import { createStore} from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 import {reducer} from "./Store/reducer"
+import { IObjectInfo, ObjectInfoState } from './type';
 import { uploadReduxStoreToFirebase } from "./linksStoreToFirebase";
 
 
@@ -38,7 +39,24 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 // Initialize Firebase Functions
 const functions = getFunctions(app);
-const store = createStore(reducer);
+
+const initialState: IObjectInfo = {
+      name: '',
+      description: "",
+      size:'S',
+      weight:'-5 kg',
+      price:0,
+      pickup_adress:"",
+      delivery_adress:"",
+      dateRange:["",""],
+      time:""
+
+}
+
+
+const store = createStore(reducer,initialState);
+
+
 
 store.subscribe(() => {
   uploadReduxStoreToFirebase(store);

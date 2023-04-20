@@ -44,6 +44,12 @@
   font-weight:bold;
 }
 
+@media(max-width: 576px) {
+  .ant-picker-panels {
+    flex-direction: column;
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
