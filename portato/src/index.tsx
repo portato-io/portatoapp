@@ -40,15 +40,15 @@ const analytics = getAnalytics(app);
 const functions = getFunctions(app);
 
 const initialState: IObjectInfo = {
-      name: 'test',
-      description: "test",
-      size:'test',
-      weight:0,
+      name: '',
+      description: "",
+      size:'S',
+      weight:'-5 kg',
       price:0,
-      pickup_adress:"test",
-      delivery_adress:"test",
+      pickup_adress:"",
+      delivery_adress:"",
       dateRange:["",""],
-      time:"test"
+      time:""
 
 }
 

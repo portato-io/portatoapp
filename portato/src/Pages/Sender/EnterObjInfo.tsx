@@ -11,7 +11,7 @@ import {useDispatch,useSelector} from 'react-redux'
 
 import { Button } from "antd";
 import { setObject } from "../../Store/actionCreators";
-import {IObjectInfo,ObjectInfoState} from "../../type"
+import {IFirstObjectInfo, IObjectInfo,ObjectInfoState} from "../../type"
 
 
 const { Title } = Typography;
@@ -24,17 +24,12 @@ const EnterObjInfo: React.FC = () => {
 
   const objecInfo = useSelector((state: IObjectInfo) => state);
 
-  const [object, setValues] = useState<IObjectInfo>(
+  const [object, setValues] = useState<IFirstObjectInfo>(
     {
       name: objecInfo.name,
       description: objecInfo.description,
       size: objecInfo.size,
       weight: objecInfo.weight,
-      price:objecInfo.price,
-      pickup_adress:objecInfo.pickup_adress,
-      delivery_adress:objecInfo.delivery_adress,
-      dateRange:objecInfo.dateRange,
-      time:objecInfo.time
   });
 
 
@@ -140,7 +135,6 @@ const EnterObjInfo: React.FC = () => {
               </div>
             </Upload>
           </Form.Item>
-          <Button  style = {{position: 'absolute',top:'5%'}} htmlType="submit"> test</Button>
           <NextButton nextScreen = {nextScreen}/>
           <BackButton/>
         </Form>

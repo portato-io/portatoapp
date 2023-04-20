@@ -17,6 +17,7 @@ const EnterAddress: React.FC = () => {
     const nextScreen = "/enter_time"
 
     const objecInfo = useSelector((state: IObjectInfo) => state);
+    console.log(objecInfo.pickup_adress)
 
     const [adresses, setValues] = useState(
         {
@@ -24,11 +25,13 @@ const EnterAddress: React.FC = () => {
           delivery_adress:objecInfo.delivery_adress,
         });
 
-    const dispatch = useDispatch();
-
     React.useEffect(() => {
             dispatch(setObjectAdress(adresses.pickup_adress, adresses.delivery_adress))
         }, [adresses]);
+
+    const dispatch = useDispatch();
+
+
 
     const handleInputChange = (e:any) => {
             setValues({
@@ -48,19 +51,15 @@ const EnterAddress: React.FC = () => {
             layout="horizontal"
             >
             <Title level = {4} style={{backgroundColor:"white"}}>Pick-up address</Title>
-            <Form.Item
-                name="Pickup address"
-            >
+            <Form.Item>
                 <Input name="pickup_adress"
-                value={adresses.pickup_adress}
+                value={adresses.pickup_adress !== '' ?  adresses.pickup_adress:undefined}
                 onChange={handleInputChange}
                 prefix = {<SearchOutlined/>} style = {{background :'', width:'90%'}}/>
             </Form.Item>
 
             <Title level = {4} style={{backgroundColor:"white"}}>Delivery address</Title>
-            <Form.Item
-                name="Delivery address"
-            >
+            <Form.Item>
                 <Input name = "delivery_adress"
                 value={adresses.delivery_adress}
                 onChange={handleInputChange}

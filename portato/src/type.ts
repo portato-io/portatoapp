@@ -2,7 +2,7 @@ export interface IObjectInfo{
     name: string,
     description: string,
     size: string,
-    weight: number,
+    weight: string,
     price:number,
     pickup_adress:string,
     delivery_adress:string,
@@ -14,7 +14,7 @@ export interface IFirstObjectInfo{
     name: string,
     description: string,
     size: string,
-    weight: number,
+    weight: string,
 }
 
 export type ObjectInfoState = {

@@ -47,12 +47,10 @@ const EnterPrice: React.FC = () => {
             layout="horizontal"
             >
                 <Title level= {3} > How much is the transport cost for you?</Title>
-                <Form.Item
-                    name="Price"
-                >
+                <Form.Item>
                     <Input
                     name="price"
-                    value={45}
+                    value={objecInfo.price !== 0 ? objecInfo.price:undefined}
                     onChange={handleInputChange}
                     placeholder="E.g : 30 CHF" style = {{width:'90%'}}/>
                 </Form.Item>

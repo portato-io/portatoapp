@@ -2,19 +2,6 @@ import * as actionTypes from "./actionTypes"
 import { AnyAction } from 'redux';
 import { IObjectInfo, ObjectInfoState } from "../type";
 
-const initialState: IObjectInfo = {
-
-        name: 'test',
-        description: "test",
-        size:'test',
-        weight:0,
-        price:0,
-        pickup_adress:"test",
-        delivery_adress:"test",
-        dateRange:["",""],
-        time:"test"
-  }
-
 
   export function reducer(state: any, action: AnyAction): IObjectInfo {
     console.log(action.type)
