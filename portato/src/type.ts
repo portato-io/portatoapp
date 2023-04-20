@@ -10,6 +10,13 @@ export interface IObjectInfo{
     time:string
 }
 
+export interface IFirstObjectInfo{
+    name: string,
+    description: string,
+    size: string,
+    weight: number,
+}
+
 export type ObjectInfoState = {
     object: IObjectInfo
   }

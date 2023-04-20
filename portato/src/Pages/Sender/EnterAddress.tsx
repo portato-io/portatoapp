@@ -16,7 +16,7 @@ const EnterAddress: React.FC = () => {
 
     const nextScreen = "/enter_time"
 
-    const objecInfo = useSelector((state: ObjectInfoState) => state.object);
+    const objecInfo = useSelector((state: IObjectInfo) => state);
 
     const [adresses, setValues] = useState(
         {
@@ -24,7 +24,7 @@ const EnterAddress: React.FC = () => {
           delivery_adress:objecInfo.delivery_adress,
         });
 
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     React.useEffect(() => {
             dispatch(setObjectAdress(adresses.pickup_adress, adresses.delivery_adress))
@@ -35,8 +35,6 @@ const EnterAddress: React.FC = () => {
               ...adresses,
               [e.target.name]: e.target.value
             });
-            console.log(e.target.name);
-
           };
 
 

@@ -22,7 +22,7 @@ const { TextArea } = Input;
 
 const EnterObjInfo: React.FC = () => {
 
-  const objecInfo = useSelector((state: ObjectInfoState) => state.object);
+  const objecInfo = useSelector((state: IObjectInfo) => state);
 
   const [object, setValues] = useState<IObjectInfo>(
     {

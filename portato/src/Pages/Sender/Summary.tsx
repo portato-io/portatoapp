@@ -13,7 +13,7 @@ const progress = 100
 
 const Summary: React.FC = () => {
     const nextScreen = "/"
-    const objecInfo = useSelector((state: ObjectInfoState) => state.object);
+    const objecInfo = useSelector((state: IObjectInfo) => state);
     console.log(objecInfo)
 
 

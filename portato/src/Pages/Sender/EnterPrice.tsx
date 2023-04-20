@@ -7,7 +7,7 @@ import { Typography, Form, Input, Card} from 'antd';
 import {InfoCircleOutlined} from '@ant-design/icons'
 import { useDispatch, useSelector } from "react-redux";
 import { setObjectPrice } from "../../Store/actionCreators";
-import { ObjectInfoState } from "../../type";
+import { IObjectInfo, ObjectInfoState } from "../../type";
 
 const { Title } = Typography;
 const progress = 75;
@@ -15,7 +15,7 @@ const progress = 75;
 const EnterPrice: React.FC = () => {
 
     const nextScreen = "/summary"
-    const objecInfo = useSelector((state: ObjectInfoState) => state.object);
+    const objecInfo = useSelector((state: IObjectInfo) => state);
 
     const [prices, setValues] = useState(
         {

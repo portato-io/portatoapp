@@ -1,10 +1,9 @@
 import * as actionTypes from "./actionTypes"
 import { AnyAction } from 'redux';
-import { ObjectInfoState } from "../type";
+import { IObjectInfo, ObjectInfoState } from "../type";
 
-const initialState: ObjectInfoState = {
-    object:
-      {
+const initialState: IObjectInfo = {
+
         name: 'test',
         description: "test",
         size:'test',
@@ -14,78 +13,48 @@ const initialState: ObjectInfoState = {
         delivery_adress:"test",
         dateRange:["",""],
         time:"test"
-      }
-
   }
 
 
-  export function reducer(state = initialState, action: AnyAction) {
+  export function reducer(state: any, action: AnyAction): IObjectInfo {
     console.log(action.type)
     switch (action.type) {
 
       case 'SET_OBJECT': {
-        console.log("DANS LE REDUCER DU SET OBJECT")
-        return { ...state, object: action.payload };}
+        console.log(action.payload)
+        return { ...state,
+        name : action.payload.name,
+        description: action.payload.description,
+        size : action.payload.size,
+        weight: action.payload.weight
+        }}
 
       case 'SET_ADRESS': {
-          console.log("DANS LE REDUCER du SET ADRESS")
-          return { ...state, object:{
-            name: state.object.name,
-            description: state.object.description,
-            size:state.object.size,
-            weight:state.object.weight,
-            price:state.object.price,
+          console.log(state)
+          return{
+            ...state,
             pickup_adress: action.payload.pickup_adress,
             delivery_adress: action.payload.delivery_adress,
-            time: state.object.time,
-            dateRange:state.object.dateRange
-          } };}
+          }}
 
       case 'SET_PRICE':{
 
-        return { ...state, object:{
-          name: state.object.name,
-          description: state.object.description,
-          size:state.object.size,
-          weight:state.object.weight,
+        return { ...state,
           price:action.payload,
-          pickup_adress: state.object.pickup_adress,
-          delivery_adress: state.object.delivery_adress,
-          time: state.object.time,
-          dateRange:state.object.dateRange
-        } };}
+        } ;}
 
       case 'SET_TIME':{
-        console.log(action.payload[0])
-        return{...state,object:{
-          name: state.object.name,
-          description: state.object.description,
-          size:state.object.size,
-          weight:state.object.weight,
-          price:state.object.price,
-          pickup_adress: state.object.pickup_adress,
-          delivery_adress: state.object.delivery_adress,
-          time: action.payload,
-          dateRange: state.object.dateRange} };
+
+        return{...state,
+          time: action.payload,} ;
 
       }
 
       case 'SET_DATE_RANGE':{
 
         return{...state,
-            object:{
-            name: state.object.name,
-            description: state.object.description,
-            size:state.object.size,
-            weight:state.object.weight,
-            price:state.object.price,
-            pickup_adress: state.object.pickup_adress,
-            delivery_adress: state.object.delivery_adress,
-            time: state.object.time,
-            dateRange:action.payload}
-
-
-        }
+            dateRange:action.payload
+          }
       }
 
       default:{

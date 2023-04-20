@@ -13,6 +13,7 @@ import { createStore} from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 import {reducer} from "./Store/reducer"
+import { IObjectInfo, ObjectInfoState } from './type';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -37,7 +38,24 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 // Initialize Firebase Functions
 const functions = getFunctions(app);
-const store = createStore(reducer);
+
+const initialState: IObjectInfo = {
+      name: 'test',
+      description: "test",
+      size:'test',
+      weight:0,
+      price:0,
+      pickup_adress:"test",
+      delivery_adress:"test",
+      dateRange:["",""],
+      time:"test"
+
+}
+
+
+const store = createStore(reducer,initialState);
+
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

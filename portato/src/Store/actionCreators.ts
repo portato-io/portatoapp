@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes"
-import { IObjectInfo,ObjectInfoAction } from "../type"
+import { IFirstObjectInfo, IObjectInfo,ObjectInfoAction } from "../type"
 import { AnyAction } from "redux";
 /*export function setObject(object: IObjectInfo) {
   const action: ObjectInfoAction = {
@@ -9,7 +9,7 @@ import { AnyAction } from "redux";
 
 }*/
 
-export const setObject = (variable: IObjectInfo): AnyAction => ({
+export const setObject = (variable: IFirstObjectInfo): AnyAction => ({
   type: actionTypes.SET_OBJECT,
   payload: variable,
 });
