@@ -5,7 +5,8 @@ import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
 import { Typography, Form, Upload, Input, Radio} from 'antd';
 import {PlusOutlined} from "@ant-design/icons"
-import {useDispatch,useSelector} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 //TMP
 
@@ -21,6 +22,8 @@ const { TextArea } = Input;
 
 
 const EnterObjInfo: React.FC = () => {
+
+  const { t, i18n } = useTranslation(['home', 'main']);
 
   const objecInfo = useSelector((state: IObjectInfo) => state);
 
