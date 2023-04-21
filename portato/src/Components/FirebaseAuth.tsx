@@ -37,6 +37,8 @@ const FirebaseAuth = () => {
     ui.start("#firebaseui-auth-container", uiConfig);
   }, [navigate]); // Add navigate as a dependency
 
+  console.log(uiRef)
+
   return <div id="firebaseui-auth-container" ref={uiRef}></div>;
 };
 
