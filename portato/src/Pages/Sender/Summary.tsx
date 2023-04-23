@@ -7,7 +7,7 @@ import BackButton from "../../Components/Buttons/BackButton";
 
 import { useSelector } from "react-redux";
 import {ObjectInfoState, IObjectInfo} from '../../type'
-import { fetchDataOnce } from "../../linksStoreToFirebase";
+    import { fetchDataOnce } from "../../linksStoreToFirebase";
 
 const { Title } = Typography;
 const progress = 100
@@ -42,6 +42,10 @@ const Summary: React.FC = () => {
                         </div>
                         <div >
                             <Title level = {4}> Price</Title>
+                            <Typography >  {objecInfo.price} CHF </Typography>
+                        </div>
+                        <div >
+                            <Title level = {4}> Images</Title>
                             <Typography >  {objecInfo.price} CHF </Typography>
                         </div>
             </Card>
