@@ -23,7 +23,7 @@ import { storage } from "../../firebaseConfig";
 //TMP
 
 import { Button } from "antd";
-import { setObject } from "../../Store/actionCreators";
+import { setObject, setObjectImages } from "../../Store/actionCreators";
 import {IFirstObjectInfo, IObjectInfo,ObjectInfoState} from "../../type"
 
 
@@ -79,6 +79,7 @@ const EnterObjInfo: React.FC = () => {
       async () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
         console.log("File available at", downloadURL);
+        dispatch(setObjectImages([downloadURL]))
         setUploading(false);
 
         setFileList((prevFileList) =>

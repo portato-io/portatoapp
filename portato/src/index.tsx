@@ -49,7 +49,8 @@ const initialState: IObjectInfo = {
       pickup_adress:"",
       delivery_adress:"",
       dateRange:["",""],
-      time:""
+      time:"",
+      images:[""]
 
 }
 
