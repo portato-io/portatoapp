@@ -66,7 +66,7 @@ const EnterObjInfo: React.FC = () => {
         setFileList((prevFileList) =>
           prevFileList.map((f) => {
             if (f.uid === uid) {
-              return { ...f, percent: progress };
+              return { ...f, percent: Math.ceil(progress) };
             }
             return f;
           })
