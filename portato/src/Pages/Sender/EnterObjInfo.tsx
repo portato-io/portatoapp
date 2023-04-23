@@ -3,10 +3,12 @@ import PageLayout from "../Layouts/PageLayoutTest"
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
+import ImageWithProgress from "../../Components/ImageWithProgress";
+
 import { Typography, Form, Upload, Input, Radio, Progress} from 'antd';
 import {PlusOutlined} from "@ant-design/icons"
 import {useDispatch,useSelector} from 'react-redux'
-import { UploadChangeParam } from "antd/lib/upload";
+import { RcFile } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 
 import {
@@ -35,14 +37,22 @@ const EnterObjInfo: React.FC = () => {
 
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const beforeUpload = (file: File) => {
     setUploading(true);
-    uploadImage(file);
+    const newFile: UploadFile = {
+      uid: Date.now().toString(),
+      name: file.name,
+      status: "uploading",
+      originFileObj: file as unknown as RcFile,
+    };
+    setFileList((prevFileList) => [...prevFileList, newFile]);
+    uploadImage(file, newFile.uid);
     return false;
   };
 
-  async function uploadImage(file: File) {
+  async function uploadImage(file: File, uid: string) {
     const storageRef = ref(storage, `images/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -52,6 +62,15 @@ const EnterObjInfo: React.FC = () => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
         setProgress(progress);
+
+        setFileList((prevFileList) =>
+          prevFileList.map((f) => {
+            if (f.uid === uid) {
+              return { ...f, percent: progress };
+            }
+            return f;
+          })
+        );
       },
       (error: StorageError) => {
         console.error("Error uploading image:", error);
@@ -61,33 +80,17 @@ const EnterObjInfo: React.FC = () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
         console.log("File available at", downloadURL);
         setUploading(false);
+
+        setFileList((prevFileList) =>
+          prevFileList.map((file) =>
+            file.uid === uid
+              ? { ...file, status: "done", url: downloadURL }
+              : file
+          )
+        );
       }
     );
   }
-
-  const fileRender = () => {
-    if (uploading) {
-      return (
-        <div>
-          <Progress type="circle" percent={progress} width={40} />
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <PlusOutlined />
-          <div style={{ marginTop: 2 }}>Image</div>
-        </div>
-      );
-    }
-  };
-  const handleUploadChange = (info: UploadChangeParam) => {
-    if (info.file.status === 'done') {
-      uploadImage(info.file.originFileObj as File);
-    } else if (info.file.status === 'error') {
-      console.error('Error uploading the file');
-    }
-  };
 
   const objecInfo = useSelector((state: IObjectInfo) => state);
 
@@ -125,6 +128,13 @@ const EnterObjInfo: React.FC = () => {
     console.log(e.target.name);
 
   };
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 2 }}>Upload</div>
+    </div>
+  );
 
   return (
     <PageLayout>
@@ -195,18 +205,51 @@ const EnterObjInfo: React.FC = () => {
 
 
           <Form.Item
-        label={<label className="item-form-label">Upload images</label>}
-        valuePropName="fileList"
-      >
-        <Upload
-        listType="picture-card"
-        showUploadList={false}
-        beforeUpload={beforeUpload}
-        onChange={handleUploadChange}
-      >
-        {fileRender()}
-      </Upload>
-      </Form.Item>
+      label={<label className="item-form-label">Upload images</label>}
+      valuePropName="fileList"
+    >
+   <Upload
+  action="/upload.do"
+  listType="picture-card"
+  fileList={fileList}
+  beforeUpload={beforeUpload}
+  itemRender={(originNode, file, fileList) => {
+    if (file.status === "uploading" || file.status === "done") {
+      return (
+        <div style={{ position: "relative" }}>
+          <img
+            src={file.url || (file.originFileObj ? URL.createObjectURL(file.originFileObj) : "")}
+            alt={file.name}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "4px",
+            }}
+          />
+          {file.status === "uploading" && (
+            <Progress
+              type="circle"
+              percent={file.percent}
+              width={40}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          )}
+        </div>
+      );
+    }
+    return originNode;
+  }}
+>
+  {fileList.length >= 8 ? null : uploadButton}
+</Upload>
+    </Form.Item>
+
           <NextButton nextScreen = {nextScreen}/>
           <BackButton/>
         </Form>
