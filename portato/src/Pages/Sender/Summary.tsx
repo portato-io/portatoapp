@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PageLayout from "../Layouts/PageLayoutTest";
-import { Typography, Card } from "antd";
+import { Typography, Card, Modal } from "antd";
 import ProgressBar from "../../Components/ProgressBar";
 import ConfirmButton from "../../Components/Buttons/ConfirmButton"; // Rename to ConfirmButton
 import BackButton from "../../Components/Buttons/BackButton";
@@ -21,6 +21,19 @@ const progress = 100;
 
 const Summary: React.FC = () => {
   const nextScreen = "/";
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   const objecInfo = useSelector((state: IObjectInfo) => state);
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate(); // Initialize useHistory
@@ -52,6 +65,13 @@ const Summary: React.FC = () => {
     return (
         <PageLayout>
             <ProgressBar progress={progress} />
+            <Modal
+                open={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <div><FirebaseAuth/></div>
+            </Modal>
             <Card
                 bordered={true}
                 style={{ marginLeft: "10%", width: "80%", marginTop: "20%", backgroundColor: "#FFF4E4" }}>
@@ -79,9 +99,10 @@ const Summary: React.FC = () => {
                         </Card>
                         {user ? (
         <ConfirmButton />
+
       ) : (
         <SignInButton
-            onClick={handleSignInClick}
+            onClick={showModal}
         />
       )}
       <BackButton />
