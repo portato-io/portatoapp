@@ -46,7 +46,7 @@ const Summary: React.FC = () => {
                         </div>
                         <div >
                             <Title level = {4}> Images</Title>
-                            <Typography >  {objecInfo.price} CHF </Typography>
+                            <Typography >  {objecInfo.images} CHF </Typography>
                         </div>
             </Card>
             <ConfirmButtom/>

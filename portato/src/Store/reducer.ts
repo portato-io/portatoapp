@@ -47,7 +47,7 @@ import { IObjectInfo, ObjectInfoState } from "../type";
       case 'SET_IMAGE':{
 
         return{...state,
-            images:action.payload
+          images: [...state.images, action.payload]
           }
       }
 
