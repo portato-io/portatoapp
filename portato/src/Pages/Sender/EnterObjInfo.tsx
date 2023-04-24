@@ -3,7 +3,7 @@ import PageLayout from "../Layouts/PageLayoutTest";
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
-import { Typography, Form, Upload, Input, Radio } from "antd";
+import { Typography, Form, Upload, Input, Radio, Progress } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { RcFile } from "antd/lib/upload";

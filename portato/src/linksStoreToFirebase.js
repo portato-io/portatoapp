@@ -18,13 +18,13 @@ export const uploadReduxStoreToFirebase = async (uid, state) => {
   }
 };
 
-export const fetchDataOnce = async () => {
+export const fetchDataOnce = async (uid) => {
   try {
-    const reduxStoreRef = ref(database, "reduxStore");
-    const snapshot = await get(reduxStoreRef);
-
+    const userRequestsRef = ref(database, `users/${uid}/requests`);
+    const snapshot = await get(userRequestsRef);
     if (snapshot.exists()) {
       console.log("Data:", snapshot.val());
+      return snapshot.val();
     } else {
       console.log("No data found.");
     }

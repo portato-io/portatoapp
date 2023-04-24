@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth";
 import * as firebaseui from "firebaseui";
 import { onAuthStateChanged, User } from "firebase/auth";
 import AuthWrapper from "../Components/AuthWrapper";
+import { useNavigate } from "react-router-dom";
 
 import { Typography } from "antd";
 
@@ -15,6 +16,7 @@ const { Title } = Typography;
 
 const ProfileContent: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
@@ -44,7 +46,7 @@ const ProfileContent: React.FC = () => {
   };
 
   const handleMySendRequestsClick = () => {
-    // navigate to My Deliveries screen
+    navigate("/user_requests");
   };
 
   return (
