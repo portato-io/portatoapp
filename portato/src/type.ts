@@ -7,7 +7,8 @@ export interface IObjectInfo{
     pickup_adress:string,
     delivery_adress:string,
     dateRange:string[],
-    time:string
+    time:string,
+    images:string[]
 }
 
 export interface IFirstObjectInfo{

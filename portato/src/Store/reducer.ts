@@ -44,6 +44,13 @@ import { IObjectInfo, ObjectInfoState } from "../type";
           }
       }
 
+      case 'SET_IMAGE':{
+
+        return{...state,
+          images: [...state.images, action.payload]
+          }
+      }
+
       default:{
         console.log("DANS LE REDUCER MAIS PAS DANS LE BON STATE")
         return state;}
