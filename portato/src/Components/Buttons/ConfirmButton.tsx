@@ -1,11 +1,12 @@
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
-function ConfirmButtom({ nextScreen = "/" }: any) {
+const ConfirmButton = ({ onClick, nextScreen = "/" }: any) => {
   const navigate = useNavigate();
 
   const handleConfirmClick = () => {
     console.log(nextScreen);
+    onClick();
     navigate("/");
   };
   return (
@@ -29,5 +30,5 @@ function ConfirmButtom({ nextScreen = "/" }: any) {
       </Button>
     </div>
   );
-}
-export default ConfirmButtom;
+};
+export default ConfirmButton;

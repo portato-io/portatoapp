@@ -4,41 +4,11 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFunctions, httpsCallable } from "firebase/functions";
 
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
 import { reducer } from "./Store/reducer";
 import { IObjectInfo, ObjectInfoState } from "./type";
-import { uploadReduxStoreToFirebase } from "./linksStoreToFirebase";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: "portatoapp.firebaseapp.com",
-  databaseURL:
-    "https://portatoapp-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "portatoapp",
-  storageBucket: "portatoapp.appspot.com",
-  messagingSenderId: "22027928847",
-  appId: "1:22027928847:web:3588209ce56727486f2a7a",
-  measurementId: "G-Y4VZJ8CMPY",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-// Initialize Firebase Functions
-const functions = getFunctions(app);
 
 const initialState: IObjectInfo = {
   name: "",
@@ -52,11 +22,7 @@ const initialState: IObjectInfo = {
   time: "",
 };
 
-const store = createStore(reducer, initialState);
-
-store.subscribe(() => {
-  uploadReduxStoreToFirebase(store);
-});
+export const store = createStore(reducer, initialState);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

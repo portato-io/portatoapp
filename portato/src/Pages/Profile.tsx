@@ -43,6 +43,10 @@ const ProfileContent: React.FC = () => {
     // navigate to My Deliveries screen
   };
 
+  const handleMySendRequestsClick = () => {
+    // navigate to My Deliveries screen
+  };
+
   return (
     <PageLayout>
       <div>
@@ -88,6 +92,9 @@ const ProfileContent: React.FC = () => {
                 </List.Item>
                 <List.Item arrow={true} onClick={handleMyDeliveriesClick}>
                   My Deliveries
+                </List.Item>
+                <List.Item arrow={true} onClick={handleMySendRequestsClick}>
+                  My Send Requests
                 </List.Item>
                 <List.Item
                   arrow={true}

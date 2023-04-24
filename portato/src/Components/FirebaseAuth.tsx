@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import "firebaseui/dist/firebaseui.css";
 import { auth } from "../firebaseConfig";
 import { GoogleAuthProvider, EmailAuthProvider } from "firebase/auth";
@@ -7,7 +6,6 @@ import { uiInstance, uiConfig } from "./firebaseUIInstance";
 
 const FirebaseAuth: React.FC = () => {
   const uiRef = useRef<HTMLDivElement | null>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Update the signInSuccessUrl and callbacks in uiConfig
@@ -17,7 +15,7 @@ const FirebaseAuth: React.FC = () => {
     ];
     uiConfig.callbacks = {
       signInSuccessWithAuthResult: () => {
-        navigate(-1);
+        window.location.replace(window.location.pathname);
         return false;
       },
     };
@@ -29,7 +27,7 @@ const FirebaseAuth: React.FC = () => {
     return () => {
       uiInstance.reset();
     };
-  }, [navigate]);
+  }, []);
 
   return <div id="firebaseui-auth-container" ref={uiRef}></div>;
 };

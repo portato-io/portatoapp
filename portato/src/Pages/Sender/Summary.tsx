@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PageLayout from "../Layouts/PageLayoutTest";
 import { Typography, Card, Modal } from "antd";
 import ProgressBar from "../../Components/ProgressBar";
-import ConfirmButton from "../../Components/Buttons/ConfirmButton"; // Rename to ConfirmButton
+import ConfirmButton from "../../Components/Buttons/ConfirmButton";
 import BackButton from "../../Components/Buttons/BackButton";
 import SignInButton from "../../Components/Buttons/SignInButton";
 
@@ -11,8 +11,9 @@ import { IObjectInfo } from "../../type";
 import { fetchDataOnce } from "../../linksStoreToFirebase";
 import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { useNavigate } from "react-router-dom"; // Import useHistory
 import FirebaseAuth from "../../Components/FirebaseAuth";
+import { uploadReduxStoreToFirebase } from "../../linksStoreToFirebase";
+import { store } from "../../index";
 
 const { Title } = Typography;
 const progress = 100;
@@ -34,7 +35,6 @@ const Summary: React.FC = () => {
   };
   const objecInfo = useSelector((state: IObjectInfo) => state);
   const [user, setUser] = useState<User | null>(null);
-  const navigate = useNavigate(); // Initialize useHistory
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -52,11 +52,21 @@ const Summary: React.FC = () => {
     };
   }, []);
 
-  console.log(objecInfo);
-  fetchDataOnce();
-
-  const handleSignInClick = () => {
-    navigate("/firebase_auth");
+  const handleConfirm = () => {
+    console.log("In handle confirm.");
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      const uid = auth.currentUser?.uid; // Add the optional chaining operator here
+      if (uid) {
+        const state = store.getState();
+        uploadReduxStoreToFirebase(uid, state);
+      } else {
+        console.log("User UID not found.");
+      }
+    } else {
+      // Handle the case when no user is signed in
+      console.log("No user is signed in.");
+    }
   };
 
   return (
@@ -105,7 +115,11 @@ const Summary: React.FC = () => {
           <Typography> {objecInfo.price} CHF </Typography>
         </div>
       </Card>
-      {user ? <ConfirmButton /> : <SignInButton onClick={showModal} />}
+      {user ? (
+        <ConfirmButton onClick={handleConfirm} />
+      ) : (
+        <SignInButton onClick={showModal} />
+      )}
       <BackButton />
     </PageLayout>
   );
