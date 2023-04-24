@@ -1,43 +1,119 @@
-import React, { useEffect } from "react";
-import PageLayout from './Layouts/PageLayoutTest'
+import React, { useEffect, useState } from "react";
+import PageLayout from "./Layouts/PageLayoutTest";
+import { List, Card } from "antd-mobile";
+import { UserOutlined } from "@ant-design/icons";
 import "firebaseui/dist/firebaseui.css";
-import { auth } from '../firebaseConfig';
-import { GoogleAuthProvider, EmailAuthProvider } from "firebase/auth";
+import { auth } from "../firebaseConfig";
+import { signOut } from "firebase/auth";
 import * as firebaseui from "firebaseui";
+import { onAuthStateChanged, User } from "firebase/auth";
+import AuthWrapper from "../Components/AuthWrapper";
+import { useNavigate } from "react-router-dom";
 
-
-
-import { Typography } from 'antd';
+import { Typography } from "antd";
 
 const { Title } = Typography;
 
-const uiConfig = {
-  signInSuccessUrl: "/enterObjInfo", // e.g., "index.html"
-  signInOptions: [
-    // List the authentication providers you want to support
-    GoogleAuthProvider.PROVIDER_ID,
-    EmailAuthProvider.PROVIDER_ID,
-  ],
-};
-
-// Initialize the FirebaseUI widget
-const ui = new firebaseui.auth.AuthUI(auth);
-
-const Profile: React.FC = () => {
+const ProfileContent: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
   useEffect(() => {
-    ui.start("#firebaseui-auth-container", uiConfig);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        console.log("User signed in:", currentUser); // Added console log
+        setUser(currentUser);
+      } else {
+        console.log("User signed out"); // Added console log
+        setUser(null);
+      }
+    });
 
-    // Clean up the UI widget when the component is unmounted
     return () => {
-      ui.reset();
+      unsubscribe();
     };
   }, []);
 
+  const handleMyAccountClick = () => {
+    // navigate to My Account screen
+  };
+
+  const handleMyPaymentMethodsClick = () => {
+    // navigate to My Payment Methods screen
+  };
+
+  const handleMyDeliveriesClick = () => {
+    // navigate to My Deliveries screen
+  };
+
+  const handleMySendRequestsClick = () => {
+    navigate("/user_requests");
+  };
+
   return (
     <PageLayout>
-      <div id="firebaseui-auth-container"></div>
+      <div>
+        <div
+          style={{
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            background: "#2897FF",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#2897FF",
+              flex: 4,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                width: "60%",
+                height: "60%",
+                borderRadius: "50%",
+                backgroundColor: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <UserOutlined style={{ fontSize: "48px" }} />
+            </div>
+          </div>
+          <div style={{ backgroundColor: "#2897FF", flex: 6 }}>
+            <Card style={{ borderRadius: "5%", height: "100%" }}>
+              <List mode="card" style={{ marginTop: "10%" }}>
+                <List.Item arrow={true} onClick={handleMyAccountClick}>
+                  My Account
+                </List.Item>
+                <List.Item arrow={true} onClick={handleMyPaymentMethodsClick}>
+                  My Payment Methods
+                </List.Item>
+                <List.Item arrow={true} onClick={handleMyDeliveriesClick}>
+                  My Deliveries
+                </List.Item>
+                <List.Item arrow={true} onClick={handleMySendRequestsClick}>
+                  My Send Requests
+                </List.Item>
+                <List.Item
+                  arrow={true}
+                  onClick={() => signOut(auth)}
+                  style={{ color: "red" }}
+                >
+                  Sign out
+                </List.Item>
+              </List>
+            </Card>
+          </div>
+        </div>
+      </div>
     </PageLayout>
   );
 };
+
+const Profile: React.FC = () => <AuthWrapper Component={ProfileContent} />;
 
 export default Profile;

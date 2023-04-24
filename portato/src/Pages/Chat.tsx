@@ -1,16 +1,23 @@
 import React from "react";
-import PageLayout from './Layouts/PageLayout'
+import PageLayout from "./Layouts/PageLayout";
 
-import { Typography } from 'antd';
+import { Typography } from "antd";
 
 const { Title } = Typography;
 
 const Chat: React.FC = () => {
   return (
     <PageLayout>
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <Title level={2}>Chat</Title>
-    </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Title level={2}>Chat</Title>
+      </div>
     </PageLayout>
   );
 };
