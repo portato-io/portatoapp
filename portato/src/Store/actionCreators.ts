@@ -39,3 +39,8 @@ export const setObjectTime = (time: string): AnyAction => ({
   type: actionTypes.SET_TIME,
   payload: time,
 });
+
+export const setObjectImages = (images: string[]): AnyAction => ({
+  type: actionTypes.SET_IMAGE,
+  payload: images,
+});

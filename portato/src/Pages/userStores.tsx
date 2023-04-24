@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getDatabase, ref, onValue, DataSnapshot } from "firebase/database";
 import styles from "./UserStores.module.css";
 
-const UserStores: React.FC = () => {
+/*const UserStores: React.FC = () => {
   const [stores, setStores] = useState<DispatchType[]>([]);
 
   useEffect(() => {
@@ -47,4 +47,4 @@ const UserStores: React.FC = () => {
   );
 };
 
-export default UserStores;
+export default UserStores;*/

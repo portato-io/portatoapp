@@ -8,6 +8,7 @@ export interface IObjectInfo {
   delivery_adress: string;
   dateRange: string[];
   time: string;
+  images: string[];
 }
 
 export interface IFirstObjectInfo {

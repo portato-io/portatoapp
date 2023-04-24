@@ -2,6 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFunctions } from "firebase/functions";
 import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 // Your Firebase configuration object
 const firebaseConfig = {
@@ -26,3 +32,5 @@ export const functions = getFunctions(app);
 export const database = getDatabase(app);
 
 export const auth = getAuth();
+
+export const storage = getStorage(app);

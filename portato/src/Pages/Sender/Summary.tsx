@@ -7,7 +7,7 @@ import BackButton from "../../Components/Buttons/BackButton";
 import SignInButton from "../../Components/Buttons/SignInButton";
 
 import { useSelector } from "react-redux";
-import { IObjectInfo } from "../../type";
+import { ObjectInfoState, IObjectInfo } from "../../type";
 import { fetchDataOnce } from "../../linksStoreToFirebase";
 import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged, User } from "firebase/auth";
@@ -113,6 +113,10 @@ const Summary: React.FC = () => {
         <div>
           <Title level={4}> Price</Title>
           <Typography> {objecInfo.price} CHF </Typography>
+        </div>
+        <div>
+          <Title level={4}> Images</Title>
+          <Typography> {objecInfo.images} </Typography>
         </div>
       </Card>
       {user ? (
