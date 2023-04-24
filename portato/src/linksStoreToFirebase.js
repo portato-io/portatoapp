@@ -30,13 +30,17 @@ export const fetchDataOnce = async () => {
 export const listenForDataChanges = () => {
   const reduxStoreRef = ref(database, "reduxStore");
 
-  onValue(reduxStoreRef, (snapshot) => {
-    if (snapshot.exists()) {
-      console.log("Data:", snapshot.val());
-    } else {
-      console.log("No data found.");
+  onValue(
+    reduxStoreRef,
+    (snapshot) => {
+      if (snapshot.exists()) {
+        console.log("Data:", snapshot.val());
+      } else {
+        console.log("No data found.");
+      }
+    },
+    (error) => {
+      console.error("Error fetching data from Firebase:", error);
     }
-  }, (error) => {
-    console.error("Error fetching data from Firebase:", error);
-  });
+  );
 };

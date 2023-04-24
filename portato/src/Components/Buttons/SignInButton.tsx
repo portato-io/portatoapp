@@ -1,6 +1,6 @@
 // SignInButton.tsx
-import React from 'react';
-import { Button } from 'antd';
+import React from "react";
+import { Button } from "antd";
 
 interface SignInButtonProps {
   onClick: () => void;
@@ -8,7 +8,7 @@ interface SignInButtonProps {
 
 const SignInButton: React.FC<SignInButtonProps> = ({ onClick }) => {
   return (
-    <Button type="primary" onClick={onClick} style={{ margin: '16px' }}>
+    <Button type="primary" onClick={onClick} style={{ margin: "16px" }}>
       Sign In
     </Button>
   );

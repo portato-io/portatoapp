@@ -1,21 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "./reportWebVitals";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFunctions, httpsCallable } from 'firebase/functions';
+import { getFunctions, httpsCallable } from "firebase/functions";
 
-import { createStore} from "redux"
-import { Provider } from "react-redux"
-import thunk from "redux-thunk"
-import {reducer} from "./Store/reducer"
-import { IObjectInfo, ObjectInfoState } from './type';
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { reducer } from "./Store/reducer";
+import { IObjectInfo, ObjectInfoState } from "./type";
 import { uploadReduxStoreToFirebase } from "./linksStoreToFirebase";
-
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,12 +25,13 @@ import { uploadReduxStoreToFirebase } from "./linksStoreToFirebase";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "portatoapp.firebaseapp.com",
-  databaseURL: "https://portatoapp-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:
+    "https://portatoapp-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "portatoapp",
   storageBucket: "portatoapp.appspot.com",
   messagingSenderId: "22027928847",
   appId: "1:22027928847:web:3588209ce56727486f2a7a",
-  measurementId: "G-Y4VZJ8CMPY"
+  measurementId: "G-Y4VZJ8CMPY",
 };
 
 // Initialize Firebase
@@ -41,29 +41,25 @@ const analytics = getAnalytics(app);
 const functions = getFunctions(app);
 
 const initialState: IObjectInfo = {
-      name: '',
-      description: "",
-      size:'S',
-      weight:'-5 kg',
-      price:0,
-      pickup_adress:"",
-      delivery_adress:"",
-      dateRange:["",""],
-      time:""
+  name: "",
+  description: "",
+  size: "S",
+  weight: "-5 kg",
+  price: 0,
+  pickup_adress: "",
+  delivery_adress: "",
+  dateRange: ["", ""],
+  time: "",
+};
 
-}
-
-
-const store = createStore(reducer,initialState);
-
-
+const store = createStore(reducer, initialState);
 
 store.subscribe(() => {
   uploadReduxStoreToFirebase(store);
 });
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <Provider store={store}>
