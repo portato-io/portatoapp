@@ -8,9 +8,25 @@ interface SignInButtonProps {
 
 const SignInButton: React.FC<SignInButtonProps> = ({ onClick }) => {
   return (
-    <Button type="primary" onClick={onClick} style={{ margin: "16px" }}>
-      Sign In
-    </Button>
+    <div
+      className="div_button_next"
+      style={{
+        position: "absolute",
+        bottom: "10%",
+        left: "45%",
+        width: "50%",
+        background: "#fff",
+      }}
+    >
+      <Button
+        type="primary"
+        size="large"
+        onClick={onClick}
+        style={{ width: "100%" }}
+      >
+        Sign In
+      </Button>
+    </div>
   );
 };
 
