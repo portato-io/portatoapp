@@ -34,6 +34,7 @@ const Summary: React.FC = () => {
     setIsModalVisible(false);
   };
   const objecInfo = useSelector((state: IObjectInfo) => state);
+  console.log(objecInfo);
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
