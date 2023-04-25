@@ -1,8 +1,10 @@
 import React from "react";
-import { Spin } from "antd";
+import { Button, Spin } from "antd";
 import { auth } from "../firebaseConfig";
 import { onAuthStateChanged, User } from "firebase/auth";
 import FirebaseAuth from "../Components/FirebaseAuth";
+import BackButton from "./Buttons/BackButton";
+import PageLayout from "../Pages/Layouts/PageLayoutTest";
 
 interface AuthWrapperProps {
   Component: React.FC;
@@ -40,7 +42,17 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ Component }) => {
   }
 
   console.log("Rendering user:", user); // Added console log
-  return user ? <Component /> : <FirebaseAuth />;
+  return user ? (
+    <Component />
+  ) : (
+    <PageLayout>
+      {" "}
+      <div style={{ position: "absolute", top: "40%", left: "20%" }}>
+        {" "}
+        <FirebaseAuth />
+      </div>
+    </PageLayout>
+  );
 };
 
 export default AuthWrapper;
