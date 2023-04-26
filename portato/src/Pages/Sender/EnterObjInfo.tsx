@@ -12,7 +12,7 @@ import {
   Progress,
   message,
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { RcFile } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
@@ -151,6 +151,12 @@ const EnterObjInfo: React.FC = () => {
     </div>
   );
 
+  const handleRemove = (file: UploadFile) => {
+    setFileList((prevFileList) =>
+      prevFileList.filter((f) => f.uid !== file.uid)
+    );
+  };
+
   return (
     <PageLayout>
       <ProgressBar />
@@ -237,6 +243,7 @@ const EnterObjInfo: React.FC = () => {
             listType="picture-card"
             fileList={fileList}
             beforeUpload={beforeUpload}
+            onRemove={handleRemove}
             itemRender={(originNode, file, fileList) => {
               if (file.status === "uploading" || file.status === "done") {
                 return (
@@ -269,6 +276,19 @@ const EnterObjInfo: React.FC = () => {
                         }}
                       />
                     )}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "2px",
+                        right: "2px",
+                        background: "rgba(255, 255, 255, 0.8)",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleRemove(file)}
+                    >
+                      <CloseOutlined />
+                    </div>
                   </div>
                 );
               }
