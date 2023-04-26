@@ -3,7 +3,15 @@ import PageLayout from "../Layouts/PageLayoutTest";
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
-import { Typography, Form, Upload, Input, Radio, Progress } from "antd";
+import {
+  Typography,
+  Form,
+  Upload,
+  Input,
+  Radio,
+  Progress,
+  message,
+} from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { RcFile } from "antd/lib/upload";
@@ -27,12 +35,27 @@ const { Title } = Typography;
 const { TextArea } = Input;
 //type IObjectInfo = typeof IObjectInfo
 
+const MAX_FILES = 4; // Limit the number of files
+const MAX_SIZE = 1 * 1024 * 1024; // Limit the file size to 2MB
+
 const EnterObjInfo: React.FC = () => {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const beforeUpload = (file: File) => {
+    if (fileList.length >= MAX_FILES) {
+      message.error("You can only upload up to " + MAX_FILES + " images.");
+      return false;
+    }
+
+    if (file.size > MAX_SIZE) {
+      message.error(
+        "The file size must not exceed " + MAX_SIZE / (1024 * 1024) + "MB."
+      );
+      return false;
+    }
+
     setUploading(true);
     const newFile: UploadFile = {
       uid: Date.now().toString(),
