@@ -5,24 +5,25 @@ on:
   push:
     branches: [main]
 
-jobs:
-  pre-commit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+steps:
+  - name: Checkout code
+    uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v3
+  - name: Set up Python
+    uses: actions/setup-python@v2
+    with:
+      python-version: 3.x
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
+  - name: Set up Node.js
+    uses: actions/setup-node@v2
+    with:
+      node-version: 16
 
-      - name: Install dependencies
-        run: |
-          npm install -g prettier
+  - name: Install pre-commit
+    run: pip install pre-commit
 
-      - name: Run pre-commit hooks
-        uses: pre-commit/action@v3.0.0
-        with:
-          extra_args: --all-files
+  - name: Install dependencies
+    run: npm ci
+
+  - name: Run pre-commit hooks
+    run: pre-commit run --all-files
