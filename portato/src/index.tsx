@@ -20,7 +20,7 @@ const initialState: IObjectInfo = {
   delivery_adress: "",
   dateRange: ["", ""],
   time: "",
-  images: [""],
+  images: [],
 };
 
 export const store = createStore(reducer, initialState);

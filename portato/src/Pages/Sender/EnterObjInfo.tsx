@@ -28,7 +28,11 @@ import { storage } from "../../firebaseConfig";
 //TMP
 
 import { Button } from "antd";
-import { setObject, setObjectImages } from "../../Store/actionCreators";
+import {
+  setObject,
+  addObjectImages,
+  removeObjectImages,
+} from "../../Store/actionCreators";
 import { IFirstObjectInfo, IObjectInfo, ObjectInfoState } from "../../type";
 
 const { Title } = Typography;
@@ -96,7 +100,7 @@ const EnterObjInfo: React.FC = () => {
       async () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
         console.log("File available at", downloadURL);
-        dispatch(setObjectImages([downloadURL]));
+        dispatch(addObjectImages([downloadURL]));
         setUploading(false);
 
         setFileList((prevFileList) =>
@@ -152,9 +156,11 @@ const EnterObjInfo: React.FC = () => {
   );
 
   const handleRemove = (file: UploadFile) => {
-    setFileList((prevFileList) =>
-      prevFileList.filter((f) => f.uid !== file.uid)
-    );
+    setFileList((prevFileList) => {
+      const index = prevFileList.findIndex((f) => f.uid === file.uid);
+      dispatch(removeObjectImages(index));
+      return prevFileList.filter((f) => f.uid !== file.uid);
+    });
   };
 
   return (
