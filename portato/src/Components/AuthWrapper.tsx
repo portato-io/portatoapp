@@ -5,6 +5,7 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import FirebaseAuth from "../Components/FirebaseAuth";
 import BackButton from "./Buttons/BackButton";
 import PageLayout from "../Pages/Layouts/PageLayoutTest";
+import "./PortatoStyleSheet.css";
 
 interface AuthWrapperProps {
   Component: React.FC;
@@ -46,9 +47,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ Component }) => {
     <Component />
   ) : (
     <PageLayout>
-      {" "}
-      <div style={{ position: "absolute", top: "40%", left: "20%" }}>
-        {" "}
+      <div className="centered-container">
         <FirebaseAuth />
       </div>
     </PageLayout>
