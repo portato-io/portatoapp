@@ -10,6 +10,7 @@ interface AuthWrapperProps {
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({ Component }) => {
   const [user, setUser] = React.useState<User | null | "loading">("loading");
+  console.log(user);
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -31,16 +32,17 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ Component }) => {
           alignItems: "center",
           justifyContent: "center",
           minHeight: "100vh",
-          backgroundColor: "#2897FF",
+          backgroundColor: "#ffffff",
         }}
       >
         <Spin size="large" />
       </div>
     );
-  }
+  } else {
+    console.log("Rendering user in else:", user); // Added console log
 
-  console.log("Rendering user:", user); // Added console log
-  return user ? <Component /> : <FirebaseAuth />;
+    return user ? <Component /> : <FirebaseAuth />;
+  }
 };
 
 export default AuthWrapper;

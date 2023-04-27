@@ -14,7 +14,6 @@ import {
   uploadBytesResumable,
   getDownloadURL,
   StorageError,
-  UploadTaskSnapshot,
 } from "firebase/storage";
 import { storage } from "../../firebaseConfig";
 //TMP
