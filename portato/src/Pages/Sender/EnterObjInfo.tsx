@@ -3,8 +3,16 @@ import PageLayout from "../Layouts/PageLayoutTest";
 import NextButton from "../../Components/Buttons/NextButton";
 import BackButton from "../../Components/Buttons/BackButton";
 import ProgressBar from "../../Components/ProgressBar";
-import { Typography, Form, Upload, Input, Radio, Progress } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import {
+  Typography,
+  Form,
+  Upload,
+  Input,
+  Radio,
+  Progress,
+  message,
+} from "antd";
+import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { RcFile } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
@@ -20,12 +28,19 @@ import { storage } from "../../firebaseConfig";
 //TMP
 
 import { Button } from "antd";
-import { setObject, setObjectImages } from "../../Store/actionCreators";
+import {
+  setObject,
+  addObjectImages,
+  removeObjectImages,
+} from "../../Store/actionCreators";
 import { IFirstObjectInfo, IObjectInfo, ObjectInfoState } from "../../type";
 
 const { Title } = Typography;
 const { TextArea } = Input;
 //type IObjectInfo = typeof IObjectInfo
+
+const MAX_FILES = 4; // Limit the number of files
+const MAX_SIZE = 1 * 1024 * 1024; // Limit the file size to 2MB
 
 const EnterObjInfo: React.FC = () => {
   const [uploading, setUploading] = useState(false);
@@ -33,6 +48,18 @@ const EnterObjInfo: React.FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const beforeUpload = (file: File) => {
+    if (fileList.length >= MAX_FILES) {
+      message.error("You can only upload up to " + MAX_FILES + " images.");
+      return false;
+    }
+
+    if (file.size > MAX_SIZE) {
+      message.error(
+        "The file size must not exceed " + MAX_SIZE / (1024 * 1024) + "MB."
+      );
+      return false;
+    }
+
     setUploading(true);
     const newFile: UploadFile = {
       uid: Date.now().toString(),
@@ -73,7 +100,7 @@ const EnterObjInfo: React.FC = () => {
       async () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
         console.log("File available at", downloadURL);
-        dispatch(setObjectImages([downloadURL]));
+        dispatch(addObjectImages([downloadURL]));
         setUploading(false);
 
         setFileList((prevFileList) =>
@@ -127,6 +154,14 @@ const EnterObjInfo: React.FC = () => {
       <div style={{ marginTop: 2 }}>Upload</div>
     </div>
   );
+
+  const handleRemove = (file: UploadFile) => {
+    setFileList((prevFileList) => {
+      const index = prevFileList.findIndex((f) => f.uid === file.uid);
+      dispatch(removeObjectImages(index));
+      return prevFileList.filter((f) => f.uid !== file.uid);
+    });
+  };
 
   return (
     <PageLayout>
@@ -214,6 +249,7 @@ const EnterObjInfo: React.FC = () => {
             listType="picture-card"
             fileList={fileList}
             beforeUpload={beforeUpload}
+            onRemove={handleRemove}
             itemRender={(originNode, file, fileList) => {
               if (file.status === "uploading" || file.status === "done") {
                 return (
@@ -246,6 +282,19 @@ const EnterObjInfo: React.FC = () => {
                         }}
                       />
                     )}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "2px",
+                        right: "2px",
+                        background: "rgba(255, 255, 255, 0.8)",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleRemove(file)}
+                    >
+                      <CloseOutlined />
+                    </div>
                   </div>
                 );
               }
