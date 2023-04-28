@@ -37,8 +37,15 @@ export function reducer(state: any, action: AnyAction): IObjectInfo {
       return { ...state, dateRange: action.payload };
     }
 
-    case "SET_IMAGE": {
+    case "ADD_IMAGE": {
       return { ...state, images: [...state.images, action.payload] };
+    }
+
+    case "REMOVE_IMAGE": {
+      const updatedImages = state.images.filter(
+        (_: any, index: number) => index !== action.payload
+      );
+      return { ...state, images: updatedImages };
     }
 
     default: {

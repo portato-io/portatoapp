@@ -24,28 +24,26 @@
   color: white;
 }
 
-
 .App-link {
   color: #61dafb;
 }
 
-.main-layout{
+.main-layout {
   height: "100vh";
   background-color: #fff;
 }
-.form-sender{
+.form-sender {
   margin-top: 20%;
   height: "100vh";
   background-color: #fff;
   margin-left: 10%;
 }
 
-.item-form-label{
-  font-weight:bold;
+.item-form-label {
+  font-weight: bold;
 }
 
-
-@media(max-width: 576px) {
+@media (max-width: 576px) {
   .ant-picker-panels {
     flex-direction: column;
   }
@@ -60,17 +58,16 @@
   }
 }
 
-@media (max-width:400px) {
-  .HeaderMenu{
+@media (max-width: 400px) {
+  .HeaderMenu {
     display: none;
   }
   .ant-picker-panels {
     flex-direction: column !important;
   }
 }
-@media (min-width:400px) {
-  .HeaderButton{
-      display: none;
-    }
-
+@media (min-width: 400px) {
+  .HeaderButton {
+    display: none;
+  }
 }

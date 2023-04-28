@@ -40,7 +40,12 @@ export const setObjectTime = (time: string): AnyAction => ({
   payload: time,
 });
 
-export const setObjectImages = (images: string[]): AnyAction => ({
-  type: actionTypes.SET_IMAGE,
+export const addObjectImages = (images: string[]): AnyAction => ({
+  type: actionTypes.ADD_IMAGE,
   payload: images,
+});
+
+export const removeObjectImages = (position: number): AnyAction => ({
+  type: actionTypes.REMOVE_IMAGE,
+  payload: position,
 });

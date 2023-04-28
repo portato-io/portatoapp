@@ -1,8 +1,11 @@
 import React from "react";
-import { Spin } from "antd";
+import { Button, Spin } from "antd";
 import { auth } from "../firebaseConfig";
 import { onAuthStateChanged, User } from "firebase/auth";
 import FirebaseAuth from "../Components/FirebaseAuth";
+import BackButton from "./Buttons/BackButton";
+import PageLayout from "../Pages/Layouts/PageLayoutTest";
+import "./PortatoStyleSheet.css";
 
 interface AuthWrapperProps {
   Component: React.FC;
@@ -10,7 +13,6 @@ interface AuthWrapperProps {
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({ Component }) => {
   const [user, setUser] = React.useState<User | null | "loading">("loading");
-  console.log(user);
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
