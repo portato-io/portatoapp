@@ -8,24 +8,27 @@ on:
       - dev
 
 jobs:
-  - name: Checkout code
-    uses: actions/checkout@v2
+  pre_commit_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-  - name: Set up Python
-    uses: actions/setup-python@v2
-    with:
-      python-version: 3.x
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
 
-  - name: Set up Node.js
-    uses: actions/setup-node@v2
-    with:
-      node-version: 16
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
 
-  - name: Install pre-commit
-    run: pip install pre-commit
+      - name: Install pre-commit
+        run: pip install pre-commit
 
-  - name: Install dependencies
-    run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-  - name: Run pre-commit hooks
-    run: pre-commit run --all-files
+      - name: Run pre-commit hooks
+        run: pre-commit run --all-files
