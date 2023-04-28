@@ -71,8 +71,8 @@ const ProfileContent: React.FC = () => {
           >
             <div
               style={{
-                width: "60%",
-                height: "60%",
+                width: "min(50vw,50vh)",
+                height: "min(50vw,50vh)",
                 borderRadius: "50%",
                 backgroundColor: "#fff",
                 display: "flex",
