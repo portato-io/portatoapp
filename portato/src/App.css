@@ -33,8 +33,10 @@
   background-color: #fff;
 }
 .form-sender {
-  margin-top: 20%;
-  height: "100vh";
+
+  margin-top: 0%;
+  width:80%;
+  /*height:80%; Doesn't take height into account */
   background-color: #fff;
   margin-left: 10%;
 }
