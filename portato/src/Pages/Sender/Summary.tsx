@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PageLayout from "../Layouts/PageLayoutTest";
-import { Typography, Card, Modal } from "antd";
+import { Typography, Card, Modal, Image } from "antd";
 import ProgressBar from "../../Components/ProgressBar";
 import ConfirmButton from "../../Components/Buttons/ConfirmButton";
 import BackButton from "../../Components/Buttons/BackButton";
@@ -68,6 +68,7 @@ const Summary: React.FC = () => {
       console.log("No user is signed in.");
     }
   };
+  const [visible, setVisible] = useState(false);
 
   return (
     <PageLayout>
@@ -116,7 +117,24 @@ const Summary: React.FC = () => {
         </div>
         <div>
           <Title level={4}> Images</Title>
-          <Typography> {objecInfo.images} </Typography>
+          <Image
+            preview={{ visible: false }}
+            height={100}
+            width={100}
+            src={objecInfo.images[0]}
+            onClick={() => setVisible(true)}
+          >
+            {" "}
+          </Image>
+          <div style={{ display: "none" }}>
+            <Image.PreviewGroup
+              preview={{ visible, onVisibleChange: (vis) => setVisible(vis) }}
+            >
+              {objecInfo.images.map((image) => (
+                <Image src={image} />
+              ))}
+            </Image.PreviewGroup>
+          </div>
         </div>
       </Card>
       {user ? (
