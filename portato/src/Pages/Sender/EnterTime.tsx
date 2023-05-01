@@ -55,7 +55,7 @@ const EnterTime: React.FC = () => {
         wrapperCol={{ span: 14 }}
         layout="horizontal"
       >
-        <Title level={3} style={{ background: "#fff" }}>
+        <Title level={3} style={{ marginTop: "20%", background: "#fff" }}>
           {" "}
           When?
         </Title>

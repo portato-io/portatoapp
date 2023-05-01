@@ -161,8 +161,8 @@ const EnterObjInfo: React.FC = () => {
     <PageLayout>
       <ProgressBar />
       <Title
-        level={3}
-        style={{ marginLeft: "5%", marginTop: "15%", background: "#fff" }}
+        level={4}
+        style={{ marginLeft: "10%", marginTop: "15%", background: "#fff" }}
       >
         {" "}
         What would you like to ship?
@@ -186,7 +186,7 @@ const EnterObjInfo: React.FC = () => {
               value={object.name}
               onChange={handleInputChange}
               placeholder="The title of your shipment"
-              style={{ width: "90%" }}
+              style={{ width: "90%", userSelect: "auto" }}
             />
           </Form.Item>
 

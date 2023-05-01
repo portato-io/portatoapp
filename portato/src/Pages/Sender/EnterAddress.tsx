@@ -39,13 +39,14 @@ const EnterAddress: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
+
       <Form
         className="form-sender"
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"
       >
-        <Title level={4} style={{ backgroundColor: "white" }}>
+        <Title level={4} style={{ marginTop: "20%", backgroundColor: "white" }}>
           Pick-up address
         </Title>
         <Form.Item>

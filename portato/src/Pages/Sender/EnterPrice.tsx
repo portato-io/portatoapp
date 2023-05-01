@@ -43,7 +43,10 @@ const EnterPrice: React.FC = () => {
         //wrapperCol={{ span: 14 }}
         layout="horizontal"
       >
-        <Title level={3}> How much is the transport cost for you?</Title>
+        <Title style={{ marginTop: "20%" }} level={3}>
+          {" "}
+          How much is the transport cost for you?
+        </Title>
         <Form.Item>
           <Input
             name="price"
