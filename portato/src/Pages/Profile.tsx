@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 
 import { Typography } from "antd";
 
+import { routes } from "../routes";
+
 const { Title } = Typography;
 
 const ProfileContent: React.FC = () => {

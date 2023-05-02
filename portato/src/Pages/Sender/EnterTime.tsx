@@ -13,6 +13,8 @@ import { CheckboxValueType } from "antd/es/checkbox/Group";
 
 //import DatePicker from "react-datepicker"
 
+const NEXT_SCREEN = "/createSendRequest/enter_price";
+
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
 const plainOptions = ["Morning ", "Mid days ", "Evenings "];
@@ -23,8 +25,6 @@ const onPanelChange = (value: Dayjs, mode: CalendarMode) => {
 const progress = 50;
 
 const EnterTime: React.FC = () => {
-  const nextScreen = "/createSendRequest/enter_price";
-
   const objecInfo = useSelector((state: ObjectInfoState) => state.object);
 
   const [time, setTime] = useState("");
@@ -73,10 +73,9 @@ const EnterTime: React.FC = () => {
             options={plainOptions}
           />
         </Form.Item>
-        <NextButton nextScreen={nextScreen} />
       </Form>
 
-      <NextButton nextScreen={nextScreen} />
+      <NextButton nextScreen={NEXT_SCREEN} />
       <BackButton />
     </PageLayout>
   );

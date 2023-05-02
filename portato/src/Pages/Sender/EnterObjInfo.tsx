@@ -27,7 +27,6 @@ import {
 import { storage } from "../../firebaseConfig";
 //TMP
 
-import { Button } from "antd";
 import {
   setObject,
   addObjectImages,
@@ -41,6 +40,7 @@ const { TextArea } = Input;
 
 const MAX_FILES = 4; // Limit the number of files
 const MAX_SIZE = 1 * 1024 * 1024; // Limit the file size to 2MB
+const NEXT_SCREEN = "/createSendRequest/enter_address";
 
 const EnterObjInfo: React.FC = () => {
   const [uploading, setUploading] = useState(false);
@@ -126,8 +126,6 @@ const EnterObjInfo: React.FC = () => {
   React.useEffect(() => {
     dispatch(setObject(object));
   }, [object]);
-
-  const nextScreen = "/createSendRequest/enter_address";
 
   const onFinish = (values: any) => {
     console.log({ values });
@@ -305,7 +303,7 @@ const EnterObjInfo: React.FC = () => {
           </Upload>
         </Form.Item>
 
-        <NextButton nextScreen={nextScreen} />
+        <NextButton nextScreen={NEXT_SCREEN} />
         <BackButton />
       </Form>
     </PageLayout>
