@@ -25,7 +25,6 @@ function ProfileContent() {
         setUser(currentUser);
         setDisplay("");
       } else {
-        console.log("User signed out"); // Added console log
         setUser(null);
       }
     });
