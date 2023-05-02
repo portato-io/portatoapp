@@ -45,13 +45,25 @@ const tabs = [
 function BottomBar() {
   const location = useLocation();
   const { pathname } = location;
+  console.log(pathname);
   const navigate = useNavigate();
   const setRouteActive = (value: string) => {
     navigate(value);
   };
+
+  const firstSlashIndex: number = pathname.indexOf("/");
+  const secondSlashIndex: number = pathname.indexOf("/", firstSlashIndex + 1);
+  let initalRouteScreen: string = "";
+  if (secondSlashIndex !== -1) {
+    initalRouteScreen = pathname.slice(firstSlashIndex, secondSlashIndex);
+    console.log(initalRouteScreen);
+  } else {
+    initalRouteScreen = pathname;
+  }
+
   return (
     <TabBar
-      activeKey={pathname}
+      activeKey={initalRouteScreen}
       onChange={(value) => setRouteActive(value)}
       style={{
         position: "absolute",

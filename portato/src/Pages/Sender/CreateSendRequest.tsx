@@ -7,11 +7,11 @@ const { Title } = Typography;
 const progress = 25;
 
 const CreateSendRequest: React.FC = () => {
-  const nextScreen = "/enterObjInfo";
+  const nextScreen = "/createSendRequest/enterObjInfo";
   const navigate = useNavigate();
 
   const handleSendClick = () => {
-    navigate("/enterObjInfo");
+    navigate("/createSendRequest/enterObjInfo");
   };
   return (
     <PageLayout>

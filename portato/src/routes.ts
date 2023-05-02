@@ -61,7 +61,7 @@ export const routes: Array<Route> = [
   {
     key: "enterObjInfo-route",
     title: "EnterObjInfo",
-    path: "/enterObjInfo",
+    path: "/createSendRequest/enterObjInfo",
     enabled: true,
     component: EnterObjInfo,
   },
