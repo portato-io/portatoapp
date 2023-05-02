@@ -127,7 +127,7 @@ const EnterObjInfo: React.FC = () => {
     dispatch(setObject(object));
   }, [object]);
 
-  const nextScreen = "/enter_address";
+  const nextScreen = "/createSendRequest/enter_address";
 
   const onFinish = (values: any) => {
     console.log({ values });

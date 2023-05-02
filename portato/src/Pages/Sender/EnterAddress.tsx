@@ -13,7 +13,7 @@ const { Title } = Typography;
 const progress = 25;
 
 const EnterAddress: React.FC = () => {
-  const nextScreen = "/enter_time";
+  const nextScreen = "/createSendRequest/enter_time";
 
   const objecInfo = useSelector((state: IObjectInfo) => state);
   console.log(objecInfo.pickup_adress);

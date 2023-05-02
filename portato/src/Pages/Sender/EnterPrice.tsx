@@ -13,7 +13,7 @@ const { Title } = Typography;
 const progress = 75;
 
 const EnterPrice: React.FC = () => {
-  const nextScreen = "/summary";
+  const nextScreen = "/createSendRequest/summary";
   const objecInfo = useSelector((state: IObjectInfo) => state);
 
   const [prices, setValues] = useState({
