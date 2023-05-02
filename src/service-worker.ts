@@ -8,14 +8,14 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-import { clientsClaim } from "workbox-core";
-import { ExpirationPlugin } from "workbox-expiration";
-import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
-import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate, NetworkFirst } from "workbox-strategies";
+import { clientsClaim } from 'workbox-core';
+import { ExpirationPlugin } from 'workbox-expiration';
+import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
 
 declare const self: ServiceWorkerGlobalScope;
-const CACHE_VERSION = "v0.1.2"; // Change this to a new version (e.g., 'v3')
+const CACHE_VERSION = 'v0.1.2'; // Change this to a new version (e.g., 'v3')
 
 clientsClaim();
 
@@ -28,17 +28,17 @@ precacheAndRoute(self.__WB_MANIFEST);
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
 // https://developers.google.com/web/fundamentals/architecture/app-shell
-const fileExtensionRegexp = new RegExp("/[^/?]+\\.[^/]+$");
+const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
   // Return false to exempt requests from being fulfilled by index.html.
   ({ request, url }: { request: Request; url: URL }) => {
     // If this isn't a navigation, skip.
-    if (request.mode !== "navigate") {
+    if (request.mode !== 'navigate') {
       return false;
     }
 
     // If this is a URL that starts with /_, skip.
-    if (url.pathname.startsWith("/_")) {
+    if (url.pathname.startsWith('/_')) {
       return false;
     }
 
@@ -51,7 +51,7 @@ registerRoute(
     // Return true to signal that we want to use the handler.
     return true;
   },
-  createHandlerBoundToURL(process.env.PUBLIC_URL + "/index.html")
+  createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
 );
 
 // An example runtime caching route for requests that aren't handled by the
@@ -59,10 +59,10 @@ registerRoute(
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) =>
-    url.origin === self.location.origin && url.pathname.endsWith(".png"),
+    url.origin === self.location.origin && url.pathname.endsWith('.png'),
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({
-    cacheName: "images",
+    cacheName: 'images',
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used images are removed.
@@ -89,14 +89,14 @@ async function fetchAndCache(url: string) {
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
 
 // 'install' event listener to cache necessary assets and directories
-self.addEventListener("install", (event: ExtendableEvent) => {
+self.addEventListener('install', (event: ExtendableEvent) => {
   // Function to fetch and cache content of multiple directories
   const fetchDirectories = async (directories: string[]) => {
     // Function to fetch and cache content of a single directory
@@ -122,19 +122,19 @@ self.addEventListener("install", (event: ExtendableEvent) => {
       .open(CACHE_VERSION)
       .then((cache: Cache) => {
         return cache.addAll([
-          "/",
-          "/index.html",
-          "/css/styles.css",
-          "/js/app.js",
+          '/',
+          '/index.html',
+          '/css/styles.css',
+          '/js/app.js',
           // Add or update assets here
         ]);
       })
-      .then(() => fetchDirectories(["/Pages/", "/Components/", "/Store/"]))
+      .then(() => fetchDirectories(['/Pages/', '/Components/', '/Store/']))
   );
 });
 
 // 'activate' event listener to delete old caches
-self.addEventListener("activate", (event: ExtendableEvent) => {
+self.addEventListener('activate', (event: ExtendableEvent) => {
   event.waitUntil(
     caches
       .keys()
@@ -152,7 +152,7 @@ self.addEventListener("activate", (event: ExtendableEvent) => {
   );
 });
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
     (async () => {
       const response = await networkFirstHandler.handle(event);
@@ -160,7 +160,7 @@ self.addEventListener("fetch", (event) => {
         return caches.match(event.request).then((cachedResponse) => {
           return (
             cachedResponse ||
-            new Response("Fallback content", { status: 200, statusText: "OK" })
+            new Response('Fallback content', { status: 200, statusText: 'OK' })
           );
         });
       }

@@ -1,5 +1,5 @@
-import React from "react";
-import PageLayout from "./Layouts/PageLayout";
+import React from 'react';
+import PageLayout from './Layouts/PageLayout';
 
 function About() {
   return (

@@ -1,17 +1,17 @@
-import React from "react";
-import { Layout, Menu } from "antd";
+import React from 'react';
+import { Layout, Menu } from 'antd';
 import {
   HomeOutlined,
   MailOutlined,
   DeliveredProcedureOutlined,
   UserOutlined,
-} from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+} from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 function HeaderBar({ isInline = false, setOpenMenu }: any) {
   const navigate = useNavigate();
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
+    <div style={{ height: '100vh', width: '100%' }}>
       <Menu
         onClick={({ key }) => {
           navigate(key);
@@ -19,32 +19,32 @@ function HeaderBar({ isInline = false, setOpenMenu }: any) {
             setOpenMenu(false);
           }
         }}
-        mode={isInline ? "inline" : "horizontal"}
-        style={{ border: "none", background: "#1875BC" }}
+        mode={isInline ? 'inline' : 'horizontal'}
+        style={{ border: 'none', background: '#1875BC' }}
         items={[
           {
-            key: "/",
+            key: '/',
             icon: <HomeOutlined />,
-            label: "Home",
+            label: 'Home',
           },
           {
-            key: "/chat",
+            key: '/chat',
             icon: <MailOutlined />,
-            label: "Chat",
+            label: 'Chat',
           },
           {
-            key: "/shipments",
+            key: '/shipments',
             icon: <DeliveredProcedureOutlined />,
-            label: "Shipments",
+            label: 'Shipments',
           },
           {
-            key: "/profile",
+            key: '/profile',
             icon: <UserOutlined />,
-            label: "Profile",
+            label: 'Profile',
           },
           {
-            key: "/about",
-            label: "About",
+            key: '/about',
+            label: 'About',
           },
         ]}
       ></Menu>

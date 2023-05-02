@@ -1,32 +1,32 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import reportWebVitals from "./reportWebVitals";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import reportWebVitals from './reportWebVitals';
 
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import { reducer } from "./Store/reducer";
-import { IObjectInfo, ObjectInfoState } from "./type";
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { reducer } from './Store/reducer';
+import { IObjectInfo, ObjectInfoState } from './type';
 
 const initialState: IObjectInfo = {
-  name: "",
-  description: "",
-  size: "S",
-  weight: "-5 kg",
+  name: '',
+  description: '',
+  size: 'S',
+  weight: '-5 kg',
   price: 0,
-  pickup_adress: "",
-  delivery_adress: "",
-  dateRange: ["", ""],
-  time: "",
+  pickup_adress: '',
+  delivery_adress: '',
+  dateRange: ['', ''],
+  time: '',
   images: [],
 };
 
 export const store = createStore(reducer, initialState);
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 root.render(
   <Provider store={store}>

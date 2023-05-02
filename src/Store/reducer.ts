@@ -1,11 +1,11 @@
-import * as actionTypes from "./actionTypes";
-import { AnyAction } from "redux";
-import { IObjectInfo, ObjectInfoState } from "../type";
+import * as actionTypes from './actionTypes';
+import { AnyAction } from 'redux';
+import { IObjectInfo, ObjectInfoState } from '../type';
 
 export function reducer(state: any, action: AnyAction): IObjectInfo {
   console.log(action.type);
   switch (action.type) {
-    case "SET_OBJECT": {
+    case 'SET_OBJECT': {
       console.log(action.payload);
       return {
         ...state,
@@ -16,7 +16,7 @@ export function reducer(state: any, action: AnyAction): IObjectInfo {
       };
     }
 
-    case "SET_ADRESS": {
+    case 'SET_ADRESS': {
       console.log(state);
       return {
         ...state,
@@ -25,23 +25,23 @@ export function reducer(state: any, action: AnyAction): IObjectInfo {
       };
     }
 
-    case "SET_PRICE": {
+    case 'SET_PRICE': {
       return { ...state, price: action.payload };
     }
 
-    case "SET_TIME": {
+    case 'SET_TIME': {
       return { ...state, time: action.payload };
     }
 
-    case "SET_DATE_RANGE": {
+    case 'SET_DATE_RANGE': {
       return { ...state, dateRange: action.payload };
     }
 
-    case "ADD_IMAGE": {
+    case 'ADD_IMAGE': {
       return { ...state, images: [...state.images, action.payload] };
     }
 
-    case "REMOVE_IMAGE": {
+    case 'REMOVE_IMAGE': {
       const updatedImages = state.images.filter(
         (_: any, index: number) => index !== action.payload
       );
@@ -49,7 +49,7 @@ export function reducer(state: any, action: AnyAction): IObjectInfo {
     }
 
     default: {
-      console.log("DANS LE REDUCER MAIS PAS DANS LE BON STATE");
+      console.log('DANS LE REDUCER MAIS PAS DANS LE BON STATE');
       return state;
     }
   }

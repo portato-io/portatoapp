@@ -1,6 +1,6 @@
-import React from "react";
-import PageLayout from "./Layouts/PageLayoutTest";
-import { Typography } from "antd";
+import React from 'react';
+import PageLayout from './Layouts/PageLayoutTest';
+import { Typography } from 'antd';
 
 const { Title } = Typography;
 
@@ -9,10 +9,10 @@ const Deliver: React.FC = () => {
     <PageLayout>
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
         }}
       >
         <Title level={2}>Deliver</Title>

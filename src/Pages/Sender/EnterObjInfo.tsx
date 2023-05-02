@@ -1,8 +1,8 @@
-import React, { Component, ChangeEvent, useState } from "react";
-import PageLayout from "../Layouts/PageLayoutTest";
-import NextButton from "../../Components/Buttons/NextButton";
-import BackButton from "../../Components/Buttons/BackButton";
-import ProgressBar from "../../Components/ProgressBar";
+import React, { Component, ChangeEvent, useState } from 'react';
+import PageLayout from '../Layouts/PageLayoutTest';
+import NextButton from '../../Components/Buttons/NextButton';
+import BackButton from '../../Components/Buttons/BackButton';
+import ProgressBar from '../../Components/ProgressBar';
 import {
   Typography,
   Form,
@@ -11,11 +11,11 @@ import {
   Radio,
   Progress,
   message,
-} from "antd";
-import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { RcFile } from "antd/lib/upload";
-import { UploadFile } from "antd/lib/upload/interface";
+} from 'antd';
+import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { RcFile } from 'antd/lib/upload';
+import { UploadFile } from 'antd/lib/upload/interface';
 
 import {
   ref,
@@ -23,17 +23,17 @@ import {
   getDownloadURL,
   StorageError,
   UploadTaskSnapshot,
-} from "firebase/storage";
-import { storage } from "../../firebaseConfig";
+} from 'firebase/storage';
+import { storage } from '../../firebaseConfig';
 //TMP
 
-import { Button } from "antd";
+import { Button } from 'antd';
 import {
   setObject,
   addObjectImages,
   removeObjectImages,
-} from "../../Store/actionCreators";
-import { IFirstObjectInfo, IObjectInfo, ObjectInfoState } from "../../type";
+} from '../../Store/actionCreators';
+import { IFirstObjectInfo, IObjectInfo, ObjectInfoState } from '../../type';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -49,13 +49,13 @@ const EnterObjInfo: React.FC = () => {
 
   const beforeUpload = (file: File) => {
     if (fileList.length >= MAX_FILES) {
-      message.error("You can only upload up to " + MAX_FILES + " images.");
+      message.error('You can only upload up to ' + MAX_FILES + ' images.');
       return false;
     }
 
     if (file.size > MAX_SIZE) {
       message.error(
-        "The file size must not exceed " + MAX_SIZE / (1024 * 1024) + "MB."
+        'The file size must not exceed ' + MAX_SIZE / (1024 * 1024) + 'MB.'
       );
       return false;
     }
@@ -64,7 +64,7 @@ const EnterObjInfo: React.FC = () => {
     const newFile: UploadFile = {
       uid: Date.now().toString(),
       name: file.name,
-      status: "uploading",
+      status: 'uploading',
       originFileObj: file as unknown as RcFile,
     };
     setFileList((prevFileList) => [...prevFileList, newFile]);
@@ -77,11 +77,11 @@ const EnterObjInfo: React.FC = () => {
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
+        console.log('Upload is ' + progress + '% done');
         setProgress(progress);
 
         setFileList((prevFileList) =>
@@ -94,19 +94,19 @@ const EnterObjInfo: React.FC = () => {
         );
       },
       (error: StorageError) => {
-        console.error("Error uploading image:", error);
+        console.error('Error uploading image:', error);
         setUploading(false);
       },
       async () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        console.log("File available at", downloadURL);
+        console.log('File available at', downloadURL);
         dispatch(addObjectImages([downloadURL]));
         setUploading(false);
 
         setFileList((prevFileList) =>
           prevFileList.map((file) =>
             file.uid === uid
-              ? { ...file, status: "done", url: downloadURL }
+              ? { ...file, status: 'done', url: downloadURL }
               : file
           )
         );
@@ -127,7 +127,7 @@ const EnterObjInfo: React.FC = () => {
     dispatch(setObject(object));
   }, [object]);
 
-  const nextScreen = "/enter_address";
+  const nextScreen = '/enter_address';
 
   const onFinish = (values: any) => {
     console.log({ values });
@@ -174,8 +174,8 @@ const EnterObjInfo: React.FC = () => {
         wrapperCol={{ span: 14 }}
         layout="horizontal"
       >
-        <Title level={3} style={{ background: "#fff" }}>
-          {" "}
+        <Title level={3} style={{ background: '#fff' }}>
+          {' '}
           What would you like to ship?
         </Title>
         <Form.Item
@@ -188,7 +188,7 @@ const EnterObjInfo: React.FC = () => {
             value={object.name}
             onChange={handleInputChange}
             placeholder="The title of your shipment"
-            style={{ width: "90%" }}
+            style={{ width: '90%' }}
           />
         </Form.Item>
 
@@ -203,7 +203,7 @@ const EnterObjInfo: React.FC = () => {
             onChange={handleInputChange}
             rows={3}
             placeholder="eg: It’s a good idea to specify the dimensions of large items."
-            style={{ width: "90%" }}
+            style={{ width: '90%' }}
           />
         </Form.Item>
 
@@ -212,12 +212,12 @@ const EnterObjInfo: React.FC = () => {
             name="size"
             value={object.size}
             onChange={handleInputChange}
-            style={{ marginLeft: "18%" }}
+            style={{ marginLeft: '18%' }}
           >
-            <Radio value={"S"}>S</Radio>
-            <Radio value={"M"}>M</Radio>
-            <Radio value={"L"}>L</Radio>
-            <Radio value={"XL"}>XL</Radio>
+            <Radio value={'S'}>S</Radio>
+            <Radio value={'M'}>M</Radio>
+            <Radio value={'L'}>L</Radio>
+            <Radio value={'XL'}>XL</Radio>
           </Radio.Group>
         </Form.Item>
 
@@ -226,15 +226,15 @@ const EnterObjInfo: React.FC = () => {
             name="weight"
             value={object.weight}
             onChange={handleInputChange}
-            style={{ marginLeft: "15%" }}
+            style={{ marginLeft: '15%' }}
           >
-            <Radio.Button value="-5 kg" style={{ background: "#F8F9FE" }}>
+            <Radio.Button value="-5 kg" style={{ background: '#F8F9FE' }}>
               -5 kg
             </Radio.Button>
-            <Radio.Button value="5-20 kg" style={{ background: "#F8F9FE" }}>
+            <Radio.Button value="5-20 kg" style={{ background: '#F8F9FE' }}>
               5-20 kg
             </Radio.Button>
-            <Radio.Button value="+20 kg" style={{ background: "#F8F9FE" }}>
+            <Radio.Button value="+20 kg" style={{ background: '#F8F9FE' }}>
               +20 kg
             </Radio.Button>
           </Radio.Group>
@@ -251,45 +251,45 @@ const EnterObjInfo: React.FC = () => {
             beforeUpload={beforeUpload}
             onRemove={handleRemove}
             itemRender={(originNode, file, fileList) => {
-              if (file.status === "uploading" || file.status === "done") {
+              if (file.status === 'uploading' || file.status === 'done') {
                 return (
-                  <div style={{ position: "relative" }}>
+                  <div style={{ position: 'relative' }}>
                     <img
                       src={
                         file.url ||
                         (file.originFileObj
                           ? URL.createObjectURL(file.originFileObj)
-                          : "")
+                          : '')
                       }
                       alt={file.name}
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        borderRadius: "4px",
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        borderRadius: '4px',
                       }}
                     />
-                    {file.status === "uploading" && (
+                    {file.status === 'uploading' && (
                       <Progress
                         type="circle"
                         percent={file.percent}
                         width={40}
                         style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
                         }}
                       />
                     )}
                     <div
                       style={{
-                        position: "absolute",
-                        top: "2px",
-                        right: "2px",
-                        background: "rgba(255, 255, 255, 0.8)",
-                        borderRadius: "4px",
-                        cursor: "pointer",
+                        position: 'absolute',
+                        top: '2px',
+                        right: '2px',
+                        background: 'rgba(255, 255, 255, 0.8)',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
                       }}
                       onClick={() => handleRemove(file)}
                     >

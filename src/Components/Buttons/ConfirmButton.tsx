@@ -1,30 +1,30 @@
-import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
-const ConfirmButton = ({ onClick, nextScreen = "/" }: any) => {
+const ConfirmButton = ({ onClick, nextScreen = '/' }: any) => {
   const navigate = useNavigate();
 
   const handleConfirmClick = () => {
     console.log(nextScreen);
     onClick();
-    navigate("/");
+    navigate('/');
   };
   return (
     <div
       className="div_button_next"
       style={{
-        position: "absolute",
-        bottom: "10%",
-        left: "45%",
-        width: "50%",
-        background: "#fff",
+        position: 'absolute',
+        bottom: '10%',
+        left: '45%',
+        width: '50%',
+        background: '#fff',
       }}
     >
       <Button
         type="primary"
         size="large"
         onClick={handleConfirmClick}
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
       >
         Confirm
       </Button>

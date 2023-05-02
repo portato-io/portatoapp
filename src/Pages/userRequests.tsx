@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
-import { fetchDataOnce } from "../linksStoreToFirebase";
-import styles from "./UserRequests.module.css";
-import { IObjectInfo } from "../type";
+import React, { useEffect, useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import { fetchDataOnce } from '../linksStoreToFirebase';
+import styles from './UserRequests.module.css';
+import { IObjectInfo } from '../type';
 
 const UserRequests: React.FC = () => {
   const [stores, setStores] = useState<IObjectInfo[]>([]);

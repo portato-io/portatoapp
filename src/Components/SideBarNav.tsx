@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Drawer } from "antd";
-import HeaderBar from "./HeaderBar";
-import { Layout, Menu } from "antd";
-import { HomeOutlined } from "@ant-design/icons";
+import React, { useState } from 'react';
+import { Drawer } from 'antd';
+import HeaderBar from './HeaderBar';
+import { Layout, Menu } from 'antd';
+import { HomeOutlined } from '@ant-design/icons';
 
 function SideBarNav({ openMenu, setOpenMenu }: any) {
   //const [openMenu, setOpenMenu] = useState(false)
@@ -16,7 +16,7 @@ function SideBarNav({ openMenu, setOpenMenu }: any) {
           setOpenMenu(false);
         }}
         className="side-drawer"
-        style={{ background: "#1875BC" }}
+        style={{ background: '#1875BC' }}
       >
         <HeaderBar isInline setOpenMenu={setOpenMenu} />
       </Drawer>

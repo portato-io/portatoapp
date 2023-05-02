@@ -1,8 +1,8 @@
-import { useRef } from "react";
-import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useRef } from 'react';
+import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
-function NextButton({ nextScreen = "/" }: any) {
+function NextButton({ nextScreen = '/' }: any) {
   const navigate = useNavigate();
   const handleNextClick = () => {
     console.log(nextScreen);
@@ -12,18 +12,18 @@ function NextButton({ nextScreen = "/" }: any) {
     <div
       className="div_button_next"
       style={{
-        position: "absolute",
-        bottom: "10%",
-        left: "45%",
-        width: "50%",
-        background: "#fff",
+        position: 'absolute',
+        bottom: '10%',
+        left: '45%',
+        width: '50%',
+        background: '#fff',
       }}
     >
       <Button
         type="primary"
         size="large"
         onClick={handleNextClick}
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
       >
         Next
       </Button>

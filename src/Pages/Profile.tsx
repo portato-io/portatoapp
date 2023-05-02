@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import PageLayout from "./Layouts/PageLayoutTest";
-import { List, Card } from "antd-mobile";
-import { UserOutlined } from "@ant-design/icons";
-import "firebaseui/dist/firebaseui.css";
-import { auth } from "../firebaseConfig";
-import { signOut } from "firebase/auth";
-import * as firebaseui from "firebaseui";
-import { onAuthStateChanged, User } from "firebase/auth";
-import AuthWrapper from "../Components/AuthWrapper";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import PageLayout from './Layouts/PageLayoutTest';
+import { List, Card } from 'antd-mobile';
+import { UserOutlined } from '@ant-design/icons';
+import 'firebaseui/dist/firebaseui.css';
+import { auth } from '../firebaseConfig';
+import { signOut } from 'firebase/auth';
+import * as firebaseui from 'firebaseui';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import AuthWrapper from '../Components/AuthWrapper';
+import { useNavigate } from 'react-router-dom';
 
-import { Typography } from "antd";
+import { Typography } from 'antd';
 
 const { Title } = Typography;
 
@@ -20,10 +20,10 @@ const ProfileContent: React.FC = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        console.log("User signed in:", currentUser); // Added console log
+        console.log('User signed in:', currentUser); // Added console log
         setUser(currentUser);
       } else {
-        console.log("User signed out"); // Added console log
+        console.log('User signed out'); // Added console log
         setUser(null);
       }
     });
@@ -46,7 +46,7 @@ const ProfileContent: React.FC = () => {
   };
 
   const handleMySendRequestsClick = () => {
-    navigate("/user_requests");
+    navigate('/user_requests');
   };
 
   return (
@@ -54,38 +54,38 @@ const ProfileContent: React.FC = () => {
       <div>
         <div
           style={{
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            background: "#2897FF",
+            height: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            background: '#2897FF',
           }}
         >
           <div
             style={{
-              backgroundColor: "#2897FF",
+              backgroundColor: '#2897FF',
               flex: 4,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
             <div
               style={{
-                width: "60%",
-                height: "60%",
-                borderRadius: "50%",
-                backgroundColor: "#fff",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                width: '60%',
+                height: '60%',
+                borderRadius: '50%',
+                backgroundColor: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              <UserOutlined style={{ fontSize: "48px" }} />
+              <UserOutlined style={{ fontSize: '48px' }} />
             </div>
           </div>
-          <div style={{ backgroundColor: "#2897FF", flex: 6 }}>
-            <Card style={{ borderRadius: "5%", height: "100%" }}>
-              <List mode="card" style={{ marginTop: "10%" }}>
+          <div style={{ backgroundColor: '#2897FF', flex: 6 }}>
+            <Card style={{ borderRadius: '5%', height: '100%' }}>
+              <List mode="card" style={{ marginTop: '10%' }}>
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   My Account
                 </List.Item>
@@ -101,7 +101,7 @@ const ProfileContent: React.FC = () => {
                 <List.Item
                   arrow={true}
                   onClick={() => signOut(auth)}
-                  style={{ color: "red" }}
+                  style={{ color: 'red' }}
                 >
                   Sign out
                 </List.Item>

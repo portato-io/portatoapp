@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Layout, Menu } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import React, { useState } from 'react';
+import { Layout, Menu } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
 
 function ButtomHeaderBar({ setOpenMenu }: any) {
   return (
-    <div className="MenuButton" style={{ height: "100vh" }}>
+    <div className="MenuButton" style={{ height: '100vh' }}>
       <div
         style={{
-          textAlign: "right",
-          backgroundColor: "#1875BC",
+          textAlign: 'right',
+          backgroundColor: '#1875BC',
           height: 50,
           fontSize: 20,
         }}

@@ -1,7 +1,7 @@
-import React from "react";
-import PageLayout from "./Layouts/PageLayout";
+import React from 'react';
+import PageLayout from './Layouts/PageLayout';
 
-import { Typography } from "antd";
+import { Typography } from 'antd';
 
 const { Title } = Typography;
 
@@ -10,10 +10,10 @@ const Shipments: React.FC = () => {
     <PageLayout>
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
         }}
       >
         <Title level={2}>Shipments</Title>

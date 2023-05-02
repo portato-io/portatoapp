@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import "firebaseui/dist/firebaseui.css";
-import { auth } from "../firebaseConfig";
-import { GoogleAuthProvider, EmailAuthProvider } from "firebase/auth";
-import { uiInstance, uiConfig } from "./firebaseUIInstance";
+import React, { useEffect, useRef } from 'react';
+import 'firebaseui/dist/firebaseui.css';
+import { auth } from '../firebaseConfig';
+import { GoogleAuthProvider, EmailAuthProvider } from 'firebase/auth';
+import { uiInstance, uiConfig } from './firebaseUIInstance';
 
 const FirebaseAuth: React.FC = () => {
   const uiRef = useRef<HTMLDivElement | null>(null);
@@ -21,7 +21,7 @@ const FirebaseAuth: React.FC = () => {
     };
 
     // Start the FirebaseUI widget
-    uiInstance.start("#firebaseui-auth-container", uiConfig);
+    uiInstance.start('#firebaseui-auth-container', uiConfig);
 
     // Cleanup on unmount
     return () => {

@@ -29,12 +29,12 @@
 }
 
 .main-layout {
-  height: "100vh";
+  height: '100vh';
   background-color: #fff;
 }
 .form-sender {
   margin-top: 20%;
-  height: "100vh";
+  height: '100vh';
   background-color: #fff;
   margin-left: 10%;
 }

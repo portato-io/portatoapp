@@ -1,11 +1,11 @@
-import "./App.css";
-import React, { Suspense, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SideNavigator from "./Components/SideBarNav";
-import { Layout, ConfigProvider } from "antd";
+import './App.css';
+import React, { Suspense, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SideNavigator from './Components/SideBarNav';
+import { Layout, ConfigProvider } from 'antd';
 
 // import routes
-import { routes as appRoutes } from "./routes";
+import { routes as appRoutes } from './routes';
 
 const { Header } = Layout;
 
@@ -16,7 +16,7 @@ const App: React.FC = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#2897FF",
+          colorPrimary: '#2897FF',
         },
       }}
     >
