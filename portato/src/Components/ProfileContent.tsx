@@ -22,7 +22,6 @@ function ProfileContent() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        console.log("User signed in:", currentUser); // Added console log
         setUser(currentUser);
         setDisplay("");
       } else {
