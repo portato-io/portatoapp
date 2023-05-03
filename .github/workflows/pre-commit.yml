@@ -1,17 +1,18 @@
-name: pre-commit
+name: Pre-commit
 
 on:
   pull_request:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v3
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -19,10 +20,7 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        run: |
-          npm install -g prettier
+        run: npm install
 
-      - name: Run pre-commit hooks
-        uses: pre-commit/action@v3.0.0
-        with:
-          extra_args: --all-files
+      - name: Run ESLint and Prettier
+        run: npm run lint-staged
