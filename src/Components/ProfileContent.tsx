@@ -71,13 +71,13 @@ function ProfileContent() {
           >
             <div
               style={{
-                width: '60%',
-                height: '60%',
-                borderRadius: '50%',
-                backgroundColor: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                width: "min(50vw,50vh)",
+                height: "min(50vw,50vh)",
+                borderRadius: "50%",
+                backgroundColor: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <UserOutlined style={{ fontSize: '48px' }} />
