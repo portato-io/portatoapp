@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import PageLayout from "../Layouts/PageLayoutTest";
-import { Typography, Card, Modal, Image } from "antd";
-import ProgressBar from "../../Components/ProgressBar";
-import ConfirmButton from "../../Components/Buttons/ConfirmButton";
-import BackButton from "../../Components/Buttons/BackButton";
-import SignInButton from "../../Components/Buttons/SignInButton";
+import React, { useEffect, useState } from 'react';
+import PageLayout from '../Layouts/PageLayoutTest';
+import { Typography, Card, Modal, Image } from 'antd';
+import ProgressBar from '../../Components/ProgressBar';
+import ConfirmButton from '../../Components/Buttons/ConfirmButton';
+import BackButton from '../../Components/Buttons/BackButton';
+import SignInButton from '../../Components/Buttons/SignInButton';
 
 import { useSelector } from 'react-redux';
 import { ObjectInfoState, IObjectInfo } from '../../type';
@@ -124,9 +124,9 @@ const Summary: React.FC = () => {
             src={objecInfo.images[0]}
             onClick={() => setVisible(true)}
           >
-            {" "}
+            {' '}
           </Image>
-          <div style={{ display: "none" }}>
+          <div style={{ display: 'none' }}>
             <Image.PreviewGroup
               preview={{ visible, onVisibleChange: (vis) => setVisible(vis) }}
             >

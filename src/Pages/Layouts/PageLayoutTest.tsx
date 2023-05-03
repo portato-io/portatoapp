@@ -1,11 +1,7 @@
-import React, { ReactNode, useState } from 'react';
-import AppHeader from '../../Components/HeaderBar';
-import ButtomHeaderBar from '../../Components/ButtonHeaderBar';
-import SideBarNav from '../../Components/SideBarNav';
-
+import { ReactNode } from 'react';
 import { Layout } from 'antd';
 import BottomBar from '../../Components/BottomBar';
-const { Header, Content, Footer } = Layout;
+const { Content } = Layout;
 
 interface Props {
   children: ReactNode;
@@ -13,7 +9,7 @@ interface Props {
 }
 
 const MainLayout = (props: Props) => {
-  const { children, display = "" } = props;
+  const { children, display = '' } = props;
   return (
     <Layout style={{ display: display }} className="main-layout">
       <Content className="layout-children">{children}</Content>

@@ -34,24 +34,25 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ Component }) => {
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '100vh',
-          backgroundColor: '#2897FF',
+          backgroundColor: '#ffffff',
         }}
       >
         <Spin size="large" />
       </div>
     );
-  }
+  } else {
+    console.log('Rendering user in else:', user); // Added console log
 
-  console.log('Rendering user:', user); // Added console log
-  return user ? (
-    <Component />
-  ) : (
-    <PageLayout>
-      <div className="centered-container">
-        <FirebaseAuth />
-      </div>
-    </PageLayout>
-  );
+    return user ? (
+      <Component />
+    ) : (
+      <PageLayout>
+        <div className="centered-container">
+          <FirebaseAuth />
+        </div>
+      </PageLayout>
+    );
+  }
 };
 
 export default AuthWrapper;
