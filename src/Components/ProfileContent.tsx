@@ -16,7 +16,6 @@ const { Title } = Typography;
 
 function ProfileContent() {
   const [user, setUser] = useState<User | null>(null);
-  console.log('COOOOOOON');
   const [display, setDisplay] = useState('none');
   const navigate = useNavigate();
   useEffect(() => {

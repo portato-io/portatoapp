@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
-import { fetchDataOnce } from "../linksStoreToFirebase";
-import styles from "./UserRequests.module.css";
-import { IObjectInfo } from "../type";
-import { Card, Typography, Image } from "antd";
+import React, { useEffect, useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import { fetchDataOnce } from '../linksStoreToFirebase';
+import styles from './UserRequests.module.css';
+import { IObjectInfo } from '../type';
+import { Card, Typography, Image } from 'antd';
 
 const UserRequests: React.FC = () => {
   const [requests, setRequest] = useState<IObjectInfo[]>([]);
@@ -40,11 +40,11 @@ const UserRequests: React.FC = () => {
     <div>
       <h1
         style={{
-          marginTop: "10%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          marginTop: '10%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         Your Current Requests
@@ -53,14 +53,14 @@ const UserRequests: React.FC = () => {
         {requests.map((request) => (
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             <Card
-              style={{ marginTop: "5%", width: "80%" }}
+              style={{ marginTop: '5%', width: '80%' }}
               title={request.name}
             >
               {request.weight}/{request.size}
