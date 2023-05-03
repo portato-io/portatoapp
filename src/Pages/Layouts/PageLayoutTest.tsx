@@ -9,13 +9,13 @@ const { Header, Content, Footer } = Layout;
 
 interface Props {
   children: ReactNode;
+  display?: string;
 }
 
 const MainLayout = (props: Props) => {
-  const { children } = props;
-  const [openMenu, setOpenMenu] = useState(false);
+  const { children, display = "" } = props;
   return (
-    <Layout className="main-layout">
+    <Layout style={{ display: display }} className="main-layout">
       <Content className="layout-children">{children}</Content>
       <BottomBar />
     </Layout>
