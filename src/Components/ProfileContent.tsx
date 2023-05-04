@@ -5,14 +5,8 @@ import { UserOutlined } from '@ant-design/icons';
 import 'firebaseui/dist/firebaseui.css';
 import { auth } from '../firebaseConfig';
 import { signOut } from 'firebase/auth';
-import * as firebaseui from 'firebaseui';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import AuthWrapper from '../Components/AuthWrapper';
 import { useNavigate } from 'react-router-dom';
-
-import { Typography } from 'antd';
-
-const { Title } = Typography;
 
 function ProfileContent() {
   const [user, setUser] = useState<User | null>(null);
@@ -49,6 +43,10 @@ function ProfileContent() {
     navigate('/user_requests');
   };
 
+  const handleSupportClick = () => {
+    navigate('/contact_support');
+  };
+
   return (
     <PageLayout display={display}>
       <div style={{ display: display }} className="profile_content">
@@ -71,13 +69,13 @@ function ProfileContent() {
           >
             <div
               style={{
-                width: "min(50vw,50vh)",
-                height: "min(50vw,50vh)",
-                borderRadius: "50%",
-                backgroundColor: "#fff",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                width: 'min(50vw,50vh)',
+                height: 'min(50vw,50vh)',
+                borderRadius: '50%',
+                backgroundColor: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <UserOutlined style={{ fontSize: '48px' }} />
@@ -97,6 +95,9 @@ function ProfileContent() {
                 </List.Item>
                 <List.Item arrow={true} onClick={handleMySendRequestsClick}>
                   My Send Requests
+                </List.Item>
+                <List.Item arrow={true} onClick={handleSupportClick}>
+                  Support
                 </List.Item>
                 <List.Item
                   arrow={true}
