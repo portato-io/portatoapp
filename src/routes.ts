@@ -16,6 +16,7 @@ const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
 const EnterPrice = lazy(() => import('./Pages/Sender/EnterPrice'));
 const Summary = lazy(() => import('./Pages/Sender/Summary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
+const ContactSupport = lazy(() => import('./Pages/ContactSupport'));
 const CreateSendRequest = lazy(
   () => import('./Pages/Sender/CreateSendRequest')
 );
@@ -120,5 +121,12 @@ export const routes: Array<Route> = [
     path: '/user_requests',
     enabled: true,
     component: UserRequests,
+  },
+  {
+    key: 'contact-support',
+    title: 'ContactSupport',
+    path: '/contact_support',
+    enabled: true,
+    component: ContactSupport,
   },
 ];
