@@ -46,7 +46,7 @@ function ProfileContent() {
   };
 
   const handleMySendRequestsClick = () => {
-    navigate('/user_requests');
+    navigate('/profile/user_requests');
   };
 
   return (

@@ -5,13 +5,14 @@ import { Typography, Button } from 'antd';
 
 const { Title } = Typography;
 const progress = 25;
+const NEXT_SCREEN = "/createSendRequest/enterObjInfo";
 
 const CreateSendRequest: React.FC = () => {
-  const nextScreen = '/enterObjInfo';
+
   const navigate = useNavigate();
 
   const handleSendClick = () => {
-    navigate('/enterObjInfo');
+    navigate(NEXT_SCREEN);
   };
   return (
     <PageLayout>

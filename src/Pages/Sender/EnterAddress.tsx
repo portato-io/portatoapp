@@ -11,9 +11,9 @@ import { setObjectAdress } from '../../Store/actionCreators';
 
 const { Title } = Typography;
 const progress = 25;
+const NEXT_SCREEN = "/createSendRequest/enter_time";
 
 const EnterAddress: React.FC = () => {
-  const nextScreen = '/enter_time';
 
   const objecInfo = useSelector((state: IObjectInfo) => state);
   console.log(objecInfo.pickup_adress);
@@ -74,7 +74,7 @@ const EnterAddress: React.FC = () => {
         </Form.Item>
       </Form>
 
-      <NextButton nextScreen={nextScreen} />
+      <NextButton nextScreen={NEXT_SCREEN} />
       <BackButton />
     </PageLayout>
   );
