@@ -162,10 +162,14 @@ const EnterObjInfo: React.FC = () => {
       return prevFileList.filter((f) => f.uid !== file.uid);
     });
   };
+  // Calculate screen height 
+  const containerHeight = window.innerHeight * 0.8;
+  console.log(containerHeight + "px");
 
   return (
     <PageLayout>
-      <ProgressBar />
+      <ProgressBar/>
+      <div style={{marginTop:'10%', height: containerHeight + "px", overflowY: "scroll" }}>
       <Form
         id="sender-forms"
         onFinish={onFinish}
@@ -308,6 +312,7 @@ const EnterObjInfo: React.FC = () => {
         <NextButton nextScreen={nextScreen} />
         <BackButton />
       </Form>
+      </div>
     </PageLayout>
   );
 };

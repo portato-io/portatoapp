@@ -34,16 +34,21 @@ const EnterPrice: React.FC = () => {
     });
     console.log(e.target.name);
   };
+  // Calculate screen height 
+  const containerHeight = window.innerHeight * 0.8;
+  console.log(containerHeight + "px");
+
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
+      <div style={{ height: containerHeight + "px", overflowY: "scroll" }}>
       <Form
         className="form-sender"
         //labelCol={{ span: 4 }}
         //wrapperCol={{ span: 14 }}
         layout="horizontal"
       >
-        <Title level={3}> How much is the transport cost for you?</Title>
+       <Title level={3} style={{width:'90%'}}> How much is the transport cost for you?</Title> 
         <Form.Item>
           <Input
             name="price"
@@ -73,6 +78,7 @@ const EnterPrice: React.FC = () => {
           </Card>
         </Form.Item>
       </Form>
+      </div>
 
       <NextButton nextScreen={nextScreen} />
       <BackButton />
