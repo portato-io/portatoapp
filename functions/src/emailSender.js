@@ -30,8 +30,6 @@ function sendEmail(req, res) {
         text: `${name} (${email}) says: ${message}`,
       };
 
-      console.log('password', transporter.options.auth.pass);
-      console.log('user', transporter.options.auth.user);
       console.log('Sending email...');
       const info = await transporter.sendMail(mailOptions);
       console.log(`Email sent: ${info.messageId}`);
