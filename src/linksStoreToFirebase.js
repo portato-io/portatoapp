@@ -18,9 +18,31 @@ export const uploadReduxStoreToFirebase = async (uid, state) => {
   }
 };
 
-export const fetchDataOnce = async (uid) => {
+async function createDirFirebase(name, uid) {
+  // Creata an empty directory where the future matching routes will be stored
+  const requestsRef = ref(database, `users/${uid}/${name}`);
+
+  // Set the directory in the database
+  await set(requestsRef, { dummy: true });
+
+  console.log(
+    'Created the dir successfully with the following adress: ',
+    requestsRef
+  );
+}
+
+export const uploadRouteToFirebase = async (uid) => {
   try {
-    const userRequestsRef = ref(database, `users/${uid}/requests`);
+    createDirFirebase('route_suggestions', uid);
+    createDirFirebase('route_confirmed', uid);
+  } catch (error) {
+    console.error('Error creating suggestions: ', error, 'user: ', uid);
+  }
+};
+
+export const fetchDataOnce = async (uid, directory) => {
+  try {
+    const userRequestsRef = ref(database, `users/${uid}/${directory}`);
     const snapshot = await get(userRequestsRef);
     if (snapshot.exists()) {
       console.log('Data:', snapshot.val());
@@ -50,3 +72,5 @@ export const listenForDataChanges = () => {
     }
   );
 };
+
+

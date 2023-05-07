@@ -1,5 +1,6 @@
 import Typography from 'antd/es/typography/Typography';
 
+
 function DealsContent() {
   return (
     <div style={{ height: '100vh' }}>

@@ -14,7 +14,8 @@ const Shipments = lazy(() => import('./Pages/Shipments'));
 const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
 const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
 const EnterPrice = lazy(() => import('./Pages/Sender/EnterPrice'));
-const Summary = lazy(() => import('./Pages/Sender/Summary'));
+const SummaryRequest = lazy(() => import('./Pages/Sender/Summary'));
+const SummaryRoute = lazy(() => import('./Pages/Routes/Summary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const CreateSendRequest = lazy(
   () => import('./Pages/Sender/CreateSendRequest')
@@ -61,7 +62,7 @@ export const routes: Array<Route> = [
   {
     key: 'enterObjInfo-route',
     title: 'EnterObjInfo',
-    path: '/enterObjInfo',
+    path: '/createSendRequest/enterObjInfo',
     enabled: true,
     component: EnterObjInfo,
   },
@@ -89,36 +90,43 @@ export const routes: Array<Route> = [
   {
     key: 'enterAddress-route',
     title: 'EnterAddress',
-    path: '/enter_address',
+    path: '/createSendRequest/enter_address',
     enabled: true,
     component: EnterAddress,
   },
   {
     key: 'enterTime-route',
     title: 'EnterTime',
-    path: '/enter_time',
+    path: '/createSendRequest/enter_time',
     enabled: true,
     component: EnterTime,
   },
   {
     key: 'enterPrice-route',
     title: 'EnterPrice',
-    path: '/enter_price',
+    path: '/createSendRequest/enter_price',
     enabled: true,
     component: EnterPrice,
   },
   {
-    key: 'summary-route',
-    title: 'Summary',
-    path: '/summary',
+    key: 'summary-request',
+    title: 'SummaryRequest',
+    path: '/createSendRequest/summary',
     enabled: true,
-    component: Summary,
+    component: SummaryRequest,
   },
   {
     key: 'user-requests',
     title: 'UserRequests',
-    path: '/user_requests',
+    path: '/profile/user_requests',
     enabled: true,
     component: UserRequests,
+  },
+  {
+    key: 'summary-route',
+    title: 'SummaryRoute',
+    path: '/createRoute/summary',
+    enabled: true,
+    component: SummaryRoute,
   },
 ];

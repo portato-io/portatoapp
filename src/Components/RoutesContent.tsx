@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import PageLayout from '../Pages/Layouts/PageLayoutTest';
-import { List, Card, Button } from 'antd-mobile';
-import { UserOutlined } from '@ant-design/icons';
+import { Button } from 'antd-mobile';
 import { useNavigate } from 'react-router-dom';
 
 function RoutesContent() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/enterObjInfo');
+    navigate('/createRoute/summary');
   };
   return (
     <div style={{ height: '100vh' }}>
