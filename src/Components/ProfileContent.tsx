@@ -17,12 +17,16 @@ const { Title } = Typography;
 function ProfileContent() {
   const [user, setUser] = useState<User | null>(null);
   const [display, setDisplay] = useState('none');
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
   const navigate = useNavigate();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setDisplay('');
+        const token = await currentUser.getIdTokenResult();
+        setIsAdmin(token.claims.admin || false);
       } else {
         setUser(null);
       }
@@ -49,6 +53,10 @@ function ProfileContent() {
     navigate('/user_requests');
   };
 
+  const handleAdminClick = () => {
+    // Navigate to the admin window
+  };
+
   return (
     <PageLayout display={display}>
       <div style={{ display: display }} className="profile_content">
@@ -71,13 +79,13 @@ function ProfileContent() {
           >
             <div
               style={{
-                width: "min(50vw,50vh)",
-                height: "min(50vw,50vh)",
-                borderRadius: "50%",
-                backgroundColor: "#fff",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                width: 'min(50vw,50vh)',
+                height: 'min(50vw,50vh)',
+                borderRadius: '50%',
+                backgroundColor: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <UserOutlined style={{ fontSize: '48px' }} />
@@ -98,6 +106,11 @@ function ProfileContent() {
                 <List.Item arrow={true} onClick={handleMySendRequestsClick}>
                   My Send Requests
                 </List.Item>
+                {isAdmin && (
+                  <List.Item arrow={true} onClick={handleAdminClick}>
+                    Admin window
+                  </List.Item>
+                )}
                 <List.Item
                   arrow={true}
                   onClick={() => signOut(auth)}
