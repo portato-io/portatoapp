@@ -1,7 +1,21 @@
 {
-  "extends": ["react-app", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "tsconfigRootDir": ".",
+    "project": ["./tsconfig.json"]
+  },
   "rules": {
-    "prettier/prettier": "error"
+    // Add your custom rules here
   }
 }
