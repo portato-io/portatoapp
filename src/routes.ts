@@ -32,7 +32,7 @@ interface Route {
   title: string;
   path: string;
   enabled: boolean;
-  component: FC<{}>;
+  component: FC<object>;
 }
 
 export const routes: Array<Route> = [
@@ -67,7 +67,7 @@ export const routes: Array<Route> = [
   {
     key: 'enterObjInfo-route',
     title: 'EnterObjInfo',
-    path: '/enterObjInfo',
+    path: '/createSendRequest/enterObjInfo',
     enabled: true,
     component: EnterObjInfo,
   },
@@ -95,35 +95,35 @@ export const routes: Array<Route> = [
   {
     key: 'enterAddress-route',
     title: 'EnterAddress',
-    path: '/enter_address',
+    path: '/createSendRequest/enter_address',
     enabled: true,
     component: EnterAddress,
   },
   {
     key: 'enterTime-route',
     title: 'EnterTime',
-    path: '/enter_time',
+    path: '/createSendRequest/enter_time',
     enabled: true,
     component: EnterTime,
   },
   {
     key: 'enterPrice-route',
     title: 'EnterPrice',
-    path: '/enter_price',
+    path: '/createSendRequest/enter_price',
     enabled: true,
     component: EnterPrice,
   },
   {
     key: 'summary-route',
     title: 'Summary',
-    path: '/summary',
+    path: '/createSendRequest/summary',
     enabled: true,
     component: Summary,
   },
   {
     key: 'user-requests',
     title: 'UserRequests',
-    path: '/user_requests',
+    path: '/profile/user_requests',
     enabled: true,
     component: UserRequests,
   },

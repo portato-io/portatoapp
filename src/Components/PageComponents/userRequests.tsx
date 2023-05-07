@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { fetchDataOnce } from '../../linksStoreToFirebase';
-import styles from './UserRequests.module.css';
 import { IObjectInfo } from '../../type';
-import { Card, Typography, Image } from 'antd';
+import { Card } from 'antd';
 
 const UserRequests: React.FC = () => {
   const [requests, setRequest] = useState<IObjectInfo[]>([]);
@@ -13,7 +12,9 @@ const UserRequests: React.FC = () => {
   // then we use await to store the values in state
 
   useEffect(() => {
-    let user_requests = new Promise<any>((resolve, reject) => {});
+    let user_requests = new Promise<any>((resolve, reject) => {
+      // do nothing
+    });
 
     const auth = getAuth();
     const currentUser = auth.currentUser;
@@ -35,12 +36,13 @@ const UserRequests: React.FC = () => {
 
     getUserRequests();
   }, []);
-
+  const containerHeight = window.innerHeight * 0.8;
+  console.log(containerHeight + 'px');
   return (
     <div>
       <h1
         style={{
-          marginTop: '10%',
+          marginTop: '10vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -49,9 +51,10 @@ const UserRequests: React.FC = () => {
       >
         Your Current Requests
       </h1>
-      <div>
+      <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
         {requests.map((request) => (
           <div
+            key={request.name}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -60,7 +63,7 @@ const UserRequests: React.FC = () => {
             }}
           >
             <Card
-              style={{ marginTop: '5%', width: '80%' }}
+              style={{ marginTop: '5vh', width: '80%' }}
               title={request.name}
             >
               {request.weight}/{request.size}
