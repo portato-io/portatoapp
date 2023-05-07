@@ -36,12 +36,12 @@ const UserRequests: React.FC = () => {
     getUserRequests();
   }, []);
   const containerHeight = window.innerHeight * 0.8;
-  console.log(containerHeight + "px");
+  console.log(containerHeight + 'px');
   return (
     <div>
       <h1
         style={{
-          marginTop: '10%',
+          marginTop: '10vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -50,9 +50,10 @@ const UserRequests: React.FC = () => {
       >
         Your Current Requests
       </h1>
-      <div style = {{height: containerHeight + "px", overflowY: "scroll"}}>
+      <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
         {requests.map((request) => (
           <div
+            key={request.name}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -61,7 +62,7 @@ const UserRequests: React.FC = () => {
             }}
           >
             <Card
-              style={{ marginTop: '5%', width: '80%' }}
+              style={{ marginTop: '5vh', width: '80%' }}
               title={request.name}
             >
               {request.weight}/{request.size}

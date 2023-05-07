@@ -69,84 +69,90 @@ const Summary: React.FC = () => {
     }
   };
   const [visible, setVisible] = useState(false);
-    // Calculate screen height 
-    const containerHeight = window.innerHeight * 0.7;
-    console.log(containerHeight + "px");
+  // Calculate screen height
+  const containerHeight = window.innerHeight * 0.7;
+  console.log(containerHeight + 'px');
 
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
-      <div style={{ marginTop:'8%',height: containerHeight + "px", overflowY: "scroll" }}>
-      <Modal open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <div>
-          <FirebaseAuth />
-        </div>
-      </Modal>
-      <Card
-        bordered={true}
+      <div
         style={{
-          marginLeft: '10%',
-          width: '80%',
-          //marginTop: '20%',
-          backgroundColor: '#FFF4E4',
+          marginTop: '8%',
+          height: containerHeight + 'px',
+          overflowY: 'scroll',
         }}
       >
-        <Title level={2}> Summary </Title>
-        <div>
-          <Title level={4}> {objecInfo.name}</Title>
-          <Typography>
-            {' '}
-            {objecInfo.description} / Size: {objecInfo.size} / Weight:{' '}
-            {objecInfo.weight}
-          </Typography>
-        </div>
-        <div>
-          <Title level={4}> Pickup address</Title>
-          <Typography> {objecInfo.pickup_adress} </Typography>
-        </div>
-        <div>
-          <Title level={4}> Delivery address</Title>
-          <Typography> {objecInfo.delivery_adress} </Typography>
-        </div>
-        <div>
-          <Title level={4}>
-            {' '}
-            {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
-          </Title>
-          <Typography> In: {objecInfo.time} </Typography>
-        </div>
-        <div>
-          <Title level={4}> Price</Title>
-          <Typography> {objecInfo.price} CHF </Typography>
-        </div>
-        <div>
-          <Title level={4}> Images</Title>
-          <Image
-            preview={{ visible: false }}
-            height={100}
-            width={100}
-            src={objecInfo.images[0]}
-            onClick={() => setVisible(true)}
-          >
-            {' '}
-          </Image>
-          <div style={{ display: 'none' }}>
-            <Image.PreviewGroup
-              preview={{ visible, onVisibleChange: (vis) => setVisible(vis) }}
-            >
-              {objecInfo.images.map((image) => (
-                <Image src={image} />
-              ))}
-            </Image.PreviewGroup>
+        <Modal open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          <div>
+            <FirebaseAuth />
           </div>
-        </div>
-      </Card>
-      {user ? (
-        <ConfirmButton onClick={handleConfirm} />
-      ) : (
-        <SignInButton onClick={showModal} />
-      )}
-      <BackButton />
+        </Modal>
+        <Card
+          bordered={true}
+          style={{
+            marginLeft: '10%',
+            width: '80%',
+            marginTop: '10vh',
+            backgroundColor: '#FFF4E4',
+          }}
+        >
+          <Title level={2}> Summary </Title>
+          <div>
+            <Title level={4}> {objecInfo.name}</Title>
+            <Typography>
+              {' '}
+              {objecInfo.description} / Size: {objecInfo.size} / Weight:{' '}
+              {objecInfo.weight}
+            </Typography>
+          </div>
+          <div>
+            <Title level={4}> Pickup address</Title>
+            <Typography> {objecInfo.pickup_adress} </Typography>
+          </div>
+          <div>
+            <Title level={4}> Delivery address</Title>
+            <Typography> {objecInfo.delivery_adress} </Typography>
+          </div>
+          <div>
+            <Title level={4}>
+              {' '}
+              {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
+            </Title>
+            <Typography> In: {objecInfo.time} </Typography>
+          </div>
+          <div>
+            <Title level={4}> Price</Title>
+            <Typography> {objecInfo.price} CHF </Typography>
+          </div>
+          <div>
+            <Title level={4}> Images</Title>
+            <Image
+              preview={{ visible: false }}
+              height={100}
+              width={100}
+              src={objecInfo.images[0]}
+              onClick={() => setVisible(true)}
+            >
+              {' '}
+            </Image>
+            <div style={{ display: 'none' }}>
+              <Image.PreviewGroup
+                preview={{ visible, onVisibleChange: (vis) => setVisible(vis) }}
+              >
+                {objecInfo.images.map((image) => (
+                  <Image src={image} />
+                ))}
+              </Image.PreviewGroup>
+            </div>
+          </div>
+        </Card>
+        {user ? (
+          <ConfirmButton onClick={handleConfirm} />
+        ) : (
+          <SignInButton onClick={showModal} />
+        )}
+        <BackButton />
       </div>
     </PageLayout>
   );

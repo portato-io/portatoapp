@@ -46,7 +46,7 @@ function ProfileContent() {
   };
 
   const handleMySendRequestsClick = () => {
-    navigate('/user_requests');
+    navigate('/profile/user_requests');
   };
 
   return (
@@ -71,13 +71,13 @@ function ProfileContent() {
           >
             <div
               style={{
-                width: "min(50vw,50vh)",
-                height: "min(50vw,50vh)",
-                borderRadius: "50%",
-                backgroundColor: "#fff",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                width: 'min(min(50vw,50vh),250px)',
+                height: 'min(min(50vw,50vh),250px)',
+                borderRadius: '50%',
+                backgroundColor: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <UserOutlined style={{ fontSize: '48px' }} />
@@ -85,7 +85,7 @@ function ProfileContent() {
           </div>
           <div style={{ backgroundColor: '#2897FF', flex: 6 }}>
             <Card style={{ borderRadius: '5%', height: '100%' }}>
-              <List mode="card" style={{ marginTop: '10%' }}>
+              <List mode="card" style={{ marginTop: '5vh' }}>
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   My Account
                 </List.Item>
