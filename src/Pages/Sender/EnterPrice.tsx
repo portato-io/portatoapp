@@ -34,50 +34,53 @@ const EnterPrice: React.FC = () => {
     });
     console.log(e.target.name);
   };
-  // Calculate screen height 
+  // Calculate screen height
   const containerHeight = window.innerHeight * 0.8;
-  console.log(containerHeight + "px");
+  console.log(containerHeight + 'px');
 
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
-      <div style={{ height: containerHeight + "px", overflowY: "scroll" }}>
-      <Form
-        className="form-sender"
-        //labelCol={{ span: 4 }}
-        //wrapperCol={{ span: 14 }}
-        layout="horizontal"
-      >
-       <Title level={3} style={{width:'90%'}}> How much is the transport cost for you?</Title> 
-        <Form.Item>
-          <Input
-            name="price"
-            value={objecInfo.price !== 0 ? objecInfo.price : undefined}
-            onChange={handleInputChange}
-            placeholder="E.g : 30 CHF"
-            style={{ width: '90%' }}
-          />
-        </Form.Item>
-        <Card bordered={false} style={{ width: '80%', marginBottom: '10%' }}>
-          Driver reward: x <br />
-          Portato fee: y <br />
-          VAT: z <br />
-          insurance: xy
-        </Card>
-        <Form.Item>
-          <Card
-            bordered={true}
-            style={{ background: '#F8F9FE', width: '80%', left: '5%' }}
-          >
-            <div style={{ textAlign: 'center' }}>
-              <InfoCircleOutlined />
-            </div>
-            Portato factors in the size of the vehicle, distance travelled and
-            attractiveness for drivers to deliver it. If your price is too low,
-            chances are nobody will take your item.
+      <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
+        <Form
+          className="form-sender"
+          //labelCol={{ span: 4 }}
+          //wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <Title level={3} style={{ width: '90%' }}>
+            {' '}
+            How much is the transport cost for you?
+          </Title>
+          <Form.Item>
+            <Input
+              name="price"
+              value={objecInfo.price !== 0 ? objecInfo.price : undefined}
+              onChange={handleInputChange}
+              placeholder="E.g : 30 CHF"
+              style={{ width: '90%' }}
+            />
+          </Form.Item>
+          <Card bordered={false} style={{ width: '80%', marginBottom: '10%' }}>
+            Driver reward: x <br />
+            Portato fee: y <br />
+            VAT: z <br />
+            insurance: xy
           </Card>
-        </Form.Item>
-      </Form>
+          <Form.Item>
+            <Card
+              bordered={true}
+              style={{ background: '#F8F9FE', width: '80%', left: '5%' }}
+            >
+              <div style={{ textAlign: 'center' }}>
+                <InfoCircleOutlined />
+              </div>
+              Portato factors in the size of the vehicle, distance travelled and
+              attractiveness for drivers to deliver it. If your price is too
+              low, chances are nobody will take your item.
+            </Card>
+          </Form.Item>
+        </Form>
       </div>
 
       <NextButton nextScreen={NEXT_SCREEN} />

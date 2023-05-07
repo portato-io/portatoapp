@@ -36,7 +36,7 @@ const UserRequests: React.FC = () => {
     getUserRequests();
   }, []);
   const containerHeight = window.innerHeight * 0.8;
-  console.log(containerHeight + "px");
+  console.log(containerHeight + 'px');
   return (
     <div>
       <h1
@@ -50,7 +50,7 @@ const UserRequests: React.FC = () => {
       >
         Your Current Requests
       </h1>
-      <div style = {{height: containerHeight + "px", overflowY: "scroll"}}>
+      <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
         {requests.map((request) => (
           <div
             key={request.name}
