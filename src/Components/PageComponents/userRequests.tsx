@@ -4,7 +4,9 @@ import { fetchDataOnce } from '../../linksStoreToFirebase';
 import { IObjectInfo } from '../../type';
 import { Card } from 'antd';
 
-const UserRequests: React.FC = () => {
+const UserRequests: React.FC<{ heightPortion?: number }> = ({
+  heightPortion = 0.8,
+}) => {
   const [requests, setRequest] = useState<IObjectInfo[]>([]);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
@@ -36,13 +38,12 @@ const UserRequests: React.FC = () => {
 
     getUserRequests();
   }, []);
-  const containerHeight = window.innerHeight * 0.8;
-  console.log(containerHeight + 'px');
+  const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>
       <h1
         style={{
-          marginTop: '10vh',
+          marginTop: '5vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',

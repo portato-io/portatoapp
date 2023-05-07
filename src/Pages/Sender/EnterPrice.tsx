@@ -41,7 +41,13 @@ const EnterPrice: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
-      <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
+      <div
+        style={{
+          marginTop: '5vh',
+          height: containerHeight + 'px',
+          overflowY: 'scroll',
+        }}
+      >
         <Form
           className="form-sender"
           //labelCol={{ span: 4 }}

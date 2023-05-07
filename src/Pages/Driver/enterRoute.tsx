@@ -8,13 +8,21 @@ import { SearchOutlined } from '@ant-design/icons';
 import { IObjectInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectAdress } from '../../Store/actionCreators';
+import { Slider } from 'antd-mobile';
 
 const { Title } = Typography;
 const progress = 25;
+const NEXT_SCREEN = '/deliver/enterDrivingTime';
+const marks = {
+  0: '0 km',
+  20: '20 km',
+  40: '40 km',
+  60: '60 km',
+  80: '80 km',
+  100: '100 km',
+};
 
 const EnterRoute: React.FC = () => {
-  const nextScreen = '/enter_time';
-
   //   const objecInfo = useSelector((state: IObjectInfo) => state);
   //   console.log(objecInfo.pickup_adress);
   //   const [route, setValues] = useState({
@@ -36,7 +44,7 @@ const EnterRoute: React.FC = () => {
     <PageLayout>
       <ProgressBar progress={progress} />
       <Form
-        className="form-sender"
+        className="form-no-scrolling-sender"
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"
@@ -48,23 +56,33 @@ const EnterRoute: React.FC = () => {
           <Input
             name="pickup_adress"
             prefix={<SearchOutlined />}
+            placeholder="Departure"
             style={{ background: '', width: '90%' }}
           />
         </Form.Item>
 
         <Title level={4} style={{ backgroundColor: 'white' }}>
-          Delivery address
+          Destination
         </Title>
         <Form.Item>
           <Input
             name="delivery_adress"
             prefix={<SearchOutlined />}
+            placeholder="Destination"
             style={{ background: '', width: '90%' }}
           />
         </Form.Item>
+        <Title level={4} style={{ backgroundColor: 'white' }}>
+          Acceptable detour
+        </Title>
+        <Slider
+          marks={marks}
+          ticks
+          style={{ marginLeft: '-3vw', width: '90vw' }}
+        />
       </Form>
 
-      <NextButton nextScreen={nextScreen} />
+      <NextButton nextScreen={NEXT_SCREEN} />
       <BackButton />
     </PageLayout>
   );

@@ -71,7 +71,7 @@ const CreateSendRequest: React.FC = () => {
           </div>
         </Button>
       </AutoCenter>
-      <UserRequests />
+      <UserRequests heightPortion={0.5} />
     </PageLayout>
   );
 };

@@ -53,7 +53,7 @@ const EnterObjInfo: React.FC = () => {
       <ProgressBar />
       <div
         style={{
-          marginTop: '10%',
+          marginTop: '5vh',
           height: containerHeight + 'px',
           overflowY: 'scroll',
         }}
@@ -132,9 +132,9 @@ const EnterObjInfo: React.FC = () => {
             </Radio.Group>
           </Form.Item>
           <UploadImage />
-          <NextButton nextScreen={NEXT_SCREEN} />
-          <BackButton />
         </Form>
+        <NextButton nextScreen={NEXT_SCREEN} />
+        <BackButton />
       </div>
     </PageLayout>
   );

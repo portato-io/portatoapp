@@ -17,17 +17,10 @@ const { Title } = Typography;
 const { RangePicker } = DatePicker;
 const plainOptions = ['Morning ', 'Mid days ', 'Evenings '];
 const CheckboxGroup = Checkbox.Group;
-const onPanelChange = (value: Dayjs, mode: CalendarMode) => {
-  console.log(value.format('YYYY-MM-DD'), mode);
-};
 const progress = 50;
 const NEXT_SCREEN = '/createSendRequest/enter_price';
 
 const EnterTime: React.FC = () => {
-  const objecInfo = useSelector((state: ObjectInfoState) => state.object);
-
-  const [time, setTime] = useState('');
-
   const dispatch = useDispatch();
 
   const handleInputChange = (e: any) => {
@@ -49,7 +42,7 @@ const EnterTime: React.FC = () => {
       <ProgressBar progress={progress} />
 
       <Form
-        className="form-sender"
+        className="form-no-scrolling-sender"
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"

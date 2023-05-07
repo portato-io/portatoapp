@@ -5,7 +5,7 @@ import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Typography, Form, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { IObjectInfo, ObjectInfoState } from '../../type';
+import { IObjectInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectAdress } from '../../Store/actionCreators';
 
@@ -39,7 +39,7 @@ const EnterAddress: React.FC = () => {
     <PageLayout>
       <ProgressBar progress={progress} />
       <Form
-        className="form-sender"
+        className="form-no-scrolling-sender"
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"
