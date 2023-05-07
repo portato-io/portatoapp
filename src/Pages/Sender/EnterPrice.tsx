@@ -11,7 +11,7 @@ import { IObjectInfo, ObjectInfoState } from '../../type';
 
 const { Title } = Typography;
 const progress = 75;
-const NEXT_SCREEN = "/createSendRequest/summary";
+const NEXT_SCREEN = '/createSendRequest/summary';
 
 const EnterPrice: React.FC = () => {
   const objecInfo = useSelector((state: IObjectInfo) => state);

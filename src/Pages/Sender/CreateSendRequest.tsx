@@ -5,10 +5,9 @@ import { Typography, Button } from 'antd';
 
 const { Title } = Typography;
 const progress = 25;
-const NEXT_SCREEN = "/createSendRequest/enterObjInfo";
+const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
 
 const CreateSendRequest: React.FC = () => {
-
   const navigate = useNavigate();
 
   const handleSendClick = () => {

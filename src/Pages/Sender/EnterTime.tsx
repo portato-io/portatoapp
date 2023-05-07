@@ -21,10 +21,9 @@ const onPanelChange = (value: Dayjs, mode: CalendarMode) => {
   console.log(value.format('YYYY-MM-DD'), mode);
 };
 const progress = 50;
-const NEXT_SCREEN = "/createSendRequest/enter_price";
+const NEXT_SCREEN = '/createSendRequest/enter_price';
 
 const EnterTime: React.FC = () => {
-
   const objecInfo = useSelector((state: ObjectInfoState) => state.object);
 
   const [time, setTime] = useState('');

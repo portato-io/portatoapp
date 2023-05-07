@@ -41,7 +41,7 @@ const { TextArea } = Input;
 
 const MAX_FILES = 4; // Limit the number of files
 const MAX_SIZE = 1 * 1024 * 1024; // Limit the file size to 2MB
-const NEXT_SCREEN = "/createSendRequest/enter_address";
+const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
   const [uploading, setUploading] = useState(false);
@@ -127,7 +127,6 @@ const EnterObjInfo: React.FC = () => {
   React.useEffect(() => {
     dispatch(setObject(object));
   }, [object]);
-
 
   const onFinish = (values: any) => {
     console.log({ values });

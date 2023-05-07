@@ -11,10 +11,9 @@ import { setObjectAdress } from '../../Store/actionCreators';
 
 const { Title } = Typography;
 const progress = 25;
-const NEXT_SCREEN = "/createSendRequest/enter_time";
+const NEXT_SCREEN = '/createSendRequest/enter_time';
 
 const EnterAddress: React.FC = () => {
-
   const objecInfo = useSelector((state: IObjectInfo) => state);
   console.log(objecInfo.pickup_adress);
 

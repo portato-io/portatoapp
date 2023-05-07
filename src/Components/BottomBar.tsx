@@ -41,9 +41,9 @@ function BottomBar() {
   const setRouteActive = (value: string) => {
     navigate(value);
   };
-  const firstSlashIndex: number = pathname.indexOf("/");
-  const secondSlashIndex: number = pathname.indexOf("/", firstSlashIndex + 1);
-  let initalRouteScreen: string = "";
+  const firstSlashIndex: number = pathname.indexOf('/');
+  const secondSlashIndex: number = pathname.indexOf('/', firstSlashIndex + 1);
+  let initalRouteScreen: string = '';
   if (secondSlashIndex !== -1) {
     initalRouteScreen = pathname.slice(firstSlashIndex, secondSlashIndex);
   } else {
