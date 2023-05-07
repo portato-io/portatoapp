@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Button } from 'antd';
 
 const { Title } = Typography;
-const progress = 25;
 
 const CreateSendRequest: React.FC = () => {
   const nextScreen = '/enterObjInfo';
