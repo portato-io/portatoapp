@@ -24,7 +24,6 @@ import {
   StorageError,
 } from 'firebase/storage';
 import { storage } from '../../firebaseConfig';
-//TMP
 
 import {
   setObject,
