@@ -5,7 +5,7 @@ function ProgressBar({ progress = 0 }: any) {
     <Progress
       percent={progress}
       showInfo={false}
-      style={{ position: 'absolute', top: '2%', left: '10%', width: '80%' }}
+      style={{ position: 'absolute', top: '2%', left: '10%', width: '80%',height:'10%' }}
     ></Progress>
   );
 }

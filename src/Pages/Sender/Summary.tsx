@@ -69,10 +69,14 @@ const Summary: React.FC = () => {
     }
   };
   const [visible, setVisible] = useState(false);
+    // Calculate screen height
+    const containerHeight = window.innerHeight * 0.7;
+    console.log(containerHeight + "px");
 
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
+      <div style={{ marginTop:'8%',height: containerHeight + "px", overflowY: "scroll" }}>
       <Modal open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <div>
           <FirebaseAuth />
@@ -143,6 +147,7 @@ const Summary: React.FC = () => {
         <SignInButton onClick={showModal} />
       )}
       <BackButton />
+      </div>
     </PageLayout>
   );
 };
