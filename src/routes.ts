@@ -8,7 +8,7 @@ const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
 const Profile = lazy(() => import('./Pages/Profile'));
 const EnterObjInfo = lazy(() => import('./Pages/Sender/EnterObjInfo'));
-const Deliver = lazy(() => import('./Pages/Deliver'));
+const Deliver = lazy(() => import('./Pages/Driver/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
 const Shipments = lazy(() => import('./Pages/Shipments'));
 const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
@@ -19,6 +19,12 @@ const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const CreateSendRequest = lazy(
   () => import('./Pages/Sender/CreateSendRequest')
 );
+const EnterRoute = lazy(() => import('./Pages/Driver/enterRoute'));
+const EnterDrivingTime = lazy(() => import('./Pages/Driver/enterDrivingTime'));
+const EnterDeliveryCapacity = lazy(
+  () => import('./Pages/Driver/enterDeliveryCapacity')
+);
+const RouteSummary = lazy(() => import('./Pages/Driver/RouteSummary'));
 
 // interface
 interface Route {
@@ -120,5 +126,33 @@ export const routes: Array<Route> = [
     path: '/user_requests',
     enabled: true,
     component: UserRequests,
+  },
+  {
+    key: 'enterRoute-route',
+    title: 'EnterRoute',
+    path: '/deliver/enterRoute',
+    enabled: true,
+    component: EnterRoute,
+  },
+  {
+    key: 'enterDrivingTime-route',
+    title: 'EnterDrivingTime',
+    path: '/deliver/enterDrivingTime',
+    enabled: true,
+    component: EnterDrivingTime,
+  },
+  {
+    key: 'enterDeliveryCapacity-route',
+    title: 'EnterDeliveryCapacity',
+    path: '/deliver/enterDeliveryCapacity',
+    enabled: true,
+    component: EnterDeliveryCapacity,
+  },
+  {
+    key: 'routeSummary-route',
+    title: 'RouteSummary',
+    path: '/deliver/routeSummary',
+    enabled: true,
+    component: RouteSummary,
   },
 ];

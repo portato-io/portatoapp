@@ -1,8 +1,8 @@
 import React from 'react';
-import PageLayout from './Layouts/PageLayoutTest';
+import PageLayout from '../Layouts/PageLayoutTest';
 import { AutoCenter, Tabs } from 'antd-mobile';
-import RoutesContent from '../Components/RoutesContent';
-import DealsContent from '../Components/DealsContents';
+import RoutesContent from '../../Components/PageComponents/RoutesContent';
+import DealsContent from '../../Components/PageComponents/DealsContents';
 
 const Deliver: React.FC = () => {
   return (
@@ -19,20 +19,6 @@ const Deliver: React.FC = () => {
           </AutoCenter>
         </Tabs.Tab>
       </Tabs>
-      {/* <Switch
-        onChange={toggleSwitch}
-      />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      >
-         {isEnabled ? <Title>Deals</Title> : <Title>Routes</Title>}
-
-      </div> */}
     </PageLayout>
   );
 };

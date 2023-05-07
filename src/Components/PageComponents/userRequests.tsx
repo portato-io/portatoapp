@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import { fetchDataOnce } from '../linksStoreToFirebase';
+import { fetchDataOnce } from '../../linksStoreToFirebase';
 import styles from './UserRequests.module.css';
-import { IObjectInfo } from '../type';
+import { IObjectInfo } from '../../type';
 import { Card, Typography, Image } from 'antd';
 
 const UserRequests: React.FC = () => {

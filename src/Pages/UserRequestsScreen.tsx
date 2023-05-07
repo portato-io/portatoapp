@@ -1,6 +1,6 @@
 // UserRequestsScreen.tsx
 import React from 'react';
-import UserRequests from './userRequests'; // Import UserRequests from the correct path
+import UserRequests from '../Components/PageComponents/userRequests'; // Import UserRequests from the correct path
 import PageLayout from './Layouts/PageLayoutTest';
 
 const UserRequestsScreen: React.FC = () => {

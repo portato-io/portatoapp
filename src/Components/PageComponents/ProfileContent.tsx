@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import PageLayout from '../Pages/Layouts/PageLayoutTest';
+import PageLayout from '../../Pages/Layouts/PageLayoutTest';
 import { List, Card } from 'antd-mobile';
 import { UserOutlined } from '@ant-design/icons';
 import 'firebaseui/dist/firebaseui.css';
-import { auth } from '../firebaseConfig';
+import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
 import * as firebaseui from 'firebaseui';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import AuthWrapper from '../Components/AuthWrapper';
+import AuthWrapper from '../AuthWrapper';
 import { useNavigate } from 'react-router-dom';
 
 import { Typography } from 'antd';
