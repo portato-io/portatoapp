@@ -3,115 +3,20 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import {
-  Typography,
-  Form,
-  Upload,
-  Input,
-  Radio,
-  Progress,
-  message,
-} from 'antd';
-import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+import UploadImage from '../../Components/UploadImage';
+
+import { Typography, Form, Input, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { RcFile } from 'antd/lib/upload';
-import { UploadFile } from 'antd/lib/upload/interface';
 
-import {
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-  StorageError,
-} from 'firebase/storage';
-import { storage } from '../../firebaseConfig';
-
-import {
-  setObject,
-  addObjectImages,
-  removeObjectImages,
-} from '../../Store/actionCreators';
+import { setObject } from '../../Store/actionCreators';
 import { IFirstObjectInfo, IObjectInfo } from '../../type';
 
 const { Title } = Typography;
 const { TextArea } = Input;
-//type IObjectInfo = typeof IObjectInfo
 
-const MAX_FILES = 4; // Limit the number of files
-const MAX_SIZE = 1 * 1024 * 1024; // Limit the file size to 2MB
 const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
-  const [uploading, setUploading] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-
-  const beforeUpload = (file: File) => {
-    if (fileList.length >= MAX_FILES) {
-      message.error('You can only upload up to ' + MAX_FILES + ' images.');
-      return false;
-    }
-
-    if (file.size > MAX_SIZE) {
-      message.error(
-        'The file size must not exceed ' + MAX_SIZE / (1024 * 1024) + 'MB.'
-      );
-      return false;
-    }
-
-    setUploading(true);
-    const newFile: UploadFile = {
-      uid: Date.now().toString(),
-      name: file.name,
-      status: 'uploading',
-      originFileObj: file as unknown as RcFile,
-    };
-    setFileList((prevFileList) => [...prevFileList, newFile]);
-    uploadImage(file, newFile.uid);
-    return false;
-  };
-
-  async function uploadImage(file: File, uid: string) {
-    const storageRef = ref(storage, `images/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        setProgress(progress);
-
-        setFileList((prevFileList) =>
-          prevFileList.map((f) => {
-            if (f.uid === uid) {
-              return { ...f, percent: Math.ceil(progress) };
-            }
-            return f;
-          })
-        );
-      },
-      (error: StorageError) => {
-        console.error('Error uploading image:', error);
-        setUploading(false);
-      },
-      async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        console.log('File available at', downloadURL);
-        dispatch(addObjectImages([downloadURL]));
-        setUploading(false);
-
-        setFileList((prevFileList) =>
-          prevFileList.map((file) =>
-            file.uid === uid
-              ? { ...file, status: 'done', url: downloadURL }
-              : file
-          )
-        );
-      }
-    );
-  }
-
   const objecInfo = useSelector((state: IObjectInfo) => state);
 
   const [object, setValues] = useState<IFirstObjectInfo>({
@@ -131,11 +36,6 @@ const EnterObjInfo: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const submitForm = (e: any) => {
-    e.preventDefault();
-    // dispatch FORM_SUBMIT action
-  };
-
   const handleInputChange = (e: any) => {
     setValues({
       ...object,
@@ -144,20 +44,6 @@ const EnterObjInfo: React.FC = () => {
     console.log(e.target.name);
   };
 
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 2 }}>Upload</div>
-    </div>
-  );
-
-  const handleRemove = (file: UploadFile) => {
-    setFileList((prevFileList) => {
-      const index = prevFileList.findIndex((f) => f.uid === file.uid);
-      dispatch(removeObjectImages(index));
-      return prevFileList.filter((f) => f.uid !== file.uid);
-    });
-  };
   // Calculate screen height
   const containerHeight = window.innerHeight * 0.8;
   console.log(containerHeight + 'px');
@@ -245,72 +131,7 @@ const EnterObjInfo: React.FC = () => {
               </Radio.Button>
             </Radio.Group>
           </Form.Item>
-
-          <Form.Item
-            label={<label className="item-form-label">Upload images</label>}
-            valuePropName="fileList"
-          >
-            <Upload
-              action="/upload.do"
-              listType="picture-card"
-              fileList={fileList}
-              beforeUpload={beforeUpload}
-              onRemove={handleRemove}
-              itemRender={(originNode, file, fileList) => {
-                if (file.status === 'uploading' || file.status === 'done') {
-                  return (
-                    <div style={{ position: 'relative' }}>
-                      <img
-                        src={
-                          file.url ||
-                          (file.originFileObj
-                            ? URL.createObjectURL(file.originFileObj)
-                            : '')
-                        }
-                        alt={file.name}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          borderRadius: '4px',
-                        }}
-                      />
-                      {file.status === 'uploading' && (
-                        <Progress
-                          type="circle"
-                          percent={file.percent}
-                          width={40}
-                          style={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                          }}
-                        />
-                      )}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '2px',
-                          right: '2px',
-                          background: 'rgba(255, 255, 255, 0.8)',
-                          borderRadius: '4px',
-                          cursor: 'pointer',
-                        }}
-                        onClick={() => handleRemove(file)}
-                      >
-                        <CloseOutlined />
-                      </div>
-                    </div>
-                  );
-                }
-                return originNode;
-              }}
-            >
-              {fileList.length >= 8 ? null : uploadButton}
-            </Upload>
-          </Form.Item>
-
+          <UploadImage />
           <NextButton nextScreen={NEXT_SCREEN} />
           <BackButton />
         </Form>
