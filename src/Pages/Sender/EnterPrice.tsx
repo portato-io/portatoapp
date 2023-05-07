@@ -11,9 +11,9 @@ import { IObjectInfo, ObjectInfoState } from '../../type';
 
 const { Title } = Typography;
 const progress = 75;
+const NEXT_SCREEN = '/createSendRequest/summary';
 
 const EnterPrice: React.FC = () => {
-  const nextScreen = '/summary';
   const objecInfo = useSelector((state: IObjectInfo) => state);
 
   const [prices, setValues] = useState({
@@ -83,7 +83,7 @@ const EnterPrice: React.FC = () => {
         </Form>
       </div>
 
-      <NextButton nextScreen={nextScreen} />
+      <NextButton nextScreen={NEXT_SCREEN} />
       <BackButton />
     </PageLayout>
   );

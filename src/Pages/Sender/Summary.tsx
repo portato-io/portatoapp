@@ -93,7 +93,7 @@ const Summary: React.FC = () => {
           style={{
             marginLeft: '10%',
             width: '80%',
-            //marginTop: '20%',
+            marginTop: '10vh',
             backgroundColor: '#FFF4E4',
           }}
         >

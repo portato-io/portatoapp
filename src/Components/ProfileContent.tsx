@@ -27,6 +27,7 @@ function ProfileContent() {
         setDisplay('');
         const token = await currentUser.getIdTokenResult();
         setIsAdmin(token.claims.admin || false);
+        console.log('is user admin : ', isAdmin);
       } else {
         setUser(null);
       }
@@ -50,7 +51,7 @@ function ProfileContent() {
   };
 
   const handleMySendRequestsClick = () => {
-    navigate('/user_requests');
+    navigate('/profile/user_requests');
   };
 
   const handleAdminClick = () => {
@@ -79,8 +80,8 @@ function ProfileContent() {
           >
             <div
               style={{
-                width: 'min(50vw,50vh)',
-                height: 'min(50vw,50vh)',
+                width: 'min(min(50vw,50vh),250px)',
+                height: 'min(min(50vw,50vh),250px)',
                 borderRadius: '50%',
                 backgroundColor: '#fff',
                 display: 'flex',
@@ -93,7 +94,7 @@ function ProfileContent() {
           </div>
           <div style={{ backgroundColor: '#2897FF', flex: 6 }}>
             <Card style={{ borderRadius: '5%', height: '100%' }}>
-              <List mode="card" style={{ marginTop: '10%' }}>
+              <List mode="card" style={{ marginTop: '5vh' }}>
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   My Account
                 </List.Item>
