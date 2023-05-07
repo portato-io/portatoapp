@@ -1,6 +1,5 @@
-import * as actionTypes from './actionTypes';
 import { AnyAction } from 'redux';
-import { IObjectInfo, ObjectInfoState } from '../type';
+import { IObjectInfo } from '../type';
 
 export function reducer(state: any, action: AnyAction): IObjectInfo {
   console.log(action.type);

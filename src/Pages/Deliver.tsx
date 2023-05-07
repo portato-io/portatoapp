@@ -1,12 +1,27 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import { Typography } from 'antd';
-
-const { Title } = Typography;
+import { AutoCenter, Tabs } from 'antd-mobile';
+import RoutesContent from '../Components/RoutesContent';
+import DealsContent from '../Components/DealsContents';
 
 const Deliver: React.FC = () => {
   return (
     <PageLayout>
+      <Tabs style={{}}>
+        <Tabs.Tab title="Deals" key="deaks">
+          <AutoCenter>
+            <DealsContent />
+          </AutoCenter>
+        </Tabs.Tab>
+        <Tabs.Tab title="Routes" key="routes">
+          <AutoCenter>
+            <RoutesContent />
+          </AutoCenter>
+        </Tabs.Tab>
+      </Tabs>
+      {/* <Switch
+        onChange={toggleSwitch}
+      />
       <div
         style={{
           display: 'flex',
@@ -15,8 +30,9 @@ const Deliver: React.FC = () => {
           height: '100vh',
         }}
       >
-        <Title level={2}>Deliver</Title>
-      </div>
+         {isEnabled ? <Title>Deals</Title> : <Title>Routes</Title>}
+
+      </div> */}
     </PageLayout>
   );
 };
