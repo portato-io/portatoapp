@@ -40,7 +40,7 @@ const UserRequests: React.FC = () => {
     <div>
       <h1
         style={{
-          marginTop: '10%',
+          marginTop: '10vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -52,6 +52,7 @@ const UserRequests: React.FC = () => {
       <div>
         {requests.map((request) => (
           <div
+            key={request.name}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -60,7 +61,7 @@ const UserRequests: React.FC = () => {
             }}
           >
             <Card
-              style={{ marginTop: '5%', width: '80%' }}
+              style={{ marginTop: '5vh', width: '80%' }}
               title={request.name}
             >
               {request.weight}/{request.size}
