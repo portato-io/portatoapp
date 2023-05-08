@@ -71,10 +71,11 @@ const EnterAddress: React.FC = () => {
             style={{ background: '', width: '90%' }}
           />
         </Form.Item>
+        <Form.Item>
+          <NextButton nextScreen={NEXT_SCREEN} />
+          <BackButton />
+        </Form.Item>
       </Form>
-
-      <NextButton nextScreen={NEXT_SCREEN} />
-      <BackButton />
     </PageLayout>
   );
 };

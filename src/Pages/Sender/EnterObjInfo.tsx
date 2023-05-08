@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import UploadImage from '../../Components/UploadImage';
 
-import { Typography, Form, Input, Radio } from 'antd';
+import { Typography, Form, Input, Radio, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setObject } from '../../Store/actionCreators';
@@ -45,7 +45,7 @@ const EnterObjInfo: React.FC = () => {
   };
 
   // Calculate screen height
-  const containerHeight = window.innerHeight * 0.8;
+  const containerHeight = window.innerHeight * 0.9;
   console.log(containerHeight + 'px');
 
   return (
@@ -132,9 +132,11 @@ const EnterObjInfo: React.FC = () => {
             </Radio.Group>
           </Form.Item>
           <UploadImage />
+          <Form.Item>
+            <NextButton nextScreen={NEXT_SCREEN} />
+            <BackButton />
+          </Form.Item>
         </Form>
-        <NextButton nextScreen={NEXT_SCREEN} />
-        <BackButton />
       </div>
     </PageLayout>
   );
