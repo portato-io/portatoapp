@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,10 +12,10 @@ function NextButton({ nextScreen = '/' }: any) {
       className="div_button_next"
       style={{
         position: 'absolute',
-        bottom: '10%',
-        left: '45%',
-        width: '50%',
-        background: '#fff',
+        bottom: '2vh',
+        right: '10vw',
+        width: '45vw',
+        background: 'white',
       }}
     >
       <Button

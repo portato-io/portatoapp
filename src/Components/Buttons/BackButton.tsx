@@ -12,9 +12,9 @@ function BackButton() {
       className="div_button_next"
       style={{
         position: 'absolute',
-        bottom: '10%',
-        left: '5%',
-        width: '30%',
+        bottom: '2vh',
+        //left: '5%',
+        width: '30vw',
         background: '#fff',
       }}
     >

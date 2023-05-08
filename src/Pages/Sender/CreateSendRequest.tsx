@@ -3,7 +3,7 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import { useNavigate } from 'react-router-dom';
 import { Typography, Button } from 'antd';
 import { AutoCenter } from 'antd-mobile';
-import UserRequests from '../userRequests';
+import UserRequests from '../../Components/PageComponents/userRequests';
 import { PlusOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
@@ -71,7 +71,7 @@ const CreateSendRequest: React.FC = () => {
           </div>
         </Button>
       </AutoCenter>
-      <UserRequests />
+      <UserRequests heightPortion={0.5} />
     </PageLayout>
   );
 };
