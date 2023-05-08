@@ -13,7 +13,9 @@ const UserRequests: React.FC = () => {
   // then we use await to store the values in state
 
   useEffect(() => {
-    let user_requests = new Promise<any>((resolve, reject) => {});
+    let user_requests = new Promise<any>((resolve, reject) => {
+      // DO nothing
+    });
 
     const auth = getAuth();
     const currentUser = auth.currentUser;

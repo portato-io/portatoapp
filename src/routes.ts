@@ -26,7 +26,7 @@ interface Route {
   title: string;
   path: string;
   enabled: boolean;
-  component: FC<{}>;
+  component: FC<object>;
 }
 
 export const routes: Array<Route> = [
