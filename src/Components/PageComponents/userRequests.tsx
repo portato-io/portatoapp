@@ -15,7 +15,7 @@ const UserRequests: React.FC<{ heightPortion?: number }> = ({
 
   useEffect(() => {
     let user_requests = new Promise<any>((resolve, reject) => {
-      // do nothing
+      // DO nothing
     });
 
     const auth = getAuth();
