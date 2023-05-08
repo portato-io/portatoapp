@@ -12,12 +12,12 @@ const AdminDashboard: React.FC = () => {
 
   const handleAllRequestsClick = () => {
     // Navigate to the "All Requests" page
-    navigate('/all-requests');
+    navigate('/admin/all_requests');
   };
 
   const handleAllRoutesClick = () => {
     // Navigate to the "All Routes" page
-    navigate('/all-routes');
+    navigate('/admin/all_routes');
   };
 
   return (
