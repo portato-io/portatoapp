@@ -30,7 +30,7 @@ export type ObjectInfoAction = {
 export type DispatchType = (args: ObjectInfoAction) => ObjectInfoAction;
 
 export interface IRouteInfo {
-  id: string;
+  id: number;
   departure_adress: string;
   destination_adress: string;
   acceptable_detour: number;

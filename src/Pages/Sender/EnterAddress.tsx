@@ -7,15 +7,16 @@ import { Typography, Form, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { IObjectInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
-import { setObjectAdress } from '../../Store/actionCreators';
+import { setObjectAdress } from '../../Store/actions/requestActionCreators';
 
 const { Title } = Typography;
 const progress = 25;
 const NEXT_SCREEN = '/createSendRequest/enter_time';
 
 const EnterAddress: React.FC = () => {
-  const objecInfo = useSelector((state: IObjectInfo) => state);
-  console.log(objecInfo.pickup_adress);
+  const objecInfo = useSelector(
+    (state: { request: IObjectInfo }) => state.request
+  );
 
   const [adresses, setValues] = useState({
     pickup_adress: objecInfo.pickup_adress,
@@ -71,11 +72,9 @@ const EnterAddress: React.FC = () => {
             style={{ background: '', width: '90%' }}
           />
         </Form.Item>
-        <Form.Item>
-          <NextButton nextScreen={NEXT_SCREEN} />
-          <BackButton />
-        </Form.Item>
       </Form>
+      <NextButton nextScreen={NEXT_SCREEN} />
+      <BackButton />
     </PageLayout>
   );
 };

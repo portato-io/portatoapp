@@ -5,15 +5,15 @@ import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Typography, Form, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { IObjectInfo } from '../../type';
+import { IRouteInfo } from '../../type';
+import { setDetour, setRoute } from '../../Store/actions/routeActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
-import { setObjectAdress } from '../../Store/actionCreators';
 import { Slider } from 'antd-mobile';
 
 const { Title } = Typography;
-const progress = 25;
+const PROGRESS = 25;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
-const marks = {
+const MARKS = {
   0: '0 km',
   20: '20 km',
   40: '40 km',
@@ -23,26 +23,38 @@ const marks = {
 };
 
 const EnterRoute: React.FC = () => {
-  //   const objecInfo = useSelector((state: IObjectInfo) => state);
-  //   console.log(objecInfo.pickup_adress);
-  //   const [route, setValues] = useState({
-  //     pickup_adress: objecInfo.pickup_adress,
-  //     delivery_adress: objecInfo.delivery_adress,
-  //   });
-  //   React.useEffect(() => {
-  //     dispatch(setObjectAdress(adresses.pickup_adress, adresses.delivery_adress));
-  //   }, [adresses]);
+  const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
+
+  const [routes, setValues] = useState({
+    departure_adress: routeInfo.departure_adress,
+    destination_adress: routeInfo.destination_adress,
+    acceptable_detour: routeInfo.acceptable_detour,
+  });
+
+  React.useEffect(() => {
+    dispatch(setRoute(routes.departure_adress, routes.destination_adress));
+    dispatch(setDetour(routes.acceptable_detour));
+  }, [routes]);
+
   const dispatch = useDispatch();
-  //   const handleInputChange = (e: any) => {
-  //     setValues({
-  //       ...adresses,
-  //       [e.target.name]: e.target.value,
-  //     });
-  //   };
+
+  const handleInputChange = (e: any) => {
+    if (typeof e == 'number') {
+      setValues({
+        ...routes,
+        acceptable_detour: e,
+      });
+    } else {
+      setValues({
+        ...routes,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
 
   return (
     <PageLayout>
-      <ProgressBar progress={progress} />
+      <ProgressBar progress={PROGRESS} />
       <Form
         className="form-no-scrolling-sender"
         labelCol={{ span: 4 }}
@@ -54,8 +66,14 @@ const EnterRoute: React.FC = () => {
         </Title>
         <Form.Item>
           <Input
-            name="pickup_adress"
+            name="departure_adress"
             prefix={<SearchOutlined />}
+            value={
+              routes.departure_adress !== ''
+                ? routes.departure_adress
+                : undefined
+            }
+            onChange={handleInputChange}
             placeholder="Departure"
             style={{ background: '', width: '90%' }}
           />
@@ -66,8 +84,14 @@ const EnterRoute: React.FC = () => {
         </Title>
         <Form.Item>
           <Input
-            name="delivery_adress"
+            name="destination_adress"
             prefix={<SearchOutlined />}
+            value={
+              routes.destination_adress !== ''
+                ? routes.destination_adress
+                : undefined
+            }
+            onChange={handleInputChange}
             placeholder="Destination"
             style={{ background: '', width: '90%' }}
           />
@@ -76,8 +100,10 @@ const EnterRoute: React.FC = () => {
           Acceptable detour
         </Title>
         <Slider
-          marks={marks}
+          marks={MARKS}
           ticks
+          value={routes.acceptable_detour}
+          onChange={handleInputChange}
           style={{ marginLeft: '-3vw', width: '90vw' }}
         />
       </Form>
