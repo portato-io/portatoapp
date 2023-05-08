@@ -55,7 +55,7 @@ function ProfileContent() {
   };
 
   const handleAdminClick = () => {
-    // Navigate to the admin window
+    navigate('/admin/admin_dashboard');
   };
 
   return (

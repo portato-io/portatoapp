@@ -3,7 +3,7 @@ import React from 'react';
 import UserRequests from '../userRequests'; // Import UserRequests from the correct path
 import PageLayout from '../Layouts/PageLayoutTest';
 
-const UserRequestsScreen: React.FC = () => {
+const AllRequests: React.FC = () => {
   return (
     <PageLayout>
       <div>
@@ -13,4 +13,4 @@ const UserRequestsScreen: React.FC = () => {
   );
 };
 
-export default UserRequestsScreen;
+export default AllRequests;

@@ -44,7 +44,6 @@ const AdminDashboard: React.FC = () => {
           All Routes
         </Button>
       </AutoCenter>
-      <UserRequests />
     </PageLayout>
   );
 };
