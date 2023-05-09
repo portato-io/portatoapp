@@ -33,10 +33,16 @@
   background-color: #fff;
 }
 .form-sender {
-  margin-top: 10%;
+  margin-top: 0vh;
   height: '100vh';
   background-color: #fff;
-  margin-left: 10%;
+  margin-left: 8vw;
+}
+.form-no-scrolling-sender {
+  margin-top: 10vh;
+  height: '100vh';
+  background-color: #fff;
+  margin-left: 8vw;
 }
 
 .item-form-label {

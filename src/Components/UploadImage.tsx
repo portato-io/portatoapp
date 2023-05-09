@@ -3,7 +3,10 @@ import { RcFile, UploadFile } from 'antd/lib/upload/interface';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addObjectImages, removeObjectImages } from '../Store/actionCreators';
+import {
+  addObjectImages,
+  removeObjectImages,
+} from '../Store/actions/requestActionCreators';
 
 import {
   ref,
