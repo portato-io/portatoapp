@@ -161,4 +161,4 @@ const Summary: React.FC = () => {
   );
 };
 
-export default SummaryRequest;
+export default Summary;
