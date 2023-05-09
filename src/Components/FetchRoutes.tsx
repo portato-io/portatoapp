@@ -3,7 +3,7 @@ import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRouteInfo } from '../type';
 import { Card } from 'antd';
 
-const FetchRequests: React.FC<{ uid: string; heightPortion?: number }> = ({
+const FetchRoutes: React.FC<{ uid: string; heightPortion?: number }> = ({
   uid = undefined,
   heightPortion = 0.8,
 }) => {
@@ -57,4 +57,4 @@ const FetchRequests: React.FC<{ uid: string; heightPortion?: number }> = ({
   );
 };
 
-export default FetchRequests;
+export default FetchRoutes;
