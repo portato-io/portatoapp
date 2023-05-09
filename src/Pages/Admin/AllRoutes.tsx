@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import FetchRequests from '../../Components/FetchRequests';
+import FetchRoutes from '../../Components/FetchRoutes';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { database } from '../../firebaseConfig';
 import { ref, get } from 'firebase/database';
@@ -30,7 +30,7 @@ const AllRoutes: React.FC = () => {
     <PageLayout>
       <div>
         {userIds.map((uid) => (
-          <FetchRequests key={uid} uid={uid} />
+          <FetchRoutes key={uid} uid={uid} />
         ))}
       </div>
     </PageLayout>
