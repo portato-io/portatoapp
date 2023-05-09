@@ -91,7 +91,7 @@ const CreateSendRequest: React.FC = () => {
       >
         Your Current Requests
       </h1>
-      <FetchRequests uid={uid} />
+      <FetchRequests uid={uid} heightPortion={0.5} />
     </PageLayout>
   );
 };
