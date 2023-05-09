@@ -16,6 +16,9 @@ const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
 const EnterPrice = lazy(() => import('./Pages/Sender/EnterPrice'));
 const Summary = lazy(() => import('./Pages/Sender/Summary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
+const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
+const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
+const AllRoutes = lazy(() => import('./Pages/Admin/AllRoutes'));
 const CreateSendRequest = lazy(
   () => import('./Pages/Sender/CreateSendRequest')
 );
@@ -154,5 +157,26 @@ export const routes: Array<Route> = [
     path: '/deliver/routeSummary',
     enabled: true,
     component: RouteSummary,
+  },
+  {
+    key: 'all-requests',
+    title: 'AllRequests',
+    path: '/admin/all_requests',
+    enabled: true,
+    component: AllRequests,
+  },
+  {
+    key: 'admin-dashboard',
+    title: 'AdminDashboard',
+    path: '/admin/admin_dashboard',
+    enabled: true,
+    component: AdminDashboard,
+  },
+  {
+    key: 'all-routes',
+    title: 'AllRoutes',
+    path: '/admin/all_routes',
+    enabled: true,
+    component: AllRoutes,
   },
 ];

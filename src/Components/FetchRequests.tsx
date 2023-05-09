@@ -12,7 +12,7 @@ const FetchRequests: React.FC<{ uid: string }> = ({ uid = undefined }) => {
 
   useEffect(() => {
     let user_requests = new Promise<any>((resolve, reject) => {
-      // DO nothing
+      // Do nothing
     });
 
     // TODO: Handle uid undefined case
