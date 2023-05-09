@@ -1,11 +1,8 @@
 import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Button } from 'antd';
+import { Button } from 'antd';
 import { AutoCenter } from 'antd-mobile';
-import UserRequests from '../userRequests';
-
-const { Title } = Typography;
 
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IObjectInfo } from '../type';
-import { Card, Typography, Image } from 'antd';
-import EnterAddress from './Sender/EnterAddress';
+import { Card } from 'antd';
 
 const FetchRequests: React.FC<{ uid: string }> = ({ uid = undefined }) => {
   const [requests, setRequest] = useState<IObjectInfo[]>([]);
