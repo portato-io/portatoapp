@@ -3,7 +3,10 @@ import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IObjectInfo } from '../type';
 import { Card } from 'antd';
 
-const FetchRequests: React.FC<{ uid: string }> = ({ uid = undefined }) => {
+const FetchRequests: React.FC<{ uid: string; heightPortion?: number }> = ({
+  uid = undefined,
+  heightPortion = 0.8,
+}) => {
   const [requests, setRequest] = useState<IObjectInfo[]>([]);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
@@ -30,8 +33,7 @@ const FetchRequests: React.FC<{ uid: string }> = ({ uid = undefined }) => {
 
     getUserRequests();
   }, []);
-  const containerHeight = window.innerHeight * 0.8;
-  console.log(containerHeight + 'px');
+  const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>
       <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>

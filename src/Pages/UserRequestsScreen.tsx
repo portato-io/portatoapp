@@ -25,7 +25,7 @@ const UserRequestsScreen: React.FC = () => {
         >
           Your Current Requests
         </h1>
-        <FetchRequests uid={uid} />
+        <FetchRequests uid={uid} heightPortion={0.7} />
       </div>
     </PageLayout>
   );
