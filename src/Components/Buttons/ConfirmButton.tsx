@@ -14,10 +14,11 @@ const ConfirmButton = ({ onClick, nextScreen = '/' }: any) => {
       className="div_button_next"
       style={{
         position: 'absolute',
-        bottom: '10%',
-        left: '45%',
-        width: '50%',
+        bottom: '2vh',
+        right: '10vw',
+        width: '45vw',
         background: '#fff',
+        marginBottom: '10vh',
       }}
     >
       <Button

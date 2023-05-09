@@ -1,13 +1,6 @@
-import * as actionTypes from './actionTypes';
-import { IFirstObjectInfo, IObjectInfo, ObjectInfoAction } from '../type';
+import * as actionTypes from '../actionTypes/requestActionTypes';
+import { IFirstObjectInfo } from '../../type';
 import { AnyAction } from 'redux';
-/*export function setObject(object: IObjectInfo) {
-  const action: ObjectInfoAction = {
-    type: actionTypes.SET_OBJECT,
-    object,
-  }
-
-}*/
 
 export const setObject = (variable: IFirstObjectInfo): AnyAction => ({
   type: actionTypes.SET_OBJECT,
