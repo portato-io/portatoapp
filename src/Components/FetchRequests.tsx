@@ -19,7 +19,7 @@ const FetchRequests: React.FC<{ uid: string; heightPortion?: number }> = ({
     });
 
     // TODO: Handle uid undefined case
-    const data = fetchDataOnce(uid);
+    const data = fetchDataOnce(uid, 'requests');
     if (data) {
       user_requests = data.then((storesArray) => {
         return storesArray;

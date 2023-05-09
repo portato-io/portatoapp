@@ -8,7 +8,7 @@ import SignInButton from '../../Components/Buttons/SignInButton';
 
 import { useSelector } from 'react-redux';
 import { ObjectInfoState, IObjectInfo } from '../../type';
-import { fetchDataOnce } from '../../linksStoreToFirebase';
+
 import { auth } from '../../firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import FirebaseAuth from '../../Components/FirebaseAuth';

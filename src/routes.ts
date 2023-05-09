@@ -14,7 +14,8 @@ const Shipments = lazy(() => import('./Pages/Shipments'));
 const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
 const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
 const EnterPrice = lazy(() => import('./Pages/Sender/EnterPrice'));
-const Summary = lazy(() => import('./Pages/Sender/Summary'));
+const SummaryRequest = lazy(() => import('./Pages/Sender/Summary'));
+const SummaryRoute = lazy(() => import('./Pages/Routes/Summary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
 const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
@@ -117,11 +118,11 @@ export const routes: Array<Route> = [
     component: EnterPrice,
   },
   {
-    key: 'summary-route',
-    title: 'Summary',
+    key: 'summary-request',
+    title: 'SummaryRequest',
     path: '/createSendRequest/summary',
     enabled: true,
-    component: Summary,
+    component: SummaryRequest,
   },
   {
     key: 'user-requests',
