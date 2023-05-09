@@ -3,8 +3,9 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import { useNavigate } from 'react-router-dom';
 import { Typography, Button } from 'antd';
 import { AutoCenter } from 'antd-mobile';
-import UserRequests from '../../Components/PageComponents/userRequests';
+import FetchRequests from '../../Components/FetchRequests';
 import { PlusOutlined } from '@ant-design/icons';
+import { getAuth } from 'firebase/auth';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
@@ -15,6 +16,14 @@ const CreateSendRequest: React.FC = () => {
   const handleSendClick = () => {
     navigate(NEXT_SCREEN);
   };
+
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+  let uid = 'undefined';
+  if (currentUser) {
+    uid = currentUser.uid;
+  }
+
   return (
     <PageLayout>
       <AutoCenter>
@@ -71,7 +80,18 @@ const CreateSendRequest: React.FC = () => {
           </div>
         </Button>
       </AutoCenter>
-      <UserRequests heightPortion={0.5} />
+      <h1
+        style={{
+          marginTop: '10vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        Your Current Requests
+      </h1>
+      <FetchRequests uid={uid} />
     </PageLayout>
   );
 };
