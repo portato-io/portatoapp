@@ -10,6 +10,7 @@ import { auth } from '../../firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import FirebaseAuth from '../../Components/FirebaseAuth';
 import { uploadRouteToFirebase } from '../../linksStoreToFirebase';
+import { store } from '../../index';
 
 const progress = 100;
 const { Title } = Typography;
@@ -52,7 +53,8 @@ const RouteSummary: React.FC = () => {
     if (currentUser) {
       const uid = auth.currentUser?.uid; // Add the optional chaining operator here
       if (uid) {
-        uploadRouteToFirebase(uid);
+        const state = store.getState();
+        uploadRouteToFirebase(uid, state.route);
       } else {
         console.log('User UID not found.');
       }
