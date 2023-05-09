@@ -25,7 +25,7 @@ function sendEmail(req, res) {
 
       const mailOptions = {
         from: 'hugo@portato.io',
-        to: 'mehdi@portato.io',
+        to: 'support@portato.io',
         subject: 'New Message from React Web App',
         text: `${name} (${email}) says: ${message}`,
       };
