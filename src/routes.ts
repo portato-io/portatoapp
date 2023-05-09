@@ -8,7 +8,7 @@ const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
 const Profile = lazy(() => import('./Pages/Profile'));
 const EnterObjInfo = lazy(() => import('./Pages/Sender/EnterObjInfo'));
-const Deliver = lazy(() => import('./Pages/Deliver'));
+const Deliver = lazy(() => import('./Pages/Driver/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
 const Shipments = lazy(() => import('./Pages/Shipments'));
 const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
@@ -17,9 +17,18 @@ const EnterPrice = lazy(() => import('./Pages/Sender/EnterPrice'));
 const SummaryRequest = lazy(() => import('./Pages/Sender/Summary'));
 const SummaryRoute = lazy(() => import('./Pages/Routes/Summary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
+const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
+const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
+const AllRoutes = lazy(() => import('./Pages/Admin/AllRoutes'));
 const CreateSendRequest = lazy(
   () => import('./Pages/Sender/CreateSendRequest')
 );
+const EnterRoute = lazy(() => import('./Pages/Driver/enterRoute'));
+const EnterDrivingTime = lazy(() => import('./Pages/Driver/enterDrivingTime'));
+const EnterDeliveryCapacity = lazy(
+  () => import('./Pages/Driver/enterDeliveryCapacity')
+);
+const RouteSummary = lazy(() => import('./Pages/Driver/RouteSummary'));
 
 // interface
 interface Route {
@@ -27,7 +36,7 @@ interface Route {
   title: string;
   path: string;
   enabled: boolean;
-  component: FC<{}>;
+  component: FC<object>;
 }
 
 export const routes: Array<Route> = [
@@ -123,10 +132,52 @@ export const routes: Array<Route> = [
     component: UserRequests,
   },
   {
-    key: 'summary-route',
-    title: 'SummaryRoute',
-    path: '/createRoute/summary',
+    key: 'enterRoute-route',
+    title: 'EnterRoute',
+    path: '/deliver/enterRoute',
     enabled: true,
-    component: SummaryRoute,
+    component: EnterRoute,
+  },
+  {
+    key: 'enterDrivingTime-route',
+    title: 'EnterDrivingTime',
+    path: '/deliver/enterDrivingTime',
+    enabled: true,
+    component: EnterDrivingTime,
+  },
+  {
+    key: 'enterDeliveryCapacity-route',
+    title: 'EnterDeliveryCapacity',
+    path: '/deliver/enterDeliveryCapacity',
+    enabled: true,
+    component: EnterDeliveryCapacity,
+  },
+  {
+    key: 'routeSummary-route',
+    title: 'RouteSummary',
+    path: '/deliver/routeSummary',
+    enabled: true,
+    component: RouteSummary,
+  },
+  {
+    key: 'all-requests',
+    title: 'AllRequests',
+    path: '/admin/all_requests',
+    enabled: true,
+    component: AllRequests,
+  },
+  {
+    key: 'admin-dashboard',
+    title: 'AdminDashboard',
+    path: '/admin/admin_dashboard',
+    enabled: true,
+    component: AdminDashboard,
+  },
+  {
+    key: 'all-routes',
+    title: 'AllRoutes',
+    path: '/admin/all_routes',
+    enabled: true,
+    component: AllRoutes,
   },
 ];

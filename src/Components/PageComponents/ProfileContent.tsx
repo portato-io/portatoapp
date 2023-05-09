@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import PageLayout from '../Pages/Layouts/PageLayoutTest';
+import PageLayout from '../../Pages/Layouts/PageLayoutTest';
 import { List, Card } from 'antd-mobile';
 import { UserOutlined } from '@ant-design/icons';
 import 'firebaseui/dist/firebaseui.css';
-import { auth } from '../firebaseConfig';
+import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
 import * as firebaseui from 'firebaseui';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import AuthWrapper from '../Components/AuthWrapper';
+import AuthWrapper from '../AuthWrapper';
 import { useNavigate } from 'react-router-dom';
 
 import { Typography } from 'antd';
@@ -17,12 +17,17 @@ const { Title } = Typography;
 function ProfileContent() {
   const [user, setUser] = useState<User | null>(null);
   const [display, setDisplay] = useState('none');
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
   const navigate = useNavigate();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setDisplay('');
+        const token = await currentUser.getIdTokenResult();
+        setIsAdmin(token.claims.admin || false);
+        console.log('is user admin : ', isAdmin);
       } else {
         setUser(null);
       }
@@ -47,6 +52,10 @@ function ProfileContent() {
 
   const handleMySendRequestsClick = () => {
     navigate('/profile/user_requests');
+  };
+
+  const handleAdminClick = () => {
+    navigate('/admin/admin_dashboard');
   };
 
   return (
@@ -98,6 +107,11 @@ function ProfileContent() {
                 <List.Item arrow={true} onClick={handleMySendRequestsClick}>
                   My Send Requests
                 </List.Item>
+                {isAdmin && (
+                  <List.Item arrow={true} onClick={handleAdminClick}>
+                    Admin window
+                  </List.Item>
+                )}
                 <List.Item
                   arrow={true}
                   onClick={() => signOut(auth)}

@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
 import { Badge, TabBar } from 'antd-mobile';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -43,7 +41,7 @@ function BottomBar() {
   };
   const firstSlashIndex: number = pathname.indexOf('/');
   const secondSlashIndex: number = pathname.indexOf('/', firstSlashIndex + 1);
-  let initalRouteScreen: string = '';
+  let initalRouteScreen = '';
   if (secondSlashIndex !== -1) {
     initalRouteScreen = pathname.slice(firstSlashIndex, secondSlashIndex);
   } else {

@@ -17,9 +17,9 @@ import { store } from '../../index';
 
 const { Title } = Typography;
 const progress = 100;
+const NEXT_SCREEN = '/';
 
-const SummaryRequest: React.FC = () => {
-  const nextScreen = '/';
+const Summary: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -33,8 +33,11 @@ const SummaryRequest: React.FC = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const objecInfo = useSelector((state: IObjectInfo) => state);
+  const objecInfo = useSelector(
+    (state: { request: IObjectInfo }) => state.request
+  );
   const [user, setUser] = useState<User | null>(null);
+  console.log('BAAAH', objecInfo);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

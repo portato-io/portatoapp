@@ -1,7 +1,23 @@
 import { AnyAction } from 'redux';
-import { IObjectInfo } from '../type';
+import { IObjectInfo } from '../../type';
 
-export function reducer(state: any, action: AnyAction): IObjectInfo {
+const initialState: IObjectInfo = {
+  name: '',
+  description: '',
+  size: 'S',
+  weight: '-5 kg',
+  price: 0,
+  pickup_adress: '',
+  delivery_adress: '',
+  dateRange: ['', ''],
+  time: '',
+  images: [],
+};
+
+export function requestReducer(
+  state: any = initialState,
+  action: AnyAction
+): IObjectInfo {
   console.log(action.type);
   switch (action.type) {
     case 'SET_OBJECT': {
