@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-function BackButton() {
+function BackButton({ scrolling = false }: any) {
   const navigate = useNavigate();
 
   const handleNextClick = () => {
@@ -13,9 +13,10 @@ function BackButton() {
       style={{
         position: 'absolute',
         bottom: '2vh',
-        //left: '5%',
+        left: scrolling ? '0vw' : '10%',
         width: '30vw',
         background: '#fff',
+        marginBottom: scrolling ? '0vh' : '10vh',
       }}
     >
       <Button

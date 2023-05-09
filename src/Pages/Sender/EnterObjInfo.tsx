@@ -8,7 +8,7 @@ import UploadImage from '../../Components/UploadImage';
 import { Typography, Form, Input, Radio, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setObject } from '../../Store/actionCreators';
+import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IObjectInfo } from '../../type';
 
 const { Title } = Typography;
@@ -17,7 +17,9 @@ const { TextArea } = Input;
 const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
-  const objecInfo = useSelector((state: IObjectInfo) => state);
+  const objecInfo = useSelector(
+    (state: { request: IObjectInfo }) => state.request
+  );
 
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
@@ -133,8 +135,8 @@ const EnterObjInfo: React.FC = () => {
           </Form.Item>
           <UploadImage />
           <Form.Item>
-            <NextButton nextScreen={NEXT_SCREEN} />
-            <BackButton />
+            <NextButton nextScreen={NEXT_SCREEN} scrolling={true} />
+            <BackButton scrolling={true} />
           </Form.Item>
         </Form>
       </div>

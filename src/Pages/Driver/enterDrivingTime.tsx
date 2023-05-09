@@ -4,12 +4,15 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import SwitchContainer from '../../Components/SwitchContainer';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
+import ProgressBar from '../../Components/ProgressBar';
 
 const { Title } = Typography;
+const PROGRESS = 50;
 
 const EnterDeliveryTime: React.FC = () => {
   return (
     <PageLayout>
+      <ProgressBar progress={PROGRESS} />
       <div
         style={{
           display: 'flex',
@@ -21,7 +24,12 @@ const EnterDeliveryTime: React.FC = () => {
       >
         <Title
           level={4}
-          style={{ position: 'absolute', top: '0vh', textAlign: 'center' }}
+          style={{
+            position: 'absolute',
+            top: '5vh',
+            textAlign: 'center',
+            marginBottom: '5vh',
+          }}
         >
           When are you driving?
         </Title>
