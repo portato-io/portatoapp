@@ -44,7 +44,6 @@ export const uploadRouteToFirebase = async (uid, state) => {
 
     // Set the request data using the generated key
     await set(newRequestRef, state);
-
   } catch (error) {
     console.error('Error creating suggestions: ', error, 'user: ', uid);
   }
@@ -82,5 +81,3 @@ export const listenForDataChanges = () => {
     }
   );
 };
-
-

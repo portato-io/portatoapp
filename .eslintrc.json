@@ -19,5 +19,8 @@
   "rules": {
     "quotes": ["error", "single", { "avoidEscape": true }]
     // Add your custom rules here
+  },
+  "globals": {
+    "console": "writable"
   }
 }
