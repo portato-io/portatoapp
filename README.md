@@ -12,7 +12,7 @@ npm start
 
 ## Deployment with Firebase
 
-Start by adding the API key to your environment f   ile. To do so, create a ´.env.local´ in the portato directory if you don't already have it.
+Start by adding the API key to your environment file. To do so, create a ´.env.local´ in the portato directory if you don't already have it.
 
 Add the following to your environment file:
 
