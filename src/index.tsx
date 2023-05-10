@@ -22,6 +22,7 @@ const initialState: IObjectInfo = {
   time: '',
   images: [],
 };
+console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 
 export const store = createStore(reducer, initialState);
 
