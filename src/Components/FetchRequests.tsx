@@ -35,7 +35,7 @@ const FetchRequests: React.FC<{ uid: string; heightPortion?: number }> = ({
   }, []);
   const containerHeight = window.innerHeight * heightPortion;
   return (
-    <div>
+    <div style={{ height: '100vh' }}>
       <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
         {requests.map((request) => (
           <div
