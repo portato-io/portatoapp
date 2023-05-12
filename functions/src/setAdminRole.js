@@ -1,4 +1,3 @@
-/* eslint-disable */
 const admin = require('firebase-admin');
 const serviceAccount = require('../portatoapp-firebase-adminsdk-80yy0-bfde2368a4.json');
 

@@ -31,10 +31,19 @@ async function createDirFirebase(name, uid) {
   );
 }
 
-export const uploadRouteToFirebase = async (uid) => {
+export const uploadRouteToFirebase = async (uid, state) => {
   try {
     createDirFirebase('route_suggestions', uid);
     createDirFirebase('route_confirmed', uid);
+
+    // Get the database instance and create a reference to the user's requests
+    const requestsRef = ref(database, `users/${uid}/routes`);
+
+    // Generate a new unique key for the request
+    const newRequestRef = push(requestsRef);
+
+    // Set the request data using the generated key
+    await set(newRequestRef, state);
   } catch (error) {
     console.error('Error creating suggestions: ', error, 'user: ', uid);
   }
@@ -72,5 +81,3 @@ export const listenForDataChanges = () => {
     }
   );
 };
-
-
