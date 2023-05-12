@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function BackButton({ scrolling = false }: any) {
   const navigate = useNavigate();
 
-  const handleNextClick = () => {
+  const handleBackClick = () => {
     navigate(-1);
   };
   return (
@@ -22,7 +22,7 @@ function BackButton({ scrolling = false }: any) {
       <Button
         type="default"
         size="large"
-        onClick={handleNextClick}
+        onClick={handleBackClick}
         style={{ width: '100%' }}
       >
         Back
