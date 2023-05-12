@@ -3,10 +3,11 @@ import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRouteInfo } from '../type';
 import { Card } from 'antd';
 
-const FetchRoutes: React.FC<{ uid: string; heightPortion?: number }> = ({
-  uid = undefined,
-  heightPortion = 0.8,
-}) => {
+const FetchRoutes: React.FC<{
+  uid: string;
+  heightPortion?: number;
+  admin?: boolean;
+}> = ({ uid = undefined, heightPortion = 0.8, admin = false }) => {
   const [routes, setRoute] = useState<IRouteInfo[]>([]);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
@@ -36,7 +37,11 @@ const FetchRoutes: React.FC<{ uid: string; heightPortion?: number }> = ({
   const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>
-      <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
+      <div
+        style={
+          admin ? {} : { height: containerHeight + 'px', overflowY: 'scroll' }
+        }
+      >
         {routes.map((route) => (
           <div
             key={route.id}
