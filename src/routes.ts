@@ -6,7 +6,7 @@ import { FC } from 'react';
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
-const Profile = lazy(() => import('./Pages/Profile'));
+const Profile = lazy(() => import('./Pages/Profile/Profile'));
 const EnterObjInfo = lazy(() => import('./Pages/Sender/EnterObjInfo'));
 const Deliver = lazy(() => import('./Pages/Driver/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
@@ -15,7 +15,6 @@ const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
 const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
 const EnterPrice = lazy(() => import('./Pages/Sender/EnterPrice'));
 const SummaryRequest = lazy(() => import('./Pages/Sender/Summary'));
-const SummaryRoute = lazy(() => import('./Pages/Routes/Summary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
 const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));

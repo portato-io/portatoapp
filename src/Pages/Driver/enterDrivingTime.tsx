@@ -8,6 +8,7 @@ import ProgressBar from '../../Components/ProgressBar';
 
 const { Title } = Typography;
 const PROGRESS = 50;
+const NEXT_SCREEN = '/deliver/routeSummary';
 
 const EnterDeliveryTime: React.FC = () => {
   return (
@@ -34,7 +35,7 @@ const EnterDeliveryTime: React.FC = () => {
           When are you driving?
         </Title>
         <SwitchContainer />
-        <NextButton />
+        <NextButton nextScreen={NEXT_SCREEN} />
         <BackButton />
       </div>
     </PageLayout>
