@@ -28,6 +28,37 @@
   color: #61dafb;
 }
 
+.custom-radio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.custom-radio input[type='radio'] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.radio-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Adjust the size of the circle */
+  height: 40px; /* Adjust the size of the circle */
+  border-radius: 50%;
+  background-color: #e8e8e8; /* Change the background color of the circle */
+  margin-bottom: 4px; /* Adjust the spacing between the circle and label */
+}
+
+.radio-icon svg {
+  display: none;
+}
+
+.radio-label {
+  font-size: 14px; /* Adjust the font size of the label */
+}
+
 .main-layout {
   height: '100vh';
   background-color: #fff;

@@ -1,12 +1,49 @@
 import React from 'react';
 import { Typography } from 'antd';
 import PageLayout from '../Layouts/PageLayoutTest';
+import NextButton from '../../Components/Buttons/NextButton';
+import BackButton from '../../Components/Buttons/BackButton';
+import ProgressBar from '../../Components/ProgressBar';
+import { Space, Radio, Selector } from 'antd-mobile';
+import CustomRadio from '../../Components/Radio/customRadio';
+import { setCap } from '../../Store/actions/routeActionCreators';
+import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
+const NEXT_SCREEN = '/deliver/routeSummary';
+const PROGRESS = 75;
+const options = [
+  {
+    label: 'S',
+    description: 'Fits in a bag',
+    value: 's',
+  },
+  {
+    label: 'M',
+    description: 'Fits in a little car',
+    value: 'm',
+  },
+  {
+    label: 'L',
+    description: 'Fits in a big car',
+    value: 'l',
+  },
+  {
+    label: 'XL',
+    description: 'Fits in a van',
+    value: 'xl',
+  },
+];
 
 const EnterDeliveryCapacity: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const handleCapChange = (e: any) => {
+    dispatch(setCap(e));
+  };
   return (
     <PageLayout>
+      <ProgressBar progress={PROGRESS} />
       <div
         style={{
           display: 'flex',
@@ -16,10 +53,33 @@ const EnterDeliveryCapacity: React.FC = () => {
           height: '100vh',
         }}
       >
-        <Title level={2} style={{ textAlign: 'center' }}>
-          Cap
+        <Title
+          level={4}
+          style={{
+            position: 'absolute',
+            top: '5vh',
+            textAlign: 'center',
+            marginBottom: '5vh',
+          }}
+        >
+          What is your delivery capacity?
         </Title>
+        <div style={{ display: 'flex', alignItems: 'center', height: '100vh' }}>
+          <Selector
+            columns={1}
+            options={options}
+            onChange={handleCapChange}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          />
+        </div>
       </div>
+      <NextButton nextScreen={NEXT_SCREEN} />
+      <BackButton />
     </PageLayout>
   );
 };

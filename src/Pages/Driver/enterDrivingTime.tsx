@@ -5,9 +5,13 @@ import SwitchContainer from '../../Components/SwitchContainer';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
+import { Tabs, Calendar, Selector } from 'antd-mobile';
+import SingleTripContent from '../../Components/PageComponents/SingleTripContent';
+import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripContent';
 
 const { Title } = Typography;
 const PROGRESS = 50;
+const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
 const EnterDeliveryTime: React.FC = () => {
   return (
@@ -19,7 +23,7 @@ const EnterDeliveryTime: React.FC = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100vh',
+          height: '15vh',
         }}
       >
         <Title
@@ -33,10 +37,20 @@ const EnterDeliveryTime: React.FC = () => {
         >
           When are you driving?
         </Title>
-        <SwitchContainer />
-        <NextButton />
-        <BackButton />
+        {/* <SwitchContainer /> */}
       </div>
+      <div>
+        <Tabs>
+          <Tabs.Tab title="Single trip" key="single">
+            <SingleTripContent />
+          </Tabs.Tab>
+          <Tabs.Tab title="Recurrent" key="recur">
+            <RecurrentTripContent />
+          </Tabs.Tab>
+        </Tabs>
+      </div>
+      <NextButton nextScreen={NEXT_SCREEN} />
+      <BackButton />
     </PageLayout>
   );
 };
