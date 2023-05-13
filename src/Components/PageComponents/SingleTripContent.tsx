@@ -35,7 +35,16 @@ function SingleTripContent() {
       <Title level={5} style={{}}>
         Time
       </Title>
-      <Selector options={TIME} multiple={true} onChange={handleTimeChange} />
+      <Selector
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        options={TIME}
+        multiple={true}
+        onChange={handleTimeChange}
+      />
     </div>
   );
 }
