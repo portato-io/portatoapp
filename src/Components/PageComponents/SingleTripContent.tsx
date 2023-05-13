@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { setTime, setType } from '../../Store/actions/routeActionCreators';
 
 const { Title } = Typography;
-const TYPE = 'single trip';
+const TYPE = 'Single Trip';
 
 function SingleTripContent() {
   const dispatch = useDispatch();

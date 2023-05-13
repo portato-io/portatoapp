@@ -26,13 +26,6 @@ const Summary: React.FC = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
   const objecInfo = useSelector(
     (state: { request: IObjectInfo }) => state.request
   );
@@ -86,7 +79,7 @@ const Summary: React.FC = () => {
           overflowY: 'scroll',
         }}
       >
-        <Modal open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Modal open={isModalVisible} footer={null}>
           <div>
             <FirebaseAuth />
           </div>

@@ -1,44 +1,67 @@
 export const DAYS = [
   {
     label: 'Mon',
-    value: 'mon',
+    value: 'Mon ',
   },
   {
     label: 'Tue',
-    value: 'tue',
+    value: 'Tue ',
   },
   {
     label: 'Wed',
-    value: 'wed',
+    value: 'Wed ',
   },
   {
     label: 'Thu',
-    value: 'thu',
+    value: 'Thu ',
   },
   {
     label: 'Fri',
-    value: 'fri',
+    value: 'Fri ',
   },
   {
     label: 'Sa',
-    value: 'sa',
+    value: 'Sa ',
   },
   {
     label: 'Sun',
-    value: 'sun',
+    value: 'Sun ',
   },
 ];
 export const TIME = [
   {
     label: 'Mornings',
-    value: 'mor',
+    value: 'Mornings ',
   },
   {
     label: 'Mid days',
-    value: 'mid',
+    value: 'Mid-days ',
   },
   {
     label: 'Evenings',
-    value: 'eve',
+    value: 'Evenings ',
+  },
+];
+
+export const CAPACITY_OPTIONS = [
+  {
+    label: 'S',
+    description: 'Fits in a bag',
+    value: 'S',
+  },
+  {
+    label: 'M',
+    description: 'Fits in a little car',
+    value: 'M',
+  },
+  {
+    label: 'L',
+    description: 'Fits in a big car',
+    value: 'L',
+  },
+  {
+    label: 'XL',
+    description: 'Fits in a van',
+    value: 'XL',
   },
 ];

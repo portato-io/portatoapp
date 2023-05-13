@@ -10,7 +10,7 @@ import {
 } from '../../Store/actions/routeActionCreators';
 
 const { Title } = Typography;
-const TYPE = 'recurrent';
+const TYPE = 'Recurrent';
 
 function RecurrentTripContent() {
   const dispatch = useDispatch();

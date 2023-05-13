@@ -11,6 +11,7 @@ import BackArrow from '../../Components/Buttons/BackArrow';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
+const BUTTON_TEXT = 'Create new request';
 
 const CreateSendRequest: React.FC = () => {
   const auth = getAuth();
@@ -35,7 +36,10 @@ const CreateSendRequest: React.FC = () => {
         >
           Current send
         </Title>
-        <ButtonToCreateNewReqRoutes nextScreen={NEXT_SCREEN} />
+        <ButtonToCreateNewReqRoutes
+          nextScreen={NEXT_SCREEN}
+          text={BUTTON_TEXT}
+        />
       </AutoCenter>
       <h1
         style={{

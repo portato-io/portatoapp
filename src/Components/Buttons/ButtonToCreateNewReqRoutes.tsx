@@ -2,7 +2,10 @@ import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 
-export function ButtonToCreateNewReqRoutes({ nextScreen = '/' }: any) {
+export function ButtonToCreateNewReqRoutes({
+  nextScreen = '/',
+  text = '',
+}: any) {
   const navigate = useNavigate();
 
   const handleSendClick = () => {
@@ -45,7 +48,7 @@ export function ButtonToCreateNewReqRoutes({ nextScreen = '/' }: any) {
             }}
           />
         </div>
-        <span style={{ fontSize: '12px', fontWeight: 'bold' }}>Add Item</span>
+        <span style={{ fontSize: '12px', fontWeight: 'bold' }}>{text}</span>
       </div>
     </Button>
   );

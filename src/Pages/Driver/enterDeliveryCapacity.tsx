@@ -4,36 +4,14 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Space, Radio, Selector } from 'antd-mobile';
-import CustomRadio from '../../Components/Radio/customRadio';
+import { Selector } from 'antd-mobile';
 import { setCap } from '../../Store/actions/routeActionCreators';
 import { useDispatch } from 'react-redux';
+import { CAPACITY_OPTIONS } from '../../constant';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
 const PROGRESS = 75;
-const options = [
-  {
-    label: 'S',
-    description: 'Fits in a bag',
-    value: 's',
-  },
-  {
-    label: 'M',
-    description: 'Fits in a little car',
-    value: 'm',
-  },
-  {
-    label: 'L',
-    description: 'Fits in a big car',
-    value: 'l',
-  },
-  {
-    label: 'XL',
-    description: 'Fits in a van',
-    value: 'xl',
-  },
-];
 
 const EnterDeliveryCapacity: React.FC = () => {
   const dispatch = useDispatch();
@@ -67,7 +45,7 @@ const EnterDeliveryCapacity: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', height: '100vh' }}>
           <Selector
             columns={1}
-            options={options}
+            options={CAPACITY_OPTIONS}
             onChange={handleCapChange}
             style={{
               display: 'flex',
