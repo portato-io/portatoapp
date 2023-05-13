@@ -7,7 +7,7 @@ import BackButton from '../../Components/Buttons/BackButton';
 import SignInButton from '../../Components/Buttons/SignInButton';
 
 import { useSelector } from 'react-redux';
-import { ObjectInfoState, IObjectInfo } from '../../type';
+import { IObjectInfo } from '../../type';
 
 import { auth } from '../../firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
@@ -62,7 +62,7 @@ const Summary: React.FC = () => {
       const uid = auth.currentUser?.uid; // Add the optional chaining operator here
       if (uid) {
         const state = store.getState();
-        uploadReduxStoreToFirebase(uid, state);
+        uploadReduxStoreToFirebase(uid, state.request);
       } else {
         console.log('User UID not found.');
       }

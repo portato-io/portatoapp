@@ -7,6 +7,7 @@ import FetchRequests from '../../Components/FetchRequests';
 import { PlusOutlined } from '@ant-design/icons';
 import { getAuth } from 'firebase/auth';
 import { ButtonToCreateNewReqRoutes } from '../../Components/Buttons/ButtonToCreateNewReqRoutes';
+import BackArrow from '../../Components/Buttons/BackArrow';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
@@ -21,6 +22,7 @@ const CreateSendRequest: React.FC = () => {
 
   return (
     <PageLayout>
+      <BackArrow />
       <AutoCenter>
         <Title
           level={4}

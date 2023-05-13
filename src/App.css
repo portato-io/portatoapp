@@ -58,6 +58,15 @@
 .radio-label {
   font-size: 14px; /* Adjust the font size of the label */
 }
+/* .custom-tab-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10vh; 
+  background-color: #ffffff;
+  border-top: solid;
+  border-top-color: #e8e9f1;
+} */
 
 .main-layout {
   height: '100vh';

@@ -4,6 +4,8 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import { database } from '../../firebaseConfig';
 import { ref, get } from 'firebase/database';
 
+const ADMIN = true;
+
 const AllRequests: React.FC = () => {
   const [userIds, setUserIds] = useState<string[]>([]);
 
@@ -25,12 +27,12 @@ const AllRequests: React.FC = () => {
   useEffect(() => {
     fetchUserIds();
   }, []);
-
+  const containerHeight = window.innerHeight * 0.8;
   return (
     <PageLayout>
-      <div>
+      <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
         {userIds.map((uid) => (
-          <FetchRequests key={uid} uid={uid} />
+          <FetchRequests key={uid} uid={uid} admin={ADMIN} />
         ))}
       </div>
     </PageLayout>

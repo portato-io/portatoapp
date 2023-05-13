@@ -58,6 +58,7 @@ function BottomBar() {
         borderTop: 'solid',
         borderTopColor: '#E8E9F1',
       }}
+      className="custom-tab-bar"
     >
       {tabs.map((item) => (
         <TabBar.Item

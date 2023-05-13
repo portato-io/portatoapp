@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
-import { IObjectInfo } from '../type';
+import { IRouteInfo } from '../type';
 import { Card } from 'antd';
 
-const FetchRequests: React.FC<{
+const FetchRoutes: React.FC<{
   uid: string;
   heightPortion?: number;
   admin?: boolean;
 }> = ({ uid = undefined, heightPortion = 0.8, admin = false }) => {
-  const [requests, setRequest] = useState<IObjectInfo[]>([]);
+  const [routes, setRoute] = useState<IRouteInfo[]>([]);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
@@ -20,19 +20,19 @@ const FetchRequests: React.FC<{
     });
 
     // TODO: Handle uid undefined case
-    const data = fetchDataOnce(uid, 'requests');
+    const data = fetchDataOnce(uid, 'routes');
     if (data) {
       user_requests = data.then((storesArray) => {
         return storesArray;
       });
     }
 
-    const getUserRequests = async () => {
+    const getUserRoutes = async () => {
       const a = await user_requests;
-      setRequest(Object.values(a));
+      setRoute(Object.values(a));
     };
 
-    getUserRequests();
+    getUserRoutes();
   }, []);
   const containerHeight = window.innerHeight * heightPortion;
   return (
@@ -42,9 +42,9 @@ const FetchRequests: React.FC<{
           admin ? {} : { height: containerHeight + 'px', overflowY: 'scroll' }
         }
       >
-        {requests.map((request) => (
+        {routes.map((route) => (
           <div
-            key={request.name}
+            key={route.id}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -52,11 +52,8 @@ const FetchRequests: React.FC<{
               alignItems: 'center',
             }}
           >
-            <Card
-              style={{ marginTop: '5vh', width: '80%' }}
-              title={request.name}
-            >
-              {request.weight}/{request.size}
+            <Card style={{ marginTop: '5vh', width: '80%' }} title={route.id}>
+              {route.departure_adress}/{route.destination_adress}
             </Card>
           </div>
         ))}
@@ -65,4 +62,4 @@ const FetchRequests: React.FC<{
   );
 };
 
-export default FetchRequests;
+export default FetchRoutes;
