@@ -29,7 +29,10 @@ const initialStateRoute: IRouteInfo = {
   departure_adress: '',
   destination_adress: '',
   acceptable_detour: 0,
-  time: '',
+  time: [''],
+  timeRange: '',
+  type: '',
+  days: '',
   delivery_capacity: '',
 };
 

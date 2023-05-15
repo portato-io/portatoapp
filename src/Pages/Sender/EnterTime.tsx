@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Typography, Form, DatePicker, Radio, Checkbox, Calendar } from 'antd';
-import type { CalendarMode } from 'antd/es/calendar/generateCalendar';
-import type { Dayjs } from 'dayjs';
-import { IObjectInfo, ObjectInfoState } from '../../type';
-import { useDispatch, useSelector } from 'react-redux';
+import { Typography, Form, DatePicker, Checkbox } from 'antd';
+import { useDispatch } from 'react-redux';
 import {
   setObjectDateRange,
   setObjectTime,
 } from '../../Store/actions/requestActionCreators';
-import { CheckboxValueType } from 'antd/es/checkbox/Group';
 
 //import DatePicker from "react-datepicker"
 
