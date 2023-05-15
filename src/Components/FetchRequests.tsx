@@ -4,10 +4,10 @@ import { IObjectInfo } from '../type';
 import { Card } from 'antd';
 
 const FetchRequests: React.FC<{
-  uid: string;
+  uid?: string; // uid is now optional
   heightPortion?: number;
   admin?: boolean;
-}> = ({ uid = undefined, heightPortion = 0.8, admin = false }) => {
+}> = ({ uid, heightPortion = 0.8, admin = false }) => {
   const [requests, setRequest] = useState<IObjectInfo[]>([]);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
@@ -15,25 +15,18 @@ const FetchRequests: React.FC<{
   // then we use await to store the values in state
 
   useEffect(() => {
-    let user_requests = new Promise<any>((resolve, reject) => {
-      // Do nothing
-    });
-
-    // TODO: Handle uid undefined case
-    const data = fetchDataOnce(uid, 'requests');
-    if (data) {
-      user_requests = data.then((storesArray) => {
-        return storesArray;
-      });
-    }
-
-    const getUserRequests = async () => {
-      const a = await user_requests;
-      setRequest(Object.values(a));
+    const fetchRequests = async () => {
+      if (uid) {
+        // only fetch if uid is not undefined
+        const data = await fetchDataOnce(uid, 'requests');
+        if (data) {
+          setRequest(Object.values(data));
+        }
+      }
     };
+    fetchRequests();
+  }, [uid]); // add uid as a dependency to the hook
 
-    getUserRequests();
-  }, []);
   const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>

@@ -16,7 +16,7 @@ const BUTTON_TEXT = 'Create new request';
 const CreateSendRequest: React.FC = () => {
   const auth = getAuth();
   const currentUser = auth.currentUser;
-  let uid = 'undefined';
+  let uid;
   if (currentUser) {
     uid = currentUser.uid;
   }
