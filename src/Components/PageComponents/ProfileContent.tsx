@@ -92,9 +92,16 @@ function ProfileContent() {
               <UserOutlined style={{ fontSize: '48px' }} />
             </div>
           </div>
-          <div style={{ backgroundColor: '#2897FF', flex: 6 }}>
+          <div
+            style={{
+              backgroundColor: '#2897FF',
+              flex: 6,
+              height: '80vh',
+              overflowY: 'auto',
+            }}
+          >
             <Card style={{ borderRadius: '5%', height: '100%' }}>
-              <List mode="card" style={{ marginTop: '5vh' }}>
+              <List mode="card" style={{ marginTop: '1vh' }}>
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   My Account
                 </List.Item>

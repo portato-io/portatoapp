@@ -18,3 +18,31 @@ export const setDetour = (detour: number): AnyAction => ({
     detour,
   },
 });
+
+export const setTime = (time: string): AnyAction => ({
+  type: actionTypes.SET_TIME,
+  payload: {
+    time,
+  },
+});
+
+export const setDays = (days: string): AnyAction => ({
+  type: actionTypes.SET_DAYS,
+  payload: {
+    days,
+  },
+});
+
+export const setType = (type: string): AnyAction => ({
+  type: actionTypes.SET_TYPE,
+  payload: {
+    type,
+  },
+});
+
+export const setCap = (capacity: string): AnyAction => ({
+  type: actionTypes.SET_CAP,
+  payload: {
+    capacity,
+  },
+});

@@ -34,7 +34,10 @@ export interface IRouteInfo {
   departure_adress: string;
   destination_adress: string;
   acceptable_detour: number;
-  time: string;
+  time: string[];
+  type: string; // recurrent/single
+  days: string;
+  timeRange: string;
   delivery_capacity: string;
 }
 

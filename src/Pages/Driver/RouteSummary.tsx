@@ -11,24 +11,20 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 import FirebaseAuth from '../../Components/FirebaseAuth';
 import { uploadRouteToFirebase } from '../../linksStoreToFirebase';
 import { store } from '../../index';
+import { IRouteInfo } from '../../type';
+import { useSelector } from 'react-redux';
 
-const progress = 100;
 const { Title } = Typography;
-
+const PROGRESS = 100;
 const RouteSummary: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
+  console.log(Object.values(routeInfo.time)[0]);
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -63,31 +59,76 @@ const RouteSummary: React.FC = () => {
       console.log('No user is signed in.');
     }
   };
-
+  const containerHeight = window.innerHeight * 0.7;
   return (
     <PageLayout>
-      <ProgressBar progress={progress} />
-      <Modal open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <div>
-          <FirebaseAuth />
-        </div>
-      </Modal>
-      <Card
-        bordered={true}
+      <ProgressBar progress={PROGRESS} />
+      <div
         style={{
-          marginLeft: '10%',
-          width: '80%',
-          marginTop: '20%',
-          backgroundColor: '#FFF4E4',
+          marginTop: '8vh',
+          height: containerHeight + 'px',
+          overflowY: 'auto',
         }}
       >
-        <Title level={2}> Summary </Title>
-      </Card>
-      {user ? (
-        <ConfirmButton onClick={handleConfirm} />
-      ) : (
-        <SignInButton onClick={showModal} />
-      )}
+        <Modal open={isModalVisible} footer={null}>
+          <div>
+            <FirebaseAuth />
+          </div>
+        </Modal>
+        <div
+          style={{
+            marginLeft: '10vw',
+            width: '80vw',
+            marginTop: '10vh',
+            backgroundColor: '#FFF4E4',
+          }}
+        >
+          <Card style={{ backgroundColor: '#FFF4E4' }}>
+            <Title level={2}> Summary </Title>
+
+            <div>
+              <Title level={4}> Departure address</Title>
+              <Typography> {routeInfo.departure_adress}</Typography>
+            </div>
+            <div>
+              <Title level={4}> Destination address</Title>
+              <Typography> {routeInfo.destination_adress} </Typography>
+            </div>
+            <div>
+              <Title level={4}> Acceptable detour</Title>
+              <Typography> {routeInfo.acceptable_detour} Km </Typography>
+            </div>
+            <div>
+              <Title level={4}>Type</Title>
+              <Typography> {routeInfo.type} </Typography>
+            </div>
+            <div>
+              <Title level={4}> Time</Title>
+              <Typography> {Object.values(routeInfo.time)[0]} </Typography>
+            </div>
+            {routeInfo.type == 'Recurrent' ? (
+              <div>
+                <Title level={4}> Days</Title>
+                <Typography> {Object.values(routeInfo.days)} </Typography>
+              </div>
+            ) : (
+              <div>
+                <Title level={4}> Time Range</Title>
+                <Typography> COMING </Typography>
+              </div>
+            )}
+            <div>
+              <Title level={4}> Capacity</Title>
+              <Typography> {routeInfo.delivery_capacity} </Typography>
+            </div>
+          </Card>
+        </div>
+        {user ? (
+          <ConfirmButton onClick={handleConfirm} />
+        ) : (
+          <SignInButton onClick={showModal} />
+        )}
+      </div>
       <BackButton />
     </PageLayout>
   );

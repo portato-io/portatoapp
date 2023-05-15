@@ -8,7 +8,7 @@ const Deliver: React.FC = () => {
   return (
     <PageLayout>
       <Tabs style={{}}>
-        <Tabs.Tab title="Deals" key="deaks">
+        <Tabs.Tab title="Deals" key="deals">
           <AutoCenter>
             <DealsContent />
           </AutoCenter>

@@ -48,9 +48,9 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts start",
+    "build": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts build",
+    "test": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
@@ -77,6 +77,7 @@
     "@types/react-redux": "^7.1.25",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
+    "git-revision-webpack-plugin": "^5.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "pret": "^0.0.2",

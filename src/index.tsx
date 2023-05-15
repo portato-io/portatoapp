@@ -22,13 +22,17 @@ const initialStateRequest: IObjectInfo = {
   time: '',
   images: [],
 };
+console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 
 const initialStateRoute: IRouteInfo = {
   id: 0,
   departure_adress: '',
   destination_adress: '',
   acceptable_detour: 0,
-  time: '',
+  time: [''],
+  timeRange: '',
+  type: '',
+  days: '',
   delivery_capacity: '',
 };
 
