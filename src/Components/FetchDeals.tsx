@@ -21,9 +21,15 @@ const FetchDeals: React.FC<{
       return;
     }
 
-    const fetchData = fetchDataOnce(uid, 'deals').then((storesArray) => {
-      // Check if storesArray is an array before returning it
-      return Array.isArray(storesArray) ? storesArray : [];
+    const fetchData = fetchDataOnce(uid, 'deals').then((storesObject) => {
+      // Check if storesObject is an object before returning it
+      if (storesObject && typeof storesObject === 'object') {
+        const storesArray = Object.values(storesObject) as IDealInfo[]; // Type assertion here
+        return storesArray;
+      } else {
+        console.log('Data is not an object:', storesObject);
+        return [];
+      }
     });
 
     const getUserDeals = async () => {

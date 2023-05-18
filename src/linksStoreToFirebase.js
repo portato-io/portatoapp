@@ -5,9 +5,7 @@ import { setRouteId } from './Store/actions/routeActionCreators';
 import { setDealId } from './Store/actions/dealActionCreators';
 import { useDispatch } from 'react-redux';
 
-const dispatch = useDispatch();
-
-export const uploadRequestToFirebase = async (uid, state) => {
+export const uploadRequestToFirebase = async (uid, state, dispatch) => {
   try {
     // Get the database instance and create a reference to the user's requests
     const requestsRef = ref(database, `users/${uid}/requests`);
@@ -40,7 +38,7 @@ async function createDirFirebase(name, uid) {
   );
 }
 
-export const uploadRouteToFirebase = async (uid, state) => {
+export const uploadRouteToFirebase = async (uid, state, dispatch) => {
   try {
     createDirFirebase('route_suggestions', uid);
     createDirFirebase('route_confirmed', uid);
@@ -76,7 +74,7 @@ export const fetchDataOnce = async (uid, directory) => {
   }
 };
 
-export const uploadDealToFirebase = async (uid, state) => {
+export const uploadDealToFirebase = async (uid, state, dispatch) => {
   try {
     // Get the database instance and create a reference to the user's requests
     const requestsRef = ref(database, `users/${uid}/deals`);

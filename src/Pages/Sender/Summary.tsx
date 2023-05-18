@@ -12,6 +12,7 @@ import { IObjectInfo } from '../../type';
 import { useAuth } from '../../Components/AuthProvider';
 import { uploadRequestToFirebase } from '../../linksStoreToFirebase';
 import { store } from '../../index';
+import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
 const progress = 100;
@@ -19,6 +20,7 @@ const NEXT_SCREEN = '/';
 
 const Summary: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -33,7 +35,7 @@ const Summary: React.FC = () => {
   const handleConfirm = () => {
     if (uid) {
       const state = store.getState();
-      uploadRequestToFirebase(uid, state.request);
+      uploadRequestToFirebase(uid, state.request, dispatch);
     } else {
       console.log('User UID not found.');
     }
