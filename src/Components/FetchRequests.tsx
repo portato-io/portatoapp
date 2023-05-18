@@ -15,17 +15,27 @@ const FetchRequests: React.FC<{
   // then we use await to store the values in state
 
   useEffect(() => {
-    const fetchRequests = async () => {
-      if (uid) {
-        // only fetch if uid is not undefined
-        const data = await fetchDataOnce(uid, 'requests');
-        if (data) {
-          setRequest(Object.values(data));
-        }
+    // TODO: Handle uid undefined case
+    if (!uid) {
+      console.log('uid is undefined');
+      return;
+    }
+
+    const fetchData = fetchDataOnce(uid, 'requests').then((storesArray) => {
+      // Check if storesArray is an array before returning it
+      return Array.isArray(storesArray) ? storesArray : [];
+    });
+
+    const getUserRequests = async () => {
+      try {
+        setRequest(await fetchData);
+      } catch (error) {
+        console.log('Error fetching data: ', error);
       }
     };
-    fetchRequests();
-  }, [uid]); // add uid as a dependency to the hook
+
+    getUserRequests();
+  }, [uid]);
 
   const containerHeight = window.innerHeight * heightPortion;
   return (

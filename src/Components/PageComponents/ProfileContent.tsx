@@ -5,9 +5,7 @@ import { UserOutlined } from '@ant-design/icons';
 import 'firebaseui/dist/firebaseui.css';
 import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
-import * as firebaseui from 'firebaseui';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import AuthWrapper from '../AuthWrapper';
 import { useNavigate } from 'react-router-dom';
 
 import { Typography } from 'antd';

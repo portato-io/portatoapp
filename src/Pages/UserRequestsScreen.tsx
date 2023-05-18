@@ -1,16 +1,10 @@
 import React from 'react';
 import FetchRequests from '../Components/FetchRequests'; // Import UserRequests from the correct path
-import PageLayout from './Layouts/PageLayoutTest';
-import { getAuth } from 'firebase/auth';
+import { useAuth } from '../Components/AuthProvider';
 import ProfilePageLayout from './Layouts/ProfilePagesLayout';
 
 const UserRequestsScreen: React.FC = () => {
-  const auth = getAuth();
-  const currentUser = auth.currentUser;
-  let uid = 'undefined';
-  if (currentUser) {
-    uid = currentUser.uid;
-  }
+  const { uid } = useAuth();
 
   return (
     <ProfilePageLayout>

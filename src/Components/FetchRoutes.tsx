@@ -15,25 +15,28 @@ const FetchRoutes: React.FC<{
   // then we use await to store the values in state
 
   useEffect(() => {
-    let user_requests = new Promise<any>((resolve, reject) => {
-      // Do nothing
-    });
-
     // TODO: Handle uid undefined case
-    const data = fetchDataOnce(uid, 'routes');
-    if (data) {
-      user_requests = data.then((storesArray) => {
-        return storesArray;
-      });
+    if (!uid) {
+      console.log('uid is undefined');
+      return;
     }
 
+    const fetchData = fetchDataOnce(uid, 'routes').then((storesArray) => {
+      // Check if storesArray is an array before returning it
+      return Array.isArray(storesArray) ? storesArray : [];
+    });
+
     const getUserRoutes = async () => {
-      const a = await user_requests;
-      setRoute(Object.values(a));
+      try {
+        setRoute(await fetchData);
+      } catch (error) {
+        console.log('Error fetching data: ', error);
+      }
     };
 
     getUserRoutes();
-  }, []);
+  }, [uid]);
+
   const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>

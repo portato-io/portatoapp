@@ -5,13 +5,11 @@ import ProgressBar from '../../Components/ProgressBar';
 import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import SignInButton from '../../Components/Buttons/SignInButton';
+import FirebaseAuth from '../../Components/FirebaseAuth';
 
 import { useSelector } from 'react-redux';
 import { IObjectInfo } from '../../type';
-
-import { auth } from '../../firebaseConfig';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import FirebaseAuth from '../../Components/FirebaseAuth';
+import { useAuth } from '../../Components/AuthProvider';
 import { uploadReduxStoreToFirebase } from '../../linksStoreToFirebase';
 import { store } from '../../index';
 
@@ -29,39 +27,15 @@ const Summary: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IObjectInfo }) => state.request
   );
-  const [user, setUser] = useState<User | null>(null);
-  console.log('BAAAH', objecInfo);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        console.log('User signed in:', currentUser); // Added console log
-        setUser(currentUser);
-      } else {
-        console.log('User signed out'); // Added console log
-        setUser(null);
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const { uid } = useAuth();
 
   const handleConfirm = () => {
-    console.log('In handle confirm.');
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-      const uid = auth.currentUser?.uid; // Add the optional chaining operator here
-      if (uid) {
-        const state = store.getState();
-        uploadReduxStoreToFirebase(uid, state.request);
-      } else {
-        console.log('User UID not found.');
-      }
+    if (uid) {
+      const state = store.getState();
+      uploadReduxStoreToFirebase(uid, state.request);
     } else {
-      // Handle the case when no user is signed in
-      console.log('No user is signed in.');
+      console.log('User UID not found.');
     }
   };
   const [visible, setVisible] = useState(false);
@@ -143,7 +117,7 @@ const Summary: React.FC = () => {
             </div>
           </div>
         </Card>
-        {user ? (
+        {uid ? (
           <ConfirmButton onClick={handleConfirm} />
         ) : (
           <SignInButton onClick={showModal} />

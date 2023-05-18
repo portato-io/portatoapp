@@ -3,7 +3,6 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import { Typography } from 'antd';
 import { AutoCenter } from 'antd-mobile';
 import FetchRequests from '../../Components/FetchRequests';
-import { getAuth } from 'firebase/auth';
 import { ButtonToCreateNewReqRoutes } from '../../Components/Buttons/ButtonToCreateNewReqRoutes';
 import BackArrow from '../../Components/Buttons/BackArrow';
 import { useAuth } from '../../Components/AuthProvider';
@@ -35,18 +34,22 @@ const CreateSendRequest: React.FC = () => {
           text={BUTTON_TEXT}
         />
       </AutoCenter>
-      <h1
-        style={{
-          marginTop: '10vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        Your Current Requests
-      </h1>
-      <FetchRequests uid={uid} heightPortion={0.5} />
+      {uid !== 'undefined' ? (
+        <>
+          <h1
+            style={{
+              marginTop: '10vh',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Your Current Requests
+          </h1>
+          <FetchRequests uid={uid} heightPortion={0.5} />
+        </>
+      ) : null}
     </PageLayout>
   );
 };
