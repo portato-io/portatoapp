@@ -57,7 +57,7 @@ export const fetchDataOnce = async (uid, directory) => {
       console.log('Data:', snapshot.val());
       return snapshot.val();
     } else {
-      console.log('No data found.');
+      console.log('No data found.', userRequestsRef);
     }
   } catch (error) {
     console.error('Error fetching data from Firebase:', error);
@@ -73,7 +73,7 @@ export const listenForDataChanges = () => {
       if (snapshot.exists()) {
         console.log('Data:', snapshot.val());
       } else {
-        console.log('No data found.');
+        console.log('No data found.', userRequestsRef);
       }
     },
     (error) => {
