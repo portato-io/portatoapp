@@ -28,6 +28,7 @@ const EnterDeliveryCapacity = lazy(
   () => import('./Pages/Driver/enterDeliveryCapacity')
 );
 const RouteSummary = lazy(() => import('./Pages/Driver/RouteSummary'));
+const DealSuggester = lazy(() => import('./Pages/Admin/DealSuggester'));
 
 // interface
 interface Route {
@@ -178,5 +179,12 @@ export const routes: Array<Route> = [
     path: '/admin/all_routes',
     enabled: true,
     component: AllRoutes,
+  },
+  {
+    key: 'deal-suggester',
+    title: 'DealSuggester',
+    path: '/admin/deal_suggester',
+    enabled: true,
+    component: DealSuggester,
   },
 ];

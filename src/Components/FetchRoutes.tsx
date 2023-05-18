@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRouteInfo } from '../type';
 import { Card } from 'antd';
+import { useNavigate } from 'react-router';
 
 const FetchRoutes: React.FC<{
   uid: string;
@@ -9,6 +10,7 @@ const FetchRoutes: React.FC<{
   admin?: boolean;
 }> = ({ uid = undefined, heightPortion = 0.8, admin = false }) => {
   const [routes, setRoute] = useState<IRouteInfo[]>([]);
+  const navigate = useNavigate();
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
@@ -43,6 +45,12 @@ const FetchRoutes: React.FC<{
     getUserRoutes();
   }, [uid]);
 
+  const match = (routeId: string) => {
+    console.log('Matching route with id: ' + routeId);
+    navigate('/admin/deal_suggester', { state: { routeId: routeId } });
+    // Insert the logic for matching here
+  };
+
   const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>
@@ -63,6 +71,7 @@ const FetchRoutes: React.FC<{
           >
             <Card style={{ marginTop: '5vh', width: '80%' }} title={route.id}>
               {route.departure_adress}/{route.destination_adress}
+              {admin && <button onClick={() => match(route.id)}>Match</button>}
             </Card>
           </div>
         ))}
