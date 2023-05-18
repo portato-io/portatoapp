@@ -1,4 +1,5 @@
 export interface IObjectInfo {
+  id: number;
   name: string;
   description: string;
   size: string;
@@ -44,4 +45,16 @@ export interface IRouteInfo {
 export type RouteInfoAction = {
   type: string;
   route: IRouteInfo;
+};
+
+export interface IDealInfo {
+  id: number;
+  request_id: number;
+  route_id: number;
+  status: string;
+}
+
+export type DealInfoAction = {
+  type: string;
+  route: IDealInfo;
 };

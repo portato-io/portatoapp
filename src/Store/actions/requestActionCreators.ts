@@ -23,6 +23,11 @@ export const setObjectPrice = (price: number): AnyAction => ({
   payload: price,
 });
 
+export const setObjectId = (id: number): AnyAction => ({
+  type: actionTypes.SET_ID,
+  payload: id,
+});
+
 export const setObjectDateRange = (dateRange: string[]): AnyAction => ({
   type: actionTypes.SET_DATE_RANGE,
   payload: dateRange,

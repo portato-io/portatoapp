@@ -8,8 +8,6 @@ import { AuthProvider } from './Components/AuthProvider';
 // import routes
 import { routes as appRoutes } from './routes';
 
-const { Header } = Layout;
-
 const App: React.FC = () => {
   const [openMenu, setOpenMenu] = useState(false);
 

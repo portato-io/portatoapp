@@ -11,6 +11,7 @@ import allReducers from './Store/reducers';
 import { IObjectInfo, IRouteInfo } from './type';
 
 const initialStateRequest: IObjectInfo = {
+  id: 0,
   name: '',
   description: '',
   size: 'S',

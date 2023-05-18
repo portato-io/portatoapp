@@ -10,7 +10,7 @@ import FirebaseAuth from '../../Components/FirebaseAuth';
 import { useSelector } from 'react-redux';
 import { IObjectInfo } from '../../type';
 import { useAuth } from '../../Components/AuthProvider';
-import { uploadReduxStoreToFirebase } from '../../linksStoreToFirebase';
+import { uploadRequestToFirebase } from '../../linksStoreToFirebase';
 import { store } from '../../index';
 
 const { Title } = Typography;
@@ -33,7 +33,7 @@ const Summary: React.FC = () => {
   const handleConfirm = () => {
     if (uid) {
       const state = store.getState();
-      uploadReduxStoreToFirebase(uid, state.request);
+      uploadRequestToFirebase(uid, state.request);
     } else {
       console.log('User UID not found.');
     }

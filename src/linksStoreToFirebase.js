@@ -1,13 +1,22 @@
 import { ref, onValue, get, set, push } from 'firebase/database';
 import { database } from './firebaseConfig';
+import { setObjectId } from './Store/actions/requestActionCreators';
+import { setRouteId } from './Store/actions/routeActionCreators';
+import { setDealId } from './Store/actions/dealActionCreators';
+import { useDispatch } from 'react-redux';
 
-export const uploadReduxStoreToFirebase = async (uid, state) => {
+const dispatch = useDispatch();
+
+export const uploadRequestToFirebase = async (uid, state) => {
   try {
     // Get the database instance and create a reference to the user's requests
     const requestsRef = ref(database, `users/${uid}/requests`);
 
     // Generate a new unique key for the request
     const newRequestRef = push(requestsRef);
+
+    // Add the unique key to the the store
+    dispatch(setObjectId(newRequestRef));
 
     // Set the request data using the generated key
     await set(newRequestRef, state);
@@ -42,6 +51,9 @@ export const uploadRouteToFirebase = async (uid, state) => {
     // Generate a new unique key for the request
     const newRequestRef = push(requestsRef);
 
+    // Add the unique key to the the store
+    dispatch(setRouteId(newRequestRef));
+
     // Set the request data using the generated key
     await set(newRequestRef, state);
   } catch (error) {
@@ -61,6 +73,24 @@ export const fetchDataOnce = async (uid, directory) => {
     }
   } catch (error) {
     console.error('Error fetching data from Firebase:', error);
+  }
+};
+
+export const uploadDealToFirebase = async (uid, state) => {
+  try {
+    // Get the database instance and create a reference to the user's requests
+    const requestsRef = ref(database, `users/${uid}/deals`);
+
+    // Generate a new unique key for the request
+    const newRequestRef = push(requestsRef);
+
+    // Add the unique key to the the store
+    dispatch(setDealId(newRequestRef));
+
+    // Set the request data using the generated key
+    await set(newRequestRef, state);
+  } catch (error) {
+    console.error('Error creating suggestions: ', error, 'user: ', uid);
   }
 };
 

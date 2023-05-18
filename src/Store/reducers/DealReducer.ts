@@ -1,30 +1,18 @@
 import { AnyAction } from 'redux';
-import { IRouteInfo } from '../../type';
+import { IDealInfo } from '../../type';
 
-const initialStateRoute: IRouteInfo = {
+const initialStateRoute: IDealInfo = {
   id: 0,
-  departure_adress: '',
-  destination_adress: '',
-  acceptable_detour: 0,
-  time: [],
-  timeRange: '',
-  type: '',
-  days: '',
-  delivery_capacity: '',
+  request_id: 0,
+  route_id: 0,
+  status: 'unknown',
 };
 
-export function routeReducer(
+export function dealReducer(
   state: any = initialStateRoute,
   action: AnyAction
-): IRouteInfo {
+): IDealInfo {
   switch (action.type) {
-    case 'SET_ROUTE': {
-      return {
-        ...state,
-        departure_adress: action.payload.departure_adress,
-        destination_adress: action.payload.destination_adress,
-      };
-    }
     case 'SET_ID': {
       return {
         ...state,
