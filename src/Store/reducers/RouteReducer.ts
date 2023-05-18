@@ -2,7 +2,7 @@ import { AnyAction } from 'redux';
 import { IRouteInfo } from '../../type';
 
 const initialStateRoute: IRouteInfo = {
-  id: 0,
+  id: '0',
   departure_adress: '',
   destination_adress: '',
   acceptable_detour: 0,

@@ -47,7 +47,7 @@ export const setCap = (capacity: string): AnyAction => ({
   },
 });
 
-export const setRouteId = (id: number): AnyAction => ({
+export const setRouteId = (id: string): AnyAction => ({
   type: actionTypes.SET_ID,
-  payload: id,
+  payload: { id },
 });

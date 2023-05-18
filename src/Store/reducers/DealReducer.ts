@@ -2,9 +2,9 @@ import { AnyAction } from 'redux';
 import { IDealInfo } from '../../type';
 
 const initialStateRoute: IDealInfo = {
-  id: 0,
-  request_id: 0,
-  route_id: 0,
+  id: '0',
+  request_id: '0',
+  route_id: '0',
   status: 'unknown',
 };
 

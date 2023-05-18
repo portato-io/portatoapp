@@ -3,21 +3,35 @@ import { database } from './firebaseConfig';
 import { setObjectId } from './Store/actions/requestActionCreators';
 import { setRouteId } from './Store/actions/routeActionCreators';
 import { setDealId } from './Store/actions/dealActionCreators';
-import { useDispatch } from 'react-redux';
+import { store } from './index';
+import { push as firebasePush } from 'firebase/database';
 
-export const uploadRequestToFirebase = async (uid, state, dispatch) => {
+export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
     // Get the database instance and create a reference to the user's requests
     const requestsRef = ref(database, `users/${uid}/requests`);
 
     // Generate a new unique key for the request
-    const newRequestRef = push(requestsRef);
+    const newRequestRef = firebasePush(requestsRef);
 
-    // Add the unique key to the the store
-    dispatch(setObjectId(newRequestRef));
+    // The unique key is now available as newRequestRef.key
+    if (newRequestRef.key) {
+      console.log('newRequestRef.key :', newRequestRef.key);
 
-    // Set the request data using the generated key
-    await set(newRequestRef, state);
+      let state = store.getState();
+
+      console.log('state: ' + JSON.stringify(state.request));
+
+      dispatch(setObjectId(newRequestRef.key));
+      state = store.getState();
+
+      console.log('state: ' + JSON.stringify(state.request));
+
+      // Update your data under the new key
+      await set(newRequestRef, state.request);
+    } else {
+      console.error('Unable to generate a unique key.');
+    }
 
     console.log('Request uploaded successfully');
   } catch (error) {
@@ -38,7 +52,7 @@ async function createDirFirebase(name, uid) {
   );
 }
 
-export const uploadRouteToFirebase = async (uid, state, dispatch) => {
+export const uploadRouteToFirebase = async (uid, dispatch) => {
   try {
     createDirFirebase('route_suggestions', uid);
     createDirFirebase('route_confirmed', uid);
@@ -47,13 +61,24 @@ export const uploadRouteToFirebase = async (uid, state, dispatch) => {
     const requestsRef = ref(database, `users/${uid}/routes`);
 
     // Generate a new unique key for the request
-    const newRequestRef = push(requestsRef);
+    const newRequestKey = requestsRef.push().key;
 
-    // Add the unique key to the the store
-    dispatch(setRouteId(newRequestRef));
+    if (newRequestKey) {
+      dispatch(setObjectId(newRequestKey));
+
+      // Update your data under the new key
+      await set(
+        ref(database, `users/${uid}/requests/${newRequestKey}`),
+        state.request
+      );
+    } else {
+      console.error('Unable to generate a unique key.');
+    }
+
+    const state = store.getState();
 
     // Set the request data using the generated key
-    await set(newRequestRef, state);
+    await set(newRequestRef, state.route);
   } catch (error) {
     console.error('Error creating suggestions: ', error, 'user: ', uid);
   }
@@ -74,7 +99,7 @@ export const fetchDataOnce = async (uid, directory) => {
   }
 };
 
-export const uploadDealToFirebase = async (uid, state, dispatch) => {
+export const uploadDealToFirebase = async (uid, dispatch) => {
   try {
     // Get the database instance and create a reference to the user's requests
     const requestsRef = ref(database, `users/${uid}/deals`);
@@ -83,10 +108,11 @@ export const uploadDealToFirebase = async (uid, state, dispatch) => {
     const newRequestRef = push(requestsRef);
 
     // Add the unique key to the the store
-    dispatch(setDealId(newRequestRef));
+    dispatch(setDealId(newRequestRef.key));
 
+    const state = store.getState();
     // Set the request data using the generated key
-    await set(newRequestRef, state);
+    await set(newRequestRef, state.deal);
   } catch (error) {
     console.error('Error creating suggestions: ', error, 'user: ', uid);
   }

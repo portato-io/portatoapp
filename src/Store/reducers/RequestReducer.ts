@@ -2,7 +2,7 @@ import { AnyAction } from 'redux';
 import { IObjectInfo } from '../../type';
 
 const initialState: IObjectInfo = {
-  id: 0,
+  id: '0',
   name: '',
   description: '',
   size: 'S',
@@ -34,7 +34,7 @@ export function requestReducer(
     case 'SET_ID': {
       return {
         ...state,
-        id: action.payload.id,
+        id: action.payload,
       };
     }
     case 'SET_ADRESS': {

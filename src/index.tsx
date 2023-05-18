@@ -11,7 +11,7 @@ import allReducers from './Store/reducers';
 import { IObjectInfo, IRouteInfo } from './type';
 
 const initialStateRequest: IObjectInfo = {
-  id: 0,
+  id: '0',
   name: '',
   description: '',
   size: 'S',
@@ -26,7 +26,7 @@ const initialStateRequest: IObjectInfo = {
 console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 
 const initialStateRoute: IRouteInfo = {
-  id: 0,
+  id: '0',
   departure_adress: '',
   destination_adress: '',
   acceptable_detour: 0,

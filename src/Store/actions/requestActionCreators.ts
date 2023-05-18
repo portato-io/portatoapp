@@ -23,7 +23,7 @@ export const setObjectPrice = (price: number): AnyAction => ({
   payload: price,
 });
 
-export const setObjectId = (id: number): AnyAction => ({
+export const setObjectId = (id: string): AnyAction => ({
   type: actionTypes.SET_ID,
   payload: id,
 });
