@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Spin } from 'antd';
+import { Spin } from 'antd';
 import { auth } from '../firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import FirebaseAuth from '../Components/FirebaseAuth';
