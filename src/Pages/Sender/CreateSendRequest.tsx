@@ -1,25 +1,19 @@
 import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { useNavigate } from 'react-router-dom';
-import { Typography, Button } from 'antd';
+import { Typography } from 'antd';
 import { AutoCenter } from 'antd-mobile';
 import FetchRequests from '../../Components/FetchRequests';
-import { PlusOutlined } from '@ant-design/icons';
 import { getAuth } from 'firebase/auth';
 import { ButtonToCreateNewReqRoutes } from '../../Components/Buttons/ButtonToCreateNewReqRoutes';
 import BackArrow from '../../Components/Buttons/BackArrow';
+import { useAuth } from '../../Components/AuthProvider';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
 const BUTTON_TEXT = 'Create new request';
 
 const CreateSendRequest: React.FC = () => {
-  const auth = getAuth();
-  const currentUser = auth.currentUser;
-  let uid;
-  if (currentUser) {
-    uid = currentUser.uid;
-  }
+  const { uid } = useAuth();
 
   return (
     <PageLayout>

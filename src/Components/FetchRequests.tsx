@@ -4,7 +4,7 @@ import { IObjectInfo } from '../type';
 import { Card } from 'antd';
 
 const FetchRequests: React.FC<{
-  uid?: string; // uid is now optional
+  uid?: string | null; // uid is now optional
   heightPortion?: number;
   admin?: boolean;
 }> = ({ uid, heightPortion = 0.8, admin = false }) => {
