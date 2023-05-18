@@ -4,10 +4,10 @@ import { IObjectInfo } from '../type';
 import { Card } from 'antd';
 
 const FetchRequests: React.FC<{
-  uid: string;
+  uid?: string | null; // uid is now optional
   heightPortion?: number;
   admin?: boolean;
-}> = ({ uid = undefined, heightPortion = 0.8, admin = false }) => {
+}> = ({ uid, heightPortion = 0.8, admin = false }) => {
   const [requests, setRequest] = useState<IObjectInfo[]>([]);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
