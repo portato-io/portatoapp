@@ -41,18 +41,22 @@ const CreateSendRequest: React.FC = () => {
           text={BUTTON_TEXT}
         />
       </AutoCenter>
-      <h1
-        style={{
-          marginTop: '10vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        Your Current Requests
-      </h1>
-      <FetchRequests uid={uid} heightPortion={0.5} />
+      {uid !== 'undefined' ? (
+        <>
+          <h1
+            style={{
+              marginTop: '10vh',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Your Current Requests
+          </h1>
+          <FetchRequests uid={uid} heightPortion={0.5} />
+        </>
+      ) : null}
     </PageLayout>
   );
 };
