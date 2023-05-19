@@ -3,6 +3,7 @@ import { IRouteInfo } from '../../type';
 
 const initialStateRoute: IRouteInfo = {
   id: '0',
+  uid: '0',
   departure_adress: '',
   destination_adress: '',
   acceptable_detour: 0,

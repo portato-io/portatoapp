@@ -1,5 +1,6 @@
 export interface IObjectInfo {
   id: string;
+  uid: string;
   name: string;
   description: string;
   size: string;
@@ -32,6 +33,7 @@ export type DispatchType = (args: ObjectInfoAction) => ObjectInfoAction;
 
 export interface IRouteInfo {
   id: string;
+  uid: string;
   departure_adress: string;
   destination_adress: string;
   acceptable_detour: number;
@@ -49,6 +51,8 @@ export type RouteInfoAction = {
 
 export interface IDealInfo {
   id: string;
+  request_uid: string;
+  route_uid: string;
   request_id: string;
   route_id: string;
   status: string;

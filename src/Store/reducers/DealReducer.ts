@@ -3,6 +3,8 @@ import { IDealInfo } from '../../type';
 
 const initialStateDeal: IDealInfo = {
   id: '0',
+  request_uid: '0',
+  route_uid: '0',
   request_id: '0',
   route_id: '0',
   status: 'unknown',

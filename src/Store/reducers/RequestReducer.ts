@@ -3,6 +3,7 @@ import { IObjectInfo } from '../../type';
 
 const initialState: IObjectInfo = {
   id: '0',
+  uid: '0',
   name: '',
   description: '',
   size: 'S',

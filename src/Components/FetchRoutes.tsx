@@ -45,9 +45,9 @@ const FetchRoutes: React.FC<{
     getUserRoutes();
   }, [uid]);
 
-  const match = (routeId: string) => {
+  const match = (routeId: string, routeUid: string) => {
     console.log('Matching route with id: ' + routeId);
-    navigate(`/admin/deal_suggester/${routeId}`);
+    navigate(`/admin/deal_suggester/${routeId}/${routeUid}`);
   };
 
   const containerHeight = window.innerHeight * heightPortion;
@@ -70,7 +70,11 @@ const FetchRoutes: React.FC<{
           >
             <Card style={{ marginTop: '5vh', width: '80%' }} title={route.id}>
               {route.departure_adress}/{route.destination_adress}
-              {admin && <button onClick={() => match(route.id)}>Match</button>}
+              {admin && (
+                <button onClick={() => match(route.id, route.uid)}>
+                  Match
+                </button>
+              )}
             </Card>
           </div>
         ))}

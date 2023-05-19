@@ -12,6 +12,7 @@ import { IObjectInfo, IRouteInfo } from './type';
 
 const initialStateRequest: IObjectInfo = {
   id: '0',
+  uid: '0',
   name: '',
   description: '',
   size: 'S',
@@ -27,6 +28,7 @@ console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 
 const initialStateRoute: IRouteInfo = {
   id: '0',
+  uid: '0',
   departure_adress: '',
   destination_adress: '',
   acceptable_detour: 0,

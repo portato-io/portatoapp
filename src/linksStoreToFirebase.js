@@ -89,6 +89,25 @@ export const fetchDataOnce = async (uid, directory) => {
   }
 };
 
+export const checkData = async (uid, directory, data_id) => {
+  try {
+    const userRequestsRef = ref(
+      database,
+      `users/${uid}/${directory}/${data_id}`
+    );
+    const snapshot = await get(userRequestsRef);
+    if (snapshot.exists()) {
+      console.log('Data:', snapshot.val());
+      return true;
+    } else {
+      console.log('No data found.', userRequestsRef);
+      return false;
+    }
+  } catch (error) {
+    console.error('Error fetching data from Firebase:', error);
+  }
+};
+
 export const uploadDealToFirebase = async (dispatch) => {
   try {
     // Get the database instance and create a reference to the user's requests
