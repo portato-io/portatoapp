@@ -1,13 +1,15 @@
 import { ref, onValue, get, set, push } from 'firebase/database';
 import { database } from './firebaseConfig';
-import { setObjectId } from './Store/actions/requestActionCreators';
-import { setRouteId } from './Store/actions/routeActionCreators';
+import { setObjectId, setReqUid } from './Store/actions/requestActionCreators';
+import { setRouteId, setRouteUid } from './Store/actions/routeActionCreators';
 import { setDealId } from './Store/actions/dealActionCreators';
 import { store } from './index';
 import { push as firebasePush } from 'firebase/database';
 
 export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
+    dispatch(setReqUid(uid));
+
     // Get the database instance and create a reference to the user's requests
     const requestsRef = ref(database, `users/${uid}/requests`);
 
@@ -46,6 +48,8 @@ async function createDirFirebase(name, uid) {
 
 export const uploadRouteToFirebase = async (uid, dispatch) => {
   try {
+    dispatch(setRouteUid(uid));
+
     createDirFirebase('route_suggestions', uid);
     createDirFirebase('route_confirmed', uid);
 
@@ -57,7 +61,7 @@ export const uploadRouteToFirebase = async (uid, dispatch) => {
 
     // The unique key is now available as newRequestRef.key
     if (newRequestRef.key) {
-      dispatch(setObjectId(newRequestRef.key));
+      dispatch(setRouteId(newRequestRef.key));
       const state = store.getState();
 
       // Update your data under the new key
@@ -85,16 +89,16 @@ export const fetchDataOnce = async (uid, directory) => {
   }
 };
 
-export const uploadDealToFirebase = async (uid, dispatch) => {
+export const uploadDealToFirebase = async (dispatch) => {
   try {
     // Get the database instance and create a reference to the user's requests
-    const requestsRef = ref(database, `users/${uid}/deals`);
+    const requestsRef = ref(database, 'deals');
 
     const newRequestRef = firebasePush(requestsRef);
 
     // The unique key is now available as newRequestRef.key
     if (newRequestRef.key) {
-      dispatch(setObjectId(newRequestRef.key));
+      dispatch(setDealId(newRequestRef.key));
       const state = store.getState();
 
       // Update your data under the new key

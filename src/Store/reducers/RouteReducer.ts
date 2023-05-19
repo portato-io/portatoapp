@@ -28,7 +28,13 @@ export function routeReducer(
     case 'SET_ID': {
       return {
         ...state,
-        id: action.payload.id,
+        id: action.payload,
+      };
+    }
+    case 'SET_UID': {
+      return {
+        ...state,
+        uid: action.payload,
       };
     }
     case 'SET_DETOUR': {

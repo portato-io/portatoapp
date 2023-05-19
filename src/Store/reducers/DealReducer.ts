@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { IDealInfo } from '../../type';
 
-const initialStateRoute: IDealInfo = {
+const initialStateDeal: IDealInfo = {
   id: '0',
   request_id: '0',
   route_id: '0',
@@ -9,50 +9,44 @@ const initialStateRoute: IDealInfo = {
 };
 
 export function dealReducer(
-  state: any = initialStateRoute,
+  state: any = initialStateDeal,
   action: AnyAction
 ): IDealInfo {
   switch (action.type) {
     case 'SET_ID': {
       return {
         ...state,
-        id: action.payload.id,
+        id: action.payload,
       };
     }
-    case 'SET_DETOUR': {
+    case 'SET_REQ_ID': {
       return {
         ...state,
-        acceptable_detour: action.payload.detour,
+        request_id: action.payload,
       };
     }
-    case 'SET_TIME': {
+    case 'SET_ROUTE_ID': {
       return {
         ...state,
-        time: action.payload,
+        route_id: action.payload,
       };
     }
-    case 'SET_TYPE': {
+    case 'SET_STATUS': {
       return {
         ...state,
-        type: action.payload.type,
+        status: action.payload,
       };
     }
-    case 'SET_TIMERANGE': {
+    case 'SET_ROUTE_UID': {
       return {
         ...state,
-        timeRange: action.payload.timeRange,
+        route_uid: action.payload,
       };
     }
-    case 'SET_DAYS': {
+    case 'SET_REQ_UID': {
       return {
         ...state,
-        days: action.payload.days,
-      };
-    }
-    case 'SET_CAP': {
-      return {
-        ...state,
-        delivery_capacity: Object.values(action.payload)[0],
+        request_uid: action.payload,
       };
     }
     default: {

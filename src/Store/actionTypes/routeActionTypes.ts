@@ -5,3 +5,4 @@ export const SET_TYPE = 'SET_TYPE';
 export const SET_DAYS = 'SET_DAYS';
 export const SET_CAP = 'SET_CAP';
 export const SET_ID = 'SET_ID';
+export const SET_UID = 'SET_UID';

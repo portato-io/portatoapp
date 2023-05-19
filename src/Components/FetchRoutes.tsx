@@ -47,8 +47,7 @@ const FetchRoutes: React.FC<{
 
   const match = (routeId: string) => {
     console.log('Matching route with id: ' + routeId);
-    navigate('/admin/deal_suggester', { state: { routeId: routeId } });
-    // Insert the logic for matching here
+    navigate(`/admin/deal_suggester/${routeId}`);
   };
 
   const containerHeight = window.innerHeight * heightPortion;

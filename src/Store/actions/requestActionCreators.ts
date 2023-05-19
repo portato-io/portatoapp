@@ -47,3 +47,8 @@ export const removeObjectImages = (position: number): AnyAction => ({
   type: actionTypes.REMOVE_IMAGE,
   payload: position,
 });
+
+export const setReqUid = (uid: string): AnyAction => ({
+  type: actionTypes.SET_UID,
+  payload: uid,
+});

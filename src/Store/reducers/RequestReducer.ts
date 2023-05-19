@@ -37,6 +37,12 @@ export function requestReducer(
         id: action.payload,
       };
     }
+    case 'SET_UID': {
+      return {
+        ...state,
+        uid: action.payload,
+      };
+    }
     case 'SET_ADRESS': {
       console.log(state);
       return {
