@@ -1,38 +1,38 @@
+const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const cors = require('cors')({ origin: true });
 
-// You must pass your server's service account details to initializeApp.
-// You can download your service account details from the Firebase Console.
-var serviceAccount = require('../portatoapp-firebase-adminsdk-80yy0-bfde2368a4.json');
+// initialize firebase admin SDK
+admin.initializeApp();
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL:
-    'https://portatoapp-default-rtdb.europe-west1.firebasedatabase.app', // replace this with your Realtime Database URL
-});
+exports.sendNotification = functions
+  .region('europe-west1')
+  .https.onRequest((req, res) => {
+    cors(req, res, () => {
+      if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Invalid request method' });
+      }
 
-// Function to send push notification
-export const sendNotification = (title, body, token) => {
-  var message = {
-    data: {
-      title: title,
-      body: body,
-    },
-    token: token,
-  };
+      let data = req.body;
 
-  // Send a message to the device corresponding to the provided
-  // registration token.
-  admin
-    .messaging()
-    .send(message)
-    .then((response) => {
-      // Response is a message ID string.
-      console.log('Successfully sent message:', response);
-    })
-    .catch((error) => {
-      console.log('Error sending message:', error);
+      var message = {
+        data: {
+          title: data.title,
+          body: data.body,
+        },
+        token: data.token,
+      };
+
+      return admin
+        .messaging()
+        .send(message)
+        .then((response) => {
+          res
+            .status(200)
+            .json({ result: 'Successfully sent message: ' + response });
+        })
+        .catch((error) => {
+          res.status(500).json({ error: 'Error sending message: ' + error });
+        });
     });
-};
-
-// Usage
-sendNotification('Hello World!', 'This is a test notification.');
+  });

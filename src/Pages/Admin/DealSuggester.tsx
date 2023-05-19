@@ -10,7 +10,13 @@ import {
 } from '../../Store/actions/dealActionCreators';
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
-import { uploadDealToFirebase, checkData } from '../../linksStoreToFirebase';
+import {
+  uploadDealToFirebase,
+  checkData,
+  getUserToken,
+} from '../../linksStoreToFirebase';
+import { getFunctions, httpsCallable } from 'firebase/functions';
+import { app } from '../../firebaseConfig';
 
 interface DealSuggesterProps {
   route_id: string;
@@ -44,6 +50,35 @@ const DealSuggester: React.FC = () => {
       if (await checkData(uid, 'requests', id)) {
         message.success('Suggestion valid! Submitted successfully');
         uploadDealToFirebase(dispatch);
+
+        const token = getUserToken(uid);
+        if (token) {
+          // Prepare the request body
+          const body = {
+            title: 'New delivery suggestion',
+            body: 'World',
+            token: token,
+          };
+
+          // Make a POST request to the Firebase Function
+          fetch(
+            'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body),
+            }
+          )
+            .then((response) => response.json())
+            .then((result) => {
+              // Read result of the Cloud Function.
+              //console.log(result.result);
+            })
+            .catch((error) => {
+              // Getting the error details
+              console.error(`error: ${error}`);
+            });
+        }
       } else {
         message.error('Suggestion invalid');
       }

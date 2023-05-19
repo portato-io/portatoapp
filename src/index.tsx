@@ -9,6 +9,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import allReducers from './Store/reducers';
 import { IObjectInfo, IRouteInfo } from './type';
+import { AuthProvider } from './Components/AuthProvider';
 
 const initialStateRequest: IObjectInfo = {
   id: '0',
@@ -50,9 +51,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <AuthProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </AuthProvider>
 );
 
 // Mehdi: If we want the app to work offline, we need register,

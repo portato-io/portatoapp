@@ -152,11 +152,43 @@ export const listenForDataChanges = () => {
 export const addNotificationsToken = async (uid, token) => {
   try {
     // Get the database instance and create a reference to the user's requests
-    const requestsRef = ref(database, `users/${uid}`);
+    const requestsRef = ref(database, `users/${uid}/token`);
 
     // Update your data under the new key
     await set(requestsRef, token);
+    console.log('Successfully added the token: ');
   } catch (error) {
     console.error('Error creating suggestions: ', error);
+  }
+};
+
+export const getUserToken = async (uid) => {
+  try {
+    const userRequestsRef = ref(database, `users/${uid}/token`);
+    const snapshot = await get(userRequestsRef);
+    if (snapshot.exists()) {
+      console.log('Data:', snapshot.val());
+      return snapshot.val();
+    } else {
+      console.log('No data found.', userRequestsRef);
+    }
+  } catch (error) {
+    console.error('Error fetching data from Firebase:', error);
+  }
+};
+
+export const checkTokenExists = async (uid) => {
+  try {
+    const userRequestsRef = ref(database, `users/${uid}/token`);
+    const snapshot = await get(userRequestsRef);
+    if (snapshot.exists()) {
+      console.log('Data:', snapshot.val());
+      return true;
+    } else {
+      console.log('No data found.', userRequestsRef);
+      return false;
+    }
+  } catch (error) {
+    console.error('Error fetching data from Firebase:', error);
   }
 };

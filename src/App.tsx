@@ -5,7 +5,10 @@ import SideNavigator from './Components/SideBarNav';
 import { Layout, ConfigProvider, Modal, Button } from 'antd';
 import { AuthProvider } from './Components/AuthProvider';
 import { getMessaging, getToken } from 'firebase/messaging'; // import Firebase Messaging
-import { addNotificationsToken } from './linksStoreToFirebase';
+import {
+  addNotificationsToken,
+  checkTokenExists,
+} from './linksStoreToFirebase';
 import { useAuth } from './Components/AuthProvider';
 
 // import routes
@@ -14,7 +17,17 @@ import { routes as appRoutes } from './routes';
 const App: React.FC = () => {
   const { uid } = useAuth();
   const [openMenu, setOpenMenu] = useState(false);
-  const [visible, setVisible] = useState(true); // for the modal
+  const [visible, setVisible] = useState(false); // for the modal
+  useEffect(() => {
+    if (uid) {
+      const checkToken = async () => {
+        if (!(await checkTokenExists(uid))) {
+          setVisible(true);
+        }
+      };
+      checkToken();
+    }
+  }, [uid]);
 
   useEffect(() => {
     // Check for service worker
