@@ -5,6 +5,7 @@ import { setRouteId, setRouteUid } from './Store/actions/routeActionCreators';
 import { setDealId } from './Store/actions/dealActionCreators';
 import { store } from './index';
 import { push as firebasePush } from 'firebase/database';
+import { checkAdmin } from './Components/AuthProvider';
 
 export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
@@ -126,7 +127,7 @@ export const uploadDealToFirebase = async (dispatch) => {
       console.error('Unable to generate a unique key.');
     }
   } catch (error) {
-    console.error('Error creating suggestions: ', error, 'user: ', uid);
+    console.error('Error creating suggestions: ', error);
   }
 };
 
@@ -146,4 +147,16 @@ export const listenForDataChanges = () => {
       console.error('Error fetching data from Firebase:', error);
     }
   );
+};
+
+export const addNotificationsToken = async (uid, token) => {
+  try {
+    // Get the database instance and create a reference to the user's requests
+    const requestsRef = ref(database, `users/${uid}`);
+
+    // Update your data under the new key
+    await set(requestsRef, token);
+  } catch (error) {
+    console.error('Error creating suggestions: ', error);
+  }
 };

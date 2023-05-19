@@ -66,6 +66,7 @@ const FetchRequests: React.FC<{
               title={request.name}
             >
               {request.weight}/{request.size}
+              {admin ? <div>{`${request.id}/${request.uid}`}</div> : null}
             </Card>
           </div>
         ))}

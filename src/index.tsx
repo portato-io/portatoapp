@@ -59,6 +59,22 @@ root.render(
 // If not change to unregister()
 serviceWorkerRegistration.register();
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/service_worker.ts').then(
+      function (registration: ServiceWorkerRegistration) {
+        console.log(
+          'Service Worker registered with scope: ',
+          registration.scope
+        );
+      },
+      function (err: any) {
+        console.log('Service Worker registration failed: ', err);
+      }
+    );
+  });
+}
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

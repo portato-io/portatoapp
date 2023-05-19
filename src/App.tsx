@@ -1,15 +1,71 @@
 import './App.css';
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useId, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNavigator from './Components/SideBarNav';
-import { Layout, ConfigProvider } from 'antd';
+import { Layout, ConfigProvider, Modal, Button } from 'antd';
 import { AuthProvider } from './Components/AuthProvider';
+import { getMessaging, getToken } from 'firebase/messaging'; // import Firebase Messaging
+import { addNotificationsToken } from './linksStoreToFirebase';
+import { useAuth } from './Components/AuthProvider';
 
 // import routes
 import { routes as appRoutes } from './routes';
 
 const App: React.FC = () => {
+  const { uid } = useAuth();
   const [openMenu, setOpenMenu] = useState(false);
+  const [visible, setVisible] = useState(true); // for the modal
+
+  useEffect(() => {
+    // Check for service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/service_worker.ts').then(
+          function (registration: ServiceWorkerRegistration) {
+            console.log(
+              'Service Worker registered with scope: ',
+              registration.scope
+            );
+          },
+          function (err: any) {
+            console.log('Service Worker registration failed: ', err);
+          }
+        );
+      });
+    }
+  }, []);
+
+  const enableNotifications = () => {
+    Notification.requestPermission().then(function (status) {
+      console.log('Notification permission status:', status);
+      if (status === 'granted') {
+        subscribeUser();
+      }
+    });
+  };
+
+  const subscribeUser = async () => {
+    // Get Firebase Messaging instance
+    const messaging = getMessaging();
+    try {
+      // Get the user's token
+      const token = await getToken(messaging);
+      console.log('User FCM token:', token);
+      addNotificationsToken(uid, token);
+      // TODO: Send this token to your server or use it directly to send push notifications.
+    } catch (error) {
+      console.error('Failed to get user FCM token', error);
+    }
+  };
+
+  const handleOk = () => {
+    setVisible(false);
+    enableNotifications();
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
 
   return (
     <AuthProvider>
@@ -36,8 +92,18 @@ const App: React.FC = () => {
             </Suspense>
           </Router>
         </div>
+
+        <Modal
+          title="Enable Notifications"
+          visible={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <p>Would you like to enable notifications for our app?</p>
+        </Modal>
       </ConfigProvider>
     </AuthProvider>
   );
 };
+
 export default App;
