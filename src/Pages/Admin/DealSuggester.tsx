@@ -51,7 +51,9 @@ const DealSuggester: React.FC = () => {
         message.success('Suggestion valid! Submitted successfully');
         uploadDealToFirebase(dispatch);
 
-        const token = getUserToken(uid);
+        const token = await getUserToken(route_uid);
+
+        console.log('token is: ', token);
         if (token) {
           // Prepare the request body
           const body = {
