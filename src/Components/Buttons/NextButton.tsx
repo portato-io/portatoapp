@@ -13,7 +13,7 @@ function NextButton({ nextScreen = '/', scrolling = false }: any) {
       style={{
         position: 'absolute',
         bottom: '2vh',
-        right: '10vw',
+        right: '-45vw',
         width: '45vw',
         background: 'white',
         marginBottom: scrolling ? '0vh' : '10vh',
