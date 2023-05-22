@@ -10,6 +10,7 @@ import {
   checkTokenExists,
 } from './linksStoreToFirebase';
 import { useAuth } from './Components/AuthProvider';
+import { fetchToken, messaging, onMessageListener } from './firebaseConfig';
 
 // import routes
 import { routes as appRoutes } from './routes';
@@ -29,24 +30,24 @@ const App: React.FC = () => {
     }
   }, [uid]);
 
-  useEffect(() => {
-    // Check for service worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/service_worker.ts').then(
-          function (registration: ServiceWorkerRegistration) {
-            console.log(
-              'Service Worker registered with scope: ',
-              registration.scope
-            );
-          },
-          function (err: any) {
-            console.log('Service Worker registration failed: ', err);
-          }
-        );
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Check for service worker
+  //   if ('serviceWorker' in navigator) {
+  //     window.addEventListener('load', function () {
+  //       navigator.serviceWorker.register('/service_worker.ts').then(
+  //         function (registration: ServiceWorkerRegistration) {
+  //           console.log(
+  //             'Service Worker registered with scope: ',
+  //             registration.scope
+  //           );
+  //         },
+  //         function (err: any) {
+  //           console.log('Service Worker registration failed: ', err);
+  //         }
+  //       );
+  //     });
+  //   }
+  // }, []);
 
   const enableNotifications = () => {
     Notification.requestPermission().then(function (status) {
@@ -59,10 +60,12 @@ const App: React.FC = () => {
 
   const subscribeUser = async () => {
     // Get Firebase Messaging instance
-    const messaging = getMessaging();
     try {
       // Get the user's token
-      const token = await getToken(messaging);
+      const token = await getToken(messaging, {
+        vapidKey:
+          'BN1R0jA9hh7euhpDZ_AjxNvffl-Tcrlx9t7ijnKg6MJjuMSaEuVf1DNQPe-jINpqinR4Ihv6nXPFwMPxDqFq3vo',
+      });
       console.log('User FCM token:', token);
       addNotificationsToken(uid, token);
       // TODO: Send this token to your server or use it directly to send push notifications.
@@ -70,6 +73,16 @@ const App: React.FC = () => {
       console.error('Failed to get user FCM token', error);
     }
   };
+
+  const [isTokenFound, setTokenFound] = useState(false);
+
+  fetchToken(setTokenFound);
+
+  onMessageListener()
+    .then((payload) => {
+      console.log(payload);
+    })
+    .catch((err) => console.log('failed: ', err));
 
   const handleOk = () => {
     setVisible(false);
