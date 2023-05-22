@@ -134,9 +134,11 @@ const EnterObjInfo: React.FC = () => {
             </Radio.Group>
           </Form.Item>
           <UploadImage />
+          <Form.Item>
+            <NextButton nextScreen={NEXT_SCREEN} scrolling={true} />
+            <BackButton scrolling={true} />
+          </Form.Item>
         </Form>
-        <NextButton nextScreen={NEXT_SCREEN} scrolling={true} />
-        <BackButton scrolling={true} />
       </div>
     </PageLayout>
   );
