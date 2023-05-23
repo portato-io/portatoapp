@@ -1,11 +1,10 @@
-import { ref, onValue, get, set, push } from 'firebase/database';
+import { ref, onValue, get, set } from 'firebase/database';
 import { database } from './firebaseConfig';
 import { setObjectId, setReqUid } from './Store/actions/requestActionCreators';
 import { setRouteId, setRouteUid } from './Store/actions/routeActionCreators';
 import { setDealId } from './Store/actions/dealActionCreators';
 import { store } from './index';
 import { push as firebasePush } from 'firebase/database';
-import { checkAdmin } from './Components/AuthProvider';
 
 export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
@@ -187,6 +186,36 @@ export const checkTokenExists = async (uid) => {
     } else {
       console.log('No data found.', userRequestsRef);
       return false;
+    }
+  } catch (error) {
+    console.error('Error fetching data from Firebase:', error);
+  }
+};
+
+export const fetchDeals = async () => {
+  try {
+    const userRequestsRef = ref(database, 'deals');
+    const snapshot = await get(userRequestsRef);
+    if (snapshot.exists()) {
+      console.log('Data:', snapshot.val());
+      return snapshot.val();
+    } else {
+      console.log('No data found.', userRequestsRef);
+    }
+  } catch (error) {
+    console.error('Error fetching data from Firebase:', error);
+  }
+};
+
+export const fetchAdressRequest = async (uid, id) => {
+  try {
+    const userRequestsRef = ref(database, `users/${uid}/requests/${id}`);
+    const snapshot = await get(userRequestsRef);
+    if (snapshot.exists()) {
+      console.log('Data:', snapshot.val());
+      return snapshot.val();
+    } else {
+      console.log('No data found.', userRequestsRef);
     }
   } catch (error) {
     console.error('Error fetching data from Firebase:', error);

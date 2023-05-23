@@ -1,46 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import { fetchDataOnce } from '../linksStoreToFirebase';
-import { IDealInfo } from '../type';
+import { fetchDeals, fetchAdressRequest } from '../linksStoreToFirebase';
+import { IDealInfo, IObjectInfo } from '../type';
 import { Card } from 'antd';
+
+interface DealInfoWithAddress extends IDealInfo {
+  pickupAddress?: string;
+  deliveryAddress?: string;
+}
 
 const FetchDeals: React.FC<{
   uid?: string | null; // uid is now optional
   heightPortion?: number;
   admin?: boolean;
-}> = ({ uid, heightPortion = 0.8, admin = false }) => {
-  const [deals, setRequest] = useState<IDealInfo[]>([]);
-
-  // Mehdi : Use Effect to only fetch the data once when the component is mount
-  // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
-  // then we use await to store the values in state
+  filterStatus?: string; // prop for filtering deals based on status
+}> = ({ uid, heightPortion = 0.8, admin = false, filterStatus }) => {
+  const [deals, setRequest] = useState<DealInfoWithAddress[]>([]);
 
   useEffect(() => {
-    // TODO: Handle uid undefined case
     if (!uid) {
       console.log('uid is undefined');
       return;
     }
 
-    const fetchData = fetchDataOnce(uid, 'deals').then((storesObject) => {
-      // Check if storesObject is an object before returning it
-      if (storesObject && typeof storesObject === 'object') {
-        const storesArray = Object.values(storesObject) as IDealInfo[]; // Type assertion here
-        return storesArray;
-      } else {
-        console.log('Data is not an object:', storesObject);
-        return [];
-      }
-    });
-
-    const getUserDeals = async () => {
+    const fetchData = async () => {
       try {
-        setRequest(await fetchData);
+        const storesObject = await fetchDeals();
+        if (storesObject && typeof storesObject === 'object') {
+          const storesArray: DealInfoWithAddress[] = Object.values(
+            storesObject
+          ) as IDealInfo[];
+          for (const deal of storesArray) {
+            const addressObject = await fetchAdressRequest(
+              deal.request_uid,
+              deal.request_id
+            );
+            if (addressObject && typeof addressObject === 'object') {
+              const request = Object.values(addressObject)[0] as IObjectInfo;
+              console.log('request: ' + request);
+              deal.pickupAddress = request.pickup_adress;
+              deal.deliveryAddress = request.delivery_adress;
+            }
+          }
+          setRequest(storesArray);
+        } else {
+          console.log('Data is not an object:', storesObject);
+          setRequest([]);
+        }
       } catch (error) {
         console.log('Error fetching data: ', error);
       }
     };
 
-    getUserDeals();
+    fetchData();
   }, [uid]);
 
   const containerHeight = window.innerHeight * heightPortion;
@@ -51,24 +62,30 @@ const FetchDeals: React.FC<{
           admin ? {} : { height: containerHeight + 'px', overflowY: 'scroll' }
         }
       >
-        {deals.map((deal) => (
-          <div
-            key={deal.id}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Card
-              style={{ marginTop: '5vh', width: '80%' }}
-              title={deal.status}
+        {deals
+          .filter(
+            (deal) =>
+              (!filterStatus || deal.status === filterStatus) &&
+              (!uid || deal.route_uid === uid)
+          ) // filter deals based on status and route uid
+          .map((deal) => (
+            <div
+              key={deal.id}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
             >
-              {deal.request_id}/{deal.route_id}
-            </Card>
-          </div>
-        ))}
+              <Card
+                style={{ marginTop: '5vh', width: '80%' }}
+                title={deal.status}
+              >
+                {deal.pickupAddress} / {deal.deliveryAddress}
+              </Card>
+            </div>
+          ))}
       </div>
     </div>
   );
