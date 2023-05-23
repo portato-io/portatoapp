@@ -1,15 +1,12 @@
 import './App.css';
-import React, { Suspense, useEffect, useId, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNavigator from './Components/SideBarNav';
-import { Layout, ConfigProvider, Modal, Button } from 'antd';
+import { ConfigProvider, Modal } from 'antd';
 import { AuthProvider } from './Components/AuthProvider';
-import { getMessaging, getToken } from 'firebase/messaging'; // import Firebase Messaging
-import {
-  addNotificationsToken,
-  checkTokenExists,
-} from './linksStoreToFirebase';
+import { checkTokenExists } from './linksStoreToFirebase';
 import { useAuth } from './Components/AuthProvider';
+import { fetchToken, onMessageListener } from './firebaseConfig';
 
 // import routes
 import { routes as appRoutes } from './routes';
@@ -29,51 +26,40 @@ const App: React.FC = () => {
     }
   }, [uid]);
 
+  const [isTokenFound, setTokenFound] = useState(false);
   useEffect(() => {
-    // Check for service worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/service_worker.ts').then(
-          function (registration: ServiceWorkerRegistration) {
-            console.log(
-              'Service Worker registered with scope: ',
-              registration.scope
-            );
-          },
-          function (err: any) {
-            console.log('Service Worker registration failed: ', err);
-          }
-        );
-      });
-    }
-  }, []);
+    const unsubscribe = onMessageListener((payload: any) => {
+      console.log('notif coming from here ', payload);
 
-  const enableNotifications = () => {
-    Notification.requestPermission().then(function (status) {
-      console.log('Notification permission status:', status);
-      if (status === 'granted') {
-        subscribeUser();
+      // Construct a browser notification
+      if (Notification.permission === 'granted') {
+        new Notification(payload.notification.title, {
+          body: payload.notification.body,
+          icon: payload.notification.icon, // assuming your payload has an icon property
+        });
+      } else {
+        Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+            new Notification(payload.notification.title, {
+              body: payload.notification.body,
+              icon: payload.notification.icon, // assuming your payload has an icon property
+            });
+          }
+        });
       }
     });
-  };
 
-  const subscribeUser = async () => {
-    // Get Firebase Messaging instance
-    const messaging = getMessaging();
-    try {
-      // Get the user's token
-      const token = await getToken(messaging);
-      console.log('User FCM token:', token);
-      addNotificationsToken(uid, token);
-      // TODO: Send this token to your server or use it directly to send push notifications.
-    } catch (error) {
-      console.error('Failed to get user FCM token', error);
-    }
-  };
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, []);
 
   const handleOk = () => {
     setVisible(false);
-    enableNotifications();
+    fetchToken(setTokenFound, uid);
+    //enableNotifications();
   };
 
   const handleCancel = () => {

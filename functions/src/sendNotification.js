@@ -24,6 +24,10 @@ exports.sendNotification = functions
           title: data.title,
           body: data.body,
         },
+        notification: {
+          title: data.title,
+          body: data.body,
+        },
         token: data.token,
       };
 
