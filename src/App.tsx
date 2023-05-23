@@ -30,25 +30,6 @@ const App: React.FC = () => {
     }
   }, [uid]);
 
-  // useEffect(() => {
-  //   // Check for service worker
-  //   if ('serviceWorker' in navigator) {
-  //     window.addEventListener('load', function () {
-  //       navigator.serviceWorker.register('/service_worker.ts').then(
-  //         function (registration: ServiceWorkerRegistration) {
-  //           console.log(
-  //             'Service Worker registered with scope: ',
-  //             registration.scope
-  //           );
-  //         },
-  //         function (err: any) {
-  //           console.log('Service Worker registration failed: ', err);
-  //         }
-  //       );
-  //     });
-  //   }
-  // }, []);
-
   const [isTokenFound, setTokenFound] = useState(false);
 
   onMessageListener()
