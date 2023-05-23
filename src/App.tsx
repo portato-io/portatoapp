@@ -31,12 +31,17 @@ const App: React.FC = () => {
   }, [uid]);
 
   const [isTokenFound, setTokenFound] = useState(false);
-
-  onMessageListener()
-    .then((payload) => {
+  useEffect(() => {
+    const unsubscribe = onMessageListener((payload: any) => {
       console.log('notif coming from here ', payload);
-    })
-    .catch((err) => console.log('failed: ', err));
+    });
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, []);
 
   const handleOk = () => {
     setVisible(false);

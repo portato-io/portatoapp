@@ -40,12 +40,11 @@ export const storage = getStorage(app);
 // Initialize Firebase Cloud Messaging and get a reference to the service
 export const messaging = getMessaging(app);
 
-export const onMessageListener = () =>
-  new Promise((resolve) => {
-    onMessage(messaging, (payload) => {
-      resolve(payload);
-    });
+export const onMessageListener = (callback) => {
+  return onMessage(messaging, (payload) => {
+    callback(payload);
   });
+};
 
 export const fetchToken = (setTokenFound, uid) => {
   return getToken(messaging, {
@@ -56,7 +55,7 @@ export const fetchToken = (setTokenFound, uid) => {
       if (currentToken) {
         console.log('current token for client: ', currentToken);
         setTokenFound(true);
-        addNotificationsToken(uid, token);
+        addNotificationsToken(uid, currentToken);
         // Track the token -> client mapping, by sending to backend server
         // show on the UI that permission is secured
       } else {
