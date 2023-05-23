@@ -4,6 +4,7 @@ import { getDatabase } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 import { getMessaging, onMessage, getToken } from 'firebase/messaging';
 import { getStorage } from 'firebase/storage';
+import { addNotificationsToken } from './linksStoreToFirebase';
 
 const notificationButton = document.getElementById('enableNotifications');
 let swRegistration = null;
@@ -46,7 +47,7 @@ export const onMessageListener = () =>
     });
   });
 
-export const fetchToken = (setTokenFound) => {
+export const fetchToken = (setTokenFound, uid) => {
   return getToken(messaging, {
     vapidKey:
       'BN1R0jA9hh7euhpDZ_AjxNvffl-Tcrlx9t7ijnKg6MJjuMSaEuVf1DNQPe-jINpqinR4Ihv6nXPFwMPxDqFq3vo',
@@ -55,6 +56,7 @@ export const fetchToken = (setTokenFound) => {
       if (currentToken) {
         console.log('current token for client: ', currentToken);
         setTokenFound(true);
+        addNotificationsToken(uid, token);
         // Track the token -> client mapping, by sending to backend server
         // show on the UI that permission is secured
       } else {

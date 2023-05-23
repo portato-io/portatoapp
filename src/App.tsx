@@ -49,44 +49,18 @@ const App: React.FC = () => {
   //   }
   // }, []);
 
-  const enableNotifications = () => {
-    Notification.requestPermission().then(function (status) {
-      console.log('Notification permission status:', status);
-      if (status === 'granted') {
-        subscribeUser();
-      }
-    });
-  };
-
-  const subscribeUser = async () => {
-    // Get Firebase Messaging instance
-    try {
-      // Get the user's token
-      const token = await getToken(messaging, {
-        vapidKey:
-          'BN1R0jA9hh7euhpDZ_AjxNvffl-Tcrlx9t7ijnKg6MJjuMSaEuVf1DNQPe-jINpqinR4Ihv6nXPFwMPxDqFq3vo',
-      });
-      console.log('User FCM token:', token);
-      addNotificationsToken(uid, token);
-      // TODO: Send this token to your server or use it directly to send push notifications.
-    } catch (error) {
-      console.error('Failed to get user FCM token', error);
-    }
-  };
-
   const [isTokenFound, setTokenFound] = useState(false);
-
-  fetchToken(setTokenFound);
 
   onMessageListener()
     .then((payload) => {
-      console.log(payload);
+      console.log('notif coming from here ', payload);
     })
     .catch((err) => console.log('failed: ', err));
 
   const handleOk = () => {
     setVisible(false);
-    enableNotifications();
+    fetchToken(setTokenFound, uid);
+    //enableNotifications();
   };
 
   const handleCancel = () => {
