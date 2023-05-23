@@ -1,16 +1,12 @@
 import './App.css';
-import React, { Suspense, useEffect, useId, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNavigator from './Components/SideBarNav';
-import { Layout, ConfigProvider, Modal, Button } from 'antd';
+import { ConfigProvider, Modal } from 'antd';
 import { AuthProvider } from './Components/AuthProvider';
-import { getMessaging, getToken } from 'firebase/messaging'; // import Firebase Messaging
-import {
-  addNotificationsToken,
-  checkTokenExists,
-} from './linksStoreToFirebase';
+import { checkTokenExists } from './linksStoreToFirebase';
 import { useAuth } from './Components/AuthProvider';
-import { fetchToken, messaging, onMessageListener } from './firebaseConfig';
+import { fetchToken, onMessageListener } from './firebaseConfig';
 
 // import routes
 import { routes as appRoutes } from './routes';
@@ -34,6 +30,23 @@ const App: React.FC = () => {
   useEffect(() => {
     const unsubscribe = onMessageListener((payload: any) => {
       console.log('notif coming from here ', payload);
+
+      // Construct a browser notification
+      if (Notification.permission === 'granted') {
+        new Notification(payload.notification.title, {
+          body: payload.notification.body,
+          icon: payload.notification.icon, // assuming your payload has an icon property
+        });
+      } else {
+        Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+            new Notification(payload.notification.title, {
+              body: payload.notification.body,
+              icon: payload.notification.icon, // assuming your payload has an icon property
+            });
+          }
+        });
+      }
     });
 
     return () => {
