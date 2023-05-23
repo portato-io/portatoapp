@@ -8,7 +8,7 @@ importScripts(
 
 // Initialize the Firebase app in the service worker by passing the generated config
 var firebaseConfig = {
-  apiKey: '',
+  apiKey: 'AIzaSyC3X0ZVQIbTvJIpJfDGdrc2q8_JlSVzDT4',
   authDomain: 'portatoapp.firebaseapp.com',
   databaseURL:
     'https://portatoapp-default-rtdb.europe-west1.firebasedatabase.app',
