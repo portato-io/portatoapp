@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { fetchDeals, fetchAdressRequest } from '../linksStoreToFirebase';
+import {
+  fetchDeals,
+  fetchAdressRequest,
+  changeStatusDeal,
+} from '../linksStoreToFirebase';
 import { IDealInfo, IObjectInfo } from '../type';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 
 interface DealInfoWithAddress extends IDealInfo {
   pickupAddress?: string;
@@ -54,6 +58,16 @@ const FetchDeals: React.FC<{
     fetchData();
   }, [uid]);
 
+  const contact = (uid: string, requestID: string) => {
+    console.log('Matching route with id: ' + routeId);
+    navigate(`/admin/deal_suggester/${routeId}/${routeUid}`);
+  };
+
+  const confirm = (dealID: string) => {
+    console.log('Matching route with id: ' + routeId);
+    navigate(`/admin/deal_suggester/${routeId}/${routeUid}`);
+  };
+
   const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>
@@ -81,6 +95,14 @@ const FetchDeals: React.FC<{
               <Card
                 style={{ marginTop: '5vh', width: '80%' }}
                 title={deal.status}
+                actions={[
+                  <Button
+                    onClick={() => contact(deal.request_uid, deal.request_id)}
+                  >
+                    Contact
+                  </Button>,
+                  <Button onClick={() => confirm()}>Confirm</Button>,
+                ]}
               >
                 {deal.pickupAddress} / {deal.deliveryAddress}
               </Card>
