@@ -18,11 +18,6 @@ import {
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { app } from '../../firebaseConfig';
 
-interface DealSuggesterProps {
-  route_id: string;
-  route_uid: string;
-}
-
 const DealSuggester: React.FC = () => {
   const dispatch = useDispatch();
   const { route_id } = useParams<{ route_id: string }>();

@@ -5,7 +5,7 @@ const cors = require('cors')({ origin: true });
 // initialize firebase admin SDK
 admin.initializeApp();
 
-exports.sendNotification = functions
+const sendNotification = functions
   .region('europe-west1')
   .https.onRequest((req, res) => {
     cors(req, res, () => {
@@ -44,3 +44,18 @@ exports.sendNotification = functions
         });
     });
   });
+
+async function getUserEmail(uid) {
+  try {
+    const userRecord = await admin.auth().getUser(uid);
+    return userRecord.email;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    return null;
+  }
+}
+
+module.exports = {
+  getUserEmail,
+  sendNotification,
+};

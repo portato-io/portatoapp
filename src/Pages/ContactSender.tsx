@@ -3,6 +3,7 @@ import { Form, Input, Button, message } from 'antd';
 import axios from 'axios';
 import '../PortatoStyleSheet.css';
 import PageLayout from './Layouts/PageLayoutTest';
+import { useParams } from 'react-router-dom';
 
 interface FormData {
   name: string;
@@ -11,6 +12,8 @@ interface FormData {
 }
 
 const ContactSender: React.FC = () => {
+  const { request_id } = useParams<{ request_id: string }>();
+  const { request_uid } = useParams<{ request_uid: string }>();
   const [form] = Form.useForm<FormData>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -18,15 +21,19 @@ const ContactSender: React.FC = () => {
     setLoading(true);
 
     // Adding a hardcoded targetEmail
-    const valuesWithTargetEmail = {
+    const valuesWithUid = {
       ...values,
-      targetEmail: 'target@example.com',
+      uid: request_uid,
+      message:
+        'This message concerns the following request: ' +
+        request_id +
+        values.message, // add your line here
     };
 
     try {
       const result = await axios.post(
-        'https://us-central1-portatoapp.cloudfunctions.net/sendEmail',
-        valuesWithTargetEmail
+        'https://us-central1-portatoapp.cloudfunctions.net/sendEmailToUid',
+        valuesWithUid
       );
 
       if (result.status === 200) {

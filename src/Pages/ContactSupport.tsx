@@ -19,7 +19,7 @@ const ContactForm: React.FC = () => {
 
     try {
       const result = await axios.post(
-        'https://us-central1-portatoapp.cloudfunctions.net/sendEmail',
+        'https://us-central1-portatoapp.cloudfunctions.net/sendEmailToSupport',
         values
       );
 
