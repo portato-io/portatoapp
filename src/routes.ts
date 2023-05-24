@@ -199,7 +199,7 @@ export const routes: Array<Route> = [
   {
     key: 'contact-sender',
     title: 'ContactSender',
-    path: '/contact_sender',
+    path: '/contact_sender/:request_uid/:request_id',
     enabled: true,
     component: ContactSender,
   },
