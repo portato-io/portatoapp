@@ -30,6 +30,7 @@ const EnterDeliveryCapacity = lazy(
 );
 const RouteSummary = lazy(() => import('./Pages/Driver/RouteSummary'));
 const DealSuggester = lazy(() => import('./Pages/Admin/DealSuggester'));
+const ContactSender = lazy(() => import('./Pages/ContactSender'));
 
 // interface
 interface Route {
@@ -194,5 +195,12 @@ export const routes: Array<Route> = [
     path: '/contact_support',
     enabled: true,
     component: ContactSupport,
+  },
+  {
+    key: 'contact-sender',
+    title: 'ContactSender',
+    path: '/contact_sender',
+    enabled: true,
+    component: ContactSender,
   },
 ];

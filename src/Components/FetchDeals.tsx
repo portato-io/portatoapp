@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import {
   fetchDeals,
   fetchAdressRequest,
-  changeStatusDeal,
+  changeDealStatus,
 } from '../linksStoreToFirebase';
 import { IDealInfo, IObjectInfo } from '../type';
 import { Card, Button } from 'antd';
+import { useNavigate } from 'react-router';
 
 interface DealInfoWithAddress extends IDealInfo {
   pickupAddress?: string;
@@ -18,6 +19,7 @@ const FetchDeals: React.FC<{
   admin?: boolean;
   filterStatus?: string; // prop for filtering deals based on status
 }> = ({ uid, heightPortion = 0.8, admin = false, filterStatus }) => {
+  const navigate = useNavigate();
   const [deals, setRequest] = useState<DealInfoWithAddress[]>([]);
 
   useEffect(() => {
@@ -58,14 +60,13 @@ const FetchDeals: React.FC<{
     fetchData();
   }, [uid]);
 
-  const contact = (uid: string, requestID: string) => {
-    console.log('Matching route with id: ' + routeId);
-    navigate(`/admin/deal_suggester/${routeId}/${routeUid}`);
+  const contact = (requestUid: string, requestID: string) => {
+    console.log('Contacting ' + requestUid + ' for request ' + requestID);
+    navigate(`/contact_sender/${requestUid}/${requestID}`);
   };
 
   const confirm = (dealID: string) => {
-    console.log('Matching route with id: ' + routeId);
-    navigate(`/admin/deal_suggester/${routeId}/${routeUid}`);
+    changeDealStatus(dealID, 'Confirm');
   };
 
   const containerHeight = window.innerHeight * heightPortion;
@@ -101,7 +102,7 @@ const FetchDeals: React.FC<{
                   >
                     Contact
                   </Button>,
-                  <Button onClick={() => confirm()}>Confirm</Button>,
+                  <Button onClick={() => confirm(deal.id)}>Confirm</Button>,
                 ]}
               >
                 {deal.pickupAddress} / {deal.deliveryAddress}

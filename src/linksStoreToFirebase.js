@@ -221,3 +221,14 @@ export const fetchAdressRequest = async (uid, id) => {
     console.error('Error fetching data from Firebase:', error);
   }
 };
+
+export const changeDealStatus = async (dealId, status) => {
+  try {
+    const dealRef = ref(database, 'deals/' + dealId);
+    await set(dealRef, { status: status });
+
+    console.log('Successfully updated data');
+  } catch (error) {
+    console.error('Error updating data:', error);
+  }
+};
