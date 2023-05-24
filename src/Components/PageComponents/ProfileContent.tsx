@@ -33,6 +33,10 @@ function ProfileContent() {
   // display prop should be managed appropriately
   const display = 'block';
 
+  const handleSupportClick = () => {
+    navigate('/contact_support');
+  };
+
   return (
     <PageLayout display={display}>
       <div style={{ display: display }} className="profile_content">
@@ -89,6 +93,9 @@ function ProfileContent() {
                 </List.Item>
                 <List.Item arrow={true} onClick={handleMySendRequestsClick}>
                   My Send Requests
+                </List.Item>
+                <List.Item arrow={true} onClick={handleSupportClick}>
+                  Support
                 </List.Item>
                 {isAdmin && (
                   <List.Item arrow={true} onClick={handleAdminClick}>
