@@ -7,10 +7,10 @@ import reportWebVitals from './reportWebVitals';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { reducer } from './Store/reducer';
-import { IObjectInfo, ObjectInfoState } from './type';
+import allReducers from './Store/reducers';
+import { IObjectInfo, IRouteInfo } from './type';
 
-const initialState: IObjectInfo = {
+const initialStateRequest: IObjectInfo = {
   name: '',
   description: '',
   size: 'S',
@@ -22,8 +22,26 @@ const initialState: IObjectInfo = {
   time: '',
   images: [],
 };
+console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 
-export const store = createStore(reducer, initialState);
+const initialStateRoute: IRouteInfo = {
+  id: 0,
+  departure_adress: '',
+  destination_adress: '',
+  acceptable_detour: 0,
+  time: [''],
+  timeRange: '',
+  type: '',
+  days: '',
+  delivery_capacity: '',
+};
+
+const initialState = {
+  request: initialStateRequest,
+  route: initialStateRoute,
+};
+
+export const store = createStore(allReducers, initialState);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

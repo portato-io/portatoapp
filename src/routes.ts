@@ -6,20 +6,29 @@ import { FC } from 'react';
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
-const Profile = lazy(() => import('./Pages/Profile'));
+const Profile = lazy(() => import('./Pages/Profile/Profile'));
 const EnterObjInfo = lazy(() => import('./Pages/Sender/EnterObjInfo'));
-const Deliver = lazy(() => import('./Pages/Deliver'));
+const Deliver = lazy(() => import('./Pages/Driver/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
 const Shipments = lazy(() => import('./Pages/Shipments'));
 const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
 const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
 const EnterPrice = lazy(() => import('./Pages/Sender/EnterPrice'));
-const Summary = lazy(() => import('./Pages/Sender/Summary'));
+const SummaryRequest = lazy(() => import('./Pages/Sender/Summary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
+const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
+const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
+const AllRoutes = lazy(() => import('./Pages/Admin/AllRoutes'));
 const ContactSupport = lazy(() => import('./Pages/ContactSupport'));
 const CreateSendRequest = lazy(
   () => import('./Pages/Sender/CreateSendRequest')
 );
+const EnterRoute = lazy(() => import('./Pages/Driver/enterRoute'));
+const EnterDrivingTime = lazy(() => import('./Pages/Driver/enterDrivingTime'));
+const EnterDeliveryCapacity = lazy(
+  () => import('./Pages/Driver/enterDeliveryCapacity')
+);
+const RouteSummary = lazy(() => import('./Pages/Driver/RouteSummary'));
 
 // interface
 interface Route {
@@ -27,7 +36,7 @@ interface Route {
   title: string;
   path: string;
   enabled: boolean;
-  component: FC<{}>;
+  component: FC<object>;
 }
 
 export const routes: Array<Route> = [
@@ -62,7 +71,7 @@ export const routes: Array<Route> = [
   {
     key: 'enterObjInfo-route',
     title: 'EnterObjInfo',
-    path: '/enterObjInfo',
+    path: '/createSendRequest/enterObjInfo',
     enabled: true,
     component: EnterObjInfo,
   },
@@ -90,37 +99,86 @@ export const routes: Array<Route> = [
   {
     key: 'enterAddress-route',
     title: 'EnterAddress',
-    path: '/enter_address',
+    path: '/createSendRequest/enter_address',
     enabled: true,
     component: EnterAddress,
   },
   {
     key: 'enterTime-route',
     title: 'EnterTime',
-    path: '/enter_time',
+    path: '/createSendRequest/enter_time',
     enabled: true,
     component: EnterTime,
   },
   {
     key: 'enterPrice-route',
     title: 'EnterPrice',
-    path: '/enter_price',
+    path: '/createSendRequest/enter_price',
     enabled: true,
     component: EnterPrice,
   },
   {
-    key: 'summary-route',
-    title: 'Summary',
-    path: '/summary',
+    key: 'summary-request',
+    title: 'SummaryRequest',
+    path: '/createSendRequest/summary',
     enabled: true,
-    component: Summary,
+    component: SummaryRequest,
   },
   {
     key: 'user-requests',
     title: 'UserRequests',
-    path: '/user_requests',
+    path: '/profile/user_requests',
     enabled: true,
     component: UserRequests,
+  },
+  {
+    key: 'enterRoute-route',
+    title: 'EnterRoute',
+    path: '/deliver/enterRoute',
+    enabled: true,
+    component: EnterRoute,
+  },
+  {
+    key: 'enterDrivingTime-route',
+    title: 'EnterDrivingTime',
+    path: '/deliver/enterDrivingTime',
+    enabled: true,
+    component: EnterDrivingTime,
+  },
+  {
+    key: 'enterDeliveryCapacity-route',
+    title: 'EnterDeliveryCapacity',
+    path: '/deliver/enterDeliveryCapacity',
+    enabled: true,
+    component: EnterDeliveryCapacity,
+  },
+  {
+    key: 'routeSummary-route',
+    title: 'RouteSummary',
+    path: '/deliver/routeSummary',
+    enabled: true,
+    component: RouteSummary,
+  },
+  {
+    key: 'all-requests',
+    title: 'AllRequests',
+    path: '/admin/all_requests',
+    enabled: true,
+    component: AllRequests,
+  },
+  {
+    key: 'admin-dashboard',
+    title: 'AdminDashboard',
+    path: '/admin/admin_dashboard',
+    enabled: true,
+    component: AdminDashboard,
+  },
+  {
+    key: 'all-routes',
+    title: 'AllRoutes',
+    path: '/admin/all_routes',
+    enabled: true,
+    component: AllRoutes,
   },
   {
     key: 'contact-support',

@@ -1,22 +1,12 @@
-import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
 import { Badge, TabBar } from 'antd-mobile';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AppOutline,
   SendOutline,
-  UnorderedListOutline,
   UserOutline,
   TruckOutline,
 } from 'antd-mobile-icons';
-import {
-  HomeOutlined,
-  ProfileOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
 
-const { Footer } = Layout;
 const tabs = [
   {
     key: '/',
@@ -49,9 +39,17 @@ function BottomBar() {
   const setRouteActive = (value: string) => {
     navigate(value);
   };
+  const firstSlashIndex: number = pathname.indexOf('/');
+  const secondSlashIndex: number = pathname.indexOf('/', firstSlashIndex + 1);
+  let initalRouteScreen = '';
+  if (secondSlashIndex !== -1) {
+    initalRouteScreen = pathname.slice(firstSlashIndex, secondSlashIndex);
+  } else {
+    initalRouteScreen = pathname;
+  }
   return (
     <TabBar
-      activeKey={pathname}
+      activeKey={initalRouteScreen}
       onChange={(value) => setRouteActive(value)}
       style={{
         position: 'absolute',
@@ -60,6 +58,7 @@ function BottomBar() {
         borderTop: 'solid',
         borderTopColor: '#E8E9F1',
       }}
+      className="custom-tab-bar"
     >
       {tabs.map((item) => (
         <TabBar.Item

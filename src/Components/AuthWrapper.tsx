@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Spin } from 'antd';
+import { Spin } from 'antd';
 import { auth } from '../firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import FirebaseAuth from '../Components/FirebaseAuth';
 import BackButton from './Buttons/BackButton';
 import PageLayout from '../Pages/Layouts/PageLayoutTest';
-import '../PortatoStyleSheet.css';
+import '../CSS/PortatoStyleSheet.css';
 
 interface AuthWrapperProps {
   Component: React.FC;

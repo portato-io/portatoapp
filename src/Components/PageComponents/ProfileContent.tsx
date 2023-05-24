@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import PageLayout from '../Pages/Layouts/PageLayoutTest';
+import PageLayout from '../../Pages/Layouts/PageLayoutTest';
 import { List, Card } from 'antd-mobile';
 import { UserOutlined } from '@ant-design/icons';
 import 'firebaseui/dist/firebaseui.css';
-import { auth } from '../firebaseConfig';
+import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -11,12 +11,17 @@ import { useNavigate } from 'react-router-dom';
 function ProfileContent() {
   const [user, setUser] = useState<User | null>(null);
   const [display, setDisplay] = useState('none');
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
   const navigate = useNavigate();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setDisplay('');
+        const token = await currentUser.getIdTokenResult();
+        setIsAdmin(token.claims.admin || false);
+        console.log('is user admin : ', isAdmin);
       } else {
         setUser(null);
       }
@@ -40,7 +45,11 @@ function ProfileContent() {
   };
 
   const handleMySendRequestsClick = () => {
-    navigate('/user_requests');
+    navigate('/profile/user_requests');
+  };
+
+  const handleAdminClick = () => {
+    navigate('/admin/admin_dashboard');
   };
 
   const handleSupportClick = () => {
@@ -69,8 +78,8 @@ function ProfileContent() {
           >
             <div
               style={{
-                width: 'min(50vw,50vh)',
-                height: 'min(50vw,50vh)',
+                width: 'min(min(50vw,50vh),250px)',
+                height: 'min(min(50vw,50vh),250px)',
                 borderRadius: '50%',
                 backgroundColor: '#fff',
                 display: 'flex',
@@ -81,9 +90,16 @@ function ProfileContent() {
               <UserOutlined style={{ fontSize: '48px' }} />
             </div>
           </div>
-          <div style={{ backgroundColor: '#2897FF', flex: 6 }}>
+          <div
+            style={{
+              backgroundColor: '#2897FF',
+              flex: 6,
+              height: '80vh',
+              overflowY: 'auto',
+            }}
+          >
             <Card style={{ borderRadius: '5%', height: '100%' }}>
-              <List mode="card" style={{ marginTop: '10%' }}>
+              <List mode="card" style={{ marginTop: '1vh' }}>
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   My Account
                 </List.Item>
@@ -99,6 +115,11 @@ function ProfileContent() {
                 <List.Item arrow={true} onClick={handleSupportClick}>
                   Support
                 </List.Item>
+                {isAdmin && (
+                  <List.Item arrow={true} onClick={handleAdminClick}>
+                    Admin window
+                  </List.Item>
+                )}
                 <List.Item
                   arrow={true}
                   onClick={() => signOut(auth)}

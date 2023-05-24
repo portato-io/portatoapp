@@ -1,34 +1,55 @@
 import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { useNavigate } from 'react-router-dom';
-import { Typography, Button } from 'antd';
+import { Typography } from 'antd';
+import { AutoCenter } from 'antd-mobile';
+import FetchRequests from '../../Components/FetchRequests';
+import { ButtonToCreateNewReqRoutes } from '../../Components/Buttons/ButtonToCreateNewReqRoutes';
+import BackArrow from '../../Components/Buttons/BackArrow';
+import { useAuth } from '../../Components/AuthProvider';
 
 const { Title } = Typography;
-const progress = 25;
+const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
+const BUTTON_TEXT = 'Create new request';
 
 const CreateSendRequest: React.FC = () => {
-  const nextScreen = '/enterObjInfo';
-  const navigate = useNavigate();
+  const { uid } = useAuth();
 
-  const handleSendClick = () => {
-    navigate('/enterObjInfo');
-  };
   return (
     <PageLayout>
-      <Title
-        level={4}
-        style={{ position: 'absolute', left: '26%', top: '10%' }}
-      >
-        Current send requests{' '}
-      </Title>
-      <Button
-        type="primary"
-        size="large"
-        style={{ position: 'absolute', left: '30%', top: '20%' }}
-        onClick={handleSendClick}
-      >
-        Create new request
-      </Button>
+      <BackArrow />
+      <AutoCenter>
+        <Title
+          level={4}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          Current send
+        </Title>
+        <ButtonToCreateNewReqRoutes
+          nextScreen={NEXT_SCREEN}
+          text={BUTTON_TEXT}
+        />
+      </AutoCenter>
+      {uid !== 'undefined' ? (
+        <>
+          <h1
+            style={{
+              marginTop: '10vh',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Your Current Requests
+          </h1>
+          <FetchRequests uid={uid} heightPortion={0.5} />
+        </>
+      ) : null}
     </PageLayout>
   );
 };
