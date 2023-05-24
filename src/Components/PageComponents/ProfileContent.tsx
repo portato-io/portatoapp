@@ -8,10 +8,6 @@ import { signOut } from 'firebase/auth';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
-import { Typography } from 'antd';
-
-const { Title } = Typography;
-
 function ProfileContent() {
   const [user, setUser] = useState<User | null>(null);
   const [display, setDisplay] = useState('none');
@@ -54,6 +50,10 @@ function ProfileContent() {
 
   const handleAdminClick = () => {
     navigate('/admin/admin_dashboard');
+  };
+
+  const handleSupportClick = () => {
+    navigate('/contact_support');
   };
 
   return (
@@ -111,6 +111,9 @@ function ProfileContent() {
                 </List.Item>
                 <List.Item arrow={true} onClick={handleMySendRequestsClick}>
                   My Send Requests
+                </List.Item>
+                <List.Item arrow={true} onClick={handleSupportClick}>
+                  Support
                 </List.Item>
                 {isAdmin && (
                   <List.Item arrow={true} onClick={handleAdminClick}>

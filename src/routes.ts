@@ -19,6 +19,7 @@ const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
 const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
 const AllRoutes = lazy(() => import('./Pages/Admin/AllRoutes'));
+const ContactSupport = lazy(() => import('./Pages/ContactSupport'));
 const CreateSendRequest = lazy(
   () => import('./Pages/Sender/CreateSendRequest')
 );
@@ -178,5 +179,12 @@ export const routes: Array<Route> = [
     path: '/admin/all_routes',
     enabled: true,
     component: AllRoutes,
+  },
+  {
+    key: 'contact-support',
+    title: 'ContactSupport',
+    path: '/contact_support',
+    enabled: true,
+    component: ContactSupport,
   },
 ];
