@@ -11,16 +11,22 @@ interface FormData {
 }
 
 const ContactSender: React.FC = () => {
-  const [form] = Form.useForm<FormData>(); // <-- Change the type here
+  const [form] = Form.useForm<FormData>();
   const [loading, setLoading] = useState<boolean>(false);
 
   const onFinish = async (values: FormData) => {
     setLoading(true);
 
+    // Adding a hardcoded targetEmail
+    const valuesWithTargetEmail = {
+      ...values,
+      targetEmail: 'target@example.com',
+    };
+
     try {
       const result = await axios.post(
         'https://us-central1-portatoapp.cloudfunctions.net/sendEmail',
-        values
+        valuesWithTargetEmail
       );
 
       if (result.status === 200) {

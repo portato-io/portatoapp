@@ -21,11 +21,11 @@ const transporter = nodemailer.createTransport({
 function sendEmail(req, res) {
   cors(req, res, async () => {
     try {
-      const { name, email, message } = req.body;
+      const { name, email, message, targetEmail } = req.body;
 
       const mailOptions = {
-        from: 'hugo@portato.io',
-        to: 'support@portato.io',
+        from: '"Notifications" <notifications@portato.io>',
+        to: targetEmail,
         subject: 'New Message from React Web App',
         text: `${name} (${email}) says: ${message}`,
       };
