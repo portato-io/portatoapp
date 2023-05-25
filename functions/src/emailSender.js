@@ -28,10 +28,11 @@ function sendEmailToUid(req, res) {
         targetEmail = await getUserEmail(uid); // Fetch email address from UID
       } else {
         res.status(500).send('No uid given');
+        return;
       }
 
       const mailOptions = {
-        from: 'hugo@portato.io',
+        from: '"Notifications" <notifications-no-reply@portato.io>',
         to: targetEmail, // Use the fetched email address
         subject: 'New Message from React Web App',
         text: `${name} (${email}) says: ${message}`,
@@ -63,7 +64,7 @@ function sendEmailToSupport(req, res) {
       }
 
       const mailOptions = {
-        from: 'hugo@portato.io',
+        from: '"Notifications" <notifications-no-reply@portato.io>',
         to: targetEmail, // Use the fetched email address
         subject: 'New Message from React Web App',
         text: `${name} (${email}) says: ${message}`,
