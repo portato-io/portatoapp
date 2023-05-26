@@ -1,14 +1,15 @@
 import * as actionTypes from '../actionTypes/dealActionTypes';
 import { AnyAction } from 'redux';
+import { IRequestInfo, IRouteInfo } from '../../type';
 
 export const setDealId = (id: string): AnyAction => ({
   type: actionTypes.SET_ID,
   payload: id,
 });
 
-export const setRouteId = (id: string): AnyAction => ({
-  type: actionTypes.SET_ROUTE_ID,
-  payload: id,
+export const setRoute = (route: IRouteInfo): AnyAction => ({
+  type: actionTypes.SET_ROUTE,
+  payload: route,
 });
 
 export const setStatus = (status: string): AnyAction => ({
@@ -16,17 +17,7 @@ export const setStatus = (status: string): AnyAction => ({
   payload: status,
 });
 
-export const setRequestId = (id: string): AnyAction => ({
-  type: actionTypes.SET_REQ_ID,
-  payload: id,
-});
-
-export const setRequestUid = (uid: string): AnyAction => ({
-  type: actionTypes.SET_REQ_UID,
-  payload: uid,
-});
-
-export const setRouetUid = (uid: string): AnyAction => ({
-  type: actionTypes.SET_ROUTE_UID,
-  payload: uid,
+export const setRequest = (request: IRequestInfo): AnyAction => ({
+  type: actionTypes.SET_REQ,
+  payload: request,
 });

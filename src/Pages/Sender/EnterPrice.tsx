@@ -7,7 +7,7 @@ import { Typography, Form, Input, Card } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectPrice } from '../../Store/actions/requestActionCreators';
-import { IObjectInfo, ObjectInfoState } from '../../type';
+import { IRequestInfo, ObjectInfoState } from '../../type';
 
 const { Title } = Typography;
 const progress = 75;
@@ -15,7 +15,7 @@ const NEXT_SCREEN = '/createSendRequest/summary';
 
 const EnterPrice: React.FC = () => {
   const objecInfo = useSelector(
-    (state: { request: IObjectInfo }) => state.request
+    (state: { request: IRequestInfo }) => state.request
   );
 
   const [prices, setValues] = useState({

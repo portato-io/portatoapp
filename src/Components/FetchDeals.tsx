@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-  fetchDeals,
-  fetchAdressRequest,
-  changeDealStatus,
-} from '../linksStoreToFirebase';
-import { IDealInfo, IObjectInfo } from '../type';
+import { fetchDeals, changeDealStatus } from '../linksStoreToFirebase';
+import { IDealInfo } from '../type';
 import { Card, Button } from 'antd';
 import { useNavigate } from 'react-router';
-
-interface DealInfoWithAddress extends IDealInfo {
-  pickupAddress?: string;
-  deliveryAddress?: string;
-}
 
 const FetchDeals: React.FC<{
   uid?: string | null; // uid is now optional
@@ -20,7 +11,7 @@ const FetchDeals: React.FC<{
   filterStatus?: string; // prop for filtering deals based on status
 }> = ({ uid, heightPortion = 0.8, admin = false, filterStatus }) => {
   const navigate = useNavigate();
-  const [deals, setRequest] = useState<DealInfoWithAddress[]>([]);
+  const [deals, setDeals] = useState<IDealInfo[]>([]);
 
   useEffect(() => {
     if (!uid) {
@@ -30,27 +21,15 @@ const FetchDeals: React.FC<{
 
     const fetchData = async () => {
       try {
-        const storesObject = await fetchDeals();
-        if (storesObject && typeof storesObject === 'object') {
-          const storesArray: DealInfoWithAddress[] = Object.values(
-            storesObject
+        const dealsObject = await fetchDeals(uid);
+        if (dealsObject && typeof dealsObject === 'object') {
+          const dealsArray: IDealInfo[] = Object.values(
+            dealsObject
           ) as IDealInfo[];
-          for (const deal of storesArray) {
-            const addressObject = await fetchAdressRequest(
-              deal.request_uid,
-              deal.request_id
-            );
-            if (addressObject && typeof addressObject === 'object') {
-              const request = Object.values(addressObject)[0] as IObjectInfo;
-              console.log('request: ' + request);
-              deal.pickupAddress = request.pickup_adress;
-              deal.deliveryAddress = request.delivery_adress;
-            }
-          }
-          setRequest(storesArray);
+          setDeals(dealsArray);
         } else {
-          console.log('Data is not an object:', storesObject);
-          setRequest([]);
+          console.log('Data is not an object:', dealsObject);
+          setDeals([]);
         }
       } catch (error) {
         console.log('Error fetching data: ', error);
@@ -66,7 +45,7 @@ const FetchDeals: React.FC<{
   };
 
   const confirm = (dealID: string) => {
-    changeDealStatus(dealID, 'Confirm');
+    changeDealStatus(dealID, 'Confirmed');
   };
 
   const containerHeight = window.innerHeight * heightPortion;
@@ -78,11 +57,7 @@ const FetchDeals: React.FC<{
         }
       >
         {deals
-          .filter(
-            (deal) =>
-              (!filterStatus || deal.status === filterStatus) &&
-              (!uid || deal.route_uid === uid)
-          ) // filter deals based on status and route uid
+          .filter((deal) => !filterStatus || deal.status === filterStatus)
           .map((deal) => (
             <div
               key={deal.id}
@@ -96,16 +71,24 @@ const FetchDeals: React.FC<{
               <Card
                 style={{ marginTop: '5vh', width: '80%' }}
                 title={deal.status}
-                actions={[
-                  <Button
-                    onClick={() => contact(deal.request_uid, deal.request_id)}
-                  >
-                    Contact
-                  </Button>,
-                  <Button onClick={() => confirm(deal.id)}>Confirm</Button>,
-                ]}
+                actions={
+                  filterStatus === 'Suggestion'
+                    ? [
+                        <Button
+                          onClick={() =>
+                            contact(deal.request.uid, deal.request.id)
+                          }
+                        >
+                          Contact
+                        </Button>,
+                        <Button onClick={() => confirm(deal.id)}>
+                          Confirm
+                        </Button>,
+                      ]
+                    : []
+                }
               >
-                {deal.pickupAddress} / {deal.deliveryAddress}
+                {deal.request.pickup_adress} / {deal.request.delivery_adress}
               </Card>
             </div>
           ))}

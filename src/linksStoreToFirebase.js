@@ -1,4 +1,13 @@
-import { ref, onValue, get, set } from 'firebase/database';
+import {
+  ref,
+  onValue,
+  get,
+  set,
+  update,
+  query,
+  orderByChild,
+  equalTo,
+} from 'firebase/database';
 import { database } from './firebaseConfig';
 import { setObjectId, setReqUid } from './Store/actions/requestActionCreators';
 import { setRouteId, setRouteUid } from './Store/actions/routeActionCreators';
@@ -202,15 +211,17 @@ export const checkTokenExists = async (uid) => {
   }
 };
 
-export const fetchDeals = async () => {
+export const fetchDeals = async (uid) => {
   try {
-    const userRequestsRef = ref(database, 'deals');
-    const snapshot = await get(userRequestsRef);
+    const dealsRef = ref(database, 'deals');
+    const dealsQuery = query(dealsRef, orderByChild('route/uid'), equalTo(uid));
+    const snapshot = await get(dealsQuery);
+
     if (snapshot.exists()) {
       console.log('Data:', snapshot.val());
       return snapshot.val();
     } else {
-      console.log('No data found.', userRequestsRef);
+      console.log('No data found for uid: ', uid);
     }
   } catch (error) {
     console.error('Error fetching data from Firebase:', error);
@@ -235,7 +246,7 @@ export const fetchAdressRequest = async (uid, id) => {
 export const changeDealStatus = async (dealId, status) => {
   try {
     const dealRef = ref(database, 'deals/' + dealId);
-    await set(dealRef, { status: status });
+    await update(dealRef, { status: status });
 
     console.log('Successfully updated data');
   } catch (error) {

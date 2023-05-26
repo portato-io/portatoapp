@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
-import { IObjectInfo } from '../type';
+import { IRequestInfo } from '../type';
 import { Card } from 'antd';
 
 const FetchRequests: React.FC<{
@@ -8,7 +8,7 @@ const FetchRequests: React.FC<{
   heightPortion?: number;
   admin?: boolean;
 }> = ({ uid, heightPortion = 0.8, admin = false }) => {
-  const [requests, setRequest] = useState<IObjectInfo[]>([]);
+  const [requests, setRequest] = useState<IRequestInfo[]>([]);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
@@ -24,7 +24,7 @@ const FetchRequests: React.FC<{
     const fetchData = fetchDataOnce(uid, 'requests').then((storesObject) => {
       // Check if storesObject is an object before returning it
       if (storesObject && typeof storesObject === 'object') {
-        const storesArray = Object.values(storesObject) as IObjectInfo[]; // Type assertion here
+        const storesArray = Object.values(storesObject) as IRequestInfo[]; // Type assertion here
         return storesArray;
       } else {
         console.log('Data is not an object:', storesObject);

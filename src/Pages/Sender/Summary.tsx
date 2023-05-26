@@ -8,7 +8,7 @@ import SignInButton from '../../Components/Buttons/SignInButton';
 import FirebaseAuth from '../../Components/FirebaseAuth';
 
 import { useSelector } from 'react-redux';
-import { IObjectInfo } from '../../type';
+import { IRequestInfo } from '../../type';
 import { useAuth } from '../../Components/AuthProvider';
 import { uploadRequestToFirebase } from '../../linksStoreToFirebase';
 import { useDispatch } from 'react-redux';
@@ -26,7 +26,7 @@ const Summary: React.FC = () => {
   };
 
   const objecInfo = useSelector(
-    (state: { request: IObjectInfo }) => state.request
+    (state: { request: IRequestInfo }) => state.request
   );
 
   const { uid } = useAuth();

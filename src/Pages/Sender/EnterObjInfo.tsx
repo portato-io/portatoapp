@@ -9,7 +9,7 @@ import { Typography, Form, Input, Radio, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setObject } from '../../Store/actions/requestActionCreators';
-import { IFirstObjectInfo, IObjectInfo } from '../../type';
+import { IFirstObjectInfo, IRequestInfo } from '../../type';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -18,7 +18,7 @@ const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
   const objecInfo = useSelector(
-    (state: { request: IObjectInfo }) => state.request
+    (state: { request: IRequestInfo }) => state.request
   );
 
   const [object, setValues] = useState<IFirstObjectInfo>({

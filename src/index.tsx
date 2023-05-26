@@ -8,10 +8,10 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import allReducers from './Store/reducers';
-import { IObjectInfo, IRouteInfo } from './type';
+import { IRequestInfo, IRouteInfo } from './type';
 import { AuthProvider } from './Components/AuthProvider';
 
-const initialStateRequest: IObjectInfo = {
+const initialStateRequest: IRequestInfo = {
   id: '0',
   uid: '0',
   name: '',

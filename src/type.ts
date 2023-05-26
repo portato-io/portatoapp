@@ -1,4 +1,4 @@
-export interface IObjectInfo {
+export interface IRequestInfo {
   id: string;
   uid: string;
   name: string;
@@ -21,12 +21,12 @@ export interface IFirstObjectInfo {
 }
 
 export type ObjectInfoState = {
-  object: IObjectInfo;
+  object: IRequestInfo;
 };
 
 export type ObjectInfoAction = {
   type: string;
-  object: IObjectInfo;
+  object: IRequestInfo;
 };
 
 export type DispatchType = (args: ObjectInfoAction) => ObjectInfoAction;
@@ -51,10 +51,8 @@ export type RouteInfoAction = {
 
 export interface IDealInfo {
   id: string;
-  request_uid: string;
-  route_uid: string;
-  request_id: string;
-  route_id: string;
+  route: IRouteInfo;
+  request: IRequestInfo;
   status: string;
 }
 

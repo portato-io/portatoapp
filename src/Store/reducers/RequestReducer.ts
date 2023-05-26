@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
-import { IObjectInfo } from '../../type';
+import { IRequestInfo } from '../../type';
 
-const initialState: IObjectInfo = {
+const initialState: IRequestInfo = {
   id: '0',
   uid: '0',
   name: '',
@@ -19,7 +19,7 @@ const initialState: IObjectInfo = {
 export function requestReducer(
   state: any = initialState,
   action: AnyAction
-): IObjectInfo {
+): IRequestInfo {
   console.log(action.type);
   switch (action.type) {
     case 'SET_OBJECT': {

@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { useParams } from 'react-router-dom';
 import {
   setStatus,
-  setRequestId,
-  setRouteId,
-  setRouetUid,
-  setRequestUid,
+  setRequest,
+  setRoute,
 } from '../../Store/actions/dealActionCreators';
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
@@ -14,16 +12,16 @@ import {
   uploadDealToFirebase,
   checkData,
   getUserTokens,
+  fetchDataOnce,
 } from '../../linksStoreToFirebase';
-import { getFunctions, httpsCallable } from 'firebase/functions';
-import { app } from '../../firebaseConfig';
+import { IRouteInfo, IRequestInfo } from '../../type';
 
 const DealSuggester: React.FC = () => {
   const dispatch = useDispatch();
   const { route_id } = useParams<{ route_id: string }>();
   const { route_uid } = useParams<{ route_uid: string }>();
-  const [inputID, setinputID] = useState('');
-  const [inputUID, setinputUID] = useState('');
+  const [requestID, setRequestID] = useState('');
+  const [requestUID, setRequestUID] = useState('');
   if (!route_id) {
     console.error('route id is undefined');
     return null; // or redirect, show error, etc.
@@ -32,14 +30,53 @@ const DealSuggester: React.FC = () => {
     console.error('route uid is undefined');
     return null; // or redirect, show error, etc.
   }
-  dispatch(setRouteId(route_id));
-  dispatch(setRouetUid(route_uid));
+
+  useEffect(() => {
+    if (!route_uid) {
+      console.log('route uid is undefined');
+      return;
+    }
+
+    const fetchRouteData = async () => {
+      try {
+        const routesObject = await fetchDataOnce(route_uid, 'routes');
+        if (routesObject && typeof routesObject === 'object') {
+          const routesArray = Object.values(routesObject) as IRouteInfo[];
+          const route = routesArray.find((route) => route.id === route_id);
+          if (route) {
+            dispatch(setRoute(route));
+          } else {
+            console.error('Route not found: ', route_id);
+          }
+        } else {
+          console.log('Data is not an object:', routesObject);
+        }
+      } catch (error) {
+        console.log('Error fetching data: ', error);
+      }
+    };
+
+    fetchRouteData();
+  }, [route_uid, route_id, dispatch]);
+
   const suggestRequest = async (id: string, uid: string) => {
     // implement your function here
     try {
       console.log('Submitted id: ', id, 'Submitted uid: ', uid);
-      dispatch(setRequestId(id));
-      dispatch(setRequestUid(uid));
+
+      const requestObject = await fetchDataOnce(uid, 'requests');
+      if (requestObject && typeof requestObject === 'object') {
+        const requestsArray = Object.values(requestObject) as IRequestInfo[];
+        const request = requestsArray.find((request) => request.id === id);
+        if (request) {
+          dispatch(setRequest(request));
+        } else {
+          console.error('Request not found: ', id);
+        }
+      } else {
+        console.log('Data is not an object:', requestObject);
+      }
+
       dispatch(setStatus('Suggestion'));
 
       if (await checkData(uid, 'requests', id)) {
@@ -92,15 +129,15 @@ const DealSuggester: React.FC = () => {
   };
 
   const handleIDChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setinputID(event.target.value);
+    setRequestID(event.target.value);
   };
 
   const handleUIDChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setinputUID(event.target.value);
+    setRequestUID(event.target.value);
   };
 
   const handleSubmit = () => {
-    suggestRequest(inputID, inputUID);
+    suggestRequest(requestID, requestUID);
   };
 
   return (
@@ -110,13 +147,13 @@ const DealSuggester: React.FC = () => {
       </h1>
       <input
         type="text"
-        value={inputID}
+        value={requestID}
         onChange={handleIDChange}
         placeholder="Enter request ID"
       />
       <input
         type="text"
-        value={inputUID}
+        value={requestUID}
         onChange={handleUIDChange}
         placeholder="Enter request UID"
       />

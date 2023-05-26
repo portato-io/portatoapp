@@ -3,10 +3,32 @@ import { IDealInfo } from '../../type';
 
 const initialStateDeal: IDealInfo = {
   id: '0',
-  request_uid: '0',
-  route_uid: '0',
-  request_id: '0',
-  route_id: '0',
+  request: {
+    id: '0',
+    uid: '0',
+    name: '',
+    description: '',
+    size: '',
+    weight: '',
+    price: 0,
+    pickup_adress: '',
+    delivery_adress: '',
+    dateRange: [],
+    time: '',
+    images: [],
+  },
+  route: {
+    id: '0',
+    uid: '0',
+    departure_adress: '',
+    destination_adress: '',
+    acceptable_detour: 0,
+    time: [],
+    type: '',
+    days: '',
+    timeRange: '',
+    delivery_capacity: '',
+  },
   status: 'unknown',
 };
 
@@ -21,34 +43,22 @@ export function dealReducer(
         id: action.payload,
       };
     }
-    case 'SET_REQ_ID': {
+    case 'SET_REQ': {
       return {
         ...state,
-        request_id: action.payload,
+        request: action.payload,
       };
     }
-    case 'SET_ROUTE_ID': {
+    case 'SET_ROUTE': {
       return {
         ...state,
-        route_id: action.payload,
+        route: action.payload,
       };
     }
     case 'SET_STATUS': {
       return {
         ...state,
         status: action.payload,
-      };
-    }
-    case 'SET_ROUTE_UID': {
-      return {
-        ...state,
-        route_uid: action.payload,
-      };
-    }
-    case 'SET_REQ_UID': {
-      return {
-        ...state,
-        request_uid: action.payload,
       };
     }
     default: {
