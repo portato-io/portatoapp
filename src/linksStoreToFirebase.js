@@ -150,20 +150,30 @@ export const listenForDataChanges = () => {
 
 export const addNotificationsToken = async (uid, token) => {
   try {
-    // Get the database instance and create a reference to the user's requests
-    const requestsRef = ref(database, `users/${uid}/token`);
+    // Get the database instance and create a reference to the user's tokens
+    const tokensRef = ref(database, `users/${uid}/tokens`);
 
-    // Update your data under the new key
-    await set(requestsRef, token);
-    console.log('Successfully added the token: ');
+    // Get the current tokens
+    const snapshot = await get(tokensRef);
+    let currentTokens = snapshot.exists() ? snapshot.val() : [];
+
+    // Check if the token already exists in the array
+    if (!currentTokens.includes(token)) {
+      // Add the new token to the array
+      currentTokens.push(token);
+
+      // Update the tokens in the database
+      await set(tokensRef, currentTokens);
+      console.log('Successfully added the token: ');
+    }
   } catch (error) {
-    console.error('Error creating suggestions: ', error);
+    console.error('Error adding token: ', error);
   }
 };
 
-export const getUserToken = async (uid) => {
+export const getUserTokens = async (uid) => {
   try {
-    const userRequestsRef = ref(database, `users/${uid}/token`);
+    const userRequestsRef = ref(database, `users/${uid}/tokens`);
     const snapshot = await get(userRequestsRef);
     if (snapshot.exists()) {
       console.log('Data:', snapshot.val());

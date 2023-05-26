@@ -13,7 +13,7 @@ import { message } from 'antd';
 import {
   uploadDealToFirebase,
   checkData,
-  getUserToken,
+  getUserTokens,
 } from '../../linksStoreToFirebase';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { app } from '../../firebaseConfig';
@@ -46,35 +46,38 @@ const DealSuggester: React.FC = () => {
         message.success('Suggestion valid! Submitted successfully');
         uploadDealToFirebase(dispatch);
 
-        const token = await getUserToken(route_uid);
+        const tokens = await getUserTokens(route_uid);
 
-        console.log('token is: ', token);
-        if (token) {
-          // Prepare the request body
-          const body = {
-            title: 'New delivery suggestion',
-            body: 'World',
-            token: token,
-          };
+        console.log('tokens are: ', tokens);
+        if (tokens) {
+          tokens.forEach(async (token: any) => {
+            // Prepare the request body
+            const body = {
+              title: 'New delivery suggestion',
+              body: 'World',
+              token: token,
+            };
 
-          // Make a POST request to the Firebase Function
-          fetch(
-            'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
-            {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(body),
-            }
-          )
-            .then((response) => response.json())
-            .then((result) => {
-              // Read result of the Cloud Function.
-              //console.log(result.result);
-            })
-            .catch((error) => {
-              // Getting the error details
-              console.error(`error: ${error}`);
-            });
+            // Make a POST request to the Firebase Function
+            fetch(
+              'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
+              {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+              }
+            )
+              .then((response) => response.json())
+              .then((result) => {
+                // Read result of the Cloud Function.
+                console.log(result);
+                message.success('Notification sent successfully');
+              })
+              .catch((error) => {
+                // Getting the error details
+                console.error(`error: ${error}`);
+              });
+          });
         }
       } else {
         message.error('Suggestion invalid');

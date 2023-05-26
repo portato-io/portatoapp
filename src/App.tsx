@@ -17,12 +17,7 @@ const App: React.FC = () => {
   const [visible, setVisible] = useState(false); // for the modal
   useEffect(() => {
     if (uid) {
-      const checkToken = async () => {
-        if (!(await checkTokenExists(uid))) {
-          setVisible(true);
-        }
-      };
-      checkToken();
+      fetchToken(setTokenFound, uid);
     }
   }, [uid]);
 
@@ -58,7 +53,7 @@ const App: React.FC = () => {
 
   const handleOk = () => {
     setVisible(false);
-    fetchToken(setTokenFound, uid);
+
     //enableNotifications();
   };
 
@@ -91,15 +86,6 @@ const App: React.FC = () => {
             </Suspense>
           </Router>
         </div>
-
-        <Modal
-          title="Enable Notifications"
-          visible={visible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <p>Would you like to enable notifications for our app?</p>
-        </Modal>
       </ConfigProvider>
     </AuthProvider>
   );
