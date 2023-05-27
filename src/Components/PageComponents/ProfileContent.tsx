@@ -1,36 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PageLayout from '../../Pages/Layouts/PageLayoutTest';
 import { List, Card } from 'antd-mobile';
 import { UserOutlined } from '@ant-design/icons';
-import 'firebaseui/dist/firebaseui.css';
 import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
-import { onAuthStateChanged, User } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { checkAdmin } from '../AuthProvider';
 
 function ProfileContent() {
-  const [user, setUser] = useState<User | null>(null);
-  const [display, setDisplay] = useState('none');
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-
   const navigate = useNavigate();
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setDisplay('');
-        const token = await currentUser.getIdTokenResult();
-        setIsAdmin(token.claims.admin || false);
-        console.log('is user admin : ', isAdmin);
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const isAdmin = checkAdmin();
 
   const handleMyAccountClick = () => {
     // navigate to My Account screen
@@ -51,6 +30,8 @@ function ProfileContent() {
   const handleAdminClick = () => {
     navigate('/admin/admin_dashboard');
   };
+  // display prop should be managed appropriately
+  const display = 'block';
 
   const handleSupportClick = () => {
     navigate('/contact_support');
@@ -59,6 +40,7 @@ function ProfileContent() {
   return (
     <PageLayout display={display}>
       <div style={{ display: display }} className="profile_content">
+        {/* Rest of your code... */}
         <div
           style={{
             height: '100vh',

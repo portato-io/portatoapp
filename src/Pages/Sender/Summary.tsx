@@ -8,10 +8,10 @@ import SignInButton from '../../Components/Buttons/SignInButton';
 import FirebaseAuth from '../../Components/FirebaseAuth';
 
 import { useSelector } from 'react-redux';
-import { IObjectInfo } from '../../type';
+import { IRequestInfo } from '../../type';
 import { useAuth } from '../../Components/AuthProvider';
-import { uploadReduxStoreToFirebase } from '../../linksStoreToFirebase';
-import { store } from '../../index';
+import { uploadRequestToFirebase } from '../../linksStoreToFirebase';
+import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
 const progress = 100;
@@ -19,21 +19,21 @@ const NEXT_SCREEN = '/';
 
 const Summary: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const objecInfo = useSelector(
-    (state: { request: IObjectInfo }) => state.request
+    (state: { request: IRequestInfo }) => state.request
   );
 
   const { uid } = useAuth();
 
   const handleConfirm = () => {
     if (uid) {
-      const state = store.getState();
-      uploadReduxStoreToFirebase(uid, state.request);
+      uploadRequestToFirebase(uid, dispatch);
     } else {
       console.log('User UID not found.');
     }

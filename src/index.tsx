@@ -8,9 +8,12 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import allReducers from './Store/reducers';
-import { IObjectInfo, IRouteInfo } from './type';
+import { IRequestInfo, IRouteInfo } from './type';
+import { AuthProvider } from './Components/AuthProvider';
 
-const initialStateRequest: IObjectInfo = {
+const initialStateRequest: IRequestInfo = {
+  id: '0',
+  uid: '0',
   name: '',
   description: '',
   size: 'S',
@@ -25,7 +28,8 @@ const initialStateRequest: IObjectInfo = {
 console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 
 const initialStateRoute: IRouteInfo = {
-  id: 0,
+  id: '0',
+  uid: '0',
   departure_adress: '',
   destination_adress: '',
   acceptable_detour: 0,
@@ -47,9 +51,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <AuthProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </AuthProvider>
 );
 
 // Mehdi: If we want the app to work offline, we need register,

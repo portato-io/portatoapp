@@ -10,9 +10,8 @@ import { auth } from '../../firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import FirebaseAuth from '../../Components/FirebaseAuth';
 import { uploadRouteToFirebase } from '../../linksStoreToFirebase';
-import { store } from '../../index';
 import { IRouteInfo } from '../../type';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const { Title } = Typography;
 const PROGRESS = 100;
@@ -20,6 +19,7 @@ const RouteSummary: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   console.log(Object.values(routeInfo.time)[0]);
+  const dispatch = useDispatch();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -49,8 +49,7 @@ const RouteSummary: React.FC = () => {
     if (currentUser) {
       const uid = auth.currentUser?.uid; // Add the optional chaining operator here
       if (uid) {
-        const state = store.getState();
-        uploadRouteToFirebase(uid, state.route);
+        uploadRouteToFirebase(uid, dispatch);
       } else {
         console.log('User UID not found.');
       }

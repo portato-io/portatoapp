@@ -23,6 +23,11 @@ export const setObjectPrice = (price: number): AnyAction => ({
   payload: price,
 });
 
+export const setObjectId = (id: string): AnyAction => ({
+  type: actionTypes.SET_ID,
+  payload: id,
+});
+
 export const setObjectDateRange = (dateRange: string[]): AnyAction => ({
   type: actionTypes.SET_DATE_RANGE,
   payload: dateRange,
@@ -41,4 +46,9 @@ export const addObjectImages = (images: string[]): AnyAction => ({
 export const removeObjectImages = (position: number): AnyAction => ({
   type: actionTypes.REMOVE_IMAGE,
   payload: position,
+});
+
+export const setReqUid = (uid: string): AnyAction => ({
+  type: actionTypes.SET_UID,
+  payload: uid,
 });

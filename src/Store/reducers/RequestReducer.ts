@@ -1,7 +1,9 @@
 import { AnyAction } from 'redux';
-import { IObjectInfo } from '../../type';
+import { IRequestInfo } from '../../type';
 
-const initialState: IObjectInfo = {
+const initialState: IRequestInfo = {
+  id: '0',
+  uid: '0',
   name: '',
   description: '',
   size: 'S',
@@ -17,7 +19,7 @@ const initialState: IObjectInfo = {
 export function requestReducer(
   state: any = initialState,
   action: AnyAction
-): IObjectInfo {
+): IRequestInfo {
   console.log(action.type);
   switch (action.type) {
     case 'SET_OBJECT': {
@@ -30,7 +32,18 @@ export function requestReducer(
         weight: action.payload.weight,
       };
     }
-
+    case 'SET_ID': {
+      return {
+        ...state,
+        id: action.payload,
+      };
+    }
+    case 'SET_UID': {
+      return {
+        ...state,
+        uid: action.payload,
+      };
+    }
     case 'SET_ADRESS': {
       console.log(state);
       return {
@@ -39,7 +52,6 @@ export function requestReducer(
         delivery_adress: action.payload.delivery_adress,
       };
     }
-
     case 'SET_PRICE': {
       return { ...state, price: action.payload };
     }

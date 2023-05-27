@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const corsModule = require('cors');
+const { getUserEmail } = require('./firebaseAdminFunc'); // make sure to point to the correct path of the firebaseAdminFunc.js file
 
 const cors = corsModule({ origin: true });
 
@@ -18,14 +19,21 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function sendEmail(req, res) {
+function sendEmailToUid(req, res) {
   cors(req, res, async () => {
     try {
-      const { name, email, message } = req.body;
+      const { name, email, message, uid } = req.body;
+      let targetEmail;
+      if (uid) {
+        targetEmail = await getUserEmail(uid); // Fetch email address from UID
+      } else {
+        res.status(500).send('No uid given');
+        return;
+      }
 
       const mailOptions = {
-        from: 'hugo@portato.io',
-        to: 'support@portato.io',
+        from: '"Notifications" <notifications-no-reply@portato.io>',
+        to: targetEmail, // Use the fetched email address
         subject: 'New Message from React Web App',
         text: `${name} (${email}) says: ${message}`,
       };
@@ -42,4 +50,36 @@ function sendEmail(req, res) {
   });
 }
 
-exports.sendEmail = functions.https.onRequest(sendEmail);
+exports.sendEmailToUid = functions.https.onRequest(sendEmailToUid);
+
+function sendEmailToSupport(req, res) {
+  cors(req, res, async () => {
+    try {
+      const { name, email, message, uid } = req.body;
+      let targetEmail;
+      if (uid) {
+        targetEmail = await getUserEmail(uid); // Fetch email address from UID
+      } else {
+        res.status(500).send('No uid given');
+      }
+
+      const mailOptions = {
+        from: '"Notifications" <notifications-no-reply@portato.io>',
+        to: targetEmail, // Use the fetched email address
+        subject: 'New Message from React Web App',
+        text: `${name} (${email}) says: ${message}`,
+      };
+
+      console.log('Sending email...');
+      const info = await transporter.sendMail(mailOptions);
+      console.log(`Email sent: ${info.messageId}`);
+
+      res.status(200).send(info);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).send(error);
+    }
+  });
+}
+
+exports.sendEmailToSupport = functions.https.onRequest(sendEmailToSupport);

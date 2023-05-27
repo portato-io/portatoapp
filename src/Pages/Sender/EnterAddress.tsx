@@ -5,7 +5,7 @@ import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Typography, Form, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { IObjectInfo } from '../../type';
+import { IRequestInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectAdress } from '../../Store/actions/requestActionCreators';
 
@@ -15,7 +15,7 @@ const NEXT_SCREEN = '/createSendRequest/enter_time';
 
 const EnterAddress: React.FC = () => {
   const objecInfo = useSelector(
-    (state: { request: IObjectInfo }) => state.request
+    (state: { request: IRequestInfo }) => state.request
   );
 
   const [adresses, setValues] = useState({
