@@ -1,8 +1,25 @@
-import * as actionTypes from './actionTypes';
 import { AnyAction } from 'redux';
-import { IObjectInfo, ObjectInfoState } from '../type';
+import { IRequestInfo } from '../../type';
 
-export function reducer(state: any, action: AnyAction): IObjectInfo {
+const initialState: IRequestInfo = {
+  id: '0',
+  uid: '0',
+  name: '',
+  description: '',
+  size: 'S',
+  weight: '-5 kg',
+  price: 0,
+  pickup_adress: '',
+  delivery_adress: '',
+  dateRange: ['', ''],
+  time: '',
+  images: [],
+};
+
+export function requestReducer(
+  state: any = initialState,
+  action: AnyAction
+): IRequestInfo {
   console.log(action.type);
   switch (action.type) {
     case 'SET_OBJECT': {
@@ -15,7 +32,18 @@ export function reducer(state: any, action: AnyAction): IObjectInfo {
         weight: action.payload.weight,
       };
     }
-
+    case 'SET_ID': {
+      return {
+        ...state,
+        id: action.payload,
+      };
+    }
+    case 'SET_UID': {
+      return {
+        ...state,
+        uid: action.payload,
+      };
+    }
     case 'SET_ADRESS': {
       console.log(state);
       return {
@@ -24,7 +52,6 @@ export function reducer(state: any, action: AnyAction): IObjectInfo {
         delivery_adress: action.payload.delivery_adress,
       };
     }
-
     case 'SET_PRICE': {
       return { ...state, price: action.payload };
     }

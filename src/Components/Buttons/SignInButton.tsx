@@ -9,13 +9,13 @@ interface SignInButtonProps {
 const SignInButton: React.FC<SignInButtonProps> = ({ onClick }) => {
   return (
     <div
-      className="div_button_next"
       style={{
         position: 'absolute',
-        bottom: '10%',
-        left: '45%',
-        width: '50%',
-        background: '#fff',
+        bottom: '2vh',
+        right: '10vw',
+        width: '45vw',
+        background: 'white',
+        marginBottom: '10vh',
       }}
     >
       <Button

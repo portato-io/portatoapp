@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
 import { Badge, TabBar } from 'antd-mobile';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -60,6 +58,7 @@ function BottomBar() {
         borderTop: 'solid',
         borderTopColor: '#E8E9F1',
       }}
+      className="custom-tab-bar"
     >
       {tabs.map((item) => (
         <TabBar.Item

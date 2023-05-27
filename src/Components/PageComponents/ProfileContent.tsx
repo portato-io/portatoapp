@@ -1,37 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import PageLayout from '../Pages/Layouts/PageLayoutTest';
+import React from 'react';
+import PageLayout from '../../Pages/Layouts/PageLayoutTest';
 import { List, Card } from 'antd-mobile';
 import { UserOutlined } from '@ant-design/icons';
-import 'firebaseui/dist/firebaseui.css';
-import { auth } from '../firebaseConfig';
+import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
-import * as firebaseui from 'firebaseui';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import AuthWrapper from '../Components/AuthWrapper';
 import { useNavigate } from 'react-router-dom';
-
-import { Typography } from 'antd';
-
-const { Title } = Typography;
+import { checkAdmin } from '../AuthProvider';
 
 function ProfileContent() {
-  const [user, setUser] = useState<User | null>(null);
-  const [display, setDisplay] = useState('none');
   const navigate = useNavigate();
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setDisplay('');
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const isAdmin = checkAdmin();
 
   const handleMyAccountClick = () => {
     // navigate to My Account screen
@@ -49,9 +27,20 @@ function ProfileContent() {
     navigate('/profile/user_requests');
   };
 
+  const handleAdminClick = () => {
+    navigate('/admin/admin_dashboard');
+  };
+  // display prop should be managed appropriately
+  const display = 'block';
+
+  const handleSupportClick = () => {
+    navigate('/contact_support');
+  };
+
   return (
     <PageLayout display={display}>
       <div style={{ display: display }} className="profile_content">
+        {/* Rest of your code... */}
         <div
           style={{
             height: '100vh',
@@ -83,9 +72,16 @@ function ProfileContent() {
               <UserOutlined style={{ fontSize: '48px' }} />
             </div>
           </div>
-          <div style={{ backgroundColor: '#2897FF', flex: 6 }}>
+          <div
+            style={{
+              backgroundColor: '#2897FF',
+              flex: 6,
+              height: '80vh',
+              overflowY: 'auto',
+            }}
+          >
             <Card style={{ borderRadius: '5%', height: '100%' }}>
-              <List mode="card" style={{ marginTop: '5vh' }}>
+              <List mode="card" style={{ marginTop: '1vh' }}>
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   My Account
                 </List.Item>
@@ -98,6 +94,14 @@ function ProfileContent() {
                 <List.Item arrow={true} onClick={handleMySendRequestsClick}>
                   My Send Requests
                 </List.Item>
+                <List.Item arrow={true} onClick={handleSupportClick}>
+                  Support
+                </List.Item>
+                {isAdmin && (
+                  <List.Item arrow={true} onClick={handleAdminClick}>
+                    Admin window
+                  </List.Item>
+                )}
                 <List.Item
                   arrow={true}
                   onClick={() => signOut(auth)}

@@ -2,12 +2,14 @@ import { initializeApp } from 'firebase/app';
 import { getFunctions } from 'firebase/functions';
 import { getDatabase } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage';
+import { getMessaging, onMessage, getToken } from 'firebase/messaging';
+import { getStorage } from 'firebase/storage';
+import { addNotificationsToken } from './linksStoreToFirebase';
+
+const notificationButton = document.getElementById('enableNotifications');
+let swRegistration = null;
+const TokenElem = document.getElementById('token');
+const ErrElem = document.getElementById('err');
 
 // Your Firebase configuration object
 const firebaseConfig = {
@@ -23,7 +25,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
 // Initialize and export Firebase Functions
 export const functions = getFunctions(app);
@@ -34,3 +36,38 @@ export const database = getDatabase(app);
 export const auth = getAuth();
 
 export const storage = getStorage(app);
+
+// Initialize Firebase Cloud Messaging and get a reference to the service
+export const messaging = getMessaging(app);
+
+export const onMessageListener = (callback) => {
+  return onMessage(messaging, (payload) => {
+    callback(payload);
+  });
+};
+
+export const fetchToken = (setTokenFound, uid) => {
+  return getToken(messaging, {
+    vapidKey:
+      'BN1R0jA9hh7euhpDZ_AjxNvffl-Tcrlx9t7ijnKg6MJjuMSaEuVf1DNQPe-jINpqinR4Ihv6nXPFwMPxDqFq3vo',
+  })
+    .then((currentToken) => {
+      if (currentToken) {
+        console.log('current token for client: ', currentToken);
+        setTokenFound(true);
+        addNotificationsToken(uid, currentToken);
+        // Track the token -> client mapping, by sending to backend server
+        // show on the UI that permission is secured
+      } else {
+        console.log(
+          'No registration token available. Request permission to generate one.'
+        );
+        setTokenFound(false);
+        // shows on the UI that permission is required
+      }
+    })
+    .catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      // catch error while creating client token
+    });
+};

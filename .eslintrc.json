@@ -13,11 +13,26 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "tsconfigRootDir": ".",
-    "project": ["./tsconfig.json"]
+    "tsconfigRootDir": "."
+    //"project": ["./tsconfig.json"]
   },
   "rules": {
-    "quotes": ["error", "single", { "avoidEscape": true }]
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "@typescript-eslint/no-var-requires": "off"
     // Add your custom rules here
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "error"
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
 }

@@ -5,67 +5,37 @@ import ProgressBar from '../../Components/ProgressBar';
 import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import SignInButton from '../../Components/Buttons/SignInButton';
+import FirebaseAuth from '../../Components/FirebaseAuth';
 
 import { useSelector } from 'react-redux';
-import { ObjectInfoState, IObjectInfo } from '../../type';
-import { fetchDataOnce } from '../../linksStoreToFirebase';
-import { auth } from '../../firebaseConfig';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import FirebaseAuth from '../../Components/FirebaseAuth';
-import { uploadReduxStoreToFirebase } from '../../linksStoreToFirebase';
-import { store } from '../../index';
+import { IRequestInfo } from '../../type';
+import { useAuth } from '../../Components/AuthProvider';
+import { uploadRequestToFirebase } from '../../linksStoreToFirebase';
+import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
 const progress = 100;
+const NEXT_SCREEN = '/';
 
 const Summary: React.FC = () => {
-  const nextScreen = '/';
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
+  const objecInfo = useSelector(
+    (state: { request: IRequestInfo }) => state.request
+  );
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-  const objecInfo = useSelector((state: IObjectInfo) => state);
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        console.log('User signed in:', currentUser); // Added console log
-        setUser(currentUser);
-      } else {
-        console.log('User signed out'); // Added console log
-        setUser(null);
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const { uid } = useAuth();
 
   const handleConfirm = () => {
-    console.log('In handle confirm.');
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-      const uid = auth.currentUser?.uid; // Add the optional chaining operator here
-      if (uid) {
-        const state = store.getState();
-        uploadReduxStoreToFirebase(uid, state);
-      } else {
-        console.log('User UID not found.');
-      }
+    if (uid) {
+      uploadRequestToFirebase(uid, dispatch);
     } else {
-      // Handle the case when no user is signed in
-      console.log('No user is signed in.');
+      console.log('User UID not found.');
     }
   };
   const [visible, setVisible] = useState(false);
@@ -83,7 +53,7 @@ const Summary: React.FC = () => {
           overflowY: 'scroll',
         }}
       >
-        <Modal open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Modal open={isModalVisible} footer={null}>
           <div>
             <FirebaseAuth />
           </div>
@@ -147,7 +117,7 @@ const Summary: React.FC = () => {
             </div>
           </div>
         </Card>
-        {user ? (
+        {uid ? (
           <ConfirmButton onClick={handleConfirm} />
         ) : (
           <SignInButton onClick={showModal} />

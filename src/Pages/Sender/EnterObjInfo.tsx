@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import UploadImage from '../../Components/UploadImage';
 
-import { Typography, Form, Input, Radio } from 'antd';
+import { Typography, Form, Input, Radio, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setObject } from '../../Store/actionCreators';
-import { IFirstObjectInfo, IObjectInfo } from '../../type';
+import { setObject } from '../../Store/actions/requestActionCreators';
+import { IFirstObjectInfo, IRequestInfo } from '../../type';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -17,7 +17,9 @@ const { TextArea } = Input;
 const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
-  const objecInfo = useSelector((state: IObjectInfo) => state);
+  const objecInfo = useSelector(
+    (state: { request: IRequestInfo }) => state.request
+  );
 
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
@@ -45,7 +47,7 @@ const EnterObjInfo: React.FC = () => {
   };
 
   // Calculate screen height
-  const containerHeight = window.innerHeight * 0.8;
+  const containerHeight = window.innerHeight * 0.9;
   console.log(containerHeight + 'px');
 
   return (
@@ -53,7 +55,7 @@ const EnterObjInfo: React.FC = () => {
       <ProgressBar />
       <div
         style={{
-          marginTop: '10%',
+          marginTop: '5vh',
           height: containerHeight + 'px',
           overflowY: 'scroll',
         }}
@@ -132,8 +134,10 @@ const EnterObjInfo: React.FC = () => {
             </Radio.Group>
           </Form.Item>
           <UploadImage />
-          <NextButton nextScreen={NEXT_SCREEN} />
-          <BackButton />
+          <Form.Item>
+            <NextButton nextScreen={NEXT_SCREEN} scrolling={true} />
+            <BackButton scrolling={true} />
+          </Form.Item>
         </Form>
       </div>
     </PageLayout>
