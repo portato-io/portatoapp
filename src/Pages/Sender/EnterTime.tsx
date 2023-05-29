@@ -1,6 +1,7 @@
 import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import NavigationButtons from '../../Components/Buttons/NavigationButtons';
+import NextButton from '../../Components/Buttons/NextButton';
+import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Typography, Form, DatePicker, Checkbox } from 'antd';
 import { useDispatch } from 'react-redux';
@@ -65,7 +66,8 @@ const EnterTime: React.FC = () => {
         </Form.Item>
       </Form>
 
-      <NavigationButtons nextScreen={NEXT_SCREEN} scrolling={true} />
+      <NextButton nextScreen={NEXT_SCREEN} />
+      <BackButton />
     </PageLayout>
   );
 };

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import NavigationButtons from '../../Components/Buttons/NavigationButtons';
-import useScrollable from '../../hooks/useScrollable';
+import NextButton from '../../Components/Buttons/NextButton';
+import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import UploadImage from '../../Components/UploadImage';
 
-import { Typography, Form, Input, Radio } from 'antd';
+import { Typography, Form, Input, Radio, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setObject } from '../../Store/actions/requestActionCreators';
@@ -20,8 +20,6 @@ const EnterObjInfo: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
-  const isScrollable = useScrollable();
-  console.log('is scrollable', isScrollable);
 
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
@@ -51,34 +49,24 @@ const EnterObjInfo: React.FC = () => {
   // Calculate screen height
   const containerHeight = window.innerHeight * 0.9;
   console.log(containerHeight + 'px');
-  const containerMaxHeight = isScrollable ? '70vh' : 'auto'; // if content is scrollable, set a max height, else let it take as much space as it needs
 
   return (
     <PageLayout>
       <ProgressBar />
-      <Form
-        id="sender-forms"
-        onFinish={onFinish}
-        className="form-no-scrolling-sender"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
+      <div
         style={{
-          display: 'flex', // make this a flex container
-          flexDirection: 'column', // align children vertically
-          height: '100vh', // take up full height
-          justifyContent: 'space-between', // push content to the top and bottom
-          overflow: 'auto', // enable scrolling when content overflows
-          paddingBottom: '15vh', // add bottom padding to raise the navigation buttons
+          marginTop: '5vh',
+          height: containerHeight + 'px',
+          overflowY: 'scroll',
         }}
       >
-        <div
-          style={{
-            marginTop: '5vh',
-            overflowY: 'auto', // let the div scroll when content overflows
-            flexGrow: 1, // this makes the div take up all available space
-            maxHeight: containerMaxHeight, // set max-height to manage overflow
-          }}
+        <Form
+          id="sender-forms"
+          onFinish={onFinish}
+          className="form-sender"
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
         >
           <Title level={3} style={{ background: '#fff' }}>
             {' '}
@@ -146,9 +134,12 @@ const EnterObjInfo: React.FC = () => {
             </Radio.Group>
           </Form.Item>
           <UploadImage />
-        </div>
-        <NavigationButtons nextScreen={NEXT_SCREEN} scrolling={isScrollable} />
-      </Form>
+          <Form.Item>
+            <NextButton nextScreen={NEXT_SCREEN} scrolling={true} />
+            <BackButton scrolling={true} />
+          </Form.Item>
+        </Form>
+      </div>
     </PageLayout>
   );
 };
