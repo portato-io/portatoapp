@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import NextButton from '../../Components/Buttons/NextButton';
-import BackButton from '../../Components/Buttons/BackButton';
+import NavigationButtons from '../../Components/Buttons/NavigationButtons';
 import ProgressBar from '../../Components/ProgressBar';
 import { Typography, Form, Input, Card } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
@@ -96,8 +95,7 @@ const EnterPrice: React.FC = () => {
             </Card>
           </Form.Item>
         </Form>
-        <NextButton nextScreen={NEXT_SCREEN} scrolling={false} />
-        <BackButton scrolling={false} />
+        <NavigationButtons nextScreen={NEXT_SCREEN} scrolling={true} />
       </div>
     </PageLayout>
   );

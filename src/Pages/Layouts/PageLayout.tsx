@@ -3,7 +3,7 @@ import AppHeader from '../../Components/HeaderBar';
 import ButtomHeaderBar from '../../Components/ButtonHeaderBar';
 import SideBarNav from '../../Components/SideBarNav';
 import { Layout } from 'antd';
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 interface Props {
   children: ReactNode;
@@ -12,6 +12,7 @@ interface Props {
 const MainLayout = (props: Props) => {
   const { children } = props;
   const [openMenu, setOpenMenu] = useState(false);
+
   return (
     <Layout className="main-layout">
       <Header style={{ background: '#1875BC' }}>
@@ -23,7 +24,9 @@ const MainLayout = (props: Props) => {
         </span>
       </Header>
       <SideBarNav openMenu={openMenu} setOpenMenu={setOpenMenu} />
-      <Content className="layout-children">{children}</Content>
+      <Content style={{ maxHeight: 'calc(100vh - 60px)', overflow: 'auto' }}>
+        {children}
+      </Content>
     </Layout>
   );
 };

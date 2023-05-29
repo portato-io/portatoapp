@@ -11,12 +11,7 @@ function BackButton({ scrolling = false }: any) {
     <div
       className="div_button_next"
       style={{
-        position: 'absolute',
-        bottom: '2vh',
-        left: scrolling ? '0vw' : '10%',
-        width: '30vw',
         background: '#fff',
-        marginBottom: scrolling ? '0vh' : '10vh',
       }}
     >
       <Button
