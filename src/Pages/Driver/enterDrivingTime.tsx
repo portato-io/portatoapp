@@ -37,7 +37,6 @@ const EnterDeliveryTime: React.FC = () => {
         >
           When are you driving?
         </Title>
-        {/* <SwitchContainer /> */}
       </div>
       <div>
         <Tabs>

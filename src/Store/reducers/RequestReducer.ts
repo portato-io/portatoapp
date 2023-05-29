@@ -20,7 +20,6 @@ export function requestReducer(
   state: any = initialState,
   action: AnyAction
 ): IRequestInfo {
-  console.log(action.type);
   switch (action.type) {
     case 'SET_OBJECT': {
       console.log(action.payload);

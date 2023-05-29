@@ -52,6 +52,11 @@ export const setRouteId = (id: string): AnyAction => ({
   payload: id,
 });
 
+export const setRouteDateRange = (dateRange: string[]): AnyAction => ({
+  type: actionTypes.SET_ROUTE_DATE_RANGE,
+  payload: dateRange,
+});
+
 export const setRouteUid = (uid: string): AnyAction => ({
   type: actionTypes.SET_UID,
   payload: uid,

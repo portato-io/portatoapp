@@ -67,7 +67,9 @@
   border-top: solid;
   border-top-color: #e8e9f1;
 } */
-
+.ant-calendar-input-wrap {
+  display: none;
+}
 .main-layout {
   height: '100vh';
   background-color: #fff;
