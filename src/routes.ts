@@ -19,7 +19,9 @@ const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
 const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
 const AllRoutes = lazy(() => import('./Pages/Admin/AllRoutes'));
-const ContactSupport = lazy(() => import('./Pages/ContactSupport'));
+const ContactSupport = lazy(
+  () => import('./Pages/Profile/Support/ContactSupport')
+);
 const CreateSendRequest = lazy(
   () => import('./Pages/Sender/CreateSendRequest')
 );
@@ -30,7 +32,9 @@ const EnterDeliveryCapacity = lazy(
 );
 const RouteSummary = lazy(() => import('./Pages/Driver/RouteSummary'));
 const DealSuggester = lazy(() => import('./Pages/Admin/DealSuggester'));
-const ContactSender = lazy(() => import('./Pages/ContactSender'));
+const ContactSender = lazy(
+  () => import('./Pages/Profile/Support/ContactSender')
+);
 
 // interface
 interface Route {
