@@ -54,7 +54,19 @@ const EnterTime: React.FC = () => {
           label={<label className="item-form-label">Dates</label>}
           style={{}}
         >
-          <RangePicker name="time" onChange={handleChangeRange} />
+          <RangePicker
+            name="time"
+            inputReadOnly={true}
+            onChange={handleChangeRange}
+            style={{
+              marginTop: '2vh',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '80vw',
+              marginLeft: '10vw',
+            }}
+          />
         </Form.Item>
 
         <Form.Item label={<label className="item-form-label">Time</label>}>

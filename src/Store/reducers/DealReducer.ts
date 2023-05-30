@@ -62,7 +62,7 @@ export function dealReducer(
       };
     }
     default: {
-      console.log('DANS LE DRIVER REDUCER MAIS PAS DANS LE BON STATE');
+      console.log('DANS LE Deal REDUCER MAIS PAS DANS LE BON STATE');
       return state;
     }
   }

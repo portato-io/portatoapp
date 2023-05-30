@@ -64,7 +64,7 @@ const RouteSummary: React.FC = () => {
       <ProgressBar progress={PROGRESS} />
       <div
         style={{
-          marginTop: '8vh',
+          marginTop: '5vh',
           height: containerHeight + 'px',
           overflowY: 'auto',
         }}
@@ -78,7 +78,7 @@ const RouteSummary: React.FC = () => {
           style={{
             marginLeft: '10vw',
             width: '80vw',
-            marginTop: '10vh',
+            marginTop: '5vh',
             backgroundColor: '#FFF4E4',
           }}
         >
@@ -112,8 +112,10 @@ const RouteSummary: React.FC = () => {
               </div>
             ) : (
               <div>
-                <Title level={4}> Time Range</Title>
-                <Typography> COMING </Typography>
+                <Title level={4}>
+                  {' '}
+                  {routeInfo.timeRange[0]}-{routeInfo.timeRange[1]}{' '}
+                </Title>
               </div>
             )}
             <div>

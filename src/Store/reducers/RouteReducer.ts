@@ -56,11 +56,8 @@ export function routeReducer(
         type: action.payload.type,
       };
     }
-    case 'SET_TIMERANGE': {
-      return {
-        ...state,
-        timeRange: action.payload.timeRange,
-      };
+    case 'SET_ROUTE_DATE_RANGE': {
+      return { ...state, timeRange: action.payload };
     }
     case 'SET_DAYS': {
       return {

@@ -16,7 +16,6 @@ const CreateSendRequest: React.FC = () => {
 
   return (
     <PageLayout>
-      <BackArrow />
       <AutoCenter>
         <Title
           level={4}
