@@ -9,12 +9,12 @@ const Deliver: React.FC = () => {
     <PageLayout>
       <Tabs style={{}}>
         <Tabs.Tab title="Deals" key="deals">
-          <AutoCenter>
+          <AutoCenter className="contentContainer">
             <DealsContent />
           </AutoCenter>
         </Tabs.Tab>
         <Tabs.Tab title="Routes" key="routes">
-          <AutoCenter>
+          <AutoCenter className="contentContainer">
             <RoutesContent />
           </AutoCenter>
         </Tabs.Tab>

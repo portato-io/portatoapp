@@ -91,6 +91,12 @@
   font-weight: bold;
 }
 
+.contentContainer {
+  max-height: calc(100vh - 60px);
+  overflow: auto;
+}
+
+
 @media (max-width: 576px) {
   .ant-picker-panels {
     flex-direction: column;
