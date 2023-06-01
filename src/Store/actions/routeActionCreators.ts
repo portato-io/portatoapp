@@ -12,6 +12,16 @@ export const setRoute = (
   },
 });
 
+export const setRouteDepartureAddress = (departure: string): AnyAction => ({
+  type: actionTypes.SET_ROUTE_DEPARTURE_ADDRESS,
+  payload: departure,
+});
+
+export const setRouteDestinationAddress = (destination: string): AnyAction => ({
+  type: actionTypes.SET_ROUTE_DESTINATION_ADDRESS,
+  payload: destination,
+});
+
 export const setDetour = (detour: number): AnyAction => ({
   type: actionTypes.SET_DETOUR,
   payload: {

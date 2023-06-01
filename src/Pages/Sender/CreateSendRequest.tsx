@@ -16,7 +16,6 @@ const CreateSendRequest: React.FC = () => {
 
   return (
     <PageLayout>
-      <AddressAutocomplete />
       <AutoCenter>
         <Title
           level={4}

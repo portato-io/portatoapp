@@ -38,6 +38,18 @@ export function routeReducer(
         uid: action.payload,
       };
     }
+    case 'SET_ROUTE_DEPARTURE_ADDRESS': {
+      return {
+        ...state,
+        departure_adress: action.payload[0],
+      };
+    }
+    case 'SET_ROUTE_DESTINATION_ADDRESS': {
+      return {
+        ...state,
+        destination_adress: action.payload[0],
+      };
+    }
     case 'SET_DETOUR': {
       return {
         ...state,

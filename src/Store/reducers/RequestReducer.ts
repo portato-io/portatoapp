@@ -22,7 +22,6 @@ export function requestReducer(
 ): IRequestInfo {
   switch (action.type) {
     case 'SET_OBJECT': {
-      console.log(action.payload);
       return {
         ...state,
         name: action.payload.name,
@@ -43,12 +42,16 @@ export function requestReducer(
         uid: action.payload,
       };
     }
-    case 'SET_ADRESS': {
-      console.log(state);
+    case 'SET_REQ_PICKUP_ADDRESS': {
       return {
         ...state,
-        pickup_adress: action.payload.pickup_adress,
-        delivery_adress: action.payload.delivery_adress,
+        pickup_adress: action.payload[0],
+      };
+    }
+    case 'SET_REQ_DELIVERY_ADDRESS': {
+      return {
+        ...state,
+        delivery_adress: action.payload[0],
       };
     }
     case 'SET_PRICE': {
