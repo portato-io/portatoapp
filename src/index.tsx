@@ -4,9 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { persistedReducer } from './Store/reducers';
+import { persistStore } from 'redux-persist';
 import allReducers from './Store/reducers';
 import { IRequestInfo, IRouteInfo } from './type';
 import { AuthProvider } from './Components/AuthProvider';
@@ -45,7 +48,8 @@ const initialState = {
   route: initialStateRoute,
 };
 
-export const store = createStore(allReducers, initialState);
+export const store = createStore(persistedReducer, initialState);
+const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -53,7 +57,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <AuthProvider>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </AuthProvider>
 );
