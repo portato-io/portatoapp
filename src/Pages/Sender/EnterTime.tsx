@@ -64,7 +64,7 @@ const EnterTime: React.FC = () => {
               justifyContent: 'center',
               alignItems: 'center',
               width: '80vw',
-              marginLeft: '10vw',
+              //marginLeft: '10vw',
             }}
           />
         </Form.Item>
