@@ -38,7 +38,11 @@ const Summary: React.FC = () => {
       console.log('User UID not found.');
     }
   };
+
   const [visible, setVisible] = useState(false);
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   // Calculate screen height
   const containerHeight = window.innerHeight * 0.7;
   console.log(containerHeight + 'px');
@@ -53,7 +57,7 @@ const Summary: React.FC = () => {
           overflowY: 'scroll',
         }}
       >
-        <Modal open={isModalVisible} footer={null}>
+        <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
           <div>
             <FirebaseAuth />
           </div>
