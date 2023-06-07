@@ -9,6 +9,7 @@ import { IRouteInfo } from '../../type';
 import { setDetour, setRoute } from '../../Store/actions/routeActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from 'antd-mobile';
+import AddressAutocomplete from '../../Components/AutoComplete';
 
 const { Title } = Typography;
 const PROGRESS = 25;
@@ -65,36 +66,14 @@ const EnterRoute: React.FC = () => {
           Departure
         </Title>
         <Form.Item>
-          <Input
-            name="departure_adress"
-            prefix={<SearchOutlined />}
-            value={
-              routes.departure_adress !== ''
-                ? routes.departure_adress
-                : undefined
-            }
-            onChange={handleInputChange}
-            placeholder="Departure"
-            style={{ background: '', width: '90%' }}
-          />
+          <AddressAutocomplete type={'departure'} />
         </Form.Item>
 
         <Title level={4} style={{ backgroundColor: 'white' }}>
           Destination
         </Title>
         <Form.Item>
-          <Input
-            name="destination_adress"
-            prefix={<SearchOutlined />}
-            value={
-              routes.destination_adress !== ''
-                ? routes.destination_adress
-                : undefined
-            }
-            onChange={handleInputChange}
-            placeholder="Destination"
-            style={{ background: '', width: '90%' }}
-          />
+          <AddressAutocomplete type={'destination'} />
         </Form.Item>
         <Title level={4} style={{ backgroundColor: 'white' }}>
           Acceptable detour

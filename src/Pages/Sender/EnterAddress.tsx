@@ -7,35 +7,12 @@ import { Typography, Form, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { IRequestInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
-import { setObjectAdress } from '../../Store/actions/requestActionCreators';
-
+import AddressAutocomplete from '../../Components/AutoComplete';
 const { Title } = Typography;
 const progress = 25;
 const NEXT_SCREEN = '/createSendRequest/enter_time';
 
 const EnterAddress: React.FC = () => {
-  const objecInfo = useSelector(
-    (state: { request: IRequestInfo }) => state.request
-  );
-
-  const [adresses, setValues] = useState({
-    pickup_adress: objecInfo.pickup_adress,
-    delivery_adress: objecInfo.delivery_adress,
-  });
-
-  React.useEffect(() => {
-    dispatch(setObjectAdress(adresses.pickup_adress, adresses.delivery_adress));
-  }, [adresses]);
-
-  const dispatch = useDispatch();
-
-  const handleInputChange = (e: any) => {
-    setValues({
-      ...adresses,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
@@ -49,7 +26,7 @@ const EnterAddress: React.FC = () => {
           Pick-up address
         </Title>
         <Form.Item>
-          <Input
+          {/* <Input
             name="pickup_adress"
             value={
               adresses.pickup_adress !== '' ? adresses.pickup_adress : undefined
@@ -57,20 +34,21 @@ const EnterAddress: React.FC = () => {
             onChange={handleInputChange}
             prefix={<SearchOutlined />}
             style={{ background: '', width: '90%' }}
-          />
+          /> */}
+          <AddressAutocomplete type={'pickup'} />
         </Form.Item>
-
         <Title level={4} style={{ backgroundColor: 'white' }}>
           Delivery address
         </Title>
         <Form.Item>
-          <Input
+          {/* <Input
             name="delivery_adress"
             value={adresses.delivery_adress}
             onChange={handleInputChange}
             prefix={<SearchOutlined />}
             style={{ background: '', width: '90%' }}
-          />
+          /> */}
+          <AddressAutocomplete type={'delivery'} />
         </Form.Item>
       </Form>
       <NextButton nextScreen={NEXT_SCREEN} />
