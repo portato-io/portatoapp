@@ -18,8 +18,9 @@ firebase.initializeApp(firebaseConfig);
 const ProfilePictureUpload: React.FC = () => {
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
-  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: any) => {
     const file = event.target.files?.[0];
+    console.log(file);
 
     if (file) {
       try {
@@ -36,11 +37,7 @@ const ProfilePictureUpload: React.FC = () => {
   };
 
   return (
-    <div className="upload-area">
-      <input type="file" onChange={handleFileChange} accept="image/*" />
-      <label>
-        <span>Click to upload profile picture</span>
-      </label>
+    <div className="upload-area" onClick={handleFileChange}>
       {profilePicture && (
         <img
           src={profilePicture}
@@ -56,6 +53,20 @@ const ProfilePictureUpload: React.FC = () => {
           }}
         />
       )}
+      <input
+        type="file"
+        onChange={handleFileChange}
+        accept="image/*"
+        style={{
+          width: 'min(min(50vw,50vh),250px)',
+          height: 'min(min(50vw,50vh),250px)',
+          borderRadius: '50%',
+          backgroundColor: '#fff',
+          display: profilePicture ? 'none' : 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      />
     </div>
   );
 };
