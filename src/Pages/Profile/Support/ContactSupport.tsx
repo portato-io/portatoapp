@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import axios from 'axios';
-import '../PortatoStyleSheet.css';
-import PageLayout from './Layouts/PageLayoutTest';
-import { useParams } from 'react-router-dom';
+import '../../../CSS/PortatoStyleSheet.css';
+import PageLayout from '../../Layouts/ProfilePagesLayout';
 
 interface FormData {
   name: string;
@@ -11,29 +10,17 @@ interface FormData {
   message: string;
 }
 
-const ContactSender: React.FC = () => {
-  const { request_id } = useParams<{ request_id: string }>();
-  const { request_uid } = useParams<{ request_uid: string }>();
-  const [form] = Form.useForm<FormData>();
+const ContactForm: React.FC = () => {
+  const [form] = Form.useForm<FormData>(); // <-- Change the type here
   const [loading, setLoading] = useState<boolean>(false);
 
   const onFinish = async (values: FormData) => {
     setLoading(true);
 
-    // Adding a hardcoded targetEmail
-    const valuesWithUid = {
-      ...values,
-      uid: request_uid,
-      message:
-        'This message concerns the following request: ' +
-        request_id +
-        values.message, // add your line here
-    };
-
     try {
       const result = await axios.post(
-        'https://us-central1-portatoapp.cloudfunctions.net/sendEmailToUid',
-        valuesWithUid
+        'https://us-central1-portatoapp.cloudfunctions.net/sendEmailToSupport',
+        values
       );
 
       if (result.status === 200) {
@@ -94,4 +81,4 @@ const ContactSender: React.FC = () => {
   );
 };
 
-export default ContactSender;
+export default ContactForm;

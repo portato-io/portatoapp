@@ -6,3 +6,23 @@
   width: 100%;
   position: absolute;
 }
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust this according to your layout */
+  padding: 20px;
+}
+
+.centered-form {
+  width: 100%;
+  max-width: 600px; /* Adjust the form width according to your preference */
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .centered-form {
+    width: 90%; /* Increase the width on smaller screens */
+  }
+}
