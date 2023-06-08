@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -17,6 +18,7 @@ const { TextArea } = Input;
 const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
+  const { t, i18n } = useTranslation(['home', 'main']);
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
@@ -70,7 +72,7 @@ const EnterObjInfo: React.FC = () => {
         >
           <Title level={3} style={{ background: '#fff' }}>
             {' '}
-            What would you like to ship?
+            {t('line1')}
           </Title>
           <Form.Item
             label={<label className="item-form-label">Name</label>}

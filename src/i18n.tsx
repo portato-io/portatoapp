@@ -12,7 +12,7 @@ const resources = {
   en: {
     home: translationEnglish,
   },
-  es: {
+  de: {
     home: translationSpanish,
   },
   fr: {
