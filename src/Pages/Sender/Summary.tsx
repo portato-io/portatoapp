@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { Typography, Card, Modal, Image } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
@@ -6,6 +6,7 @@ import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import SignInButton from '../../Components/Buttons/SignInButton';
 import FirebaseAuth from '../../Components/FirebaseAuth';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 import { useSelector } from 'react-redux';
 import { IRequestInfo } from '../../type';
@@ -18,6 +19,7 @@ const progress = 100;
 const NEXT_SCREEN = '/';
 
 const Summary: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
 
@@ -71,36 +73,40 @@ const Summary: React.FC = () => {
             backgroundColor: '#FFF4E4',
           }}
         >
-          <Title level={2}> Summary </Title>
+          <Title level={2}> {t('requestSummary.title')} </Title>
           <div>
             <Title level={4}> {objecInfo.name}</Title>
             <Typography>
-              {' '}
-              {objecInfo.description} / Size: {objecInfo.size} / Weight:{' '}
-              {objecInfo.weight}
+              {objecInfo.description}
+              <br />
+              {t('requestSummary.size')} {objecInfo.size} /{' '}
+              {t('requestSummary.weight')} {objecInfo.weight}
             </Typography>
           </div>
           <div>
-            <Title level={4}> Pickup address</Title>
+            <Title level={4}> {t('requestSummary.pickupAddress')}</Title>
             <Typography> {objecInfo.pickup_adress} </Typography>
           </div>
           <div>
-            <Title level={4}> Delivery address</Title>
+            <Title level={4}> {t('requestSummary.deliveryAddress')}</Title>
             <Typography> {objecInfo.delivery_adress} </Typography>
           </div>
           <div>
-            <Title level={4}>
+            <Title level={4}>{t('requestSummary.timeframe')}</Title>
+            <Typography>
               {' '}
-              {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
-            </Title>
-            <Typography> In: {objecInfo.time} </Typography>
+              {t('requestSummary.possibleDates')} {objecInfo.dateRange[0]} -{' '}
+              {objecInfo.dateRange[1]}
+              <br />
+              {t('requestSummary.possibleTimes')} {objecInfo.time}{' '}
+            </Typography>
           </div>
           <div>
-            <Title level={4}> Price</Title>
+            <Title level={4}> {t('requestSummary.price')}</Title>
             <Typography> {objecInfo.price} CHF </Typography>
           </div>
           <div>
-            <Title level={4}> Images</Title>
+            <Title level={4}> {t('requestSummary.images')}</Title>
             <Image
               preview={{ visible: false }}
               height={100}
