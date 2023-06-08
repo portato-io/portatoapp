@@ -1,0 +1,4 @@
+node_modules/
+portatoapp-firebase-admin*
+.env.sh
+.env
