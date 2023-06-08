@@ -1,5 +1,19 @@
 {
-    "line1": "An exciting scientific endeavor is space flight. People can learn more than they normally could.",
-    "line2": "Space exploration is a study of the cosmos. There are many aspects of the universe that we do not fully understand.",
-    "line3": "Astronauts visit space and report back to us on their experiences there."
+    "requestInfo":
+    {
+        "title": "What do you want to ship?",
+        "name": "Name",
+        "namePlaceholder": "The title of your shipment",
+        "description":"Description",
+        "descriptionPlaceholder":"eg: It’s a good idea to specify the dimensions of large items.",
+        "size":"Size",
+        "weight":"Weight",
+        "uploadImages":"Upload Images"
+    },
+    "requestAddresses":
+    {
+        "pickupAddress":"blablab"
+
+
+    }
 }

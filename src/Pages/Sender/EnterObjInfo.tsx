@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
-import { useTranslation } from 'react-i18next';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -18,7 +18,8 @@ const { TextArea } = Input;
 const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
-  const { t, i18n } = useTranslation(['home', 'main']);
+  const { t } = useContext(TranslationContext);
+
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
@@ -72,10 +73,12 @@ const EnterObjInfo: React.FC = () => {
         >
           <Title level={3} style={{ background: '#fff' }}>
             {' '}
-            {t('line1')}
+            {t('requestInfo.title')}
           </Title>
           <Form.Item
-            label={<label className="item-form-label">Name</label>}
+            label={
+              <label className="item-form-label">{t('requestInfo.name')}</label>
+            }
             //name="name"
             //rules={[{ required: true, message: 'Please input your username!' }]}
           >
@@ -83,13 +86,19 @@ const EnterObjInfo: React.FC = () => {
               name="name"
               value={object.name}
               onChange={handleInputChange}
-              placeholder="The title of your shipment"
+              placeholder={
+                t('requestInfo.namePlaceholder') || 'default placeholder'
+              }
               style={{ width: '90%' }}
             />
           </Form.Item>
 
           <Form.Item
-            label={<label className="item-form-label">Description</label>}
+            label={
+              <label className="item-form-label">
+                {t('requestInfo.description')}
+              </label>
+            }
 
             //rules={[{ required: true, message: 'Please input description!' }]}
           >
@@ -98,12 +107,18 @@ const EnterObjInfo: React.FC = () => {
               value={object.description}
               onChange={handleInputChange}
               rows={3}
-              placeholder="eg: It’s a good idea to specify the dimensions of large items."
+              placeholder={
+                t('requestInfo.descriptionPlaceholder') || 'default placeholder'
+              }
               style={{ width: '90%' }}
             />
           </Form.Item>
 
-          <Form.Item label={<label className="item-form-label">Size</label>}>
+          <Form.Item
+            label={
+              <label className="item-form-label">{t('requestInfo.size')}</label>
+            }
+          >
             <Radio.Group
               name="size"
               value={object.size}
@@ -117,7 +132,13 @@ const EnterObjInfo: React.FC = () => {
             </Radio.Group>
           </Form.Item>
 
-          <Form.Item label={<label className="item-form-label">Weight</label>}>
+          <Form.Item
+            label={
+              <label className="item-form-label">
+                {t('requestInfo.weight')}
+              </label>
+            }
+          >
             <Radio.Group
               name="weight"
               value={object.weight}

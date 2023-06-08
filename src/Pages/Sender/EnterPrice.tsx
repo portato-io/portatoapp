@@ -8,12 +8,14 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectPrice } from '../../Store/actions/requestActionCreators';
 import { IRequestInfo, ObjectInfoState } from '../../type';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const progress = 75;
 const NEXT_SCREEN = '/createSendRequest/summary';
 
 const EnterPrice: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
@@ -104,3 +106,6 @@ const EnterPrice: React.FC = () => {
 };
 
 export default EnterPrice;
+function useContext(TranslationContext: React.Context<any>): { t: any } {
+  throw new Error('Function not implemented.');
+}
