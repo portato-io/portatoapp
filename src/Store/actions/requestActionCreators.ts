@@ -51,3 +51,8 @@ export const setReqUid = (uid: string): AnyAction => ({
   type: actionTypes.SET_UID,
   payload: uid,
 });
+
+export const setMatched = (matched: boolean): AnyAction => ({
+  type: actionTypes.SET_MATCHED,
+  payload: matched,
+});

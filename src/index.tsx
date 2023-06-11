@@ -10,7 +10,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { persistedReducer } from './Store/reducers';
 import { persistStore } from 'redux-persist';
-import allReducers from './Store/reducers';
 import { IRequestInfo, IRouteInfo } from './type';
 import { AuthProvider } from './Components/AuthProvider';
 
@@ -27,6 +26,7 @@ const initialStateRequest: IRequestInfo = {
   dateRange: ['', ''],
   time: '',
   images: [],
+  matched: false,
 };
 console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 

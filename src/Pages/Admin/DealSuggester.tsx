@@ -6,6 +6,7 @@ import {
   setRequest,
   setRoute,
 } from '../../Store/actions/dealActionCreators';
+import { setMatched } from '../../Store/actions/requestActionCreators';
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
 import {
@@ -13,6 +14,7 @@ import {
   checkData,
   getUserTokens,
   fetchDataOnce,
+  checkPreviousRoutes,
 } from '../../linksStoreToFirebase';
 import { IRouteInfo, IRequestInfo } from '../../type';
 
@@ -20,8 +22,13 @@ const DealSuggester: React.FC = () => {
   const dispatch = useDispatch();
   const { route_id } = useParams<{ route_id: string }>();
   const { route_uid } = useParams<{ route_uid: string }>();
-  const [requestID, setRequestID] = useState('');
-  const [requestUID, setRequestUID] = useState('');
+  const [ID, setID] = useState('');
+  const [UID, setUID] = useState('');
+  const [isVerified, setIsVerified] = useState(false); // new state for verifying the click of verify button
+  const [currentRoute, setCurrentRoute] = useState<IRouteInfo | null>(null); // store the current route
+  const [currentRequest, setCurrentRequest] = useState<IRequestInfo | null>(
+    null
+  ); // store the current request
   if (!route_id) {
     console.error('route id is undefined');
     return null; // or redirect, show error, etc.
@@ -39,17 +46,20 @@ const DealSuggester: React.FC = () => {
 
     const fetchRouteData = async () => {
       try {
-        const routesObject = await fetchDataOnce(route_uid, 'routes');
-        if (routesObject && typeof routesObject === 'object') {
-          const routesArray = Object.values(routesObject) as IRouteInfo[];
-          const route = routesArray.find((route) => route.id === route_id);
-          if (route) {
-            dispatch(setRoute(route));
+        const requestObject = await fetchDataOnce(route_uid, 'requests');
+        if (requestObject && typeof requestObject === 'object') {
+          const requestArray = Object.values(requestObject) as IRequestInfo[];
+          const request = requestArray.find(
+            (request) => request.id === route_id
+          );
+          if (request) {
+            dispatch(setRequest(request));
+            setCurrentRequest(request); // update the current request state
           } else {
             console.error('Route not found: ', route_id);
           }
         } else {
-          console.log('Data is not an object:', routesObject);
+          console.log('Data is not an object:', requestObject);
         }
       } catch (error) {
         console.log('Error fetching data: ', error);
@@ -59,62 +69,37 @@ const DealSuggester: React.FC = () => {
     fetchRouteData();
   }, [route_uid, route_id, dispatch]);
 
-  const suggestRequest = async (id: string, uid: string) => {
+  const verifyRequest = async (id: string, uid: string) => {
     // implement your function here
     try {
       console.log('Submitted id: ', id, 'Submitted uid: ', uid);
 
-      const requestObject = await fetchDataOnce(uid, 'requests');
-      if (requestObject && typeof requestObject === 'object') {
-        const requestsArray = Object.values(requestObject) as IRequestInfo[];
-        const request = requestsArray.find((request) => request.id === id);
-        if (request) {
-          dispatch(setRequest(request));
+      const routesObject = await fetchDataOnce(uid, 'routes');
+      if (routesObject && typeof routesObject === 'object') {
+        const routesArray = Object.values(routesObject) as IRouteInfo[];
+        const route = routesArray.find((route) => route.id === id);
+        if (route) {
+          dispatch(setRoute(route));
+          setCurrentRoute(route); // update the current route state
         } else {
-          console.error('Request not found: ', id);
+          console.error('Route not found: ', id);
         }
       } else {
-        console.log('Data is not an object:', requestObject);
+        console.log('Data is not an object:', routesObject);
       }
 
       dispatch(setStatus('Suggestion'));
 
-      if (await checkData(uid, 'requests', id)) {
-        message.success('Suggestion valid! Submitted successfully');
-        uploadDealToFirebase(dispatch);
-
-        const tokens = await getUserTokens(route_uid);
-
-        console.log('tokens are: ', tokens);
-        if (tokens) {
-          tokens.forEach(async (token: any) => {
-            // Prepare the request body
-            const body = {
-              title: 'New delivery suggestion',
-              body: 'World',
-              token: token,
-            };
-
-            // Make a POST request to the Firebase Function
-            fetch(
-              'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
-              {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
-              }
-            )
-              .then((response) => response.json())
-              .then((result) => {
-                // Read result of the Cloud Function.
-                console.log(result);
-                message.success('Notification sent successfully');
-              })
-              .catch((error) => {
-                // Getting the error details
-                console.error(`error: ${error}`);
-              });
-          });
+      if (await checkData(uid, 'routes', id)) {
+        message.success('Suggestion valid!');
+        if (currentRequest) {
+          if (await checkPreviousRoutes(currentRequest.id, id)) {
+            setIsVerified(true); // setting isVerified to true after verification is successful
+          } else {
+            message.error('Route already suggested in the past!');
+          }
+        } else {
+          message.error('Error fetching request data!');
         }
       } else {
         message.error('Suggestion invalid');
@@ -128,16 +113,55 @@ const DealSuggester: React.FC = () => {
     }
   };
 
+  const submitSuggestions = async () => {
+    setMatched(true);
+    uploadDealToFirebase(dispatch);
+
+    const tokens = await getUserTokens(route_uid);
+
+    console.log('tokens are: ', tokens);
+    if (tokens) {
+      tokens.forEach(async (token: any) => {
+        // Prepare the request body
+        const body = {
+          title: 'New delivery suggestion',
+          body: 'World',
+          token: token,
+        };
+
+        // Make a POST request to the Firebase Function
+        fetch(
+          'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          }
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            // Read result of the Cloud Function.
+            console.log(result);
+            message.success('Notification sent successfully');
+          })
+          .catch((error) => {
+            // Getting the error details
+            console.error(`error: ${error}`);
+          });
+      });
+    }
+  };
+
   const handleIDChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRequestID(event.target.value);
+    setID(event.target.value);
   };
 
   const handleUIDChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRequestUID(event.target.value);
+    setUID(event.target.value);
   };
 
   const handleSubmit = () => {
-    suggestRequest(requestID, requestUID);
+    verifyRequest(ID, UID);
   };
 
   return (
@@ -147,17 +171,29 @@ const DealSuggester: React.FC = () => {
       </h1>
       <input
         type="text"
-        value={requestID}
+        value={ID}
         onChange={handleIDChange}
         placeholder="Enter request ID"
       />
       <input
         type="text"
-        value={requestUID}
+        value={UID}
         onChange={handleUIDChange}
         placeholder="Enter request UID"
       />
-      <button onClick={handleSubmit}>Validate</button>
+      <button onClick={handleSubmit}>Verify</button>
+
+      {/* Displaying route and request states if verification was done*/}
+      {isVerified && (
+        <>
+          <h2>Route state:</h2>
+          <pre>{JSON.stringify(currentRoute, null, 2)}</pre>
+          <h2>Request state:</h2>
+          <pre>{JSON.stringify(currentRequest, null, 2)}</pre>
+
+          <button onClick={submitSuggestions}>Submit Suggestions</button>
+        </>
+      )}
     </PageLayout>
   );
 };

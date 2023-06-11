@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { Typography, Card, Modal, Image } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
@@ -15,7 +15,6 @@ import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
 const progress = 100;
-const NEXT_SCREEN = '/';
 
 const Summary: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,6 +27,8 @@ const Summary: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
+  const state = useSelector((state) => state);
+  console.log(state); // prints all states of the store
 
   const { uid } = useAuth();
 

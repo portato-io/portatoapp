@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { fetchDeals, changeDealStatus } from '../linksStoreToFirebase';
+import { fetchDeals, uploadDealToFirebase } from '../linksStoreToFirebase';
 import { IDealInfo } from '../type';
 import { Card, Button } from 'antd';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { setStatus } from '../Store/actions/dealActionCreators';
 
 const FetchDeals: React.FC<{
   uid?: string | null; // uid is now optional
@@ -11,6 +13,7 @@ const FetchDeals: React.FC<{
   filterStatus?: string; // prop for filtering deals based on status
 }> = ({ uid, heightPortion = 0.8, admin = false, filterStatus }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [deals, setDeals] = useState<IDealInfo[]>([]);
 
   useEffect(() => {
@@ -44,8 +47,14 @@ const FetchDeals: React.FC<{
     navigate(`/contact_sender/${requestUid}/${requestID}`);
   };
 
-  const confirm = (dealID: string) => {
-    changeDealStatus(dealID, 'Confirmed');
+  const confirm = () => {
+    dispatch(setStatus('Confirmed'));
+    uploadDealToFirebase(dispatch);
+  };
+
+  const match = (dealID: string) => {
+    console.log('Matching deal with id: ' + dealID);
+    // You can put your matching logic here
   };
 
   const containerHeight = window.innerHeight * heightPortion;
@@ -57,7 +66,11 @@ const FetchDeals: React.FC<{
         }
       >
         {deals
-          .filter((deal) => !filterStatus || deal.status === filterStatus)
+          .filter((deal) =>
+            admin
+              ? deal.status === 'No match'
+              : !filterStatus || deal.status === filterStatus
+          )
           .map((deal) => (
             <div
               key={deal.id}
@@ -72,7 +85,9 @@ const FetchDeals: React.FC<{
                 style={{ marginTop: '5vh', width: '80%' }}
                 title={deal.status}
                 actions={
-                  filterStatus === 'Suggestion'
+                  deal.status === 'No match' && admin
+                    ? [<Button onClick={() => match(deal.id)}>Match</Button>]
+                    : filterStatus === 'Suggestion'
                     ? [
                         <Button
                           onClick={() =>
@@ -81,9 +96,7 @@ const FetchDeals: React.FC<{
                         >
                           Contact
                         </Button>,
-                        <Button onClick={() => confirm(deal.id)}>
-                          Confirm
-                        </Button>,
+                        <Button onClick={() => confirm()}>Confirm</Button>,
                       ]
                     : []
                 }

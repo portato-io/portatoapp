@@ -243,13 +243,48 @@ export const fetchAdressRequest = async (uid, id) => {
   }
 };
 
-export const changeDealStatus = async (dealId, status) => {
+export const updateMatched = async (request, matched) => {
   try {
-    const dealRef = ref(database, 'deals/' + dealId);
-    await update(dealRef, { status: status });
+    const dealRef = ref(
+      database,
+      'users/' + request.uid + '/requests/' + request.id
+    );
+    await update(dealRef, { matched: matched });
 
-    console.log('Successfully updated data');
+    console.log('Successfully updated matched status ' + dealRef);
   } catch (error) {
-    console.error('Error updating data:', error);
+    console.error('Error updating matched status :', error);
+  }
+};
+
+export const checkPreviousRoutes = async (requestId, routeId) => {
+  try {
+    // Create a reference to the deals
+    const dealsRef = ref(database, 'deals');
+
+    // Get a snapshot of all deals
+    const snapshot = await get(dealsRef);
+
+    // If snapshot exists, check if there's any deal with the matching requestId and routeId
+    if (snapshot.exists()) {
+      const deals = snapshot.val();
+      for (let key in deals) {
+        if (
+          deals[key].request.id === requestId &&
+          deals[key].route.id === routeId
+        ) {
+          console.log(
+            'Deal already exists with the provided request and route IDs.'
+          );
+          return false;
+        }
+      }
+    }
+
+    console.log('No deals found with the provided request and route IDs.');
+    return true;
+  } catch (error) {
+    console.error('Error checking previous routes: ', error);
+    throw error; // You might want to handle the error more gracefully
   }
 };
