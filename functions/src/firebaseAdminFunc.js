@@ -45,6 +45,39 @@ const sendNotification = functions
     });
   });
 
+const sendNotificationEmail = functions
+  .region('europe-west1')
+  .https.onRequest((req, res) => {
+    cors(req, res, async () => {
+      try {
+        const { name, email, message, uid } = req.body;
+        let targetEmail;
+        if (uid) {
+          targetEmail = await getUserEmail(uid); // Fetch email address from UID
+        } else {
+          res.status(500).send('No uid given');
+          return;
+        }
+
+        const mailOptions = {
+          from: '"Notifications" <notifications@portato.io>',
+          to: targetEmail, // Use the fetched email address
+          subject: 'New potential delivery solution',
+          text: `${name} (${email}) says: ${message}`,
+        };
+
+        console.log('Sending email...');
+        const info = await transporter.sendMail(mailOptions);
+        console.log(`Email sent: ${info.messageId}`);
+
+        res.status(200).send(info);
+      } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).send(error);
+      }
+    });
+  });
+
 async function getUserEmail(uid) {
   try {
     const userRecord = await admin.auth().getUser(uid);
@@ -58,4 +91,5 @@ async function getUserEmail(uid) {
 module.exports = {
   getUserEmail,
   sendNotification,
+  sendNotificationEmail,
 };

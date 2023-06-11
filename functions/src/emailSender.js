@@ -32,7 +32,7 @@ function sendEmailToUid(req, res) {
       }
 
       const mailOptions = {
-        from: '"Notifications" <notifications-no-reply@portato.io>',
+        from: '"Notifications" <notifications@portato.io>',
         to: targetEmail, // Use the fetched email address
         subject: 'New Message from React Web App',
         text: `${name} (${email}) says: ${message}`,

@@ -6,7 +6,6 @@ import {
   setRequest,
   setRoute,
 } from '../../Store/actions/dealActionCreators';
-import { setMatched } from '../../Store/actions/requestActionCreators';
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
 import {
@@ -15,6 +14,7 @@ import {
   getUserTokens,
   fetchDataOnce,
   checkPreviousRoutes,
+  updateMatched,
 } from '../../linksStoreToFirebase';
 import { IRouteInfo, IRequestInfo } from '../../type';
 
@@ -69,7 +69,7 @@ const DealSuggester: React.FC = () => {
     fetchRouteData();
   }, [route_uid, route_id, dispatch]);
 
-  const verifyRequest = async (id: string, uid: string) => {
+  const verifySuggestion = async (id: string, uid: string) => {
     // implement your function here
     try {
       console.log('Submitted id: ', id, 'Submitted uid: ', uid);
@@ -114,41 +114,51 @@ const DealSuggester: React.FC = () => {
   };
 
   const submitSuggestions = async () => {
-    setMatched(true);
+    updateMatched(true);
     uploadDealToFirebase(dispatch);
+    if (currentRequest) {
+      const tokens = await getUserTokens(currentRequest.id);
 
-    const tokens = await getUserTokens(route_uid);
+      console.log('tokens are: ', tokens);
+      if (tokens) {
+        tokens.forEach(async (token: any) => {
+          // Prepare the request body
+          const body = {
+            title: 'Potential delivery solution',
+            body: 'We have found a match for your delivery request.',
+            token: token,
+          };
 
-    console.log('tokens are: ', tokens);
-    if (tokens) {
-      tokens.forEach(async (token: any) => {
-        // Prepare the request body
-        const body = {
-          title: 'New delivery suggestion',
-          body: 'World',
-          token: token,
-        };
+          // Make a POST request to the Firebase Function
+          fetch(
+            'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body),
+            }
+          );
 
-        // Make a POST request to the Firebase Function
-        fetch(
-          'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-          }
-        )
-          .then((response) => response.json())
-          .then((result) => {
-            // Read result of the Cloud Function.
-            console.log(result);
-            message.success('Notification sent successfully');
-          })
-          .catch((error) => {
-            // Getting the error details
-            console.error(`error: ${error}`);
-          });
-      });
+          fetch(
+            'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body),
+            }
+          )
+            .then((response) => response.json())
+            .then((result) => {
+              // Read result of the Cloud Function.
+              console.log(result);
+              message.success('Notification sent successfully');
+            })
+            .catch((error) => {
+              // Getting the error details
+              console.error(`error: ${error}`);
+            });
+        });
+      }
     }
   };
 
@@ -161,7 +171,7 @@ const DealSuggester: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    verifyRequest(ID, UID);
+    verifySuggestion(ID, UID);
   };
 
   return (
