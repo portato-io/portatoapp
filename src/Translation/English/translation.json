@@ -38,7 +38,7 @@
     "requestCost":
     {
         "title": "How much is the transport worth to you?",
-        "|*TBI*|pricePlaceholder": "e.g. 30 CHF",
+        "|*TBI*|pricePlaceholder": "e.g., 30 CHF",
         "driverReward": "Reward for driver:",
         "portatoFee": "Portato fee:",
         "vat": "VAT:",
@@ -64,5 +64,52 @@
         "vat": "VAT:",
         "insurance": "Insurance:",
         "comment": "Enter a fair price to give an appropriate incentive. After all, your driver will do a detour to deliver your shipment."
+    },
+    "driveOverview":
+    {
+        "|*TBI*|newTitle": "Register a new route",
+        "|*TBI*|createButtonDescription": "Create",
+        "|*TBI*|currentTitle": "Your current routes"
+    },
+    "driveAddresses":
+    {
+        "departureAddress": "Departure address",
+        "|*TBI*|departureAddressPlaceholder": "Enter an address",
+        "destinationAddress": "Destination address",
+        "|*TBI*|destinationAddressPlaceholder": "Enter an address",
+        "acceptableDetour": "Acceptable detour"
+    },
+    "driveTime":
+    {
+        "title": "When are you driving?",
+        "rangeTitle": "Select date range",
+        "|*TBI*|startPlaceholder": "Start",
+        "|*TBI*|endPlaceholder": "Ende",
+        "selectTime": "Select timing",
+        "|*TBI*|timeMornings": "Mornings",
+        "|*TBI*|timeMidDays": "Mid days",
+        "|*TBI*|timeEvenings": "Evenings",
+        "weekdayTitle": "Please specify the day",
+        "timeTitle": "Select timing"
+    },
+    "driveCapacity":
+    {
+        "title": "What's your delivery capacity?"
+    },
+    "driveSummary":
+    {
+        "title": "Summary of your trip",
+        "departureAddress": "Departure address",
+        "destinationAddress": "Destination address",
+        "acceptableDetour": "Acceptable detour",
+        "tripType": "Type of your trip",
+        "timing": "Timing",
+        "tripDates": "Dates:",
+        "tripTime": "Time:",
+        "each": "Recurring each:",
+        "driveCapacity": "Capacity"
+        
+
+        
     }
 }

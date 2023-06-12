@@ -1,3 +1,4 @@
+import React, { useContext } from 'react';
 import { Typography } from 'antd';
 import { Selector } from 'antd-mobile';
 import { DAYS, TIME } from '../../constant';
@@ -8,11 +9,13 @@ import {
   setTime,
   setType,
 } from '../../Store/actions/routeActionCreators';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const TYPE = 'Recurrent';
 
 function RecurrentTripContent() {
+  const { t } = useContext(TranslationContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,7 +36,7 @@ function RecurrentTripContent() {
   return (
     <div>
       <Title level={5} style={{}}>
-        Please specify the day
+        {t('driveTime.weekdayTitle')}
       </Title>
       <Selector
         columns={3}
@@ -43,7 +46,7 @@ function RecurrentTripContent() {
       />
 
       <Title level={5} style={{}}>
-        Time
+        {t('driveTime.timeTitle')}
       </Title>
       <div
         style={{

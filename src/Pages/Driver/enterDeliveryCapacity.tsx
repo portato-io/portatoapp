@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography } from 'antd';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
@@ -8,6 +8,7 @@ import { Selector } from 'antd-mobile';
 import { setCap } from '../../Store/actions/routeActionCreators';
 import { useDispatch } from 'react-redux';
 import { CAPACITY_OPTIONS } from '../../constant';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
@@ -15,7 +16,7 @@ const PROGRESS = 75;
 
 const EnterDeliveryCapacity: React.FC = () => {
   const dispatch = useDispatch();
-
+  const { t } = useContext(TranslationContext);
   const handleCapChange = (e: any) => {
     dispatch(setCap(e));
   };
@@ -40,11 +41,11 @@ const EnterDeliveryCapacity: React.FC = () => {
             marginBottom: '5vh',
           }}
         >
-          What is your delivery capacity?
+          {t('driveCapacity.title')}
         </Title>
         <div style={{ display: 'flex', alignItems: 'center', height: '100vh' }}>
           <Selector
-            columns={1}
+            columns={2}
             options={CAPACITY_OPTIONS}
             onChange={handleCapChange}
             style={{
