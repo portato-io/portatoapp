@@ -50,7 +50,7 @@ const sendNotificationEmail = functions
   .https.onRequest((req, res) => {
     cors(req, res, async () => {
       try {
-        const { name, email, message, uid } = req.body;
+        const { title, body, uid } = req.body;
         let targetEmail;
         if (uid) {
           targetEmail = await getUserEmail(uid); // Fetch email address from UID
@@ -62,8 +62,8 @@ const sendNotificationEmail = functions
         const mailOptions = {
           from: '"Notifications" <notifications@portato.io>',
           to: targetEmail, // Use the fetched email address
-          subject: 'New potential delivery solution',
-          text: `${name} (${email}) says: ${message}`,
+          subject: title,
+          text: body,
         };
 
         console.log('Sending email...');
