@@ -2,6 +2,7 @@ import { lazy } from 'react';
 
 // other
 import { FC } from 'react';
+import MyAccount from './Pages/Profile/MyAccount';
 
 // pages
 const About = lazy(() => import('./Pages/About'));
@@ -206,5 +207,12 @@ export const routes: Array<Route> = [
     path: '/contact_sender/:request_uid/:request_id',
     enabled: true,
     component: ContactSender,
+  },
+  {
+    key: 'my-account',
+    title: 'MyAccount',
+    path: '/profile/my-account',
+    enabled: true,
+    component: MyAccount,
   },
 ];

@@ -12,10 +12,10 @@ function ProfileContent() {
   const isAdmin = checkAdmin();
 
   const handleMyAccountClick = () => {
-    // navigate to My Account screen
+    navigate('/profile/my-account');
   };
 
-  const handleMyPaymentMethodsClick = () => {
+  const handleMyBlogClick = () => {
     // navigate to My Payment Methods screen
   };
 
@@ -85,14 +85,11 @@ function ProfileContent() {
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   My Account
                 </List.Item>
-                <List.Item arrow={true} onClick={handleMyPaymentMethodsClick}>
-                  My Payment Methods
-                </List.Item>
-                <List.Item arrow={true} onClick={handleMyDeliveriesClick}>
-                  My Deliveries
-                </List.Item>
                 <List.Item arrow={true} onClick={handleMySendRequestsClick}>
                   My Send Requests
+                </List.Item>
+                <List.Item arrow={true} onClick={handleMyBlogClick}>
+                  Blog
                 </List.Item>
                 <List.Item arrow={true} onClick={handleSupportClick}>
                   Support
