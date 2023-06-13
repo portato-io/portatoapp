@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { initializeApp } from 'firebase/app';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { auth, storageRef } from '../../firebaseConfig';
-import firebase from 'firebase/app';
+import { auth } from '../../firebaseConfig';
 import 'firebase/auth';
-import {
-  updateProfile,
-  sendEmailVerification,
-  updateEmail,
-} from 'firebase/auth';
+import { updateProfile, updateEmail } from 'firebase/auth';
 
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
 import { Button, Form, ImageUploader } from 'antd-mobile';

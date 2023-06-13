@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PageLayout from '../../Pages/Layouts/PageLayoutTest';
 import { List, Card } from 'antd-mobile';
 import { UserOutlined } from '@ant-design/icons';
@@ -10,6 +10,15 @@ import { checkAdmin } from '../AuthProvider';
 function ProfileContent() {
   const navigate = useNavigate();
   const isAdmin = checkAdmin();
+  const user = auth.currentUser;
+
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user) {
+      setImageUrl(user.photoURL);
+    }
+  }, []);
 
   const handleMyAccountClick = () => {
     navigate('/profile/my-account');
@@ -69,7 +78,15 @@ function ProfileContent() {
                 justifyContent: 'center',
               }}
             >
-              <UserOutlined style={{ fontSize: '48px' }} />
+              {imageUrl ? (
+                <img
+                  src={new URL(imageUrl).href}
+                  alt="avatar"
+                  style={{ width: '100%', height: '100%', borderRadius: '50%' }}
+                />
+              ) : (
+                <UserOutlined style={{ fontSize: '48px' }} />
+              )}
             </div>
           </div>
           <div
