@@ -31,9 +31,9 @@
         "|*TBI*|startDatePlaceholder": "Start date",
         "|*TBI*|endDatePlaceholder": "End date",
         "|*TBI*|time": "Time",
-        "|*TBI*|mornings": "morning",
-        "|*TBI*|midDays": "mid days",
-        "|*TBI*|evenings": "evenings"
+        "|*TBI*|mornings": "Mornings",
+        "|*TBI*|midDays": "Mid days",
+        "|*TBI*|evenings": "Evenings"
     },
     "requestCost":
     {
@@ -56,14 +56,7 @@
         "possibleDates": "Possible dates:",
         "possibleTimes": "Possible times:",
         "price": "Price:",
-        "images": "Image(s):",
-        
-        "|*TBI*|pricePlaceholder": "e.g. 30 CHF",
-        "driverReward": "Reward for driver:",
-        "portatoFee": "Portato fee:",
-        "vat": "VAT:",
-        "insurance": "Insurance:",
-        "comment": "Enter a fair price to give an appropriate incentive. After all, your driver will do a detour to deliver your shipment."
+        "images": "Image(s):"
     },
     "driveOverview":
     {
