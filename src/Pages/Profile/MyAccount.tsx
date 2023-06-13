@@ -4,45 +4,76 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { auth, storageRef } from '../../firebaseConfig';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { updateProfile, sendEmailVerification } from 'firebase/auth';
+import {
+  updateProfile,
+  sendEmailVerification,
+  updateEmail,
+} from 'firebase/auth';
 
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
-import { Form, ImageUploader } from 'antd-mobile';
+import { Button, Form, ImageUploader } from 'antd-mobile';
 // import UploadImage from '../../Components/UploadImage';
 import { Upload, Input } from 'antd';
 
 const MyAccount: React.FC = () => {
-  const [displayName, setDisplayName] = useState<string | null>(null);
+  const [name, setName] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
 
   const user = auth.currentUser;
 
-  const uploadProfilePicture = async (file: File) => {
-    console.log(file);
+  useEffect(() => {
     if (user) {
-      updateProfile(user, {
-        photoURL: 'file',
-      }).then(function () {
-        console.log('Image uploaded');
-      });
+      setName(user.displayName);
+      setEmail(user.email);
+      setImageUrl(user.photoURL);
     }
+  }, []);
+
+  const uploadProfilePicture = async (imgURL: any) => {
+    setImageUrl(imgURL);
   };
-  const onChange = () => {
-    console.log('rien');
+
+  const showSuccessMessage = (message: string) => {
+    const popup = document.createElement('div');
+    popup.textContent = message;
+    popup.className = 'popup';
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+      popup.remove();
+    }, 2000);
+  };
+
+  const onNameChange = (e: any) => {
+    setName(e.target.value);
+  };
+
+  const onEmailChange = (e: any) => {
+    setEmail(e.target.value);
   };
   const beforeUpload = () => {
     console.log('rien');
   };
-  if (user) {
-    updateProfile(user, {
-      displayName: 'customer ',
-      photoURL: 'https://firebasestorage.googleapis.com/v0/b/',
-    }).then(function () {
-      setDisplayName(user.displayName);
-      console.log('TEST', user.displayName);
-      console.log('TESTImage', user.photoURL);
-    });
-  }
+
+  const onFinish = () => {
+    if (user) {
+      updateProfile(user, {
+        displayName: name,
+        photoURL: imageUrl,
+      }).then(function () {
+        updateEmail(user, email || '')
+          .then(function () {
+            showSuccessMessage('User Information uploaded');
+          })
+          .catch((error) => {
+            console.log(error); //TO DO: Reauthentificate the user when changing mail adress
+          });
+      });
+    }
+    console.log('submitted');
+  };
+
   const [loading, setLoading] = useState(false);
   const uploadButton = (
     <div>
@@ -50,7 +81,6 @@ const MyAccount: React.FC = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
-  console.log(displayName);
   return (
     <ProfilePageLayout>
       <div
@@ -63,35 +93,27 @@ const MyAccount: React.FC = () => {
           overflowY: 'scroll',
         }}
       >
-        <Form>
+        <Form
+          onFinish={onFinish}
+          footer={
+            <Button block type="submit" color="primary" size="large">
+              Validate
+            </Button>
+          }
+        >
           <Form.Header>My Account</Form.Header>
           <Form.Item
             label={<label className="item-form-label">Profile Picture</label>}
           >
-            <Upload
-              listType="picture-card"
-              beforeUpload={(file: File) => {
-                uploadProfilePicture(file);
-                return false; // Prevent default upload behavior
-              }}
-            />
-          </Form.Item>
-          <Form.Item label={<label className="item-form-label">Name</label>}>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label={<label className="item-form-label">Mail address</label>}
-          >
-            <Input />
             <Upload
               name="avatar"
               listType="picture-card"
               className="avatar-uploader"
               showUploadList={false}
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              onChange={onChange}
               beforeUpload={(file: File) => {
-                uploadProfilePicture(file);
+                const imgURL = URL.createObjectURL(file);
+                uploadProfilePicture(imgURL);
                 return false; // Prevent default upload behavior
               }}
             >
@@ -103,10 +125,13 @@ const MyAccount: React.FC = () => {
               )}
             </Upload>
           </Form.Item>
+          <Form.Item label={<label className="item-form-label">Name</label>}>
+            <Input onChange={onNameChange} value={name || ''} />
+          </Form.Item>
           <Form.Item
-            label={<label className="item-form-label">Living address</label>}
+            label={<label className="item-form-label">Mail address</label>}
           >
-            <Input />
+            <Input onChange={onEmailChange} value={email || ''} />
           </Form.Item>
         </Form>
       </div>
