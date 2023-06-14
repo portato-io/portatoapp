@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { Layout } from 'antd';
 import BottomBar from '../../Components/BottomBar';
+require('../../CSS/FillOutForms.css');
+
 const { Content } = Layout;
 
 interface Props {
