@@ -39,46 +39,48 @@ const EnterTime: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-
-      <Form
-        className="form-no-scrolling-sender"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
-      >
-        <Title level={3} style={{ background: '#fff' }}>
-          {' '}
-          When?
-        </Title>
-        <Form.Item
-          label={<label className="item-form-label">Dates</label>}
-          style={{}}
+      <div className="progress-bar-content-container">
+        <Form
+          className="form-sender"
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
         >
-          <RangePicker
-            name="time"
-            inputReadOnly={true}
-            onChange={handleChangeRange}
-            style={{
-              marginTop: '2vh',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '80vw',
-            }}
-          />
-        </Form.Item>
+          <Title level={3} style={{ background: '#fff' }}>
+            {' '}
+            When?
+          </Title>
+          <Form.Item
+            label={<label className="font-bold">Dates</label>}
+            style={{}}
+          >
+            <RangePicker
+              name="time"
+              inputReadOnly={true}
+              onChange={handleChangeRange}
+              style={{
+                marginTop: '2vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '80vw',
+              }}
+            />
+          </Form.Item>
 
-        <Form.Item label={<label className="item-form-label">Time</label>}>
-          <CheckboxGroup
-            name="time"
-            onChange={handleInputChange}
-            options={plainOptions}
-          />
-        </Form.Item>
-      </Form>
-
-      <NextButton nextScreen={NEXT_SCREEN} />
-      <BackButton />
+          <Form.Item label={<label className="font-bold">Time</label>}>
+            <CheckboxGroup
+              name="time"
+              onChange={handleInputChange}
+              options={plainOptions}
+            />
+          </Form.Item>
+        </Form>
+        <div className="form-button-container">
+          <NextButton nextScreen={NEXT_SCREEN} />
+          <BackButton />
+        </div>
+      </div>
     </PageLayout>
   );
 };

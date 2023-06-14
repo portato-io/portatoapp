@@ -62,13 +62,7 @@ const RouteSummary: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div
-        style={{
-          marginTop: '5vh',
-          height: containerHeight + 'px',
-          overflowY: 'auto',
-        }}
-      >
+      <div className="progress-bar-content-container">
         <Modal open={isModalVisible} footer={null}>
           <div>
             <FirebaseAuth />
@@ -124,13 +118,16 @@ const RouteSummary: React.FC = () => {
             </div>
           </Card>
         </div>
-        {user ? (
-          <ConfirmButton onClick={handleConfirm} />
-        ) : (
-          <SignInButton onClick={showModal} />
-        )}
+
+        <div className="form-button-container">
+          {user ? (
+            <ConfirmButton onClick={handleConfirm} />
+          ) : (
+            <SignInButton onClick={showModal} />
+          )}
+          <BackButton />
+        </div>
       </div>
-      <BackButton />
     </PageLayout>
   );
 };

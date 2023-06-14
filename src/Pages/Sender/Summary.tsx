@@ -50,13 +50,7 @@ const Summary: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div
-        style={{
-          marginTop: '8%',
-          height: containerHeight + 'px',
-          overflowY: 'scroll',
-        }}
-      >
+      <div className="progress-bar-content-container">
         <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
           <div>
             <FirebaseAuth />
@@ -121,12 +115,14 @@ const Summary: React.FC = () => {
             </div>
           </div>
         </Card>
-        {uid ? (
-          <ConfirmButton onClick={handleConfirm} />
-        ) : (
-          <SignInButton onClick={showModal} />
-        )}
-        <BackButton />
+        <div className="form-button-container">
+          {uid ? (
+            <ConfirmButton onClick={handleConfirm} />
+          ) : (
+            <SignInButton onClick={showModal} />
+          )}
+          <BackButton />
+        </div>
       </div>
     </PageLayout>
   );

@@ -43,13 +43,7 @@ const EnterPrice: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div
-        style={{
-          marginTop: '5vh',
-          height: containerHeight + 'px',
-          overflowY: 'scroll',
-        }}
-      >
+      <div className="progress-bar-content-container">
         <Form
           className="form-sender"
           //labelCol={{ span: 4 }}
@@ -96,8 +90,10 @@ const EnterPrice: React.FC = () => {
             </Card>
           </Form.Item>
         </Form>
-        <NextButton nextScreen={NEXT_SCREEN} scrolling={false} />
-        <BackButton scrolling={false} />
+        <div className="form-button-container">
+          <NextButton nextScreen={NEXT_SCREEN} />
+          <BackButton />
+        </div>
       </div>
     </PageLayout>
   );

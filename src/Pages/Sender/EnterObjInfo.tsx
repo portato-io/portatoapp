@@ -47,20 +47,10 @@ const EnterObjInfo: React.FC = () => {
     console.log(e.target.name);
   };
 
-  // Calculate screen height
-  const containerHeight = window.innerHeight * 0.9;
-  console.log(containerHeight + 'px');
-
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div
-        style={{
-          marginTop: '5vh',
-          height: containerHeight + 'px',
-          overflowY: 'scroll',
-        }}
-      >
+      <div className="progress-bar-content-container">
         <Form
           id="sender-forms"
           onFinish={onFinish}
@@ -135,11 +125,13 @@ const EnterObjInfo: React.FC = () => {
             </Radio.Group>
           </Form.Item>
           <UploadImage />
-          <Form.Item>
-            <NextButton nextScreen={NEXT_SCREEN} scrolling={true} />
-            <BackButton scrolling={true} />
-          </Form.Item>
         </Form>
+        {/* TODO Mischa: Reserve space for Back/Next buttons in general container
+          & move buttons out of div, for responsive scrolling! */}
+        <div className="form-button-container">
+          <NextButton nextScreen={NEXT_SCREEN} />
+          <BackButton />
+        </div>
       </div>
     </PageLayout>
   );

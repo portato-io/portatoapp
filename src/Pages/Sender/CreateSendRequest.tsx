@@ -17,17 +17,7 @@ const CreateSendRequest: React.FC = () => {
   return (
     <PageLayout>
       <AutoCenter>
-        <Title
-          level={4}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Current send
-        </Title>
+        <div style={{ height: '50px' }}></div>
         <ButtonToCreateNewReqRoutes
           nextScreen={NEXT_SCREEN}
           text={BUTTON_TEXT}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from 'antd';
+import { Form, Typography } from 'antd';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -22,42 +22,33 @@ const EnterDeliveryCapacity: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      >
-        <Title
-          level={4}
-          style={{
-            position: 'absolute',
-            top: '5vh',
-            textAlign: 'center',
-            marginBottom: '5vh',
-          }}
+      <div className="progress-bar-content-container">
+        <Form
+          className="form-sender"
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
         >
-          What is your delivery capacity?
-        </Title>
-        <div style={{ display: 'flex', alignItems: 'center', height: '100vh' }}>
-          <Selector
-            columns={1}
-            options={CAPACITY_OPTIONS}
-            onChange={handleCapChange}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          />
+          <Title level={4}>What is your delivery capacity?</Title>
+          <div style={{ marginTop: '10vh' }}>
+            <Selector
+              columns={1}
+              options={CAPACITY_OPTIONS}
+              onChange={handleCapChange}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            />
+          </div>
+        </Form>
+        <div className="form-button-container">
+          <NextButton nextScreen={NEXT_SCREEN} />
+          <BackButton />
         </div>
       </div>
-      <NextButton nextScreen={NEXT_SCREEN} />
-      <BackButton />
     </PageLayout>
   );
 };
