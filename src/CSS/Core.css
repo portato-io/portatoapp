@@ -1,0 +1,48 @@
+.main-layout {
+  height: '100vh';
+  background-color: #FFF;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.main-navigation-bar {
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  border-top: solid;
+  border-top-color: #E8E9F1;
+  background-color: #FFF;
+  z-index: 1000;
+  height: 55px;
+}
+
+/* Mobile devices */
+@media only screen and (max-width: 767px) {
+  .HeaderMenu {
+    display: none;
+  }
+
+  /* TODO Mischa: Stick navigation bar to top by default and only move it down for mobile?
+  .main-navigation-bar {
+    top: auto;
+    bottom: 0%;
+    border-top: solid;
+    border-top-color: #E8E9F1;
+  } */
+}
+
+/* Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .HeaderButton {
+    display: none;
+  }
+}
+
+/* Desktops and laptops */
+@media only screen and (min-width: 1024px) {
+  .HeaderButton {
+    display: none;
+  }
+}
