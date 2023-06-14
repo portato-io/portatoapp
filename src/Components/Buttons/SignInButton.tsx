@@ -8,16 +8,7 @@ interface SignInButtonProps {
 
 const SignInButton: React.FC<SignInButtonProps> = ({ onClick }) => {
   return (
-    <div
-      style={{
-        position: 'absolute',
-        bottom: '2vh',
-        right: '10vw',
-        width: '45vw',
-        background: 'white',
-        marginBottom: '10vh',
-      }}
-    >
+    <div className="form-button-main form-button-right">
       <Button
         type="primary"
         size="large"
