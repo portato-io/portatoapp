@@ -9,13 +9,13 @@ import { IRequestInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
 import AddressAutocomplete from '../../Components/AutoComplete';
 const { Title } = Typography;
-const progress = 25;
+const PROGRESS = 25;
 const NEXT_SCREEN = '/createSendRequest/enter_time';
 
 const EnterAddress: React.FC = () => {
   return (
     <PageLayout>
-      <ProgressBar progress={progress} />
+      <ProgressBar progress={PROGRESS} />
       <Form
         className="form-no-scrolling-sender"
         labelCol={{ span: 4 }}

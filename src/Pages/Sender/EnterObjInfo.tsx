@@ -13,6 +13,7 @@ import { IFirstObjectInfo, IRequestInfo } from '../../type';
 
 const { Title } = Typography;
 const { TextArea } = Input;
+const PROGRESS = 0;
 
 const NEXT_SCREEN = '/createSendRequest/enter_address';
 
@@ -52,7 +53,7 @@ const EnterObjInfo: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar />
+      <ProgressBar progress={PROGRESS} />
       <div
         style={{
           marginTop: '5vh',

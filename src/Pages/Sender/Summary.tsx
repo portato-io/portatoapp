@@ -14,7 +14,7 @@ import { uploadRequestToFirebase } from '../../linksStoreToFirebase';
 import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
-const progress = 100;
+const PROGRESS = 100;
 const NEXT_SCREEN = '/';
 
 const Summary: React.FC = () => {
@@ -49,7 +49,7 @@ const Summary: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={progress} />
+      <ProgressBar progress={PROGRESS} />
       <div
         style={{
           marginTop: '8%',

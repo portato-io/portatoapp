@@ -12,7 +12,7 @@ import { Slider } from 'antd-mobile';
 import AddressAutocomplete from '../../Components/AutoComplete';
 
 const { Title } = Typography;
-const PROGRESS = 25;
+const PROGRESS = 0;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
 const MARKS = {
   0: '0 km',

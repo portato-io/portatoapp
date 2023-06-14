@@ -16,7 +16,7 @@ const { Title } = Typography;
 const { RangePicker } = DatePicker;
 const plainOptions = ['Morning ', 'Mid days ', 'Evenings '];
 const CheckboxGroup = Checkbox.Group;
-const progress = 50;
+const PROGRESS = 50;
 const NEXT_SCREEN = '/createSendRequest/enter_price';
 
 const EnterTime: React.FC = () => {
@@ -38,7 +38,7 @@ const EnterTime: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={progress} />
+      <ProgressBar progress={PROGRESS} />
 
       <Form
         className="form-no-scrolling-sender"

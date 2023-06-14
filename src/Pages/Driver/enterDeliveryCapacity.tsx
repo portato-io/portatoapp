@@ -11,7 +11,7 @@ import { CAPACITY_OPTIONS } from '../../constant';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
-const PROGRESS = 75;
+const PROGRESS = 66;
 
 const EnterDeliveryCapacity: React.FC = () => {
   const dispatch = useDispatch();

@@ -10,7 +10,7 @@ import { setObjectPrice } from '../../Store/actions/requestActionCreators';
 import { IRequestInfo, ObjectInfoState } from '../../type';
 
 const { Title } = Typography;
-const progress = 75;
+const PROGRESS = 75;
 const NEXT_SCREEN = '/createSendRequest/summary';
 
 const EnterPrice: React.FC = () => {
@@ -42,7 +42,7 @@ const EnterPrice: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={progress} />
+      <ProgressBar progress={PROGRESS} />
       <div
         style={{
           marginTop: '5vh',
