@@ -73,7 +73,7 @@ const EnterObjInfo: React.FC = () => {
             What would you like to ship?
           </Title>
           <Form.Item
-            label={<label className="item-form-label">Name</label>}
+            label={<label className="font-bold">Name</label>}
             //name="name"
             //rules={[{ required: true, message: 'Please input your username!' }]}
           >
@@ -87,7 +87,7 @@ const EnterObjInfo: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            label={<label className="item-form-label">Description</label>}
+            label={<label className="font-bold">Description</label>}
 
             //rules={[{ required: true, message: 'Please input description!' }]}
           >
@@ -101,7 +101,7 @@ const EnterObjInfo: React.FC = () => {
             />
           </Form.Item>
 
-          <Form.Item label={<label className="item-form-label">Size</label>}>
+          <Form.Item label={<label className="font-bold">Size</label>}>
             <Radio.Group
               name="size"
               value={object.size}
@@ -115,7 +115,7 @@ const EnterObjInfo: React.FC = () => {
             </Radio.Group>
           </Form.Item>
 
-          <Form.Item label={<label className="item-form-label">Weight</label>}>
+          <Form.Item label={<label className="font-bold">Weight</label>}>
             <Radio.Group
               name="weight"
               value={object.weight}

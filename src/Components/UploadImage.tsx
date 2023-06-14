@@ -149,7 +149,7 @@ const UploadImage = () => {
 
   return (
     <Form.Item
-      label={<label className="item-form-label">Upload images</label>}
+      label={<label className="font-bold">Upload images</label>}
       valuePropName="fileList"
     >
       <Upload
