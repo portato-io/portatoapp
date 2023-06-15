@@ -26,15 +26,6 @@ const EnterAddress: React.FC = () => {
           Pick-up address
         </Title>
         <Form.Item>
-          {/* <Input
-            name="pickup_adress"
-            value={
-              adresses.pickup_adress !== '' ? adresses.pickup_adress : undefined
-            }
-            onChange={handleInputChange}
-            prefix={<SearchOutlined />}
-            style={{ background: '', width: '90%' }}
-          /> */}
           <AddressAutocomplete type={'pickup'} />
         </Form.Item>
         <Title level={4} style={{ backgroundColor: 'white' }}>
