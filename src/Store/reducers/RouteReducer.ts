@@ -83,6 +83,9 @@ export function routeReducer(
         delivery_capacity: Object.values(action.payload)[0],
       };
     }
+    case 'EMPTY_STATE':
+      return initialStateRoute;
+
     default: {
       console.log('DANS LE DRIVER REDUCER MAIS PAS DANS LE BON STATE');
       return state;

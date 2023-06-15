@@ -12,6 +12,7 @@ import FirebaseAuth from '../../Components/FirebaseAuth';
 import { uploadRouteToFirebase } from '../../linksStoreToFirebase';
 import { IRouteInfo } from '../../type';
 import { useSelector, useDispatch } from 'react-redux';
+import { emptyState } from '../../Store/actions/requestActionCreators';
 
 const { Title } = Typography;
 const PROGRESS = 100;
@@ -57,6 +58,7 @@ const RouteSummary: React.FC = () => {
       // Handle the case when no user is signed in
       console.log('No user is signed in.');
     }
+    dispatch(emptyState()); //Free the redux store after uploading
   };
   const containerHeight = window.innerHeight * 0.7;
   return (
