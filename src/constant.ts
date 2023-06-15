@@ -65,3 +65,18 @@ export const CAPACITY_OPTIONS = [
     value: 'XL',
   },
 ];
+
+export const LANGUAGE_OPTIONS = [
+  {
+    label: 'English',
+    value: 'en',
+  },
+  {
+    label: 'Deutsch',
+    value: 'de',
+  },
+  {
+    label: 'French',
+    value: 'fr',
+  },
+];

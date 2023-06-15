@@ -36,6 +36,8 @@ const ContactSender = lazy(
   () => import('./Pages/Profile/Support/ContactSender')
 );
 
+import Settings from './Pages/Profile/Settings';
+
 // interface
 interface Route {
   key: string;
@@ -206,5 +208,12 @@ export const routes: Array<Route> = [
     path: '/contact_sender/:request_uid/:request_id',
     enabled: true,
     component: ContactSender,
+  },
+  {
+    key: 'settings',
+    title: 'Settings',
+    path: '/profile/settings',
+    enabled: true,
+    component: Settings,
   },
 ];

@@ -37,6 +37,10 @@ function ProfileContent() {
     navigate('/contact_support');
   };
 
+  const handleSettingsClick = () => {
+    navigate('/profile/settings');
+  };
+
   return (
     <PageLayout display={display}>
       <div style={{ display: display }} className="profile_content">
@@ -96,6 +100,9 @@ function ProfileContent() {
                 </List.Item>
                 <List.Item arrow={true} onClick={handleSupportClick}>
                   Support
+                </List.Item>
+                <List.Item arrow={true} onClick={handleSettingsClick}>
+                  Settings
                 </List.Item>
                 {isAdmin && (
                   <List.Item arrow={true} onClick={handleAdminClick}>
