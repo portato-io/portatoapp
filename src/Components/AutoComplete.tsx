@@ -22,15 +22,13 @@ interface Address {
   center: [number, number];
 }
 
-const AddressAutocomplete: React.FC<{ type: string }> = ({ type }) => {
+const AddressAutocomplete: React.FC<{ type: string; savedAddress: string }> = ({
+  type,
+  savedAddress,
+}) => {
   const [inputValue, setInputValue] = useState('');
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
-
-  const objecInfo = useSelector(
-    (state: { request: IRequestInfo }) => state.request
-  );
-  const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
 
   const dispatch = useDispatch();
 
@@ -85,6 +83,7 @@ const AddressAutocomplete: React.FC<{ type: string }> = ({ type }) => {
       <AutoComplete
         showSearch
         placeholder="Enter an address"
+        value={savedAddress}
         style={{ width: '80vw' }}
         options={addresses.map((address) => ({
           value: address.place_name,

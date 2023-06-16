@@ -66,14 +66,20 @@ const EnterRoute: React.FC = () => {
           Departure
         </Title>
         <Form.Item>
-          <AddressAutocomplete type={'departure'} />
+          <AddressAutocomplete
+            type={'departure'}
+            savedAddress={routeInfo.departure_adress}
+          />
         </Form.Item>
 
         <Title level={4} style={{ backgroundColor: 'white' }}>
           Destination
         </Title>
         <Form.Item>
-          <AddressAutocomplete type={'destination'} />
+          <AddressAutocomplete
+            type={'destination'}
+            savedAddress={routeInfo.destination_adress}
+          />
         </Form.Item>
         <Title level={4} style={{ backgroundColor: 'white' }}>
           Acceptable detour

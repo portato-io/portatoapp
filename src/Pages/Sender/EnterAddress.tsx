@@ -13,6 +13,10 @@ const progress = 25;
 const NEXT_SCREEN = '/createSendRequest/enter_time';
 
 const EnterAddress: React.FC = () => {
+  const objecInfo = useSelector(
+    (state: { request: IRequestInfo }) => state.request
+  );
+  console.log(objecInfo);
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
@@ -26,7 +30,10 @@ const EnterAddress: React.FC = () => {
           Pick-up address
         </Title>
         <Form.Item>
-          <AddressAutocomplete type={'pickup'} />
+          <AddressAutocomplete
+            type={'pickup'}
+            savedAddress={objecInfo.pickup_adress}
+          />
         </Form.Item>
         <Title level={4} style={{ backgroundColor: 'white' }}>
           Delivery address
@@ -39,7 +46,10 @@ const EnterAddress: React.FC = () => {
             prefix={<SearchOutlined />}
             style={{ background: '', width: '90%' }}
           /> */}
-          <AddressAutocomplete type={'delivery'} />
+          <AddressAutocomplete
+            type={'delivery'}
+            savedAddress={objecInfo.delivery_adress}
+          />
         </Form.Item>
       </Form>
       <NextButton nextScreen={NEXT_SCREEN} />
