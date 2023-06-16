@@ -69,8 +69,9 @@ export const CAPACITY_OPTIONS = [
 export const LANGUAGE_OPTIONS = [
   {
     label: 'English',
-    value: 'en',
+    value: 'en-US',
   },
+
   {
     label: 'Deutsch',
     value: 'de',

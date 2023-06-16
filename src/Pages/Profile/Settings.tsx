@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
 import { Cascader, Form, Button, Switch } from 'antd-mobile';
 import i18next from 'i18next';
@@ -13,6 +13,13 @@ const Settings: React.FC = () => {
   const changeLanguage = (language: string) => {
     i18next.changeLanguage(language);
   };
+
+  useEffect(() => {
+    const languageOption = LANGUAGE_OPTIONS.find(
+      (option) => option.value == i18next.language
+    );
+    setLanguage(languageOption?.label);
+  }, []);
 
   const onSelectLanguage = (value: any) => {
     console.log(value);
