@@ -59,7 +59,7 @@ function BottomBar() {
             key={item.key}
             icon={item.icon}
             title={item.title}
-            badge={item.badge}
+            // badge={item.badge}
             className="main-navigation-bar-element"
           />
         ))}
