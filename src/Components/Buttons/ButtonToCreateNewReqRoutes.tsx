@@ -1,6 +1,9 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
+import plusImg from '../../Assets/Images/plus_icon.png';
+
+require('../../CSS/FillOutForms.css');
 
 export function ButtonToCreateNewReqRoutes({
   nextScreen = '/',
@@ -15,40 +18,14 @@ export function ButtonToCreateNewReqRoutes({
     <Button
       type="default"
       size="large"
-      style={{
-        position: 'relative',
-        height: 'auto',
-        width: '50vw',
-      }}
+      className="create-new-plus-button"
       onClick={handleSendClick}
     >
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={{
-            width: '50px',
-            height: '50px',
-            borderRadius: '50%',
-            background: 'green',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <PlusOutlined
-            style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-            }}
-          />
+      <div className="create-new-plus-layout">
+        <div className="create-new-plus-bubble">
+          <img src={plusImg} alt="PlusIcon" className="create-new-plus-image" />
         </div>
-        <span style={{ fontSize: '12px', fontWeight: 'bold' }}>{text}</span>
+        <span className="font-large font-bold">{text}</span>
       </div>
     </Button>
   );
