@@ -1,3 +1,4 @@
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { Typography } from 'antd';
 import { Calendar, Selector } from 'antd-mobile';
@@ -9,12 +10,14 @@ import {
   setType,
   setRouteDateRange,
 } from '../../Store/actions/routeActionCreators';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const TYPE = 'Single Trip';
 const { RangePicker } = DatePicker;
 
 function SingleTripContent() {
+  const { t } = useContext(TranslationContext);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setType(TYPE));
@@ -41,30 +44,25 @@ function SingleTripContent() {
     <div>
       <div style={{ marginTop: '5vh', height: '5vh' }}>
         <Title level={5} style={{}}>
-          Select Range
+          {t('driveTime.rangeTitle')}
         </Title>
         <RangePicker
           name="time"
           inputReadOnly={true}
           onChange={handleChangeRange}
           style={{
-            marginTop: '2vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '80vw',
-            marginLeft: '10vw',
+            width: '100%',
           }}
         />
       </div>
       <Title level={5} style={{ marginTop: '10vh' }}>
-        Time
+        {t('driveTime.timeTitle')}
       </Title>
+
       <Selector
         style={{
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
         }}
         options={TIME}
         multiple={true}

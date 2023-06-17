@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { Layout } from 'antd';
 import BottomBar from '../../Components/BottomBar';
+require('../../CSS/FillOutForms.css');
+
 const { Content } = Layout;
 
 interface Props {
@@ -11,9 +13,14 @@ interface Props {
 const MainLayout = (props: Props) => {
   const { children, display = '' } = props;
   return (
-    <Layout style={{ display: display }} className="main-layout">
-      <Content className="layout-children">{children}</Content>
-      <BottomBar />
+    <Layout style={{ display: display }}>
+      <div className="main-page-split">
+        <main className="main-container-split">
+          <Content>{children}</Content>
+        </main>
+
+        <BottomBar />
+      </div>
     </Layout>
   );
 };
