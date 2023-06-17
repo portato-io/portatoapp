@@ -48,23 +48,18 @@ function SingleTripContent() {
           inputReadOnly={true}
           onChange={handleChangeRange}
           style={{
-            marginTop: '2vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '80vw',
-            marginLeft: '10vw',
+            width: '100%',
           }}
         />
       </div>
       <Title level={5} style={{ marginTop: '10vh' }}>
         Time
       </Title>
+
       <Selector
         style={{
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
         }}
         options={TIME}
         multiple={true}

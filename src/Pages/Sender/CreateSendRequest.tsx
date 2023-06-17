@@ -23,6 +23,7 @@ const CreateSendRequest: React.FC = () => {
           text={BUTTON_TEXT}
         />
       </AutoCenter>
+
       {uid !== 'undefined' ? (
         <>
           <h1

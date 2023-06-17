@@ -43,56 +43,58 @@ const EnterPrice: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div className="progress-bar-content-container">
-        <Form
-          className="form-sender"
-          //labelCol={{ span: 4 }}
-          //wrapperCol={{ span: 14 }}
-          layout="horizontal"
-        >
-          <Title level={3} style={{ width: '90%' }}>
-            {' '}
-            How much is the transport cost for you?
-          </Title>
-          <Form.Item>
-            <Input
-              name="price"
-              value={objecInfo.price !== 0 ? objecInfo.price : undefined}
-              onChange={handleInputChange}
-              placeholder="E.g : 30 CHF"
-              style={{ width: '90%' }}
-            />
-          </Form.Item>
-          <Card
-            bordered={false}
-            style={{ marginTop: '-2vh', width: '80%', marginBottom: '10%' }}
+      <div className="form-and-buttons-content-container">
+        <div className="form-content-container">
+          <Form
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
           >
-            Driver reward: x <br />
-            Portato fee: y <br />
-            VAT: z <br />
-            insurance: xy
-          </Card>
-          <Form.Item>
+            <Title level={3}>How much is the transport cost for you?</Title>
+            <Form.Item>
+              <Input
+                name="price"
+                value={objecInfo.price !== 0 ? objecInfo.price : undefined}
+                onChange={handleInputChange}
+                placeholder="E.g : 30 CHF"
+              />
+            </Form.Item>
             <Card
-              bordered={true}
+              bordered={false}
+              className="centered-card"
+              style={{ margin: 'auto', width: '80%' }}
+            >
+              Driver reward: x <br />
+              Portato fee: y <br />
+              VAT: z <br />
+              insurance: xy
+            </Card>
+            <Form.Item
               style={{
-                background: '#F8F9FE',
-                width: '80%',
-                marginTop: '-2vh',
+                marginTop: '20px',
               }}
             >
-              <div style={{ textAlign: 'center' }}>
-                <InfoCircleOutlined />
-              </div>
-              Portato factors in the size of the vehicle, distance travelled and
-              attractiveness for drivers to deliver it. If your price is too
-              low, chances are nobody will take your item.
-            </Card>
-          </Form.Item>
-        </Form>
+              <Card
+                bordered={true}
+                style={{
+                  background: '#F8F9FE',
+                  width: '80%',
+                  margin: 'auto',
+                }}
+              >
+                <div style={{ textAlign: 'center' }}>
+                  <InfoCircleOutlined />
+                </div>
+                Portato factors in the size of the vehicle, distance travelled
+                and attractiveness for drivers to deliver it. If your price is
+                too low, chances are nobody will take your item.
+              </Card>
+            </Form.Item>
+          </Form>
+        </div>
         <div className="form-button-container">
-          <NextButton nextScreen={NEXT_SCREEN} />
           <BackButton />
+          <NextButton nextScreen={NEXT_SCREEN} />
         </div>
       </div>
     </PageLayout>

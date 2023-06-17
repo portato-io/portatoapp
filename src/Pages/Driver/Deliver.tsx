@@ -10,7 +10,9 @@ const HAS_ROUTES = false;
 const Deliver: React.FC = () => {
   return (
     <PageLayout>
-      {/* TODO Mischa: Move the tabs to the bottom of the screen - at least on mobile! */}
+      {/* 
+      TODO: Move the tabs to the bottom of the screen - at least on mobile!
+      TODO: Re-enable the deals tab when it's implemented.
       <Tabs defaultActiveKey={HAS_ROUTES ? 'deals' : 'routes'}>
         <Tabs.Tab title="Deals" key="deals">
           <AutoCenter className="deliver-overview-content-container">
@@ -22,7 +24,10 @@ const Deliver: React.FC = () => {
             <RoutesContent />
           </AutoCenter>
         </Tabs.Tab>
-      </Tabs>
+      </Tabs> */}
+      <AutoCenter className="deliver-overview-content-container">
+        <RoutesContent />
+      </AutoCenter>
     </PageLayout>
   );
 };

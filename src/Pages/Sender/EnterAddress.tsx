@@ -16,45 +16,42 @@ const EnterAddress: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div className="progress-bar-content-container">
-        <Form
-          className="form-sender"
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 14 }}
-          layout="horizontal"
-        >
-          <Title level={4} style={{ backgroundColor: 'white' }}>
-            Pick-up address
-          </Title>
-          <Form.Item>
-            {/* <Input
-              name="pickup_adress"
-              value={
-                adresses.pickup_adress !== '' ? adresses.pickup_adress : undefined
-              }
-              onChange={handleInputChange}
-              prefix={<SearchOutlined />}
-              style={{ background: '', width: '90%' }}
-            /> */}
-            <AddressAutocomplete type={'pickup'} />
-          </Form.Item>
-          <Title level={4} style={{ backgroundColor: 'white' }}>
-            Delivery address
-          </Title>
-          <Form.Item>
-            {/* <Input
-              name="delivery_adress"
-              value={adresses.delivery_adress}
-              onChange={handleInputChange}
-              prefix={<SearchOutlined />}
-              style={{ background: '', width: '90%' }}
-            /> */}
-            <AddressAutocomplete type={'delivery'} />
-          </Form.Item>
-        </Form>
+      <div className="form-and-buttons-content-container">
+        <div className="form-content-container">
+          <Form
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
+          >
+            <Title level={4}>Pick-up address</Title>
+            <Form.Item>
+              {/* <Input
+                name="pickup_adress"
+                value={
+                  adresses.pickup_adress !== '' ? adresses.pickup_adress : undefined
+                }
+                onChange={handleInputChange}
+                prefix={<SearchOutlined />}
+                style={{ background: '', width: '90%' }}
+              /> */}
+              <AddressAutocomplete type={'pickup'} />
+            </Form.Item>
+            <Title level={4}>Delivery address</Title>
+            <Form.Item>
+              {/* <Input
+                name="delivery_adress"
+                value={adresses.delivery_adress}
+                onChange={handleInputChange}
+                prefix={<SearchOutlined />}
+                style={{ background: '', width: '90%' }}
+              /> */}
+              <AddressAutocomplete type={'delivery'} />
+            </Form.Item>
+          </Form>
+        </div>
         <div className="form-button-container">
-          <NextButton nextScreen={NEXT_SCREEN} />
           <BackButton />
+          <NextButton nextScreen={NEXT_SCREEN} />
         </div>
       </div>
     </PageLayout>

@@ -22,31 +22,27 @@ const EnterDeliveryCapacity: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div className="progress-bar-content-container">
-        <Form
-          className="form-sender"
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 14 }}
-          layout="horizontal"
-        >
-          <Title level={4}>What is your delivery capacity?</Title>
-          <div style={{ marginTop: '10vh' }}>
+      <div className="form-and-buttons-content-container">
+        <div className="form-content-container">
+          <Form
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
+          >
+            <Title level={4}>What is your delivery capacity?</Title>
+
             <Selector
               columns={1}
               options={CAPACITY_OPTIONS}
               onChange={handleCapChange}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
+              className="form-element-centered"
+              style={{ marginTop: '20px' }}
             />
-          </div>
-        </Form>
+          </Form>
+        </div>
         <div className="form-button-container">
-          <NextButton nextScreen={NEXT_SCREEN} />
           <BackButton />
+          <NextButton nextScreen={NEXT_SCREEN} />
         </div>
       </div>
     </PageLayout>

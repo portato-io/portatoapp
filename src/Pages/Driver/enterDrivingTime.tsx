@@ -17,15 +17,14 @@ const EnterDeliveryTime: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div className="progress-bar-content-container">
-        <Form
-          className="form-sender"
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 14 }}
-          layout="horizontal"
-        >
-          <Title level={4}>When are you driving?</Title>
-          <div style={{ marginLeft: '-3vw', width: '90vw' }}>
+      <div className="form-and-buttons-content-container">
+        <div className="form-content-container">
+          <Form
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
+          >
+            <Title level={4}>When are you driving?</Title>
             <Tabs>
               <Tabs.Tab title="Single trip" key="single">
                 <SingleTripContent />
@@ -34,11 +33,11 @@ const EnterDeliveryTime: React.FC = () => {
                 <RecurrentTripContent />
               </Tabs.Tab>
             </Tabs>
-          </div>
-        </Form>
+          </Form>
+        </div>
         <div className="form-button-container">
-          <NextButton nextScreen={NEXT_SCREEN} />
           <BackButton />
+          <NextButton nextScreen={NEXT_SCREEN} />
         </div>
       </div>
     </PageLayout>

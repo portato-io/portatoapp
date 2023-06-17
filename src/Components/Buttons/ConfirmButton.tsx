@@ -10,7 +10,7 @@ const ConfirmButton = ({ onClick, nextScreen = '/' }: any) => {
     navigate('/');
   };
   return (
-    <div className="form-button-main form-button-right">
+    <div className="form-button-right">
       <Button
         type="primary"
         size="large"

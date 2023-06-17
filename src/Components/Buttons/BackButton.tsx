@@ -8,7 +8,7 @@ function BackButton({ scrolling = false }: any) {
     navigate(-1);
   };
   return (
-    <div className="form-button-main form-button-left">
+    <div className="form-button-left">
       <Button
         type="default"
         size="large"

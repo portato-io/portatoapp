@@ -1,11 +1,3 @@
-.form-sender {
-    margin-top: 0vh;
-    height: '100vh';
-    background-color: #fff;
-    margin-left: 8vw;
-    margin-bottom: calc(55px + 10vh + 2vh);
-}
-
 .deliver-overview-content-container {
     max-height: calc(100vh - 60px);
     overflow: auto;
@@ -14,40 +6,45 @@
 /* TODO Mischa: Make progress bar fixed to screen and only scroll form content*/
 .progress-bar-indicator {
     position: absolute;
-    top: 2%;
+    top: calc(var(--progress-bar-height) / 2 - 13px);
     left: 10%;
     width: 80%;
-    height: 10%;
+    justify-content: center;
+    height: var(--progress-bar-height);
+}
+.form-content-container {
+    flex: 1;
+    /* background-color: green; */
+    margin: auto;
+    width: 80%;
 }
 
-.progress-bar-content-container {
-    margin-top: 8vh;
-    overflow-y: 'scroll';
+.form-element-centered {
+    justify-content: center;
+    display: flex;
 }
 
-.form-button-main {
-    position: fixed;
-    bottom: 55px;
-    background: #fff;
-    margin-bottom: 20px;
-    z-index: 100;
-}
-
-.form-button-left {
-    left: 10%;
-    width: 30vw;
-}
-
-.form-button-right {
-    right: 10vw;
-    width: 45vw;
+.form-and-buttons-content-container {
+    margin-top: var(--progress-bar-height);
+    /* background-color: chocolate; */
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - var(--main-navigation-bar-height) - var(--progress-bar-height));
 }
 
 .form-button-container {
-    position: fixed;
-    width: 100%;
-    bottom: 55px;
-    background: linear-gradient(0deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0)) 100%;
-    height: 100px;
-    z-index: 99;
+    display: flex;
+    justify-content: center;
+    flex: 0;
+    margin-bottom: 30px;
+    /* background-color: red; */
+}
+
+.form-button-left {
+    width: 30vw;
+    margin-right: 20px;
+}
+
+.form-button-right {
+    width: 45vw;
 }

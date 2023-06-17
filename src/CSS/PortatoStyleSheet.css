@@ -26,11 +26,3 @@
     width: 90%; /* Increase the width on smaller screens */
   }
 }
-
-div .temp-home-page-css {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}

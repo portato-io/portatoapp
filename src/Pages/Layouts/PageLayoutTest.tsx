@@ -13,9 +13,14 @@ interface Props {
 const MainLayout = (props: Props) => {
   const { children, display = '' } = props;
   return (
-    <Layout style={{ display: display }} className="main-layout">
-      <Content className="layout-children">{children}</Content>
-      <BottomBar />
+    <Layout style={{ display: display }}>
+      <div className="main-page-split">
+        <main className="main-container-split">
+          <Content>{children}</Content>
+        </main>
+
+        <BottomBar />
+      </div>
     </Layout>
   );
 };

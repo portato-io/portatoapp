@@ -62,21 +62,22 @@ const RouteSummary: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div className="progress-bar-content-container">
-        <Modal open={isModalVisible} footer={null}>
-          <div>
-            <FirebaseAuth />
-          </div>
-        </Modal>
-        <div
-          style={{
-            marginLeft: '10vw',
-            width: '80vw',
-            marginTop: '5vh',
-            backgroundColor: '#FFF4E4',
-          }}
-        >
-          <Card style={{ backgroundColor: '#FFF4E4' }}>
+      <div className="form-and-buttons-content-container">
+        <div className="form-content-container">
+          <Modal open={isModalVisible} footer={null}>
+            <div>
+              <FirebaseAuth />
+            </div>
+          </Modal>
+          <Card
+            bordered={true}
+            style={{
+              marginTop: '20px',
+              marginBottom: '20px',
+              backgroundColor: '#FFF4E4',
+              borderRadius: '20px',
+            }}
+          >
             <Title level={2}> Summary </Title>
 
             <div>
@@ -107,8 +108,7 @@ const RouteSummary: React.FC = () => {
             ) : (
               <div>
                 <Title level={4}>
-                  {' '}
-                  {routeInfo.timeRange[0]}-{routeInfo.timeRange[1]}{' '}
+                  {routeInfo.timeRange[0]}-{routeInfo.timeRange[1]}
                 </Title>
               </div>
             )}
@@ -120,12 +120,12 @@ const RouteSummary: React.FC = () => {
         </div>
 
         <div className="form-button-container">
+          <BackButton />
           {user ? (
             <ConfirmButton onClick={handleConfirm} />
           ) : (
             <SignInButton onClick={showModal} />
           )}
-          <BackButton />
         </div>
       </div>
     </PageLayout>

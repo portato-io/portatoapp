@@ -1,48 +1,62 @@
-.main-layout {
-  height: '100vh';
+:root {
+  --main-navigation-bar-height: 55px;
+  --progress-bar-height: 55px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
   background-color: #FFF;
+}
+
+.main-page-split {
+  background-color: #FFF;
+  padding-top: var(--main-navigation-bar-height);
+}
+
+.main-container-split {
+  overflow: auto;
+}
+
+.main-navigation-bar {
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  border-bottom: solid;
+  border-bottom-color: #E8E9F1;
+  background-color: #FFF;
+  z-index: 1000;
+  height: var(--main-navigation-bar-height);
 }
 
 .font-bold {
   font-weight: bold;
 }
 
-.main-navigation-bar {
-  position: fixed;
-  bottom: 0%;
-  width: 100%;
-  border-top: solid;
-  border-top-color: #E8E9F1;
-  background-color: #FFF;
-  z-index: 1000;
-  height: 55px;
-}
-
 /* Mobile devices */
 @media only screen and (max-width: 767px) {
-  .HeaderMenu {
-    display: none;
+  /* Switch the navigation bar to the bottom for mobile devices. */
+  .main-page-split {
+    padding-top: 0;
+    padding-bottom: var(--main-navigation-bar-height);
   }
 
-  /* TODO Mischa: Stick navigation bar to top by default and only move it down for mobile?
   .main-navigation-bar {
     top: auto;
     bottom: 0%;
     border-top: solid;
     border-top-color: #E8E9F1;
-  } */
+    border-bottom: none;
+  }
 }
 
 /* Tablets */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-  .HeaderButton {
-    display: none;
-  }
+
 }
 
 /* Desktops and laptops */
 @media only screen and (min-width: 1024px) {
-  .HeaderButton {
-    display: none;
-  }
+
 }

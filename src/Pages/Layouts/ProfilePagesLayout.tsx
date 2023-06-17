@@ -14,7 +14,7 @@ const ProfilePageLayout = (props: Props) => {
   return (
     <Layout style={{ display: display }} className="main-layout">
       <BackArrow />
-      <Content className="layout-children">{children}</Content>
+      <Content>{children}</Content>
       <BottomBar />
     </Layout>
   );
