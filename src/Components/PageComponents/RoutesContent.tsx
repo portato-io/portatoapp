@@ -12,7 +12,6 @@ function RoutesContent() {
   return (
     <div>
       <AutoCenter>
-        <div style={{ height: '50px' }}></div>
         <ButtonToCreateNewReqRoutes
           nextScreen={NEXT_SCREEN}
           text={t('driveOverview.newTitle')}

@@ -18,7 +18,6 @@ const CreateSendRequest: React.FC = () => {
   return (
     <PageLayout>
       <AutoCenter>
-        <div style={{ height: '50px' }}></div>
         <ButtonToCreateNewReqRoutes
           nextScreen={NEXT_SCREEN}
           text={t('requestOverview.newTitle')}
