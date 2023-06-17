@@ -108,6 +108,15 @@
         "back": "Back",
         "confirm": "Confirm",
         "signIn": "Sign In"
+    },
+    "navigationMenu": {
+        "myAccount": "My Account",
+        "mySendRequests": "My Send Requests",
+        "signIn": "Sign In",
+        "blog": "Blog",
+        "support": "Support",
+        "adminWindow": "Admin Window",
+        "signOut": "Sign Out"
     }
 
 }

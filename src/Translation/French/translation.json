@@ -108,5 +108,14 @@
         "back": "Retour",
         "confirm": "Confirmer",
         "signIn": "Connexion"
+    },
+    "navigationMenu": {
+        "myAccount": "Mon Compte",
+        "mySendRequests": "Mes Demandes d'Envoi",
+        "signIn": "Se Connecter",
+        "blog": "Blog",
+        "support": "Support",
+        "adminWindow": "Fenêtre d'Admin",
+        "signOut": "Se Déconnecter"
     }
 }

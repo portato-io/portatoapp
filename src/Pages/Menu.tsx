@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PageLayout from '../Pages/Layouts/PageLayoutTest';
 import { List, Card } from 'antd-mobile';
 import { Modal } from 'antd';
@@ -7,9 +7,11 @@ import { auth } from '../firebaseConfig';
 import FirebaseAuth from '../Components/FirebaseAuth';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { TranslationContext } from '../Contexts/TranslationContext';
 import { useAuth, checkAdmin } from '../Components/AuthProvider';
 
 const Menu: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const navigate = useNavigate();
   const isAdmin = checkAdmin();
   const user = auth.currentUser;
@@ -117,27 +119,27 @@ const Menu: React.FC = () => {
                 {uid ? (
                   <>
                     <List.Item arrow={true} onClick={handleMyAccountClick}>
-                      My Account
+                      {t('navigationMenu.myAccount')}
                     </List.Item>
                     <List.Item arrow={true} onClick={handleMySendRequestsClick}>
-                      My Send Requests
+                      {t('navigationMenu.mySendRequests')}
                     </List.Item>
                   </>
                 ) : (
                   <List.Item arrow={true} onClick={showModal}>
-                    Sign In
+                    {t('navigationMenu.signIn')}
                   </List.Item>
                 )}
 
                 <List.Item arrow={true} onClick={handleMyBlogClick}>
-                  Blog
+                  {t('navigationMenu.blog')}
                 </List.Item>
                 <List.Item arrow={true} onClick={handleSupportClick}>
-                  Support
+                  {t('navigationMenu.support')}
                 </List.Item>
                 {isAdmin && (
                   <List.Item arrow={true} onClick={handleAdminClick}>
-                    Admin window
+                    {t('navigationMenu.adminWindow')}
                   </List.Item>
                 )}
                 {uid ? (
@@ -146,7 +148,7 @@ const Menu: React.FC = () => {
                     onClick={() => signOut(auth)}
                     style={{ color: 'red' }}
                   >
-                    Sign out
+                    {t('navigationMenu.signOut')}
                   </List.Item>
                 ) : null}
               </List>
