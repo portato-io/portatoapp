@@ -58,6 +58,10 @@ const Menu: React.FC = () => {
     navigate('/contact_support');
   };
 
+  const handleSettingsClick = () => {
+    navigate('/profile/settings');
+  };
+
   return (
     <PageLayout display={display}>
       <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
@@ -65,96 +69,55 @@ const Menu: React.FC = () => {
           <FirebaseAuth />
         </div>
       </Modal>
-      <div style={{ display: display }} className="profile_content">
-        {/* Rest of your code... */}
-        <div
-          style={{
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            background: '#2897FF',
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: '#2897FF',
-              flex: 4,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <div
-              style={{
-                width: 'min(min(50vw,50vh),250px)',
-                height: 'min(min(50vw,50vh),250px)',
-                borderRadius: '50%',
-                backgroundColor: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              {imageUrl ? (
-                <img
-                  src={new URL(imageUrl).href}
-                  alt="avatar"
-                  style={{ width: '100%', height: '100%', borderRadius: '50%' }}
-                />
-              ) : (
-                <UserOutlined style={{ fontSize: '48px' }} />
-              )}
-            </div>
-          </div>
-          <div
-            style={{
-              backgroundColor: '#2897FF',
-              flex: 6,
-              height: '80vh',
-              overflowY: 'auto',
-            }}
-          >
-            <Card style={{ borderRadius: '5%', height: '100%' }}>
-              <List mode="card" style={{ marginTop: '1vh' }}>
-                {uid ? (
-                  <>
-                    <List.Item arrow={true} onClick={handleMyAccountClick}>
-                      {t('navigationMenu.myAccount')}
-                    </List.Item>
-                    <List.Item arrow={true} onClick={handleMySendRequestsClick}>
-                      {t('navigationMenu.mySendRequests')}
-                    </List.Item>
-                  </>
-                ) : (
-                  <List.Item arrow={true} onClick={showModal}>
-                    {t('navigationMenu.signIn')}
-                  </List.Item>
-                )}
-
-                <List.Item arrow={true} onClick={handleMyBlogClick}>
-                  {t('navigationMenu.blog')}
-                </List.Item>
-                <List.Item arrow={true} onClick={handleSupportClick}>
-                  {t('navigationMenu.support')}
-                </List.Item>
-                {isAdmin && (
-                  <List.Item arrow={true} onClick={handleAdminClick}>
-                    {t('navigationMenu.adminWindow')}
-                  </List.Item>
-                )}
-                {uid ? (
-                  <List.Item
-                    arrow={true}
-                    onClick={() => signOut(auth)}
-                    style={{ color: 'red' }}
-                  >
-                    {t('navigationMenu.signOut')}
-                  </List.Item>
-                ) : null}
-              </List>
-            </Card>
+      <div className="profile-screen-background">
+        <div className="profile-image-container">
+          <div className="profile-image-bubble">
+            <UserOutlined style={{ fontSize: '48px' }} />
           </div>
         </div>
+
+        <Card className="settings-card">
+          <List mode="card" style={{ marginTop: '1vh' }}>
+            {uid ? (
+              <>
+                <List.Item arrow={true} onClick={handleMyAccountClick}>
+                  {t('navigationMenu.myAccount')}
+                </List.Item>
+                <List.Item arrow={true} onClick={handleMySendRequestsClick}>
+                  {t('navigationMenu.mySendRequests')}
+                </List.Item>
+              </>
+            ) : (
+              <List.Item arrow={true} onClick={showModal}>
+                {t('navigationMenu.signIn')}
+              </List.Item>
+            )}
+
+            <List.Item arrow={true} onClick={handleMyBlogClick}>
+              {t('navigationMenu.blog')}
+            </List.Item>
+            <List.Item arrow={true} onClick={handleSupportClick}>
+              {t('navigationMenu.support')}
+            </List.Item>
+            <List.Item arrow={true} onClick={handleSettingsClick}>
+              Settings
+            </List.Item>
+            {isAdmin && (
+              <List.Item arrow={true} onClick={handleAdminClick}>
+                {t('navigationMenu.adminWindow')}
+              </List.Item>
+            )}
+            {uid ? (
+              <List.Item
+                arrow={true}
+                onClick={() => signOut(auth)}
+                style={{ color: 'red' }}
+              >
+                {t('navigationMenu.signOut')}
+              </List.Item>
+            ) : null}
+          </List>
+        </Card>
       </div>
     </PageLayout>
   );
