@@ -10,7 +10,7 @@ import SingleTripContent from '../../Components/PageComponents/SingleTripContent
 import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripContent';
 
 const { Title } = Typography;
-const PROGRESS = 66;
+const PROGRESS = 33;
 const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
 const EnterDeliveryTime: React.FC = () => {
