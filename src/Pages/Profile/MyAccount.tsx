@@ -6,7 +6,7 @@ import { updateProfile, updateEmail } from 'firebase/auth';
 
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
 import { Button, Form, ImageUploader } from 'antd-mobile';
-import { Upload, Input } from 'antd';
+import { Upload, Input, message } from 'antd';
 
 const MyAccount: React.FC = () => {
   const [name, setName] = useState<string | null>(null);
