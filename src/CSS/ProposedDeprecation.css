@@ -1,0 +1,21 @@
+
+/* Mobile devices */
+@media only screen and (max-width: 767px) {
+    .HeaderMenu {
+      display: none;
+    }
+}
+
+/* Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .HeaderButton {
+      display: none;
+    }
+}
+  
+/* Desktops and laptops */
+@media only screen and (min-width: 1024px) {
+    .HeaderButton {
+        display: none;
+    }
+}

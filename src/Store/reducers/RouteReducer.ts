@@ -41,13 +41,13 @@ export function routeReducer(
     case 'SET_ROUTE_DEPARTURE_ADDRESS': {
       return {
         ...state,
-        departure_adress: action.payload[0],
+        departure_adress: action.payload,
       };
     }
     case 'SET_ROUTE_DESTINATION_ADDRESS': {
       return {
         ...state,
-        destination_adress: action.payload[0],
+        destination_adress: action.payload,
       };
     }
     case 'SET_DETOUR': {

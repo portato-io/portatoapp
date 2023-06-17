@@ -5,13 +5,8 @@ function ProgressBar({ progress = 0 }: any) {
     <Progress
       percent={progress}
       showInfo={false}
-      style={{
-        position: 'absolute',
-        top: '2%',
-        left: '10%',
-        width: '80%',
-        height: '10%',
-      }}
+      strokeColor={'#1677FF'}
+      className="progress-bar-indicator"
     ></Progress>
   );
 }

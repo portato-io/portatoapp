@@ -1,4 +1,4 @@
-import './App.css';
+import './CSS/Core.css';
 import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNavigator from './Components/SideBarNav';
@@ -7,6 +7,7 @@ import { AuthProvider } from './Components/AuthProvider';
 import { checkTokenExists } from './linksStoreToFirebase';
 import { useAuth } from './Components/AuthProvider';
 import { fetchToken, onMessageListener } from './firebaseConfig';
+import { TranslationProvider } from './Contexts/TranslationContext';
 
 // import routes
 import { routes as appRoutes } from './routes';
@@ -62,32 +63,34 @@ const App: React.FC = () => {
   };
 
   return (
-    <AuthProvider>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: '#2897FF',
-          },
-        }}
-      >
-        <div>
-          <Router>
-            <SideNavigator openMenu={openMenu} setOpenMenu={setOpenMenu} />
-            <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                {appRoutes.map((route) => (
-                  <Route
-                    key={route.key}
-                    path={route.path}
-                    element={<route.component />}
-                  />
-                ))}
-              </Routes>
-            </Suspense>
-          </Router>
-        </div>
-      </ConfigProvider>
-    </AuthProvider>
+    <TranslationProvider>
+      <AuthProvider>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: '#2897FF',
+            },
+          }}
+        >
+          <div>
+            <Router>
+              <SideNavigator openMenu={openMenu} setOpenMenu={setOpenMenu} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                  {appRoutes.map((route) => (
+                    <Route
+                      key={route.key}
+                      path={route.path}
+                      element={<route.component />}
+                    />
+                  ))}
+                </Routes>
+              </Suspense>
+            </Router>
+          </div>
+        </ConfigProvider>
+      </AuthProvider>
+    </TranslationProvider>
   );
 };
 

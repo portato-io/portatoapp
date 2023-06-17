@@ -1,0 +1,128 @@
+{
+    "requestOverview":
+    {
+        "newTitle": "Créer une nouvelle demande d'envoi",
+        "|*TBI*|createButtonDescription": "Créer",
+        "currentTitle": "Vos demandes d'envoi en cours"
+    },
+    
+    "requestInfo":
+    {
+        "title": "Que voulez-vous expédier?",
+        "name": "Titre",
+        "namePlaceholder": "Donnez à votre envoi un titre significatif.",
+        "description": "Description",
+        "descriptionPlaceholder": "Par exemple, il est recommandé de préciser les dimensions des objets volumineux.",
+        "size": "Taille",
+        "weight": "Poids",
+        "uploadImages": "Importer des images"
+    },
+    "requestAddresses":
+    {
+        "pickupAddress": "Adresse de ramassage",
+        "|*TBI*|pickupAddressPlaceholder": "Entrez une adresse",
+        "deliveryAddress": "Adresse de livraison",
+        "|*TBI*|deliveryAddressPlaceholder": "Entrez une adresse"
+    },
+    "requestTime":
+    {
+        "title": "Quand voulez-vous que l'envoi soit récupéré?",
+        "|*TBI*|dates": "Dates",
+        "|*TBI*|startDatePlaceholder": "Date de début",
+        "|*TBI*|endDatePlaceholder": "Date de fin",
+        "|*TBI*|time": "Heure",
+        "|*TBI*|mornings": "Matinées",
+        "|*TBI*|midDays": "Mi-journées",
+        "|*TBI*|evenings": "Soirées"
+    },
+    "requestCost":
+    {
+        "title": "Combien vaut pour vous le transport?",
+        "|*TBI*|pricePlaceholder": "par ex., 30 CHF",
+        "driverReward": "Récompense pour le conducteur:",
+        "portatoFee": "Frais de Portato:",
+        "vat": "TVA:",
+        "insurance": "Assurance:",
+        "comment": "Entrez un prix équitable pour donner une incitation appropriée. Après tout, votre conducteur fera un détour pour livrer votre envoi."
+    },
+    "requestSummary":
+    {
+        "title": "Résumé de votre demande d'envoi",
+        "size": "Taille:",
+        "weight": "Poids:",
+        "pickupAddress": "Adresse de prise en charge:",
+        "deliveryAddress": "Adresse de livraison:",
+        "timeframe": "Délai:",
+        "possibleDates": "Dates possibles:",
+        "possibleTimes": "Heures possibles:",
+        "price": "Prix:",
+        "images": "Image(s):"
+    },
+    "driveOverview":
+    {
+        "|*TBI*|newTitle": "Enregistrer un nouvel itinéraire",
+        "|*TBI*|createButtonDescription": "Créer",
+        "|*TBI*|currentTitle": "Vos itinéraires actuels"
+    },
+    "driveAddresses":
+    {
+        "departureAddress": "Adresse de départ",
+        "|*TBI*|departureAddressPlaceholder": "Entrez une adresse",
+        "destinationAddress": "Adresse de destination",
+        "|*TBI*|destinationAddressPlaceholder": "Entrez une adresse",
+        "acceptableDetour": "Détour acceptable"
+    },
+    "driveTime":
+    {
+        "title": "Quand conduisez-vous?",
+        "rangeTitle": "Sélectionner une plage de dates",
+        "|*TBI*|startPlaceholder": "Début",
+        "|*TBI*|endPlaceholder": "Fin",
+        "selectTime": "Sélectionnez l'heure",
+        "|*TBI*|timeMornings": "Matinées",
+        "|*TBI*|timeMidDays": "Mi-journées",
+        "|*TBI*|timeEvenings": "Soirées",
+        "weekdayTitle": "Veuillez préciser le jour",
+        "timeTitle": "Sélectionnez l'heure"
+    },
+    "driveCapacity":
+    {
+        "title": "Quelle est votre capacité de livraison ?"
+    },
+    "driveSummary":
+    {
+        "title": "Résumé de votre voyage",
+        "departureAddress": "Adresse de départ",
+        "destinationAddress": "Adresse de destination",
+        "acceptableDetour": "Détour acceptable",
+        "tripType": "Type de votre voyage",
+        "timing": "Horaire",
+        "tripDates": "Dates:",
+        "tripTime": "Heure:",
+        "each": "Récurrent chaque:",
+        "driveCapacity": "Capacité"
+    },
+    "navigationButton":
+    {
+        "next": "Suivant",
+        "back": "Retour",
+        "confirm": "Confirmer",
+        "signIn": "Connexion"
+    },
+    "navigationMenu": {
+        "myAccount": "Mon Compte",
+        "mySendRequests": "Mes Demandes d'Envoi",
+        "signIn": "Se Connecter",
+        "blog": "Blog",
+        "support": "Support",
+        "adminWindow": "Fenêtre d'Admin",
+        "signOut": "Se Déconnecter"
+    },
+    "accountPage": {
+        "validate": "Valider",
+        "myAccount": "Mon Compte",
+        "profilePicture": "Photo de Profil",
+        "name": "Nom",
+        "emailAddress": "Adresse Email"
+    }
+}
