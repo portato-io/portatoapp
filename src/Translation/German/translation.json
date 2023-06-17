@@ -101,5 +101,13 @@
         "tripTime": "Tageszeit:",
         "each": "Wiederkehrend jeden:",
         "driveCapacity": "Kapazität"
+    },
+    "navigationButton":
+    {
+        "next": "Next",
+        "back": "Back",
+        "confirm": "Confirm",
+        "signIn": "Sign In"
     }
+
 }

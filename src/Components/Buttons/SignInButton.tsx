@@ -1,12 +1,15 @@
 // SignInButton.tsx
 import React from 'react';
 import { Button } from 'antd';
+import { useContext } from 'react';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 interface SignInButtonProps {
   onClick: () => void;
 }
 
 const SignInButton: React.FC<SignInButtonProps> = ({ onClick }) => {
+  const { t } = useContext(TranslationContext);
   return (
     <div
       style={{
@@ -24,7 +27,7 @@ const SignInButton: React.FC<SignInButtonProps> = ({ onClick }) => {
         onClick={onClick}
         style={{ width: '100%' }}
       >
-        Sign In
+        {t('navigationButton.signIn')}
       </Button>
     </div>
   );

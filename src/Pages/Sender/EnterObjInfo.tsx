@@ -94,11 +94,7 @@ const EnterObjInfo: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            label={
-              <label className="item-form-label">
-                {t('requestInfo.description')}
-              </label>
-            }
+            label={<label className="item-form-label">{t()}</label>}
 
             //rules={[{ required: true, message: 'Please input description!' }]}
           >

@@ -15,7 +15,7 @@
         "descriptionPlaceholder": "Par exemple, il est recommandé de préciser les dimensions des objets volumineux.",
         "size": "Taille",
         "weight": "Poids",
-        "uploadImages": "Télécharger des images"
+        "uploadImages": "Importer des images"
     },
     "requestAddresses":
     {
@@ -50,7 +50,7 @@
         "title": "Résumé de votre demande d'envoi",
         "size": "Taille:",
         "weight": "Poids:",
-        "pickupAddress": "Adresse de ramassage:",
+        "pickupAddress": "Adresse de prise en charge:",
         "deliveryAddress": "Adresse de livraison:",
         "timeframe": "Délai:",
         "possibleDates": "Dates possibles:",
@@ -101,5 +101,12 @@
         "tripTime": "Heure:",
         "each": "Récurrent chaque:",
         "driveCapacity": "Capacité"
+    },
+    "navigationButton":
+    {
+        "next": "Suivant",
+        "back": "Retour",
+        "confirm": "Confirmer",
+        "signIn": "Connexion"
     }
 }

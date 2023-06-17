@@ -100,9 +100,14 @@
         "tripDates": "Dates:",
         "tripTime": "Time:",
         "each": "Recurring each:",
-        "driveCapacity": "Capacity"
-        
-
-        
+        "driveCapacity": "Capacity"        
+    },
+    "navigationButton":
+    {
+        "next": "Next",
+        "back": "Back",
+        "confirm": "Confirm",
+        "signIn": "Sign In"
     }
+
 }
