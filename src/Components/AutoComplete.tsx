@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
-import { Input } from 'antd';
+import { AutoComplete, Input } from 'antd';
 import { Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRequestInfo, IRouteInfo } from '../type';
@@ -22,20 +22,18 @@ interface Address {
   center: [number, number];
 }
 
-const AddressAutocomplete: React.FC<{ type: string }> = ({ type }) => {
+const AddressAutocomplete: React.FC<{ type: string; savedAddress: string }> = ({
+  type,
+  savedAddress,
+}) => {
   const [inputValue, setInputValue] = useState('');
   const [addresses, setAddresses] = useState<Address[]>([]);
-  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
-
-  const objecInfo = useSelector(
-    (state: { request: IRequestInfo }) => state.request
-  );
-  const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
+  const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
 
   const dispatch = useDispatch();
 
   const onChange = (value: string) => {
-    console.log(type);
+    //setSelectedAddress(value || null);
     switch (type) {
       case 'pickup':
         dispatch(setReqPickupAddress(value));
@@ -55,7 +53,7 @@ const AddressAutocomplete: React.FC<{ type: string }> = ({ type }) => {
   };
   const handleAddressSelect = (value: string) => {
     const selected = addresses.find((address) => address.place_name === value);
-    setSelectedAddress(selected || null);
+    setSelectedAddress(selected?.place_name || null);
     setInputValue(value);
     setAddresses([]);
   };
@@ -80,14 +78,13 @@ const AddressAutocomplete: React.FC<{ type: string }> = ({ type }) => {
       setAddresses([]);
     }
   };
-
   return (
     <div>
-      <Select
+      <AutoComplete
         showSearch
         placeholder="Enter an address"
+        value={savedAddress}
         style={{ width: '80vw' }}
-        mode="tags"
         options={addresses.map((address) => ({
           value: address.place_name,
           label: address.place_name,

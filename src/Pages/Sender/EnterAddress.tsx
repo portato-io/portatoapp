@@ -15,6 +15,10 @@ const PROGRESS = 25;
 const NEXT_SCREEN = '/createSendRequest/enter_time';
 
 const EnterAddress: React.FC = () => {
+  const objecInfo = useSelector(
+    (state: { request: IRequestInfo }) => state.request
+  );
+  console.log(objecInfo);
   const { t } = useContext(TranslationContext);
   return (
     <PageLayout>
@@ -26,29 +30,26 @@ const EnterAddress: React.FC = () => {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
-            <Title level={4}>Pick-up address</Title>
+            <Title level={4}> Pick-up address</Title>
             <Form.Item>
-              {/* <Input
-                name="pickup_adress"
-                value={
-                  adresses.pickup_adress !== '' ? adresses.pickup_adress : undefined
-                }
-                onChange={handleInputChange}
-                prefix={<SearchOutlined />}
-                style={{ background: '', width: '90%' }}
-              /> */}
-              <AddressAutocomplete type={'pickup'} />
+              <AddressAutocomplete
+                type={'pickup'}
+                savedAddress={objecInfo.pickup_adress}
+              />
             </Form.Item>
             <Title level={4}>Delivery address</Title>
             <Form.Item>
               {/* <Input
-                name="delivery_adress"
-                value={adresses.delivery_adress}
-                onChange={handleInputChange}
-                prefix={<SearchOutlined />}
-                style={{ background: '', width: '90%' }}
-              /> */}
-              <AddressAutocomplete type={'delivery'} />
+            name="delivery_adress"
+            value={adresses.delivery_adress}
+            onChange={handleInputChange}
+            prefix={<SearchOutlined />}
+            style={{ background: '', width: '90%' }}
+          /> */}
+              <AddressAutocomplete
+                type={'delivery'}
+                savedAddress={objecInfo.delivery_adress}
+              />
             </Form.Item>
           </Form>
         </div>
