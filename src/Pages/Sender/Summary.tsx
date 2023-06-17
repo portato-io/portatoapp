@@ -13,6 +13,7 @@ import { IRequestInfo } from '../../type';
 import { useAuth } from '../../Components/AuthProvider';
 import { uploadRequestToFirebase } from '../../linksStoreToFirebase';
 import { useDispatch } from 'react-redux';
+import { emptyState } from '../../Store/actions/requestActionCreators';
 
 const { Title } = Typography;
 const PROGRESS = 100;
@@ -38,6 +39,7 @@ const Summary: React.FC = () => {
     } else {
       console.log('User UID not found.');
     }
+    dispatch(emptyState()); //Free the redux store after uploading
   };
 
   const [visible, setVisible] = useState(false);

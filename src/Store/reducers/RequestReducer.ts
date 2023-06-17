@@ -20,6 +20,7 @@ export function requestReducer(
   state: any = initialState,
   action: AnyAction
 ): IRequestInfo {
+  console.log(action.type);
   switch (action.type) {
     case 'SET_OBJECT': {
       return {
@@ -76,6 +77,9 @@ export function requestReducer(
       );
       return { ...state, images: updatedImages };
     }
+
+    case 'EMPTY_STATE':
+      return initialState;
 
     default: {
       console.log('DANS LE REDUCER MAIS PAS DANS LE BON STATE');

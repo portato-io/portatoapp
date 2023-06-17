@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes/requestActionTypes';
 import { IFirstObjectInfo } from '../../type';
+import { EMPTY_STATE } from '../actionTypes/commonActionTypes';
 import { AnyAction } from 'redux';
 
 export const setObject = (variable: IFirstObjectInfo): AnyAction => ({
@@ -50,4 +51,8 @@ export const removeObjectImages = (position: number): AnyAction => ({
 export const setReqUid = (uid: string): AnyAction => ({
   type: actionTypes.SET_UID,
   payload: uid,
+});
+
+export const emptyState = (): AnyAction => ({
+  type: EMPTY_STATE,
 });
