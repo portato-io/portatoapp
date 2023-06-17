@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { Typography, Card, Modal, Image } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
@@ -6,6 +6,7 @@ import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import SignInButton from '../../Components/Buttons/SignInButton';
 import FirebaseAuth from '../../Components/FirebaseAuth';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 import { useSelector } from 'react-redux';
 import { IRequestInfo } from '../../type';
@@ -15,9 +16,9 @@ import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
 const PROGRESS = 100;
-const NEXT_SCREEN = '/';
 
 const Summary: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
 

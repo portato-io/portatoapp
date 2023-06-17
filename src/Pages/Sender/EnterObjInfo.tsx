@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -18,6 +19,8 @@ const PROGRESS = 0;
 const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
+  const { t } = useContext(TranslationContext);
+
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );

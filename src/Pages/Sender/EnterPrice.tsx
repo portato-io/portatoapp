@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -8,12 +8,14 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectPrice } from '../../Store/actions/requestActionCreators';
 import { IRequestInfo, ObjectInfoState } from '../../type';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const PROGRESS = 75;
 const NEXT_SCREEN = '/createSendRequest/summary';
 
 const EnterPrice: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );

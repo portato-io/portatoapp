@@ -1,5 +1,5 @@
-import React from 'react';
 import { Form, Typography } from 'antd';
+import React, { useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import SwitchContainer from '../../Components/SwitchContainer';
 import NextButton from '../../Components/Buttons/NextButton';
@@ -8,12 +8,15 @@ import ProgressBar from '../../Components/ProgressBar';
 import { Tabs, Calendar, Selector } from 'antd-mobile';
 import SingleTripContent from '../../Components/PageComponents/SingleTripContent';
 import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripContent';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const PROGRESS = 33;
 const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
 const EnterDeliveryTime: React.FC = () => {
+  const { t } = useContext(TranslationContext);
+
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -11,6 +11,7 @@ import {
   setObjectTime,
 } from '../../Store/actions/requestActionCreators';
 import { TIME } from '../../constant';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 //import DatePicker from "react-datepicker"
 
@@ -20,6 +21,7 @@ const PROGRESS = 50;
 const NEXT_SCREEN = '/createSendRequest/enter_price';
 
 const EnterTime: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const dispatch = useDispatch();
 
   const handleTimeChange = (e: any) => {

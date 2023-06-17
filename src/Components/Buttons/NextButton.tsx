@@ -1,7 +1,10 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 function NextButton({ nextScreen = '/', scrolling = false }: any) {
+  const { t } = useContext(TranslationContext);
   const navigate = useNavigate();
   const handleNextClick = () => {
     console.log(nextScreen);
@@ -15,7 +18,7 @@ function NextButton({ nextScreen = '/', scrolling = false }: any) {
         onClick={handleNextClick}
         style={{ width: '100%' }}
       >
-        Next
+        {t('navigationButton.next')}
       </Button>
     </div>
   );
