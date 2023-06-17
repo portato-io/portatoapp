@@ -104,10 +104,25 @@
     },
     "navigationButton":
     {
-        "next": "Next",
-        "back": "Back",
-        "confirm": "Confirm",
-        "signIn": "Sign In"
+        "next": "Weiter",
+        "back": "Zurück",
+        "confirm": "Bestätigen",
+        "signIn": "Anmelden"
+    },
+    "navigationMenu": {
+        "myAccount": "Mein Konto",
+        "mySendRequests": "Meine Sendeanfragen",
+        "signIn": "Anmelden",
+        "blog": "Blog",
+        "support": "Unterstützung",
+        "adminWindow": "Admin-Fenster",
+        "signOut": "Abmelden"
+    },
+    "accountPage": {
+        "validate": "Bestätigen",
+        "myAccount": "Mein Konto",
+        "profilePicture": "Profilbild",
+        "name": "Name",
+        "emailAddress": "E-Mail Adresse"
     }
-
 }

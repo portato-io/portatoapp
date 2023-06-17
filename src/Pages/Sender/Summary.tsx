@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { Typography, Card, Modal, Image } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
@@ -16,7 +16,6 @@ import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
 const progress = 100;
-const NEXT_SCREEN = '/';
 
 const Summary: React.FC = () => {
   const { t } = useContext(TranslationContext);

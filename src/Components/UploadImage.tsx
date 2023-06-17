@@ -1,7 +1,7 @@
 import { message, Upload, Progress, Form } from 'antd';
 import { RcFile, UploadFile } from 'antd/lib/upload/interface';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   addObjectImages,
@@ -16,7 +16,6 @@ import {
   getStorage,
   deleteObject,
 } from 'firebase/storage';
-import { TranslationContext } from '../Contexts/TranslationContext';
 import { storage } from '../firebaseConfig';
 const MAX_FILES = 10;
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
@@ -28,8 +27,6 @@ function getStorageRefFromUrl(url: string) {
 }
 
 const UploadImage = () => {
-  const { t } = useContext(TranslationContext);
-
   const dispatch = useDispatch();
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -151,14 +148,11 @@ const UploadImage = () => {
 
   return (
     <Form.Item
-      label={
-        <label className="item-form-label">
-          {t('requestInfo.uploadImages')}
-        </label>
-      }
+      label={<label className="item-form-label"></label>}
       valuePropName="fileList"
     >
       <Upload
+        style={{ position: 'absolute', right: '1050px' }}
         action="/upload.do"
         listType="picture-card"
         fileList={fileList}

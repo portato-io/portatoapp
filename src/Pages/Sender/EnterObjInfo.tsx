@@ -152,7 +152,16 @@ const EnterObjInfo: React.FC = () => {
               </Radio.Button>
             </Radio.Group>
           </Form.Item>
-          <UploadImage />
+          <Form.Item
+            label={
+              <label className="item-form-label">
+                {t('requestInfo.uploadImages')}
+              </label>
+            }
+          >
+            <UploadImage />
+          </Form.Item>
+
           <Form.Item>
             <NextButton nextScreen={NEXT_SCREEN} scrolling={true} />
             <BackButton scrolling={true} />
