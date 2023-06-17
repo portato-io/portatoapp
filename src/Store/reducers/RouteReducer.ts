@@ -41,13 +41,13 @@ export function routeReducer(
     case 'SET_ROUTE_DEPARTURE_ADDRESS': {
       return {
         ...state,
-        departure_adress: action.payload[0],
+        departure_adress: action.payload,
       };
     }
     case 'SET_ROUTE_DESTINATION_ADDRESS': {
       return {
         ...state,
-        destination_adress: action.payload[0],
+        destination_adress: action.payload,
       };
     }
     case 'SET_DETOUR': {
@@ -83,6 +83,9 @@ export function routeReducer(
         delivery_capacity: Object.values(action.payload)[0],
       };
     }
+    case 'EMPTY_STATE':
+      return initialStateRoute;
+
     default: {
       console.log('DANS LE DRIVER REDUCER MAIS PAS DANS LE BON STATE');
       return state;

@@ -1,4 +1,4 @@
-import './App.css';
+import './CSS/Core.css';
 import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNavigator from './Components/SideBarNav';

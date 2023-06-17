@@ -3,6 +3,7 @@ import AppHeader from '../../Components/HeaderBar';
 import ButtomHeaderBar from '../../Components/ButtonHeaderBar';
 import SideBarNav from '../../Components/SideBarNav';
 import { Layout } from 'antd';
+require('../../CSS/ProposedDeprecation.css');
 const { Header, Content } = Layout;
 
 interface Props {

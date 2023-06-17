@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes/routeActionTypes';
 import { AnyAction } from 'redux';
+import { EMPTY_STATE } from '../actionTypes/commonActionTypes';
 
 export const setRoute = (
   departure_adress: string,
@@ -70,4 +71,8 @@ export const setRouteDateRange = (dateRange: string[]): AnyAction => ({
 export const setRouteUid = (uid: string): AnyAction => ({
   type: actionTypes.SET_UID,
   payload: uid,
+});
+
+export const emptyState = (): AnyAction => ({
+  type: EMPTY_STATE,
 });

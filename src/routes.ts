@@ -2,11 +2,12 @@ import { lazy } from 'react';
 
 // other
 import { FC } from 'react';
+import MyAccount from './Pages/Profile/MyAccount';
 
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
-const Profile = lazy(() => import('./Pages/Profile/Profile'));
+const Profile = lazy(() => import('./Pages/Menu'));
 const EnterObjInfo = lazy(() => import('./Pages/Sender/EnterObjInfo'));
 const Deliver = lazy(() => import('./Pages/Driver/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
@@ -215,5 +216,12 @@ export const routes: Array<Route> = [
     path: '/profile/settings',
     enabled: true,
     component: Settings,
+  },
+  {
+    key: 'my-account',
+    title: 'MyAccount',
+    path: '/profile/my-account',
+    enabled: true,
+    component: MyAccount,
   },
 ];
