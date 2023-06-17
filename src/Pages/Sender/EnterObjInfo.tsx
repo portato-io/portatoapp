@@ -154,7 +154,9 @@ const EnterObjInfo: React.FC = () => {
           </Form.Item>
           <Form.Item
             label={
-              <label className="item-form-label">Upload items photos</label>
+              <label className="item-form-label">
+                {t('requestInfo.uploadImages')}
+              </label>
             }
           >
             <UploadImage />

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import PageLayout from '../../Pages/Layouts/PageLayoutTest';
+import PageLayout from '../Pages/Layouts/PageLayoutTest';
 import { List, Card } from 'antd-mobile';
+import { Modal } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { auth } from '../../firebaseConfig';
+import { auth } from '../firebaseConfig';
+import FirebaseAuth from '../Components/FirebaseAuth';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { checkAdmin } from '../AuthProvider';
+import { useAuth, checkAdmin } from '../Components/AuthProvider';
 
-function ProfileContent() {
+const Menu: React.FC = () => {
   const navigate = useNavigate();
   const isAdmin = checkAdmin();
   const user = auth.currentUser;
@@ -19,6 +21,14 @@ function ProfileContent() {
       setImageUrl(user.photoURL);
     }
   }, []);
+  const { uid } = useAuth();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const handleMyAccountClick = () => {
     navigate('/profile/my-account');
@@ -48,6 +58,11 @@ function ProfileContent() {
 
   return (
     <PageLayout display={display}>
+      <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
+        <div>
+          <FirebaseAuth />
+        </div>
+      </Modal>
       <div style={{ display: display }} className="profile_content">
         {/* Rest of your code... */}
         <div
@@ -99,12 +114,21 @@ function ProfileContent() {
           >
             <Card style={{ borderRadius: '5%', height: '100%' }}>
               <List mode="card" style={{ marginTop: '1vh' }}>
-                <List.Item arrow={true} onClick={handleMyAccountClick}>
-                  My Account
-                </List.Item>
-                <List.Item arrow={true} onClick={handleMySendRequestsClick}>
-                  My Send Requests
-                </List.Item>
+                {uid ? (
+                  <>
+                    <List.Item arrow={true} onClick={handleMyAccountClick}>
+                      My Account
+                    </List.Item>
+                    <List.Item arrow={true} onClick={handleMySendRequestsClick}>
+                      My Send Requests
+                    </List.Item>
+                  </>
+                ) : (
+                  <List.Item arrow={true} onClick={showModal}>
+                    Sign In
+                  </List.Item>
+                )}
+
                 <List.Item arrow={true} onClick={handleMyBlogClick}>
                   Blog
                 </List.Item>
@@ -116,13 +140,15 @@ function ProfileContent() {
                     Admin window
                   </List.Item>
                 )}
-                <List.Item
-                  arrow={true}
-                  onClick={() => signOut(auth)}
-                  style={{ color: 'red' }}
-                >
-                  Sign out
-                </List.Item>
+                {uid ? (
+                  <List.Item
+                    arrow={true}
+                    onClick={() => signOut(auth)}
+                    style={{ color: 'red' }}
+                  >
+                    Sign out
+                  </List.Item>
+                ) : null}
               </List>
             </Card>
           </div>
@@ -130,6 +156,6 @@ function ProfileContent() {
       </div>
     </PageLayout>
   );
-}
+};
 
-export default ProfileContent;
+export default Menu;

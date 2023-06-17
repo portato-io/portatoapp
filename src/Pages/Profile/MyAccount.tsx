@@ -5,7 +5,7 @@ import 'firebase/auth';
 import { updateProfile, updateEmail } from 'firebase/auth';
 
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
-import { Button, Form, ImageUploader } from 'antd-mobile';
+import { Button, Form } from 'antd-mobile';
 import { Upload, Input, message } from 'antd';
 
 const MyAccount: React.FC = () => {
@@ -26,27 +26,12 @@ const MyAccount: React.FC = () => {
   const uploadProfilePicture = async (imgURL: any) => {
     setImageUrl(imgURL);
   };
-
-  const showSuccessMessage = (message: string) => {
-    const popup = document.createElement('div');
-    popup.textContent = message;
-    popup.className = 'popup';
-    document.body.appendChild(popup);
-
-    setTimeout(() => {
-      popup.remove();
-    }, 2000);
-  };
-
   const onNameChange = (e: any) => {
     setName(e.target.value);
   };
 
   const onEmailChange = (e: any) => {
     setEmail(e.target.value);
-  };
-  const beforeUpload = () => {
-    console.log('rien');
   };
 
   const onFinish = () => {
@@ -57,7 +42,7 @@ const MyAccount: React.FC = () => {
       }).then(function () {
         updateEmail(user, email || '')
           .then(function () {
-            message.success('Successfully updated information')
+            message.success('Successfully updated information');
           })
           .catch((error) => {
             console.log(error); //TO DO: Reauthentificate the user when changing mail adress
