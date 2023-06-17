@@ -1,6 +1,7 @@
 :root {
   --main-navigation-bar-height: 55px;
   --progress-bar-height: 55px;
+  --portato-blue: #1875bc;
 }
 
 html,
@@ -32,6 +33,10 @@ body {
 
 .font-bold {
   font-weight: bold;
+}
+
+.font-large {
+  font-size: 20px;
 }
 
 /* Mobile devices */

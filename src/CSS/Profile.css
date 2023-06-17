@@ -1,5 +1,5 @@
 .profile-screen-background {
-    background-color: #2897FF;
+    background-color: var(--portato-blue);
     min-height: calc(100vh - var(--main-navigation-bar-height));
 }
 
