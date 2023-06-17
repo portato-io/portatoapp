@@ -117,6 +117,12 @@
         "support": "Unterstützung",
         "adminWindow": "Admin-Fenster",
         "signOut": "Abmelden"
+    },
+    "accountPage": {
+        "validate": "Bestätigen",
+        "myAccount": "Mein Konto",
+        "profilePicture": "Profilbild",
+        "name": "Name",
+        "emailAddress": "E-Mail Adresse"
     }
-
 }

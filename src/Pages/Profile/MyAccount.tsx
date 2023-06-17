@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { auth } from '../../firebaseConfig';
 import 'firebase/auth';
 import { updateProfile, updateEmail } from 'firebase/auth';
-
+import { TranslationContext } from '../../Contexts/TranslationContext';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
 import { Button, Form } from 'antd-mobile';
 import { Upload, Input, message } from 'antd';
 
 const MyAccount: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const [name, setName] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
@@ -75,13 +76,17 @@ const MyAccount: React.FC = () => {
           onFinish={onFinish}
           footer={
             <Button block type="submit" color="primary" size="large">
-              Validate
+              {t('accountPage.validate')}
             </Button>
           }
         >
-          <Form.Header>My Account</Form.Header>
+          <Form.Header>{t('accountPage.myAccount')}</Form.Header>
           <Form.Item
-            label={<label className="item-form-label">Profile Picture</label>}
+            label={
+              <label className="item-form-label">
+                {t('accountPage.profilePicture')}
+              </label>
+            }
           >
             <Upload
               name="avatar"
@@ -103,11 +108,19 @@ const MyAccount: React.FC = () => {
               )}
             </Upload>
           </Form.Item>
-          <Form.Item label={<label className="item-form-label">Name</label>}>
+          <Form.Item
+            label={
+              <label className="item-form-label">{t('accountPage.name')}</label>
+            }
+          >
             <Input onChange={onNameChange} value={name || ''} />
           </Form.Item>
           <Form.Item
-            label={<label className="item-form-label">Mail address</label>}
+            label={
+              <label className="item-form-label">
+                {t('accountPage.emailAddress')}
+              </label>
+            }
           >
             <Input onChange={onEmailChange} value={email || ''} />
           </Form.Item>

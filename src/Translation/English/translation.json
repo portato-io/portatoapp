@@ -117,6 +117,13 @@
         "support": "Support",
         "adminWindow": "Admin Window",
         "signOut": "Sign Out"
+    },
+    "accountPage": {
+        "validate": "Validate",
+        "myAccount": "My Account",
+        "profilePicture": "Profile Picture",
+        "name": "Name",
+        "emailAddress": "Email Address"
     }
 
 }
