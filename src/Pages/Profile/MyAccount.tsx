@@ -6,7 +6,6 @@ import { updateProfile, updateEmail } from 'firebase/auth';
 
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
 import { Button, Form, ImageUploader } from 'antd-mobile';
-// import UploadImage from '../../Components/UploadImage';
 import { Upload, Input } from 'antd';
 
 const MyAccount: React.FC = () => {
