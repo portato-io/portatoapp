@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { TranslationContext } from '../Contexts/TranslationContext';
 import { useAuth, checkAdmin } from '../Components/AuthProvider';
 
+require('../CSS/Profile.css');
+
 const Menu: React.FC = () => {
   const { t } = useContext(TranslationContext);
   const navigate = useNavigate();
