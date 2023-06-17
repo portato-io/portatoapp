@@ -57,7 +57,7 @@ const MyAccount: React.FC = () => {
       }).then(function () {
         updateEmail(user, email || '')
           .then(function () {
-            showSuccessMessage('User Information uploaded');
+            message.success('Successfully updated information')
           })
           .catch((error) => {
             console.log(error); //TO DO: Reauthentificate the user when changing mail adress
