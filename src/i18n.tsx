@@ -3,7 +3,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 //Import all translation files
 import translationEnglish from './Translation/English/translation.json';
-import translationDeutch from './Translation/Deutch/translation.json';
+import translationGerman from './Translation/German/translation.json';
 import translationFrench from './Translation/French/translation.json';
 
 //---Using different namespaces
@@ -12,7 +12,7 @@ const resources = {
     home: translationEnglish,
   },
   de: {
-    home: translationDeutch,
+    home: translationGerman,
   },
   fr: {
     home: translationFrench,

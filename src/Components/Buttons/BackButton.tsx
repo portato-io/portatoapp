@@ -1,7 +1,11 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { TranslationContext } from '../../Contexts/TranslationContext';
+import NavigationButtons from './NavigationButtons';
 
 function BackButton({ scrolling = false }: any) {
+  const { t } = useContext(TranslationContext);
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -25,7 +29,7 @@ function BackButton({ scrolling = false }: any) {
         onClick={handleBackClick}
         style={{ width: '100%' }}
       >
-        Back
+        {t('navigationButton.back')}
       </Button>
     </div>
   );

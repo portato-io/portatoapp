@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -60,7 +60,7 @@ const EnterPrice: React.FC = () => {
         >
           <Title level={3} style={{ width: '90%' }}>
             {' '}
-            How much is the transport cost for you?
+            {t('requestCost.title')}
           </Title>
           <Form.Item>
             <Input
@@ -75,10 +75,10 @@ const EnterPrice: React.FC = () => {
             bordered={false}
             style={{ marginTop: '-2vh', width: '80%', marginBottom: '10%' }}
           >
-            Driver reward: x <br />
-            Portato fee: y <br />
-            VAT: z <br />
-            insurance: xy
+            {t('requestCost.driverReward')} a <br />
+            {t('requestCost.portatoFee')} b <br />
+            {t('requestCost.vat')} c <br />
+            {t('requestCost.insurance')} d
           </Card>
           <Form.Item>
             <Card
@@ -92,9 +92,7 @@ const EnterPrice: React.FC = () => {
               <div style={{ textAlign: 'center' }}>
                 <InfoCircleOutlined />
               </div>
-              Portato factors in the size of the vehicle, distance travelled and
-              attractiveness for drivers to deliver it. If your price is too
-              low, chances are nobody will take your item.
+              {t('requestCost.comment')}
             </Card>
           </Form.Item>
         </Form>
@@ -106,6 +104,3 @@ const EnterPrice: React.FC = () => {
 };
 
 export default EnterPrice;
-function useContext(TranslationContext: React.Context<any>): { t: any } {
-  throw new Error('Function not implemented.');
-}

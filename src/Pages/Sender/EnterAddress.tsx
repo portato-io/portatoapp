@@ -9,6 +9,7 @@ import { IRequestInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
 import AddressAutocomplete from '../../Components/AutoComplete';
 import { TranslationContext } from '../../Contexts/TranslationContext';
+
 const { Title } = Typography;
 const progress = 25;
 const NEXT_SCREEN = '/createSendRequest/enter_time';
@@ -40,7 +41,7 @@ const EnterAddress: React.FC = () => {
           <AddressAutocomplete type={'pickup'} />
         </Form.Item>
         <Title level={4} style={{ backgroundColor: 'white' }}>
-          Delivery address
+          {t('requestAddresses.deliveryAddress')}
         </Title>
         <Form.Item>
           {/* <Input

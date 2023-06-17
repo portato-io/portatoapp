@@ -1,0 +1,113 @@
+{
+    "requestOverview":
+    {
+        "newTitle": "Erstelle eine neue Versandanfrage",
+        "|*TBI*|createButtonDescription": "Erstellen",
+        "currentTitle": "Deine aktuellen Versandanfragen"
+    },
+    
+    "requestInfo":
+    {
+        "title": "Was möchtest Du versenden?",
+        "name": "Titel",
+        "namePlaceholder": "Gib deiner Sendung einen aussagekräftigen Titel.",
+        "description": "Beschreibung",
+        "descriptionPlaceholder": "z.B.: Es ist eine gute Idee, die Abmessungen von großen Gegenständen anzugeben.",
+        "size": "Größe",
+        "weight": "Gewicht",
+        "uploadImages": "Bilder hochladen"
+    },
+    "requestAddresses":
+    {
+        "pickupAddress": "Abholadresse",
+        "|*TBI*|pickupAddressPlaceholder": "Gib eine Adresse ein",
+        "deliveryAddress": "Lieferadresse",
+        "|*TBI*|deliveryAddressPlaceholder": "Gib eine Adresse ein"
+    },
+    "requestTime":
+    {
+        "title": "Wann soll die Sendung abgeholt werden?",
+        "|*TBI*|dates": "Daten",
+        "|*TBI*|startDatePlaceholder": "Startdatum",
+        "|*TBI*|endDatePlaceholder": "Enddatum",
+        "|*TBI*|time": "Tageszeit",
+        "|*TBI*|mornings": "Morgens",
+        "|*TBI*|midDays": "Mittags",
+        "|*TBI*|evenings": "Abends"
+    },
+    "requestCost":
+    {
+        "title": "Was ist Dir der Transport wert?",
+        "|*TBI*|pricePlaceholder": "z.B., 30 CHF",
+        "driverReward": "Belohnung für den Fahrer:",
+        "portatoFee": "Gebühr Portato:",
+        "vat": "MwSt:",
+        "insurance": "Versicherung:",
+        "comment": "Gib einen fairen Preis ein, um einen angemessenen Anreiz zu geben. Schließlich wird dein Fahrer einen Umweg machen, um deine Sendung zu liefern."
+    },
+    "requestSummary":
+    {
+        "title": "Zusammenfassung deiner Versandanfrage",
+        "size": "Größe:",
+        "weight": "Gewicht:",
+        "pickupAddress": "Abholadresse:",
+        "deliveryAddress": "Lieferadresse:",
+        "timeframe": "Zeitrahmen:",
+        "possibleDates": "Mögliche Daten:",
+        "possibleTimes": "Mögliche Tageszeiten:",
+        "price": "Preis:",
+        "images": "Bild(er):"
+    },
+    "driveOverview":
+    {
+        "|*TBI*|newTitle": "Eine neue Route registrieren",
+        "|*TBI*|createButtonDescription": "Erstellen",
+        "|*TBI*|currentTitle": "Deine aktuellen Routen"
+    },
+    "driveAddresses":
+    {
+        "departureAddress": "Abfahrtsadresse",
+        "|*TBI*|departureAddressPlaceholder": "Gib eine Adresse ein",
+        "destinationAddress": "Zieladresse",
+        "|*TBI*|destinationAddressPlaceholder": "Gib eine Adresse ein",
+        "acceptableDetour": "Akzeptabler Umweg"
+    },
+    "driveTime":
+    {
+        "title": "Wann fährst Du?",
+        "rangeTitle": "Datum auswählen",
+        "|*TBI*|startPlaceholder": "Start",
+        "|*TBI*|endPlaceholder": "Ende",
+        "selectTime": "Uhrzeit auswählen",
+        "|*TBI*|timeMornings": "Morgens",
+        "|*TBI*|timeMidDays": "Mittags",
+        "|*TBI*|timeEvenings": "Abends",
+        "weekdayTitle": "Bitte gib den Tag an",
+        "timeTitle": "Tageszeit auswählen"
+    },
+    "driveCapacity":
+    {
+        "title": "Wie groß ist deine Lieferkapazität?"
+    },
+    "driveSummary":
+    {
+        "title": "Zusammenfassung deiner Fahrt",
+        "departureAddress": "Abfahrtsadresse",
+        "destinationAddress": "Zieladresse",
+        "acceptableDetour": "Akzeptabler Umweg",
+        "tripType": "Art deiner Reise",
+        "timing": "Zeitplan",
+        "tripDates": "Daten:",
+        "tripTime": "Tageszeit:",
+        "each": "Wiederkehrend jeden:",
+        "driveCapacity": "Kapazität"
+    },
+    "navigationButton":
+    {
+        "next": "Next",
+        "back": "Back",
+        "confirm": "Confirm",
+        "signIn": "Sign In"
+    }
+
+}
