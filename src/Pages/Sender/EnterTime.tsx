@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -9,6 +9,7 @@ import {
   setObjectDateRange,
   setObjectTime,
 } from '../../Store/actions/requestActionCreators';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 //import DatePicker from "react-datepicker"
 
@@ -20,6 +21,7 @@ const progress = 50;
 const NEXT_SCREEN = '/createSendRequest/enter_price';
 
 const EnterTime: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const dispatch = useDispatch();
 
   const handleInputChange = (e: any) => {
@@ -48,7 +50,7 @@ const EnterTime: React.FC = () => {
       >
         <Title level={3} style={{ background: '#fff' }}>
           {' '}
-          When?
+          {t('requestTime.title')}
         </Title>
         <Form.Item
           label={<label className="item-form-label">Dates</label>}
