@@ -48,15 +48,23 @@ function BottomBar() {
     initalRouteScreen = pathname;
   }
   return (
-    <TabBar
-      activeKey={initalRouteScreen}
-      onChange={(value) => setRouteActive(value)}
-      className="main-navigation-bar"
-    >
-      {tabs.map((item) => (
-        <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
-      ))}
-    </TabBar>
+    <div className="main-navigation-bar-container">
+      <TabBar
+        activeKey={initalRouteScreen}
+        onChange={(value) => setRouteActive(value)}
+        className="main-navigation-bar"
+      >
+        {tabs.map((item) => (
+          <TabBar.Item
+            key={item.key}
+            icon={item.icon}
+            title={item.title}
+            badge={item.badge}
+            className="main-navigation-bar-element"
+          />
+        ))}
+      </TabBar>
+    </div>
   );
 }
 

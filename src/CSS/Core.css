@@ -19,7 +19,7 @@ body {
   overflow: auto;
 }
 
-.main-navigation-bar {
+.main-navigation-bar-container {
   position: fixed;
   top: 0%;
   width: 100%;
@@ -28,6 +28,16 @@ body {
   background-color: #FFF;
   z-index: 1000;
   height: var(--main-navigation-bar-height);
+}
+
+.main-navigation-bar {
+  width: 50vw;
+  margin: auto;
+}
+
+.main-navigation-bar-element {
+  flex-direction: row !important;
+  gap: 5px;
 }
 
 .font-bold {
@@ -45,13 +55,22 @@ body {
     padding-top: 0;
     padding-bottom: var(--main-navigation-bar-height);
   }
-
-  .main-navigation-bar {
+  
+  .main-navigation-bar-container {
     top: auto;
     bottom: 0%;
     border-top: solid;
     border-top-color: #E8E9F1;
     border-bottom: none;
+  }
+  
+  .main-navigation-bar {
+    width: 100%;
+  }
+  
+  .main-navigation-bar-element {
+    flex-direction: column !important;
+    gap: 0px;
   }
 }
 
