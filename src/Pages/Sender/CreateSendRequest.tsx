@@ -10,7 +10,6 @@ import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
-const BUTTON_TEXT = 'Create new';
 
 const CreateSendRequest: React.FC = () => {
   const { t } = useContext(TranslationContext);
@@ -22,23 +21,12 @@ const CreateSendRequest: React.FC = () => {
         <div style={{ height: '50px' }}></div>
         <ButtonToCreateNewReqRoutes
           nextScreen={NEXT_SCREEN}
-          text={BUTTON_TEXT}
+          text={t('requestOverview.newTitle')}
         />
       </AutoCenter>
 
       {uid !== 'undefined' ? (
         <>
-          <h1
-            style={{
-              marginTop: '10vh',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            {t('requestOverview.currentTitle')}
-          </h1>
           <FetchRequests uid={uid} heightPortion={0.5} />
         </>
       ) : null}

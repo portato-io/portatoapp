@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
 import { Card } from 'antd';
+import { TranslationContext } from '../Contexts/TranslationContext';
 require('../CSS/Send.css');
 
 const FetchRequests: React.FC<{
@@ -9,6 +10,7 @@ const FetchRequests: React.FC<{
   heightPortion?: number;
   admin?: boolean;
 }> = ({ uid, heightPortion = 0.8, admin = false }) => {
+  const { t } = useContext(TranslationContext);
   const [requests, setRequest] = useState<IRequestInfo[]>([]);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
@@ -45,8 +47,25 @@ const FetchRequests: React.FC<{
   }, [uid]);
 
   const containerHeight = window.innerHeight * heightPortion;
+
+  // Return early, if no requests exist; avoid adding the title altogether.
+  if (requests.length === 0) {
+    return null;
+  }
+
   return (
     <div>
+      <h1
+        style={{
+          marginTop: '10vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {t('requestOverview.currentTitle')}
+      </h1>
       {requests.map((request) => (
         <div key={request.name} className="current-send-requests-list">
           <Card className="send-request-card" title={request.name}>
