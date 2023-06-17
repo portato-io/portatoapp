@@ -1,6 +1,6 @@
 import { Radio } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
-//import './CustomRadio.css'; // Import the CSS file where you define the custom styles
+require('../../CSS/CustomRadio.css');
 
 const CustomRadio = () => {
   return (

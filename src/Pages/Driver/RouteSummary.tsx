@@ -64,28 +64,23 @@ const RouteSummary: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div
-        style={{
-          marginTop: '5vh',
-          height: containerHeight + 'px',
-          overflowY: 'auto',
-        }}
-      >
-        <Modal open={isModalVisible} footer={null}>
-          <div>
-            <FirebaseAuth />
-          </div>
-        </Modal>
-        <div
-          style={{
-            marginLeft: '10vw',
-            width: '80vw',
-            marginTop: '5vh',
-            backgroundColor: '#FFF4E4',
-          }}
-        >
-          <Card style={{ backgroundColor: '#FFF4E4' }}>
-            <Title level={2}> {t('driveSummary.title')} </Title>
+      <div className="form-and-buttons-content-container">
+        <div className="form-content-container">
+          <Modal open={isModalVisible} footer={null}>
+            <div>
+              <FirebaseAuth />
+            </div>
+          </Modal>
+          <Card
+            bordered={true}
+            style={{
+              marginTop: '20px',
+              marginBottom: '20px',
+              backgroundColor: '#FFF4E4',
+              borderRadius: '20px',
+            }}
+          >
+            <Title level={2}> Summary </Title>
 
             <div>
               <Title level={4}> {t('driveSummary.departureAddress')}</Title>
@@ -116,13 +111,9 @@ const RouteSummary: React.FC = () => {
               </div>
             ) : (
               <div>
-                <Title level={4}> {t('driveSummary.timing')}</Title>
-                <Typography>
-                  {t('driveSummary.tripDates')} {routeInfo.timeRange[0]} -{' '}
-                  {routeInfo.timeRange[1]} <br />
-                  {t('driveSummary.tripTime')}{' '}
-                  {Object.values(routeInfo.time)[0]}
-                </Typography>
+                <Title level={4}>
+                  {routeInfo.timeRange[0]}-{routeInfo.timeRange[1]}
+                </Title>
               </div>
             )}
             <div>
@@ -131,13 +122,16 @@ const RouteSummary: React.FC = () => {
             </div>
           </Card>
         </div>
-        {user ? (
-          <ConfirmButton onClick={handleConfirm} />
-        ) : (
-          <SignInButton onClick={showModal} />
-        )}
+
+        <div className="form-button-container">
+          <BackButton />
+          {user ? (
+            <ConfirmButton onClick={handleConfirm} />
+          ) : (
+            <SignInButton onClick={showModal} />
+          )}
+        </div>
       </div>
-      <BackButton />
     </PageLayout>
   );
 };

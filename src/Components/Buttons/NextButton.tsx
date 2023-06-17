@@ -11,17 +11,7 @@ function NextButton({ nextScreen = '/', scrolling = false }: any) {
     navigate(nextScreen);
   };
   return (
-    <div
-      className="div_button_next"
-      style={{
-        position: 'absolute',
-        bottom: '2vh',
-        right: '10vw',
-        width: '45vw',
-        background: 'white',
-        marginBottom: scrolling ? '0vh' : '10vh',
-      }}
-    >
+    <div className="form-button-right">
       <Button
         type="primary"
         size="large"

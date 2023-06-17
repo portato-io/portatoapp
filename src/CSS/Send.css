@@ -1,0 +1,11 @@
+.current-send-requests-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.send-request-card {
+    width: 80%;
+    margin-bottom: 2vh;
+}

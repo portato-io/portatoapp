@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
 import { Card } from 'antd';
+require('../CSS/Send.css');
 
 const FetchRequests: React.FC<{
   uid?: string | null; // uid is now optional
@@ -46,31 +47,14 @@ const FetchRequests: React.FC<{
   const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>
-      <div
-        style={
-          admin ? {} : { height: containerHeight + 'px', overflowY: 'scroll' }
-        }
-      >
-        {requests.map((request) => (
-          <div
-            key={request.name}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Card
-              style={{ marginTop: '5vh', width: '80%' }}
-              title={request.name}
-            >
-              {request.weight}/{request.size}
-              {admin ? <div>{`${request.id}/${request.uid}`}</div> : null}
-            </Card>
-          </div>
-        ))}
-      </div>
+      {requests.map((request) => (
+        <div key={request.name} className="current-send-requests-list">
+          <Card className="send-request-card" title={request.name}>
+            {request.weight}/{request.size}
+            {admin ? <div>{`${request.id}/${request.uid}`}</div> : null}
+          </Card>
+        </div>
+      ))}
     </div>
   );
 };

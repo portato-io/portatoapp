@@ -13,7 +13,7 @@ import AddressAutocomplete from '../../Components/AutoComplete';
 import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
-const PROGRESS = 25;
+const PROGRESS = 0;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
 const MARKS = {
   0: '0 km',
@@ -58,39 +58,42 @@ const EnterRoute: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <Form
-        className="form-no-scrolling-sender"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
-      >
-        <Title level={4} style={{ backgroundColor: 'white' }}>
-          {t('driveAddresses.departureAddress')}
-        </Title>
-        <Form.Item>
-          <AddressAutocomplete type={'departure'} />
-        </Form.Item>
+      <div className="form-and-buttons-content-container">
+        <div className="form-content-container">
+          <Form
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
+          >
+            <Title level={4} style={{ backgroundColor: 'white' }}>
+              Departure
+            </Title>
+            <Form.Item>
+              <AddressAutocomplete type={'departure'} />
+            </Form.Item>
 
-        <Title level={4} style={{ backgroundColor: 'white' }}>
-          {t('driveAddresses.destinationAddress')}
-        </Title>
-        <Form.Item>
-          <AddressAutocomplete type={'destination'} />
-        </Form.Item>
-        <Title level={4} style={{ backgroundColor: 'white' }}>
-          {t('driveAddresses.acceptableDetour')}
-        </Title>
-        <Slider
-          marks={MARKS}
-          ticks
-          value={routes.acceptable_detour}
-          onChange={handleInputChange}
-          style={{ marginLeft: '-3vw', width: '90vw' }}
-        />
-      </Form>
-
-      <NextButton nextScreen={NEXT_SCREEN} />
-      <BackButton />
+            <Title level={4} style={{ backgroundColor: 'white' }}>
+              Destination
+            </Title>
+            <Form.Item>
+              <AddressAutocomplete type={'destination'} />
+            </Form.Item>
+            <Title level={4} style={{ backgroundColor: 'white' }}>
+              Acceptable detour
+            </Title>
+            <Slider
+              marks={MARKS}
+              ticks
+              value={routes.acceptable_detour}
+              onChange={handleInputChange}
+            />
+          </Form>
+        </div>
+        <div className="form-button-container">
+          <BackButton />
+          <NextButton nextScreen={NEXT_SCREEN} />
+        </div>
+      </div>
     </PageLayout>
   );
 };

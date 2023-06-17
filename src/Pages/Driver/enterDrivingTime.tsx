@@ -1,5 +1,5 @@
+import { Form, Typography } from 'antd';
 import React, { useContext } from 'react';
-import { Typography } from 'antd';
 import PageLayout from '../Layouts/PageLayoutTest';
 import SwitchContainer from '../../Components/SwitchContainer';
 import NextButton from '../../Components/Buttons/NextButton';
@@ -11,7 +11,7 @@ import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripC
 import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
-const PROGRESS = 50;
+const PROGRESS = 33;
 const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
 const EnterDeliveryTime: React.FC = () => {
@@ -20,39 +20,29 @@ const EnterDeliveryTime: React.FC = () => {
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '15vh',
-        }}
-      >
-        <Title
-          level={4}
-          style={{
-            position: 'absolute',
-            top: '5vh',
-            textAlign: 'center',
-            marginBottom: '5vh',
-          }}
-        >
-          {t('driveTime.title')}
-        </Title>
+      <div className="form-and-buttons-content-container">
+        <div className="form-content-container">
+          <Form
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
+          >
+            <Title level={4}>When are you driving?</Title>
+            <Tabs>
+              <Tabs.Tab title="Single trip" key="single">
+                <SingleTripContent />
+              </Tabs.Tab>
+              <Tabs.Tab title="Recurrent" key="recur">
+                <RecurrentTripContent />
+              </Tabs.Tab>
+            </Tabs>
+          </Form>
+        </div>
+        <div className="form-button-container">
+          <BackButton />
+          <NextButton nextScreen={NEXT_SCREEN} />
+        </div>
       </div>
-      <div>
-        <Tabs>
-          <Tabs.Tab title="Single trip" key="single">
-            <SingleTripContent />
-          </Tabs.Tab>
-          <Tabs.Tab title="Recurring trip" key="recur">
-            <RecurrentTripContent />
-          </Tabs.Tab>
-        </Tabs>
-      </div>
-      <NextButton nextScreen={NEXT_SCREEN} />
-      <BackButton />
     </PageLayout>
   );
 };
