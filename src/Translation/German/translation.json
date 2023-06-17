@@ -60,7 +60,7 @@
     },
     "driveOverview":
     {
-        "|*TBI*|newTitle": "Eine neue Route registrieren",
+        "newTitle": "Neue Route registrieren",
         "|*TBI*|createButtonDescription": "Erstellen",
         "|*TBI*|currentTitle": "Deine aktuellen Routen"
     },
