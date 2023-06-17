@@ -17,7 +17,6 @@ import {
   deleteObject,
 } from 'firebase/storage';
 import { storage } from '../firebaseConfig';
-
 const MAX_FILES = 10;
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
 
@@ -149,10 +148,11 @@ const UploadImage = () => {
 
   return (
     <Form.Item
-      label={<label className="item-form-label">Upload images</label>}
+      label={<label className="item-form-label"></label>}
       valuePropName="fileList"
     >
       <Upload
+        style={{ position: 'absolute', right: '1050px' }}
         action="/upload.do"
         listType="picture-card"
         fileList={fileList}

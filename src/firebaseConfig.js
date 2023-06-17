@@ -3,7 +3,7 @@ import { getFunctions } from 'firebase/functions';
 import { getDatabase } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 import { getMessaging, onMessage, getToken } from 'firebase/messaging';
-import { getStorage } from 'firebase/storage';
+import { getStorage, ref } from 'firebase/storage';
 import { addNotificationsToken } from './linksStoreToFirebase';
 
 const notificationButton = document.getElementById('enableNotifications');
@@ -36,6 +36,8 @@ export const database = getDatabase(app);
 export const auth = getAuth();
 
 export const storage = getStorage(app);
+
+export const storageRef = ref(storage);
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
 export const messaging = getMessaging(app);
