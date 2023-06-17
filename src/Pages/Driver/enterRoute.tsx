@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -10,20 +10,22 @@ import { setDetour, setRoute } from '../../Store/actions/routeActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from 'antd-mobile';
 import AddressAutocomplete from '../../Components/AutoComplete';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const PROGRESS = 25;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
 const MARKS = {
   0: '0 km',
+  5: '5 km',
+  10: '10 km',
   20: '20 km',
-  40: '40 km',
-  60: '60 km',
-  80: '80 km',
+  50: '50 km',
   100: '100 km',
 };
 
 const EnterRoute: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
 
   const [routes, setValues] = useState({
@@ -63,20 +65,20 @@ const EnterRoute: React.FC = () => {
         layout="horizontal"
       >
         <Title level={4} style={{ backgroundColor: 'white' }}>
-          Departure
+          {t('driveAddresses.departureAddress')}
         </Title>
         <Form.Item>
           <AddressAutocomplete type={'departure'} />
         </Form.Item>
 
         <Title level={4} style={{ backgroundColor: 'white' }}>
-          Destination
+          {t('driveAddresses.destinationAddress')}
         </Title>
         <Form.Item>
           <AddressAutocomplete type={'destination'} />
         </Form.Item>
         <Title level={4} style={{ backgroundColor: 'white' }}>
-          Acceptable detour
+          {t('driveAddresses.acceptableDetour')}
         </Title>
         <Slider
           marks={MARKS}

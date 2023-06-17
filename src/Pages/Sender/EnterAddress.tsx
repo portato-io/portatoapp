@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -8,11 +8,14 @@ import { SearchOutlined } from '@ant-design/icons';
 import { IRequestInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
 import AddressAutocomplete from '../../Components/AutoComplete';
+import { TranslationContext } from '../../Contexts/TranslationContext';
+
 const { Title } = Typography;
 const progress = 25;
 const NEXT_SCREEN = '/createSendRequest/enter_time';
 
 const EnterAddress: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   return (
     <PageLayout>
       <ProgressBar progress={progress} />
@@ -23,7 +26,7 @@ const EnterAddress: React.FC = () => {
         layout="horizontal"
       >
         <Title level={4} style={{ backgroundColor: 'white' }}>
-          Pick-up address
+          {t('requestAddresses.pickupAddress')}
         </Title>
         <Form.Item>
           {/* <Input
@@ -38,7 +41,7 @@ const EnterAddress: React.FC = () => {
           <AddressAutocomplete type={'pickup'} />
         </Form.Item>
         <Title level={4} style={{ backgroundColor: 'white' }}>
-          Delivery address
+          {t('requestAddresses.deliveryAddress')}
         </Title>
         <Form.Item>
           {/* <Input

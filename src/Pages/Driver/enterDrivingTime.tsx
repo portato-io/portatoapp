@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography } from 'antd';
 import PageLayout from '../Layouts/PageLayoutTest';
 import SwitchContainer from '../../Components/SwitchContainer';
@@ -8,12 +8,15 @@ import ProgressBar from '../../Components/ProgressBar';
 import { Tabs, Calendar, Selector } from 'antd-mobile';
 import SingleTripContent from '../../Components/PageComponents/SingleTripContent';
 import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripContent';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const PROGRESS = 50;
 const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
 const EnterDeliveryTime: React.FC = () => {
+  const { t } = useContext(TranslationContext);
+
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
@@ -35,7 +38,7 @@ const EnterDeliveryTime: React.FC = () => {
             marginBottom: '5vh',
           }}
         >
-          When are you driving?
+          {t('driveTime.title')}
         </Title>
       </div>
       <div>
@@ -43,7 +46,7 @@ const EnterDeliveryTime: React.FC = () => {
           <Tabs.Tab title="Single trip" key="single">
             <SingleTripContent />
           </Tabs.Tab>
-          <Tabs.Tab title="Recurrent" key="recur">
+          <Tabs.Tab title="Recurring trip" key="recur">
             <RecurrentTripContent />
           </Tabs.Tab>
         </Tabs>

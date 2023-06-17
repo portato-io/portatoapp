@@ -17,7 +17,6 @@ import {
   deleteObject,
 } from 'firebase/storage';
 import { storage } from '../firebaseConfig';
-
 const MAX_FILES = 10;
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
 

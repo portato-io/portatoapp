@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { Typography, Card, Modal } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
@@ -12,10 +12,12 @@ import FirebaseAuth from '../../Components/FirebaseAuth';
 import { uploadRouteToFirebase } from '../../linksStoreToFirebase';
 import { IRouteInfo } from '../../type';
 import { useSelector, useDispatch } from 'react-redux';
+import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const PROGRESS = 100;
 const RouteSummary: React.FC = () => {
+  const { t } = useContext(TranslationContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   console.log(Object.values(routeInfo.time)[0]);
@@ -83,43 +85,48 @@ const RouteSummary: React.FC = () => {
           }}
         >
           <Card style={{ backgroundColor: '#FFF4E4' }}>
-            <Title level={2}> Summary </Title>
+            <Title level={2}> {t('driveSummary.title')} </Title>
 
             <div>
-              <Title level={4}> Departure address</Title>
+              <Title level={4}> {t('driveSummary.departureAddress')}</Title>
               <Typography> {routeInfo.departure_adress}</Typography>
             </div>
             <div>
-              <Title level={4}> Destination address</Title>
+              <Title level={4}> {t('driveSummary.destinationAddress')}</Title>
               <Typography> {routeInfo.destination_adress} </Typography>
             </div>
             <div>
-              <Title level={4}> Acceptable detour</Title>
+              <Title level={4}> {t('driveSummary.acceptableDetour')}</Title>
               <Typography> {routeInfo.acceptable_detour} Km </Typography>
             </div>
             <div>
-              <Title level={4}>Type</Title>
+              <Title level={4}>{t('driveSummary.tripType')}</Title>
               <Typography> {routeInfo.type} </Typography>
             </div>
-            <div>
-              <Title level={4}> Time</Title>
-              <Typography> {Object.values(routeInfo.time)[0]} </Typography>
-            </div>
+
             {routeInfo.type == 'Recurrent' ? (
               <div>
-                <Title level={4}> Days</Title>
-                <Typography> {Object.values(routeInfo.days)} </Typography>
+                <Title level={4}> {t('driveSummary.timing')}</Title>
+                <Typography>
+                  {t('driveSummary.each')} {Object.values(routeInfo.days)}
+                  <br />
+                  {t('driveSummary.tripTime')}{' '}
+                  {Object.values(routeInfo.time)[0]}{' '}
+                </Typography>
               </div>
             ) : (
               <div>
-                <Title level={4}>
-                  {' '}
-                  {routeInfo.timeRange[0]}-{routeInfo.timeRange[1]}{' '}
-                </Title>
+                <Title level={4}> {t('driveSummary.timing')}</Title>
+                <Typography>
+                  {t('driveSummary.tripDates')} {routeInfo.timeRange[0]} -{' '}
+                  {routeInfo.timeRange[1]} <br />
+                  {t('driveSummary.tripTime')}{' '}
+                  {Object.values(routeInfo.time)[0]}
+                </Typography>
               </div>
             )}
             <div>
-              <Title level={4}> Capacity</Title>
+              <Title level={4}> {t('driveSummary.driveCapacity')} </Title>
               <Typography> {routeInfo.delivery_capacity} </Typography>
             </div>
           </Card>
