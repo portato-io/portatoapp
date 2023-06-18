@@ -118,63 +118,62 @@ const DealSuggester: React.FC = () => {
       updateMatched(true);
       uploadDealToFirebase(dispatch);
       if (currentRequest) {
-        const tokens = await getUserTokens(currentRequest.id);
+        const tokens = await getUserTokens(currentRequest.uid);
 
         console.log('tokens are: ', tokens);
-        if (tokens) {
-          tokens.forEach(async (token: any) => {
-            // Prepare the request body
-            const notificationBody = {
-              title: 'Potential delivery solution',
-              body: 'We have found a match for your delivery request.',
-              token: token,
-            };
+        if (tokens && tokens.length > 0) {
+          // Prepare the request body
+          const notificationBody = {
+            title: 'Potential delivery solution',
+            body: 'We have found a match for your delivery request.',
+            tokens: tokens, // Send the entire array of tokens
+          };
 
-            // Make a POST request to the Firebase Function
-            fetch(
+          // Make a POST request to the Firebase Function
+          try {
+            const response = await fetch(
               'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
               {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(notificationBody),
               }
-            )
-              .then((response) => response.json())
-              .then((result) => {
-                // Read result of the Cloud Function.
-                console.log(result);
-                message.success('Notification Email sent successfully');
-              })
-              .catch((error) => {
-                // Getting the error details
-                console.error(`error: ${error}`);
-              });
-            const emailBody = {
-              title: 'Potential delivery solution',
-              body: 'We have found a match for your delivery request.',
-              uid: UID,
-            };
+            );
 
-            fetch(
-              'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
-              {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(emailBody),
-              }
-            )
-              .then((response) => response.json())
-              .then((result) => {
-                // Read result of the Cloud Function.
-                console.log(result);
-                message.success('Notification sent successfully');
-              })
-              .catch((error) => {
-                // Getting the error details
-                console.error(`error: ${error}`);
-              });
-          });
+            const result = await response.json();
+            // Read result of the Cloud Function.
+            console.log(result);
+            message.success('Notification sent successfully');
+          } catch (error) {
+            // Getting the error details
+            console.error(`error: ${error}`);
+          }
         }
+
+        const emailBody = {
+          title: 'Potential delivery solution',
+          body: 'We have found a match for your delivery request.',
+          uid: UID,
+        };
+
+        fetch(
+          'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailBody),
+          }
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            // Read result of the Cloud Function.
+            console.log(result);
+            message.success('Notification email sent successfully');
+          })
+          .catch((error) => {
+            // Getting the error details
+            console.error(`error: ${error}`);
+          });
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

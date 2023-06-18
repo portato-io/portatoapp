@@ -1,0 +1,28 @@
+.profile-screen-background {
+    background-color: var(--portato-blue);
+    min-height: calc(100vh - var(--main-navigation-bar-height));
+}
+
+.profile-image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-image-bubble {
+    width: min(min(50vw,50vh), 250px);
+    height: min(min(50vw,50vh), 250px);
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.settings-card {
+    border-radius: 20px;
+    height: 100%;
+    width: min(80%, 350px);
+    margin: auto;
+}

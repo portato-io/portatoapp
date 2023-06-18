@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes/requestActionTypes';
 import { IFirstObjectInfo } from '../../type';
+import { EMPTY_STATE } from '../actionTypes/commonActionTypes';
 import { AnyAction } from 'redux';
 
 export const setObject = (variable: IFirstObjectInfo): AnyAction => ({
@@ -55,4 +56,8 @@ export const setReqUid = (uid: string): AnyAction => ({
 export const setMatched = (matched: boolean): AnyAction => ({
   type: actionTypes.SET_MATCHED,
   payload: matched,
+});
+
+export const emptyState = (): AnyAction => ({
+  type: EMPTY_STATE,
 });

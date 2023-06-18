@@ -13,6 +13,11 @@ import { persistStore } from 'redux-persist';
 import { IRequestInfo, IRouteInfo } from './type';
 import { AuthProvider } from './Components/AuthProvider';
 
+//Import i18n.ts
+import './i18n';
+import { I18nextProvider } from 'react-i18next';
+import i18n from 'i18next';
+
 const initialStateRequest: IRequestInfo = {
   id: '0',
   uid: '0',
@@ -58,7 +63,9 @@ root.render(
   <AuthProvider>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <I18nextProvider i18n={i18n}>
+          <App />
+        </I18nextProvider>
       </PersistGate>
     </Provider>
   </AuthProvider>

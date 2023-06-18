@@ -71,11 +71,6 @@ const FetchRoutes: React.FC<{
             <Card style={{ marginTop: '5vh', width: '80%' }} title={route.id}>
               {route.departure_adress}/{route.destination_adress}
               {admin ? <div>{`${route.id}/${route.uid}`}</div> : null}
-              {admin && (
-                <button onClick={() => match(route.id, route.uid)}>
-                  Match
-                </button>
-              )}
             </Card>
           </div>
         ))}

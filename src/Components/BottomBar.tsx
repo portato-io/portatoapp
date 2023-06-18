@@ -48,27 +48,23 @@ function BottomBar() {
     initalRouteScreen = pathname;
   }
   return (
-    <TabBar
-      activeKey={initalRouteScreen}
-      onChange={(value) => setRouteActive(value)}
-      style={{
-        position: 'absolute',
-        bottom: '0%',
-        width: '100%',
-        borderTop: 'solid',
-        borderTopColor: '#E8E9F1',
-      }}
-      className="custom-tab-bar"
-    >
-      {tabs.map((item) => (
-        <TabBar.Item
-          key={item.key}
-          icon={item.icon}
-          title={item.title}
-          style={{ backgroundColor: 'white' }}
-        />
-      ))}
-    </TabBar>
+    <div className="main-navigation-bar-container">
+      <TabBar
+        activeKey={initalRouteScreen}
+        onChange={(value) => setRouteActive(value)}
+        className="main-navigation-bar"
+      >
+        {tabs.map((item) => (
+          <TabBar.Item
+            key={item.key}
+            icon={item.icon}
+            title={item.title}
+            // badge={item.badge}
+            className="main-navigation-bar-element"
+          />
+        ))}
+      </TabBar>
+    </div>
   );
 }
 

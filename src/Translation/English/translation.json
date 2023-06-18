@@ -1,0 +1,129 @@
+{
+    "requestOverview":
+    {
+        "newTitle": "Create a new send request",
+        "|*TBI*|createButtonDescription": "Create",
+        "currentTitle": "Your current send requests"
+    },
+    
+    "requestInfo":
+    {
+        "title": "What do you want to ship?",
+        "name": "Title",
+        "namePlaceholder": "Give your shipment a meaningful title.",
+        "description": "Description",
+        "descriptionPlaceholder": "eg: It’s a good idea to specify the dimensions of large items.",
+        "size": "Size",
+        "weight": "Weight",
+        "uploadImages": "Upload Images"
+    },
+    "requestAddresses":
+    {
+        "pickupAddress": "Pick-up address",
+        "|*TBI*|pickupAddressPlaceholder": "Enter an address",
+        "deliveryAddress": "Delivery address",
+        "|*TBI*|deliveryAddressPlaceholder": "Enter an address"
+    },
+    "requestTime":
+    {
+        "title": "When do you want the shipment to be picked up?",
+        "|*TBI*|dates": "Dates",
+        "|*TBI*|startDatePlaceholder": "Start date",
+        "|*TBI*|endDatePlaceholder": "End date",
+        "|*TBI*|time": "Time",
+        "|*TBI*|mornings": "Mornings",
+        "|*TBI*|midDays": "Mid days",
+        "|*TBI*|evenings": "Evenings"
+    },
+    "requestCost":
+    {
+        "title": "How much is the transport worth to you?",
+        "|*TBI*|pricePlaceholder": "e.g., 30 CHF",
+        "driverReward": "Reward for driver:",
+        "portatoFee": "Portato fee:",
+        "vat": "VAT:",
+        "insurance": "Insurance:",
+        "comment": "Enter a fair price to give an appropriate incentive. After all, your driver will do a detour to deliver your shipment."
+    },
+    "requestSummary":
+    {
+        "title": "Summary of your shipment request",
+        "size": "Size:",
+        "weight": "Weight:",
+        "pickupAddress": "Pick-up address:",
+        "deliveryAddress": "Delivery address:",
+        "timeframe": "Timeframe:",
+        "possibleDates": "Possible dates:",
+        "possibleTimes": "Possible times:",
+        "price": "Price:",
+        "images": "Image(s):"
+    },
+    "driveOverview":
+    {
+        "newTitle": "Register a new route",
+        "|*TBI*|createButtonDescription": "Create",
+        "|*TBI*|currentTitle": "Your current routes"
+    },
+    "driveAddresses":
+    {
+        "departureAddress": "Departure address",
+        "|*TBI*|departureAddressPlaceholder": "Enter an address",
+        "destinationAddress": "Destination address",
+        "|*TBI*|destinationAddressPlaceholder": "Enter an address",
+        "acceptableDetour": "Acceptable detour"
+    },
+    "driveTime":
+    {
+        "title": "When are you driving?",
+        "rangeTitle": "Select date range",
+        "|*TBI*|startPlaceholder": "Start",
+        "|*TBI*|endPlaceholder": "Ende",
+        "selectTime": "Select timing",
+        "|*TBI*|timeMornings": "Mornings",
+        "|*TBI*|timeMidDays": "Mid days",
+        "|*TBI*|timeEvenings": "Evenings",
+        "weekdayTitle": "Please specify the day",
+        "timeTitle": "Select timing"
+    },
+    "driveCapacity":
+    {
+        "title": "What's your delivery capacity?"
+    },
+    "driveSummary":
+    {
+        "title": "Summary of your trip",
+        "departureAddress": "Departure address",
+        "destinationAddress": "Destination address",
+        "acceptableDetour": "Acceptable detour",
+        "tripType": "Type of your trip",
+        "timing": "Timing",
+        "tripDates": "Dates:",
+        "tripTime": "Time:",
+        "each": "Recurring each:",
+        "driveCapacity": "Capacity"        
+    },
+    "navigationButton":
+    {
+        "next": "Next",
+        "back": "Back",
+        "confirm": "Confirm",
+        "signIn": "Sign In"
+    },
+    "navigationMenu": {
+        "myAccount": "My Account",
+        "mySendRequests": "My Send Requests",
+        "signIn": "Sign In",
+        "blog": "Blog",
+        "support": "Support",
+        "adminWindow": "Admin Window",
+        "signOut": "Sign Out"
+    },
+    "accountPage": {
+        "validate": "Validate",
+        "myAccount": "My Account",
+        "profilePicture": "Profile Picture",
+        "name": "Name",
+        "emailAddress": "Email Address"
+    }
+
+}

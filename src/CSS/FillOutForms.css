@@ -1,0 +1,77 @@
+.deliver-overview-content-container {
+    max-height: calc(100vh - 60px);
+    overflow: auto;
+}
+
+.progress-bar-indicator {
+    margin-top: var(--progress-bar-margin);
+    margin-bottom: var(--progress-bar-margin);
+    left: 10%;
+    width: 80%;
+}
+.form-content-container {
+    flex: 1;
+    /* background-color: green; */
+    margin: auto;
+    width: 80%;
+}
+
+.form-element-centered {
+    justify-content: center;
+    display: flex;
+}
+
+.form-and-buttons-content-container {
+    /* background-color: chocolate; */
+    display: flex;
+    flex-direction: column;
+    /* min-height calculated by total height, minus nav and progress bar */
+    min-height: calc(100vh - var(--main-navigation-bar-height) - 22px - 2 * var(--progress-bar-margin));
+}
+
+.form-button-container {
+    display: flex;
+    justify-content: center;
+    flex: 0;
+    margin-bottom: 30px;
+    /* background-color: red; */
+}
+
+.form-button-left {
+    width: 30vw;
+    margin-right: 20px;
+}
+
+.form-button-right {
+    width: 45vw;
+}
+
+.create-new-plus-button {
+    height: auto !important;
+    min-width: 50vw;
+    background-color: rgba(24,117,188,0.2);
+    margin-top: 50px;
+}
+
+.create-new-plus-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-new-plus-bubble {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: var(--portato-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-new-plus-image {
+    width: 60px;
+    color: white;
+    filter: invert()
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
 import { Card } from 'antd';
@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
 import { updateMatched } from '../linksStoreToFirebase';
 import { uploadDealToFirebase } from '../linksStoreToFirebase';
+import { TranslationContext } from '../Contexts/TranslationContext';
+require('../CSS/Send.css');
 
 const FetchRequests: React.FC<{
   uid?: string | null; // uid is now optional
@@ -16,6 +18,7 @@ const FetchRequests: React.FC<{
   const [requests, setRequestState] = useState<IRequestInfo[]>([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useContext(TranslationContext);
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
@@ -66,43 +69,43 @@ const FetchRequests: React.FC<{
     console.log('Creating deal with status Backlog for request: ' + request.id);
   };
 
-  const containerHeight = window.innerHeight * heightPortion;
+  // Return early, if no requests exist; avoid adding the title altogether.
+  if (requests.length === 0) {
+    return null;
+  }
+
   return (
     <div>
-      <div
-        style={
-          admin ? {} : { height: containerHeight + 'px', overflowY: 'scroll' }
-        }
-      >
-        {requests.map((request) => (
-          <div
-            key={request.name}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Card
-              style={{ marginTop: '5vh', width: '80%' }}
-              title={request.name}
-            >
-              {request.weight}/{request.size}
-              {admin ? <div>{`${request.id}/${request.uid}`}</div> : null}
-              {admin ? <div>{`${request.matched}`}</div> : null}
-              {admin && (
-                <button onClick={() => match(request.id, request.uid)}>
-                  Match
-                </button>
-              )}
-              {admin && (
-                <button onClick={() => noMatch(request)}>No Match</button>
-              )}
-            </Card>
-          </div>
-        ))}
-      </div>
+      {admin ? null : (
+        <h1
+          style={{
+            marginTop: '10vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          {t('requestOverview.currentTitle')}
+        </h1>
+      )}
+      {requests.map((request) => (
+        <div key={request.name} className="current-send-requests-list">
+          <Card className="send-request-card" title={request.name}>
+            {request.weight}/{request.size}
+            {admin ? <div>{`${request.id}/${request.uid}`}</div> : null}
+            {admin ? <div>{`${request.matched}`}</div> : null}
+            {admin && (
+              <button onClick={() => match(request.id, request.uid)}>
+                Match
+              </button>
+            )}
+            {admin && (
+              <button onClick={() => noMatch(request)}>No Match</button>
+            )}
+          </Card>
+        </div>
+      ))}
     </div>
   );
 };
