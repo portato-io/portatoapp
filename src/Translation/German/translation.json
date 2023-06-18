@@ -1,9 +1,17 @@
 {
+    "navBar":
+    {
+        "home": "Home",
+        "send": "Versenden",
+        "drive": "Fahren",
+        "profile": "Profil"
+    },
+
     "requestOverview":
     {
-        "newTitle": "Erstelle eine neue Versandanfrage",
-        "|*TBI*|createButtonDescription": "Erstellen",
-        "currentTitle": "Deine aktuellen Versandanfragen"
+        "newTitle": "Hast Du etwas zu versenden?",
+        "createButtonDescription": "Versandauftrag erstellen",
+        "currentTitle": "Deine aktuellen Versandaufträge"
     },
     
     "requestInfo":
@@ -12,7 +20,7 @@
         "name": "Titel",
         "namePlaceholder": "Gib deiner Sendung einen aussagekräftigen Titel.",
         "description": "Beschreibung",
-        "descriptionPlaceholder": "z.B.: Es ist eine gute Idee, die Abmessungen von großen Gegenständen anzugeben.",
+        "descriptionPlaceholder": "z.B. ist es eine gute Idee, die Abmessungen von grossen Gegenständen anzugeben.",
         "size": "Größe",
         "weight": "Gewicht",
         "uploadImages": "Bilder hochladen"
@@ -27,7 +35,7 @@
     "requestTime":
     {
         "title": "Wann soll die Sendung abgeholt werden?",
-        "|*TBI*|dates": "Daten",
+        "dates": "Daten",
         "|*TBI*|startDatePlaceholder": "Startdatum",
         "|*TBI*|endDatePlaceholder": "Enddatum",
         "|*TBI*|time": "Tageszeit",
@@ -38,7 +46,7 @@
     "requestCost":
     {
         "title": "Was ist Dir der Transport wert?",
-        "|*TBI*|pricePlaceholder": "z.B., 30 CHF",
+        "pricePlaceholder": "z.B., 30 CHF",
         "driverReward": "Belohnung für den Fahrer:",
         "portatoFee": "Gebühr Portato:",
         "vat": "MwSt:",
@@ -60,8 +68,8 @@
     },
     "driveOverview":
     {
-        "newTitle": "Neue Route registrieren",
-        "|*TBI*|createButtonDescription": "Erstellen",
+        "newTitle": "Möchtest Du eine Route registrieren",
+        "createButtonDescription": "Erstellen",
         "|*TBI*|currentTitle": "Deine aktuellen Routen"
     },
     "driveAddresses":
@@ -76,13 +84,15 @@
     {
         "title": "Wann fährst Du?",
         "rangeTitle": "Datum auswählen",
+        "singleTrip": "Einzelfahrt",
+        "recurringRide": "Wiederkehrende Fahrt",
         "|*TBI*|startPlaceholder": "Start",
         "|*TBI*|endPlaceholder": "Ende",
         "selectTime": "Uhrzeit auswählen",
         "|*TBI*|timeMornings": "Morgens",
         "|*TBI*|timeMidDays": "Mittags",
         "|*TBI*|timeEvenings": "Abends",
-        "weekdayTitle": "Bitte gib den Tag an",
+        "weekdayTitle": "Tage auswählen",
         "timeTitle": "Tageszeit auswählen"
     },
     "driveCapacity":

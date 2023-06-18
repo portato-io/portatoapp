@@ -61,9 +61,11 @@ const EnterObjInfo: React.FC = () => {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
-            <Title level={3}>What would you like to ship?</Title>
+            <Title level={3}>{t('requestInfo.title')}</Title>
             <Form.Item
-              label={<label className="font-bold">Name</label>}
+              label={
+                <label className="font-bold">{t('requestInfo.name')}</label>
+              }
               //name="name"
               //rules={[{ required: true, message: 'Please input your username!' }]}
             >
@@ -71,12 +73,16 @@ const EnterObjInfo: React.FC = () => {
                 name="name"
                 value={object.name}
                 onChange={handleInputChange}
-                placeholder="The title of your shipment"
+                placeholder={t('requestInfo.namePlaceholder')}
               />
             </Form.Item>
 
             <Form.Item
-              label={<label className="font-bold">Description</label>}
+              label={
+                <label className="font-bold">
+                  {t('requestInfo.description')}
+                </label>
+              }
 
               //rules={[{ required: true, message: 'Please input description!' }]}
             >
@@ -85,11 +91,15 @@ const EnterObjInfo: React.FC = () => {
                 value={object.description}
                 onChange={handleInputChange}
                 rows={3}
-                placeholder="eg: It’s a good idea to specify the dimensions of large items."
+                placeholder={t('requestInfo.descriptionPlaceholder')}
               />
             </Form.Item>
 
-            <Form.Item label={<label className="font-bold">Size</label>}>
+            <Form.Item
+              label={
+                <label className="font-bold">{t('requestInfo.size')}</label>
+              }
+            >
               <Radio.Group
                 name="size"
                 value={object.size}
@@ -103,7 +113,11 @@ const EnterObjInfo: React.FC = () => {
               </Radio.Group>
             </Form.Item>
 
-            <Form.Item label={<label className="font-bold">Weight</label>}>
+            <Form.Item
+              label={
+                <label className="font-bold">{t('requestInfo.weight')}</label>
+              }
+            >
               <Radio.Group
                 name="weight"
                 value={object.weight}
@@ -111,7 +125,7 @@ const EnterObjInfo: React.FC = () => {
                 className="form-element-centered"
               >
                 <Radio.Button value="-5 kg" style={{ background: '#F8F9FE' }}>
-                  -5 kg
+                  {'<'}5 kg
                 </Radio.Button>
                 <Radio.Button value="5-20 kg" style={{ background: '#F8F9FE' }}>
                   5-20 kg
@@ -121,7 +135,15 @@ const EnterObjInfo: React.FC = () => {
                 </Radio.Button>
               </Radio.Group>
             </Form.Item>
-            <UploadImage />
+            <Form.Item
+              label={
+                <label className="font-bold">
+                  {t('requestInfo.uploadImages')}
+                </label>
+              }
+            >
+              <UploadImage />
+            </Form.Item>
           </Form>
         </div>
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container

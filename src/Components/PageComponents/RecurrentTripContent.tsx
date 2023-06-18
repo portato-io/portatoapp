@@ -39,7 +39,7 @@ function RecurrentTripContent() {
         {t('driveTime.weekdayTitle')}
       </Title>
       <Selector
-        columns={3}
+        columns={7}
         options={DAYS}
         multiple={true}
         onChange={handleDaysChange}

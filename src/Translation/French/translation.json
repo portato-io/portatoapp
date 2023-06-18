@@ -1,8 +1,16 @@
 {
+    "navBar":
+    {
+        "home": "Accueil",
+        "send": "Envoyer",
+        "drive": "Conduire",
+        "profile": "Profil"
+    },
+
     "requestOverview":
     {
         "newTitle": "Créer une nouvelle demande d'envoi",
-        "|*TBI*|createButtonDescription": "Créer",
+        "createButtonDescription": "Créer",
         "currentTitle": "Vos demandes d'envoi en cours"
     },
     
@@ -27,7 +35,7 @@
     "requestTime":
     {
         "title": "Quand voulez-vous que l'envoi soit récupéré?",
-        "|*TBI*|dates": "Dates",
+        "dates": "Dates",
         "|*TBI*|startDatePlaceholder": "Date de début",
         "|*TBI*|endDatePlaceholder": "Date de fin",
         "|*TBI*|time": "Heure",
@@ -38,7 +46,7 @@
     "requestCost":
     {
         "title": "Combien vaut pour vous le transport?",
-        "|*TBI*|pricePlaceholder": "par ex., 30 CHF",
+        "pricePlaceholder": "par ex., 30 CHF",
         "driverReward": "Récompense pour le conducteur:",
         "portatoFee": "Frais de Portato:",
         "vat": "TVA:",
@@ -61,7 +69,7 @@
     "driveOverview":
     {
         "newTitle": "Enregistrer un nouvel itinéraire",
-        "|*TBI*|createButtonDescription": "Créer",
+        "createButtonDescription": "Créer",
         "|*TBI*|currentTitle": "Vos itinéraires actuels"
     },
     "driveAddresses":
@@ -76,13 +84,15 @@
     {
         "title": "Quand conduisez-vous?",
         "rangeTitle": "Sélectionner une plage de dates",
+        "singleTrip": "Voyage unique",
+        "recurringRide": "Trajet récurrent",
         "|*TBI*|startPlaceholder": "Début",
         "|*TBI*|endPlaceholder": "Fin",
         "selectTime": "Sélectionnez l'heure",
         "|*TBI*|timeMornings": "Matinées",
         "|*TBI*|timeMidDays": "Mi-journées",
         "|*TBI*|timeEvenings": "Soirées",
-        "weekdayTitle": "Veuillez préciser le jour",
+        "weekdayTitle": "Sélectionnez les jours",
         "timeTitle": "Sélectionnez l'heure"
     },
     "driveCapacity":

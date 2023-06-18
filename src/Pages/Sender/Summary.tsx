@@ -66,34 +66,40 @@ const Summary: React.FC = () => {
               borderRadius: '20px',
             }}
           >
-            <Title level={2}> Summary </Title>
+            <Title level={2}> {t('requestSummary.title')} </Title>
             <div>
               <Title level={4}> {objecInfo.name}</Title>
               <Typography>
-                {objecInfo.description} / Size: {objecInfo.size} / Weight:
-                {objecInfo.weight}
+                {objecInfo.description}
+                <br />
+                {t('requestSummary.size')} {objecInfo.size} |{'    '}
+                {t('requestSummary.weight')} {objecInfo.weight}
               </Typography>
             </div>
             <div>
-              <Title level={4}> Pickup address</Title>
+              <Title level={4}> {t('requestSummary.pickupAddress')}</Title>
               <Typography> {objecInfo.pickup_adress} </Typography>
             </div>
             <div>
-              <Title level={4}> Delivery address</Title>
+              <Title level={4}> {t('requestSummary.deliveryAddress')}</Title>
               <Typography> {objecInfo.delivery_adress} </Typography>
             </div>
             <div>
-              <Title level={4}>
-                {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
-              </Title>
-              <Typography> In: {objecInfo.time} </Typography>
+              <Title level={4}>{t('requestSummary.timeframe')}</Title>
+              <Typography>
+                {' '}
+                {t('requestSummary.possibleDates')} {objecInfo.dateRange[0]} -{' '}
+                {objecInfo.dateRange[1]}
+                <br />
+                {t('requestSummary.possibleTimes')} {objecInfo.time}{' '}
+              </Typography>
             </div>
             <div>
-              <Title level={4}> Price</Title>
+              <Title level={4}> {t('requestSummary.price')}</Title>
               <Typography> {objecInfo.price} CHF </Typography>
             </div>
             <div>
-              <Title level={4}> Images</Title>
+              <Title level={4}> {t('requestSummary.images')}</Title>
               <Image
                 preview={{ visible: false }}
                 height={100}

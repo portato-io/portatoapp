@@ -48,9 +48,11 @@ const EnterTime: React.FC = () => {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
-            <Title level={3}>When?</Title>
+            <Title level={3}>{t('requestTime.title')}</Title>
             <Form.Item
-              label={<label className="font-bold">Dates</label>}
+              label={
+                <label className="font-bold">{t('requestTime.dates')}</label>
+              }
               style={{}}
             >
               <RangePicker

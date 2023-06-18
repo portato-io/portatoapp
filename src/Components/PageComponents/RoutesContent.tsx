@@ -14,7 +14,7 @@ function RoutesContent() {
       <AutoCenter>
         <ButtonToCreateNewReqRoutes
           nextScreen={NEXT_SCREEN}
-          text={t('driveOverview.newTitle')}
+          text={t('driveOverview.createButtonDescription')}
         />
       </AutoCenter>
 

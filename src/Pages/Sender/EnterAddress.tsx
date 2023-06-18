@@ -30,14 +30,14 @@ const EnterAddress: React.FC = () => {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
-            <Title level={4}> Pick-up address</Title>
+            <Title level={4}> {t('requestAddresses.pickupAddress')}</Title>
             <Form.Item>
               <AddressAutocomplete
                 type={'pickup'}
                 savedAddress={objecInfo.pickup_adress}
               />
             </Form.Item>
-            <Title level={4}>Delivery address</Title>
+            <Title level={4}>{t('requestAddresses.deliveryAddress')}</Title>
             <Form.Item>
               {/* <Input
             name="delivery_adress"

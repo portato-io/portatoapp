@@ -1,8 +1,16 @@
 {
+    "navBar":
+    {
+        "home": "Home",
+        "send": "Send",
+        "drive": "Drive",
+        "profile": "Profile"
+    },
+
     "requestOverview":
     {
-        "newTitle": "Create a new send request",
-        "|*TBI*|createButtonDescription": "Create",
+        "newTitle": "Got something to send?",
+        "createButtonDescription": "Create request",
         "currentTitle": "Your current send requests"
     },
     
@@ -15,7 +23,7 @@
         "descriptionPlaceholder": "eg: It’s a good idea to specify the dimensions of large items.",
         "size": "Size",
         "weight": "Weight",
-        "uploadImages": "Upload Images"
+        "uploadImages": "Upload images"
     },
     "requestAddresses":
     {
@@ -27,7 +35,7 @@
     "requestTime":
     {
         "title": "When do you want the shipment to be picked up?",
-        "|*TBI*|dates": "Dates",
+        "dates": "Dates",
         "|*TBI*|startDatePlaceholder": "Start date",
         "|*TBI*|endDatePlaceholder": "End date",
         "|*TBI*|time": "Time",
@@ -38,7 +46,7 @@
     "requestCost":
     {
         "title": "How much is the transport worth to you?",
-        "|*TBI*|pricePlaceholder": "e.g., 30 CHF",
+        "pricePlaceholder": "e.g., 30 CHF",
         "driverReward": "Reward for driver:",
         "portatoFee": "Portato fee:",
         "vat": "VAT:",
@@ -60,8 +68,8 @@
     },
     "driveOverview":
     {
-        "newTitle": "Register a new route",
-        "|*TBI*|createButtonDescription": "Create",
+        "newTitle": "Want to register a ride?",
+        "createButtonDescription": "Create",
         "|*TBI*|currentTitle": "Your current routes"
     },
     "driveAddresses":
@@ -76,13 +84,15 @@
     {
         "title": "When are you driving?",
         "rangeTitle": "Select date range",
+        "singleTrip": "Single trip",
+        "recurringRide": "Recurring ride",
         "|*TBI*|startPlaceholder": "Start",
         "|*TBI*|endPlaceholder": "Ende",
         "selectTime": "Select timing",
         "|*TBI*|timeMornings": "Mornings",
         "|*TBI*|timeMidDays": "Mid days",
         "|*TBI*|timeEvenings": "Evenings",
-        "weekdayTitle": "Please specify the day",
+        "weekdayTitle": "Select days",
         "timeTitle": "Select timing"
     },
     "driveCapacity":
