@@ -115,7 +115,7 @@ const DealSuggester: React.FC = () => {
 
   const submitSuggestions = async () => {
     try {
-      updateMatched(true);
+      updateMatched(currentRequest, true);
       uploadDealToFirebase(dispatch);
       if (currentRequest) {
         const tokens = await getUserTokens(currentRequest.uid);

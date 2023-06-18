@@ -93,8 +93,7 @@ const FetchRequests: React.FC<{
         <div key={request.name} className="current-send-requests-list">
           <Card className="send-request-card" title={request.name}>
             {request.weight}/{request.size}
-            {admin ? <div>{`${request.id}/${request.uid}`}</div> : null}
-            {admin ? <div>{`${request.matched}`}</div> : null}
+            {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
             {admin && (
               <button onClick={() => match(request.id, request.uid)}>
                 Match
