@@ -1,3 +1,58 @@
 .home-main-image {
     width: 100%;
 }
+
+.landing-portato-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.portato-icon {
+    width: 50px;
+    height: 100%;
+}
+
+.portato-wordmark {
+    font-size: 30px;
+    margin: 0;
+    color: var(--portato-blue)
+}
+
+.portato-tagline {
+    width: 45vw;
+}
+
+.landing-main-container {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  background-image: url('../Assets/Images/landing_page_image2.png');
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  background-position: calc(100vw - 80vw) bottom;
+}
+
+.landing-main-labels {
+    position: absolute;
+    bottom: 0%;
+    margin-bottom: 20px;
+    margin-left: 5vw;
+}
+
+
+.landing-section {
+    /* background-color: red; */
+}
+
+.cta-section {
+    /* background-color: green; */
+}
+
+.explanation-section {
+    /* background-color: yellow; */
+}
+
+.about-section {
+    /* background-color: blue; */
+}

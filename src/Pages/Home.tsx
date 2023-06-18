@@ -1,7 +1,8 @@
 import React from 'react';
 import { Typography, Card, Space } from 'antd';
 import PageLayout from './Layouts/PageLayoutTest';
-import backgroundImg from '../Assets/Images/landing_page_image.png';
+import backgroundImg from '../Assets/Images/landing_page_image2.png';
+import portatoLogo from '../Assets/Images/logo_blue.png';
 import howItWorksImg from '../Assets/Images/how_it_works.gif';
 require('../CSS/PortatoStyleSheet.css');
 require('../CSS/Home.css');
@@ -11,20 +12,28 @@ const Home: React.FC = () => {
   return (
     <PageLayout>
       {/* Landing screen */}
-      <section>
-        <div>
-          <img
-            src={backgroundImg}
-            alt="Background"
-            className="home-main-image"
-          />
-          <h1>Portato</h1>
-          <p>Ride-sharing for things</p>
+      <section className="landing-section">
+        <div className="landing-main-container">
+          <div className="landing-main-labels">
+            <div className="landing-portato-logo">
+              <img
+                src={portatoLogo}
+                alt="Portato Icon"
+                className="portato-icon"
+              ></img>
+              <h1 className="font-comfortaa portato-wordmark">portato</h1>
+            </div>
+
+            <p className="font-comfortaa portato-tagline">
+              Der einfache, guenstige und geile Transportdienst von deinen
+              Homies.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Call to action */}
-      <section>
+      <section className="cta-section">
         <div>
           <button
             onClick={() =>
@@ -42,7 +51,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* How it works */}
-      <section>
+      <section className="explanation-section">
         <Card
           size="small"
           title="How It Works"
@@ -53,7 +62,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* About us */}
-      <section>
+      <section className="about-section">
         <Card
           size="small"
           title="About Us"
