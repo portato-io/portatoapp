@@ -3,14 +3,11 @@
     overflow: auto;
 }
 
-/* TODO Mischa: Make progress bar fixed to screen and only scroll form content*/
 .progress-bar-indicator {
-    position: absolute;
-    top: calc(var(--progress-bar-height) / 2 - 13px);
+    margin-top: var(--progress-bar-margin);
+    margin-bottom: var(--progress-bar-margin);
     left: 10%;
     width: 80%;
-    justify-content: center;
-    height: var(--progress-bar-height);
 }
 .form-content-container {
     flex: 1;
@@ -25,11 +22,11 @@
 }
 
 .form-and-buttons-content-container {
-    margin-top: var(--progress-bar-height);
     /* background-color: chocolate; */
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - var(--main-navigation-bar-height) - var(--progress-bar-height));
+    /* min-height calculated by total height, minus nav and progress bar */
+    min-height: calc(100vh - var(--main-navigation-bar-height) - 22px - 2 * var(--progress-bar-margin));
 }
 
 .form-button-container {
@@ -47,4 +44,34 @@
 
 .form-button-right {
     width: 45vw;
+}
+
+.create-new-plus-button {
+    height: auto !important;
+    min-width: 50vw;
+    background-color: rgba(24,117,188,0.2);
+    margin-top: 50px;
+}
+
+.create-new-plus-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-new-plus-bubble {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: var(--portato-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-new-plus-image {
+    width: 60px;
+    color: white;
+    filter: invert()
 }

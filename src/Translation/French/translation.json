@@ -60,7 +60,7 @@
     },
     "driveOverview":
     {
-        "|*TBI*|newTitle": "Enregistrer un nouvel itinéraire",
+        "newTitle": "Enregistrer un nouvel itinéraire",
         "|*TBI*|createButtonDescription": "Créer",
         "|*TBI*|currentTitle": "Vos itinéraires actuels"
     },

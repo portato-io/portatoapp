@@ -1,6 +1,7 @@
 :root {
   --main-navigation-bar-height: 55px;
-  --progress-bar-height: 55px;
+  --portato-blue: #1875bc;
+  --progress-bar-margin: 15px;
 }
 
 html,
@@ -19,7 +20,7 @@ body {
   overflow: auto;
 }
 
-.main-navigation-bar {
+.main-navigation-bar-container {
   position: fixed;
   top: 0%;
   width: 100%;
@@ -30,8 +31,22 @@ body {
   height: var(--main-navigation-bar-height);
 }
 
+.main-navigation-bar {
+  width: 50vw;
+  margin: auto;
+}
+
+.main-navigation-bar-element {
+  flex-direction: row !important;
+  gap: 5px;
+}
+
 .font-bold {
   font-weight: bold;
+}
+
+.font-large {
+  font-size: 20px;
 }
 
 /* Mobile devices */
@@ -41,13 +56,22 @@ body {
     padding-top: 0;
     padding-bottom: var(--main-navigation-bar-height);
   }
-
-  .main-navigation-bar {
+  
+  .main-navigation-bar-container {
     top: auto;
     bottom: 0%;
     border-top: solid;
     border-top-color: #E8E9F1;
     border-bottom: none;
+  }
+  
+  .main-navigation-bar {
+    width: 100%;
+  }
+  
+  .main-navigation-bar-element {
+    flex-direction: column !important;
+    gap: 0px;
   }
 }
 
