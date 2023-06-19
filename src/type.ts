@@ -11,6 +11,7 @@ export interface IRequestInfo {
   dateRange: string[];
   time: string;
   images: string[];
+  matched: boolean;
 }
 
 export interface IFirstObjectInfo {
@@ -18,6 +19,7 @@ export interface IFirstObjectInfo {
   description: string;
   size: string;
   weight: string;
+  matched: boolean;
 }
 
 export type ObjectInfoState = {

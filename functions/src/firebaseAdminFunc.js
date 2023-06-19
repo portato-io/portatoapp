@@ -1,22 +1,37 @@
 const functions = require('firebase-functions');
+const nodemailer = require('nodemailer');
 const admin = require('firebase-admin');
 const cors = require('cors')({ origin: true });
 
 // initialize firebase admin SDK
 admin.initializeApp();
 
+const { sender, mailing_service } = functions.config();
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    type: 'OAuth2',
+    user: sender.email_address,
+    pass: sender.email_password,
+    clientId: mailing_service.client_id,
+    clientSecret: mailing_service.client_secret,
+    refreshToken: mailing_service.refresh_token,
+  },
+});
+
 const sendNotification = functions
   .region('europe-west1')
-  .https.onRequest((req, res) => {
-    cors(req, res, () => {
+  .https.onRequest(async (req, res) => {
+    cors(req, res, async () => {
       if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Invalid request method' });
       }
 
       let data = req.body;
-      console.log('token is :', data.token);
-      if (!data.token) {
-        return res.status(400).json({ error: 'Missing token' });
+      console.log('tokens are :', data.tokens);
+      if (!data.tokens) {
+        return res.status(400).json({ error: 'Missing tokens' });
       }
 
       var message = {
@@ -28,20 +43,54 @@ const sendNotification = functions
           title: data.title,
           body: data.body,
         },
-        token: data.token,
       };
 
-      return admin
-        .messaging()
-        .send(message)
-        .then((response) => {
-          res
-            .status(200)
-            .json({ result: 'Successfully sent message: ' + response });
-        })
-        .catch((error) => {
-          res.status(500).json({ error: 'Error sending message: ' + error });
-        });
+      let responses = [];
+      for (let token of data.tokens) {
+        message.token = token;
+        try {
+          let response = await admin.messaging().send(message);
+          responses.push('Successfully sent message: ' + response);
+        } catch (error) {
+          responses.push(
+            'Error sending message to token ' + token + ': ' + error
+          );
+        }
+      }
+      return res.status(200).json({ results: responses });
+    });
+  });
+
+const sendNotificationEmail = functions
+  .region('europe-west1')
+  .https.onRequest((req, res) => {
+    cors(req, res, async () => {
+      try {
+        const { title, body, uid } = req.body;
+        let targetEmail;
+        if (uid) {
+          targetEmail = await getUserEmail(uid); // Fetch email address from UID
+        } else {
+          res.status(500).send('No uid given');
+          return;
+        }
+
+        const mailOptions = {
+          from: '"Notifications" <notifications@portato.io>',
+          to: targetEmail, // Use the fetched email address
+          subject: title,
+          text: body,
+        };
+
+        console.log('Sending email...');
+        const info = await transporter.sendMail(mailOptions);
+        console.log(`Email sent: ${info.messageId}`);
+
+        res.status(200).send(info);
+      } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).send(error);
+      }
     });
   });
 
@@ -58,4 +107,5 @@ async function getUserEmail(uid) {
 module.exports = {
   getUserEmail,
   sendNotification,
+  sendNotificationEmail,
 };

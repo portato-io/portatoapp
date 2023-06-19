@@ -30,6 +30,8 @@ const Summary: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
+  const state = useSelector((state) => state);
+  console.log(state); // prints all states of the store
 
   const { uid } = useAuth();
 
