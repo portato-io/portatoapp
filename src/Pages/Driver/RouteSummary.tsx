@@ -17,6 +17,8 @@ import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const PROGRESS = 100;
+const NEXT_SCREEN = '/deliver';
+
 const RouteSummary: React.FC = () => {
   const { t } = useContext(TranslationContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -128,7 +130,7 @@ const RouteSummary: React.FC = () => {
         <div className="form-button-container">
           <BackButton />
           {user ? (
-            <ConfirmButton onClick={handleConfirm} />
+            <ConfirmButton nextScreen={NEXT_SCREEN} onClick={handleConfirm} />
           ) : (
             <SignInButton onClick={showModal} />
           )}
