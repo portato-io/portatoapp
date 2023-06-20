@@ -31,7 +31,7 @@ const initialStateRequest: IRequestInfo = {
   dateRange: ['', ''],
   time: '',
   images: [],
-  matched: false,
+  status: 'unmatched',
 };
 console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 

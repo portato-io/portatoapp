@@ -14,7 +14,7 @@ const initialState: IRequestInfo = {
   dateRange: ['', ''],
   time: '',
   images: [],
-  matched: false,
+  status: 'unmatched',
 };
 
 export function requestReducer(
@@ -30,7 +30,7 @@ export function requestReducer(
         description: action.payload.description,
         size: action.payload.size,
         weight: action.payload.weight,
-        matched: action.payload.matched || false,
+        status: action.payload.status || false,
       };
     }
     case 'SET_ID': {
@@ -65,8 +65,8 @@ export function requestReducer(
       return { ...state, time: action.payload };
     }
 
-    case 'SET_MATCHED': {
-      return { ...state, matched: action.payload };
+    case 'SET_STATUS': {
+      return { ...state, status: action.payload };
     }
 
     case 'SET_DATE_RANGE': {

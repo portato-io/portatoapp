@@ -243,17 +243,17 @@ export const fetchAdressRequest = async (uid, id) => {
   }
 };
 
-export const updateMatched = async (request, matched) => {
+export const updateRequestStatus = async (request, status) => {
   try {
     const dealRef = ref(
       database,
       'users/' + request.uid + '/requests/' + request.id
     );
-    await update(dealRef, { matched: matched });
+    await update(dealRef, { status: status });
 
-    console.log('Successfully updated matched status ' + dealRef);
+    console.log('Successfully updated request status ' + dealRef);
   } catch (error) {
-    console.error('Error updating matched status :', error);
+    console.error('Error updating request status :', error);
   }
 };
 

@@ -5,7 +5,7 @@ import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
-import { updateMatched } from '../linksStoreToFirebase';
+import { updateRequestStatus } from '../linksStoreToFirebase';
 import { uploadDealToFirebase } from '../linksStoreToFirebase';
 import { TranslationContext } from '../Contexts/TranslationContext';
 require('../CSS/Send.css');
@@ -36,7 +36,9 @@ const FetchRequests: React.FC<{
       if (storesObject && typeof storesObject === 'object') {
         let storesArray = Object.values(storesObject) as IRequestInfo[]; // Type assertion here
         if (admin) {
-          storesArray = storesArray.filter((request) => !request.matched);
+          storesArray = storesArray.filter(
+            (request) => request.status == 'unmatched'
+          );
         }
         return storesArray;
       } else {
@@ -65,8 +67,13 @@ const FetchRequests: React.FC<{
     dispatch(setRequest(request));
     dispatch(setStatus('No Match'));
     uploadDealToFirebase(dispatch);
-    updateMatched(request, true);
+    updateRequestStatus(request, 'no match');
     console.log('Creating deal with status Backlog for request: ' + request.id);
+  };
+
+  const contact = (requestUid: string, requestID: string) => {
+    console.log('Contacting ' + requestUid + ' for request ' + requestID);
+    navigate(`/contact_sender/${requestUid}/${requestID}`);
   };
 
   // Return early, if no requests exist; avoid adding the title altogether.
@@ -91,7 +98,12 @@ const FetchRequests: React.FC<{
       )}
       {requests.map((request) => (
         <div key={request.name} className="current-send-requests-list">
-          <Card className="send-request-card" title={request.name}>
+          <Card
+            className={`send-request-card ${
+              request.status === 'matched' ? 'highlight-card' : ''
+            }`}
+            title={request.name}
+          >
             {request.weight}/{request.size}
             {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
             {admin && (
@@ -101,6 +113,9 @@ const FetchRequests: React.FC<{
             )}
             {admin && (
               <button onClick={() => noMatch(request)}>No Match</button>
+            )}
+            {!admin && request.status === 'matched' && (
+              <button onClick={() => contact(request)}>Contact</button>
             )}
           </Card>
         </div>

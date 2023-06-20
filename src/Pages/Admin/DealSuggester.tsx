@@ -14,7 +14,7 @@ import {
   getUserTokens,
   fetchDataOnce,
   checkPreviousRoutes,
-  updateMatched,
+  updateRequestStatus,
 } from '../../linksStoreToFirebase';
 import { IRouteInfo, IRequestInfo } from '../../type';
 
@@ -115,7 +115,7 @@ const DealSuggester: React.FC = () => {
 
   const submitSuggestions = async () => {
     try {
-      updateMatched(currentRequest, true);
+      updateRequestStatus(currentRequest, 'matched');
       uploadDealToFirebase(dispatch);
       if (currentRequest) {
         const tokens = await getUserTokens(currentRequest.uid);

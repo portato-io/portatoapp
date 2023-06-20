@@ -9,4 +9,4 @@ export const SET_ID = 'SET_ID';
 export const SET_UID = 'SET_UID';
 export const SET_REQ_PICKUP_ADDRESS = 'SET_REQ_PICKUP_ADDRESS';
 export const SET_REQ_DELIVERY_ADDRESS = 'SET_REQ_DELIVERY_ADDRESS';
-export const SET_MATCHED = 'SET_MATCHED';
+export const SET_STATUS = 'SET_STATUS';
