@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AppOutline,
   SendOutline,
-  UserOutline,
+  AppstoreOutline,
   TruckOutline,
 } from 'antd-mobile-icons';
 
@@ -27,8 +27,8 @@ const tabs = [
   },
   {
     key: '/profile',
-    title: 'profile',
-    icon: <UserOutline />,
+    title: 'menu',
+    icon: <AppstoreOutline />,
   },
 ];
 
