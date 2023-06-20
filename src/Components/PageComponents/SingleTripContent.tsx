@@ -31,14 +31,9 @@ function SingleTripContent() {
     dispatch(setTime(e));
   };
 
-  const handleChangeRange = (range: any) => {
-    const start = range[0].format().substring(0, 10);
-    const end = range[1].format().substring(0, 10);
-
-    //values contains a timestamp, that's why we take the first 10 characters
-    console.log('start date', start);
-    console.log('end date', end);
-    dispatch(setRouteDateRange([start, end]));
+  const handleChangeRange = (date: any) => {
+    const travelDate = date.format().substring(0, 10);
+    dispatch(setRouteDateRange(travelDate));
   };
   return (
     <div>
@@ -46,7 +41,7 @@ function SingleTripContent() {
         <Title level={5} style={{}}>
           {t('driveTime.rangeTitle')}
         </Title>
-        <RangePicker
+        <DatePicker
           name="time"
           inputReadOnly={true}
           onChange={handleChangeRange}
