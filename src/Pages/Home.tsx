@@ -53,6 +53,16 @@ const Home: React.FC = () => {
         </section>
 
         {/* How it works */}
+        {/* <lottie-player src="../Assets/Lotties/test-animation.json" background="transparent"  speed="1" loop controls autoplay></lottie-player> */}
+        {/* <lottie-player src="https://assets9.lottiefiles.com/datafiles/MUp3wlMDGtoK5FK/data.json"  background="transparent"  loop controls autoplay></lottie-player> */}
+        {/* <lottie-player src="https://assets9.lottiefiles.com/datafiles/MUp3wlMDGtoK5FK/data.json" background="transparent" loop autoplay></lottie-player> */}
+        {/* <lottie-player src="../Assets/Lotties/test-animation.json" background="transparent" loop autoplay></lottie-player> */}
+        <lottie-player
+          src="https://lottie.host/dd830d03-3456-47ab-a89e-c64105f8ca2e/nGZ4DRarLa.json"
+          background="transparent"
+          loop
+          autoplay
+        ></lottie-player>
         <section className="explanation-section section-container boxed-section">
           <h2 className="font-comfortaa color-portato-blue section-title">
             How It Works
