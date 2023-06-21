@@ -25,67 +25,66 @@ const Home: React.FC = () => {
             </div>
 
             <p className="font-comfortaa portato-tagline">
-              Der einfache, guenstige und geile Transportdienst von deinen
-              Homies.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Call to action */}
-      <section className="cta-section">
-        <div>
-          <button
-            onClick={() =>
-              (window.location.href = '/createSendRequest/enterObjInfo')
-            }
-          >
-            Send something
-          </button>
-          <button
-            onClick={() => (window.location.href = '/deliver/enterRoute')}
-          >
-            Deliver something
-          </button>
-        </div>
-      </section>
+      <div className="home-main-container">
+        {/* Call to action */}
+        <section className="cta-section section-container">
+          <div className="cta-button-layout">
+            <button
+              className="cta-button font-comfortaa"
+              onClick={() =>
+                (window.location.href = '/createSendRequest/enterObjInfo')
+              }
+            >
+              Send something
+            </button>
+            <button
+              className="cta-button font-comfortaa"
+              onClick={() => (window.location.href = '/deliver/enterRoute')}
+            >
+              Deliver something
+            </button>
+          </div>
+        </section>
 
-      {/* How it works */}
-      <section className="explanation-section">
-        <Card
-          size="small"
-          title="How It Works"
-          style={{ width: '90vw', margin: 'auto' }}
-        >
-          <img src={howItWorksImg} alt="Animated GIF" />
-        </Card>
-      </section>
+        {/* How it works */}
+        <section className="explanation-section section-container boxed-section">
+          <h2 className="font-comfortaa color-portato-blue section-title">
+            How It Works
+          </h2>
+          <img
+            className="how-it-works-animation"
+            src={howItWorksImg}
+            alt="Animated GIF"
+          />
+        </section>
 
-      {/* About us */}
-      <section className="about-section">
-        <Card
-          size="small"
-          title="About Us"
-          style={{ width: '90vw', margin: 'auto' }}
-        >
-          <h3>Our vision and mission</h3>
+        {/* About us */}
+        <section className="about-section section-container boxed-section boxed-section-blue">
+          <h2 className="font-comfortaa color-portato-blue section-title">
+            About Us
+          </h2>
+          <h3 className="font-comfortaa">Our vision and mission</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rhoncus
             interdum ligula, sit amet ullamcorper sapien ullamcorper ut. Vivamus
             dapibus, urna nec tempor luctus, mauris risus efficitur justo, et
             gravida metus ex id enim.
           </p>
-          <h3>Who we are and where we stand</h3>
+          <h3 className="font-comfortaa">Who we are and where we stand</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rhoncus
             interdum ligula, sit amet ullamcorper sapien ullamcorper ut. Vivamus
             dapibus, urna nec tempor luctus, mauris risus efficitur justo, et
             gravida metus ex id enim.
           </p>
-        </Card>
-      </section>
-
-      <div></div>
+        </section>
+      </div>
     </PageLayout>
   );
 };

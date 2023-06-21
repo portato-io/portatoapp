@@ -3,13 +3,10 @@
   src: url('../Fonts/Comfortaa-VariableFont_wght.ttf') format('truetype');
 }
 
-.font-comfortaa {
-  font-family: 'Comfortaa', sans-serif;
-}
-
 :root {
   --main-navigation-bar-height: 55px;
   --portato-blue: #1875bc;
+  --portato-blue-25: rgba(24, 117, 188, 0.25);
   --progress-bar-margin: 15px;
 }
 
@@ -54,8 +51,24 @@ body {
   font-weight: bold;
 }
 
+.font-comfortaa {
+  font-family: 'Comfortaa', sans-serif;
+}
+
 .font-large {
   font-size: 20px;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.color-portato-blue {
+  color: var(--portato-blue);
 }
 
 /* Mobile devices */
