@@ -8,3 +8,4 @@ exports.sendNotification = sendNotification.sendNotification;
 exports.sendEmailToUid = emailSender.sendEmailToUid;
 exports.sendEmailToSupport = emailSender.sendEmailToSupport;
 exports.fetchOpenRoute = fetchOpenRouteModule.fetchOpenRoute;
+exports.sendNotificationEmail = sendNotification.sendNotificationEmail;

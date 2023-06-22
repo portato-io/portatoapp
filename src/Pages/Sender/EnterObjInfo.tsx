@@ -30,6 +30,7 @@ const EnterObjInfo: React.FC = () => {
     description: objecInfo.description,
     size: objecInfo.size,
     weight: objecInfo.weight,
+    matched: objecInfo.matched,
   });
 
   React.useEffect(() => {
