@@ -52,16 +52,6 @@ const App: React.FC = () => {
     };
   }, []);
 
-  const handleOk = () => {
-    setVisible(false);
-
-    //enableNotifications();
-  };
-
-  const handleCancel = () => {
-    setVisible(false);
-  };
-
   return (
     <TranslationProvider>
       <AuthProvider>
