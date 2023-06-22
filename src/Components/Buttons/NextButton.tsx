@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { TranslationContext } from '../../Contexts/TranslationContext';
 
-function NextButton({ nextScreen = '/', scrolling = false }: any) {
+function NextButton({
+  nextScreen = '/',
+  scrolling = false,
+  disabled = 'false',
+}: any) {
   const { t } = useContext(TranslationContext);
   const navigate = useNavigate();
   const handleNextClick = () => {
@@ -15,8 +19,10 @@ function NextButton({ nextScreen = '/', scrolling = false }: any) {
       <Button
         type="primary"
         size="large"
+        htmlType="submit"
         onClick={handleNextClick}
         style={{ width: '100%' }}
+        disabled={disabled}
       >
         {t('navigationButton.next')}
       </Button>

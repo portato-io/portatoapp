@@ -32,6 +32,15 @@ const EnterObjInfo: React.FC = () => {
     weight: objecInfo.weight,
     matched: objecInfo.matched,
   });
+  const [form] = Form.useForm();
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleFormChange = () => {
+    const formValues = form.getFieldsValue();
+    const isFilled = Object.values(formValues).every((value) => !!value);
+    setIsFormFilled(isFilled);
+    console.log(isFilled);
+  };
 
   React.useEffect(() => {
     dispatch(setObject(object));
@@ -57,6 +66,8 @@ const EnterObjInfo: React.FC = () => {
       <div className="form-and-buttons-content-container">
         <div className="form-content-container">
           <Form
+            form={form}
+            onChange={handleFormChange}
             onFinish={onFinish}
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
@@ -64,9 +75,9 @@ const EnterObjInfo: React.FC = () => {
           >
             <Title level={3}>What would you like to ship?</Title>
             <Form.Item
+              name="name"
               label={<label className="font-bold">Name</label>}
-              //name="name"
-              //rules={[{ required: true, message: 'Please input your username!' }]}
+              rules={[{ required: true, message: 'test' }]}
             >
               <Input
                 name="name"
@@ -77,9 +88,9 @@ const EnterObjInfo: React.FC = () => {
             </Form.Item>
 
             <Form.Item
+              name="description"
               label={<label className="font-bold">Description</label>}
-
-              //rules={[{ required: true, message: 'Please input description!' }]}
+              rules={[{ required: true }]}
             >
               <TextArea
                 name="description"
@@ -90,7 +101,10 @@ const EnterObjInfo: React.FC = () => {
               />
             </Form.Item>
 
-            <Form.Item label={<label className="font-bold">Size</label>}>
+            <Form.Item
+              label={<label className="font-bold">Size</label>}
+              rules={[{ required: true }]}
+            >
               <Radio.Group
                 name="size"
                 value={object.size}
@@ -104,7 +118,10 @@ const EnterObjInfo: React.FC = () => {
               </Radio.Group>
             </Form.Item>
 
-            <Form.Item label={<label className="font-bold">Weight</label>}>
+            <Form.Item
+              label={<label className="font-bold">Weight</label>}
+              rules={[{ required: true }]}
+            >
               <Radio.Group
                 name="weight"
                 value={object.weight}
@@ -122,14 +139,16 @@ const EnterObjInfo: React.FC = () => {
                 </Radio.Button>
               </Radio.Group>
             </Form.Item>
-            <UploadImage />
+            <Form.Item rules={[{ required: true }]}>
+              <UploadImage />
+            </Form.Item>
           </Form>
         </div>
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container
           & move buttons out of div, for responsive scrolling! */}
         <div className="form-button-container">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton nextScreen={NEXT_SCREEN} disabled={!isFormFilled} />
         </div>
       </div>
     </PageLayout>
