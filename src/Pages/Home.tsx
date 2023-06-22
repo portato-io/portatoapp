@@ -1,13 +1,39 @@
-import React from 'react';
-import { Typography, Card, Space } from 'antd';
+import React, { useContext } from 'react';
+import { Row, Col, Typography, Card, Space, Avatar } from 'antd';
 import PageLayout from './Layouts/PageLayoutTest';
 import backgroundImg from '../Assets/Images/landing_page_image.png';
 import howItWorksImg from '../Assets/Images/how_it_works.gif';
-require('../CSS/PortatoStyleSheet.css');
-require('../CSS/Home.css');
+import { TranslationContext } from '../Contexts/TranslationContext';
+
 const { Title } = Typography;
 
 const Home: React.FC = () => {
+  const { t } = useContext(TranslationContext);
+  const teamMemberNames = ['Conrad', 'Mischa', 'Chiara', 'Hugo', 'Mehdi'];
+
+  function getTeamMemberImage(image: string): string {
+    return image || 'https://images.app.goo.gl/g1PsaaVtxwriDuqVA'; // Use placeholder image if URL is not provided
+  }
+
+  const TeamMember: React.FC<{ memberName: string }> = ({ memberName }) => {
+    const name = t(`team.${memberName}.name`);
+    const description = t(`team.${memberName}.description`);
+    const image = getTeamMemberImage(t(`team.${memberName}.image`));
+
+    return (
+      <Col span={5}>
+        <Space
+          direction="vertical"
+          style={{ width: '100%', textAlign: 'center' }}
+        >
+          <Avatar size={100} src={image} />
+          <Title level={5}>{name}</Title>
+          <p>{description}</p>
+        </Space>
+      </Col>
+    );
+  };
+
   return (
     <PageLayout>
       {/* Landing screen */}
@@ -56,27 +82,44 @@ const Home: React.FC = () => {
       <section>
         <Card
           size="small"
-          title="About Us"
+          title={t('about.title')}
           style={{ width: '90vw', margin: 'auto' }}
         >
-          <h3>Our vision and mission</h3>
+          <h3>{t('about.visionMissionTitle')}</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rhoncus
-            interdum ligula, sit amet ullamcorper sapien ullamcorper ut. Vivamus
-            dapibus, urna nec tempor luctus, mauris risus efficitur justo, et
-            gravida metus ex id enim.
+            {t('about.visionMissionText')
+              .split('\n')
+              .map((line: string, i: number) => (
+                <span key={i}>
+                  {line}
+                  <br />
+                </span>
+              ))}
           </p>
-          <h3>Who we are and where we stand</h3>
+          <h3>{t('about.whoWeAreTitle')}</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rhoncus
-            interdum ligula, sit amet ullamcorper sapien ullamcorper ut. Vivamus
-            dapibus, urna nec tempor luctus, mauris risus efficitur justo, et
-            gravida metus ex id enim.
+            {t('about.whoWeAreText')
+              .split('\n')
+              .map((line: string, i: number) => (
+                <span key={i}>
+                  {line}
+                  <br />
+                </span>
+              ))}
           </p>
+
+          {/* Team members */}
+
+          <Row gutter={[16, 16]} justify="center">
+            {teamMemberNames.map((name) => (
+              <TeamMember memberName={name} key={name} />
+            ))}
+          </Row>
         </Card>
       </section>
+      <div>{/* Add your additional section content here */}</div>
 
-      <div></div>
+      {/* Remember to close PageLayout */}
     </PageLayout>
   );
 };

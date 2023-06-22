@@ -1,4 +1,40 @@
 {
+    "about": {
+        "title": "Über uns",
+        "visionMissionTitle": "Unsere Vision und Mission",
+        "visionMissionText": "Im Schweizer Individualverkehr werden täglich über 150 Millionen Kilometer mit dem Auto zurückgelegt. Dabei sind die Autos oft kaum beladen: In jedem Fahrzeug sitzen durchschnittlich nur 1.6 Personen und die immer grösseren Kofferräume sind mehrheitlich leer.\n\n​Portato hat sich zum Ziel gesetzt, diese vielen freien Transportkapazitäten besser zu nutzen. Jede Mitfahrgelegenheit vermeidet potentiell eine weitere Transport-Fahrt und bedeutet ein Auto weniger auf der Strasse. Unsere Vision ist es, so den Strassenverkehr effizienter zu machen und einen positiven Beitrag zur Umwelt zu leisten.​\n\nUnsere unmittelbare Mission ist es, Mitfahrgelegenheiten zwischen Privatpersonen zu vermitteln. Auf der einen Seite lässt sich so der Versand von (sperrigen) Gegenständen bequemer gestalten. Auf der anderen Seite ermöglichen wir Fahrern, ihren freien Platz sinnvoll zu nutzen, dabei Geld zu verdienen und ihren ökologischen Fussabdruck zu reduzieren.",
+        "whoWeAreTitle": "Wer wir sind",
+        "whoWeAreText": "Bei Portato trifft Innovation auf freie Strasse! Wir sind eine lebhafte Fusion von Denkern, Bastlern und Pionieren mit dem gemeinsamen Ziel den Transport zu revolutionieren!"
+    },
+    
+    "team": {
+        "Conrad": {
+            "name": "Conrad",
+            "description": "PowerPoint-Zauberer und Excel-Magier. Conrad hat den Consulting-Alltag aufgegeben, um CEO von Portato zu werden. Er hat eine leidenschaft für Fahrräder, ein prall gefülltes Kontaktbuch und einen feierfreudigen Geist. Sanft im Kern, aber effektiv in der Ausführung.",
+            "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        },
+        "Hugo": {
+            "name": "Hugo",
+            "description": "Franko-britisches Genie mit Gedanken so schnell, dass sie einen Überschallknall erzeugen. Hugo kann dich in zwei Sprachen bezaubern, während er das Backend in drei programmiert. Seine Finger fliegen über die Tastatur und weben Zaubersprüche, die alles zum Laufen bringen.",
+            "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        },
+        "Mehdi": {
+            "name": "Mehdi",
+            "description": "Hip-Hop-Liebhaber, Hipster und Charmeur, Mehdi ist unser Guru für User Experience. Wenn er nicht gerade damit beschäftigt ist, ein Magnet der Bewunderung zu sein, kreiert er Code, der das Frontend genauso gut aussehen lässt wie seine Frisuren.",
+            "image": "https://images.pexels.com/photos/16375570/pexels-photo-16375570/free-photo-of-man-sitting-on-a-wall-with-a-mural.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        },
+        "Mischa": {
+            "name": "Mischa",
+            "description": "Hansdampf in allen Gassen. Mischa ist die seltene Kombination aus Programmierer-Designer-Animator-Denker... und so vielem mehr. Er kann zwischen Jiu-Jitsu, Adobe und Visual Code wechseln wie niemand sonst, Tag und Nacht, Zusammen oder Remote.",
+            "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        },
+        "Chiara": {
+            "name": "Chiara",
+            "description": "Chiara, die Geschichtenschreiberin und 2D-Animationskünstlerin, ist nebenbei auch eine angehende Prinzessin mit dem feurigen Geist eines lateinischen Tanzes. Sie bringt den Zauber in unsere freundlichen Gesichter und verleiht Portato sein charmantes Gesicht.",
+            "image": "https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        }
+    },
+
     "navBar":
     {
         "home": "Home",
