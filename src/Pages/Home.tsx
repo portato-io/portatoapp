@@ -5,6 +5,7 @@ import backgroundImg from '../Assets/Images/landing_page_image2.png';
 import portatoLogo from '../Assets/Images/logo_blue.png';
 import howItWorksImg from '../Assets/Images/how_it_works.gif';
 import { TranslationContext } from '../Contexts/TranslationContext';
+require('../CSS/Home.css');
 
 const { Title } = Typography;
 
@@ -90,45 +91,46 @@ const Home: React.FC = () => {
           autoplay
         ></lottie-player> */}
 
-      {/* About us */}
-      <section>
-        <Card
-          size="small"
-          title={t('about.title')}
-          style={{ width: '90vw', margin: 'auto' }}
-        >
-          <h3>{t('about.visionMissionTitle')}</h3>
-          <p>
-            {t('about.visionMissionText')
-              .split('\n')
-              .map((line: string, i: number) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-          </p>
-          <h3>{t('about.whoWeAreTitle')}</h3>
-          <p>
-            {t('about.whoWeAreText')
-              .split('\n')
-              .map((line: string, i: number) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-          </p>
+        {/* About us */}
+        <section>
+          <Card
+            size="small"
+            title={t('about.title')}
+            style={{ width: '90vw', margin: 'auto' }}
+          >
+            <h3>{t('about.visionMissionTitle')}</h3>
+            <p>
+              {t('about.visionMissionText')
+                .split('\n')
+                .map((line: string, i: number) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+            </p>
+            <h3>{t('about.whoWeAreTitle')}</h3>
+            <p>
+              {t('about.whoWeAreText')
+                .split('\n')
+                .map((line: string, i: number) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+            </p>
 
-          {/* Team members */}
+            {/* Team members */}
 
-          <Row gutter={[16, 16]} justify="center">
-            {teamMemberNames.map((name) => (
-              <TeamMember memberName={name} key={name} />
-            ))}
-          </Row>
-        </Card>
-      </section>
+            <Row gutter={[16, 16]} justify="center">
+              {teamMemberNames.map((name) => (
+                <TeamMember memberName={name} key={name} />
+              ))}
+            </Row>
+          </Card>
+        </section>
+      </div>
     </PageLayout>
   );
 };
