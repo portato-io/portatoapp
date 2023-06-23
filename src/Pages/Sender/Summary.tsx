@@ -17,6 +17,7 @@ import { emptyState } from '../../Store/actions/requestActionCreators';
 
 const { Title } = Typography;
 const PROGRESS = 100;
+const NEXT_SCREEN = '/createSendRequest';
 
 const Summary: React.FC = () => {
   const { t } = useContext(TranslationContext);
@@ -127,7 +128,7 @@ const Summary: React.FC = () => {
         <div className="form-button-container">
           <BackButton />
           {uid ? (
-            <ConfirmButton onClick={handleConfirm} />
+            <ConfirmButton nextScreen={NEXT_SCREEN} onClick={handleConfirm} />
           ) : (
             <SignInButton onClick={showModal} />
           )}

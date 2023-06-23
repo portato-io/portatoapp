@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AppOutline,
   SendOutline,
-  UserOutline,
+  AppstoreOutline,
   TruckOutline,
 } from 'antd-mobile-icons';
 import { TranslationContext } from '../Contexts/TranslationContext';
@@ -33,7 +33,7 @@ function BottomBar() {
     {
       key: '/profile',
       title: t('navBar.profile'),
-      icon: <UserOutline />,
+      icon: <AppstoreOutline />,
     },
   ];
 
