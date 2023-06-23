@@ -52,13 +52,13 @@ const EnterPrice: React.FC = () => {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
-            <Title level={3}>How much is the transport cost for you?</Title>
+            <Title level={3}>{t('requestCost.title')}</Title>
             <Form.Item>
               <Input
                 name="price"
                 value={objecInfo.price !== 0 ? objecInfo.price : undefined}
                 onChange={handleInputChange}
-                placeholder="E.g : 30 CHF"
+                placeholder={t('requestCost.pricePlaceholder')}
               />
             </Form.Item>
             <Card
@@ -66,10 +66,10 @@ const EnterPrice: React.FC = () => {
               className="centered-card"
               style={{ margin: 'auto', width: '80%' }}
             >
-              Driver reward: x <br />
-              Portato fee: y <br />
-              VAT: z <br />
-              insurance: xy
+              {t('requestCost.driverReward')} a <br />
+              {t('requestCost.portatoFee')} b <br />
+              {t('requestCost.vat')} c <br />
+              {t('requestCost.insurance')} d
             </Card>
             <Form.Item
               style={{
@@ -87,9 +87,7 @@ const EnterPrice: React.FC = () => {
                 <div style={{ textAlign: 'center' }}>
                   <InfoCircleOutlined />
                 </div>
-                Portato factors in the size of the vehicle, distance travelled
-                and attractiveness for drivers to deliver it. If your price is
-                too low, chances are nobody will take your item.
+                {t('requestCost.comment')}
               </Card>
             </Form.Item>
           </Form>

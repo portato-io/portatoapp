@@ -20,7 +20,7 @@ const CreateSendRequest: React.FC = () => {
       <AutoCenter>
         <ButtonToCreateNewReqRoutes
           nextScreen={NEXT_SCREEN}
-          text={t('requestOverview.newTitle')}
+          text={t('requestOverview.createButtonDescription')}
         />
       </AutoCenter>
 

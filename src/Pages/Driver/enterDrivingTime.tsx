@@ -27,12 +27,12 @@ const EnterDeliveryTime: React.FC = () => {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
-            <Title level={4}>When are you driving?</Title>
+            <Title level={4}>{t('driveTime.title')}</Title>
             <Tabs>
-              <Tabs.Tab title="Single trip" key="single">
+              <Tabs.Tab title={t('driveTime.singleTrip')} key="single">
                 <SingleTripContent />
               </Tabs.Tab>
-              <Tabs.Tab title="Recurrent" key="recur">
+              <Tabs.Tab title={t('driveTime.recurringRide')} key="recur">
                 <RecurrentTripContent />
               </Tabs.Tab>
             </Tabs>
