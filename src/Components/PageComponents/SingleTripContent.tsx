@@ -14,7 +14,6 @@ import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const TYPE = 'Single Trip';
-const { RangePicker } = DatePicker;
 
 function SingleTripContent() {
   const { t } = useContext(TranslationContext);
