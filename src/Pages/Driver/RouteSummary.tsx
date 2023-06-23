@@ -115,9 +115,7 @@ const RouteSummary: React.FC = () => {
               </div>
             ) : (
               <div>
-                <Title level={4}>
-                  {routeInfo.timeRange[0]}-{routeInfo.timeRange[1]}
-                </Title>
+                <Title level={4}>{routeInfo.timeRange}</Title>
               </div>
             )}
             <div>
