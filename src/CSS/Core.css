@@ -2,13 +2,15 @@
   --main-navigation-bar-height: 55px;
   --portato-blue: #1875bc;
   --progress-bar-margin: 15px;
+  --color-white: #FFFFFF;
+  --color-blue: #1875bc;
 }
 
 html,
 body {
   height: 100%;
   margin: 0;
-  background-color: #FFF;
+  background-color: var(--color-white);
 }
 
 .main-page-split {
