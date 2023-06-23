@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { auth } from '../../firebaseConfig';
 import 'firebase/auth';
+import { storage } from '../../firebaseConfig';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { updateProfile, updateEmail } from 'firebase/auth';
 import { TranslationContext } from '../../Contexts/TranslationContext';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
@@ -13,6 +15,7 @@ const MyAccount: React.FC = () => {
   const [name, setName] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<File | null>(null);
 
   const user = auth.currentUser;
 
@@ -35,11 +38,24 @@ const MyAccount: React.FC = () => {
     setEmail(e.target.value);
   };
 
+  async function upload(file: File, currentUser: any, setLoading: any) {
+    const fileRef = ref(storage, currentUser.uid + '.png');
+
+    const snapshot = await uploadBytes(fileRef, file);
+    const photoURL = await getDownloadURL(fileRef);
+
+    updateProfile(currentUser, { photoURL });
+
+    setLoading(false);
+    alert('Uploaded file!');
+  }
+
   const onFinish = () => {
-    if (user) {
+    if (user && photo) {
+      upload(photo, user, setLoading);
       updateProfile(user, {
         displayName: name,
-        photoURL: imageUrl,
+        // photoURL: imageUrl,
       }).then(function () {
         updateEmail(user, email || '')
           .then(function () {
@@ -93,8 +109,9 @@ const MyAccount: React.FC = () => {
               listType="picture-card"
               className="avatar-uploader"
               showUploadList={false}
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              //action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               beforeUpload={(file: File) => {
+                setPhoto(file);
                 const imgURL = URL.createObjectURL(file);
                 uploadProfilePicture(imgURL);
                 return false; // Prevent default upload behavior

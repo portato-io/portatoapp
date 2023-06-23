@@ -23,6 +23,8 @@ const Menu: React.FC = () => {
   useEffect(() => {
     if (user) {
       setImageUrl(user.photoURL);
+    } else {
+      console.log('user not fully signed in');
     }
   }, []);
   const { uid } = useAuth();
@@ -40,10 +42,6 @@ const Menu: React.FC = () => {
 
   const handleMyBlogClick = () => {
     // navigate to My Payment Methods screen
-  };
-
-  const handleMyDeliveriesClick = () => {
-    // navigate to My Deliveries screen
   };
 
   const handleMySendRequestsClick = () => {
@@ -74,7 +72,15 @@ const Menu: React.FC = () => {
       <div className="profile-screen-background">
         <div className="profile-image-container">
           <div className="profile-image-bubble">
-            <UserOutlined style={{ fontSize: '48px' }} />
+            {uid && imageUrl ? (
+              <img
+                src={new URL(imageUrl).href}
+                alt="avatar"
+                style={{ width: '100%', height: '100%', borderRadius: '50%' }}
+              />
+            ) : (
+              <UserOutlined style={{ fontSize: '48px' }} />
+            )}
           </div>
         </div>
 
