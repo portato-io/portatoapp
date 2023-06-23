@@ -1,3 +1,4 @@
+import React, { useContext } from 'react';
 import { Badge, TabBar } from 'antd-mobile';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -6,33 +7,36 @@ import {
   AppstoreOutline,
   TruckOutline,
 } from 'antd-mobile-icons';
-
-const tabs = [
-  {
-    key: '/',
-    title: 'home',
-    icon: <AppOutline />,
-    badge: Badge.dot,
-  },
-  {
-    key: '/createSendRequest',
-    title: 'send',
-    icon: <SendOutline />,
-    badge: '5',
-  },
-  {
-    key: '/deliver',
-    title: 'deliver',
-    icon: <TruckOutline />,
-  },
-  {
-    key: '/profile',
-    title: 'menu',
-    icon: <AppstoreOutline />,
-  },
-];
+import { TranslationContext } from '../Contexts/TranslationContext';
 
 function BottomBar() {
+  const { t } = useContext(TranslationContext);
+
+  const tabs = [
+    {
+      key: '/',
+      title: t('navBar.home'),
+      icon: <AppOutline />,
+      badge: Badge.dot,
+    },
+    {
+      key: '/createSendRequest',
+      title: t('navBar.send'),
+      icon: <SendOutline />,
+      badge: '5',
+    },
+    {
+      key: '/deliver',
+      title: t('navBar.drive'),
+      icon: <TruckOutline />,
+    },
+    {
+      key: '/profile',
+      title: t('navBar.profile'),
+      icon: <AppstoreOutline />,
+    },
+  ];
+
   const location = useLocation();
   const { pathname } = location;
   const navigate = useNavigate();

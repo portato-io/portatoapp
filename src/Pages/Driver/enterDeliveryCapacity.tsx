@@ -30,7 +30,7 @@ const EnterDeliveryCapacity: React.FC = () => {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
-            <Title level={4}>What is your delivery capacity?</Title>
+            <Title level={4}>{t('driveCapacity.title')}</Title>
 
             <Selector
               columns={1}
