@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { Typography, Card, Modal, Image } from 'antd';
+import { Typography, Card, Modal, Image, message } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
 import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -36,13 +36,25 @@ const Summary: React.FC = () => {
 
   const { uid } = useAuth();
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    console.log('About to upload request');
     if (uid) {
-      uploadRequestToFirebase(uid, dispatch);
+      console.log('valid uid');
+      try {
+        const uploadSuccess = await uploadRequestToFirebase(uid, dispatch);
+        if (uploadSuccess) {
+          message.success('Successfully uploaded request!');
+          dispatch(emptyState()); //Free the redux store after uploading
+        } else {
+          message.error('Failed to upload request!');
+        }
+      } catch (error) {
+        console.error('Error uploading request: ', error);
+        message.error('Failed to upload request due to an error!');
+      }
     } else {
       console.log('User UID not found.');
     }
-    dispatch(emptyState()); //Free the redux store after uploading
   };
 
   const [visible, setVisible] = useState(false);

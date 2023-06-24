@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { TranslationContext } from '../../Contexts/TranslationContext';
 
-const ConfirmButton = ({ nextScreen = '/' }: any) => {
+const ConfirmButton = ({ nextScreen = '/', onClick }: any) => {
   const { t } = useContext(TranslationContext);
   const navigate = useNavigate();
   const handleConfirmClick = () => {
+    if (onClick) onClick(); // Call the onClick function prop if it exists
     navigate(nextScreen);
   };
   return (

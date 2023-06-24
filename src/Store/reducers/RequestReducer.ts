@@ -32,7 +32,7 @@ export function requestReducer(
         size: action.payload.size,
         weight: action.payload.weight,
         status: action.payload.status || false,
-        dealId: action.payload.dealId,
+        dealId: action.payload.dealId || '',
       };
     }
     case 'SET_ID': {
@@ -94,7 +94,7 @@ export function requestReducer(
       return initialState;
 
     default: {
-      console.log('DANS LE REDUCER MAIS PAS DANS LE BON STATE');
+      console.error('Unknown action type in request Reducer', action.type);
       return state;
     }
   }

@@ -87,7 +87,7 @@ export function routeReducer(
       return initialStateRoute;
 
     default: {
-      console.log('DANS LE DRIVER REDUCER MAIS PAS DANS LE BON STATE');
+      console.error('Unknown action type in route Reducer', action.type);
       return state;
     }
   }

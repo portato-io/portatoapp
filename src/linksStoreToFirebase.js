@@ -32,13 +32,16 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
 
       // Update your data under the new key
       await set(newRequestRef, state.request);
+
+      console.log('Request uploaded successfully');
+      return true;
     } else {
       console.error('Unable to generate a unique key.');
+      return false;
     }
-
-    console.log('Request uploaded successfully');
   } catch (error) {
     console.error('Error uploading request:', error);
+    return false;
   }
 };
 

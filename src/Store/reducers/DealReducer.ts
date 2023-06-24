@@ -64,7 +64,7 @@ export function dealReducer(
       };
     }
     default: {
-      console.log('DANS LE Deal REDUCER MAIS PAS DANS LE BON STATE');
+      console.error('Unknown action type in dealReducer', action.type);
       return state;
     }
   }
