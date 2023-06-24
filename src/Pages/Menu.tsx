@@ -8,24 +8,25 @@ import FirebaseAuth from '../Components/FirebaseAuth';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { TranslationContext } from '../Contexts/TranslationContext';
-import { useAuth, checkAdmin } from '../Components/AuthProvider';
+import { useAuth } from '../Components/AuthProvider';
 
 require('../CSS/Profile.css');
 
 const Menu: React.FC = () => {
   const { t } = useContext(TranslationContext);
   const navigate = useNavigate();
-  const isAdmin = checkAdmin();
-  const user = auth.currentUser;
+  const { user, isAdmin, loading } = useAuth();
 
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (user) {
       setImageUrl(user.photoURL);
+    } else {
+      console.log('user not fully signed in');
     }
-  }, []);
-  const { uid } = useAuth();
+  }, [user]); // Make sure to include 'user' in your dependency array, so useEffect re-runs when 'user' changes.
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
@@ -40,10 +41,6 @@ const Menu: React.FC = () => {
 
   const handleMyBlogClick = () => {
     // navigate to My Payment Methods screen
-  };
-
-  const handleMyDeliveriesClick = () => {
-    // navigate to My Deliveries screen
   };
 
   const handleMySendRequestsClick = () => {
@@ -64,6 +61,10 @@ const Menu: React.FC = () => {
     navigate('/profile/settings');
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <PageLayout display={display}>
       <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
@@ -74,13 +75,21 @@ const Menu: React.FC = () => {
       <div className="profile-screen-background">
         <div className="profile-image-container">
           <div className="profile-image-bubble">
-            <UserOutlined style={{ fontSize: '48px' }} />
+            {user && imageUrl ? (
+              <img
+                src={new URL(imageUrl).href}
+                alt="avatar"
+                style={{ width: '100%', height: '100%', borderRadius: '50%' }}
+              />
+            ) : (
+              <UserOutlined style={{ fontSize: '48px' }} />
+            )}
           </div>
         </div>
 
         <Card className="settings-card">
           <List mode="card" style={{ marginTop: '1vh' }}>
-            {uid ? (
+            {user ? (
               <>
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   {t('navigationMenu.myAccount')}
@@ -109,7 +118,7 @@ const Menu: React.FC = () => {
                 {t('navigationMenu.adminWindow')}
               </List.Item>
             )}
-            {uid ? (
+            {user ? (
               <List.Item
                 arrow={true}
                 onClick={() => signOut(auth)}

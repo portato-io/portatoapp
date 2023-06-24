@@ -17,6 +17,8 @@ import { TranslationContext } from '../../Contexts/TranslationContext';
 
 const { Title } = Typography;
 const PROGRESS = 100;
+const NEXT_SCREEN = '/deliver';
+
 const RouteSummary: React.FC = () => {
   const { t } = useContext(TranslationContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -113,9 +115,13 @@ const RouteSummary: React.FC = () => {
               </div>
             ) : (
               <div>
-                <Title level={4}>
-                  {routeInfo.timeRange[0]}-{routeInfo.timeRange[1]}
-                </Title>
+                <Title level={4}> {t('driveSummary.timing')}</Title>
+                <Typography>
+                  {t('driveSummary.tripDates')} {routeInfo.timeRange[0]} -{' '}
+                  {routeInfo.timeRange[1]} <br />
+                  {t('driveSummary.tripTime')}{' '}
+                  {Object.values(routeInfo.time)[0]}
+                </Typography>
               </div>
             )}
             <div>
@@ -128,7 +134,7 @@ const RouteSummary: React.FC = () => {
         <div className="form-button-container">
           <BackButton />
           {user ? (
-            <ConfirmButton onClick={handleConfirm} />
+            <ConfirmButton nextScreen={NEXT_SCREEN} onClick={handleConfirm} />
           ) : (
             <SignInButton onClick={showModal} />
           )}
