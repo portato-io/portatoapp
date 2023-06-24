@@ -1,27 +1,93 @@
-@font-face {
-  font-family: 'Comfortaa';
-  src: url('../Fonts/Comfortaa-VariableFont_wght.ttf') format('truetype');
-}
+
 
 :root {
   --main-navigation-bar-height: 55px;
   --portato-blue: #1875bc;
   --portato-blue-25: rgba(24, 117, 188, 0.25);
   --progress-bar-margin: 15px;
+  --color-black: #000000;
   --color-white: #FFFFFF;
-  --color-blue: #1875bc;
+  --color-blue: #568BB3;
+  --color-blue-light: #53B2F2;
+  --spacing-small: 2vw;
+  --spacing-regular: 5vw;
+  --spacing-big: 10vw;
+  --content-width-regular: 800px;
+  --content-width-large: 1200px;
+  --content-width-bleed: initial;
+  --spacing-horizontal-small: 5px;
+  --spacing-horizontal-regular: 15px;
+  --spacing-horizontal-big: 25px;
+  --spacing-vertical-small: 15px;
+  --spacing-vertical-regular: 25px;
+  --spacing-vertical-big: 40px;
+  --transition-regular: all 0.3s ease-in-out 0s;
 }
 
-html,
-body {
-  height: 100%;
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width:100%;
   margin: 0;
   background-color: var(--color-white);
 }
 
+/* GENERAL ELEMENTS------------------------------------ */
+.section {
+  width:100%;
+  max-width: var(--content-width-regular);
+  margin:var(--spacing-vertical-regular) auto;
+  padding:0 var(--spacing-regular);
+}
+.section:first-child {margin-top:0}
+.section:last-child {margin-bottom:0}
+.section-large { max-width: var(--content-width-large);}
+.section-bleed { max-width: var(--content-width-bleed); padding:0; }
+
+img, .image {
+  width:100%;
+  height:auto;
+}
+
+
+/* LOGO & SLOGAN ------------------------------------ */
+.logo-slogan {
+  font-family: 'Comfortaa'; 
+  color:var(--color-blue-light);
+  margin-top:-130px;
+  margin-bottom: 0;
+}
+.logo-slogan:before {
+  font-size:4rem;
+  position:relative;
+  top:10px;
+  margin-left:-10px;
+}
+
+
+/* SPACERS ------------------------------------------- */
+.spacer-small {margin-bottom: 20px}
+.spacer-regular {margin-bottom: 40px}
+.spacer-big {margin-bottom: 60px;}
+
+
+/* MODIFIERS ---------------------------------------- */
+.mod-display-flex {display:flex};
+.mod-display-block {display:block};
+.mod-display-inline-block {display:inline-block};
+.mod-flex-space-between {justify-content: space-between};
+.mod-flex-wrap {flex-wrap: wrap;}
+.mod-nomargin {margin:0}
+.mod-nomargin-bottom {margin-bottom:0}
+.mod-nomargin-top {margin-top:0}
+
+
 .main-page-split {
   background-color: #FFF;
   padding-top: var(--main-navigation-bar-height);
+
 }
 
 .main-container-split {
@@ -49,25 +115,7 @@ body {
   gap: 5px;
 }
 
-.font-bold {
-  font-weight: bold;
-}
 
-.font-comfortaa {
-  font-family: 'Comfortaa', sans-serif;
-}
-
-.font-large {
-  font-size: 20px;
-}
-
-.text-align-left {
-  text-align: left;
-}
-
-.text-align-right {
-  text-align: right;
-}
 
 .color-portato-blue {
   color: var(--portato-blue);

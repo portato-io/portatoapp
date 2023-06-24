@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'portato icon font';
+    src: url('../Fonts/portatoiconfont-regular.woff2') format('woff2'),
+        url('../Fonts/portatoiconfont-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('../Fonts/Comfortaa-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Nunito Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Nunito Regular'), url('../Fonts/Nunito-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'Nunito Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Nunito Light'), url('../Fonts/Nunito-Light.woff') format('woff');
+}
+@font-face {
+    font-family: 'Nunito Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Nunito Bold'), url('../Fonts/Nunito-Bold.woff') format('woff');
+}
+
+body {
+    font-family: 'Nunito Regular', sans-serif;
+    font-size:18px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Nunito Bold';
+}
+
+h1 { font-size: 3em; margin: 30px 0;}
+h2 { font-size: 2em; margin: 20px 0;}
+h3 { font-size: 1.5em; margin: 15px 0; font-family: 'Nunito Light'}
+
+.button {font-family: 'Nunito Bold'; font-size:1.2em;}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-comfortaa {
+  font-family: 'Comfortaa', sans-serif;
+}
+
+.font-large {
+  font-size: 20px;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}
