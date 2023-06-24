@@ -7,6 +7,7 @@ import {
   query,
   orderByChild,
   equalTo,
+  serverTimestamp,
 } from 'firebase/database';
 import { database } from './firebaseConfig';
 import { setObjectId, setReqUid } from './Store/actions/requestActionCreators';
@@ -322,5 +323,18 @@ export const fetchRouteUidFromDeal = async (dealId) => {
     }
   } catch (error) {
     console.error('Error fetching route info: ', error);
+  }
+};
+
+export const addContactTimestamp = async (request_uid, request_id) => {
+  try {
+    const dealRef = ref(
+      database,
+      'users/' + request_uid + '/requests/' + request_id
+    );
+    await update(dealRef, { addContactTimestamp: serverTimestamp() });
+    console.log('Successfully updating timestamp  ' + dealRef);
+  } catch (error) {
+    console.error('Error updating request timestamp :', error);
   }
 };

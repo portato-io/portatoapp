@@ -4,7 +4,10 @@ import axios from 'axios';
 import '../../../CSS/PortatoStyleSheet.css';
 import PageLayout from '../../Layouts/PageLayoutTest';
 import { useParams } from 'react-router-dom';
-import { updateRequestStatus } from '../../../linksStoreToFirebase';
+import {
+  updateRequestStatus,
+  addContactTimestamp,
+} from '../../../linksStoreToFirebase';
 
 interface FormData {
   name: string;
@@ -40,6 +43,7 @@ const ContactDriver: React.FC = () => {
         message.success('Email sent successfully!');
         form.resetFields();
         updateRequestStatus(request_uid, request_id, 'contacted');
+        addContactTimestamp(request_uid, request_id);
       } else {
         message.error('Failed to send email. Please try again.');
       }

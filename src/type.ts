@@ -13,6 +13,7 @@ export interface IRequestInfo {
   images: string[];
   status: string;
   dealId: string;
+  contactTimestamp: string;
 }
 
 export interface IFirstObjectInfo {
@@ -22,6 +23,7 @@ export interface IFirstObjectInfo {
   weight: string;
   status: string;
   dealId: string;
+  contactTimestamp: string;
 }
 
 export type ObjectInfoState = {

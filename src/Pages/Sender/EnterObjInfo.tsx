@@ -32,6 +32,7 @@ const EnterObjInfo: React.FC = () => {
     weight: objecInfo.weight,
     status: objecInfo.status,
     dealId: objecInfo.dealId,
+    contactTimestamp: objecInfo.contactTimestamp,
   });
 
   React.useEffect(() => {

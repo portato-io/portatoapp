@@ -16,6 +16,7 @@ const initialState: IRequestInfo = {
   images: [],
   status: 'unmatched',
   dealId: '',
+  contactTimestamp: '',
 };
 
 export function requestReducer(
@@ -33,6 +34,7 @@ export function requestReducer(
         weight: action.payload.weight,
         status: action.payload.status || false,
         dealId: action.payload.dealId || '',
+        contactTimestamp: action.payload.contactTimestamp || '',
       };
     }
     case 'SET_ID': {

@@ -38,11 +38,19 @@ const FetchRequests: React.FC<{
       // Check if storesObject is an object before returning it
       if (storesObject && typeof storesObject === 'object') {
         let storesArray = Object.values(storesObject) as IRequestInfo[]; // Type assertion here
+
+        // Filter out 'delivery confirmed' requests
+        storesArray = storesArray.filter(
+          (request) => request.status !== 'delivery confirmed'
+        );
+
+        // If the user is an admin, only return 'unmatched' requests
         if (admin) {
           storesArray = storesArray.filter(
-            (request) => request.status == 'unmatched'
+            (request) => request.status === 'unmatched'
           );
         }
+
         return storesArray;
       } else {
         console.log('Data is not an object:', storesObject);
@@ -80,6 +88,14 @@ const FetchRequests: React.FC<{
     navigate(`/contact_driver/${uid}/${request.uid}/${request.id}`);
   };
 
+  const getNewDriver = (request: IRequestInfo) => {
+    updateRequestStatus(request.uid, request.id, 'new driver');
+  };
+
+  const confirmDelivery = (request: IRequestInfo) => {
+    updateRequestStatus(request.uid, request.id, 'delivery confirmed');
+  };
+
   // Return early, if no requests exist; avoid adding the title altogether.
   if (requests.length === 0) {
     return null;
@@ -104,7 +120,9 @@ const FetchRequests: React.FC<{
         <div key={request.name} className="current-send-requests-list">
           <Card
             className={`send-request-card ${
-              request.status === 'matched' ? 'highlight-card' : ''
+              request.status === 'matched' || request.status === 'contacted'
+                ? 'highlight-card'
+                : ''
             }`}
             title={request.name}
             bodyStyle={{
@@ -116,10 +134,12 @@ const FetchRequests: React.FC<{
             <div>
               {request.weight}/{request.size}
               {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
+              {request.status === 'contacted' && (
+                <p>Contacted potential driver at {request.contactTimestamp}</p>
+              )}
             </div>
 
             <div style={{ alignSelf: 'flex-end' }}>
-              {' '}
               {admin ? (
                 <>
                   <Button
@@ -138,6 +158,20 @@ const FetchRequests: React.FC<{
                     Contact
                   </Button>
                 )
+              )}
+
+              {request.status === 'contacted' && (
+                <>
+                  <Button type="primary" onClick={() => getNewDriver(request)}>
+                    Get New Driver
+                  </Button>
+                  <Button
+                    type="primary"
+                    onClick={() => confirmDelivery(request)}
+                  >
+                    Confirm Delivery
+                  </Button>
+                </>
               )}
             </div>
           </Card>
