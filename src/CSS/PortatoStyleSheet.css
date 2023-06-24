@@ -20,6 +20,10 @@
   max-width: 600px; /* Adjust the form width according to your preference */
   box-sizing: border-box;
 }
+.highlight-card {
+  /* Any styles to highlight the card go here. */
+  background-color: #ffc107; /* This is just an example color. */
+}
 
 @media (max-width: 768px) {
   .centered-form {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
@@ -107,20 +107,39 @@ const FetchRequests: React.FC<{
               request.status === 'matched' ? 'highlight-card' : ''
             }`}
             title={request.name}
+            bodyStyle={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }} // added style here
           >
-            {request.weight}/{request.size}
-            {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
-            {admin && (
-              <button onClick={() => match(request.id, request.uid)}>
-                Match
-              </button>
-            )}
-            {admin && (
-              <button onClick={() => noMatch(request)}>No Match</button>
-            )}
-            {!admin && request.status === 'matched' && (
-              <button onClick={() => contact(request)}>Contact</button>
-            )}
+            <div>
+              {request.weight}/{request.size}
+              {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
+            </div>
+
+            <div style={{ alignSelf: 'flex-end' }}>
+              {' '}
+              {admin ? (
+                <>
+                  <Button
+                    type="primary"
+                    onClick={() => match(request.id, request.uid)}
+                  >
+                    Match
+                  </Button>
+                  <Button type="primary" onClick={() => noMatch(request)}>
+                    No Match
+                  </Button>
+                </>
+              ) : (
+                request.status === 'matched' && (
+                  <Button type="primary" onClick={() => contact(request)}>
+                    Contact
+                  </Button>
+                )
+              )}
+            </div>
           </Card>
         </div>
       ))}
