@@ -17,6 +17,7 @@ const initialStateDeal: IDealInfo = {
     time: '',
     images: [],
     status: 'unmatched',
+    dealId: '',
   },
   route: {
     id: '0',

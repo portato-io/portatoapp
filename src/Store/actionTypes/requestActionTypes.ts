@@ -10,3 +10,4 @@ export const SET_UID = 'SET_UID';
 export const SET_REQ_PICKUP_ADDRESS = 'SET_REQ_PICKUP_ADDRESS';
 export const SET_REQ_DELIVERY_ADDRESS = 'SET_REQ_DELIVERY_ADDRESS';
 export const SET_STATUS = 'SET_STATUS';
+export const SET_DEAL_ID = 'SET_DEAL_ID';

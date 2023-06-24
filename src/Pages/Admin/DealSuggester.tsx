@@ -15,6 +15,7 @@ import {
   fetchDataOnce,
   checkPreviousRoutes,
   updateRequestStatus,
+  updateRequestDealId,
 } from '../../linksStoreToFirebase';
 import { IRouteInfo, IRequestInfo } from '../../type';
 
@@ -116,7 +117,9 @@ const DealSuggester: React.FC = () => {
   const submitSuggestions = async () => {
     try {
       updateRequestStatus(currentRequest, 'matched');
-      uploadDealToFirebase(dispatch);
+      const dealId = uploadDealToFirebase(dispatch);
+      updateRequestDealId(currentRequest, dealId);
+
       if (currentRequest) {
         const tokens = await getUserTokens(currentRequest.uid);
 

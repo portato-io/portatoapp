@@ -31,6 +31,7 @@ const EnterObjInfo: React.FC = () => {
     size: objecInfo.size,
     weight: objecInfo.weight,
     status: objecInfo.status,
+    dealId: objecInfo.dealId,
   });
 
   React.useEffect(() => {

@@ -11,9 +11,8 @@ interface FormData {
   message: string;
 }
 
-const ContactSender: React.FC = () => {
-  const { request_id } = useParams<{ request_id: string }>();
-  const { request_uid } = useParams<{ request_uid: string }>();
+const ContactDriver: React.FC = () => {
+  const { route_uid } = useParams<{ route_uid: string }>();
   const [form] = Form.useForm<FormData>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -23,11 +22,8 @@ const ContactSender: React.FC = () => {
     // Adding a hardcoded targetEmail
     const valuesWithUid = {
       ...values,
-      uid: request_uid,
-      message:
-        'This message concerns the following request: ' +
-        request_id +
-        values.message, // add your line here
+      uid: route_uid,
+      message: 'This message concerns the following request: ' + values.message, // add your line here
     };
 
     try {
@@ -94,4 +90,4 @@ const ContactSender: React.FC = () => {
   );
 };
 
-export default ContactSender;
+export default ContactDriver;

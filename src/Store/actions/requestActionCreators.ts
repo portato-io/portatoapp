@@ -61,3 +61,8 @@ export const setStatus = (status: string): AnyAction => ({
 export const emptyState = (): AnyAction => ({
   type: EMPTY_STATE,
 });
+
+export const setDealId = (id: string): AnyAction => ({
+  type: actionTypes.SET_DEAL_ID,
+  payload: id,
+});

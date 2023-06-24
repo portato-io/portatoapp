@@ -131,6 +131,7 @@ export const uploadDealToFirebase = async (dispatch) => {
 
       // Update your data under the new key
       await set(newRequestRef, state.deal);
+      return newRequestRef.key;
     } else {
       console.error('Unable to generate a unique key.');
     }
@@ -286,5 +287,37 @@ export const checkPreviousRoutes = async (requestId, routeId) => {
   } catch (error) {
     console.error('Error checking previous routes: ', error);
     throw error; // You might want to handle the error more gracefully
+  }
+};
+
+export const updateRequestDealId = async (request, dealId) => {
+  try {
+    const dealRef = ref(
+      database,
+      'users/' + request.uid + '/requests/' + request.id
+    );
+    await update(dealRef, { dealId: dealId });
+
+    console.log('Successfully updated request dealId ' + dealRef);
+  } catch (error) {
+    console.error('Error updating request dealId :', error);
+  }
+};
+
+export const fetchRouteUidFromDeal = async (dealId) => {
+  try {
+    const dealsRef = ref(database, 'deals');
+    const dealsQuery = query(dealsRef, equalTo(dealId));
+    const snapshot = await get(dealsQuery);
+
+    if (!snapshot.exists()) {
+      console.log('No such deal!');
+      return null;
+    } else {
+      const dealData = snapshot.val();
+      return dealData.route.uid;
+    }
+  } catch (error) {
+    console.error('Error fetching route info: ', error);
   }
 };

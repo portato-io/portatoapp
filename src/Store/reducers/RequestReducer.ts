@@ -15,6 +15,7 @@ const initialState: IRequestInfo = {
   time: '',
   images: [],
   status: 'unmatched',
+  dealId: '',
 };
 
 export function requestReducer(
@@ -31,6 +32,7 @@ export function requestReducer(
         size: action.payload.size,
         weight: action.payload.weight,
         status: action.payload.status || false,
+        dealId: action.payload.dealId,
       };
     }
     case 'SET_ID': {
@@ -82,6 +84,10 @@ export function requestReducer(
         (_: any, index: number) => index !== action.payload
       );
       return { ...state, images: updatedImages };
+    }
+
+    case 'SET_DEAL_ID': {
+      return { ...state, dealId: action.payload };
     }
 
     case 'EMPTY_STATE':

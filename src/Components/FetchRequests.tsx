@@ -5,8 +5,11 @@ import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
-import { updateRequestStatus } from '../linksStoreToFirebase';
-import { uploadDealToFirebase } from '../linksStoreToFirebase';
+import {
+  updateRequestStatus,
+  fetchRouteUidFromDeal,
+  uploadDealToFirebase,
+} from '../linksStoreToFirebase';
 import { TranslationContext } from '../Contexts/TranslationContext';
 require('../CSS/Send.css');
 
@@ -71,9 +74,10 @@ const FetchRequests: React.FC<{
     console.log('Creating deal with status Backlog for request: ' + request.id);
   };
 
-  const contact = (requestUid: string, requestID: string) => {
-    console.log('Contacting ' + requestUid + ' for request ' + requestID);
-    navigate(`/contact_sender/${requestUid}/${requestID}`);
+  const contact = (dealId: string) => {
+    const uid = fetchRouteUidFromDeal(dealId);
+    console.log('Contacting ' + uid);
+    navigate(`/contact_driver/${uid}`);
   };
 
   // Return early, if no requests exist; avoid adding the title altogether.
@@ -115,7 +119,7 @@ const FetchRequests: React.FC<{
               <button onClick={() => noMatch(request)}>No Match</button>
             )}
             {!admin && request.status === 'matched' && (
-              <button onClick={() => contact(request)}>Contact</button>
+              <button onClick={() => contact(request.dealId)}>Contact</button>
             )}
           </Card>
         </div>

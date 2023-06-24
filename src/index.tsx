@@ -32,6 +32,7 @@ const initialStateRequest: IRequestInfo = {
   time: '',
   images: [],
   status: 'unmatched',
+  dealId: '',
 };
 console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 
