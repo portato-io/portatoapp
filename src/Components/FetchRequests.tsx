@@ -12,6 +12,7 @@ import {
 } from '../linksStoreToFirebase';
 import { TranslationContext } from '../Contexts/TranslationContext';
 require('../CSS/Send.css');
+require('../CSS/PortatoStyleSheet.css');
 
 const FetchRequests: React.FC<{
   uid?: string | null; // uid is now optional
@@ -120,9 +121,7 @@ const FetchRequests: React.FC<{
         <div key={request.name} className="current-send-requests-list">
           <Card
             className={`send-request-card ${
-              request.status === 'matched' || request.status === 'contacted'
-                ? 'highlight-card'
-                : ''
+              request.status === 'matched' ? 'highlight-card' : ''
             }`}
             title={request.name}
             bodyStyle={{
