@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../../../CSS/PortatoStyleSheet.css';
 import PageLayout from '../../Layouts/PageLayoutTest';
 import { useParams } from 'react-router-dom';
+import { updateRequestStatus } from '../../../linksStoreToFirebase';
 
 interface FormData {
   name: string;
@@ -13,6 +14,9 @@ interface FormData {
 
 const ContactDriver: React.FC = () => {
   const { route_uid } = useParams<{ route_uid: string }>();
+  const { request_uid } = useParams<{ request_uid: string }>();
+  const { request_id } = useParams<{ request_id: string }>();
+
   const [form] = Form.useForm<FormData>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -35,6 +39,7 @@ const ContactDriver: React.FC = () => {
       if (result.status === 200) {
         message.success('Email sent successfully!');
         form.resetFields();
+        updateRequestStatus(request_uid, request_id, 'contacted');
       } else {
         message.error('Failed to send email. Please try again.');
       }

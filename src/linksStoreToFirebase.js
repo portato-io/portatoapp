@@ -247,11 +247,11 @@ export const fetchAdressRequest = async (uid, id) => {
   }
 };
 
-export const updateRequestStatus = async (request, status) => {
+export const updateRequestStatus = async (request_uid, request_id, status) => {
   try {
     const dealRef = ref(
       database,
-      'users/' + request.uid + '/requests/' + request.id
+      'users/' + request_uid + '/requests/' + request_id
     );
     await update(dealRef, { status: status });
 

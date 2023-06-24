@@ -116,11 +116,11 @@ const DealSuggester: React.FC = () => {
 
   const submitSuggestions = async () => {
     try {
-      updateRequestStatus(currentRequest, 'matched');
-      const dealId = uploadDealToFirebase(dispatch);
-      updateRequestDealId(currentRequest, dealId);
-
       if (currentRequest) {
+        updateRequestStatus(currentRequest.uid, currentRequest.id, 'matched');
+        const dealId = uploadDealToFirebase(dispatch);
+        updateRequestDealId(currentRequest, dealId);
+
         const tokens = await getUserTokens(currentRequest.uid);
 
         console.log('tokens are: ', tokens);
@@ -177,6 +177,9 @@ const DealSuggester: React.FC = () => {
             // Getting the error details
             console.error(`error: ${error}`);
           });
+      } else {
+        console.error('currentRequest is null');
+        message.error('request is null');
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -208,13 +211,13 @@ const DealSuggester: React.FC = () => {
         type="text"
         value={ID}
         onChange={handleIDChange}
-        placeholder="Enter request ID"
+        placeholder="Enter route ID"
       />
       <input
         type="text"
         value={UID}
         onChange={handleUIDChange}
-        placeholder="Enter request UID"
+        placeholder="Enter route UID"
       />
       <button onClick={handleSubmit}>Verify</button>
 

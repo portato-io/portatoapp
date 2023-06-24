@@ -70,14 +70,14 @@ const FetchRequests: React.FC<{
     dispatch(setRequest(request));
     dispatch(setStatus('No Match'));
     uploadDealToFirebase(dispatch);
-    updateRequestStatus(request, 'no match');
+    updateRequestStatus(request.uid, request.id, 'no match');
     console.log('Creating deal with status Backlog for request: ' + request.id);
   };
 
-  const contact = (dealId: string) => {
-    const uid = fetchRouteUidFromDeal(dealId);
+  const contact = (request: IRequestInfo) => {
+    const uid = fetchRouteUidFromDeal(request.dealId);
     console.log('Contacting ' + uid);
-    navigate(`/contact_driver/${uid}`);
+    navigate(`/contact_driver/${uid}/${request.uid}/${request.id}`);
   };
 
   // Return early, if no requests exist; avoid adding the title altogether.
@@ -119,7 +119,7 @@ const FetchRequests: React.FC<{
               <button onClick={() => noMatch(request)}>No Match</button>
             )}
             {!admin && request.status === 'matched' && (
-              <button onClick={() => contact(request.dealId)}>Contact</button>
+              <button onClick={() => contact(request)}>Contact</button>
             )}
           </Card>
         </div>

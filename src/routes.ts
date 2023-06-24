@@ -206,7 +206,7 @@ export const routes: Array<Route> = [
   {
     key: 'contact-driver',
     title: 'ContactDriver',
-    path: '/contact_driver/:route_uid',
+    path: '/contact_driver/:route_uid/:request_uid/:request_id',
     enabled: true,
     component: ContactDriver,
   },
