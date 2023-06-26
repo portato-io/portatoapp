@@ -15,7 +15,6 @@ const { Title } = Typography;
 const PROGRESS = 0;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
 const MARKS = {
-  0: '0 km',
   5: '5 km',
   10: '10 km',
   15: '15 km',
