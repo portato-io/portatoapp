@@ -11,6 +11,8 @@ import {
   setRouteDateRange,
 } from '../../Store/actions/routeActionCreators';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { IRouteInfo } from '../../type';
 
 const { Title } = Typography;
 const TYPE = 'Single Trip';
@@ -18,6 +20,7 @@ const TYPE = 'Single Trip';
 function SingleTripContent() {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(setType(TYPE));
 
