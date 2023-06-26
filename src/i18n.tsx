@@ -1,38 +1,35 @@
-import i18next from 'i18next';
+import i18next, { InitOptions, Resource } from 'i18next';
+import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-//Import all translation files
 import translationEnglish from './Translation/English/translation.json';
 import translationGerman from './Translation/German/translation.json';
 import translationFrench from './Translation/French/translation.json';
 
-//---Using different namespaces
-const resources = {
+const resources: Resource = {
   en: {
-    home: translationEnglish,
+    translation: translationEnglish,
   },
   de: {
-    home: translationGerman,
+    translation: translationGerman,
   },
   fr: {
-    home: translationFrench,
+    translation: translationFrench,
   },
 };
 
-const savedLanguage = localStorage.getItem('language');
+const options: InitOptions = {
+  resources,
+  fallbackLng: 'en',
+  detection: {
+    order: ['localStorage', 'navigator'],
+    caches: ['localStorage'],
+  },
+  interpolation: {
+    escapeValue: false,
+  },
+};
 
-if (savedLanguage) {
-  i18next.init({
-    lng: savedLanguage,
-  });
-} else {
-  i18next.use(LanguageDetector).init({
-    resources,
-    //fallbackLng: 'en',
-    detection: {
-      order: ['navigator'],
-    },
-  });
-}
+i18next.use(LanguageDetector).use(initReactI18next).init(options);
 
 export default i18next;

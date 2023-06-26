@@ -14,23 +14,22 @@ const Settings: React.FC = () => {
     i18next.changeLanguage(language);
   };
 
+  const onSelectLanguage = (value: any) => {
+    const languageOption = LANGUAGE_OPTIONS.find(
+      (option) => option.value === value
+    );
+    if (languageOption) {
+      setLanguage(languageOption.label);
+      changeLanguage(value);
+    }
+  };
+
   useEffect(() => {
     const languageOption = LANGUAGE_OPTIONS.find(
       (option) => option.value == i18next.language
     );
     setLanguage(languageOption?.label);
   }, []);
-
-  const onSelectLanguage = (value: any) => {
-    console.log(value);
-    const languageOption = LANGUAGE_OPTIONS.find(
-      (option) => option.value == value
-    );
-    if (languageOption) {
-      setLanguage(languageOption.label);
-      localStorage.setItem('language', value);
-    }
-  };
   return (
     <ProfilePageLayout>
       <Title
