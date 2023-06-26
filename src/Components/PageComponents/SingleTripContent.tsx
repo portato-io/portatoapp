@@ -15,8 +15,6 @@ import { useSelector } from 'react-redux';
 import { IRouteInfo } from '../../type';
 
 const { Title } = Typography;
-const TYPE = 'Single Trip';
-
 function SingleTripContent(activeTab: any) {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const dispatch = useDispatch();

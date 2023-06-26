@@ -64,13 +64,15 @@ const RouteSummary: React.FC = () => {
     }
     dispatch(emptyState()); //Free the redux store after uploading
   };
-  const containerHeight = window.innerHeight * 0.7;
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
       <div className="form-and-buttons-content-container">
         <div className="form-content-container">
-          <Modal open={isModalVisible} footer={null}>
+          <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
             <div>
               <FirebaseAuth />
             </div>

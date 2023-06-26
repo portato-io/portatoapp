@@ -12,7 +12,6 @@ import {
 import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
-const TYPE = 'Recurrent';
 
 function RecurrentTripContent(activeTab: any) {
   const { t } = useTranslation<string>(); // Setting the generic type to string
