@@ -309,17 +309,19 @@ export const updateRequestDealId = async (request, dealId) => {
 };
 
 export const fetchRouteUidFromDeal = async (dealId) => {
+  if (!dealId) {
+    console.error('No dealId provided');
+    return null;
+  }
   try {
-    const dealsRef = ref(database, 'deals');
-    const dealsQuery = query(dealsRef, equalTo(dealId));
-    const snapshot = await get(dealsQuery);
-
-    if (!snapshot.exists()) {
+    const dealRef = ref(database, `deals/${dealId}/route`);
+    const snapshot = await get(dealRef);
+    if (snapshot.exists()) {
+      const routeData = snapshot.val();
+      return routeData.uid; // Return the uid of the route
+    } else {
       console.log('No such deal!');
       return null;
-    } else {
-      const dealData = snapshot.val();
-      return dealData.route.uid;
     }
   } catch (error) {
     console.error('Error fetching route info: ', error);
@@ -332,7 +334,10 @@ export const addContactTimestamp = async (request_uid, request_id) => {
       database,
       'users/' + request_uid + '/requests/' + request_id
     );
-    await update(dealRef, { addContactTimestamp: serverTimestamp() });
+    const timestamp = serverTimestamp();
+    const date = new Date(timestamp * 1000); // Convert to JavaScript Date object
+    const dateString = date.toISOString(); // Convert to string in ISO format
+    await update(dealRef, { addContactTimestamp: dateString });
     console.log('Successfully updating timestamp  ' + dealRef);
   } catch (error) {
     console.error('Error updating request timestamp :', error);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
-import { Card, Button } from 'antd';
+import { Card, Button, message } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
@@ -83,10 +83,18 @@ const FetchRequests: React.FC<{
     console.log('Creating deal with status Backlog for request: ' + request.id);
   };
 
-  const contact = (request: IRequestInfo) => {
-    const uid = fetchRouteUidFromDeal(request.dealId);
-    console.log('Contacting ' + uid);
-    navigate(`/contact_driver/${uid}/${request.uid}/${request.id}`);
+  const contact = async (request: IRequestInfo) => {
+    try {
+      const uid = await fetchRouteUidFromDeal(request.dealId); // We use await here to resolve the Promise
+      if (uid === undefined) {
+        message.error('Error fetching driver information');
+      } else {
+        console.log('Contacting ' + uid);
+        navigate(`/contact_driver/${uid}/${request.uid}/${request.id}`);
+      }
+    } catch (error) {
+      console.log('Error in contacting: ', error);
+    }
   };
 
   const getNewDriver = (request: IRequestInfo) => {

@@ -118,7 +118,11 @@ const DealSuggester: React.FC = () => {
     try {
       if (currentRequest) {
         updateRequestStatus(currentRequest.uid, currentRequest.id, 'matched');
-        const dealId = uploadDealToFirebase(dispatch);
+        const dealId = await uploadDealToFirebase(dispatch);
+        if (dealId === undefined) {
+          message.error('failed to update dealid ');
+          return;
+        }
         updateRequestDealId(currentRequest, dealId);
 
         const tokens = await getUserTokens(currentRequest.uid);
