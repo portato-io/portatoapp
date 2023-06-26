@@ -7,8 +7,9 @@
         "whoWeAreText": "At Portato, innovation meets the open road! We are a lively fusion of thinkers, tinkerers, and pioneers with the common goal of revolutionizing transport!"
     },
 
-    "home": {
-        "howItWorks": "How it works"
+    "general": {
+        "howItWorks": "How it works",
+        "moreInfo": "Learn more"
     },
 
     "social": {

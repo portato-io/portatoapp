@@ -1,5 +1,5 @@
 .button {
-	border-radius: 5px;
+	display:inline-block;
 	padding:7px 15px;
 	min-width: 130px;
 	text-align: center;
@@ -21,7 +21,3 @@
 	background:var(--color-white);
 	color: var(--color-blue);	
 }
-.button-shadow {
-	box-shadow: 7px 7px 2px 1px rgba(0,0,0,0.1);
-}
-.button-shadow:hover {box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.05);}

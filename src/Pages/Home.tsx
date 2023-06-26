@@ -4,6 +4,7 @@ import PageLayout from './Layouts/PageLayoutTest';
 import headerImage from '../Assets/Images/portato-landing-5.png';
 import portatoLogo from '../Assets/Images/logo_blue.png';
 import howItWorksImg from '../Assets/Images/how_it_works.gif';
+import howItWorksVideo from '../Assets/Videos/video-start-1.mp4';
 import { TranslationContext } from '../Contexts/TranslationContext';
 require('../CSS/Home.css');
 
@@ -36,6 +37,22 @@ const Home: React.FC = () => {
     );
   };
 
+  /* SOCIALS - Not working, but i don't know why 
+
+  const socialChannels = ['linkedin', 'instagram'];
+  const socialChannel: React.FC<{ socialLabel: string }> = ({ socialLabel }) => {
+    const label = t(`social.${socialLabel}.label`);
+    const link = t(`social.${socialLabel}.link`);
+
+    return (
+      <a href={link}>
+        {label}
+      </a>
+    );
+  };
+
+  --------------------------------------------------- */
+
   return (
     <PageLayout>
       {/* Landing screen */}
@@ -58,13 +75,13 @@ const Home: React.FC = () => {
         <div className="spacer-regular"></div>
         <div className="mod-display-flex">
           <a
-            className="button button-solid button-shadow"
+            className="button button-solid box-shadow box-radius-default box-shadow-effect"
             href="/createSendRequest/enterObjInfo"
           >
             Send
           </a>
           <a
-            className="button button-solid button-shadow"
+            className="button button-solid box-shadow box-radius-default box-shadow-effect"
             href="/deliver/enterRoute"
           >
             Deliver
@@ -73,8 +90,35 @@ const Home: React.FC = () => {
         <div className="spacer-regular"></div>
       </section>
 
-      <section className="section ">
-        <h2>{t('home.howItWorks')}</h2>
+      <section className="section">
+        <h2>{t('general.howItWorks')}</h2>
+        <div className="video-wrapper">
+          <a href="javascript:void(0)" className="video-button-play"></a>
+          <video
+            className="box-shadow box-radius-style-1"
+            muted
+            autoPlay
+            preload="auto"
+          >
+            <source src={howItWorksVideo}></source>
+          </video>
+        </div>
+      </section>
+
+      <section className="section">
+        <section className="section box-style-color box-radius-style-2 box-shadow mod-text-align-right">
+          <h2>{t('about.title')}</h2>
+          <p>{t('about.visionMissionTitle')}</p>
+          <div className="spacer-small"></div>
+          <div>
+            <a
+              href="/about-us"
+              className="button button-solid box-shadow box-radius-default box-shadow-effect"
+            >
+              {t('general.moreInfo')}
+            </a>
+          </div>
+        </section>
       </section>
 
       <section className="section ">
