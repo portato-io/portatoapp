@@ -117,8 +117,7 @@ const RouteSummary: React.FC = () => {
               <div>
                 <Title level={4}> {t('driveSummary.timing')}</Title>
                 <Typography>
-                  {t('driveSummary.tripDates')} {routeInfo.timeRange[0]} -{' '}
-                  {routeInfo.timeRange[1]} <br />
+                  {t('driveSummary.tripDates')} {routeInfo.timeRange} <br />
                   {t('driveSummary.tripTime')}{' '}
                   {Object.values(routeInfo.time)[0]}
                 </Typography>
