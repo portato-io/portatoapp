@@ -31,8 +31,6 @@ const Summary: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
-  const state = useSelector((state) => state);
-  console.log(state); // prints all states of the store
 
   const { uid } = useAuth();
 
@@ -106,7 +104,8 @@ const Summary: React.FC = () => {
                 {t('requestSummary.possibleDates')} {objecInfo.dateRange[0]} -{' '}
                 {objecInfo.dateRange[1]}
                 <br />
-                {t('requestSummary.possibleTimes')} {objecInfo.time}{' '}
+                {t('requestSummary.possibleTimes')}{' '}
+                {Object.values(objecInfo.time)[0]}{' '}
               </Typography>
             </div>
             <div>
