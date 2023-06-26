@@ -7,13 +7,13 @@ import { auth } from '../firebaseConfig';
 import FirebaseAuth from '../Components/FirebaseAuth';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { TranslationContext } from '../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../Components/AuthProvider';
 
 require('../CSS/Profile.css');
 
 const Menu: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const navigate = useNavigate();
   const { user, isAdmin, loading } = useAuth();
 

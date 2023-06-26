@@ -6,7 +6,7 @@ import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import SignInButton from '../../Components/Buttons/SignInButton';
 import FirebaseAuth from '../../Components/FirebaseAuth';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 import { useSelector } from 'react-redux';
 import { IRequestInfo } from '../../type';
@@ -20,7 +20,7 @@ const PROGRESS = 100;
 const NEXT_SCREEN = '/createSendRequest';
 
 const Summary: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
 

@@ -8,14 +8,14 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectPrice } from '../../Store/actions/requestActionCreators';
 import { IRequestInfo, ObjectInfoState } from '../../type';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const PROGRESS = 75;
 const NEXT_SCREEN = '/createSendRequest/summary';
 
 const EnterPrice: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
@@ -58,7 +58,7 @@ const EnterPrice: React.FC = () => {
                 name="price"
                 value={objecInfo.price !== 0 ? objecInfo.price : undefined}
                 onChange={handleInputChange}
-                placeholder={t('requestCost.pricePlaceholder')}
+                placeholder={t('requestCost.pricePlaceholder') || ''}
               />
             </Form.Item>
             <Card

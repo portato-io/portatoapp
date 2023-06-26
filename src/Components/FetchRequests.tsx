@@ -10,7 +10,7 @@ import {
   fetchRouteUidFromDeal,
   uploadDealToFirebase,
 } from '../linksStoreToFirebase';
-import { TranslationContext } from '../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 require('../CSS/Send.css');
 require('../CSS/PortatoStyleSheet.css');
 
@@ -22,7 +22,7 @@ const FetchRequests: React.FC<{
   const [requests, setRequestState] = useState<IRequestInfo[]>([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values

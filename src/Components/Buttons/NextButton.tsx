@@ -1,10 +1,10 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 function NextButton({ nextScreen = '/', scrolling = false }: any) {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const navigate = useNavigate();
   const handleNextClick = () => {
     console.log(nextScreen);

@@ -11,7 +11,7 @@ import {
   setObjectTime,
 } from '../../Store/actions/requestActionCreators';
 import { TIME } from '../../constant';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 //import DatePicker from "react-datepicker"
 
@@ -21,7 +21,7 @@ const PROGRESS = 50;
 const NEXT_SCREEN = '/createSendRequest/enter_price';
 
 const EnterTime: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const dispatch = useDispatch();
 
   const handleTimeChange = (e: any) => {
