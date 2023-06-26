@@ -6,6 +6,22 @@
         "whoWeAreTitle": "Who we are",
         "whoWeAreText": "At Portato, innovation meets the open road! We are a lively fusion of thinkers, tinkerers, and pioneers with the common goal of revolutionizing transport!"
     },
+
+    "home": {
+        "howItWorks": "How it works"
+    },
+
+    "social": {
+        "heading": "Our socials",
+        "linkedin": {
+            "label": "LinkedIn",
+            "link": "https://www.linkedin.com/company/portato-io/"
+        },
+        "instagram": {
+            "label": "Instagram",
+            "link": "https://www.instagram.com/portato.io/"
+        }
+    },
     
     "team": {
         "Conrad": {

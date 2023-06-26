@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Row, Col, Typography, Card, Space, Avatar } from 'antd';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-4.png';
+import headerImage from '../Assets/Images/portato-landing-5.png';
 import portatoLogo from '../Assets/Images/logo_blue.png';
 import howItWorksImg from '../Assets/Images/how_it_works.gif';
 import { TranslationContext } from '../Contexts/TranslationContext';
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section ">
         <div className="spacer-regular"></div>
         <div className="mod-display-flex">
           <a
@@ -70,6 +70,15 @@ const Home: React.FC = () => {
             Deliver
           </a>
         </div>
+        <div className="spacer-regular"></div>
+      </section>
+
+      <section className="section ">
+        <h2>{t('home.howItWorks')}</h2>
+      </section>
+
+      <section className="section ">
+        <h2>{t('social.heading')}</h2>
       </section>
 
       <section className="section">

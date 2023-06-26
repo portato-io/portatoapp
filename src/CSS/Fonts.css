@@ -32,9 +32,10 @@
     src: local('Nunito Bold'), url('../Fonts/Nunito-Bold.woff') format('woff');
 }
 
-body {
+html body {
     font-family: 'Nunito Regular', sans-serif;
-    font-size:18px;
+    font-size:16px;
+    color: var(--color-black);
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -44,6 +45,8 @@ h1,h2,h3,h4,h5,h6 {
 h1 { font-size: 3em; margin: 30px 0;}
 h2 { font-size: 2em; margin: 20px 0;}
 h3 { font-size: 1.5em; margin: 15px 0; font-family: 'Nunito Light'}
+
+p,a {font-size:1em;}
 
 .button {font-family: 'Nunito Bold'; font-size:1.2em;}
 
