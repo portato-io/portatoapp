@@ -16,7 +16,7 @@ const Settings: React.FC = () => {
 
   const onSelectLanguage = (value: any) => {
     const languageOption = LANGUAGE_OPTIONS.find(
-      (option) => option.value === value
+      (option) => option.value == value
     );
     if (languageOption) {
       setLanguage(languageOption.label);
