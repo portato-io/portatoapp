@@ -28,7 +28,7 @@ const Settings: React.FC = () => {
     );
     if (languageOption) {
       setLanguage(languageOption.label);
-      changeLanguage(value);
+      localStorage.setItem('language', value);
     }
   };
   return (

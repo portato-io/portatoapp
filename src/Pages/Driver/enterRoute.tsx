@@ -3,8 +3,7 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Typography, Form, Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Typography, Form } from 'antd';
 import { IRouteInfo } from '../../type';
 import { setDetour, setRoute } from '../../Store/actions/routeActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,12 +15,11 @@ const { Title } = Typography;
 const PROGRESS = 0;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
 const MARKS = {
-  0: '0 km',
   5: '5 km',
   10: '10 km',
+  15: '15 km',
   20: '20 km',
-  50: '50 km',
-  100: '100 km',
+  25: '25 km',
 };
 
 const EnterRoute: React.FC = () => {
@@ -35,13 +33,13 @@ const EnterRoute: React.FC = () => {
   });
 
   React.useEffect(() => {
-    dispatch(setRoute(routes.departure_adress, routes.destination_adress));
     dispatch(setDetour(routes.acceptable_detour));
   }, [routes]);
 
   const dispatch = useDispatch();
 
   const handleInputChange = (e: any) => {
+    console.log(e);
     if (typeof e == 'number') {
       setValues({
         ...routes,
@@ -92,6 +90,7 @@ const EnterRoute: React.FC = () => {
               ticks
               value={routes.acceptable_detour}
               onChange={handleInputChange}
+              max={parseInt(MARKS[25])} // Fix for now, will make it more generic in the future
               style={{ marginLeft: '-3vw', width: '90vw' }}
             />
           </Form>

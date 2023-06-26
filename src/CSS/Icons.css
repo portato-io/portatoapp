@@ -1,0 +1,29 @@
+.icon:before {
+	font-family: 'portato icon font';
+	font-size:1rem;
+	margin-right:7px;
+}
+
+.icon-small:before {
+	font-size:0.7rem;
+}
+.icon-big:before {
+	font-size:1.5rem;
+}
+
+.icon-home:before {
+	content: 'h';
+}
+.icon-send:before {
+	content: 'A';
+}
+.icon-drive:before {
+	content: 'S';
+}
+.icon-profile:before {
+	content: 'u';
+}
+.icon-logo:before {
+	content: 'o';
+}
+

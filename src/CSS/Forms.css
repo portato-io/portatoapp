@@ -1,0 +1,23 @@
+.button {
+	display:inline-block;
+	padding:7px 15px;
+	min-width: 130px;
+	text-align: center;
+	margin:0 var(--spacing-horizontal-regular);
+	cursor: pointer;
+	transition: var(--transition-regular);
+}
+.button:first-child {margin-left:0}
+.button:last-child {right:0}
+
+.button-solid {
+	border: 1px solid var(--color-blue-light);
+	background:var(--color-blue-light);
+	color: var(--color-white);
+}
+.button-solid:hover {color: var(--color-white); border-color:var(--color-blue)}
+.button-border {
+	border: 1px solid var(--color-blue);
+	background:var(--color-white);
+	color: var(--color-blue);	
+}
