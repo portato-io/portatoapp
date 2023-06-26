@@ -19,12 +19,20 @@ const resources = {
   },
 };
 
-i18next.use(LanguageDetector).init({
-  resources,
-  fallbackLng: 'en',
-  detection: {
-    order: ['navigator'],
-  }, // default fallback language
-});
+const savedLanguage = localStorage.getItem('language');
+
+if (savedLanguage) {
+  i18next.init({
+    lng: savedLanguage,
+  });
+} else {
+  i18next.use(LanguageDetector).init({
+    resources,
+    //fallbackLng: 'en',
+    detection: {
+      order: ['navigator'],
+    },
+  });
+}
 
 export default i18next;
