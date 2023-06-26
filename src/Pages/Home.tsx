@@ -5,13 +5,13 @@ import headerImage from '../Assets/Images/portato-landing-5.png';
 import portatoLogo from '../Assets/Images/logo_blue.png';
 import howItWorksImg from '../Assets/Images/how_it_works.gif';
 import howItWorksVideo from '../Assets/Videos/video-start-1.mp4';
-import { TranslationContext } from '../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 require('../CSS/Home.css');
 
 const { Title } = Typography;
 
 const Home: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const teamMemberNames = ['Conrad', 'Mischa', 'Chiara', 'Hugo', 'Mehdi'];
 
   function getTeamMemberImage(image: string): string {

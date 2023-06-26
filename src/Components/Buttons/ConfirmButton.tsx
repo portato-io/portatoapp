@@ -1,10 +1,10 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const ConfirmButton = ({ nextScreen = '/', onClick }: any) => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const navigate = useNavigate();
   const handleConfirmClick = () => {
     if (onClick) onClick(); // Call the onClick function prop if it exists

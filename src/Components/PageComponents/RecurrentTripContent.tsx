@@ -9,13 +9,13 @@ import {
   setTime,
   setType,
 } from '../../Store/actions/routeActionCreators';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const TYPE = 'Recurrent';
 
 function RecurrentTripContent() {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { IRequestInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
 import AddressAutocomplete from '../../Components/AutoComplete';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const PROGRESS = 25;
@@ -19,7 +19,7 @@ const EnterAddress: React.FC = () => {
     (state: { request: IRequestInfo }) => state.request
   );
   console.log(objecInfo);
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />

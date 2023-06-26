@@ -5,13 +5,13 @@ import 'firebase/auth';
 import { storage } from '../../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { updateProfile, updateEmail } from 'firebase/auth';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
 import { Button, Form } from 'antd-mobile';
 import { Upload, Input, message } from 'antd';
 
 const MyAccount: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const [name, setName] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);

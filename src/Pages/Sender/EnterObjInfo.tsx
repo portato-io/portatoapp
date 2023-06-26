@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -19,7 +19,7 @@ const PROGRESS = 0;
 const NEXT_SCREEN = '/createSendRequest/enter_address';
 
 const EnterObjInfo: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
@@ -76,7 +76,7 @@ const EnterObjInfo: React.FC = () => {
                 name="name"
                 value={object.name}
                 onChange={handleInputChange}
-                placeholder={t('requestInfo.namePlaceholder')}
+                placeholder={t('requestInfo.namePlaceholder') || ''}
               />
             </Form.Item>
 
@@ -94,7 +94,7 @@ const EnterObjInfo: React.FC = () => {
                 value={object.description}
                 onChange={handleInputChange}
                 rows={3}
-                placeholder={t('requestInfo.descriptionPlaceholder')}
+                placeholder={t('requestInfo.descriptionPlaceholder') || ''}
               />
             </Form.Item>
 

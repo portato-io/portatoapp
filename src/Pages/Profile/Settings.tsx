@@ -30,6 +30,7 @@ const Settings: React.FC = () => {
     );
     setLanguage(languageOption?.label);
   }, []);
+
   return (
     <ProfilePageLayout>
       <Title
