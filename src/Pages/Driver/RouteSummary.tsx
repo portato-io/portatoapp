@@ -103,7 +103,7 @@ const RouteSummary: React.FC = () => {
               <Typography> {routeInfo.type} </Typography>
             </div>
 
-            {routeInfo.type == 'Recurrent' ? (
+            {routeInfo.type == t('driveTime.recurringRide') ? (
               <div>
                 <Title level={4}> {t('driveSummary.timing')}</Title>
                 <Typography>

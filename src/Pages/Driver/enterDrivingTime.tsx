@@ -1,5 +1,5 @@
 import { Form, Typography } from 'antd';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import SwitchContainer from '../../Components/SwitchContainer';
 import NextButton from '../../Components/Buttons/NextButton';
@@ -16,6 +16,11 @@ const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
 const EnterDeliveryTime: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
+  const [activeTab, setActiveTab] = useState(t('driveTime.singleTrip'));
+
+  const handleTabChange = (tab: any) => {
+    setActiveTab(tab);
+  };
 
   return (
     <PageLayout>
@@ -28,12 +33,18 @@ const EnterDeliveryTime: React.FC = () => {
             layout="horizontal"
           >
             <Title level={4}>{t('driveTime.title')}</Title>
-            <Tabs>
-              <Tabs.Tab title={t('driveTime.singleTrip')} key="single">
-                <SingleTripContent />
+            <Tabs onChange={handleTabChange}>
+              <Tabs.Tab
+                title={t('driveTime.singleTrip')}
+                key={t('driveTime.singleTrip')}
+              >
+                <SingleTripContent activeTab={activeTab} />
               </Tabs.Tab>
-              <Tabs.Tab title={t('driveTime.recurringRide')} key="recur">
-                <RecurrentTripContent />
+              <Tabs.Tab
+                title={t('driveTime.recurringRide')}
+                key={t('driveTime.recurringRide')}
+              >
+                <RecurrentTripContent activeTab={activeTab} />
               </Tabs.Tab>
             </Tabs>
           </Form>
