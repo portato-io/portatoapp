@@ -4,6 +4,10 @@ import axios from 'axios';
 import '../../../CSS/PortatoStyleSheet.css';
 import PageLayout from '../../Layouts/PageLayoutTest';
 import { useParams } from 'react-router-dom';
+import {
+  updateRequestStatus,
+  addContactTimestamp,
+} from '../../../linksStoreToFirebase';
 
 interface FormData {
   name: string;
@@ -11,9 +15,11 @@ interface FormData {
   message: string;
 }
 
-const ContactSender: React.FC = () => {
-  const { request_id } = useParams<{ request_id: string }>();
+const ContactDriver: React.FC = () => {
+  const { route_uid } = useParams<{ route_uid: string }>();
   const { request_uid } = useParams<{ request_uid: string }>();
+  const { request_id } = useParams<{ request_id: string }>();
+
   const [form] = Form.useForm<FormData>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -23,11 +29,8 @@ const ContactSender: React.FC = () => {
     // Adding a hardcoded targetEmail
     const valuesWithUid = {
       ...values,
-      uid: request_uid,
-      message:
-        'This message concerns the following request: ' +
-        request_id +
-        values.message, // add your line here
+      uid: route_uid,
+      message: 'This message concerns the following request: ' + values.message, // add your line here
     };
 
     try {
@@ -39,6 +42,8 @@ const ContactSender: React.FC = () => {
       if (result.status === 200) {
         message.success('Email sent successfully!');
         form.resetFields();
+        updateRequestStatus(request_uid, request_id, 'contacted');
+        addContactTimestamp(request_uid, request_id);
       } else {
         message.error('Failed to send email. Please try again.');
       }
@@ -94,4 +99,4 @@ const ContactSender: React.FC = () => {
   );
 };
 
-export default ContactSender;
+export default ContactDriver;

@@ -7,6 +7,7 @@ import {
   query,
   orderByChild,
   equalTo,
+  serverTimestamp,
 } from 'firebase/database';
 import { database } from './firebaseConfig';
 import { setObjectId, setReqUid } from './Store/actions/requestActionCreators';
@@ -32,13 +33,16 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
 
       // Update your data under the new key
       await set(newRequestRef, state.request);
+
+      console.log('Request uploaded successfully');
+      return true;
     } else {
       console.error('Unable to generate a unique key.');
+      return false;
     }
-
-    console.log('Request uploaded successfully');
   } catch (error) {
     console.error('Error uploading request:', error);
+    return false;
   }
 };
 
@@ -131,6 +135,7 @@ export const uploadDealToFirebase = async (dispatch) => {
 
       // Update your data under the new key
       await set(newRequestRef, state.deal);
+      return newRequestRef.key;
     } else {
       console.error('Unable to generate a unique key.');
     }
@@ -243,17 +248,17 @@ export const fetchAdressRequest = async (uid, id) => {
   }
 };
 
-export const updateMatched = async (request, matched) => {
+export const updateRequestStatus = async (request_uid, request_id, status) => {
   try {
     const dealRef = ref(
       database,
-      'users/' + request.uid + '/requests/' + request.id
+      'users/' + request_uid + '/requests/' + request_id
     );
-    await update(dealRef, { matched: matched });
+    await update(dealRef, { status: status });
 
-    console.log('Successfully updated matched status ' + dealRef);
+    console.log('Successfully updated request status ' + dealRef);
   } catch (error) {
-    console.error('Error updating matched status :', error);
+    console.error('Error updating request status :', error);
   }
 };
 
@@ -286,5 +291,55 @@ export const checkPreviousRoutes = async (requestId, routeId) => {
   } catch (error) {
     console.error('Error checking previous routes: ', error);
     throw error; // You might want to handle the error more gracefully
+  }
+};
+
+export const updateRequestDealId = async (request, dealId) => {
+  try {
+    const dealRef = ref(
+      database,
+      'users/' + request.uid + '/requests/' + request.id
+    );
+    await update(dealRef, { dealId: dealId });
+
+    console.log('Successfully updated request dealId ' + dealRef);
+  } catch (error) {
+    console.error('Error updating request dealId :', error);
+  }
+};
+
+export const fetchRouteUidFromDeal = async (dealId) => {
+  if (!dealId) {
+    console.error('No dealId provided');
+    return null;
+  }
+  try {
+    const dealRef = ref(database, `deals/${dealId}/route`);
+    const snapshot = await get(dealRef);
+    if (snapshot.exists()) {
+      const routeData = snapshot.val();
+      return routeData.uid; // Return the uid of the route
+    } else {
+      console.log('No such deal!');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching route info: ', error);
+  }
+};
+
+export const addContactTimestamp = async (request_uid, request_id) => {
+  try {
+    const dealRef = ref(
+      database,
+      'users/' + request_uid + '/requests/' + request_id
+    );
+    const timestamp = serverTimestamp();
+    const date = new Date(timestamp * 1000); // Convert to JavaScript Date object
+    const dateString = date.toISOString(); // Convert to string in ISO format
+    await update(dealRef, { addContactTimestamp: dateString });
+    console.log('Successfully updating timestamp  ' + dealRef);
+  } catch (error) {
+    console.error('Error updating request timestamp :', error);
   }
 };

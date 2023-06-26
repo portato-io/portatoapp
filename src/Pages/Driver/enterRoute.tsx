@@ -9,7 +9,7 @@ import { setDetour, setRoute } from '../../Store/actions/routeActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from 'antd-mobile';
 import AddressAutocomplete from '../../Components/AutoComplete';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const PROGRESS = 0;
@@ -23,7 +23,7 @@ const MARKS = {
 };
 
 const EnterRoute: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
 
   const [routes, setValues] = useState({

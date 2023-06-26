@@ -6,13 +6,13 @@ import FetchRequests from '../../Components/FetchRequests';
 import { ButtonToCreateNewReqRoutes } from '../../Components/Buttons/ButtonToCreateNewReqRoutes';
 import { useAuth } from '../../Components/AuthProvider';
 import AddressAutocomplete from '../../Components/AutoComplete';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
 
 const CreateSendRequest: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const { uid } = useAuth();
 
   return (

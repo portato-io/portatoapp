@@ -14,7 +14,9 @@ const initialState: IRequestInfo = {
   dateRange: ['', ''],
   time: '',
   images: [],
-  matched: false,
+  status: 'unmatched',
+  dealId: '',
+  contactTimestamp: '',
 };
 
 export function requestReducer(
@@ -30,7 +32,9 @@ export function requestReducer(
         description: action.payload.description,
         size: action.payload.size,
         weight: action.payload.weight,
-        matched: action.payload.matched || false,
+        status: action.payload.status || false,
+        dealId: action.payload.dealId || '',
+        contactTimestamp: action.payload.contactTimestamp || '',
       };
     }
     case 'SET_ID': {
@@ -65,8 +69,8 @@ export function requestReducer(
       return { ...state, time: action.payload };
     }
 
-    case 'SET_MATCHED': {
-      return { ...state, matched: action.payload };
+    case 'SET_STATUS': {
+      return { ...state, status: action.payload };
     }
 
     case 'SET_DATE_RANGE': {
@@ -84,11 +88,15 @@ export function requestReducer(
       return { ...state, images: updatedImages };
     }
 
+    case 'SET_DEAL_ID': {
+      return { ...state, dealId: action.payload };
+    }
+
     case 'EMPTY_STATE':
       return initialState;
 
     default: {
-      console.log('DANS LE REDUCER MAIS PAS DANS LE BON STATE');
+      console.error('Unknown action type in request Reducer', action.type);
       return state;
     }
   }

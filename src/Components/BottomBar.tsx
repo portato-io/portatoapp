@@ -7,10 +7,10 @@ import {
   AppstoreOutline,
   TruckOutline,
 } from 'antd-mobile-icons';
-import { TranslationContext } from '../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 function BottomBar() {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
 
   const tabs = [
     {

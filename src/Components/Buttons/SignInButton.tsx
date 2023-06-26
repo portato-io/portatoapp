@@ -2,14 +2,14 @@
 import React from 'react';
 import { Button } from 'antd';
 import { useContext } from 'react';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 interface SignInButtonProps {
   onClick: () => void;
 }
 
 const SignInButton: React.FC<SignInButtonProps> = ({ onClick }) => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   return (
     <div className="form-button-right">
       <Button

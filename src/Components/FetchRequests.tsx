@@ -1,14 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
-import { Card } from 'antd';
+import { Card, Button, message } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
-import { updateMatched } from '../linksStoreToFirebase';
-import { uploadDealToFirebase } from '../linksStoreToFirebase';
-import { TranslationContext } from '../Contexts/TranslationContext';
+import {
+  updateRequestStatus,
+  fetchRouteUidFromDeal,
+  uploadDealToFirebase,
+} from '../linksStoreToFirebase';
+import { useTranslation } from 'react-i18next';
 require('../CSS/Send.css');
+require('../CSS/PortatoStyleSheet.css');
 
 const FetchRequests: React.FC<{
   uid?: string | null; // uid is now optional
@@ -18,7 +22,7 @@ const FetchRequests: React.FC<{
   const [requests, setRequestState] = useState<IRequestInfo[]>([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
@@ -35,9 +39,19 @@ const FetchRequests: React.FC<{
       // Check if storesObject is an object before returning it
       if (storesObject && typeof storesObject === 'object') {
         let storesArray = Object.values(storesObject) as IRequestInfo[]; // Type assertion here
+
+        // Filter out 'delivery confirmed' requests
+        storesArray = storesArray.filter(
+          (request) => request.status !== 'delivery confirmed'
+        );
+
+        // If the user is an admin, only return 'unmatched' requests
         if (admin) {
-          storesArray = storesArray.filter((request) => !request.matched);
+          storesArray = storesArray.filter(
+            (request) => request.status === 'unmatched'
+          );
         }
+
         return storesArray;
       } else {
         console.log('Data is not an object:', storesObject);
@@ -65,8 +79,30 @@ const FetchRequests: React.FC<{
     dispatch(setRequest(request));
     dispatch(setStatus('No Match'));
     uploadDealToFirebase(dispatch);
-    updateMatched(request, true);
+    updateRequestStatus(request.uid, request.id, 'no match');
     console.log('Creating deal with status Backlog for request: ' + request.id);
+  };
+
+  const contact = async (request: IRequestInfo) => {
+    try {
+      const uid = await fetchRouteUidFromDeal(request.dealId); // We use await here to resolve the Promise
+      if (uid === undefined) {
+        message.error('Error fetching driver information');
+      } else {
+        console.log('Contacting ' + uid);
+        navigate(`/contact_driver/${uid}/${request.uid}/${request.id}`);
+      }
+    } catch (error) {
+      console.log('Error in contacting: ', error);
+    }
+  };
+
+  const getNewDriver = (request: IRequestInfo) => {
+    updateRequestStatus(request.uid, request.id, 'new driver');
+  };
+
+  const confirmDelivery = (request: IRequestInfo) => {
+    updateRequestStatus(request.uid, request.id, 'delivery confirmed');
   };
 
   // Return early, if no requests exist; avoid adding the title altogether.
@@ -91,17 +127,60 @@ const FetchRequests: React.FC<{
       )}
       {requests.map((request) => (
         <div key={request.name} className="current-send-requests-list">
-          <Card className="send-request-card" title={request.name}>
-            {request.weight}/{request.size}
-            {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
-            {admin && (
-              <button onClick={() => match(request.id, request.uid)}>
-                Match
-              </button>
-            )}
-            {admin && (
-              <button onClick={() => noMatch(request)}>No Match</button>
-            )}
+          <Card
+            className={`send-request-card ${
+              request.status === 'matched' ? 'highlight-card' : ''
+            }`}
+            title={request.name}
+            bodyStyle={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }} // added style here
+          >
+            <div>
+              {request.weight}/{request.size}
+              {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
+              {request.status === 'contacted' && (
+                <p>Contacted potential driver at {request.contactTimestamp}</p>
+              )}
+            </div>
+
+            <div style={{ alignSelf: 'flex-end' }}>
+              {admin ? (
+                <>
+                  <Button
+                    type="primary"
+                    onClick={() => match(request.id, request.uid)}
+                  >
+                    Match
+                  </Button>
+                  <Button type="primary" onClick={() => noMatch(request)}>
+                    No Match
+                  </Button>
+                </>
+              ) : (
+                request.status === 'matched' && (
+                  <Button type="primary" onClick={() => contact(request)}>
+                    Contact
+                  </Button>
+                )
+              )}
+
+              {request.status === 'contacted' && (
+                <>
+                  <Button type="primary" onClick={() => getNewDriver(request)}>
+                    Get New Driver
+                  </Button>
+                  <Button
+                    type="primary"
+                    onClick={() => confirmDelivery(request)}
+                  >
+                    Confirm Delivery
+                  </Button>
+                </>
+              )}
+            </div>
           </Card>
         </div>
       ))}

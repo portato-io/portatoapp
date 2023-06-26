@@ -44,7 +44,7 @@ const FetchDeals: React.FC<{
 
   const contact = (requestUid: string, requestID: string) => {
     console.log('Contacting ' + requestUid + ' for request ' + requestID);
-    navigate(`/contact_sender/${requestUid}/${requestID}`);
+    navigate(`/contact_driver/${requestUid}/${requestID}`);
   };
 
   const confirm = () => {

@@ -13,14 +13,14 @@ import { uploadRouteToFirebase } from '../../linksStoreToFirebase';
 import { IRouteInfo } from '../../type';
 import { useSelector, useDispatch } from 'react-redux';
 import { emptyState } from '../../Store/actions/requestActionCreators';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const PROGRESS = 100;
 const NEXT_SCREEN = '/deliver';
 
 const RouteSummary: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const [isModalVisible, setIsModalVisible] = useState(false);
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   console.log(Object.values(routeInfo.time)[0]);

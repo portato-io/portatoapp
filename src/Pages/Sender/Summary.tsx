@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { Typography, Card, Modal, Image } from 'antd';
+import { Typography, Card, Modal, Image, message } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
 import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import SignInButton from '../../Components/Buttons/SignInButton';
 import FirebaseAuth from '../../Components/FirebaseAuth';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 import { useSelector } from 'react-redux';
 import { IRequestInfo } from '../../type';
@@ -20,7 +20,7 @@ const PROGRESS = 100;
 const NEXT_SCREEN = '/createSendRequest';
 
 const Summary: React.FC = () => {
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
 
@@ -36,13 +36,25 @@ const Summary: React.FC = () => {
 
   const { uid } = useAuth();
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    console.log('About to upload request');
     if (uid) {
-      uploadRequestToFirebase(uid, dispatch);
+      console.log('valid uid');
+      try {
+        const uploadSuccess = await uploadRequestToFirebase(uid, dispatch);
+        if (uploadSuccess) {
+          message.success('Successfully uploaded request!');
+          dispatch(emptyState()); //Free the redux store after uploading
+        } else {
+          message.error('Failed to upload request!');
+        }
+      } catch (error) {
+        console.error('Error uploading request: ', error);
+        message.error('Failed to upload request due to an error!');
+      }
     } else {
       console.log('User UID not found.');
     }
-    dispatch(emptyState()); //Free the redux store after uploading
   };
 
   const [visible, setVisible] = useState(false);

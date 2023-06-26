@@ -8,7 +8,7 @@ import { Selector } from 'antd-mobile';
 import { setCap } from '../../Store/actions/routeActionCreators';
 import { useDispatch } from 'react-redux';
 import { CAPACITY_OPTIONS } from '../../constant';
-import { TranslationContext } from '../../Contexts/TranslationContext';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
@@ -16,7 +16,7 @@ const PROGRESS = 66;
 
 const EnterDeliveryCapacity: React.FC = () => {
   const dispatch = useDispatch();
-  const { t } = useContext(TranslationContext);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const handleCapChange = (e: any) => {
     dispatch(setCap(e));
   };
