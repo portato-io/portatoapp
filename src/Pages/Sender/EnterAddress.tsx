@@ -31,7 +31,7 @@ const EnterAddress: React.FC = () => {
             layout="horizontal"
           >
             <Title level={4}> Pick-up address</Title>
-            <Form.Item>
+            <Form.Item name="test" rules={[{ required: true }]}>
               <AddressAutocomplete
                 type={'pickup'}
                 savedAddress={objecInfo.pickup_adress}

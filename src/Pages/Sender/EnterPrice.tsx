@@ -53,7 +53,10 @@ const EnterPrice: React.FC = () => {
             layout="horizontal"
           >
             <Title level={3}>How much is the transport cost for you?</Title>
-            <Form.Item>
+            <Form.Item
+              name={'price'}
+              rules={[{ required: true, message: 'please enter a price' }]}
+            >
               <Input
                 name="price"
                 value={objecInfo.price !== 0 ? objecInfo.price : undefined}

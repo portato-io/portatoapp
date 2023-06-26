@@ -37,6 +37,7 @@ const EnterObjInfo: React.FC = () => {
 
   const handleFormChange = () => {
     const formValues = form.getFieldsValue();
+    console.log('TEEEEST', formValues);
     const isFilled = Object.values(formValues).every((value) => !!value);
     setIsFormFilled(isFilled);
     console.log(isFilled);
@@ -77,7 +78,12 @@ const EnterObjInfo: React.FC = () => {
             <Form.Item
               name="name"
               label={<label className="font-bold">Name</label>}
-              rules={[{ required: true, message: 'test' }]}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter a name for your request',
+                },
+              ]}
             >
               <Input
                 name="name"
@@ -102,8 +108,9 @@ const EnterObjInfo: React.FC = () => {
             </Form.Item>
 
             <Form.Item
+              name={'size'}
               label={<label className="font-bold">Size</label>}
-              rules={[{ required: true }]}
+              rules={[{ required: true, message: 'Please pick an item!' }]}
             >
               <Radio.Group
                 name="size"
@@ -118,10 +125,7 @@ const EnterObjInfo: React.FC = () => {
               </Radio.Group>
             </Form.Item>
 
-            <Form.Item
-              label={<label className="font-bold">Weight</label>}
-              rules={[{ required: true }]}
-            >
+            <Form.Item label={<label className="font-bold">Weight</label>}>
               <Radio.Group
                 name="weight"
                 value={object.weight}
@@ -139,7 +143,7 @@ const EnterObjInfo: React.FC = () => {
                 </Radio.Button>
               </Radio.Group>
             </Form.Item>
-            <Form.Item rules={[{ required: true }]}>
+            <Form.Item>
               <UploadImage />
             </Form.Item>
           </Form>

@@ -6,7 +6,7 @@ import { TranslationContext } from '../../Contexts/TranslationContext';
 function NextButton({
   nextScreen = '/',
   scrolling = false,
-  disabled = 'false',
+  disabled = false,
 }: any) {
   const { t } = useContext(TranslationContext);
   const navigate = useNavigate();

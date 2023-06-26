@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -22,6 +22,16 @@ const NEXT_SCREEN = '/createSendRequest/enter_price';
 
 const EnterTime: React.FC = () => {
   const { t } = useContext(TranslationContext);
+  const [form] = Form.useForm();
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleFormChange = () => {
+    const formValues = form.getFieldsValue();
+    console.log('TEEEEST', formValues);
+    const isFilled = Object.values(formValues).every((value) => !!value);
+    setIsFormFilled(isFilled);
+    console.log(isFilled);
+  };
   const dispatch = useDispatch();
 
   const handleTimeChange = (e: any) => {
@@ -44,14 +54,19 @@ const EnterTime: React.FC = () => {
       <div className="form-and-buttons-content-container">
         <div className="form-content-container">
           <Form
+            form={form}
+            onChange={handleFormChange}
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
             <Title level={3}>When?</Title>
             <Form.Item
+              name={'when'}
               label={<label className="font-bold">Dates</label>}
-              style={{}}
+              rules={[
+                { required: true, message: 'Please enter a delivery time!' },
+              ]}
             >
               <RangePicker
                 name="time"
@@ -61,7 +76,11 @@ const EnterTime: React.FC = () => {
               />
             </Form.Item>
 
-            <Form.Item label={<label className="font-bold">Time</label>}>
+            <Form.Item
+              name={'time'}
+              label={<label className="font-bold">Time</label>}
+              rules={[{ required: true, message: 'Please pick an item!' }]}
+            >
               <Selector
                 className="form-element-centered"
                 options={TIME}

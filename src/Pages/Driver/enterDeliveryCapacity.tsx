@@ -31,14 +31,15 @@ const EnterDeliveryCapacity: React.FC = () => {
             layout="horizontal"
           >
             <Title level={4}>What is your delivery capacity?</Title>
-
-            <Selector
-              columns={1}
-              options={CAPACITY_OPTIONS}
-              onChange={handleCapChange}
-              className="form-element-centered"
-              style={{ marginTop: '20px' }}
-            />
+            <Form.Item rules={[{ required: true }]}>
+              <Selector
+                columns={1}
+                options={CAPACITY_OPTIONS}
+                onChange={handleCapChange}
+                className="form-element-centered"
+                style={{ marginTop: '20px' }}
+              />
+            </Form.Item>
           </Form>
         </div>
         <div className="form-button-container">
