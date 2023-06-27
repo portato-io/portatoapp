@@ -9,6 +9,8 @@ import { Tabs, Calendar, Selector } from 'antd-mobile';
 import SingleTripContent from '../../Components/PageComponents/SingleTripContent';
 import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripContent';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const PROGRESS = 33;
@@ -51,7 +53,12 @@ const EnterDeliveryTime: React.FC = () => {
         </div>
         <div className="form-button-container">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'drive_3_next_to_capacity_clicked');
+            }}
+          />
         </div>
       </div>
     </PageLayout>

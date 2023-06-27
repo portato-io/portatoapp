@@ -8,12 +8,16 @@ require('../../CSS/FillOutForms.css');
 export function ButtonToCreateNewReqRoutes({
   nextScreen = '/',
   text = '',
+  onClick = () =>
+    console.log('Button clicked without an onClick handler provided'),
 }: any) {
   const navigate = useNavigate();
 
   const handleSendClick = () => {
     navigate(nextScreen);
+    onClick();
   };
+
   return (
     <Button
       type="default"

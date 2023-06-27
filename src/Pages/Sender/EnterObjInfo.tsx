@@ -12,6 +12,9 @@ import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
 import { useTranslation } from 'react-i18next';
 
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
+
 const { Title } = Typography;
 const { TextArea } = Input;
 const PROGRESS = 0;
@@ -153,7 +156,12 @@ const EnterObjInfo: React.FC = () => {
           & move buttons out of div, for responsive scrolling! */}
         <div className="form-button-container">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'send_2_next_to_route_clicked');
+            }}
+          />
         </div>
       </div>
     </PageLayout>

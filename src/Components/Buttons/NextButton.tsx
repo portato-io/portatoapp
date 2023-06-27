@@ -1,15 +1,27 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-function NextButton({ nextScreen = '/', scrolling = false }: any) {
-  const { t } = useTranslation<string>(); // Setting the generic type to string
+interface NextButtonProps {
+  nextScreen?: string;
+  scrolling?: boolean;
+  onClick?: () => void;
+}
+
+const NextButton: React.FC<NextButtonProps> = ({
+  nextScreen = '/',
+  scrolling = false,
+  onClick,
+}) => {
+  const { t } = useTranslation<string>();
   const navigate = useNavigate();
+
   const handleNextClick = () => {
     console.log(nextScreen);
     navigate(nextScreen);
+    if (onClick) onClick();
   };
+
   return (
     <div className="form-button-right">
       <Button
@@ -22,5 +34,6 @@ function NextButton({ nextScreen = '/', scrolling = false }: any) {
       </Button>
     </div>
   );
-}
+};
+
 export default NextButton;
