@@ -9,6 +9,8 @@ import { IRequestInfo } from '../../type';
 import { useDispatch, useSelector } from 'react-redux';
 import AddressAutocomplete from '../../Components/AutoComplete';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const PROGRESS = 25;
@@ -55,7 +57,12 @@ const EnterAddress: React.FC = () => {
         </div>
         <div className="form-button-container">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'send_3_next_to_timeframe_clicked');
+            }}
+          />
         </div>
       </div>
     </PageLayout>

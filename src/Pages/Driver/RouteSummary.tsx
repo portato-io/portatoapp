@@ -14,6 +14,8 @@ import { IRouteInfo } from '../../type';
 import { useSelector, useDispatch } from 'react-redux';
 import { emptyState } from '../../Store/actions/requestActionCreators';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const PROGRESS = 100;
@@ -135,9 +137,20 @@ const RouteSummary: React.FC = () => {
         <div className="form-button-container">
           <BackButton />
           {user ? (
-            <ConfirmButton nextScreen={NEXT_SCREEN} onClick={handleConfirm} />
+            <ConfirmButton
+              nextScreen={NEXT_SCREEN}
+              onClick={() => {
+                handleConfirm();
+                logEvent(analytics, 'drive_5_summary_confirm_clicked');
+              }}
+            />
           ) : (
-            <SignInButton onClick={showModal} />
+            <SignInButton
+              onClick={() => {
+                showModal();
+                logEvent(analytics, 'drive_5_summary_sign_in_clicked');
+              }}
+            />
           )}
         </div>
       </div>

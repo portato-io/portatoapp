@@ -7,6 +7,8 @@ import { ButtonToCreateNewReqRoutes } from '../../Components/Buttons/ButtonToCre
 import { useAuth } from '../../Components/AuthProvider';
 import AddressAutocomplete from '../../Components/AutoComplete';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
@@ -21,6 +23,9 @@ const CreateSendRequest: React.FC = () => {
         <ButtonToCreateNewReqRoutes
           nextScreen={NEXT_SCREEN}
           text={t('requestOverview.createButtonDescription')}
+          onClick={() => {
+            logEvent(analytics, 'send_1_create_new_button_clicked');
+          }}
         />
       </AutoCenter>
 

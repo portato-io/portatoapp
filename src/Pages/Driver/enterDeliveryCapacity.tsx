@@ -9,6 +9,8 @@ import { setCap } from '../../Store/actions/routeActionCreators';
 import { useDispatch } from 'react-redux';
 import { CAPACITY_OPTIONS } from '../../constant';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
@@ -43,7 +45,12 @@ const EnterDeliveryCapacity: React.FC = () => {
         </div>
         <div className="form-button-container">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'drive_4_next_to_summary_clicked');
+            }}
+          />
         </div>
       </div>
     </PageLayout>

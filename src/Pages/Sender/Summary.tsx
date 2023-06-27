@@ -18,6 +18,9 @@ import {
   setStatus,
 } from '../../Store/actions/requestActionCreators';
 
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
+
 const { Title } = Typography;
 const PROGRESS = 100;
 const NEXT_SCREEN = '/createSendRequest';
@@ -143,9 +146,20 @@ const Summary: React.FC = () => {
         <div className="form-button-container">
           <BackButton />
           {uid ? (
-            <ConfirmButton nextScreen={NEXT_SCREEN} onClick={handleConfirm} />
+            <ConfirmButton
+              nextScreen={NEXT_SCREEN}
+              onClick={() => {
+                handleConfirm();
+                logEvent(analytics, 'send_6_summary_confirm_clicked');
+              }}
+            />
           ) : (
-            <SignInButton onClick={showModal} />
+            <SignInButton
+              onClick={() => {
+                showModal();
+                logEvent(analytics, 'send_6_summary_sign_in_clicked');
+              }}
+            />
           )}
         </div>
       </div>
