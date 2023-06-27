@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Typography } from 'antd';
-import { Calendar, Selector } from 'antd-mobile';
+import { Selector } from 'antd-mobile';
 import { DatePicker } from 'antd';
 import { TIME } from '../../constant';
 import { useEffect } from 'react';
@@ -11,8 +11,6 @@ import {
   setRouteDateRange,
 } from '../../Store/actions/routeActionCreators';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { IRouteInfo } from '../../type';
 
 const { Title } = Typography;
 function SingleTripContent(activeTab: any) {
@@ -59,6 +57,7 @@ function SingleTripContent(activeTab: any) {
           display: 'flex',
           justifyContent: 'center',
         }}
+        showCheckMark={false}
         options={TIME}
         multiple={true}
         onChange={handleTimeChange}

@@ -9,10 +9,18 @@ import { setCap } from '../../Store/actions/routeActionCreators';
 import { useDispatch } from 'react-redux';
 import { CAPACITY_OPTIONS } from '../../constant';
 import { useTranslation } from 'react-i18next';
+import CustomSelector from '../../Components/CustomSelector';
+import { UserOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
 const PROGRESS = 66;
+// const icons = [
+//   <UserOutlined />,
+//   <UserOutlined />,
+//   <UserOutlined />,
+//   <UserOutlined />,
+// ];
 
 const EnterDeliveryCapacity: React.FC = () => {
   const dispatch = useDispatch();
@@ -37,8 +45,15 @@ const EnterDeliveryCapacity: React.FC = () => {
               options={CAPACITY_OPTIONS}
               onChange={handleCapChange}
               className="form-element-centered"
-              style={{ marginTop: '20px' }}
+              style={{
+                marginTop: '20px',
+                '--border-radius': '100px',
+                '--border': 'solid transparent 1px',
+                '--checked-border': 'solid var(--adm-color-primary) 1px',
+                '--padding': '8px 24px',
+              }}
             />
+            {/* <CustomSelector prefixIcons={icons} options={CAPACITY_OPTIONS} /> */}
           </Form>
         </div>
         <div className="form-button-container">

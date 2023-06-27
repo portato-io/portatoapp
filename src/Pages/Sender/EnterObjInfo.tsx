@@ -7,10 +7,11 @@ import UploadImage from '../../Components/UploadImage';
 
 import { Typography, Form, Input, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { CAPACITY_OPTIONS } from '../../constant';
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
 import { useTranslation } from 'react-i18next';
+import { Selector } from 'antd-mobile';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -44,8 +45,15 @@ const EnterObjInfo: React.FC = () => {
   };
 
   const dispatch = useDispatch();
+  const handleCapChange = (e: any) => {
+    setValues({
+      ...object,
+      size: e,
+    });
+  };
 
   const handleInputChange = (e: any) => {
+    console.log(e);
     setValues({
       ...object,
       [e.target.name]: e.target.value,
@@ -103,17 +111,20 @@ const EnterObjInfo: React.FC = () => {
                 <label className="font-bold">{t('requestInfo.size')}</label>
               }
             >
-              <Radio.Group
-                name="size"
-                value={object.size}
-                onChange={handleInputChange}
+              <Selector
+                columns={2}
+                options={CAPACITY_OPTIONS}
+                onChange={handleCapChange}
+                defaultValue={[object.size[0]]}
                 className="form-element-centered"
-              >
-                <Radio value={'S'}>S</Radio>
-                <Radio value={'M'}>M</Radio>
-                <Radio value={'L'}>L</Radio>
-                <Radio value={'XL'}>XL</Radio>
-              </Radio.Group>
+                style={{
+                  marginTop: '20px',
+                  '--border-radius': '100px',
+                  '--border': 'solid transparent 1px',
+                  '--checked-border': 'solid var(--adm-color-primary) 1px',
+                  '--padding': '8px 24px',
+                }}
+              />
             </Form.Item>
 
             <Form.Item
