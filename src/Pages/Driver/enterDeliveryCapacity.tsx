@@ -6,11 +6,12 @@ import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Selector } from 'antd-mobile';
 import { setCap } from '../../Store/actions/routeActionCreators';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CAPACITY_OPTIONS } from '../../constant';
 import { useTranslation } from 'react-i18next';
 import CustomSelector from '../../Components/CustomSelector';
 import { UserOutlined } from '@ant-design/icons';
+import { IRouteInfo } from '../../type';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
@@ -23,6 +24,7 @@ const PROGRESS = 66;
 // ];
 
 const EnterDeliveryCapacity: React.FC = () => {
+  const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const dispatch = useDispatch();
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const handleCapChange = (e: any) => {
@@ -44,6 +46,7 @@ const EnterDeliveryCapacity: React.FC = () => {
               columns={1}
               options={CAPACITY_OPTIONS}
               onChange={handleCapChange}
+              defaultValue={[routeInfo.delivery_capacity[0]]}
               className="form-element-centered"
               style={{
                 marginTop: '20px',

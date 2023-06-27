@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import { Selector } from 'antd-mobile';
 import { DatePicker } from 'antd';
@@ -11,9 +11,11 @@ import {
   setRouteDateRange,
 } from '../../Store/actions/routeActionCreators';
 import { useTranslation } from 'react-i18next';
+import { IRouteInfo } from '../../type';
 
 const { Title } = Typography;
 function SingleTripContent(activeTab: any) {
+  const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const dispatch = useDispatch();
 
@@ -61,6 +63,7 @@ function SingleTripContent(activeTab: any) {
         options={TIME}
         multiple={true}
         onChange={handleTimeChange}
+        defaultValue={routeInfo.time}
       />
     </div>
   );
