@@ -334,10 +334,26 @@ export const addContactTimestamp = async (request_uid, request_id) => {
       database,
       'users/' + request_uid + '/requests/' + request_id
     );
-    const timestamp = serverTimestamp();
-    const date = new Date(timestamp * 1000); // Convert to JavaScript Date object
-    const dateString = date.toISOString(); // Convert to string in ISO format
-    await update(dealRef, { addContactTimestamp: dateString });
+
+    // Write the timestamp placeholder to the database
+    await update(dealRef, { addContactTimestamp: serverTimestamp() });
+
+    // Read the actual timestamp from the database
+    const snapshot = await get(dealRef);
+    const data = snapshot.val();
+    const timestamp = data.addContactTimestamp;
+
+    if (!Number.isInteger(timestamp)) {
+      throw new Error(`Invalid timestamp: ${timestamp}`);
+    }
+
+    // Convert to JavaScript Date object
+    const date = new Date(timestamp);
+    // Convert to string in ISO format
+    const dateString = date.toISOString();
+
+    await update(dealRef, { contactTimestamp: dateString });
+
     console.log('Successfully updating timestamp  ' + dealRef);
   } catch (error) {
     console.error('Error updating request timestamp :', error);

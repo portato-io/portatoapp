@@ -117,7 +117,6 @@ const DealSuggester: React.FC = () => {
   const submitSuggestions = async () => {
     try {
       if (currentRequest) {
-        updateRequestStatus(currentRequest.uid, currentRequest.id, 'matched');
         const dealId = await uploadDealToFirebase(dispatch);
         if (dealId === undefined) {
           message.error('failed to update dealid ');
@@ -176,6 +175,12 @@ const DealSuggester: React.FC = () => {
             // Read result of the Cloud Function.
             console.log(result);
             message.success('Notification email sent successfully');
+            // we only updagte the status once we have been able to send the notification
+            updateRequestStatus(
+              currentRequest.uid,
+              currentRequest.id,
+              'matched'
+            );
           })
           .catch((error) => {
             // Getting the error details

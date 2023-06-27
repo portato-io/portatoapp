@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { Typography, Card, Modal, Image, message } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
@@ -13,7 +13,10 @@ import { IRequestInfo } from '../../type';
 import { useAuth } from '../../Components/AuthProvider';
 import { uploadRequestToFirebase } from '../../linksStoreToFirebase';
 import { useDispatch } from 'react-redux';
-import { emptyState } from '../../Store/actions/requestActionCreators';
+import {
+  emptyState,
+  setStatus,
+} from '../../Store/actions/requestActionCreators';
 
 const { Title } = Typography;
 const PROGRESS = 100;
@@ -35,6 +38,7 @@ const Summary: React.FC = () => {
   const { uid } = useAuth();
 
   const handleConfirm = async () => {
+    dispatch(setStatus('unmatched'));
     console.log('About to upload request');
     if (uid) {
       console.log('valid uid');
