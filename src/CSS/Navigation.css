@@ -1,0 +1,15 @@
+.main-navigation-bar-container {
+	position:fixed;
+	bottom:-3px;
+	left:;
+	width: 100%;
+	border-width:3px 0;
+	border-style:solid;
+	border-color:var(--color-grey4);
+	background:var(--color-white);
+	z-index:11;
+}
+
+.adm-tab-bar-item {
+	min-height:60px;
+}

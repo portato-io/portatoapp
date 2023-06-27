@@ -2,6 +2,8 @@ import './CSS/Fonts.css';
 import './CSS/Icons.css';
 import './CSS/Forms.css';
 import './CSS/Core.css';
+import './CSS/Navigation.css';
+import './CSS/Mediaqueries.css';
 
 import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

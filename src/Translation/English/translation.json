@@ -9,45 +9,49 @@
 
   "general": {
     "howItWorks": "How it works",
-    "moreInfo": "Learn more"
+    "moreInfo": "Learn more",
+    "send": "Send",
+    "deliver": "Deliver"
   },
 
   "social": {
     "heading": "Our socials",
     "linkedin": {
       "label": "LinkedIn",
-      "link": "https://www.linkedin.com/company/portato-io/"
+      "link": "https://www.linkedin.com/company/portato-io/",
+      "icon": "icon-linkedin"
     },
     "instagram": {
       "label": "Instagram",
-      "link": "https://www.instagram.com/portato.io/"
+      "link": "https://www.instagram.com/portato.io/",
+      "icon": "icon-instagram"
     }
   },
 
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Our resident PowerPoint sorcerer and Excel wizard, Conrad ditched the daily grind to become Portato's CEO. He sports a gym membership, a bursting contact book, and a party spirit. Fiercely soft yet effectively hard-hitting.",
+      "description": "PowerPoint sorcerer and Excel wizard turned Portato's CEO. A sports enthusiast with a vast and robust network.",
       "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "The Franco-British engineering maestro with thoughts so fast, they've got a sonic boom. Hugo can charm you in two languages while programming the backend in three. His fingers fly over the keyboard, casting spells that make everything tick.",
+      "description": "Franco-British engineering maestro, charming in two languages while juggling backend programming in at least three.",
       "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Mehdi": {
       "name": "Mehdi",
-      "description": "Hip-hop, hipster, and Moroccan charm trifecta, Mehdi is our user experience guru. When he's not busy being a magnet for admiration, he's crafting code that makes the backend look as good as his haircuts.",
+      "description": "Hip-hop lover and user experience guru, making the frontend look as good as his haircuts.",
       "image": "https://images.pexels.com/photos/16375570/pexels-photo-16375570/free-photo-of-man-sitting-on-a-wall-with-a-mural.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Jack of all trades and master of...well, everything! Mischa is the rare combination of a coder-designer-animator-rigger and follicular minimalist. Can flip between jiujitsu and JavaScript like nobody's business, all from the compact comfort of a Smart car.",
+      "description": "ack of all trades, master of ... all. Multitalent with a knack for coding, design, animation, and jiujitsu.",
       "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "Storyboard scribe and 2D animation whizz, Chiara moonlights as a wannabe princess with the fiery spirit of a Latin dance. The magic behind our friendly faces, she infuses Portato with charm, one frame at a time.",
+      "description": "A 2D animation whizz moonlighting as a princess, infusing charm into Portato one frame at a time.",
       "image": "https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     }
   },

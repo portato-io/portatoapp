@@ -27,39 +27,48 @@ const Home: React.FC = () => {
     const image = getTeamMemberImage(t(`team.${memberName}.image`));
 
     return (
-      <Col span={5}>
-        <Space
-          direction="vertical"
-          style={{ width: '100%', textAlign: 'center' }}
-        >
-          <Avatar size={100} src={image} />
-          <Title level={5}>{name}</Title>
-          <p>{description}</p>
-        </Space>
-      </Col>
+      <div className="listing-entry">
+        <div className="listing-entry-header">
+          <img className="image box-radius-style-2" src={image} />
+          <h4>{name}</h4>
+        </div>
+        <div className="listing-entry-content">
+          <p>
+            <small>{description}</small>
+          </p>
+          <div className="spacer-small"></div>
+        </div>
+      </div>
     );
   };
 
-  /* SOCIALS - Not working, but i don't know why 
+  /* SOCIALS - Not working, but i don't know why  */
 
-  const socialChannels = ['linkedin', 'instagram'];
-  const socialChannel: React.FC<{ socialLabel: string }> = ({ socialLabel }) => {
+  const socialChannelTypes = ['linkedin', 'instagram'];
+  const SocialChannel: React.FC<{ socialLabel: string }> = ({
+    socialLabel,
+  }) => {
     const label = t(`social.${socialLabel}.label`);
     const link = t(`social.${socialLabel}.link`);
+    const icon = 'icon ' + t(`social.${socialLabel}.icon`);
 
     return (
-      <a href={link}>
-        {label}
+      <a
+        href={link}
+        className="button button-border box-shadow box-radius-default box-shadow-effect"
+      >
+        <i className={icon} />
+        <span>{label}</span>
       </a>
     );
   };
 
-  --------------------------------------------------- */
+  /*--------------------------------------------------- */
 
   return (
     <PageLayout>
       {/* Landing screen */}
-      <section className="section section-bleed">
+      <section className="section section-bleed mod-nomargin-top">
         <img
           src={headerImage}
           alt="portato header image"
@@ -70,7 +79,7 @@ const Home: React.FC = () => {
       <section className="section">
         <div className="text-section">
           <h1 className="icon icon-logo icon-big logo-slogan">portato</h1>
-          <h3>A easy, cheap and eco-friendly transport service for things.</h3>
+          <h5>A easy, cheap and eco-friendly transport service for things.</h5>
         </div>
       </section>
 
@@ -82,14 +91,14 @@ const Home: React.FC = () => {
             href="/createSendRequest/enterObjInfo"
             onClick={() => logEvent(analytics, 'send_button_click')}
           >
-            Send
+            {t('general.send')}
           </a>
           <a
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             href="/deliver/enterRoute"
             onClick={() => logEvent(analytics, 'deliver_button_click')}
           >
-            Deliver
+            {t('general.deliver')}
           </a>
         </div>
         <div className="spacer-regular"></div>
@@ -110,32 +119,9 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="section">
-        <section className="section box-style-color box-radius-style-2 box-shadow mod-text-align-right">
-          <h2>{t('about.title')}</h2>
-          <p>{t('about.visionMissionTitle')}</p>
-          <div className="spacer-small"></div>
-          <div>
-            <a
-              href="/about-us"
-              className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            >
-              {t('general.moreInfo')}
-            </a>
-          </div>
-        </section>
-      </section>
-
-      <section className="section ">
-        <h2>{t('social.heading')}</h2>
-      </section>
-
-      <section className="section">
-        <Card
-          size="small"
-          title={t('about.title')}
-          style={{ width: '90vw', margin: 'auto' }}
-        >
+      <section className="section mod-text-align-right">
+        <h2>{t('about.title')}</h2>
+        <section className="section box-style-color box-radius-style-3 box-shadow mod-text-align-right mod-nomargin-top">
           <h3>{t('about.visionMissionTitle')}</h3>
           <p>
             {t('about.visionMissionText')
@@ -147,26 +133,54 @@ const Home: React.FC = () => {
                 </span>
               ))}
           </p>
-          <h3>{t('about.whoWeAreTitle')}</h3>
-          <p>
-            {t('about.whoWeAreText')
-              .split('\n')
-              .map((line: string, i: number) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-          </p>
+          <div className="spacer-small"></div>
+          {/*
+          <div>
+            <a
+              href="/about-us"
+              className="button button-solid box-shadow box-radius-default box-shadow-effect"
+            >
+              {t('general.moreInfo')}
+            </a>
+          </div>
+          */}
+        </section>
+      </section>
 
-          {/* Team members */}
+      <div className="spacer-big"></div>
 
-          <Row gutter={[16, 16]} justify="center">
-            {teamMemberNames.map((name) => (
-              <TeamMember memberName={name} key={name} />
+      <section className="section">
+        <h2>{t('about.whoWeAreTitle')}</h2>
+        <p>
+          {t('about.whoWeAreText')
+            .split('\n')
+            .map((line: string, i: number) => (
+              <span key={i}>
+                {line}
+                <br />
+              </span>
             ))}
-          </Row>
-        </Card>
+        </p>
+      </section>
+
+      <section className="section">
+        <div className="listing listing-3 listing-boxes">
+          {teamMemberNames.map((name) => (
+            <TeamMember memberName={name} key={name} />
+          ))}
+          <div className="entry-filler"></div>
+          <div className="entry-filler"></div>
+          <div className="entry-filler"></div>
+        </div>
+      </section>
+
+      <section className="section">
+        <h2>{t('social.heading')}</h2>
+        <div className="mod-display-flex">
+          {socialChannelTypes.map((label) => (
+            <SocialChannel socialLabel={label} key={label} />
+          ))}
+        </div>
       </section>
 
       {/* How it works */}
@@ -180,8 +194,6 @@ const Home: React.FC = () => {
           loop
           autoplay
         ></lottie-player> */}
-
-      {/* About us */}
     </PageLayout>
   );
 };
