@@ -48,7 +48,8 @@ const FetchRequests: React.FC<{
         // If the user is an admin, only return 'unmatched' requests
         if (admin) {
           storesArray = storesArray.filter(
-            (request) => request.status === 'unmatched'
+            (request) =>
+              request.status === 'unmatched' || request.status === 'new driver'
           );
         }
 
@@ -61,7 +62,22 @@ const FetchRequests: React.FC<{
 
     const getUserRequests = async () => {
       try {
-        setRequestState(await fetchData);
+        const requests = await fetchData;
+        // Sort requests to have 'matched' and then 'contacted' requests at the top
+        const sortedRequests = requests.sort((a, b) => {
+          if (a.status === 'matched') {
+            return -1;
+          } else if (b.status === 'matched') {
+            return 1;
+          } else if (a.status === 'contacted') {
+            return -1;
+          } else if (b.status === 'contacted') {
+            return 1;
+          }
+          return 0;
+        });
+
+        setRequestState(sortedRequests);
       } catch (error) {
         console.log('Error fetching data: ', error);
       }
@@ -98,7 +114,7 @@ const FetchRequests: React.FC<{
   };
 
   const getNewDriver = (request: IRequestInfo) => {
-    updateRequestStatus(request.uid, request.id, 'new driver');
+    updateRequestStatus(request.uid, request.id, 'unmatched');
   };
 
   const confirmDelivery = (request: IRequestInfo) => {
@@ -138,11 +154,25 @@ const FetchRequests: React.FC<{
               justifyContent: 'space-between',
             }} // added style here
           >
+            <div>Price: {request.price} CHF</div>
             <div>
-              {request.weight}/{request.size}
+              Weight: {request.weight}/ Size: {request.size}
+            </div>
+            <div>Departure adress: {request.pickup_adress}</div>
+            <div>Arrival Adress: {request.delivery_adress}</div>
+            <div>
+              Date range - From {request.dateRange[0]} - To{' '}
+              {request.dateRange[1]}
+            </div>
+            <div>Time: {request.time}</div>
+            <div>Description: {request.description}</div>
+            <div>
               {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
               {request.status === 'contacted' && (
-                <p>Contacted potential driver at {request.contactTimestamp}</p>
+                <p>
+                  Contacted potential driver at{' '}
+                  {new Date(request.contactTimestamp).toLocaleString()}
+                </p>
               )}
             </div>
 
