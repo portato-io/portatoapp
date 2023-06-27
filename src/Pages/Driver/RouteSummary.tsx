@@ -113,8 +113,7 @@ const RouteSummary: React.FC = () => {
                 <Typography>
                   {t('driveSummary.each')} {Object.values(routeInfo.days)}
                   <br />
-                  {t('driveSummary.tripTime')}{' '}
-                  {Object.values(routeInfo.time)[0]}{' '}
+                  {t('driveSummary.tripTime')} {Object.values(routeInfo.time)}{' '}
                 </Typography>
               </div>
             ) : (
@@ -122,8 +121,7 @@ const RouteSummary: React.FC = () => {
                 <Title level={4}> {t('driveSummary.timing')}</Title>
                 <Typography>
                   {t('driveSummary.tripDates')} {routeInfo.timeRange} <br />
-                  {t('driveSummary.tripTime')}{' '}
-                  {Object.values(routeInfo.time)[0]}
+                  {t('driveSummary.tripTime')} {Object.values(routeInfo.time)}
                 </Typography>
               </div>
             )}
