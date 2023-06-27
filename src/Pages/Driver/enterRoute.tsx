@@ -91,6 +91,7 @@ const EnterRoute: React.FC = () => {
               value={routes.acceptable_detour}
               onChange={handleInputChange}
               max={parseInt(MARKS[25])} // Fix for now, will make it more generic in the future
+              min={parseInt(MARKS[5])}
               style={{ marginLeft: '-3vw', width: '90vw' }}
             />
           </Form>

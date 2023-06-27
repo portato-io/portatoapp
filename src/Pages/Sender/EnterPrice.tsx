@@ -61,7 +61,7 @@ const EnterPrice: React.FC = () => {
                 placeholder={t('requestCost.pricePlaceholder') || ''}
               />
             </Form.Item>
-            <Card
+            {/* <Card
               bordered={false}
               className="centered-card"
               style={{ margin: 'auto', width: '80%' }}
@@ -70,7 +70,7 @@ const EnterPrice: React.FC = () => {
               {t('requestCost.portatoFee')} b <br />
               {t('requestCost.vat')} c <br />
               {t('requestCost.insurance')} d
-            </Card>
+            </Card> */}
             <Form.Item
               style={{
                 marginTop: '20px',

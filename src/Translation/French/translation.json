@@ -1,173 +1,160 @@
 {
-    "about": {
-        "title": "À propos de nous",
-        "visionMissionTitle": "Notre vision et mission",
-        "visionMissionText": "En Suisse, plus de 150 millions de kilomètres sont parcourus en voiture chaque jour. Pourtant, les véhicules sont souvent à peine chargés: en moyenne, seules 1,6 personnes sont présentes dans chaque véhicule et les coffres de plus en plus grands sont majoritairement vides.\n\nPortato s'est fixé comme objectif d'optimiser ces nombreuses capacités de transport inutilisées. Chaque covoiturage évite potentiellement un autre trajet et signifie un véhicule de moins sur la route. Notre vision est donc de rendre le transport routier plus efficient et de contribuer positivement à l'environnement.\n\nNotre mission immédiate est de faciliter le covoiturage entre particuliers. D'une part, cela rend l'expédition d'articles (encombrants) plus pratique. D'autre part, nous permettons aux conducteurs d'utiliser judicieusement leur espace libre, gagnant de l'argent au passage et réduisant leur empreinte écologique.",
-        "whoWeAreTitle": "Qui sommes-nous",
-        "whoWeAreText": "Chez Portato, l'innovation rencontre la route ouverte! Nous sommes une fusion vivante de penseurs, de bricoleurs et de pionniers avec l'objectif commun de révolutionner le transport!"
-    },
-    
-    "team": {
-        "Conrad": {
-            "name": "Conrad",
-            "description": "Conrad, notre sorcier PowerPoint et notre magicien Excel, a abandonné la routine pour devenir le PDG de Portato. Adepte de la salle de sport, avec un carnet de contacts débordant et un esprit festif. Doucement féroce, mais efficacement percutant.",
-            "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        },
-        "Hugo": {
-            "name": "Hugo",
-            "description": "Hugo, le prodige de l'ingénierie franco-britannique, dont les pensées sont si rapides qu'elles créent un boom sonique. Hugo peut vous charmer en deux langues tout en programmant le backend en trois. Ses doigts volent sur le clavier, lançant des sorts qui font tout fonctionner.",
-            "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        },
-        "Mehdi": {
-            "name": "Mehdi",
-            "description": "Mehdi, l'incarnation du hip-hop, du style hipster et du charme marocain, est notre gourou de l'expérience utilisateur. Lorsqu'il n'est pas occupé à être le centre d'admiration, il façonne le code pour faire en sorte que le backend soit aussi beau que ses coupes de cheveux.",
-            "image": "https://images.pexels.com/photos/16375570/pexels-photo-16375570/free-photo-of-man-sitting-on-a-wall-with-a-mural.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        },
-        "Mischa": {
-            "name": "Mischa",
-            "description": "Homme-orchestre dans tous les sens du terme. Mischa est cette rare combinaison de programmeur-designer-animateur-penseur... et bien plus encore. Il peut passer du Jiu-Jitsu à Adobe et Visual Code comme personne d'autre, jour et nuit, ensemble ou à distance.",
-            "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        },
-        "Chiara": {
-            "name": "Chiara",
-            "description": "Chiara, scénariste de story-boards et prodige de l'animation 2D, se double d'une princesse en devenir avec l'esprit enflammé d'une danse latine. Elle est la magie derrière nos visages amicaux, infusant Portato de son charme, une image à la fois.",
-            "image": "https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        }
-    },
-    "navBar":
-    {
-        "home": "Accueil",
-        "send": "Envoyer",
-        "drive": "Conduire",
-        "profile": "Profil"
-    },
+  "about": {
+    "title": "À propos de nous",
+    "visionMissionTitle": "Notre vision et mission",
+    "visionMissionText": "En Suisse, plus de 150 millions de kilomètres sont parcourus en voiture chaque jour. Pourtant, les véhicules sont souvent à peine chargés: en moyenne, seules 1,6 personnes sont présentes dans chaque véhicule et les coffres de plus en plus grands sont majoritairement vides.\n\nPortato s'est fixé comme objectif d'optimiser ces nombreuses capacités de transport inutilisées. Chaque covoiturage évite potentiellement un autre trajet et signifie un véhicule de moins sur la route. Notre vision est donc de rendre le transport routier plus efficient et de contribuer positivement à l'environnement.\n\nNotre mission immédiate est de faciliter le covoiturage entre particuliers. D'une part, cela rend l'expédition d'articles (encombrants) plus pratique. D'autre part, nous permettons aux conducteurs d'utiliser judicieusement leur espace libre, gagnant de l'argent au passage et réduisant leur empreinte écologique.",
+    "whoWeAreTitle": "Qui sommes-nous",
+    "whoWeAreText": "Chez Portato, l'innovation rencontre la route ouverte! Nous sommes une fusion vivante de penseurs, de bricoleurs et de pionniers avec l'objectif commun de révolutionner le transport!"
+  },
 
-    "requestOverview":
-    {
-        "newTitle": "Créer une nouvelle demande d'envoi",
-        "createButtonDescription": "Créer",
-        "currentTitle": "Vos demandes d'envoi en cours"
+  "team": {
+    "Conrad": {
+      "name": "Conrad",
+      "description": "Conrad, notre sorcier PowerPoint et notre magicien Excel, a abandonné la routine pour devenir le PDG de Portato. Adepte de la salle de sport, avec un carnet de contacts débordant et un esprit festif. Doucement féroce, mais efficacement percutant.",
+      "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
-    
-    "requestInfo":
-    {
-        "title": "Que voulez-vous expédier?",
-        "name": "Titre",
-        "namePlaceholder": "Donnez à votre envoi un titre significatif.",
-        "description": "Description",
-        "descriptionPlaceholder": "Par exemple, il est recommandé de préciser les dimensions des objets volumineux.",
-        "size": "Taille",
-        "weight": "Poids",
-        "uploadImages": "Importer des images"
+    "Hugo": {
+      "name": "Hugo",
+      "description": "Hugo, le prodige de l'ingénierie franco-britannique, dont les pensées sont si rapides qu'elles créent un boom sonique. Hugo peut vous charmer en deux langues tout en programmant le backend en trois. Ses doigts volent sur le clavier, lançant des sorts qui font tout fonctionner.",
+      "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
-    "requestAddresses":
-    {
-        "pickupAddress": "Adresse de ramassage",
-        "|*TBI*|pickupAddressPlaceholder": "Entrez une adresse",
-        "deliveryAddress": "Adresse de livraison",
-        "|*TBI*|deliveryAddressPlaceholder": "Entrez une adresse"
+    "Mehdi": {
+      "name": "Mehdi",
+      "description": "Mehdi, l'incarnation du hip-hop, du style hipster et du charme marocain, est notre gourou de l'expérience utilisateur. Lorsqu'il n'est pas occupé à être le centre d'admiration, il façonne le code pour faire en sorte que le backend soit aussi beau que ses coupes de cheveux.",
+      "image": "https://images.pexels.com/photos/16375570/pexels-photo-16375570/free-photo-of-man-sitting-on-a-wall-with-a-mural.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
-    "requestTime":
-    {
-        "title": "Quand voulez-vous que l'envoi soit récupéré?",
-        "dates": "Dates",
-        "|*TBI*|startDatePlaceholder": "Date de début",
-        "|*TBI*|endDatePlaceholder": "Date de fin",
-        "|*TBI*|time": "Heure",
-        "|*TBI*|mornings": "Matinées",
-        "|*TBI*|midDays": "Mi-journées",
-        "|*TBI*|evenings": "Soirées"
+    "Mischa": {
+      "name": "Mischa",
+      "description": "Homme-orchestre dans tous les sens du terme. Mischa est cette rare combinaison de programmeur-designer-animateur-penseur... et bien plus encore. Il peut passer du Jiu-Jitsu à Adobe et Visual Code comme personne d'autre, jour et nuit, ensemble ou à distance.",
+      "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
-    "requestCost":
-    {
-        "title": "Combien vaut pour vous le transport?",
-        "pricePlaceholder": "par ex., 30 CHF",
-        "driverReward": "Récompense pour le conducteur:",
-        "portatoFee": "Frais de Portato:",
-        "vat": "TVA:",
-        "insurance": "Assurance:",
-        "comment": "Entrez un prix équitable pour donner une incitation appropriée. Après tout, votre conducteur fera un détour pour livrer votre envoi."
-    },
-    "requestSummary":
-    {
-        "title": "Résumé de votre demande d'envoi",
-        "size": "Taille:",
-        "weight": "Poids:",
-        "pickupAddress": "Adresse de prise en charge:",
-        "deliveryAddress": "Adresse de livraison:",
-        "timeframe": "Délai:",
-        "possibleDates": "Dates possibles:",
-        "possibleTimes": "Heures possibles:",
-        "price": "Prix:",
-        "images": "Image(s):"
-    },
-    "driveOverview":
-    {
-        "newTitle": "Enregistrer un nouvel itinéraire",
-        "createButtonDescription": "Créer",
-        "|*TBI*|currentTitle": "Vos itinéraires actuels"
-    },
-    "driveAddresses":
-    {
-        "departureAddress": "Adresse de départ",
-        "|*TBI*|departureAddressPlaceholder": "Entrez une adresse",
-        "destinationAddress": "Adresse de destination",
-        "|*TBI*|destinationAddressPlaceholder": "Entrez une adresse",
-        "acceptableDetour": "Détour acceptable"
-    },
-    "driveTime":
-    {
-        "title": "Quand conduisez-vous?",
-        "rangeTitle": "Sélectionner une plage de dates",
-        "singleTrip": "Voyage unique",
-        "recurringRide": "Trajet récurrent",
-        "|*TBI*|startPlaceholder": "Début",
-        "|*TBI*|endPlaceholder": "Fin",
-        "selectTime": "Sélectionnez l'heure",
-        "|*TBI*|timeMornings": "Matinées",
-        "|*TBI*|timeMidDays": "Mi-journées",
-        "|*TBI*|timeEvenings": "Soirées",
-        "weekdayTitle": "Sélectionnez les jours",
-        "timeTitle": "Sélectionnez l'heure"
-    },
-    "driveCapacity":
-    {
-        "title": "Quelle est votre capacité de livraison ?"
-    },
-    "driveSummary":
-    {
-        "title": "Résumé de votre voyage",
-        "departureAddress": "Adresse de départ",
-        "destinationAddress": "Adresse de destination",
-        "acceptableDetour": "Détour acceptable",
-        "tripType": "Type de votre voyage",
-        "timing": "Horaire",
-        "tripDates": "Dates:",
-        "tripTime": "Heure:",
-        "each": "Récurrent chaque:",
-        "driveCapacity": "Capacité"
-    },
-    "navigationButton":
-    {
-        "next": "Suivant",
-        "back": "Retour",
-        "confirm": "Confirmer",
-        "signIn": "Connexion"
-    },
-    "navigationMenu": {
-        "myAccount": "Mon Compte",
-        "mySendRequests": "Mes Demandes d'Envoi",
-        "signIn": "Se Connecter",
-        "blog": "Blog",
-        "support": "Support",
-        "adminWindow": "Fenêtre d'Admin",
-        "signOut": "Se Déconnecter"
-    },
-    "accountPage": {
-        "validate": "Valider",
-        "myAccount": "Mon Compte",
-        "profilePicture": "Photo de Profil",
-        "name": "Nom",
-        "emailAddress": "Adresse Email"
+    "Chiara": {
+      "name": "Chiara",
+      "description": "Chiara, scénariste de story-boards et prodige de l'animation 2D, se double d'une princesse en devenir avec l'esprit enflammé d'une danse latine. Elle est la magie derrière nos visages amicaux, infusant Portato de son charme, une image à la fois.",
+      "image": "https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     }
+  },
+  "navBar": {
+    "home": "Accueil",
+    "send": "Envoyer",
+    "drive": "Conduire",
+    "profile": "Menu"
+  },
+
+  "requestOverview": {
+    "newTitle": "Créer une nouvelle demande d'envoi",
+    "createButtonDescription": "Créer",
+    "currentTitle": "Vos demandes d'envoi en cours"
+  },
+
+  "requestInfo": {
+    "title": "Que voulez-vous expédier?",
+    "name": "Titre",
+    "namePlaceholder": "Donnez à votre envoi un titre significatif.",
+    "description": "Description",
+    "descriptionPlaceholder": "Par exemple, il est recommandé de préciser les dimensions des objets volumineux.",
+    "size": "Taille",
+    "weight": "Poids",
+    "uploadImages": "Importer des images"
+  },
+  "requestAddresses": {
+    "pickupAddress": "Adresse de ramassage",
+    "|*TBI*|pickupAddressPlaceholder": "Entrez une adresse",
+    "deliveryAddress": "Adresse de livraison",
+    "|*TBI*|deliveryAddressPlaceholder": "Entrez une adresse"
+  },
+  "requestTime": {
+    "title": "Quand voulez-vous que l'envoi soit récupéré?",
+    "dates": "Dates",
+    "|*TBI*|startDatePlaceholder": "Date de début",
+    "|*TBI*|endDatePlaceholder": "Date de fin",
+    "|*TBI*|time": "Heure",
+    "|*TBI*|mornings": "Matinées",
+    "|*TBI*|midDays": "Mi-journées",
+    "|*TBI*|evenings": "Soirées"
+  },
+  "requestCost": {
+    "title": "Combien vaut pour vous le transport?",
+    "pricePlaceholder": "par ex., 30 CHF",
+    "driverReward": "Récompense pour le conducteur:",
+    "portatoFee": "Frais de Portato:",
+    "vat": "TVA:",
+    "insurance": "Assurance:",
+    "comment": "Entrez un prix équitable pour donner une incitation appropriée. Après tout, votre conducteur fera un détour pour livrer votre envoi."
+  },
+  "requestSummary": {
+    "title": "Résumé de votre demande d'envoi",
+    "size": "Taille:",
+    "weight": "Poids:",
+    "pickupAddress": "Adresse de prise en charge:",
+    "deliveryAddress": "Adresse de livraison:",
+    "timeframe": "Délai:",
+    "possibleDates": "Dates possibles:",
+    "possibleTimes": "Heures possibles:",
+    "price": "Prix:",
+    "images": "Image(s):"
+  },
+  "driveOverview": {
+    "newTitle": "Enregistrer un nouvel itinéraire",
+    "createButtonDescription": "Créer",
+    "|*TBI*|currentTitle": "Vos itinéraires actuels"
+  },
+  "driveAddresses": {
+    "departureAddress": "Adresse de départ",
+    "|*TBI*|departureAddressPlaceholder": "Entrez une adresse",
+    "destinationAddress": "Adresse de destination",
+    "|*TBI*|destinationAddressPlaceholder": "Entrez une adresse",
+    "acceptableDetour": "Détour acceptable"
+  },
+  "driveTime": {
+    "title": "Quand conduisez-vous?",
+    "rangeTitle": "Sélectionner une plage de dates",
+    "singleTrip": "Voyage unique",
+    "recurringRide": "Trajet récurrent",
+    "|*TBI*|startPlaceholder": "Début",
+    "|*TBI*|endPlaceholder": "Fin",
+    "selectTime": "Sélectionnez l'heure",
+    "|*TBI*|timeMornings": "Matinées",
+    "|*TBI*|timeMidDays": "Mi-journées",
+    "|*TBI*|timeEvenings": "Soirées",
+    "weekdayTitle": "Sélectionnez les jours",
+    "timeTitle": "Sélectionnez l'heure"
+  },
+  "driveCapacity": {
+    "title": "Quelle est votre capacité de livraison ?"
+  },
+  "driveSummary": {
+    "title": "Résumé de votre voyage",
+    "departureAddress": "Adresse de départ",
+    "destinationAddress": "Adresse de destination",
+    "acceptableDetour": "Détour acceptable",
+    "tripType": "Type de votre voyage",
+    "timing": "Horaire",
+    "tripDates": "Dates:",
+    "tripTime": "Heure:",
+    "each": "Récurrent chaque:",
+    "driveCapacity": "Capacité"
+  },
+  "navigationButton": {
+    "next": "Suivant",
+    "back": "Retour",
+    "confirm": "Confirmer",
+    "signIn": "Connexion"
+  },
+  "navigationMenu": {
+    "myAccount": "Mon Compte",
+    "mySendRequests": "Mes Demandes d'Envoi",
+    "signIn": "Se Connecter",
+    "blog": "Blog",
+    "support": "Support",
+    "adminWindow": "Fenêtre d'Admin",
+    "signOut": "Se Déconnecter"
+  },
+  "accountPage": {
+    "validate": "Valider",
+    "myAccount": "Mon Compte",
+    "profilePicture": "Photo de Profil",
+    "name": "Nom",
+    "emailAddress": "Adresse Email"
+  }
 }

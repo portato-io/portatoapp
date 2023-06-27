@@ -12,8 +12,7 @@ import {
 } from '../../Store/actions/requestActionCreators';
 import { TIME } from '../../constant';
 import { useTranslation } from 'react-i18next';
-
-//import DatePicker from "react-datepicker"
+require('../../CSS/Calendar.css');
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;

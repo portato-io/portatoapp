@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Typography } from 'antd';
 import { Selector } from 'antd-mobile';
 import { DAYS, TIME } from '../../constant';
@@ -12,19 +12,19 @@ import {
 import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
-const TYPE = 'Recurrent';
 
-function RecurrentTripContent() {
+function RecurrentTripContent(activeTab: any) {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const dispatch = useDispatch();
-
+  console.log('ACTIVE', Object.values(activeTab));
   useEffect(() => {
-    dispatch(setType(TYPE));
+    console.log('JESUIS DANS RECURRENT TRIP');
+    dispatch(setType(Object.values(activeTab)[0] as string));
 
     return () => {
       // do nothing
     };
-  }, []);
+  }, [activeTab]);
 
   const handleDaysChange = (e: any) => {
     dispatch(setDays(e));
