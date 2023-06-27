@@ -5,6 +5,7 @@ import { getAuth } from 'firebase/auth';
 import { getMessaging, onMessage, getToken } from 'firebase/messaging';
 import { getStorage, ref } from 'firebase/storage';
 import { addNotificationsToken } from './linksStoreToFirebase';
+import { getAnalytics } from 'firebase/analytics';
 
 const notificationButton = document.getElementById('enableNotifications');
 let swRegistration = null;
@@ -41,6 +42,9 @@ export const storageRef = ref(storage);
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
 export const messaging = getMessaging(app);
+
+// Get a reference to the analytics service
+export const analytics = getAnalytics(app);
 
 export const onMessageListener = (callback) => {
   return onMessage(messaging, (payload) => {

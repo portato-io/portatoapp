@@ -6,6 +6,9 @@ import portatoLogo from '../Assets/Images/logo_blue.png';
 import howItWorksImg from '../Assets/Images/how_it_works.gif';
 import howItWorksVideo from '../Assets/Videos/video-start-1.mp4';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../firebaseConfig';
+
 require('../CSS/Home.css');
 
 const { Title } = Typography;
@@ -77,12 +80,14 @@ const Home: React.FC = () => {
           <a
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             href="/createSendRequest/enterObjInfo"
+            onClick={() => logEvent(analytics, 'send_button_click')}
           >
             Send
           </a>
           <a
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             href="/deliver/enterRoute"
+            onClick={() => logEvent(analytics, 'deliver_button_click')}
           >
             Deliver
           </a>
