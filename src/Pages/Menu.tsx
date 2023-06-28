@@ -94,9 +94,9 @@ const Menu: React.FC = () => {
                 <List.Item arrow={true} onClick={handleMyAccountClick}>
                   {t('navigationMenu.myAccount')}
                 </List.Item>
-                <List.Item arrow={true} onClick={handleMySendRequestsClick}>
+                {/* <List.Item arrow={true} onClick={handleMySendRequestsClick}>
                   {t('navigationMenu.mySendRequests')}
-                </List.Item>
+                </List.Item> */}
               </>
             ) : (
               <List.Item arrow={true} onClick={showModal}>
@@ -104,9 +104,9 @@ const Menu: React.FC = () => {
               </List.Item>
             )}
 
-            <List.Item arrow={true} onClick={handleMyBlogClick}>
+            {/* <List.Item arrow={true} onClick={handleMyBlogClick}>
               {t('navigationMenu.blog')}
-            </List.Item>
+            </List.Item> */}
             <List.Item arrow={true} onClick={handleSupportClick}>
               {t('navigationMenu.support')}
             </List.Item>
