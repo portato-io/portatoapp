@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
-import { Card, Button, message } from 'antd';
+import { Card, Button, message, Popconfirm } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
@@ -28,43 +29,34 @@ const FetchRequests: React.FC<{
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
   // then we use await to store the values in state
 
-  useEffect(() => {
-    // TODO: Handle uid undefined case
+  const fetchAndSortRequests = async () => {
     if (!uid) {
       console.log('uid is undefined');
       return;
     }
 
-    const fetchData = fetchDataOnce(uid, 'requests').then((storesObject) => {
-      // Check if storesObject is an object before returning it
-      if (storesObject && typeof storesObject === 'object') {
-        let storesArray = Object.values(storesObject) as IRequestInfo[]; // Type assertion here
+    try {
+      const fetchData = await fetchDataOnce(uid, 'requests');
+      let requests: IRequestInfo[] = [];
+
+      // Check if fetchData is an object before returning it
+      if (fetchData && typeof fetchData === 'object') {
+        requests = Object.values(fetchData) as IRequestInfo[];
 
         // Filter out 'delivery confirmed' requests
-        storesArray = storesArray.filter(
+        requests = requests.filter(
           (request) => request.status !== 'delivery confirmed'
         );
 
         // If the user is an admin, only return 'unmatched' requests
         if (admin) {
-          storesArray = storesArray.filter(
+          requests = requests.filter(
             (request) =>
               request.status === 'unmatched' || request.status === 'new driver'
           );
         }
 
-        return storesArray;
-      } else {
-        console.log('Data is not an object:', storesObject);
-        return [];
-      }
-    });
-
-    const getUserRequests = async () => {
-      try {
-        const requests = await fetchData;
-        // Sort requests to have 'matched' and then 'contacted' requests at the top
-        const sortedRequests = requests.sort((a, b) => {
+        requests.sort((a, b) => {
           if (a.status === 'matched') {
             return -1;
           } else if (b.status === 'matched') {
@@ -76,14 +68,18 @@ const FetchRequests: React.FC<{
           }
           return 0;
         });
-
-        setRequestState(sortedRequests);
-      } catch (error) {
-        console.log('Error fetching data: ', error);
+      } else {
+        console.log('Data is not an object:', fetchData);
       }
-    };
 
-    getUserRequests();
+      setRequestState(requests);
+    } catch (error) {
+      console.log('Error fetching data: ', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAndSortRequests();
   }, [uid]);
 
   const match = (routeId: string, routeUid: string) => {
@@ -121,6 +117,12 @@ const FetchRequests: React.FC<{
     updateRequestStatus(request.uid, request.id, 'delivery confirmed');
   };
 
+  const deleteRequest = (request: IRequestInfo) => {
+    updateRequestStatus(request.uid, request.id, 'deleted').then(() => {
+      fetchAndSortRequests();
+    });
+  };
+
   // Return early, if no requests exist; avoid adding the title altogether.
   if (requests.length === 0) {
     return null;
@@ -153,6 +155,19 @@ const FetchRequests: React.FC<{
               flexDirection: 'column',
               justifyContent: 'space-between',
             }} // added style here
+            extra={
+              <Popconfirm
+                title="Do you want to delete this request?"
+                onConfirm={() => deleteRequest(request)}
+                onCancel={() => console.log('Cancelled')}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="link">
+                  <DeleteOutlined />
+                </Button>
+              </Popconfirm>
+            }
           >
             <div>Price: {request.price} CHF</div>
             <div>

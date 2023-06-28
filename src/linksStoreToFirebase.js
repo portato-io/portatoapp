@@ -248,18 +248,35 @@ export const fetchAdressRequest = async (uid, id) => {
   }
 };
 
-export const updateRequestStatus = async (request_uid, request_id, status) => {
-  try {
-    const dealRef = ref(
-      database,
-      'users/' + request_uid + '/requests/' + request_id
-    );
-    await update(dealRef, { status: status });
-
-    console.log('Successfully updated request status ' + dealRef);
-  } catch (error) {
-    console.error('Error updating request status :', error);
-  }
+/**
+ * Updates the request status
+ *
+ * @param {string} request_uid - The request uid
+ * @param {string} request_id - The request id
+ * @param {string} status - The new status
+ * @return {Promise} A promise that resolves with no value
+ */
+export const updateRequestStatus = (request_uid, request_id, status) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const dealRef = ref(
+        database,
+        'users/' + request_uid + '/requests/' + request_id
+      );
+      update(dealRef, { status: status })
+        .then(() => {
+          console.log('Successfully updated request status ' + dealRef);
+          resolve();
+        })
+        .catch((error) => {
+          console.error('Error updating request status :', error);
+          reject(error);
+        });
+    } catch (error) {
+      console.error('Error updating request status :', error);
+      reject(error);
+    }
+  });
 };
 
 export const checkPreviousRoutes = async (requestId, routeId) => {
