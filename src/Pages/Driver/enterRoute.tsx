@@ -57,36 +57,36 @@ const EnterRoute: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Form
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <h2>{t('driveOverview.createNewRouteTitle')}</h2>
+          <Form.Item
+            className="input-wrapper"
+            label={t('driveAddresses.departureAddress')}
           >
-            <Title level={4} style={{ backgroundColor: 'white' }}>
-              Departure
-            </Title>
-            <Form.Item>
-              <AddressAutocomplete
-                type={'departure'}
-                savedAddress={routeInfo.departure_adress}
-              />
-            </Form.Item>
-
-            <Title level={4} style={{ backgroundColor: 'white' }}>
-              Destination
-            </Title>
-            <Form.Item>
-              <AddressAutocomplete
-                type={'destination'}
-                savedAddress={routeInfo.destination_adress}
-              />
-            </Form.Item>
-            <Title level={4} style={{ backgroundColor: 'white' }}>
-              Acceptable detour
-            </Title>
+            <AddressAutocomplete
+              type={'departure'}
+              savedAddress={routeInfo.departure_adress}
+            />
+          </Form.Item>
+          <Form.Item
+            className="input-wrapper"
+            label={t('driveAddresses.destinationAddress')}
+          >
+            <AddressAutocomplete
+              type={'destination'}
+              savedAddress={routeInfo.destination_adress}
+            />
+          </Form.Item>
+          <Form.Item
+            className="input-wrapper"
+            label={t('driveAddresses.acceptableDetour')}
+          >
             <Slider
               marks={MARKS}
               ticks
@@ -94,11 +94,11 @@ const EnterRoute: React.FC = () => {
               onChange={handleInputChange}
               max={parseInt(MARKS[25])} // Fix for now, will make it more generic in the future
               min={parseInt(MARKS[5])}
-              style={{ marginLeft: '-3vw', width: '90vw' }}
             />
-          </Form>
-        </div>
-        <div className="form-button-container">
+          </Form.Item>
+        </Form>
+
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           <NextButton
             nextScreen={NEXT_SCREEN}
@@ -107,7 +107,7 @@ const EnterRoute: React.FC = () => {
             }}
           />
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

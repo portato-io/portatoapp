@@ -3,11 +3,13 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import { AutoCenter, Tabs } from 'antd-mobile';
 import RoutesContent from '../../Components/PageComponents/RoutesContent';
 import DealsContent from '../../Components/PageComponents/DealsContents';
+import { useTranslation } from 'react-i18next';
 
 // TODO Mischa: Determine whether user has a route or not. If not; show routes page!
 const HAS_ROUTES = false;
 
 const Deliver: React.FC = () => {
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   return (
     <PageLayout>
       {/* 
@@ -25,9 +27,10 @@ const Deliver: React.FC = () => {
           </AutoCenter>
         </Tabs.Tab>
       </Tabs> */}
-      <AutoCenter className="deliver-overview-content-container">
+      <section className="section ">
+        <h2>{t('driveOverview.newTitle')}</h2>
         <RoutesContent />
-      </AutoCenter>
+      </section>
     </PageLayout>
   );
 };
