@@ -83,6 +83,14 @@ export function routeReducer(
         delivery_capacity: Object.values(action.payload)[0],
       };
     }
+
+    case 'SET_ROUTE_STATUS': {
+      return {
+        ...state,
+        routeStatus: action.payload.routeStatus,
+      };
+    }
+
     case 'EMPTY_STATE':
       return initialStateRoute;
 
