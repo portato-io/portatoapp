@@ -6,15 +6,27 @@ import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Selector } from 'antd-mobile';
 import { setCap } from '../../Store/actions/routeActionCreators';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CAPACITY_OPTIONS } from '../../constant';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
+import CustomSelector from '../../Components/CustomSelector';
+import { UserOutlined } from '@ant-design/icons';
+import { IRouteInfo } from '../../type';
 
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
 const PROGRESS = 66;
+// const icons = [
+//   <UserOutlined />,
+//   <UserOutlined />,
+//   <UserOutlined />,
+//   <UserOutlined />,
+// ];
 
 const EnterDeliveryCapacity: React.FC = () => {
+  const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const dispatch = useDispatch();
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const handleCapChange = (e: any) => {
@@ -41,7 +53,12 @@ const EnterDeliveryCapacity: React.FC = () => {
         </Form>
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'drive_4_next_to_summary_clicked');
+            }}
+          />
         </div>
       </section>
     </PageLayout>

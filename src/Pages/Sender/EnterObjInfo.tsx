@@ -7,10 +7,14 @@ import UploadImage from '../../Components/UploadImage';
 
 import { Typography, Form, Input, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { CAPACITY_OPTIONS } from '../../constant';
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
 import { useTranslation } from 'react-i18next';
+import { Selector } from 'antd-mobile';
+
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -44,8 +48,15 @@ const EnterObjInfo: React.FC = () => {
   };
 
   const dispatch = useDispatch();
+  const handleCapChange = (e: any) => {
+    setValues({
+      ...object,
+      size: e,
+    });
+  };
 
   const handleInputChange = (e: any) => {
+    console.log(e);
     setValues({
       ...object,
       [e.target.name]: e.target.value,
@@ -95,16 +106,20 @@ const EnterObjInfo: React.FC = () => {
           </Form.Item>
 
           <Form.Item className="input-wrapper" label={t('requestInfo.size')}>
-            <Radio.Group
-              name="size"
-              value={object.size}
-              onChange={handleInputChange}
-            >
-              <Radio value={'S'}>S</Radio>
-              <Radio value={'M'}>M</Radio>
-              <Radio value={'L'}>L</Radio>
-              <Radio value={'XL'}>XL</Radio>
-            </Radio.Group>
+            <Selector
+              columns={2}
+              options={CAPACITY_OPTIONS}
+              onChange={handleCapChange}
+              defaultValue={[object.size[0]]}
+              className="form-element-centered"
+              style={{
+                marginTop: '20px',
+                '--border-radius': '100px',
+                '--border': 'solid transparent 1px',
+                '--checked-border': 'solid var(--adm-color-primary) 1px',
+                '--padding': '8px 24px',
+              }}
+            />
           </Form.Item>
 
           <Form.Item className="input-wrapper" label={t('requestInfo.weight')}>
@@ -130,7 +145,12 @@ const EnterObjInfo: React.FC = () => {
           & move buttons out of div, for responsive scrolling! */}
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'send_2_next_to_route_clicked');
+            }}
+          />
         </div>
       </section>
     </PageLayout>

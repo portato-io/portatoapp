@@ -28,7 +28,7 @@ const initialStateDeal: IDealInfo = {
     acceptable_detour: 0,
     time: [],
     type: '',
-    days: '',
+    days: [],
     timeRange: '',
     delivery_capacity: '',
   },

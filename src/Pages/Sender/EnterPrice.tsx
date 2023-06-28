@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setObjectPrice } from '../../Store/actions/requestActionCreators';
 import { IRequestInfo, ObjectInfoState } from '../../type';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const PROGRESS = 75;
@@ -79,7 +81,12 @@ const EnterPrice: React.FC = () => {
         </Form>
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'send_5_next_to_summary_clicked');
+            }}
+          />
         </div>
       </section>
     </PageLayout>

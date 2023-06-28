@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from 'antd-mobile';
 import AddressAutocomplete from '../../Components/AutoComplete';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const PROGRESS = 0;
@@ -98,7 +100,12 @@ const EnterRoute: React.FC = () => {
 
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'drive_2_next_to_timeframe_clicked');
+            }}
+          />
         </div>
       </section>
     </PageLayout>

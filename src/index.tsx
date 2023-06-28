@@ -45,7 +45,7 @@ const initialStateRoute: IRouteInfo = {
   time: [''],
   timeRange: '',
   type: '',
-  days: '',
+  days: [],
   delivery_capacity: '',
 };
 

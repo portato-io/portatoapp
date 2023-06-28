@@ -12,6 +12,8 @@ import {
 } from '../../Store/actions/requestActionCreators';
 import { TIME } from '../../constant';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 require('../../CSS/Calendar.css');
 
 const { Title } = Typography;
@@ -67,7 +69,12 @@ const EnterTime: React.FC = () => {
 
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton
+            nextScreen={NEXT_SCREEN}
+            onClick={() => {
+              logEvent(analytics, 'send_4_next_to_pricing_clicked');
+            }}
+          />
         </div>
       </section>
     </PageLayout>
