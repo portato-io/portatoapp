@@ -29,23 +29,6 @@
     min-height: calc(100vh - var(--main-navigation-bar-height) - 22px - 2 * var(--progress-bar-margin));
 }
 
-.form-button-container {
-    display: flex;
-    justify-content: center;
-    flex: 0;
-    margin-bottom: 30px;
-    /* background-color: red; */
-}
-
-.form-button-left {
-    width: 30vw;
-    margin-right: 20px;
-}
-
-.form-button-right {
-    width: 45vw;
-}
-
 .create-new-plus-button {
     height: auto !important;
     min-width: 50vw;

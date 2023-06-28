@@ -17,12 +17,15 @@ const CreateSendRequest: React.FC = () => {
 
   return (
     <PageLayout>
-      <AutoCenter>
-        <ButtonToCreateNewReqRoutes
-          nextScreen={NEXT_SCREEN}
-          text={t('requestOverview.createButtonDescription')}
-        />
-      </AutoCenter>
+      <section className="section">
+        <h2>{t('requestOverview.newTitle')}</h2>
+        <div>
+          <ButtonToCreateNewReqRoutes
+            nextScreen={NEXT_SCREEN}
+            text={t('requestOverview.createButtonDescription')}
+          />
+        </div>
+      </section>
 
       {uid !== 'undefined' ? (
         <>

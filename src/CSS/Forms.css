@@ -1,3 +1,4 @@
+/* BUTTONS -------------------------------------------- */
 .button {
 	display:inline-block;
 	padding:7px 15px;
@@ -11,7 +12,7 @@
 .button:last-child {right:0}
 
 .button-solid {
-	border: 1px solid var(--color-blue-light);
+	border: 2px solid var(--color-blue-light);
 	background:var(--color-blue-light);
 	color: var(--color-white);
 }
@@ -20,4 +21,82 @@
 	border: 2px solid var(--color-blue);
 	background:var(--color-white);
 	color: var(--color-blue);	
+}
+.button-border-light {
+	border-color:var(--color-grey4);
+}
+.button span {
+	position:relative;
+	top:-2px;
+}
+
+
+/* FORM ELEMENTS ---------------------------------------- */
+.section-form .progress-bar-indicator {
+	left:0;
+	width: 100%;
+}
+.input-wrapper {
+	margin-bottom:var(--spacing-vertical-regular)
+}
+
+label {
+	padding-bottom:5px;
+	display:block;
+}
+.form-input-wrapper input[type="search"],
+.form-input {
+	border-style: solid;
+	border-width: 0 0 2px 0;
+	border-color:var(--color-grey3);
+	border-radius:0;
+	padding:0 0 5px 0;
+	font-size:1.6rem;
+	width:100%;
+}
+textarea.form-input {
+	padding-top:3px;
+}
+.form-input:hover {
+	border-width: 0 0 2px 0;
+	border-color:var(--color-blue-light);
+}
+.form-input:focus {
+	border-width: 0 0 2px 0;
+	outline:none;
+	border-inline-end-width: 0px;
+	box-shadow: none;
+	border-color:var(--color-blue-light);
+}
+.form-input::placeholder {
+	font-size:1.5rem;
+}
+textarea.form-input::placeholder {
+	font-size:1.25rem;
+	line-height:1.4;
+}
+.form-input-radio {
+	display:flex;
+}
+.form-button-container {
+    margin:var(--spacing-vertical-big) 0;
+}
+.form-button-right .button {
+	min-width:160px;
+}
+
+/* OVERWRITING EXISTING ---------------------------------*/
+.ant-form-item-row {
+	display:block;
+}
+.ant-form-item .ant-form-item-control {
+	display:block;
+	max-width:100%;
+}
+.ant-form-item .ant-form-item-label {
+	overflow: visible;
+}
+.ant-form-item .ant-form-item-label > label {
+	display:block;
+	height:auto;
 }

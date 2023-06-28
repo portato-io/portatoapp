@@ -12,7 +12,7 @@ import {
 } from '../linksStoreToFirebase';
 import { useTranslation } from 'react-i18next';
 require('../CSS/Send.css');
-require('../CSS/PortatoStyleSheet.css');
+// require('../CSS/PortatoStyleSheet.css');
 
 const FetchRequests: React.FC<{
   uid?: string | null; // uid is now optional
@@ -127,94 +127,120 @@ const FetchRequests: React.FC<{
   }
 
   return (
-    <div>
-      {admin ? null : (
-        <h1
-          style={{
-            marginTop: '10vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {t('requestOverview.currentTitle')}
-        </h1>
-      )}
+    <section className="section">
+      <div className="spacer-big"></div>
+      {admin ? null : <h2>{t('requestOverview.currentTitle')}</h2>}
       {requests.map((request) => (
-        <div key={request.name} className="current-send-requests-list">
-          <Card
-            className={`send-request-card ${
+        <div
+          key={request.name}
+          className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style"
+        >
+          <div
+            className={`send-request-card box-shadow ${
               request.status === 'matched' ? 'highlight-card' : ''
             }`}
-            title={request.name}
-            bodyStyle={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }} // added style here
           >
-            <div>Price: {request.price} CHF</div>
-            <div>
-              Weight: {request.weight}/ Size: {request.size}
+            <div className="send-request-card-header">
+              <h4>{request.name}</h4>
             </div>
-            <div>Departure adress: {request.pickup_adress}</div>
-            <div>Arrival Adress: {request.delivery_adress}</div>
-            <div>
-              Date range - From {request.dateRange[0]} - To{' '}
-              {request.dateRange[1]}
-            </div>
-            <div>Time: {request.time}</div>
-            <div>Description: {request.description}</div>
-            <div>
-              {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
-              {request.status === 'contacted' && (
-                <p>
-                  Contacted potential driver at{' '}
-                  {new Date(request.contactTimestamp).toLocaleString()}
-                </p>
-              )}
-            </div>
+            <div className="send-request-card-content">
+              <div className="table-wrapper">
+                <table>
+                  <tr>
+                    <th>{t('driveAddresses.departureAddress')}</th>
+                    <td>{request.pickup_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestOverview.requestList.arrivalAdress')}</th>
+                    <td>{request.delivery_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestOverview.requestList.dateRange')}</th>
+                    <td>
+                      {t('requestOverview.requestList.from')}{' '}
+                      {request.dateRange[0]}{' '}
+                      {t('requestOverview.requestList.to')}{' '}
+                      {request.dateRange[1]}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestOverview.requestList.time')}</th>
+                    <td>{request.time}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestOverview.requestList.price')}</th>
+                    <td>{request.price} CHF</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestOverview.requestList.weight')}</th>
+                    <td>{request.weight}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestOverview.requestList.size')}</th>
+                    <td>{request.size}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestOverview.requestList.description')}</th>
+                    <td>{request.description}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestOverview.requestList.description')}</th>
+                    <td>{request.description}</td>
+                  </tr>
+                </table>
+              </div>
+              <div>
+                {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
+                {request.status === 'contacted' && (
+                  <p>
+                    Contacted potential driver at{' '}
+                    {new Date(request.contactTimestamp).toLocaleString()}
+                  </p>
+                )}
+              </div>
+              <div style={{ alignSelf: 'flex-end' }}>
+                {admin ? (
+                  <>
+                    <Button
+                      type="primary"
+                      onClick={() => match(request.id, request.uid)}
+                    >
+                      Match
+                    </Button>
+                    <Button type="primary" onClick={() => noMatch(request)}>
+                      No Match
+                    </Button>
+                  </>
+                ) : (
+                  request.status === 'matched' && (
+                    <Button type="primary" onClick={() => contact(request)}>
+                      Contact
+                    </Button>
+                  )
+                )}
 
-            <div style={{ alignSelf: 'flex-end' }}>
-              {admin ? (
-                <>
-                  <Button
-                    type="primary"
-                    onClick={() => match(request.id, request.uid)}
-                  >
-                    Match
-                  </Button>
-                  <Button type="primary" onClick={() => noMatch(request)}>
-                    No Match
-                  </Button>
-                </>
-              ) : (
-                request.status === 'matched' && (
-                  <Button type="primary" onClick={() => contact(request)}>
-                    Contact
-                  </Button>
-                )
-              )}
-
-              {request.status === 'contacted' && (
-                <>
-                  <Button type="primary" onClick={() => getNewDriver(request)}>
-                    Get New Driver
-                  </Button>
-                  <Button
-                    type="primary"
-                    onClick={() => confirmDelivery(request)}
-                  >
-                    Confirm Delivery
-                  </Button>
-                </>
-              )}
+                {request.status === 'contacted' && (
+                  <>
+                    <Button
+                      type="primary"
+                      onClick={() => getNewDriver(request)}
+                    >
+                      Get New Driver
+                    </Button>
+                    <Button
+                      type="primary"
+                      onClick={() => confirmDelivery(request)}
+                    >
+                      Confirm Delivery
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
-          </Card>
+          </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 

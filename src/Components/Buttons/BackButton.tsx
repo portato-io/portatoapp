@@ -12,14 +12,12 @@ function BackButton({ scrolling = false }: any) {
   };
   return (
     <div className="form-button-left">
-      <Button
-        type="default"
-        size="large"
+      <a
+        className="button button-border button-border-light box-shadow box-radius-default box-shadow-effect"
         onClick={handleBackClick}
-        style={{ width: '100%' }}
       >
         {t('navigationButton.back')}
-      </Button>
+      </a>
     </div>
   );
 }
