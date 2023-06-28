@@ -10,6 +10,18 @@
 	z-index:11;
 }
 
-.adm-tab-bar-item {
+.main-navigation-bar .adm-tab-bar-item {
 	min-height:60px;
+	flex-direction: row;
+}
+
+.main-navigation-bar .adm-tab-bar-item-title-with-icon {
+	font-size:1.4rem;
+	display:none;
+}
+
+.main-navigation-bar .icon-drive:before {
+	font-size:3.4rem;
+	position:relative;
+	top:-3px;
 }

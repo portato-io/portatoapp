@@ -111,14 +111,6 @@ const EnterObjInfo: React.FC = () => {
               options={CAPACITY_OPTIONS}
               onChange={handleCapChange}
               defaultValue={[object.size[0]]}
-              className="form-element-centered"
-              style={{
-                marginTop: '20px',
-                '--border-radius': '100px',
-                '--border': 'solid transparent 1px',
-                '--checked-border': 'solid var(--adm-color-primary) 1px',
-                '--padding': '8px 24px',
-              }}
             />
           </Form.Item>
 

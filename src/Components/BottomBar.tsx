@@ -16,24 +16,24 @@ function BottomBar() {
     {
       key: '/',
       title: t('navBar.home'),
-      icon: <AppOutline />,
+      icon: <i className="icon icon-big icon-home" />,
       badge: Badge.dot,
     },
     {
       key: '/createSendRequest',
       title: t('navBar.send'),
-      icon: <SendOutline />,
+      icon: <i className="icon icon-big icon-send" />,
       badge: '5',
     },
     {
       key: '/deliver',
       title: t('navBar.drive'),
-      icon: <TruckOutline />,
+      icon: <i className="icon icon-big icon-drive" />,
     },
     {
       key: '/profile',
       title: t('navBar.profile'),
-      icon: <AppstoreOutline />,
+      icon: <i className="icon icon-big icon-profile" />,
     },
   ];
 
