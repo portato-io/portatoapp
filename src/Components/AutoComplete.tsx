@@ -84,7 +84,7 @@ const AddressAutocomplete: React.FC<{ type: string; savedAddress: string }> = ({
         showSearch
         placeholder="Enter an address"
         value={savedAddress}
-        style={{ width: '80vw' }}
+        className="form-input-wrapper"
         options={addresses.map((address) => ({
           value: address.place_name,
           label: address.place_name,

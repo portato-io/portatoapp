@@ -14,6 +14,7 @@ import { IRouteInfo } from '../../type';
 import { useSelector, useDispatch } from 'react-redux';
 import { emptyState } from '../../Store/actions/requestActionCreators';
 import { useTranslation } from 'react-i18next';
+require('../../CSS/Send.css');
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
@@ -71,68 +72,73 @@ const RouteSummary: React.FC = () => {
   };
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
-            <div>
-              <FirebaseAuth />
-            </div>
-          </Modal>
-          <Card
-            bordered={true}
-            style={{
-              marginTop: '20px',
-              marginBottom: '20px',
-              backgroundColor: '#FFF4E4',
-              borderRadius: '20px',
-            }}
-          >
-            <Title level={2}> Summary </Title>
-
-            <div>
-              <Title level={4}> {t('driveSummary.departureAddress')}</Title>
-              <Typography> {routeInfo.departure_adress}</Typography>
-            </div>
-            <div>
-              <Title level={4}> {t('driveSummary.destinationAddress')}</Title>
-              <Typography> {routeInfo.destination_adress} </Typography>
-            </div>
-            <div>
-              <Title level={4}> {t('driveSummary.acceptableDetour')}</Title>
-              <Typography> {routeInfo.acceptable_detour} Km </Typography>
-            </div>
-            <div>
-              <Title level={4}>{t('driveSummary.tripType')}</Title>
-              <Typography> {routeInfo.type} </Typography>
-            </div>
-
-            {routeInfo.type == t('driveTime.recurringRide') ? (
-              <div>
-                <Title level={4}> {t('driveSummary.timing')}</Title>
-                <Typography>
-                  {t('driveSummary.each')} {Object.values(routeInfo.days)}
-                  <br />
-                  {t('driveSummary.tripTime')} {Object.values(routeInfo.time)}{' '}
-                </Typography>
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
+          <div>
+            <FirebaseAuth />
+          </div>
+        </Modal>
+        <h2>{t('driveSummary.title')}</h2>
+        <div className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style">
+          <div className="send-request-card box-shadow">
+            <div className="send-request-card-header"></div>
+            <div className="send-request-card-content">
+              <div className="table-wrapper">
+                <table>
+                  <tr>
+                    <th>{t('driveSummary.departureAddress')}</th>
+                    <td>{routeInfo.departure_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.destinationAddress')}</th>
+                    <td>{routeInfo.destination_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.acceptableDetour')}</th>
+                    <td>{routeInfo.acceptable_detour} Km </td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.driveCapacity')}</th>
+                    <td>{routeInfo.delivery_capacity}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.tripType')}</th>
+                    <td>{routeInfo.type}</td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td>
+                      {routeInfo.type == t('driveTime.recurringRide') ? (
+                        <div>
+                          <Title level={4}> {t('driveSummary.timing')}</Title>
+                          <Typography>
+                            {t('driveSummary.each')}{' '}
+                            {Object.values(routeInfo.days)}
+                            <br />
+                            {t('driveSummary.tripTime')}{' '}
+                            {Object.values(routeInfo.time)[0]}{' '}
+                          </Typography>
+                        </div>
+                      ) : (
+                        <div>
+                          <Title level={4}> {t('driveSummary.timing')}</Title>
+                          <Typography>
+                            {t('driveSummary.tripDates')} {routeInfo.timeRange}{' '}
+                            <br />
+                            {t('driveSummary.tripTime')}{' '}
+                            {Object.values(routeInfo.time)[0]}
+                          </Typography>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                </table>
               </div>
-            ) : (
-              <div>
-                <Title level={4}> {t('driveSummary.timing')}</Title>
-                <Typography>
-                  {t('driveSummary.tripDates')} {routeInfo.timeRange} <br />
-                  {t('driveSummary.tripTime')} {Object.values(routeInfo.time)}
-                </Typography>
-              </div>
-            )}
-            <div>
-              <Title level={4}> {t('driveSummary.driveCapacity')} </Title>
-              <Typography> {routeInfo.delivery_capacity} </Typography>
             </div>
-          </Card>
+          </div>
         </div>
-
-        <div className="form-button-container">
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           {user ? (
             <ConfirmButton
@@ -151,7 +157,7 @@ const RouteSummary: React.FC = () => {
             />
           )}
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

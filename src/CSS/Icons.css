@@ -1,14 +1,15 @@
 .icon:before {
 	font-family: 'portato icon font';
-	font-size:1rem;
-	margin-right:7px;
+	font-size:1.8rem;
+	margin-right:10px;
+	font-style: normal;
 }
 
 .icon-small:before {
 	font-size:0.7rem;
 }
 .icon-big:before {
-	font-size:1.5rem;
+	font-size:2.4rem;
 }
 
 .icon-home:before {
@@ -25,5 +26,17 @@
 }
 .icon-logo:before {
 	content: 'o';
+}
+.icon-plus:before {
+	content: 'N';
+}
+.icon-bin:before {
+	content: 'Y';
+}
+.icon-help:before {
+	content: 'K';
+}
+.icon-bell:before {
+	content: 'B';
 }
 

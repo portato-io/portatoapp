@@ -24,38 +24,37 @@ const EnterAddress: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
-          >
-            <Title level={4}> {t('requestAddresses.pickupAddress')}</Title>
-            <Form.Item>
-              <AddressAutocomplete
-                type={'pickup'}
-                savedAddress={objecInfo.pickup_adress}
-              />
-            </Form.Item>
-            <Title level={4}>{t('requestAddresses.deliveryAddress')}</Title>
-            <Form.Item>
-              {/* <Input
-            name="delivery_adress"
-            value={adresses.delivery_adress}
-            onChange={handleInputChange}
-            prefix={<SearchOutlined />}
-            style={{ background: '', width: '90%' }}
-          /> */}
-              <AddressAutocomplete
-                type={'delivery'}
-                savedAddress={objecInfo.delivery_adress}
-              />
-            </Form.Item>
-          </Form>
-        </div>
-        <div className="form-button-container">
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Form
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <Form.Item className="input-wrapper">
+            <label> {t('requestAddresses.pickupAddress')}</label>
+            <AddressAutocomplete
+              type={'pickup'}
+              savedAddress={objecInfo.pickup_adress}
+            />
+          </Form.Item>
+
+          <Form.Item className="input-wrapper">
+            {/* <Input
+              name="delivery_adress"
+              value={adresses.delivery_adress}
+              onChange={handleInputChange}
+              prefix={<SearchOutlined />}
+              style={{ background: '', width: '90%' }}
+            /> */}
+            <label> {t('requestAddresses.deliveryAddress')}</label>
+            <AddressAutocomplete
+              type={'delivery'}
+              savedAddress={objecInfo.delivery_adress}
+            />
+          </Form.Item>
+        </Form>
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           <NextButton
             nextScreen={NEXT_SCREEN}
@@ -64,7 +63,7 @@ const EnterAddress: React.FC = () => {
             }}
           />
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

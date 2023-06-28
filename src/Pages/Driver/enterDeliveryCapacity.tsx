@@ -34,34 +34,24 @@ const EnterDeliveryCapacity: React.FC = () => {
   };
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
-          >
-            <Title level={4}>{t('driveCapacity.title')}</Title>
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Form
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <Title level={4}>{t('driveCapacity.title')}</Title>
 
-            <Selector
-              columns={1}
-              options={CAPACITY_OPTIONS}
-              onChange={handleCapChange}
-              defaultValue={[routeInfo.delivery_capacity[0]]}
-              className="form-element-centered"
-              style={{
-                marginTop: '20px',
-                '--border-radius': '100px',
-                '--border': 'solid transparent 1px',
-                '--checked-border': 'solid var(--adm-color-primary) 1px',
-                '--padding': '8px 24px',
-              }}
-            />
-            {/* <CustomSelector prefixIcons={icons} options={CAPACITY_OPTIONS} /> */}
-          </Form>
-        </div>
-        <div className="form-button-container">
+          <Selector
+            columns={1}
+            options={CAPACITY_OPTIONS}
+            onChange={handleCapChange}
+            className="form-element-centered"
+            style={{ marginTop: '20px' }}
+          />
+        </Form>
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           <NextButton
             nextScreen={NEXT_SCREEN}
@@ -70,7 +60,7 @@ const EnterDeliveryCapacity: React.FC = () => {
             }}
           />
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

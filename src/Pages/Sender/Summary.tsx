@@ -17,6 +17,7 @@ import {
   emptyState,
   setStatus,
 } from '../../Store/actions/requestActionCreators';
+require('../../CSS/Send.css');
 
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
@@ -69,81 +70,80 @@ const Summary: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
-            <div>
-              <FirebaseAuth />
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
+          <div>
+            <FirebaseAuth />
+          </div>
+        </Modal>
+        <h2>{t('requestSummary.title')}</h2>
+        <div className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style">
+          <div className="send-request-card box-shadow">
+            <div className="send-request-card-header">
+              <h4>{objecInfo.name}</h4>
             </div>
-          </Modal>
-          <Card
-            bordered={true}
-            style={{
-              marginTop: '20px',
-              marginBottom: '20px',
-              backgroundColor: '#FFF4E4',
-              borderRadius: '20px',
-            }}
-          >
-            <Title level={2}> {t('requestSummary.title')} </Title>
-            <div>
-              <Title level={4}> {objecInfo.name}</Title>
-              <Typography>
-                {objecInfo.description}
-                <br />
-                {t('requestSummary.size')} {objecInfo.size} |{'    '}
-                {t('requestSummary.weight')} {objecInfo.weight}
-              </Typography>
-            </div>
-            <div>
-              <Title level={4}> {t('requestSummary.pickupAddress')}</Title>
-              <Typography> {objecInfo.pickup_adress} </Typography>
-            </div>
-            <div>
-              <Title level={4}> {t('requestSummary.deliveryAddress')}</Title>
-              <Typography> {objecInfo.delivery_adress} </Typography>
-            </div>
-            <div>
-              <Title level={4}>{t('requestSummary.timeframe')}</Title>
-              <Typography>
-                {' '}
-                {t('requestSummary.possibleDates')} {objecInfo.dateRange[0]} -{' '}
-                {objecInfo.dateRange[1]}
-                <br />
-                {t('requestSummary.possibleTimes')}{' '}
-                {Object.values(objecInfo.time)[0]}{' '}
-              </Typography>
-            </div>
-            <div>
-              <Title level={4}> {t('requestSummary.price')}</Title>
-              <Typography> {objecInfo.price} CHF </Typography>
-            </div>
-            <div>
-              <Title level={4}> {t('requestSummary.images')}</Title>
-              <Image
-                preview={{ visible: false }}
-                height={100}
-                width={100}
-                src={objecInfo.images[0]}
-                onClick={() => setVisible(true)}
-              ></Image>
-              <div style={{ display: 'none' }}>
-                <Image.PreviewGroup
-                  preview={{
-                    visible,
-                    onVisibleChange: (vis) => setVisible(vis),
-                  }}
-                >
-                  {objecInfo.images.map((image) => (
-                    <Image src={image} />
-                  ))}
-                </Image.PreviewGroup>
+            <div className="send-request-card-content">
+              <div className="table-wrapper">
+                <table>
+                  <tr>
+                    <th>{t('requestOverview.requestList.description')}</th>
+                    <td>{objecInfo.description}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestSummary.pickupAddress')}</th>
+                    <td>{objecInfo.pickup_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestSummary.deliveryAddress')}</th>
+                    <td>{objecInfo.delivery_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestSummary.timeframe')}</th>
+                    <td>
+                      {' '}
+                      {t('requestSummary.possibleDates')}{' '}
+                      {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
+                      <br />
+                      {t('requestSummary.possibleTimes')}{' '}
+                      {Object.values(objecInfo.time)[0]}{' '}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestSummary.price')}</th>
+                    <td>{objecInfo.price} CHF</td>
+                  </tr>
+                  <tr>
+                    <th>{t('requestSummary.images')}</th>
+                    <td>
+                      <Image
+                        preview={{ visible: false }}
+                        height={100}
+                        width={100}
+                        src={objecInfo.images[0]}
+                        onClick={() => setVisible(true)}
+                      ></Image>
+                      <div style={{ display: 'none' }}>
+                        <Image.PreviewGroup
+                          preview={{
+                            visible,
+                            onVisibleChange: (vis) => setVisible(vis),
+                          }}
+                        >
+                          {objecInfo.images.map((image) => (
+                            <Image src={image} />
+                          ))}
+                        </Image.PreviewGroup>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
-          </Card>
+          </div>
         </div>
-        <div className="form-button-container">
+
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           {uid ? (
             <ConfirmButton
@@ -162,7 +162,7 @@ const Summary: React.FC = () => {
             />
           )}
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

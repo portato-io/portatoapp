@@ -17,22 +17,18 @@ function RoutesContent() {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   return (
     <div>
-      <AutoCenter>
-        <ButtonToCreateNewReqRoutes
-          nextScreen={NEXT_SCREEN}
-          text={t('driveOverview.createButtonDescription')}
-          onClick={() => {
-            logEvent(analytics, 'drive_1_create_new_button_clicked');
-          }}
-        />
-        {uid !== 'undefined' ? (
-          <>
-            <FetchRoutes uid={uid} heightPortion={0.5} />
-          </>
-        ) : null}
-      </AutoCenter>
-
-      {/* TODO: Fetch routes and display them here, similar to send requests! */}
+      <ButtonToCreateNewReqRoutes
+        nextScreen={NEXT_SCREEN}
+        text={t('driveOverview.createButtonDescription')}
+        onClick={() => {
+          logEvent(analytics, 'drive_1_create_new_button_clicked');
+        }}
+      />
+      {uid !== 'undefined' ? (
+        <>
+          <FetchRoutes uid={uid} heightPortion={0.5} />
+        </>
+      ) : null}
     </div>
   );
 }

@@ -1,5 +1,13 @@
+/* Big mobiles */
+@media only screen and (min-width: 450px){
+  .main-navigation-bar .adm-tab-bar-item-title-with-icon {
+    display:inline-block;
+  }
+}
+
 /* Tablets */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+
 }
 
 /* Desktops and laptops */

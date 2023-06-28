@@ -37,10 +37,9 @@ function SingleTripContent(activeTab: any) {
   };
   return (
     <div>
-      <div style={{ marginTop: '5vh', height: '5vh' }}>
-        <Title level={5} style={{}}>
-          {t('driveTime.rangeTitle')}
-        </Title>
+      <div className="spacer-regular"></div>
+      <div className="input-wrapper">
+        <label>{t('driveTime.rangeTitle')}</label>
         <DatePicker
           name="time"
           inputReadOnly={true}
@@ -50,21 +49,10 @@ function SingleTripContent(activeTab: any) {
           }}
         />
       </div>
-      <Title level={5} style={{ marginTop: '10vh' }}>
-        {t('driveTime.timeTitle')}
-      </Title>
-
-      <Selector
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-        showCheckMark={false}
-        options={TIME}
-        multiple={true}
-        onChange={handleTimeChange}
-        defaultValue={routeInfo.time}
-      />
+      <div className="input-wrapper">
+        <label>{t('driveTime.timeTitle')}</label>
+        <Selector options={TIME} multiple={true} onChange={handleTimeChange} />
+      </div>
     </div>
   );
 }
