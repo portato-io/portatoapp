@@ -65,7 +65,6 @@ export function dealReducer(
       };
     }
     default: {
-      console.error('Unknown action type in dealReducer', action.type);
       return state;
     }
   }

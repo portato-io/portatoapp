@@ -87,7 +87,6 @@ export function routeReducer(
       return initialStateRoute;
 
     default: {
-      console.error('Unknown action type in route Reducer', action.type);
       return state;
     }
   }
