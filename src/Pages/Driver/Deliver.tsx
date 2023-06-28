@@ -2,10 +2,10 @@ import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { AutoCenter, Tabs } from 'antd-mobile';
 import RoutesContent from '../../Components/PageComponents/RoutesContent';
-import DealsContent from '../../Components/PageComponents/DealsContents';
+//import DealsContent from '../../Components/PageComponents/DealsContents';
 
 // TODO Mischa: Determine whether user has a route or not. If not; show routes page!
-const HAS_ROUTES = false;
+//const HAS_ROUTES = false;
 
 const Deliver: React.FC = () => {
   return (
