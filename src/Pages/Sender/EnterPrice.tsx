@@ -20,10 +20,19 @@ const EnterPrice: React.FC = () => {
     (state: { request: IRequestInfo }) => state.request
   );
 
+  const [form] = Form.useForm();
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleFormChange = () => {
+    const formValues = form.getFieldsValue();
+    const isFilled = Object.values(formValues).every((value) => !!value);
+    setIsFormFilled(isFilled);
+  };
+
   const [prices, setValues] = useState({
     price: objecInfo.price,
   });
-  console.log(prices.price);
+  console.log(objecInfo.price !== 0);
 
   const dispatch = useDispatch();
 
@@ -48,6 +57,8 @@ const EnterPrice: React.FC = () => {
       <div className="form-and-buttons-content-container">
         <div className="form-content-container">
           <Form
+            form={form}
+            onChange={handleFormChange}
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
             layout="horizontal"
@@ -64,16 +75,6 @@ const EnterPrice: React.FC = () => {
                 placeholder="E.g : 30 CHF"
               />
             </Form.Item>
-            <Card
-              bordered={false}
-              className="centered-card"
-              style={{ margin: 'auto', width: '80%' }}
-            >
-              Driver reward: x <br />
-              Portato fee: y <br />
-              VAT: z <br />
-              insurance: xy
-            </Card>
             <Form.Item
               style={{
                 marginTop: '20px',
@@ -99,7 +100,7 @@ const EnterPrice: React.FC = () => {
         </div>
         <div className="form-button-container">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton nextScreen={NEXT_SCREEN} disabled={!isFormFilled} />
         </div>
       </div>
     </PageLayout>
