@@ -8,6 +8,7 @@ import howItWorksVideo from '../Assets/Videos/video-start-1.mp4';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
+import LottieAnimation from '../Assets/Lotties/how-it-works-animation';
 
 require('../CSS/Home.css');
 
@@ -106,7 +107,8 @@ const Home: React.FC = () => {
 
       <section className="section">
         <h2>{t('general.howItWorks')}</h2>
-        <div className="video-wrapper">
+        <LottieAnimation />
+        {/* <div className="video-wrapper">
           <a href="javascript:void(0)" className="video-button-play"></a>
           <video
             className="box-shadow box-radius-style-1"
@@ -116,7 +118,7 @@ const Home: React.FC = () => {
           >
             <source src={howItWorksVideo}></source>
           </video>
-        </div>
+        </div> */}
       </section>
 
       <section className="section mod-text-align-right">
