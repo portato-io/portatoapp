@@ -20,6 +20,12 @@ const EnterAddress: React.FC = () => {
   );
   console.log(objecInfo);
   const { t } = useContext(TranslationContext);
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleFormFilledState = (adressfilled: boolean) => {
+    console.log(adressfilled);
+    setIsFormFilled(adressfilled);
+  };
   return (
     <PageLayout>
       <ProgressBar progress={PROGRESS} />
@@ -35,27 +41,22 @@ const EnterAddress: React.FC = () => {
               <AddressAutocomplete
                 type={'pickup'}
                 savedAddress={objecInfo.pickup_adress}
+                handleFormFilledState={handleFormFilledState}
               />
             </Form.Item>
             <Title level={4}>Delivery address</Title>
             <Form.Item>
-              {/* <Input
-            name="delivery_adress"
-            value={adresses.delivery_adress}
-            onChange={handleInputChange}
-            prefix={<SearchOutlined />}
-            style={{ background: '', width: '90%' }}
-          /> */}
               <AddressAutocomplete
                 type={'delivery'}
                 savedAddress={objecInfo.delivery_adress}
+                handleFormFilledState={handleFormFilledState}
               />
             </Form.Item>
           </Form>
         </div>
         <div className="form-button-container">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton nextScreen={NEXT_SCREEN} disabled={!isFormFilled} />
         </div>
       </div>
     </PageLayout>

@@ -28,6 +28,13 @@ const EnterRoute: React.FC = () => {
   const { t } = useContext(TranslationContext);
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
 
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleFormFilledState = (adressfilled: boolean) => {
+    console.log(adressfilled);
+    setIsFormFilled(adressfilled);
+  };
+
   const [routes, setValues] = useState({
     departure_adress: routeInfo.departure_adress,
     destination_adress: routeInfo.destination_adress,
@@ -72,6 +79,7 @@ const EnterRoute: React.FC = () => {
               <AddressAutocomplete
                 type={'departure'}
                 savedAddress={routeInfo.departure_adress}
+                handleFormFilledState={handleFormFilledState}
               />
             </Form.Item>
 
@@ -82,6 +90,7 @@ const EnterRoute: React.FC = () => {
               <AddressAutocomplete
                 type={'destination'}
                 savedAddress={routeInfo.destination_adress}
+                handleFormFilledState={handleFormFilledState}
               />
             </Form.Item>
             <Title level={4} style={{ backgroundColor: 'white' }}>
@@ -98,7 +107,7 @@ const EnterRoute: React.FC = () => {
         </div>
         <div className="form-button-container">
           <BackButton />
-          <NextButton nextScreen={NEXT_SCREEN} />
+          <NextButton nextScreen={NEXT_SCREEN} disabled={!isFormFilled} />
         </div>
       </div>
     </PageLayout>
