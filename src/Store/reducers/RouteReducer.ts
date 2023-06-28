@@ -10,7 +10,7 @@ const initialStateRoute: IRouteInfo = {
   time: [],
   timeRange: '',
   type: '',
-  days: '',
+  days: [],
   delivery_capacity: '',
 };
 
@@ -59,7 +59,7 @@ export function routeReducer(
     case 'SET_TIME': {
       return {
         ...state,
-        time: action.payload,
+        time: action.payload.time,
       };
     }
     case 'SET_TYPE': {

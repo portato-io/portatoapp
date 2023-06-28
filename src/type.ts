@@ -45,7 +45,7 @@ export interface IRouteInfo {
   acceptable_detour: number;
   time: string[];
   type: string; // recurrent/single
-  days: string;
+  days: string[];
   timeRange: string;
   delivery_capacity: string;
 }

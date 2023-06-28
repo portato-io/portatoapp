@@ -14,6 +14,8 @@ import { IRouteInfo } from '../../type';
 import { useSelector, useDispatch } from 'react-redux';
 import { emptyState } from '../../Store/actions/requestActionCreators';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
 const { Title } = Typography;
 const PROGRESS = 100;
@@ -111,8 +113,7 @@ const RouteSummary: React.FC = () => {
                 <Typography>
                   {t('driveSummary.each')} {Object.values(routeInfo.days)}
                   <br />
-                  {t('driveSummary.tripTime')}{' '}
-                  {Object.values(routeInfo.time)[0]}{' '}
+                  {t('driveSummary.tripTime')} {Object.values(routeInfo.time)}{' '}
                 </Typography>
               </div>
             ) : (
@@ -120,8 +121,7 @@ const RouteSummary: React.FC = () => {
                 <Title level={4}> {t('driveSummary.timing')}</Title>
                 <Typography>
                   {t('driveSummary.tripDates')} {routeInfo.timeRange} <br />
-                  {t('driveSummary.tripTime')}{' '}
-                  {Object.values(routeInfo.time)[0]}
+                  {t('driveSummary.tripTime')} {Object.values(routeInfo.time)}
                 </Typography>
               </div>
             )}
@@ -135,9 +135,20 @@ const RouteSummary: React.FC = () => {
         <div className="form-button-container">
           <BackButton />
           {user ? (
-            <ConfirmButton nextScreen={NEXT_SCREEN} onClick={handleConfirm} />
+            <ConfirmButton
+              nextScreen={NEXT_SCREEN}
+              onClick={() => {
+                handleConfirm();
+                logEvent(analytics, 'drive_5_summary_confirm_clicked');
+              }}
+            />
           ) : (
-            <SignInButton onClick={showModal} />
+            <SignInButton
+              onClick={() => {
+                showModal();
+                logEvent(analytics, 'drive_5_summary_sign_in_clicked');
+              }}
+            />
           )}
         </div>
       </div>
