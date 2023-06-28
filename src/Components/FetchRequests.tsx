@@ -45,7 +45,9 @@ const FetchRequests: React.FC<{
 
         // Filter out 'delivery confirmed' requests
         requests = requests.filter(
-          (request) => request.status !== 'delivery confirmed'
+          (request) =>
+            request.status !== 'delivery confirmed' &&
+            request.status !== 'deleted'
         );
 
         // If the user is an admin, only return 'unmatched' requests
@@ -111,10 +113,12 @@ const FetchRequests: React.FC<{
 
   const getNewDriver = (request: IRequestInfo) => {
     updateRequestStatus(request.uid, request.id, 'unmatched');
+    fetchAndSortRequests();
   };
 
   const confirmDelivery = (request: IRequestInfo) => {
     updateRequestStatus(request.uid, request.id, 'delivery confirmed');
+    fetchAndSortRequests();
   };
 
   const deleteRequest = (request: IRequestInfo) => {
