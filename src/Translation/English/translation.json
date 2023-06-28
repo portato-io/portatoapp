@@ -134,7 +134,8 @@
   },
   "driveOverview": {
     "newTitle": "Want to register a ride?",
-    "createButtonDescription": "Create",
+    "createNewRouteTitle": "Create a new route",
+    "createButtonDescription": "Create route",
     "|*TBI*|currentTitle": "Your current routes"
   },
   "driveAddresses": {

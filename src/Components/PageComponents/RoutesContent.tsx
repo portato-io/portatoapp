@@ -11,13 +11,10 @@ function RoutesContent() {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   return (
     <div>
-      <AutoCenter>
-        <ButtonToCreateNewReqRoutes
-          nextScreen={NEXT_SCREEN}
-          text={t('driveOverview.createButtonDescription')}
-        />
-      </AutoCenter>
-
+      <ButtonToCreateNewReqRoutes
+        nextScreen={NEXT_SCREEN}
+        text={t('driveOverview.createButtonDescription')}
+      />
       {/* TODO: Fetch routes and display them here, similar to send requests! */}
     </div>
   );

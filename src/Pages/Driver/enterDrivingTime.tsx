@@ -24,36 +24,34 @@ const EnterDeliveryTime: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
-          >
-            <Title level={4}>{t('driveTime.title')}</Title>
-            <Tabs onChange={handleTabChange}>
-              <Tabs.Tab
-                title={t('driveTime.singleTrip')}
-                key={t('driveTime.singleTrip')}
-              >
-                <SingleTripContent activeTab={activeTab} />
-              </Tabs.Tab>
-              <Tabs.Tab
-                title={t('driveTime.recurringRide')}
-                key={t('driveTime.recurringRide')}
-              >
-                <RecurrentTripContent activeTab={activeTab} />
-              </Tabs.Tab>
-            </Tabs>
-          </Form>
-        </div>
-        <div className="form-button-container">
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Form
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <h2>{t('driveTime.title')}</h2>
+          <Tabs onChange={handleTabChange}>
+            <Tabs.Tab
+              title={t('driveTime.singleTrip')}
+              key={t('driveTime.singleTrip')}
+            >
+              <SingleTripContent activeTab={activeTab} />
+            </Tabs.Tab>
+            <Tabs.Tab
+              title={t('driveTime.recurringRide')}
+              key={t('driveTime.recurringRide')}
+            >
+              <RecurrentTripContent activeTab={activeTab} />
+            </Tabs.Tab>
+          </Tabs>
+        </Form>
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           <NextButton nextScreen={NEXT_SCREEN} />
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

@@ -22,30 +22,28 @@ const EnterDeliveryCapacity: React.FC = () => {
   };
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
-          >
-            <Title level={4}>{t('driveCapacity.title')}</Title>
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Form
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <Title level={4}>{t('driveCapacity.title')}</Title>
 
-            <Selector
-              columns={1}
-              options={CAPACITY_OPTIONS}
-              onChange={handleCapChange}
-              className="form-element-centered"
-              style={{ marginTop: '20px' }}
-            />
-          </Form>
-        </div>
-        <div className="form-button-container">
+          <Selector
+            columns={1}
+            options={CAPACITY_OPTIONS}
+            onChange={handleCapChange}
+            className="form-element-centered"
+            style={{ marginTop: '20px' }}
+          />
+        </Form>
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           <NextButton nextScreen={NEXT_SCREEN} />
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };
