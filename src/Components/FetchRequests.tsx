@@ -164,7 +164,7 @@ const FetchRequests: React.FC<{
               Date range - From {request.dateRange[0]} - To{' '}
               {request.dateRange[1]}
             </div>
-            <div>Time: {request.time}</div>
+            <div>Time: {Object.values(requests[0].time)[0]}</div>
             <div>Description: {request.description}</div>
             <div>
               {admin ? <pre>{JSON.stringify(request, null, 2)}</pre> : null}
