@@ -66,106 +66,84 @@ const EnterObjInfo: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Form
-            onFinish={onFinish}
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+
+        <Form
+          onFinish={onFinish}
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <h2>{t('requestInfo.title')}</h2>
+          <Form.Item
+            className="input-wrapper"
+            label={t('requestInfo.name')}
+            //name="name"
+            //rules={[{ required: true, message: 'Please input your username!' }]}
           >
-            <Title level={3}>{t('requestInfo.title')}</Title>
-            <Form.Item
-              label={
-                <label className="font-bold">{t('requestInfo.name')}</label>
-              }
-              //name="name"
-              //rules={[{ required: true, message: 'Please input your username!' }]}
-            >
-              <Input
-                name="name"
-                value={object.name}
-                onChange={handleInputChange}
-                placeholder={t('requestInfo.namePlaceholder') || ''}
-              />
-            </Form.Item>
+            <Input
+              name="name"
+              value={object.name}
+              onChange={handleInputChange}
+              placeholder={t('requestInfo.namePlaceholder') || ''}
+            />
+          </Form.Item>
 
-            <Form.Item
-              label={
-                <label className="font-bold">
-                  {t('requestInfo.description')}
-                </label>
-              }
+          <Form.Item
+            className="input-wrapper"
+            label={t('requestInfo.description')}
 
-              //rules={[{ required: true, message: 'Please input description!' }]}
-            >
-              <TextArea
-                name="description"
-                value={object.description}
-                onChange={handleInputChange}
-                rows={3}
-                placeholder={t('requestInfo.descriptionPlaceholder') || ''}
-              />
-            </Form.Item>
+            //rules={[{ required: true, message: 'Please input description!' }]}
+          >
+            <TextArea
+              name="description"
+              value={object.description}
+              onChange={handleInputChange}
+              rows={3}
+              placeholder={t('requestInfo.descriptionPlaceholder') || ''}
+            />
+          </Form.Item>
 
-            <Form.Item
-              label={
-                <label className="font-bold">{t('requestInfo.size')}</label>
-              }
-            >
-              <Selector
-                columns={2}
-                options={CAPACITY_OPTIONS}
-                onChange={handleCapChange}
-                defaultValue={[object.size[0]]}
-                className="form-element-centered"
-                style={{
-                  marginTop: '20px',
-                  '--border-radius': '100px',
-                  '--border': 'solid transparent 1px',
-                  '--checked-border': 'solid var(--adm-color-primary) 1px',
-                  '--padding': '8px 24px',
-                }}
-              />
-            </Form.Item>
+          <Form.Item className="input-wrapper" label={t('requestInfo.size')}>
+            <Selector
+              columns={2}
+              options={CAPACITY_OPTIONS}
+              onChange={handleCapChange}
+              defaultValue={[object.size[0]]}
+              className="form-element-centered"
+              style={{
+                marginTop: '20px',
+                '--border-radius': '100px',
+                '--border': 'solid transparent 1px',
+                '--checked-border': 'solid var(--adm-color-primary) 1px',
+                '--padding': '8px 24px',
+              }}
+            />
+          </Form.Item>
 
-            <Form.Item
-              label={
-                <label className="font-bold">{t('requestInfo.weight')}</label>
-              }
+          <Form.Item className="input-wrapper" label={t('requestInfo.weight')}>
+            <Radio.Group
+              name="weight"
+              value={object.weight}
+              onChange={handleInputChange}
             >
-              <Radio.Group
-                name="weight"
-                value={object.weight}
-                onChange={handleInputChange}
-                className="form-element-centered"
-              >
-                <Radio.Button value="-5 kg" style={{ background: '#F8F9FE' }}>
-                  {'<'}5 kg
-                </Radio.Button>
-                <Radio.Button value="5-20 kg" style={{ background: '#F8F9FE' }}>
-                  5-20 kg
-                </Radio.Button>
-                <Radio.Button value="+20 kg" style={{ background: '#F8F9FE' }}>
-                  +20 kg
-                </Radio.Button>
-              </Radio.Group>
-            </Form.Item>
-            <Form.Item
-              label={
-                <label className="font-bold">
-                  {t('requestInfo.uploadImages')}
-                </label>
-              }
-            >
-              <UploadImage />
-            </Form.Item>
-          </Form>
-        </div>
+              <Radio value="-5 kg">0-5 kg</Radio>
+              <Radio value="5-20 kg">5-20 kg</Radio>
+              <Radio value="+20 kg">20+ kg</Radio>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item
+            className="input-wrapper"
+            label={t('requestInfo.uploadImages')}
+          >
+            <UploadImage />
+          </Form.Item>
+        </Form>
+
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container
           & move buttons out of div, for responsive scrolling! */}
-        <div className="form-button-container">
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           <NextButton
             nextScreen={NEXT_SCREEN}
@@ -174,7 +152,7 @@ const EnterObjInfo: React.FC = () => {
             }}
           />
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

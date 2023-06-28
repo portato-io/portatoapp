@@ -12,14 +12,12 @@ const ConfirmButton = ({ nextScreen = '/', onClick }: any) => {
   };
   return (
     <div className="form-button-right">
-      <Button
-        type="primary"
-        size="large"
+      <a
+        className="button button-solid box-shadow box-radius-default box-shadow-effect"
         onClick={handleConfirmClick}
-        style={{ width: '100%' }}
       >
         {t('navigationButton.confirm')}
-      </Button>
+      </a>
     </div>
   );
 };

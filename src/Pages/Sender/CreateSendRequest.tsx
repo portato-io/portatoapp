@@ -19,15 +19,18 @@ const CreateSendRequest: React.FC = () => {
 
   return (
     <PageLayout>
-      <AutoCenter>
-        <ButtonToCreateNewReqRoutes
-          nextScreen={NEXT_SCREEN}
-          text={t('requestOverview.createButtonDescription')}
-          onClick={() => {
-            logEvent(analytics, 'send_1_create_new_button_clicked');
-          }}
-        />
-      </AutoCenter>
+      <section className="section">
+        <h2>{t('requestOverview.newTitle')}</h2>
+        <div>
+          <ButtonToCreateNewReqRoutes
+            nextScreen={NEXT_SCREEN}
+            text={t('requestOverview.createButtonDescription')}
+            onClick={() => {
+              logEvent(analytics, 'send_1_create_new_button_clicked');
+            }}
+          />
+        </div>
+      </section>
 
       {uid !== 'undefined' ? (
         <>

@@ -66,7 +66,21 @@
   "requestOverview": {
     "newTitle": "Got something to send?",
     "createButtonDescription": "Create request",
-    "currentTitle": "Your current send requests"
+    "currentTitle": "Your current send requests",
+
+    "requestList": {
+        "price": "Price",
+        "weight": "Weight",
+        "arrivalAdress":"Arrival address",
+        "dateRange":"Date range",
+        "from": "From",
+        "to": "to",
+        "time": "Time",
+        "size": "Size",
+        "Images": "Images",
+        "description": "Description"
+    }
+
   },
 
   "requestInfo": {
@@ -88,6 +102,7 @@
   "requestTime": {
     "title": "When do you want the shipment to be picked up?",
     "dates": "Dates",
+    "times": "Times",
     "|*TBI*|startDatePlaceholder": "Start date",
     "|*TBI*|endDatePlaceholder": "End date",
     "|*TBI*|time": "Time",
@@ -97,6 +112,7 @@
   },
   "requestCost": {
     "title": "How much is the transport worth to you?",
+    "label": "Price",
     "pricePlaceholder": "e.g., 30 CHF",
     "driverReward": "Reward for driver:",
     "portatoFee": "Portato fee:",

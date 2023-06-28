@@ -19,6 +19,9 @@
     margin-top: 25px;
     margin-bottom: 25px;
 }
+.profile-image-bubble > img {
+    object-fit: cover;
+}
 
 .settings-card {
     border-radius: 20px;
