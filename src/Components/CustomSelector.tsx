@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import { Selector, SelectorProps } from 'antd-mobile';
-import styled from 'styled-components';
 
 declare type SelectorValue = string | number;
 
