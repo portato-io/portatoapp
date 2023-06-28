@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRouteInfo } from '../type';
-import { Card } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
+import { Card, Button, Popconfirm } from 'antd';
 import { useNavigate } from 'react-router';
 
 const FetchRoutes: React.FC<{
@@ -52,6 +53,12 @@ const FetchRoutes: React.FC<{
     navigate(`/admin/deal_suggester/${routeId}/${routeUid}`);
   };
 
+  const deleteRoute = (request: IRouteInfo) => {
+    (request.uid, request.id, 'deleted').then(() => {
+      fetchAndSortRequests();
+    });
+  };
+
   const containerHeight = window.innerHeight * heightPortion;
   return (
     <div>
@@ -70,7 +77,23 @@ const FetchRoutes: React.FC<{
               alignItems: 'center',
             }}
           >
-            <Card style={{ marginTop: '5vh', width: '80%' }} title={route.id}>
+            <Card
+              style={{ marginTop: '5vh', width: '80%' }}
+              title={route.id}
+              extra={
+                <Popconfirm
+                  title="Do you want to delete this request?"
+                  onConfirm={() => deleteRoute(route)}
+                  onCancel={() => console.log('Cancelled')}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button type="link">
+                    <DeleteOutlined />
+                  </Button>
+                </Popconfirm>
+              }
+            >
               {route.departure_adress}/{route.destination_adress}
               {admin ? <pre>{JSON.stringify(route, null, 2)}</pre> : null}
             </Card>
