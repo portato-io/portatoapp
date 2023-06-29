@@ -79,7 +79,8 @@ const sendNotificationEmail = functions
           from: '"Notifications" <notifications@portato.io>',
           to: targetEmail, // Use the fetched email address
           subject: title,
-          text: body,
+          text: body.replace(/<[^>]*>?/gm, ''), // Strip HTML tags for the plain text version
+          html: body, // Also include HTML in your email
         };
 
         console.log('Sending email...');
