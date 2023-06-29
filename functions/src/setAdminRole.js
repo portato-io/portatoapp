@@ -5,7 +5,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const email = 'conradbielitz@gmail.com';
+const email = 'conrad@portato.io';
 
 admin
   .auth()
