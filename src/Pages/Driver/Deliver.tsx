@@ -4,9 +4,10 @@ import { AutoCenter, Tabs } from 'antd-mobile';
 import RoutesContent from '../../Components/PageComponents/RoutesContent';
 import DealsContent from '../../Components/PageComponents/DealsContents';
 import { useTranslation } from 'react-i18next';
+//import DealsContent from '../../Components/PageComponents/DealsContents';
 
 // TODO Mischa: Determine whether user has a route or not. If not; show routes page!
-const HAS_ROUTES = false;
+//const HAS_ROUTES = false;
 
 const Deliver: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string

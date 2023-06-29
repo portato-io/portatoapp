@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
-import { Card, Button, message } from 'antd';
+import { Button, message, Popconfirm } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
 import {
-  updateRequestStatus,
+  updateObjectStatus,
   fetchRouteUidFromDeal,
   uploadDealToFirebase,
 } from '../linksStoreToFirebase';
@@ -22,49 +23,42 @@ const FetchRequests: React.FC<{
   const [requests, setRequestState] = useState<IRequestInfo[]>([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { t } = useTranslation<string>();
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
   // then we use await to store the values in state
 
-  useEffect(() => {
-    // TODO: Handle uid undefined case
+  const fetchAndSortRequests = async () => {
     if (!uid) {
       console.log('uid is undefined');
       return;
     }
 
-    const fetchData = fetchDataOnce(uid, 'requests').then((storesObject) => {
-      // Check if storesObject is an object before returning it
-      if (storesObject && typeof storesObject === 'object') {
-        let storesArray = Object.values(storesObject) as IRequestInfo[]; // Type assertion here
+    try {
+      const fetchData = await fetchDataOnce(uid, 'requests');
+      let requests: IRequestInfo[] = [];
+
+      // Check if fetchData is an object before returning it
+      if (fetchData && typeof fetchData === 'object') {
+        requests = Object.values(fetchData) as IRequestInfo[];
 
         // Filter out 'delivery confirmed' requests
-        storesArray = storesArray.filter(
-          (request) => request.status !== 'delivery confirmed'
+        requests = requests.filter(
+          (request) =>
+            request.status !== 'delivery confirmed' &&
+            request.status !== 'deleted'
         );
 
         // If the user is an admin, only return 'unmatched' requests
         if (admin) {
-          storesArray = storesArray.filter(
+          requests = requests.filter(
             (request) =>
               request.status === 'unmatched' || request.status === 'new driver'
           );
         }
 
-        return storesArray;
-      } else {
-        console.log('Data is not an object:', storesObject);
-        return [];
-      }
-    });
-
-    const getUserRequests = async () => {
-      try {
-        const requests = await fetchData;
-        // Sort requests to have 'matched' and then 'contacted' requests at the top
-        const sortedRequests = requests.sort((a, b) => {
+        requests.sort((a, b) => {
           if (a.status === 'matched') {
             return -1;
           } else if (b.status === 'matched') {
@@ -76,14 +70,18 @@ const FetchRequests: React.FC<{
           }
           return 0;
         });
-
-        setRequestState(sortedRequests);
-      } catch (error) {
-        console.log('Error fetching data: ', error);
+      } else {
+        console.log('Data is not an object:', fetchData);
       }
-    };
 
-    getUserRequests();
+      setRequestState(requests);
+    } catch (error) {
+      console.log('Error fetching data: ', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAndSortRequests();
   }, [uid]);
 
   const match = (routeId: string, routeUid: string) => {
@@ -95,7 +93,7 @@ const FetchRequests: React.FC<{
     dispatch(setRequest(request));
     dispatch(setStatus('No Match'));
     uploadDealToFirebase(dispatch);
-    updateRequestStatus(request.uid, request.id, 'no match');
+    updateObjectStatus(request.uid, request.id, 'no match', 'requests');
     console.log('Creating deal with status Backlog for request: ' + request.id);
   };
 
@@ -114,11 +112,26 @@ const FetchRequests: React.FC<{
   };
 
   const getNewDriver = (request: IRequestInfo) => {
-    updateRequestStatus(request.uid, request.id, 'unmatched');
+    updateObjectStatus(request.uid, request.id, 'unmatched', 'requests');
+    fetchAndSortRequests();
   };
 
   const confirmDelivery = (request: IRequestInfo) => {
-    updateRequestStatus(request.uid, request.id, 'delivery confirmed');
+    updateObjectStatus(
+      request.uid,
+      request.id,
+      'delivery confirmed',
+      'requests'
+    );
+    fetchAndSortRequests();
+  };
+
+  const deleteRequest = (request: IRequestInfo) => {
+    updateObjectStatus(request.uid, request.id, 'deleted', 'requests').then(
+      () => {
+        fetchAndSortRequests();
+      }
+    );
   };
 
   // Return early, if no requests exist; avoid adding the title altogether.
@@ -142,6 +155,23 @@ const FetchRequests: React.FC<{
           >
             <div className="send-request-card-header">
               <h4>{request.name}</h4>
+
+              <div
+                className="delete-icon"
+                style={{ position: 'absolute', top: 0, right: 0 }}
+              >
+                <Popconfirm
+                  title="Do you want to delete this request?"
+                  onConfirm={() => deleteRequest(request)}
+                  onCancel={() => console.log('Cancelled')}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button type="link">
+                    <DeleteOutlined />
+                  </Button>
+                </Popconfirm>
+              </div>
             </div>
             <div className="send-request-card-content">
               <div className="table-wrapper">
@@ -214,7 +244,6 @@ const FetchRequests: React.FC<{
                     </Button>
                   )
                 )}
-
                 {request.status === 'contacted' && (
                   <>
                     <Button

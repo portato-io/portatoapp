@@ -48,6 +48,7 @@ export interface IRouteInfo {
   days: string[];
   timeRange: string;
   delivery_capacity: string;
+  routeStatus: string;
 }
 
 export type RouteInfoAction = {

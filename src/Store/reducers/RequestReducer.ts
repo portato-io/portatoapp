@@ -96,7 +96,6 @@ export function requestReducer(
       return initialState;
 
     default: {
-      console.error('Unknown action type in request Reducer', action.type);
       return state;
     }
   }
