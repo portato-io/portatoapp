@@ -51,7 +51,12 @@ function SingleTripContent(activeTab: any) {
       </div>
       <div className="input-wrapper">
         <label>{t('driveTime.timeTitle')}</label>
-        <Selector options={TIME} multiple={true} onChange={handleTimeChange} />
+        <Selector
+          options={TIME}
+          multiple={true}
+          onChange={handleTimeChange}
+          defaultValue={routeInfo.time}
+        />
       </div>
     </div>
   );

@@ -41,15 +41,21 @@ function RecurrentTripContent(activeTab: any) {
       <div className="input-wrapper">
         <label>{t('driveTime.weekdayTitle')}</label>
         <Selector
-          columns={7}
+          columns={4}
           options={DAYS}
           multiple={true}
           onChange={handleDaysChange}
+          defaultValue={routeInfo.days}
         />
       </div>
       <div className="input-wrapper">
         <label>{t('driveTime.timeTitle')}</label>
-        <Selector options={TIME} multiple={true} onChange={handleTimeChange} />
+        <Selector
+          options={TIME}
+          multiple={true}
+          onChange={handleTimeChange}
+          defaultValue={routeInfo.time}
+        />
       </div>
     </div>
   );

@@ -125,7 +125,7 @@ const RouteSummary: React.FC = () => {
                         <div>
                           <Typography>
                             {routeInfo.timeRange} <br />
-                            {Object.values(routeInfo.time)[0]}
+                            {Object.values(routeInfo.time)}
                           </Typography>
                         </div>
                       )}

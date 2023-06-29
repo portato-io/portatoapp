@@ -46,6 +46,7 @@ const EnterDeliveryCapacity: React.FC = () => {
           <Selector
             columns={1}
             options={CAPACITY_OPTIONS}
+            defaultValue={[routeInfo.delivery_capacity[0]]}
             onChange={handleCapChange}
             className="form-element-centered"
             style={{ marginTop: '20px' }}

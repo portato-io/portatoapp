@@ -143,7 +143,7 @@ const FetchRoutes: React.FC<{
                             <br />
                             {t('driveSummary.tripTime')}{' '}
                             {route.time && typeof route.time === 'object'
-                              ? Object.values(route.time)[0]
+                              ? Object.values(route.time)
                               : 'No data for time'}{' '}
                           </Typography>
                         </div>
@@ -155,7 +155,7 @@ const FetchRoutes: React.FC<{
                             <br />
                             {t('driveSummary.tripTime')}{' '}
                             {route.time && typeof route.time === 'object'
-                              ? Object.values(route.time)[0]
+                              ? Object.values(route.time)
                               : 'No data for time'}
                           </Typography>
                         </div>
