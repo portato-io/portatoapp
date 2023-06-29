@@ -65,7 +65,7 @@ const FetchRoutes: React.FC<{
     <div>
       <div className="spacer-big"></div>
       {admin ? null : <h2>{t('driveOverview.currentTitle')}</h2>}
-      {routes.map((route) => (
+      {routes.map((route, index) => (
         <div
           key={route.id}
           className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style"
@@ -76,7 +76,7 @@ const FetchRoutes: React.FC<{
             }`}
           >
             <div className="send-request-card-header mod-display-flex mod-flex-space-between">
-              <h4>{route.id}</h4>
+              <h4>My Trip #{index + 1}</h4>
 
               <div className="card-actions">
                 <div>
