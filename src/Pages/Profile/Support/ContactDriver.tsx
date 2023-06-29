@@ -69,11 +69,7 @@ const ContactDriver: React.FC = () => {
     const valuesWithUid = {
       ...values,
       uid: route_uid,
-      message:
-        'This message concerns the following request: ' +
-        emailContent +
-        '\n' +
-        values.message,
+      message: ' ' + emailContent + '\n' + values.message,
       images: images,
     };
 

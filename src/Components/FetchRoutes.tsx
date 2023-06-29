@@ -117,6 +117,18 @@ const FetchRoutes: React.FC<{
                     <th>{t('driveSummary.tripType')}</th>
                     <td>{route.type}</td>
                   </tr>
+                  {admin ? (
+                    <tr>
+                      <th>Uid</th>
+                      <td>{route.uid}</td>
+                    </tr>
+                  ) : null}
+                  {admin ? (
+                    <tr>
+                      <th>id</th>
+                      <td>{route.id}</td>
+                    </tr>
+                  ) : null}
                   <tr>
                     <th></th>
                     <td>
