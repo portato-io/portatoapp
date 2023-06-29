@@ -4,10 +4,7 @@ import * as firebaseui from 'firebaseui';
 import { GoogleAuthProvider, EmailAuthProvider } from 'firebase/auth';
 
 const uiConfig = {
-  signInOptions: [
-    GoogleAuthProvider.PROVIDER_ID,
-    EmailAuthProvider.PROVIDER_ID,
-  ],
+  signInOptions: [EmailAuthProvider.PROVIDER_ID],
   callbacks: {},
 };
 const uiInstance = new firebaseui.auth.AuthUI(auth);
