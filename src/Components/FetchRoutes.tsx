@@ -3,7 +3,6 @@ import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRouteInfo } from '../type';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Typography } from 'antd';
-import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { updateObjectStatus } from '../linksStoreToFirebase';
 const { Title } = Typography;
@@ -58,10 +57,10 @@ const FetchRoutes: React.FC<{
   };
 
   return (
-    <section className="section">
+    <section className="">
       <div className="spacer-big"></div>
       {admin ? null : <h2>{t('requestOverview.currentTitle')}</h2>}
-      {routes.map((route) => (
+      {routes.map((route, index) => (
         <div
           key={route.id}
           className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style"
@@ -72,7 +71,7 @@ const FetchRoutes: React.FC<{
             }`}
           >
             <div className="send-request-card-header">
-              <h4>{route.id}</h4>
+              <h4>{`My Trip #${index + 1}`}</h4>
 
               <div
                 className="delete-icon"
