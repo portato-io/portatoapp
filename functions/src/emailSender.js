@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const corsModule = require('cors');
+const axios = require('axios');
 const { getUserEmail } = require('./firebaseAdminFunc'); // make sure to point to the correct path of the firebaseAdminFunc.js file
 
 const cors = corsModule({ origin: true });
@@ -40,17 +41,25 @@ const sendEmailToUid = (req, res) => {
 
       // If images is not empty, then attach it to the email
       if (images && Array.isArray(images) && images.length > 0) {
-        mailOptions.attachments = images.map((url, index) => {
-          return {
-            filename: `image${index + 1}.jpg`,
-            path: url,
-            cid: `image${index + 1}`, // Same cid value as in the html img src
-          };
-        });
+        const attachments = await Promise.all(
+          images.map(async (url, index) => {
+            const response = await axios.get(url, {
+              responseType: 'arraybuffer',
+            });
+            const buffer = Buffer.from(response.data, 'utf-8');
+            return {
+              filename: `image${index + 1}.jpg`,
+              content: buffer,
+              cid: `image${index + 1}`, // Same cid value as in the html img src
+            };
+          })
+        );
+
+        mailOptions.attachments = attachments;
         // Add the attachments
         // Now you can use cid in your html to refer to the images
         mailOptions.html =
-          `${message}<br/>` +
+          `${name} (${email}) contacted you regarding the following transport request: ${message}<br/>` +
           images
             .map((url, index) => `<img src="cid:image${index + 1}"/>`)
             .join('');
