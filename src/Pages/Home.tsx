@@ -5,6 +5,23 @@ import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
 import LottieAnimation from '../Assets/Lotties/how-it-works-animation';
+import ConradImage from '../Assets/Images/team/conrad.jpg';
+import HugoImage from '../Assets/Images/team/hugo.jpg';
+import MehdiImage from '../Assets/Images/team/mehdi.jpg';
+import MischaImage from '../Assets/Images/team/mischa.jpg';
+import ChiaraImage from '../Assets/Images/team/chiara.jpg';
+
+interface Images {
+  [key: string]: string;
+}
+
+const teamMemberImages: Images = {
+  Conrad: ConradImage,
+  Hugo: HugoImage,
+  Mehdi: MehdiImage,
+  Mischa: MischaImage,
+  Chiara: ChiaraImage,
+};
 
 require('../CSS/Home.css');
 
@@ -12,8 +29,11 @@ const Home: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const teamMemberNames = ['Conrad', 'Mischa', 'Chiara', 'Hugo', 'Mehdi'];
 
-  function getTeamMemberImage(image: string): string {
-    return image || 'https://images.app.goo.gl/g1PsaaVtxwriDuqVA'; // Use placeholder image if URL is not provided
+  function getTeamMemberImage(memberName: string): string {
+    return (
+      teamMemberImages[memberName] ||
+      'https://images.app.goo.gl/g1PsaaVtxwriDuqVA'
+    ); // Use placeholder image if image is not found
   }
 
   const TeamMember: React.FC<{ memberName: string }> = ({ memberName }) => {
