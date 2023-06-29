@@ -30,6 +30,11 @@
 	top:-2px;
 }
 
+button .icon + span {
+	position: relative;
+	top:-3px;
+}
+
 
 /* FORM ELEMENTS ---------------------------------------- */
 .section-form .progress-bar-indicator {
@@ -86,6 +91,10 @@ textarea.form-input::placeholder {
 }
 
 /* OVERWRITING EXISTING ---------------------------------*/
+.ant-modal-root .ant-modal {
+	margin-left:auto;
+	margin-right:auto;
+}
 .ant-form-item-row {
 	display:block;
 }

@@ -33,7 +33,9 @@ const CreateSendRequest: React.FC = () => {
 
       {uid !== 'undefined' ? (
         <>
-          <FetchRequests uid={uid} heightPortion={0.5} />
+          <section className="section">
+            <FetchRequests uid={uid} heightPortion={0.5} />
+          </section>
         </>
       ) : null}
     </PageLayout>

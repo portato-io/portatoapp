@@ -12,7 +12,9 @@
     "howItWorks": "How it works",
     "moreInfo": "Learn more",
     "send": "Ship",
-    "deliver": "Drive"
+    "deliver": "Drive",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete this?"
   },
   
   "timeSelector": {

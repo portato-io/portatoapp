@@ -140,7 +140,7 @@ const FetchRequests: React.FC<{
   }
 
   return (
-    <section className="section">
+    <div>
       <div className="spacer-big"></div>
       {admin ? null : <h2>{t('requestOverview.currentTitle')}</h2>}
       {requests.map((request) => (
@@ -153,24 +153,25 @@ const FetchRequests: React.FC<{
               request.status === 'matched' ? 'highlight-card' : ''
             }`}
           >
-            <div className="send-request-card-header">
+            <div className="send-request-card-header mod-display-flex mod-flex-space-between">
               <h4>{request.name}</h4>
-
-              <div
-                className="delete-icon"
-                style={{ position: 'absolute', top: 0, right: 0 }}
-              >
-                <Popconfirm
-                  title="Do you want to delete this request?"
-                  onConfirm={() => deleteRequest(request)}
-                  onCancel={() => console.log('Cancelled')}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <Button type="link">
-                    <DeleteOutlined />
-                  </Button>
-                </Popconfirm>
+              <div className="card-actions">
+                <div>
+                  <Popconfirm
+                    title="Do you want to delete this request?"
+                    onConfirm={() => deleteRequest(request)}
+                    onCancel={() => console.log('Cancelled')}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button type="link">
+                      <i className="icon icon-bin"></i>
+                      <span className="mod-hide-mobile">
+                        {t('general.delete')}
+                      </span>
+                    </Button>
+                  </Popconfirm>
+                </div>
               </div>
             </div>
             <div className="send-request-card-content">
@@ -265,7 +266,7 @@ const FetchRequests: React.FC<{
           </div>
         </div>
       ))}
-    </section>
+    </div>
   );
 };
 
