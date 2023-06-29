@@ -131,7 +131,7 @@ const DealSuggester: React.FC = () => {
           // Prepare the request body
           const notificationBody = {
             title: 'Potential delivery solution',
-            body: 'We have found a match for your delivery request.',
+            body: 'We have found a match for your delivery request.\n Plese go to your send request page to find more information',
             tokens: tokens, // Send the entire array of tokens
           };
 
@@ -158,7 +158,7 @@ const DealSuggester: React.FC = () => {
 
         const emailBody = {
           title: 'Potential delivery solution',
-          body: 'We have found a match for your delivery request.',
+          body: 'We have found a match for your delivery request. Please go to <a href="https://www.portato.io/createSendRequest">Your send request page</a> to find more information',
           uid: UID,
         };
 
