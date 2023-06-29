@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
 import {
-  updateRequestStatus,
+  updateObjectStatus,
   fetchRouteUidFromDeal,
   uploadDealToFirebase,
 } from '../linksStoreToFirebase';
@@ -93,7 +93,7 @@ const FetchRequests: React.FC<{
     dispatch(setRequest(request));
     dispatch(setStatus('No Match'));
     uploadDealToFirebase(dispatch);
-    updateRequestStatus(request.uid, request.id, 'no match');
+    updateObjectStatus(request.uid, request.id, 'no match', 'requests');
     console.log('Creating deal with status Backlog for request: ' + request.id);
   };
 
@@ -112,19 +112,26 @@ const FetchRequests: React.FC<{
   };
 
   const getNewDriver = (request: IRequestInfo) => {
-    updateRequestStatus(request.uid, request.id, 'unmatched');
+    updateObjectStatus(request.uid, request.id, 'unmatched', 'requests');
     fetchAndSortRequests();
   };
 
   const confirmDelivery = (request: IRequestInfo) => {
-    updateRequestStatus(request.uid, request.id, 'delivery confirmed');
+    updateObjectStatus(
+      request.uid,
+      request.id,
+      'delivery confirmed',
+      'requests'
+    );
     fetchAndSortRequests();
   };
 
   const deleteRequest = (request: IRequestInfo) => {
-    updateRequestStatus(request.uid, request.id, 'deleted').then(() => {
-      fetchAndSortRequests();
-    });
+    updateObjectStatus(request.uid, request.id, 'deleted', 'requests').then(
+      () => {
+        fetchAndSortRequests();
+      }
+    );
   };
 
   // Return early, if no requests exist; avoid adding the title altogether.
@@ -145,19 +152,6 @@ const FetchRequests: React.FC<{
             className={`send-request-card box-shadow ${
               request.status === 'matched' ? 'highlight-card' : ''
             }`}
-            extra={
-              <Popconfirm
-                title="Do you want to delete this request?"
-                onConfirm={() => deleteRequest(request)}
-                onCancel={() => console.log('Cancelled')}
-                okText="Yes"
-                cancelText="No"
-              >
-                <Button type="link">
-                  <DeleteOutlined />
-                </Button>
-              </Popconfirm>
-            }
           >
             <div className="send-request-card-header">
               <h4>{request.name}</h4>
@@ -237,7 +231,6 @@ const FetchRequests: React.FC<{
                     </Button>
                   )
                 )}
-
                 {request.status === 'contacted' && (
                   <>
                     <Button
@@ -254,6 +247,20 @@ const FetchRequests: React.FC<{
                     </Button>
                   </>
                 )}
+                extra=
+                {
+                  <Popconfirm
+                    title="Do you want to delete this request?"
+                    onConfirm={() => deleteRequest(request)}
+                    onCancel={() => console.log('Cancelled')}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button type="link">
+                      <DeleteOutlined />
+                    </Button>
+                  </Popconfirm>
+                }
               </div>
             </div>
           </div>

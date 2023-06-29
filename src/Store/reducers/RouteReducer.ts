@@ -12,6 +12,7 @@ const initialStateRoute: IRouteInfo = {
   type: '',
   days: [],
   delivery_capacity: '',
+  routeStatus: '',
 };
 
 export function routeReducer(

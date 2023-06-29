@@ -14,7 +14,7 @@ import {
   getUserTokens,
   fetchDataOnce,
   checkPreviousRoutes,
-  updateRequestStatus,
+  updateObjectStatus,
   updateRequestDealId,
 } from '../../linksStoreToFirebase';
 import { IRouteInfo, IRequestInfo } from '../../type';
@@ -176,10 +176,11 @@ const DealSuggester: React.FC = () => {
             console.log(result);
             message.success('Notification email sent successfully');
             // we only updagte the status once we have been able to send the notification
-            updateRequestStatus(
+            updateObjectStatus(
               currentRequest.uid,
               currentRequest.id,
-              'matched'
+              'matched',
+              'requests'
             );
           })
           .catch((error) => {

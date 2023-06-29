@@ -31,6 +31,7 @@ const initialStateDeal: IDealInfo = {
     days: [],
     timeRange: '',
     delivery_capacity: '',
+    routeStatus: '',
   },
   status: 'unknown',
 };

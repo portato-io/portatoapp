@@ -251,17 +251,18 @@ export const fetchAdressRequest = async (uid, id) => {
 /**
  * Updates the request status
  *
- * @param {string} request_uid - The request uid
- * @param {string} request_id - The request id
+ * @param {string} object_uid - The uid of the object
+ * @param {string} request_id - The id of the object
  * @param {string} status - The new status
+ * @param {string} object - The name of the object type
  * @return {Promise} A promise that resolves with no value
  */
-export const updateRequestStatus = (request_uid, request_id, status) => {
+export const updateObjectStatus = (object_uid, object_id, status, object) => {
   return new Promise((resolve, reject) => {
     try {
       const dealRef = ref(
         database,
-        'users/' + request_uid + '/requests/' + request_id
+        'users/' + object_uid + `/${object}/` + object_id
       );
       update(dealRef, { status: status })
         .then(() => {

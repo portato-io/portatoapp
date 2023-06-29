@@ -4,6 +4,7 @@ import { IRouteInfo } from '../type';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Card, Button, Popconfirm } from 'antd';
 import { useNavigate } from 'react-router';
+import { updateObjectStatus } from '../linksStoreToFirebase';
 
 const FetchRoutes: React.FC<{
   uid: string | null | undefined;
@@ -11,25 +12,18 @@ const FetchRoutes: React.FC<{
   admin?: boolean;
 }> = ({ uid, heightPortion = 0.8, admin = false }) => {
   const [routes, setRoute] = useState<IRouteInfo[]>([]);
+  const [refreshKey, setRefreshKey] = useState(0); // add this line
   const navigate = useNavigate();
 
-  // Mehdi : Use Effect to only fetch the data once when the component is mount
-  // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
-  // then we use await to store the values in state
-
   useEffect(() => {
-    // TODO: Handle uid undefined case
     if (!uid) {
       console.log('uid is undefined');
       return;
     }
 
     const fetchData = fetchDataOnce(uid, 'routes').then((storesObject) => {
-      // Check if storesObject is an object before returning it
-      console.log('storesObject ' + JSON.stringify(storesObject));
       if (storesObject && typeof storesObject === 'object') {
-        const storesArray = Object.values(storesObject) as IRouteInfo[]; // Type assertion here
-        console.log('route info is ', storesArray);
+        const storesArray = Object.values(storesObject) as IRouteInfo[];
         return storesArray;
       } else {
         console.log('Data is not an object:', storesObject);
@@ -46,7 +40,7 @@ const FetchRoutes: React.FC<{
     };
 
     getUserRoutes();
-  }, [uid]);
+  }, [uid, refreshKey]); // add refreshKey as a dependency
 
   const match = (routeId: string, routeUid: string) => {
     console.log('Matching route with id: ' + routeId);
@@ -54,33 +48,40 @@ const FetchRoutes: React.FC<{
   };
 
   const deleteRoute = (request: IRouteInfo) => {
-    (request.uid, request.id, 'deleted').then(() => {
-      fetchAndSortRequests();
-    });
+    updateObjectStatus(request.uid, request.id, 'deleted', 'routes').then(
+      () => {
+        setRefreshKey((oldKey) => oldKey + 1); // update the refreshKey state
+      }
+    );
   };
 
-  const containerHeight = window.innerHeight * heightPortion;
   return (
-    <div>
-      <div
-        style={
-          admin ? {} : { height: containerHeight + 'px', overflowY: 'scroll' }
-        }
-      >
-        {routes.map((route) => (
-          <div
-            key={route.id}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Card
-              style={{ marginTop: '5vh', width: '80%' }}
-              title={route.id}
-              extra={
+    <section className="section">
+      <div className="spacer-big"></div>
+      {routes.map((route) => (
+        <div
+          key={route.id}
+          className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style"
+        >
+          <div className={'send-request-card box-shadow'}>
+            <div className="send-request-card-header">
+              <h4>{route.id}</h4>
+            </div>
+            <div className="send-request-card-content">
+              <div className="table-wrapper">
+                <table>
+                  <tr>
+                    <th>Departure Address</th>
+                    <td>{route.departure_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>Destination Address</th>
+                    <td>{route.destination_adress}</td>
+                  </tr>
+                </table>
+              </div>
+              {admin ? <pre>{JSON.stringify(route, null, 2)}</pre> : null}
+              <div style={{ alignSelf: 'flex-end' }}>
                 <Popconfirm
                   title="Do you want to delete this request?"
                   onConfirm={() => deleteRoute(route)}
@@ -92,15 +93,12 @@ const FetchRoutes: React.FC<{
                     <DeleteOutlined />
                   </Button>
                 </Popconfirm>
-              }
-            >
-              {route.departure_adress}/{route.destination_adress}
-              {admin ? <pre>{JSON.stringify(route, null, 2)}</pre> : null}
-            </Card>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      ))}
+    </section>
   );
 };
 
