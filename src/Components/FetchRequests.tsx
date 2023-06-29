@@ -138,7 +138,6 @@ const FetchRequests: React.FC<{
   if (requests.length === 0) {
     return null;
   }
-  console.log(requests);
 
   return (
     <div>

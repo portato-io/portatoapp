@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRouteInfo } from '../type';
-import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Typography } from 'antd';
-import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { updateObjectStatus } from '../linksStoreToFirebase';
 require('../CSS/Send.css');
@@ -57,6 +55,11 @@ const FetchRoutes: React.FC<{
       setRefreshKey((oldKey) => oldKey + 1); // update the refreshKey state
     });
   };
+
+  // Return early, if no requests exist; avoid adding the title altogether.
+  if (routes.length === 0) {
+    return null;
+  }
 
   return (
     <div>

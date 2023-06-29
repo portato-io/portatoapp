@@ -1,7 +1,5 @@
 import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { Typography } from 'antd';
-import { AutoCenter } from 'antd-mobile';
 import FetchRequests from '../../Components/FetchRequests';
 import { ButtonToCreateNewReqRoutes } from '../../Components/Buttons/ButtonToCreateNewReqRoutes';
 import { useAuth } from '../../Components/AuthProvider';
@@ -9,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
 const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
 
 const CreateSendRequest: React.FC = () => {
