@@ -58,7 +58,7 @@ const FetchRoutes: React.FC<{
   };
 
   return (
-    <section className="section">
+    <div>
       <div className="spacer-big"></div>
       {admin ? null : <h2>{t('requestOverview.currentTitle')}</h2>}
       {routes.map((route) => (
@@ -153,7 +153,7 @@ const FetchRoutes: React.FC<{
           </div>
         </div>
       ))}
-    </section>
+    </div>
   );
 };
 

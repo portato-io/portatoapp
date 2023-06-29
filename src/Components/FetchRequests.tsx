@@ -140,7 +140,7 @@ const FetchRequests: React.FC<{
   }
 
   return (
-    <section className="section">
+    <div>
       <div className="spacer-big"></div>
       {admin ? null : <h2>{t('requestOverview.currentTitle')}</h2>}
       {requests.map((request) => (
@@ -265,7 +265,7 @@ const FetchRequests: React.FC<{
           </div>
         </div>
       ))}
-    </section>
+    </div>
   );
 };
 
