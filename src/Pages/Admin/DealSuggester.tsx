@@ -158,7 +158,7 @@ const DealSuggester: React.FC = () => {
 
         const emailBody = {
           title: 'Potential delivery solution',
-          body: 'We have found a match for your delivery request. Please go to <a href="https://www.portato.io/profile/user_requests">Your send request page</a> to find more information',
+          body: 'We have found a match for your delivery request. Please go to <a href="https://www.portato.io/profile/user_requests">your send request page</a> to find more information',
           uid: UID,
         };
 
