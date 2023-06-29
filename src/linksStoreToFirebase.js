@@ -390,3 +390,19 @@ export const addContactTimestamp = async (request_uid, request_id) => {
     console.error('Error updating request timestamp :', error);
   }
 };
+
+export const fetchSpecificObjects = async (objectPath) => {
+  try {
+    const userObjectRef = ref(database, `${objectPath}`);
+    const snapshot = await get(userObjectRef);
+    if (snapshot.exists()) {
+      console.log('Data:', snapshot.val());
+      return snapshot.val();
+    } else {
+      console.log('No data found.', userObjectRef);
+      return {}; // return an empty object if no data is found
+    }
+  } catch (error) {
+    console.error('Error fetching data from Firebase:', error);
+  }
+};
