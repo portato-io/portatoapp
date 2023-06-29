@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRequestInfo } from '../type';
-import { Card, Button, message, Popconfirm } from 'antd';
+import { Button, message, Popconfirm } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -23,7 +23,7 @@ const FetchRequests: React.FC<{
   const [requests, setRequestState] = useState<IRequestInfo[]>([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { t } = useTranslation<string>();
 
   // Mehdi : Use Effect to only fetch the data once when the component is mount
   // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values

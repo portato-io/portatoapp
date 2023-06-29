@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { Typography, Card, Modal } from 'antd';
+import { Typography, Modal } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
 import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';

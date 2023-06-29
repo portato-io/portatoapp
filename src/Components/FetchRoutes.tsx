@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRouteInfo } from '../type';
 import { DeleteOutlined } from '@ant-design/icons';
-import { Card, Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, Typography } from 'antd';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { updateObjectStatus } from '../linksStoreToFirebase';
+const { Title } = Typography;
 
 const FetchRoutes: React.FC<{
   uid: string | null | undefined;
@@ -13,7 +15,7 @@ const FetchRoutes: React.FC<{
 }> = ({ uid, heightPortion = 0.8, admin = false }) => {
   const [routes, setRoute] = useState<IRouteInfo[]>([]);
   const [refreshKey, setRefreshKey] = useState(0); // add this line
-  const navigate = useNavigate();
+  const { t } = useTranslation<string>();
 
   useEffect(() => {
     if (!uid) {
@@ -21,19 +23,26 @@ const FetchRoutes: React.FC<{
       return;
     }
 
-    const fetchData = fetchDataOnce(uid, 'routes').then((storesObject) => {
-      if (storesObject && typeof storesObject === 'object') {
-        const storesArray = Object.values(storesObject) as IRouteInfo[];
-        return storesArray;
-      } else {
-        console.log('Data is not an object:', storesObject);
-        return [];
-      }
-    });
-
     const getUserRoutes = async () => {
       try {
-        setRoute(await fetchData);
+        const storesObject = await fetchDataOnce(uid, 'routes');
+
+        if (storesObject && typeof storesObject === 'object') {
+          let routesArray = Object.values(storesObject) as IRouteInfo[];
+
+          if (Array.isArray(routesArray)) {
+            routesArray = routesArray.filter(
+              (route) => route.routeStatus !== 'deleted'
+            );
+            setRoute(routesArray);
+          } else {
+            console.error('Invalid store array');
+            setRoute([]);
+          }
+        } else {
+          console.log('Data is not an object:', storesObject);
+          setRoute([]);
+        }
       } catch (error) {
         console.log('Error fetching data: ', error);
       }
@@ -42,46 +51,33 @@ const FetchRoutes: React.FC<{
     getUserRoutes();
   }, [uid, refreshKey]); // add refreshKey as a dependency
 
-  const match = (routeId: string, routeUid: string) => {
-    console.log('Matching route with id: ' + routeId);
-    navigate(`/admin/deal_suggester/${routeId}/${routeUid}`);
-  };
-
-  const deleteRoute = (request: IRouteInfo) => {
-    updateObjectStatus(request.uid, request.id, 'deleted', 'routes').then(
-      () => {
-        setRefreshKey((oldKey) => oldKey + 1); // update the refreshKey state
-      }
-    );
+  const deleteRoute = (route: IRouteInfo) => {
+    updateObjectStatus(route.uid, route.id, 'deleted', 'routes').then(() => {
+      setRefreshKey((oldKey) => oldKey + 1); // update the refreshKey state
+    });
   };
 
   return (
     <section className="section">
       <div className="spacer-big"></div>
+      {admin ? null : <h2>{t('requestOverview.currentTitle')}</h2>}
       {routes.map((route) => (
         <div
           key={route.id}
           className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style"
         >
-          <div className={'send-request-card box-shadow'}>
+          <div
+            className={`send-request-card box-shadow ${
+              route.routeStatus === 'matched' ? 'highlight-card' : ''
+            }`}
+          >
             <div className="send-request-card-header">
               <h4>{route.id}</h4>
-            </div>
-            <div className="send-request-card-content">
-              <div className="table-wrapper">
-                <table>
-                  <tr>
-                    <th>Departure Address</th>
-                    <td>{route.departure_adress}</td>
-                  </tr>
-                  <tr>
-                    <th>Destination Address</th>
-                    <td>{route.destination_adress}</td>
-                  </tr>
-                </table>
-              </div>
-              {admin ? <pre>{JSON.stringify(route, null, 2)}</pre> : null}
-              <div style={{ alignSelf: 'flex-end' }}>
+
+              <div
+                className="delete-icon"
+                style={{ position: 'absolute', top: 0, right: 0 }}
+              >
                 <Popconfirm
                   title="Do you want to delete this request?"
                   onConfirm={() => deleteRoute(route)}
@@ -93,6 +89,65 @@ const FetchRoutes: React.FC<{
                     <DeleteOutlined />
                   </Button>
                 </Popconfirm>
+              </div>
+            </div>
+            <div className="send-request-card-content">
+              <div className="table-wrapper">
+                <table>
+                  <tr>
+                    <th>{t('driveSummary.departureAddress')}</th>
+                    <td>{route.departure_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.destinationAddress')}</th>
+                    <td>{route.destination_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.acceptableDetour')}</th>
+                    <td>{route.acceptable_detour} Km </td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.driveCapacity')}</th>
+                    <td>{route.delivery_capacity}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.tripType')}</th>
+                    <td>{route.type}</td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td>
+                      {route.type == t('driveTime.recurringRide') ? (
+                        <div>
+                          <Title level={4}> {t('driveSummary.timing')}</Title>
+                          <Typography>
+                            {t('driveSummary.each')}{' '}
+                            {route.days && typeof route.days === 'object'
+                              ? Object.values(route.days)
+                              : 'No data for days'}
+                            <br />
+                            {t('driveSummary.tripTime')}{' '}
+                            {route.time && typeof route.time === 'object'
+                              ? Object.values(route.time)[0]
+                              : 'No data for time'}{' '}
+                          </Typography>
+                        </div>
+                      ) : (
+                        <div>
+                          <Title level={4}> {t('driveSummary.timing')}</Title>
+                          <Typography>
+                            {t('driveSummary.tripDates')} {route.timeRange}{' '}
+                            <br />
+                            {t('driveSummary.tripTime')}{' '}
+                            {route.time && typeof route.time === 'object'
+                              ? Object.values(route.time)[0]
+                              : 'No data for time'}
+                          </Typography>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>

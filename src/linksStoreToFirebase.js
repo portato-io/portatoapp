@@ -96,6 +96,7 @@ export const fetchDataOnce = async (uid, directory) => {
       return snapshot.val();
     } else {
       console.log('No data found.', userRequestsRef);
+      return {}; // return an empty object if no data is found
     }
   } catch (error) {
     console.error('Error fetching data from Firebase:', error);
@@ -264,17 +265,29 @@ export const updateObjectStatus = (object_uid, object_id, status, object) => {
         database,
         'users/' + object_uid + `/${object}/` + object_id
       );
-      update(dealRef, { status: status })
-        .then(() => {
-          console.log('Successfully updated request status ' + dealRef);
-          resolve();
-        })
-        .catch((error) => {
-          console.error('Error updating request status :', error);
-          reject(error);
-        });
+      if (object == 'requests') {
+        update(dealRef, { status: status })
+          .then(() => {
+            console.log('Successfully updated request status ' + dealRef);
+            resolve();
+          })
+          .catch((error) => {
+            console.error('Error updating request status :', error);
+            reject(error);
+          });
+      } else if (object == 'routes') {
+        update(dealRef, { routeStatus: status })
+          .then(() => {
+            console.log('Successfully updated route status ' + dealRef);
+            resolve();
+          })
+          .catch((error) => {
+            console.error('Error updating route status :', error);
+            reject(error);
+          });
+      }
     } catch (error) {
-      console.error('Error updating request status :', error);
+      console.error('Error updating object status :', error);
       reject(error);
     }
   });
