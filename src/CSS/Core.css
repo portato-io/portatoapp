@@ -5,6 +5,7 @@
   --progress-bar-margin: 15px;
   --color-black: #000000;
   --color-grey1: #888888;
+  --color-grey2: #666666;
   --color-grey3: #d0d0d0;
   --color-grey4: #e8e9f1;
   --color-grey5: #F8F9FE;
@@ -185,7 +186,7 @@ th, td {
   font-family: 'Comfortaa';
   font-size: 5rem;
   color: var(--color-blue-light);
-  margin-top: -130px;
+  margin-top: -80px;
   margin-bottom: 20px;
 }
 .logo-slogan:before {
@@ -239,11 +240,17 @@ th, td {
 .mod-nomargin-top {
   margin-top: 0;
 }
+.mod-nopadding {
+  padding: 0;
+}
 .mod-text-align-right {
   text-align: right;
 }
 .mod-text-align-center {
   text-align: center;
+}
+.mod-hide-mobile {
+  display:none!important;
 }
 
 

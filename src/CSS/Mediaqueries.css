@@ -3,6 +3,9 @@
   .main-navigation-bar .adm-tab-bar-item-title-with-icon {
     display:inline-block;
   }
+  .mod-hide-mobile {
+    display:inherit!important;
+  }
 }
 
 /* Tablets */
