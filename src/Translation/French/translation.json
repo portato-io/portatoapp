@@ -135,7 +135,7 @@
   "driveOverview": {
     "newTitle": "Souhaitez-vous enregistrer un nouvel itinéraire?",
     "createButtonDescription": "Créer route",
-    "|*TBI*|currentTitle": "Vos itinéraires actuels"
+    "currentTitle": "Vos itinéraires actuels"
   },
   "driveAddresses": {
     "departureAddress": "Adresse de départ",
