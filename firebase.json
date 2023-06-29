@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "portato",
-      "public": "portato/public",
+      "public": "build",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -17,7 +17,7 @@
     },
     {
       "target": "portatoapp",
-      "public": "portatoapp/public",
+      "public": "build",
       "ignore": [
         "firebase.json",
         "**/.*",
