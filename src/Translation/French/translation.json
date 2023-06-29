@@ -14,7 +14,7 @@
     "send": "Envoyer",
     "deliver": "Conduire"
   },
-  
+
   "social": {
     "heading": "Retrouvez-nous sur les réseaux sociaux",
     "linkedin": {
@@ -28,32 +28,32 @@
       "icon": "icon-instagram"
     }
   },
-  
+
   "team": {
     "Conrad": {
       "name": "Conrad",
       "description": "Ancien ingénieur PowerPoint et Excel, maintenant CEO de Portato. Un passionné de sport avec un grand réseau.",
-      "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/conrad.jpg"
     },
     "Hugo": {
       "name": "Hugo",
       "description": "Génie franco-britannique jonglant avec le backend dans au moins autant de langues.",
-      "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/hugo.jpg"
     },
     "Mehdi": {
       "name": "Mehdi",
       "description": "Amoureux du hip-hop qui rend le frontend aussi beau que ses coupes de cheveux.",
-      "image": "https://images.pexels.com/photos/16375570/pexels-photo-16375570/free-photo-of-man-sitting-on-a-wall-with-a-mural.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/mehdi.jpg"
     },
     "Mischa": {
       "name": "Mischa",
       "description": "Touche-à-tout, maître du produit. Multitalent avec un talent pour la programmation, le design et l'animation.",
-      "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/mischa.jpg"
     },
     "Chiara": {
       "name": "Chiara",
       "description": "Artiste story-board et animatrice 2D qui donne à Porato son charme.",
-      "image": "https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/chiara.png"
     }
   },
   "navBar": {
@@ -70,16 +70,16 @@
     "requestList": {
       "price": "Prix",
       "weight": "Poids",
-      "pickupAddress":"Adresse de ramassage",
-      "deliveryAddress":"Adresse de livraison",
-      "dateRange":"Dates",
+      "pickupAddress": "Adresse de ramassage",
+      "deliveryAddress": "Adresse de livraison",
+      "dateRange": "Dates",
       "from": "Du",
       "to": "au",
       "time": "Heure",
       "size": "Taille",
       "Images": "Images",
       "description": "Description"
-  }
+    }
   },
 
   "requestInfo": {

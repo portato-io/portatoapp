@@ -41,27 +41,27 @@
     "Conrad": {
       "name": "Conrad",
       "description": "Former PowerPoint and Excel engineer, now Portato's CEO. A sports enthusiast with a vast network.",
-      "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/conrad.jpg
     },
     "Hugo": {
       "name": "Hugo",
       "description": "Franco-British engineering maestro juggling the backend in at least as many languages.",
-      "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/hugo.jpg"
     },
     "Mehdi": {
       "name": "Mehdi",
       "description": "Hip-hop lover and user experience guru, making the frontend look as good as his haircuts.",
-      "image": "https://images.pexels.com/photos/16375570/pexels-photo-16375570/free-photo-of-man-sitting-on-a-wall-with-a-mural.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/mehdi.jpg"
     },
     "Mischa": {
       "name": "Mischa",
       "description": "Jack of all trades, master of ... product. Multitalent with a knack for coding, design and animation.",
-      "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/mischa.jpg"
     },
     "Chiara": {
       "name": "Chiara",
       "description": "A 2D animation whizz moonlighting as a princess, infusing charm into Portato one frame at a time.",
-      "image": "https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      "image": "src/Assets/Images/team/chiara.png"
     }
   },
 

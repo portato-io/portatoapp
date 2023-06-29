@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { Row, Col, Typography, Card, Space, Avatar } from 'antd';
+import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
 import headerImage from '../Assets/Images/portato-landing-8.png';
 import { useTranslation } from 'react-i18next';
@@ -8,8 +7,6 @@ import { analytics } from '../firebaseConfig';
 import LottieAnimation from '../Assets/Lotties/how-it-works-animation';
 
 require('../CSS/Home.css');
-
-const { Title } = Typography;
 
 const Home: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
