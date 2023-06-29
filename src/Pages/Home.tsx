@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Row, Col, Typography, Card, Space, Avatar } from 'antd';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-7.png';
+import headerImage from '../Assets/Images/portato-landing-8.png';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
