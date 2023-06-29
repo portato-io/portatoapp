@@ -41,12 +41,12 @@
     "Conrad": {
       "name": "Conrad",
       "description": "Former PowerPoint and Excel engineer, now Portato's CEO. A sports enthusiast with a vast network.",
-      "image": "src/Assets/Images/team/conrad.jpg"
+      "image": "../../src/Assets/Images/team/conrad.jpg"
     },
     "Hugo": {
       "name": "Hugo",
       "description": "Franco-British engineering maestro juggling the backend in at least as many languages.",
-      "image": "src/Assets/Images/team/hugo.jpg"
+      "image": "./src/Assets/Images/team/hugo.jpg"
     },
     "Mehdi": {
       "name": "Mehdi",

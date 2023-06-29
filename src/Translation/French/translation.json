@@ -33,17 +33,17 @@
     "Conrad": {
       "name": "Conrad",
       "description": "Ancien ingénieur PowerPoint et Excel, maintenant CEO de Portato. Un passionné de sport avec un grand réseau.",
-      "image": "src/Assets/Images/team/conrad.jpg"
+      "image": "../src/Assets/Images/team/conrad.jpg"
     },
     "Hugo": {
       "name": "Hugo",
       "description": "Génie franco-britannique jonglant avec le backend dans au moins autant de langues.",
-      "image": "src/Assets/Images/team/hugo.jpg"
+      "image": "../../src/Assets/Images/team/hugo.jpg"
     },
     "Mehdi": {
       "name": "Mehdi",
       "description": "Amoureux du hip-hop qui rend le frontend aussi beau que ses coupes de cheveux.",
-      "image": "src/Assets/Images/team/mehdi.jpg"
+      "image": "./src/Assets/Images/team/mehdi.jpg"
     },
     "Mischa": {
       "name": "Mischa",

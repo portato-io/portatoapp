@@ -192,7 +192,7 @@ export const routes: Array<Route> = [
   {
     key: 'deal-suggester',
     title: 'DealSuggester',
-    path: '/admin/deal_suggester/:route_id/:route_uid',
+    path: '/admin/deal_suggester/:request_id/:request_uid',
     enabled: true,
     component: DealSuggester,
   },

@@ -21,8 +21,8 @@ import { IRouteInfo, IRequestInfo } from '../../type';
 
 const DealSuggester: React.FC = () => {
   const dispatch = useDispatch();
-  const { route_id } = useParams<{ route_id: string }>();
-  const { route_uid } = useParams<{ route_uid: string }>();
+  const { request_id } = useParams<{ request_id: string }>();
+  const { request_uid } = useParams<{ request_uid: string }>();
   const [ID, setID] = useState('');
   const [UID, setUID] = useState('');
   const [isVerified, setIsVerified] = useState(false); // new state for verifying the click of verify button
@@ -30,34 +30,34 @@ const DealSuggester: React.FC = () => {
   const [currentRequest, setCurrentRequest] = useState<IRequestInfo | null>(
     null
   ); // store the current request
-  if (!route_id) {
+  if (!request_id) {
     console.error('route id is undefined');
     return null; // or redirect, show error, etc.
   }
-  if (!route_uid) {
+  if (!request_uid) {
     console.error('route uid is undefined');
     return null; // or redirect, show error, etc.
   }
 
   useEffect(() => {
-    if (!route_uid) {
+    if (!request_uid) {
       console.log('route uid is undefined');
       return;
     }
 
     const fetchRouteData = async () => {
       try {
-        const requestObject = await fetchDataOnce(route_uid, 'requests');
+        const requestObject = await fetchDataOnce(request_uid, 'requests');
         if (requestObject && typeof requestObject === 'object') {
           const requestArray = Object.values(requestObject) as IRequestInfo[];
           const request = requestArray.find(
-            (request) => request.id === route_id
+            (request) => request.id === request_id
           );
           if (request) {
             dispatch(setRequest(request));
             setCurrentRequest(request); // update the current request state
           } else {
-            console.error('Route not found: ', route_id);
+            console.error('Route not found: ', request_id);
           }
         } else {
           console.log('Data is not an object:', requestObject);
@@ -68,7 +68,7 @@ const DealSuggester: React.FC = () => {
     };
 
     fetchRouteData();
-  }, [route_uid, route_id, dispatch]);
+  }, [request_uid, request_id, dispatch]);
 
   const verifySuggestion = async (id: string, uid: string) => {
     // implement your function here
@@ -159,7 +159,7 @@ const DealSuggester: React.FC = () => {
         const emailBody = {
           title: 'Potential delivery solution',
           body: 'We have found a match for your delivery request. Please go to <a href="https://www.portato.io/profile/user_requests">your send request page</a> to find more information',
-          uid: UID,
+          uid: request_uid,
         };
 
         fetch(
@@ -215,7 +215,7 @@ const DealSuggester: React.FC = () => {
   return (
     <PageLayout>
       <h1>
-        Input matching request for {route_id} of user {route_uid}
+        Input matching request for {request_id} of user {request_uid}
       </h1>
       <input
         type="text"
