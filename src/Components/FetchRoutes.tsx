@@ -133,11 +133,10 @@ const FetchRoutes: React.FC<{
                     </tr>
                   ) : null}
                   <tr>
-                    <th></th>
+                    <th>{t('driveSummary.timing')}</th>
                     <td>
                       {route.type == t('driveTime.recurringRide') ? (
                         <div>
-                          <Title level={4}> {t('driveSummary.timing')}</Title>
                           <Typography>
                             {t('driveSummary.each')}{' '}
                             {route.days && typeof route.days === 'object'
@@ -152,9 +151,8 @@ const FetchRoutes: React.FC<{
                         </div>
                       ) : (
                         <div>
-                          <Title level={4}> {t('driveSummary.timing')}</Title>
                           <Typography>
-                            {t('driveSummary.tripDates')} {route.timeRange}{' '}
+                            {t('driveSummary.tripDate')} {route.timeRange}{' '}
                             <br />
                             {t('driveSummary.tripTime')}{' '}
                             {route.time && typeof route.time === 'object'
