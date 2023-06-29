@@ -137,7 +137,7 @@
   "driveOverview": {
     "newTitle": "Möchtest Du eine Route registrieren?",
     "createButtonDescription": "Route registrieren",
-    "|*TBI*|currentTitle": "Deine aktuellen Routen"
+    "currentTitle": "Deine aktuellen Routen"
   },
   "driveAddresses": {
     "departureAddress": "Abfahrtsadresse",

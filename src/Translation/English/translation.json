@@ -146,7 +146,7 @@
     "newTitle": "Want to register a ride?",
     "createNewRouteTitle": "Create a new route",
     "createButtonDescription": "Create route",
-    "|*TBI*|currentTitle": "Your current routes"
+    "currentTitle": "Your current routes"
   },
   "driveAddresses": {
     "departureAddress": "Departure address",
