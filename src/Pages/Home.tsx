@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Row, Col, Typography, Card, Space, Avatar } from 'antd';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-5.png';
+import headerImage from '../Assets/Images/portato-landing-6.png';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
@@ -40,8 +40,7 @@ const Home: React.FC = () => {
     );
   };
 
-  /* SOCIALS - Not working, but i don't know why  */
-
+  /* SOCIALS ------------------------------------------------------ */
   const socialChannelTypes = ['linkedin', 'instagram'];
   const SocialChannel: React.FC<{ socialLabel: string }> = ({
     socialLabel,
@@ -61,12 +60,10 @@ const Home: React.FC = () => {
     );
   };
 
-  /*--------------------------------------------------- */
-
   return (
     <PageLayout>
       {/* Landing screen */}
-      <section className="section section-bleed mod-nomargin-top">
+      <section className="section mod-nopadding mod-nomargin-top">
         <img
           src={headerImage}
           alt="portato header image"
