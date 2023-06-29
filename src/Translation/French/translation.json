@@ -1,36 +1,58 @@
 {
   "about": {
     "title": "À propos de nous",
-    "visionMissionTitle": "Notre vision et mission",
-    "visionMissionText": "En Suisse, plus de 150 millions de kilomètres sont parcourus en voiture chaque jour. Pourtant, les véhicules sont souvent à peine chargés: en moyenne, seules 1,6 personnes sont présentes dans chaque véhicule et les coffres de plus en plus grands sont majoritairement vides.\n\nPortato s'est fixé comme objectif d'optimiser ces nombreuses capacités de transport inutilisées. Chaque covoiturage évite potentiellement un autre trajet et signifie un véhicule de moins sur la route. Notre vision est donc de rendre le transport routier plus efficient et de contribuer positivement à l'environnement.\n\nNotre mission immédiate est de faciliter le covoiturage entre particuliers. D'une part, cela rend l'expédition d'articles (encombrants) plus pratique. D'autre part, nous permettons aux conducteurs d'utiliser judicieusement leur espace libre, gagnant de l'argent au passage et réduisant leur empreinte écologique.",
+    "visionMissionTitle": "La mission de Portato",
+    "visionMissionText": "Les Suisses parcourent plus de 150 millions de kilomètres par jour avec leur voiture, souvent avec un coffre vide.\n\nPortato exploite ces nombreuses capacités de transport disponibles. Nous facilitons le covoiturage pour les choses.\n\n Pratique pour les expéditeurs, lucratif pour les conducteurs, bon pour l'environnement.",
     "whoWeAreTitle": "Qui sommes-nous",
     "whoWeAreText": "Chez Portato, l'innovation rencontre la route ouverte! Nous sommes une fusion vivante de penseurs, de bricoleurs et de pionniers avec l'objectif commun de révolutionner le transport!"
   },
 
+  "general": {
+    "tagline": "Le service de transport simple, économique et écologique",
+    "howItWorks": "Comment ça fonctionne",
+    "moreInfo": "En savoir plus",
+    "send": "Envoyer",
+    "deliver": "Conduire"
+  },
+  
+  "social": {
+    "heading": "Retrouvez-nous sur les réseaux sociaux",
+    "linkedin": {
+      "label": "LinkedIn",
+      "link": "https://www.linkedin.com/company/portato-io/",
+      "icon": "icon-linkedin"
+    },
+    "instagram": {
+      "label": "Instagram",
+      "link": "https://www.instagram.com/portato.io/",
+      "icon": "icon-instagram"
+    }
+  },
+  
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Conrad, notre sorcier PowerPoint et notre magicien Excel, a abandonné la routine pour devenir le PDG de Portato. Adepte de la salle de sport, avec un carnet de contacts débordant et un esprit festif. Doucement féroce, mais efficacement percutant.",
+      "description": "Ancien ingénieur PowerPoint et Excel, maintenant CEO de Portato. Un passionné de sport avec un grand réseau.",
       "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "Hugo, le prodige de l'ingénierie franco-britannique, dont les pensées sont si rapides qu'elles créent un boom sonique. Hugo peut vous charmer en deux langues tout en programmant le backend en trois. Ses doigts volent sur le clavier, lançant des sorts qui font tout fonctionner.",
+      "description": "Génie franco-britannique jonglant avec le backend dans au moins autant de langues.",
       "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Mehdi": {
       "name": "Mehdi",
-      "description": "Mehdi, l'incarnation du hip-hop, du style hipster et du charme marocain, est notre gourou de l'expérience utilisateur. Lorsqu'il n'est pas occupé à être le centre d'admiration, il façonne le code pour faire en sorte que le backend soit aussi beau que ses coupes de cheveux.",
+      "description": "Amoureux du hip-hop qui rend le frontend aussi beau que ses coupes de cheveux.",
       "image": "https://images.pexels.com/photos/16375570/pexels-photo-16375570/free-photo-of-man-sitting-on-a-wall-with-a-mural.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Homme-orchestre dans tous les sens du terme. Mischa est cette rare combinaison de programmeur-designer-animateur-penseur... et bien plus encore. Il peut passer du Jiu-Jitsu à Adobe et Visual Code comme personne d'autre, jour et nuit, ensemble ou à distance.",
+      "description": "Touche-à-tout, maître du produit. Multitalent avec un talent pour la programmation, le design et l'animation.",
       "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "Chiara, scénariste de story-boards et prodige de l'animation 2D, se double d'une princesse en devenir avec l'esprit enflammé d'une danse latine. Elle est la magie derrière nos visages amicaux, infusant Portato de son charme, une image à la fois.",
+      "description": "Artiste story-board et animatrice 2D qui donne à Porato son charme.",
       "image": "https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     }
   },
@@ -44,7 +66,20 @@
   "requestOverview": {
     "newTitle": "Créer une nouvelle demande d'envoi",
     "createButtonDescription": "Créer",
-    "currentTitle": "Vos demandes d'envoi en cours"
+    "currentTitle": "Vos demandes d'envoi en cours",
+    "requestList": {
+      "price": "Prix",
+      "weight": "Poids",
+      "pickupAddress":"Adresse de ramassage",
+      "deliveryAddress":"Adresse de livraison",
+      "dateRange":"Dates",
+      "from": "Du",
+      "to": "au",
+      "time": "Heure",
+      "size": "Taille",
+      "Images": "Images",
+      "description": "Description"
+  }
   },
 
   "requestInfo": {
@@ -66,6 +101,8 @@
   "requestTime": {
     "title": "Quand voulez-vous que l'envoi soit récupéré?",
     "dates": "Dates",
+    "times": "Heure",
+    "rangeHint": "(Vous pouvez fixer la date de début et de fin le même jour si nécessaire)",
     "|*TBI*|startDatePlaceholder": "Date de début",
     "|*TBI*|endDatePlaceholder": "Date de fin",
     "|*TBI*|time": "Heure",
@@ -75,7 +112,8 @@
   },
   "requestCost": {
     "title": "Combien vaut pour vous le transport?",
-    "pricePlaceholder": "par ex., 30 CHF",
+    "label": "Prix (en CHF)",
+    "pricePlaceholder": "par ex., 50",
     "driverReward": "Récompense pour le conducteur:",
     "portatoFee": "Frais de Portato:",
     "vat": "TVA:",
@@ -84,19 +122,19 @@
   },
   "requestSummary": {
     "title": "Résumé de votre demande d'envoi",
-    "size": "Taille:",
-    "weight": "Poids:",
-    "pickupAddress": "Adresse de prise en charge:",
-    "deliveryAddress": "Adresse de livraison:",
-    "timeframe": "Délai:",
-    "possibleDates": "Dates possibles:",
-    "possibleTimes": "Heures possibles:",
-    "price": "Prix:",
-    "images": "Image(s):"
+    "size": "Taille",
+    "weight": "Poids",
+    "pickupAddress": "Adresse de prise en charge",
+    "deliveryAddress": "Adresse de livraison",
+    "timeframe": "Délai",
+    "possibleDates": "Dates possibles",
+    "possibleTimes": "Heures possibles",
+    "price": "Prix",
+    "images": "Image(s)"
   },
   "driveOverview": {
-    "newTitle": "Enregistrer un nouvel itinéraire",
-    "createButtonDescription": "Créer",
+    "newTitle": "Souhaitez-vous enregistrer un nouvel itinéraire?",
+    "createButtonDescription": "Créer route",
     "|*TBI*|currentTitle": "Vos itinéraires actuels"
   },
   "driveAddresses": {
@@ -108,7 +146,7 @@
   },
   "driveTime": {
     "title": "Quand conduisez-vous?",
-    "rangeTitle": "Sélectionner une plage de dates",
+    "rangeTitle": "Sélectionner la date",
     "singleTrip": "Voyage unique",
     "recurringRide": "Trajet récurrent",
     "|*TBI*|startPlaceholder": "Début",
@@ -130,7 +168,7 @@
     "acceptableDetour": "Détour acceptable",
     "tripType": "Type de votre voyage",
     "timing": "Horaire",
-    "tripDates": "Dates:",
+    "tripDate": "Date:",
     "tripTime": "Heure:",
     "each": "Récurrent chaque:",
     "driveCapacity": "Capacité"
@@ -146,7 +184,7 @@
     "mySendRequests": "Mes Demandes d'Envoi",
     "signIn": "Se Connecter",
     "blog": "Blog",
-    "support": "Support",
+    "support": "Support / Feedback",
     "adminWindow": "Fenêtre d'Admin",
     "signOut": "Se Déconnecter"
   },

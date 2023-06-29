@@ -30,16 +30,16 @@ export const DAYS = [
 ];
 export const TIME = [
   {
-    label: 'Mornings',
-    value: 'Mornings ',
+    label: 'Morning',
+    value: 'Morning ',
   },
   {
-    label: 'Mid days',
-    value: 'Mid-days ',
+    label: 'Mid day',
+    value: 'Mid-day ',
   },
   {
-    label: 'Evenings',
-    value: 'Evenings ',
+    label: 'Evening',
+    value: 'Evening ',
   },
 ];
 
@@ -73,7 +73,7 @@ export const LANGUAGE_OPTIONS = [
   },
 
   {
-    label: 'Deutsch',
+    label: 'German',
     value: 'de',
   },
   {

@@ -79,7 +79,7 @@ const Home: React.FC = () => {
       <section className="section">
         <div className="text-section">
           <h1 className="icon icon-logo icon-big logo-slogan">portato</h1>
-          <h5>A easy, cheap and eco-friendly transport service for things.</h5>
+          <h5>{t('general.tagline')}</h5>
         </div>
       </section>
 
