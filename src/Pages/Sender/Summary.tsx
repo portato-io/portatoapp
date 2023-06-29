@@ -85,34 +85,38 @@ const Summary: React.FC = () => {
             </div>
             <div className="send-request-card-content">
               <div className="table-wrapper">
-                <table>
+                <table className="table">
                   <tr>
-                    <th>{t('requestOverview.requestList.description')}</th>
-                    <td>{objecInfo.description}</td>
+                    <th className="th">
+                      {t('requestOverview.requestList.description')}
+                    </th>
+                    <td className="td">{objecInfo.description}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestSummary.pickupAddress')}</th>
-                    <td>{objecInfo.pickup_adress}</td>
+                    <th className="th">{t('requestSummary.pickupAddress')}</th>
+                    <td className="td">{objecInfo.pickup_adress}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestSummary.deliveryAddress')}</th>
-                    <td>{objecInfo.delivery_adress}</td>
+                    <th className="th">
+                      {t('requestSummary.deliveryAddress')}
+                    </th>
+                    <td className="td">{objecInfo.delivery_adress}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestSummary.timeframe')}</th>
-                    <td>
+                    <th className="th">{t('requestSummary.timeframe')}</th>
+                    <td className="td">
                       {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
                       <br />
                       {Object.values(objecInfo.time)[0]}{' '}
                     </td>
                   </tr>
                   <tr>
-                    <th>{t('requestSummary.price')}</th>
-                    <td>{objecInfo.price} CHF</td>
+                    <th className="th">{t('requestSummary.price')}</th>
+                    <td className="td">{objecInfo.price} CHF</td>
                   </tr>
                   <tr>
-                    <th>{t('requestSummary.images')}</th>
-                    <td>
+                    <th className="th">{t('requestSummary.images')}</th>
+                    <td className="td">
                       <Image
                         preview={{ visible: false }}
                         height={100}

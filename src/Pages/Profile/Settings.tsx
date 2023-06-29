@@ -77,12 +77,12 @@ const Settings: React.FC = () => {
             <ArrowRightOutlined />
           </Button>
         </Form.Item>
-        <Form.Item label="Notifications">
+        {/* <Form.Item label="Notifications">
           <Switch style={{ position: 'absolute', right: '5vw', top: '1vh' }} />
         </Form.Item>
         <Form.Item label="Dark Mode">
           <Switch style={{ position: 'absolute', right: '5vw', top: '1vh' }} />
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </ProfilePageLayout>
   );
