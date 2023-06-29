@@ -138,6 +138,7 @@ const FetchRequests: React.FC<{
   if (requests.length === 0) {
     return null;
   }
+  console.log(requests);
 
   return (
     <div>
@@ -196,7 +197,7 @@ const FetchRequests: React.FC<{
                   </tr>
                   <tr>
                     <th>{t('requestOverview.requestList.time')}</th>
-                    <td>{request.time}</td>
+                    <td>{Object.values(request.time)[0]}</td>
                   </tr>
                   <tr>
                     <th>{t('requestOverview.requestList.price')}</th>
