@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "portatoapp"
-  }
+  },
+  "targets": {
+    "portatoapp": {
+      "hosting": {
+        "portato": [
+          "portato"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
