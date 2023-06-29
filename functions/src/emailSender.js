@@ -47,6 +47,7 @@ const sendEmailToUid = (req, res) => {
             cid: `image${index + 1}`, // Same cid value as in the html img src
           };
         });
+        // Add the attachments
         // Now you can use cid in your html to refer to the images
         mailOptions.html =
           `${message}<br/>` +
