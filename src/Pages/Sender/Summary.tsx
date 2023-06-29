@@ -101,11 +101,8 @@ const Summary: React.FC = () => {
                   <tr>
                     <th>{t('requestSummary.timeframe')}</th>
                     <td>
-                      {' '}
-                      {t('requestSummary.possibleDates')}{' '}
                       {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
                       <br />
-                      {t('requestSummary.possibleTimes')}{' '}
                       {Object.values(objecInfo.time)[0]}{' '}
                     </td>
                   </tr>

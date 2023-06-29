@@ -107,11 +107,12 @@ const RouteSummary: React.FC = () => {
                     <td>{routeInfo.type}</td>
                   </tr>
                   <tr>
-                    <th></th>
+                    <th>
+                      <th>{t('driveSummary.timing')}</th>
+                    </th>
                     <td>
                       {routeInfo.type == t('driveTime.recurringRide') ? (
                         <div>
-                          <Title level={4}> {t('driveSummary.timing')}</Title>
                           <Typography>
                             {t('driveSummary.each')}{' '}
                             {Object.values(routeInfo.days)}
@@ -122,11 +123,8 @@ const RouteSummary: React.FC = () => {
                         </div>
                       ) : (
                         <div>
-                          <Title level={4}> {t('driveSummary.timing')}</Title>
                           <Typography>
-                            {t('driveSummary.tripDates')} {routeInfo.timeRange}{' '}
-                            <br />
-                            {t('driveSummary.tripTime')}{' '}
+                            {routeInfo.timeRange} <br />
                             {Object.values(routeInfo.time)[0]}
                           </Typography>
                         </div>

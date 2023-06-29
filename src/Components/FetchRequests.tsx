@@ -147,11 +147,11 @@ const FetchRequests: React.FC<{
               <div className="table-wrapper">
                 <table>
                   <tr>
-                    <th>{t('driveAddresses.departureAddress')}</th>
+                    <th>{t('requestOverview.requestList.pickupAddress')}</th>
                     <td>{request.pickup_adress}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestOverview.requestList.arrivalAdress')}</th>
+                    <th>{t('requestOverview.requestList.deliveryAddress')}</th>
                     <td>{request.delivery_adress}</td>
                   </tr>
                   <tr>
@@ -178,10 +178,6 @@ const FetchRequests: React.FC<{
                   <tr>
                     <th>{t('requestOverview.requestList.size')}</th>
                     <td>{request.size}</td>
-                  </tr>
-                  <tr>
-                    <th>{t('requestOverview.requestList.description')}</th>
-                    <td>{request.description}</td>
                   </tr>
                   <tr>
                     <th>{t('requestOverview.requestList.description')}</th>

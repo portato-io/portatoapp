@@ -56,6 +56,7 @@ const EnterTime: React.FC = () => {
               onChange={handleChangeRange}
               style={{ width: '100%' }}
             />
+            <small>{t('requestTime.rangeHint')}</small>
           </Form.Item>
 
           <Form.Item className="input-wrapper" label={t('requestTime.times')}>
