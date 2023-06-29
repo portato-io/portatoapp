@@ -39,13 +39,13 @@ const Home: React.FC = () => {
   const TeamMember: React.FC<{ memberName: string }> = ({ memberName }) => {
     const name = t(`team.${memberName}.name`);
     const description = t(`team.${memberName}.description`);
-    const image = getTeamMemberImage(t(`team.${memberName}.image`));
+    const image = getTeamMemberImage(memberName);
     console.log('image', image);
 
     return (
       <div className="listing-entry">
         <div className="listing-entry-header">
-          <img className="image box-radius-style-2" src={image} />
+          <img className="image circle" src={image} />
           <h4>{name}</h4>
         </div>
         <div className="listing-entry-content">

@@ -285,6 +285,9 @@ th, td {
 .box-radius-style-3 {
   border-radius: 5vw 0vw 5vw 5vw;
 }
+.circle {
+  border-radius: 50%;
+}
 
 
 /* TO BE CHECKED --------------------------------------- */
