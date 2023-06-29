@@ -1,21 +1,28 @@
 {
   "about": {
     "title": "About us",
-    "visionMissionTitle": "Our vision and mission",
-    "visionMissionText": "In Switzerland, more than 150 million kilometers are driven by car every day. At the same time, the cars are often barely loaded: On average, only 1.6 people sit in each vehicle and the increasingly large trunks are mostly empty.\n\nPortato has set itself the goal of making better use of these many free transport capacities. Every carpool potentially avoids another transport trip and means one less car on the road. Our vision is to thus make road transport more efficient and make a positive contribution to the environment.\n\nOur immediate mission is to facilitate carpooling between private individuals. On the one hand, this makes it more convenient to ship (bulky) items. On the other hand, we enable drivers to use their free space wisely, earning money in the process and reducing their ecological footprint.",
+    "visionMissionTitle": "Portato's mission",
+    "visionMissionText": "Swiss individuals drive over 150 million kilometers in their cars per day, often with empty trunks.\n\nOur aim at Portato is to tap into these unused transport capacities. We make ride-sharing for things easy. \n\n Higher convenience for senders, additional income for drivers, less traffic polluting our environment",
     "whoWeAreTitle": "Who we are",
     "whoWeAreText": "At Portato, innovation meets the open road! We are a lively fusion of thinkers, tinkerers, and pioneers with the common goal of revolutionizing transport!"
   },
 
   "general": {
+    "tagline": "An easy, cheap and eco-friendly transport service for things.",
     "howItWorks": "How it works",
     "moreInfo": "Learn more",
-    "send": "Send",
-    "deliver": "Deliver"
+    "send": "Ship",
+    "deliver": "Drive"
   },
+  
+  "timeSelector": {
+    "morning": "Morning",
+    "midDay": "Mid day",
+    "evening": "Evening"
+    },
 
   "social": {
-    "heading": "Our socials",
+    "heading": "Find us on social media",
     "linkedin": {
       "label": "LinkedIn",
       "link": "https://www.linkedin.com/company/portato-io/",
@@ -31,12 +38,12 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "PowerPoint sorcerer and Excel wizard turned Portato's CEO. A sports enthusiast with a vast and robust network.",
+      "description": "Former PowerPoint and Excel engineer, now Portato's CEO. A sports enthusiast with a vast network.",
       "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "Franco-British engineering maestro, charming in two languages while juggling backend programming in at least three.",
+      "description": "Franco-British engineering maestro juggling the backend in at least as many languages.",
       "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Mehdi": {
@@ -46,7 +53,7 @@
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "ack of all trades, master of ... all. Multitalent with a knack for coding, design, animation, and jiujitsu.",
+      "description": "Jack of all trades, master of ... product. Multitalent with a knack for coding, design and animation.",
       "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Chiara": {
@@ -58,15 +65,29 @@
 
   "navBar": {
     "home": "Home",
-    "send": "Send",
-    "drive": "Drive",
+    "send": "Delivery request",
+    "drive": "Register route",
     "profile": "Menu"
   },
 
   "requestOverview": {
-    "newTitle": "Got something to send?",
+    "newTitle": "Got something to ship?",
     "createButtonDescription": "Create request",
-    "currentTitle": "Your current send requests"
+    "currentTitle": "Your current delivery requests",
+    "requestList": {
+        "price": "Price",
+        "weight": "Weight",
+        "pickupAddress":"Pick-up address",
+        "deliveryAddress":"Delivery address",
+        "dateRange":"Date range",
+        "from": "From",
+        "to": "to",
+        "time": "Time",
+        "size": "Size",
+        "Images": "Images",
+        "description": "Description"
+    }
+
   },
 
   "requestInfo": {
@@ -74,7 +95,7 @@
     "name": "Title",
     "namePlaceholder": "Give your shipment a meaningful title.",
     "description": "Description",
-    "descriptionPlaceholder": "eg: It’s a good idea to specify the dimensions of large items.",
+    "descriptionPlaceholder": "E.g., it’s a good idea to specify the dimensions of large items.",
     "size": "Size",
     "weight": "Weight",
     "uploadImages": "Upload images"
@@ -88,6 +109,8 @@
   "requestTime": {
     "title": "When do you want the shipment to be picked up?",
     "dates": "Dates",
+    "times": "Times",
+    "rangeHint": "(You can set the start and end date to the same day if needed.)",
     "|*TBI*|startDatePlaceholder": "Start date",
     "|*TBI*|endDatePlaceholder": "End date",
     "|*TBI*|time": "Time",
@@ -97,7 +120,8 @@
   },
   "requestCost": {
     "title": "How much is the transport worth to you?",
-    "pricePlaceholder": "e.g., 30 CHF",
+    "label": "Price (in CHF)",
+    "pricePlaceholder": "e.g., 50",
     "driverReward": "Reward for driver:",
     "portatoFee": "Portato fee:",
     "vat": "VAT:",
@@ -108,17 +132,18 @@
     "title": "Summary of your shipment request",
     "size": "Size:",
     "weight": "Weight:",
-    "pickupAddress": "Pick-up address:",
-    "deliveryAddress": "Delivery address:",
-    "timeframe": "Timeframe:",
-    "possibleDates": "Possible dates:",
-    "possibleTimes": "Possible times:",
-    "price": "Price:",
-    "images": "Image(s):"
+    "pickupAddress": "Pick-up address",
+    "deliveryAddress": "Delivery address",
+    "timeframe": "Timeframe",
+    "possibleDates": "Possible dates",
+    "possibleTimes": "Possible times",
+    "price": "Price",
+    "images": "Image(s)"
   },
   "driveOverview": {
     "newTitle": "Want to register a ride?",
-    "createButtonDescription": "Create",
+    "createNewRouteTitle": "Create a new route",
+    "createButtonDescription": "Create route",
     "|*TBI*|currentTitle": "Your current routes"
   },
   "driveAddresses": {
@@ -130,17 +155,17 @@
   },
   "driveTime": {
     "title": "When are you driving?",
-    "rangeTitle": "Select date range",
+    "rangeTitle": "Select date",
     "singleTrip": "Single trip",
     "recurringRide": "Recurring ride",
     "|*TBI*|startPlaceholder": "Start",
-    "|*TBI*|endPlaceholder": "Ende",
-    "selectTime": "Select timing",
-    "|*TBI*|timeMornings": "Mornings",
-    "|*TBI*|timeMidDays": "Mid days",
-    "|*TBI*|timeEvenings": "Evenings",
+    "|*TBI*|endPlaceholder": "End",
+    "selectTime": "Select time",
+    "|*TBI*|timeMornings": "Morning",
+    "|*TBI*|timeMidDays": "Mid day",
+    "|*TBI*|timeEvenings": "Evening",
     "weekdayTitle": "Select days",
-    "timeTitle": "Select timing"
+    "timeTitle": "Select time"
   },
   "driveCapacity": {
     "title": "What's your delivery capacity?"
@@ -152,7 +177,7 @@
     "acceptableDetour": "Acceptable detour",
     "tripType": "Type of your trip",
     "timing": "Timing",
-    "tripDates": "Dates:",
+    "tripDate": "Date:",
     "tripTime": "Time:",
     "each": "Recurring each:",
     "driveCapacity": "Capacity"
@@ -168,7 +193,7 @@
     "mySendRequests": "My Send Requests",
     "signIn": "Sign In",
     "blog": "Blog",
-    "support": "Support",
+    "support": "Support / Feedback",
     "adminWindow": "Admin Window",
     "signOut": "Sign Out"
   },

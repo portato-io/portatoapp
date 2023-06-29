@@ -96,6 +96,7 @@ export const fetchDataOnce = async (uid, directory) => {
       return snapshot.val();
     } else {
       console.log('No data found.', userRequestsRef);
+      return {}; // return an empty object if no data is found
     }
   } catch (error) {
     console.error('Error fetching data from Firebase:', error);
@@ -248,18 +249,48 @@ export const fetchAdressRequest = async (uid, id) => {
   }
 };
 
-export const updateRequestStatus = async (request_uid, request_id, status) => {
-  try {
-    const dealRef = ref(
-      database,
-      'users/' + request_uid + '/requests/' + request_id
-    );
-    await update(dealRef, { status: status });
-
-    console.log('Successfully updated request status ' + dealRef);
-  } catch (error) {
-    console.error('Error updating request status :', error);
-  }
+/**
+ * Updates the request status
+ *
+ * @param {string} object_uid - The uid of the object
+ * @param {string} request_id - The id of the object
+ * @param {string} status - The new status
+ * @param {string} object - The name of the object type
+ * @return {Promise} A promise that resolves with no value
+ */
+export const updateObjectStatus = (object_uid, object_id, status, object) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const dealRef = ref(
+        database,
+        'users/' + object_uid + `/${object}/` + object_id
+      );
+      if (object == 'requests') {
+        update(dealRef, { status: status })
+          .then(() => {
+            console.log('Successfully updated request status ' + dealRef);
+            resolve();
+          })
+          .catch((error) => {
+            console.error('Error updating request status :', error);
+            reject(error);
+          });
+      } else if (object == 'routes') {
+        update(dealRef, { routeStatus: status })
+          .then(() => {
+            console.log('Successfully updated route status ' + dealRef);
+            resolve();
+          })
+          .catch((error) => {
+            console.error('Error updating route status :', error);
+            reject(error);
+          });
+      }
+    } catch (error) {
+      console.error('Error updating object status :', error);
+      reject(error);
+    }
+  });
 };
 
 export const checkPreviousRoutes = async (requestId, routeId) => {

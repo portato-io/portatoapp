@@ -1,51 +1,87 @@
 {
   "about": {
     "title": "Über uns",
-    "visionMissionTitle": "Unsere Vision und Mission",
-    "visionMissionText": "Im Schweizer Individualverkehr werden täglich über 150 Millionen Kilometer mit dem Auto zurückgelegt. Dabei sind die Autos oft kaum beladen: In jedem Fahrzeug sitzen durchschnittlich nur 1.6 Personen und die immer grösseren Kofferräume sind mehrheitlich leer.\n\n​Portato hat sich zum Ziel gesetzt, diese vielen freien Transportkapazitäten besser zu nutzen. Jede Mitfahrgelegenheit vermeidet potentiell eine weitere Transport-Fahrt und bedeutet ein Auto weniger auf der Strasse. Unsere Vision ist es, so den Strassenverkehr effizienter zu machen und einen positiven Beitrag zur Umwelt zu leisten.​\n\nUnsere unmittelbare Mission ist es, Mitfahrgelegenheiten zwischen Privatpersonen zu vermitteln. Auf der einen Seite lässt sich so der Versand von (sperrigen) Gegenständen bequemer gestalten. Auf der anderen Seite ermöglichen wir Fahrern, ihren freien Platz sinnvoll zu nutzen, dabei Geld zu verdienen und ihren ökologischen Fussabdruck zu reduzieren.",
+    "visionMissionTitle": "Portatos Mission",
+    "visionMissionText": "Schweizer:innen fahren täglich über 150 Mio. Kilometer mit dem Auto, meistens mit leeren Kofferäumen.\n\n​Portato nutzt diese vielen freien Transportkapazitäten. Wir machen Mitfahrgelegenheiten einfach.\n\n Praktisch für Versender:innen. Lukrativ für Fahrer:innen. Gut für die Umwelt.",
     "whoWeAreTitle": "Wer wir sind",
-    "whoWeAreText": "Bei Portato trifft Innovation auf freie Strasse! Wir sind eine lebhafte Fusion von Denkern, Bastlern und Pionieren mit dem gemeinsamen Ziel den Transport zu revolutionieren!"
+    "whoWeAreText": "Bei Portato trifft Innovation auf freie Strasse! Wir sind eine lebhafte Mischung von Denkern, Bastlern und Pionieren mit dem Ziel den Transport zu revolutionieren!"
+  },
+
+  "general": {
+    "tagline": "Der einfache, günstige und ökologische Transportdienst.",
+    "howItWorks": "So funktioniert's",
+    "moreInfo": "Erfahre mehr",
+    "send": "Senden",
+    "deliver": "Fahren"
+  },
+
+  "social": {
+    "heading": "Finde uns auf Social Media",
+    "linkedin": {
+      "label": "LinkedIn",
+      "link": "https://www.linkedin.com/company/portato-io/",
+      "icon": "icon-linkedin"
+    },
+    "instagram": {
+      "label": "Instagram",
+      "link": "https://www.instagram.com/portato.io/",
+      "icon": "icon-instagram"
+    }
   },
 
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "PowerPoint-Zauberer und Excel-Magier. Conrad hat den Consulting-Alltag aufgegeben, um CEO von Portato zu werden. Er hat eine leidenschaft für Fahrräder, ein prall gefülltes Kontaktbuch und einen feierfreudigen Geist. Sanft im Kern, aber effektiv in der Ausführung.",
+      "description": "Ehemaliger PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Ein Sportenthusiast mit einem grossen Netzwerk.",
       "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "Franko-britisches Genie mit Gedanken so schnell, dass sie einen Überschallknall erzeugen. Hugo kann dich in zwei Sprachen bezaubern, während er das Backend in drei programmiert. Seine Finger fliegen über die Tastatur und weben Zaubersprüche, die alles zum Laufen bringen.",
+      "description": "Franko-britisches Genie, der das Backend in mindestens genauso vielen Sprachen jongliert.",
       "image": "https://images.pexels.com/photos/4100672/pexels-photo-4100672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Mehdi": {
       "name": "Mehdi",
-      "description": "Hip-Hop-Liebhaber, Hipster und Charmeur, Mehdi ist unser Guru für User Experience. Wenn er nicht gerade damit beschäftigt ist, ein Magnet der Bewunderung zu sein, kreiert er Code, der das Frontend genauso gut aussehen lässt wie seine Frisuren.",
+      "description": "Hip-Hop-Liebhaber, der das Frontend genauso gut aussehen lässt wie seine Frisuren.",
       "image": "https://images.pexels.com/photos/16375570/pexels-photo-16375570/free-photo-of-man-sitting-on-a-wall-with-a-mural.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Hansdampf in allen Gassen. Mischa ist die seltene Kombination aus Programmierer-Designer-Animator-Denker... und so vielem mehr. Er kann zwischen Jiu-Jitsu, Adobe und Visual Code wechseln wie niemand sonst, Tag und Nacht, Zusammen oder Remote.",
+      "description": "Hansdampf in allen Gassen. Multitalent mit einem Händchen für Code, Design und Animation.",
       "image": "https://images.pexels.com/photos/1194196/pexels-photo-1194196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "Chiara, die Geschichtenschreiberin und 2D-Animationskünstlerin, ist nebenbei auch eine angehende Prinzessin mit dem feurigen Geist eines lateinischen Tanzes. Sie bringt den Zauber in unsere freundlichen Gesichter und verleiht Portato sein charmantes Gesicht.",
+      "description": "Storyboard-Artist und 2D-Künstlerin, die Porato seinen Charme verleiht, ein Strich nach dem anderen.",
       "image": "https://images.pexels.com/photos/933255/pexels-photo-933255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     }
   },
 
   "navBar": {
     "home": "Home",
-    "send": "Versenden",
+    "send": "Senden",
     "drive": "Fahren",
     "profile": "Menu"
   },
 
   "requestOverview": {
-    "newTitle": "Hast Du etwas zu versenden?",
+    "newTitle": "Möchtest Du etwas transportieren lassen?",
     "createButtonDescription": "Versandauftrag erstellen",
-    "currentTitle": "Deine aktuellen Versandaufträge"
+    "currentTitle": "Deine aktuellen Versandaufträge",
+    "requestList": {
+        "price": "Preis",
+        "weight": "Gewicht",
+        "pickupAddress":"Abholadresse",
+        "deliveryAddress":"Lieferadresse",
+        "dateRange":"Datum",
+        "from": "Von",
+        "to": "bis",
+        "time": "Tageszeit",
+        "size": "Grösse",
+        "Images": "Bilder",
+        "description": "Beschreibung"
+    }
+    
   },
 
   "requestInfo": {
@@ -54,7 +90,7 @@
     "namePlaceholder": "Gib deiner Sendung einen aussagekräftigen Titel.",
     "description": "Beschreibung",
     "descriptionPlaceholder": "z.B. ist es eine gute Idee, die Abmessungen von grossen Gegenständen anzugeben.",
-    "size": "Größe",
+    "size": "Grösse",
     "weight": "Gewicht",
     "uploadImages": "Bilder hochladen"
   },
@@ -67,6 +103,8 @@
   "requestTime": {
     "title": "Wann soll die Sendung abgeholt werden?",
     "dates": "Daten",
+    "times": "Tageszeiten",
+    "rangeHint": "(Du kannst das Start- und Enddatum auf den gleichen Tag legen falls nötig)",
     "|*TBI*|startDatePlaceholder": "Startdatum",
     "|*TBI*|endDatePlaceholder": "Enddatum",
     "|*TBI*|time": "Tageszeit",
@@ -76,28 +114,29 @@
   },
   "requestCost": {
     "title": "Was ist Dir der Transport wert?",
-    "pricePlaceholder": "z.B., 30 CHF",
+    "label": "Preis (in CHF)",
+    "pricePlaceholder": "z.B. 50",
     "driverReward": "Belohnung für den Fahrer:",
     "portatoFee": "Gebühr Portato:",
     "vat": "MwSt:",
     "insurance": "Versicherung:",
-    "comment": "Gib einen fairen Preis ein, um einen angemessenen Anreiz zu geben. Schließlich wird dein Fahrer einen Umweg machen, um deine Sendung zu liefern."
+    "comment": "Gib einen fairen Preis ein, um einen angemessenen Anreiz zu geben. Schliesslich wird dein Fahrer einen Umweg machen, um deine Sendung zu liefern."
   },
   "requestSummary": {
     "title": "Zusammenfassung deiner Versandanfrage",
-    "size": "Größe:",
-    "weight": "Gewicht:",
-    "pickupAddress": "Abholadresse:",
-    "deliveryAddress": "Lieferadresse:",
-    "timeframe": "Zeitrahmen:",
-    "possibleDates": "Mögliche Daten:",
-    "possibleTimes": "Mögliche Tageszeiten:",
-    "price": "Preis:",
-    "images": "Bild(er):"
+    "size": "Grösse",
+    "weight": "Gewicht",
+    "pickupAddress": "Abholadresse",
+    "deliveryAddress": "Lieferadresse",
+    "timeframe": "Zeitrahmen",
+    "possibleDates": "Mögliche Daten",
+    "possibleTimes": "Mögliche Tageszeiten",
+    "price": "Preis",
+    "images": "Bild(er)"
   },
   "driveOverview": {
-    "newTitle": "Möchtest Du eine Route registrieren",
-    "createButtonDescription": "Erstellen",
+    "newTitle": "Möchtest Du eine Route registrieren?",
+    "createButtonDescription": "Route registrieren",
     "|*TBI*|currentTitle": "Deine aktuellen Routen"
   },
   "driveAddresses": {
@@ -122,7 +161,7 @@
     "timeTitle": "Tageszeit auswählen"
   },
   "driveCapacity": {
-    "title": "Wie groß ist deine Lieferkapazität?"
+    "title": "Wie gross ist deine Lieferkapazität?"
   },
   "driveSummary": {
     "title": "Zusammenfassung deiner Fahrt",
@@ -131,7 +170,7 @@
     "acceptableDetour": "Akzeptabler Umweg",
     "tripType": "Art deiner Reise",
     "timing": "Zeitplan",
-    "tripDates": "Daten:",
+    "tripDates": "Datum:",
     "tripTime": "Tageszeit:",
     "each": "Wiederkehrend jeden:",
     "driveCapacity": "Kapazität"
@@ -147,7 +186,7 @@
     "mySendRequests": "Meine Sendeanfragen",
     "signIn": "Anmelden",
     "blog": "Blog",
-    "support": "Unterstützung",
+    "support": "Support / Feedback",
     "adminWindow": "Admin-Fenster",
     "signOut": "Abmelden"
   },

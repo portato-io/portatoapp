@@ -76,3 +76,8 @@ export const setRouteUid = (uid: string): AnyAction => ({
 export const emptyState = (): AnyAction => ({
   type: EMPTY_STATE,
 });
+
+export const setRouteStatus = (routeStatus: string): AnyAction => ({
+  type: actionTypes.SET_ROUTE_STATUS,
+  payload: routeStatus,
+});

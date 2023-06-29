@@ -5,7 +5,7 @@ import '../../../CSS/PortatoStyleSheet.css';
 import PageLayout from '../../Layouts/PageLayoutTest';
 import { useParams } from 'react-router-dom';
 import {
-  updateRequestStatus,
+  updateObjectStatus,
   addContactTimestamp,
 } from '../../../linksStoreToFirebase';
 
@@ -42,8 +42,12 @@ const ContactDriver: React.FC = () => {
       if (result.status === 200) {
         message.success('Email sent successfully!');
         form.resetFields();
-        updateRequestStatus(request_uid, request_id, 'contacted');
-        addContactTimestamp(request_uid, request_id);
+        if (request_uid && request_id) {
+          updateObjectStatus(request_uid, request_id, 'contacted', 'requests');
+          addContactTimestamp(request_uid, request_id);
+        } else {
+          console.error('request_uid or request_id is undefined');
+        }
       } else {
         message.error('Failed to send email. Please try again.');
       }

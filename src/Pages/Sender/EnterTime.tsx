@@ -41,40 +41,34 @@ const EnterTime: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
-          >
-            <Title level={3}>{t('requestTime.title')}</Title>
-            <Form.Item
-              label={
-                <label className="font-bold">{t('requestTime.dates')}</label>
-              }
-              style={{}}
-            >
-              <RangePicker
-                name="time"
-                inputReadOnly={true}
-                onChange={handleChangeRange}
-                style={{ width: '100%' }}
-              />
-            </Form.Item>
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Form
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <h2>{t('requestTime.title')}</h2>
+          <Form.Item className="input-wrapper" label={t('requestTime.dates')}>
+            <RangePicker
+              name="time"
+              inputReadOnly={true}
+              onChange={handleChangeRange}
+              style={{ width: '100%' }}
+            />
+            <small>{t('requestTime.rangeHint')}</small>
+          </Form.Item>
 
-            <Form.Item label={<label className="font-bold">Time</label>}>
-              <Selector
-                className="form-element-centered"
-                options={TIME}
-                multiple={true}
-                onChange={handleTimeChange}
-              />
-            </Form.Item>
-          </Form>
-        </div>
-        <div className="form-button-container">
+          <Form.Item className="input-wrapper" label={t('requestTime.times')}>
+            <Selector
+              options={TIME}
+              multiple={true}
+              onChange={handleTimeChange}
+            />
+          </Form.Item>
+        </Form>
+
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           <NextButton
             nextScreen={NEXT_SCREEN}
@@ -83,7 +77,7 @@ const EnterTime: React.FC = () => {
             }}
           />
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

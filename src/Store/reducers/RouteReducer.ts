@@ -12,6 +12,7 @@ const initialStateRoute: IRouteInfo = {
   type: '',
   days: [],
   delivery_capacity: '',
+  routeStatus: '',
 };
 
 export function routeReducer(
@@ -83,11 +84,18 @@ export function routeReducer(
         delivery_capacity: Object.values(action.payload)[0],
       };
     }
+
+    case 'SET_ROUTE_STATUS': {
+      return {
+        ...state,
+        routeStatus: action.payload.routeStatus,
+      };
+    }
+
     case 'EMPTY_STATE':
       return initialStateRoute;
 
     default: {
-      console.error('Unknown action type in route Reducer', action.type);
       return state;
     }
   }

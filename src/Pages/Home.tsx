@@ -2,12 +2,10 @@ import React, { useContext } from 'react';
 import { Row, Col, Typography, Card, Space, Avatar } from 'antd';
 import PageLayout from './Layouts/PageLayoutTest';
 import headerImage from '../Assets/Images/portato-landing-5.png';
-import portatoLogo from '../Assets/Images/logo_blue.png';
-import howItWorksImg from '../Assets/Images/how_it_works.gif';
-import howItWorksVideo from '../Assets/Videos/video-start-1.mp4';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
+import LottieAnimation from '../Assets/Lotties/how-it-works-animation';
 
 require('../CSS/Home.css');
 
@@ -79,7 +77,7 @@ const Home: React.FC = () => {
       <section className="section">
         <div className="text-section">
           <h1 className="icon icon-logo icon-big logo-slogan">portato</h1>
-          <h5>A easy, cheap and eco-friendly transport service for things.</h5>
+          <h5>{t('general.tagline')}</h5>
         </div>
       </section>
 
@@ -107,15 +105,7 @@ const Home: React.FC = () => {
       <section className="section">
         <h2>{t('general.howItWorks')}</h2>
         <div className="video-wrapper">
-          <a href="javascript:void(0)" className="video-button-play"></a>
-          <video
-            className="box-shadow box-radius-style-1"
-            muted
-            autoPlay
-            preload="auto"
-          >
-            <source src={howItWorksVideo}></source>
-          </video>
+          <LottieAnimation />
         </div>
       </section>
 

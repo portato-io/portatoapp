@@ -37,32 +37,19 @@ function RecurrentTripContent(activeTab: any) {
   console.log(routeInfo);
   return (
     <div>
-      <Title level={5} style={{}}>
-        {t('driveTime.weekdayTitle')}
-      </Title>
-      <Selector
-        columns={4}
-        options={DAYS}
-        multiple={true}
-        onChange={handleDaysChange}
-        defaultValue={routeInfo.days}
-      />
-
-      <Title level={5}>{t('driveTime.timeTitle')}</Title>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div className="spacer-regular"></div>
+      <div className="input-wrapper">
+        <label>{t('driveTime.weekdayTitle')}</label>
         <Selector
-          options={TIME}
+          columns={7}
+          options={DAYS}
           multiple={true}
-          onChange={handleTimeChange}
-          defaultValue={routeInfo.time}
+          onChange={handleDaysChange}
         />
+      </div>
+      <div className="input-wrapper">
+        <label>{t('driveTime.timeTitle')}</label>
+        <Selector options={TIME} multiple={true} onChange={handleTimeChange} />
       </div>
     </div>
   );

@@ -31,6 +31,7 @@ const initialStateDeal: IDealInfo = {
     days: [],
     timeRange: '',
     delivery_capacity: '',
+    routeStatus: '',
   },
   status: 'unknown',
 };
@@ -65,7 +66,6 @@ export function dealReducer(
       };
     }
     default: {
-      console.error('Unknown action type in dealReducer', action.type);
       return state;
     }
   }

@@ -1,81 +1,159 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
 import { IRouteInfo } from '../type';
-import { Card } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
+import { Button, Popconfirm, Typography } from 'antd';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { updateObjectStatus } from '../linksStoreToFirebase';
+const { Title } = Typography;
 
 const FetchRoutes: React.FC<{
-  uid: string;
+  uid: string | null | undefined;
   heightPortion?: number;
   admin?: boolean;
-}> = ({ uid = undefined, heightPortion = 0.8, admin = false }) => {
+}> = ({ uid, heightPortion = 0.8, admin = false }) => {
   const [routes, setRoute] = useState<IRouteInfo[]>([]);
-  const navigate = useNavigate();
-
-  // Mehdi : Use Effect to only fetch the data once when the component is mount
-  // fetchDataOnce return a Promise object, we need the .then to decode the promise and store the values
-  // then we use await to store the values in state
+  const [refreshKey, setRefreshKey] = useState(0); // add this line
+  const { t } = useTranslation<string>();
 
   useEffect(() => {
-    // TODO: Handle uid undefined case
     if (!uid) {
       console.log('uid is undefined');
       return;
     }
 
-    const fetchData = fetchDataOnce(uid, 'routes').then((storesObject) => {
-      // Check if storesObject is an object before returning it
-      if (storesObject && typeof storesObject === 'object') {
-        const storesArray = Object.values(storesObject) as IRouteInfo[]; // Type assertion here
-        return storesArray;
-      } else {
-        console.log('Data is not an object:', storesObject);
-        return [];
-      }
-    });
-
     const getUserRoutes = async () => {
       try {
-        setRoute(await fetchData);
+        const storesObject = await fetchDataOnce(uid, 'routes');
+
+        if (storesObject && typeof storesObject === 'object') {
+          let routesArray = Object.values(storesObject) as IRouteInfo[];
+
+          if (Array.isArray(routesArray)) {
+            routesArray = routesArray.filter(
+              (route) => route.routeStatus !== 'deleted'
+            );
+            setRoute(routesArray);
+          } else {
+            console.error('Invalid store array');
+            setRoute([]);
+          }
+        } else {
+          console.log('Data is not an object:', storesObject);
+          setRoute([]);
+        }
       } catch (error) {
         console.log('Error fetching data: ', error);
       }
     };
 
     getUserRoutes();
-  }, [uid]);
+  }, [uid, refreshKey]); // add refreshKey as a dependency
 
-  const match = (routeId: string, routeUid: string) => {
-    console.log('Matching route with id: ' + routeId);
-    navigate(`/admin/deal_suggester/${routeId}/${routeUid}`);
+  const deleteRoute = (route: IRouteInfo) => {
+    updateObjectStatus(route.uid, route.id, 'deleted', 'routes').then(() => {
+      setRefreshKey((oldKey) => oldKey + 1); // update the refreshKey state
+    });
   };
 
-  const containerHeight = window.innerHeight * heightPortion;
   return (
-    <div>
-      <div
-        style={
-          admin ? {} : { height: containerHeight + 'px', overflowY: 'scroll' }
-        }
-      >
-        {routes.map((route) => (
+    <section className="section">
+      <div className="spacer-big"></div>
+      {admin ? null : <h2>{t('requestOverview.currentTitle')}</h2>}
+      {routes.map((route) => (
+        <div
+          key={route.id}
+          className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style"
+        >
           <div
-            key={route.id}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            className={`send-request-card box-shadow ${
+              route.routeStatus === 'matched' ? 'highlight-card' : ''
+            }`}
           >
-            <Card style={{ marginTop: '5vh', width: '80%' }} title={route.id}>
-              {route.departure_adress}/{route.destination_adress}
-              {admin ? <pre>{JSON.stringify(route, null, 2)}</pre> : null}
-            </Card>
+            <div className="send-request-card-header">
+              <h4>{route.id}</h4>
+
+              <div
+                className="delete-icon"
+                style={{ position: 'absolute', top: 0, right: 0 }}
+              >
+                <Popconfirm
+                  title="Do you want to delete this request?"
+                  onConfirm={() => deleteRoute(route)}
+                  onCancel={() => console.log('Cancelled')}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button type="link">
+                    <DeleteOutlined />
+                  </Button>
+                </Popconfirm>
+              </div>
+            </div>
+            <div className="send-request-card-content">
+              <div className="table-wrapper">
+                <table>
+                  <tr>
+                    <th>{t('driveSummary.departureAddress')}</th>
+                    <td>{route.departure_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.destinationAddress')}</th>
+                    <td>{route.destination_adress}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.acceptableDetour')}</th>
+                    <td>{route.acceptable_detour} Km </td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.driveCapacity')}</th>
+                    <td>{route.delivery_capacity}</td>
+                  </tr>
+                  <tr>
+                    <th>{t('driveSummary.tripType')}</th>
+                    <td>{route.type}</td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td>
+                      {route.type == t('driveTime.recurringRide') ? (
+                        <div>
+                          <Title level={4}> {t('driveSummary.timing')}</Title>
+                          <Typography>
+                            {t('driveSummary.each')}{' '}
+                            {route.days && typeof route.days === 'object'
+                              ? Object.values(route.days)
+                              : 'No data for days'}
+                            <br />
+                            {t('driveSummary.tripTime')}{' '}
+                            {route.time && typeof route.time === 'object'
+                              ? Object.values(route.time)[0]
+                              : 'No data for time'}{' '}
+                          </Typography>
+                        </div>
+                      ) : (
+                        <div>
+                          <Title level={4}> {t('driveSummary.timing')}</Title>
+                          <Typography>
+                            {t('driveSummary.tripDates')} {route.timeRange}{' '}
+                            <br />
+                            {t('driveSummary.tripTime')}{' '}
+                            {route.time && typeof route.time === 'object'
+                              ? Object.values(route.time)[0]
+                              : 'No data for time'}
+                          </Typography>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      ))}
+    </section>
   );
 };
 

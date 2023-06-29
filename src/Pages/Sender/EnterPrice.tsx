@@ -46,24 +46,23 @@ const EnterPrice: React.FC = () => {
 
   return (
     <PageLayout>
-      <ProgressBar progress={PROGRESS} />
-      <div className="form-and-buttons-content-container">
-        <div className="form-content-container">
-          <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
-          >
-            <Title level={3}>{t('requestCost.title')}</Title>
-            <Form.Item>
-              <Input
-                name="price"
-                value={objecInfo.price !== 0 ? objecInfo.price : undefined}
-                onChange={handleInputChange}
-                placeholder={t('requestCost.pricePlaceholder') || ''}
-              />
-            </Form.Item>
-            {/* <Card
+      <section className="section section-form mod-nomargin-top">
+        <ProgressBar progress={PROGRESS} />
+        <Form
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <h2>{t('requestCost.title')}</h2>
+          <Form.Item className="input-wrapper" label={t('requestCost.label')}>
+            <Input
+              name="price"
+              value={objecInfo.price !== 0 ? objecInfo.price : undefined}
+              onChange={handleInputChange}
+              placeholder={t('requestCost.pricePlaceholder') || ''}
+            />
+          </Form.Item>
+          {/* <Card
               bordered={false}
               className="centered-card"
               style={{ margin: 'auto', width: '80%' }}
@@ -73,28 +72,14 @@ const EnterPrice: React.FC = () => {
               {t('requestCost.vat')} c <br />
               {t('requestCost.insurance')} d
             </Card> */}
-            <Form.Item
-              style={{
-                marginTop: '20px',
-              }}
-            >
-              <Card
-                bordered={true}
-                style={{
-                  background: '#F8F9FE',
-                  width: '80%',
-                  margin: 'auto',
-                }}
-              >
-                <div style={{ textAlign: 'center' }}>
-                  <InfoCircleOutlined />
-                </div>
-                {t('requestCost.comment')}
-              </Card>
-            </Form.Item>
-          </Form>
-        </div>
-        <div className="form-button-container">
+          <div className="mod-display-flex box-style-grey box-shadow box-radius-style-2">
+            <i className="icon icon-bell"></i>
+            <p className="text-hint mod-nomargin-top">
+              {t('requestCost.comment')}
+            </p>
+          </div>
+        </Form>
+        <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton />
           <NextButton
             nextScreen={NEXT_SCREEN}
@@ -103,7 +88,7 @@ const EnterPrice: React.FC = () => {
             }}
           />
         </div>
-      </div>
+      </section>
     </PageLayout>
   );
 };

@@ -147,10 +147,7 @@ const UploadImage = () => {
   };
 
   return (
-    <Form.Item
-      label={<label className="item-form-label"></label>}
-      valuePropName="fileList"
-    >
+    <Form.Item valuePropName="fileList">
       <Upload
         style={{ position: 'absolute', right: '1050px' }}
         action="/upload.do"

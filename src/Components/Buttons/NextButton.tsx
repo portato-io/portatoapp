@@ -24,14 +24,12 @@ const NextButton: React.FC<NextButtonProps> = ({
 
   return (
     <div className="form-button-right">
-      <Button
-        type="primary"
-        size="large"
+      <a
+        className="button button-solid box-shadow box-radius-default box-shadow-effect"
         onClick={handleNextClick}
-        style={{ width: '100%' }}
       >
         {t('navigationButton.next')}
-      </Button>
+      </a>
     </div>
   );
 };
