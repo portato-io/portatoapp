@@ -53,6 +53,7 @@ const Home: React.FC = () => {
       <a
         href={link}
         className="button button-border box-shadow box-radius-default box-shadow-effect"
+        target="_blank"
       >
         <i className={icon} />
         <span>{label}</span>
@@ -169,18 +170,6 @@ const Home: React.FC = () => {
           ))}
         </div>
       </section>
-
-      {/* How it works */}
-      {/* <lottie-player src="../Assets/Lotties/test-animation.json" background="transparent"  speed="1" loop controls autoplay></lottie-player> */}
-      {/* <lottie-player src="https://assets9.lottiefiles.com/datafiles/MUp3wlMDGtoK5FK/data.json"  background="transparent"  loop controls autoplay></lottie-player> */}
-      {/* <lottie-player src="https://assets9.lottiefiles.com/datafiles/MUp3wlMDGtoK5FK/data.json" background="transparent" loop autoplay></lottie-player> */}
-      {/* <lottie-player src="../Assets/Lotties/test-animation.json" background="transparent" loop autoplay></lottie-player> */}
-      {/* <lottie-player
-          src="https://lottie.host/dd830d03-3456-47ab-a89e-c64105f8ca2e/nGZ4DRarLa.json"
-          background="transparent"
-          loop
-          autoplay
-        ></lottie-player> */}
     </PageLayout>
   );
 };
