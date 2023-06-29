@@ -85,32 +85,34 @@ const RouteSummary: React.FC = () => {
             <div className="send-request-card-header"></div>
             <div className="send-request-card-content">
               <div className="table-wrapper">
-                <table>
+                <table className="table">
                   <tr>
-                    <th>{t('driveSummary.departureAddress')}</th>
-                    <td>{routeInfo.departure_adress}</td>
+                    <th className="th">{t('driveSummary.departureAddress')}</th>
+                    <td className="td">{routeInfo.departure_adress}</td>
                   </tr>
                   <tr>
-                    <th>{t('driveSummary.destinationAddress')}</th>
-                    <td>{routeInfo.destination_adress}</td>
-                  </tr>
-                  <tr>
-                    <th>{t('driveSummary.acceptableDetour')}</th>
-                    <td>{routeInfo.acceptable_detour} Km </td>
-                  </tr>
-                  <tr>
-                    <th>{t('driveSummary.driveCapacity')}</th>
-                    <td>{routeInfo.delivery_capacity}</td>
-                  </tr>
-                  <tr>
-                    <th>{t('driveSummary.tripType')}</th>
-                    <td>{routeInfo.type}</td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <th>{t('driveSummary.timing')}</th>
+                    <th className="th">
+                      {t('driveSummary.destinationAddress')}
                     </th>
-                    <td>
+                    <td className="td">{routeInfo.destination_adress}</td>
+                  </tr>
+                  <tr>
+                    <th className="th">{t('driveSummary.acceptableDetour')}</th>
+                    <td className="td">{routeInfo.acceptable_detour} Km </td>
+                  </tr>
+                  <tr>
+                    <th className="th">{t('driveSummary.driveCapacity')}</th>
+                    <td className="td">{routeInfo.delivery_capacity}</td>
+                  </tr>
+                  <tr>
+                    <th className="th">{t('driveSummary.tripType')}</th>
+                    <td className="td">{routeInfo.type}</td>
+                  </tr>
+                  <tr>
+                    <th className="th">
+                      <th className="th">{t('driveSummary.timing')}</th>
+                    </th>
+                    <td className="td">
                       {routeInfo.type == t('driveTime.recurringRide') ? (
                         <div>
                           <Typography>

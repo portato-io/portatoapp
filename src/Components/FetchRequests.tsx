@@ -176,18 +176,24 @@ const FetchRequests: React.FC<{
             </div>
             <div className="send-request-card-content">
               <div className="table-wrapper">
-                <table>
+                <table className="table">
                   <tr>
-                    <th>{t('requestOverview.requestList.pickupAddress')}</th>
-                    <td>{request.pickup_adress}</td>
+                    <th className="th">
+                      {t('requestOverview.requestList.pickupAddress')}
+                    </th>
+                    <td className="td">{request.pickup_adress}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestOverview.requestList.deliveryAddress')}</th>
-                    <td>{request.delivery_adress}</td>
+                    <th className="th">
+                      {t('requestOverview.requestList.deliveryAddress')}
+                    </th>
+                    <td className="td">{request.delivery_adress}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestOverview.requestList.dateRange')}</th>
-                    <td>
+                    <th className="th">
+                      {t('requestOverview.requestList.dateRange')}
+                    </th>
+                    <td className="td">
                       {t('requestOverview.requestList.from')}{' '}
                       {request.dateRange[0]}{' '}
                       {t('requestOverview.requestList.to')}{' '}
@@ -195,24 +201,34 @@ const FetchRequests: React.FC<{
                     </td>
                   </tr>
                   <tr>
-                    <th>{t('requestOverview.requestList.time')}</th>
-                    <td>{Object.values(request.time)[0]}</td>
+                    <th className="th">
+                      {t('requestOverview.requestList.time')}
+                    </th>
+                    <td className="td">{Object.values(request.time)[0]}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestOverview.requestList.price')}</th>
-                    <td>{request.price} CHF</td>
+                    <th className="th">
+                      {t('requestOverview.requestList.price')}
+                    </th>
+                    <td className="td">{request.price} CHF</td>
                   </tr>
                   <tr>
-                    <th>{t('requestOverview.requestList.weight')}</th>
-                    <td>{request.weight}</td>
+                    <th className="th">
+                      {t('requestOverview.requestList.weight')}
+                    </th>
+                    <td className="td">{request.weight}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestOverview.requestList.size')}</th>
-                    <td>{request.size}</td>
+                    <th className="th">
+                      {t('requestOverview.requestList.size')}
+                    </th>
+                    <td className="td">{request.size}</td>
                   </tr>
                   <tr>
-                    <th>{t('requestOverview.requestList.description')}</th>
-                    <td>{request.description}</td>
+                    <th className="th">
+                      {t('requestOverview.requestList.description')}
+                    </th>
+                    <td className="td">{request.description}</td>
                   </tr>
                 </table>
               </div>

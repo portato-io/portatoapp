@@ -99,42 +99,44 @@ const FetchRoutes: React.FC<{
             </div>
             <div className="send-request-card-content">
               <div className="table-wrapper">
-                <table>
+                <table className="table">
                   <tr>
-                    <th>{t('driveSummary.departureAddress')}</th>
-                    <td>{route.departure_adress}</td>
+                    <th className="th">{t('driveSummary.departureAddress')}</th>
+                    <td className="td">{route.departure_adress}</td>
                   </tr>
                   <tr>
-                    <th>{t('driveSummary.destinationAddress')}</th>
-                    <td>{route.destination_adress}</td>
+                    <th className="th">
+                      {t('driveSummary.destinationAddress')}
+                    </th>
+                    <td className="td">{route.destination_adress}</td>
                   </tr>
                   <tr>
-                    <th>{t('driveSummary.acceptableDetour')}</th>
-                    <td>{route.acceptable_detour} Km </td>
+                    <th className="th">{t('driveSummary.acceptableDetour')}</th>
+                    <td className="td">{route.acceptable_detour} Km </td>
                   </tr>
                   <tr>
-                    <th>{t('driveSummary.driveCapacity')}</th>
-                    <td>{route.delivery_capacity}</td>
+                    <th className="th">{t('driveSummary.driveCapacity')}</th>
+                    <td className="td">{route.delivery_capacity}</td>
                   </tr>
                   <tr>
-                    <th>{t('driveSummary.tripType')}</th>
-                    <td>{route.type}</td>
+                    <th className="th">{t('driveSummary.tripType')}</th>
+                    <td className="td">{route.type}</td>
                   </tr>
                   {admin ? (
                     <tr>
-                      <th>Uid</th>
-                      <td>{route.uid}</td>
+                      <th className="th">Uid</th>
+                      <td className="td">{route.uid}</td>
                     </tr>
                   ) : null}
                   {admin ? (
                     <tr>
-                      <th>id</th>
-                      <td>{route.id}</td>
+                      <th className="th">id</th>
+                      <td className="td">{route.id}</td>
                     </tr>
                   ) : null}
                   <tr>
-                    <th>{t('driveSummary.timing')}</th>
-                    <td>
+                    <th className="th">{t('driveSummary.timing')}</th>
+                    <td className="td">
                       {route.type == t('driveTime.recurringRide') ? (
                         <div>
                           <Typography>

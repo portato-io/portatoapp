@@ -3,3 +3,7 @@
     flex-direction: column;
   }
 }
+
+.ant-picker-date-panel {
+  width: 100hw;
+}
