@@ -8,10 +8,7 @@ const FirebaseAuth: React.FC = () => {
 
   useEffect(() => {
     // Update the signInSuccessUrl and callbacks in uiConfig
-    uiConfig.signInOptions = [
-      GoogleAuthProvider.PROVIDER_ID,
-      EmailAuthProvider.PROVIDER_ID,
-    ];
+    uiConfig.signInOptions = [EmailAuthProvider.PROVIDER_ID];
     uiConfig.callbacks = {
       signInSuccessWithAuthResult: () => {
         window.location.replace(window.location.pathname);
