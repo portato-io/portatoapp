@@ -158,7 +158,7 @@ const FetchRequests: React.FC<{
               <div className="card-actions">
                 <div>
                   <Popconfirm
-                    title="Do you want to delete this request?"
+                    title={t('general.deleteConfirm')}
                     onConfirm={() => deleteRequest(request)}
                     onCancel={() => console.log('Cancelled')}
                     okText="Yes"
