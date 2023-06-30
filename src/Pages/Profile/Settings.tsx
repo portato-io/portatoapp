@@ -4,9 +4,11 @@ import { Cascader, Form, Button, Switch } from 'antd-mobile';
 import i18next from 'i18next';
 import { LANGUAGE_OPTIONS } from '../../constant';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { Typography } from 'antd';
 
 const Settings: React.FC = () => {
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const { Title } = Typography;
   const [visible, setVisible] = useState(false);
   const [language, setLanguage] = useState<string>();
@@ -42,10 +44,10 @@ const Settings: React.FC = () => {
           marginLeft: '5vw',
         }}
       >
-        Settings
+        {t('settings.title')}
       </Title>
       <Form style={{ position: 'absolute', marginTop: '20vh', width: '100vw' }}>
-        <Form.Item label="Language">
+        <Form.Item label={t('settings.languageLabel')}>
           {/* <Typography style={{ display: 'inline' }}>Language</Typography> */}
           <Cascader
             placeholder=" "

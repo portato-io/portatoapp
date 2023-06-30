@@ -64,7 +64,7 @@ const EnterRoute: React.FC = () => {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
         >
-          <h2>{t('driveOverview.createNewRouteTitle')}</h2>
+          <h2>{t('driveAddresses.createNewRouteTitle')}</h2>
           <Form.Item
             className="input-wrapper"
             label={t('driveAddresses.departureAddress')}

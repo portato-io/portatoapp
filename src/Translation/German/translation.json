@@ -140,6 +140,7 @@
     "currentTitle": "Deine aktuellen Routen"
   },
   "driveAddresses": {
+    "createNewRouteTitle": "Neue Route erstellen",
     "departureAddress": "Abfahrtsadresse",
     "|*TBI*|departureAddressPlaceholder": "Gib eine Adresse ein",
     "destinationAddress": "Zieladresse",
@@ -197,5 +198,9 @@
     "profilePicture": "Profilbild",
     "name": "Name",
     "emailAddress": "E-Mail Adresse"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "languageLabel": "Sprache"
   }
 }
