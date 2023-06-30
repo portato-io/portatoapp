@@ -138,6 +138,7 @@
     "currentTitle": "Vos itinéraires actuels"
   },
   "driveAddresses": {
+    "createNewRouteTitle": "Créer un nouvel itinéraire",
     "departureAddress": "Adresse de départ",
     "|*TBI*|departureAddressPlaceholder": "Entrez une adresse",
     "destinationAddress": "Adresse de destination",
@@ -195,5 +196,9 @@
     "profilePicture": "Photo de Profil",
     "name": "Nom",
     "emailAddress": "Adresse Email"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "languageLabel": "Langue"
   }
 }

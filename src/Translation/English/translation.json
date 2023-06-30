@@ -139,11 +139,11 @@
   },
   "driveOverview": {
     "newTitle": "Want to register a ride?",
-    "createNewRouteTitle": "Create a new route",
     "createButtonDescription": "Create route",
     "currentTitle": "Your current routes"
   },
   "driveAddresses": {
+    "createNewRouteTitle": "Create a new route",
     "departureAddress": "Departure address",
     "|*TBI*|departureAddressPlaceholder": "Enter an address",
     "destinationAddress": "Destination address",
@@ -201,5 +201,9 @@
     "profilePicture": "Profile Picture",
     "name": "Name",
     "emailAddress": "Email Address"
+  },
+  "settings": {
+    "title": "Settings",
+    "languageLabel": "Language"
   }
 }
