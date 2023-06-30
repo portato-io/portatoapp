@@ -18,7 +18,6 @@ require('../../CSS/Send.css');
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
 const PROGRESS = 100;
 const NEXT_SCREEN = '/deliver';
 
@@ -26,7 +25,6 @@ const RouteSummary: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const [isModalVisible, setIsModalVisible] = useState(false);
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
-  console.log(Object.values(routeInfo.time)[0]);
   const dispatch = useDispatch();
 
   const showModal = () => {
@@ -117,17 +115,23 @@ const RouteSummary: React.FC = () => {
                         <div>
                           <Typography>
                             {t('driveSummary.each')}{' '}
-                            {Object.values(routeInfo.days)}
+                            {routeInfo.days
+                              ? Object.values(routeInfo.days)
+                              : 'N/A'}
                             <br />
                             {t('driveSummary.tripTime')}{' '}
-                            {Object.values(routeInfo.time)[0]}{' '}
+                            {routeInfo.time
+                              ? Object.values(routeInfo.time).join(', ')
+                              : 'N/A'}{' '}
                           </Typography>
                         </div>
                       ) : (
                         <div>
                           <Typography>
                             {routeInfo.timeRange} <br />
-                            {Object.values(routeInfo.time)}
+                            {routeInfo.time
+                              ? Object.values(routeInfo.time)
+                              : 'N/A'}{' '}
                           </Typography>
                         </div>
                       )}
