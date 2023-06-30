@@ -188,7 +188,8 @@
     "blog": "Blog",
     "support": "Support / Feedback",
     "adminWindow": "Admin-Fenster",
-    "signOut": "Abmelden"
+    "signOut": "Abmelden",
+    "settings": "Einstellungen"
   },
   "accountPage": {
     "validate": "Bestätigen",

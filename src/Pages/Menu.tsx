@@ -111,7 +111,7 @@ const Menu: React.FC = () => {
               {t('navigationMenu.support')}
             </List.Item>
             <List.Item arrow={true} onClick={handleSettingsClick}>
-              Settings
+              {t('navigationMenu.settings')}
             </List.Item>
             {isAdmin && (
               <List.Item arrow={true} onClick={handleAdminClick}>

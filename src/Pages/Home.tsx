@@ -40,7 +40,6 @@ const Home: React.FC = () => {
     const name = t(`team.${memberName}.name`);
     const description = t(`team.${memberName}.description`);
     const image = getTeamMemberImage(memberName);
-    console.log('image', image);
 
     return (
       <div className="listing-entry">

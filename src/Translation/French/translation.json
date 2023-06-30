@@ -184,9 +184,10 @@
     "mySendRequests": "Mes Demandes d'Envoi",
     "signIn": "Se Connecter",
     "blog": "Blog",
-    "support": "Support / Feedback",
+    "support": "Contactez-nous",
     "adminWindow": "Fenêtre d'Admin",
-    "signOut": "Se Déconnecter"
+    "signOut": "Se Déconnecter",
+    "settings": "Paramètres"
   },
   "accountPage": {
     "validate": "Valider",
