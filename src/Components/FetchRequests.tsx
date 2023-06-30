@@ -204,7 +204,9 @@ const FetchRequests: React.FC<{
                     <th className="th">
                       {t('requestOverview.requestList.time')}
                     </th>
-                    <td className="td">{Object.values(request.time)[0]}</td>
+                    <td className="td">
+                      {Object.values(request.time).join(', ')}
+                    </td>
                   </tr>
                   <tr>
                     <th className="th">

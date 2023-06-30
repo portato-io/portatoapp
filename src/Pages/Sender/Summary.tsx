@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { Typography, Card, Modal, Image, message } from 'antd';
+import { Modal, Image, message } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
 import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -22,7 +22,6 @@ require('../../CSS/Send.css');
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
 const PROGRESS = 100;
 const NEXT_SCREEN = '/createSendRequest';
 
@@ -107,7 +106,7 @@ const Summary: React.FC = () => {
                     <td className="td">
                       {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
                       <br />
-                      {Object.values(objecInfo.time)[0]}{' '}
+                      {Object.values(objecInfo.time).join(', ')}
                     </td>
                   </tr>
                   <tr>
