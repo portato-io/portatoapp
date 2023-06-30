@@ -1,31 +1,53 @@
-import React, { useEffect, useRef } from 'react';
-import 'firebaseui/dist/firebaseui.css';
-import { GoogleAuthProvider, EmailAuthProvider } from 'firebase/auth';
-import { uiInstance, uiConfig } from './firebaseUIInstance';
+import React, { useState } from 'react';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from 'firebase/auth';
 
 const FirebaseAuth: React.FC = () => {
-  const uiRef = useRef<HTMLDivElement | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    // Update the signInSuccessUrl and callbacks in uiConfig
-    uiConfig.signInOptions = [EmailAuthProvider.PROVIDER_ID];
-    uiConfig.callbacks = {
-      signInSuccessWithAuthResult: () => {
-        window.location.replace(window.location.pathname);
-        return false;
-      },
-    };
+  const auth = getAuth();
 
-    // Start the FirebaseUI widget
-    uiInstance.start('#firebaseui-auth-container', uiConfig);
+  const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    // Cleanup on unmount
-    return () => {
-      uiInstance.reset();
-    };
-  }, []);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Send email verification
+        const user = userCredential.user;
+        const actionCodeSettings = {
+          url: window.location.href,
+          handleCodeInApp: true,
+        };
+        sendEmailVerification(user, actionCodeSettings).then(() => {
+          alert('Verification email sent!');
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  return <div id="firebaseui-auth-container" ref={uiRef}></div>;
+  return (
+    <form onSubmit={handleSignUp}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Sign up</button>
+    </form>
+  );
 };
 
 export default FirebaseAuth;
