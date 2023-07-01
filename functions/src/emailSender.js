@@ -82,13 +82,7 @@ exports.sendEmailToUid = functions.https.onRequest(sendEmailToUid);
 function sendEmailToSupport(req, res) {
   cors(req, res, async () => {
     try {
-      const { name, email, message, uid } = req.body;
-      let targetEmail;
-      if (uid) {
-        targetEmail = await getUserEmail(uid); // Fetch email address from UID
-      } else {
-        res.status(500).send('No uid given');
-      }
+      const { name, email, message } = req.body;
 
       const mailOptions = {
         from: '"Notifications" <notifications@portato.io>',
