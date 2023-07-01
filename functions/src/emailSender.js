@@ -91,8 +91,8 @@ function sendEmailToSupport(req, res) {
       }
 
       const mailOptions = {
-        from: '"Notifications" <notifications-no-reply@portato.io>',
-        to: targetEmail, // Use the fetched email address
+        from: '"Notifications" <notifications@portato.io>',
+        to: 'support@portato.io',
         subject: 'New Message from React Web App',
         text: `${name} (${email}) says: ${message}`,
       };
