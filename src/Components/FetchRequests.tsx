@@ -38,42 +38,47 @@ const FetchRequests: React.FC<{
       const fetchData = await fetchDataOnce(uid, 'requests');
       let requests: IRequestInfo[] = [];
 
-      // Check if fetchData is an object before returning it
-      if (fetchData && typeof fetchData === 'object') {
+      // Check if fetchData is not null or undefined before returning it
+      if (fetchData) {
         requests = Object.values(fetchData) as IRequestInfo[];
+        // Check if fetchData is an object before returning it
+        if (fetchData && typeof fetchData === 'object') {
+          requests = Object.values(fetchData) as IRequestInfo[];
 
-        // Filter out 'delivery confirmed' requests
-        requests = requests.filter(
-          (request) =>
-            request.status !== 'delivery confirmed' &&
-            request.status !== 'deleted'
-        );
-
-        // If the user is an admin, only return 'unmatched' requests
-        if (admin) {
+          // Filter out 'delivery confirmed' requests
           requests = requests.filter(
             (request) =>
-              request.status === 'unmatched' || request.status === 'new driver'
+              request.status !== 'delivery confirmed' &&
+              request.status !== 'deleted'
           );
+
+          // If the user is an admin, only return 'unmatched' requests
+          if (admin) {
+            requests = requests.filter(
+              (request) =>
+                request.status === 'unmatched' ||
+                request.status === 'new driver'
+            );
+          }
+
+          requests.sort((a, b) => {
+            if (a.status === 'matched') {
+              return -1;
+            } else if (b.status === 'matched') {
+              return 1;
+            } else if (a.status === 'contacted') {
+              return -1;
+            } else if (b.status === 'contacted') {
+              return 1;
+            }
+            return 0;
+          });
+        } else {
+          console.log('Data is not an object:', fetchData);
         }
 
-        requests.sort((a, b) => {
-          if (a.status === 'matched') {
-            return -1;
-          } else if (b.status === 'matched') {
-            return 1;
-          } else if (a.status === 'contacted') {
-            return -1;
-          } else if (b.status === 'contacted') {
-            return 1;
-          }
-          return 0;
-        });
-      } else {
-        console.log('Data is not an object:', fetchData);
+        setRequestState(requests);
       }
-
-      setRequestState(requests);
     } catch (error) {
       console.log('Error fetching data: ', error);
     }
@@ -204,7 +209,9 @@ const FetchRequests: React.FC<{
                       {t('requestOverview.requestList.time')}
                     </th>
                     <td className="td">
-                      {Object.values(request.time).join(', ')}
+                      {request.time && typeof request.time === 'object'
+                        ? Object.values(request.time).join(', ')
+                        : 'No data for time'}{' '}
                     </td>
                   </tr>
                   <tr>
