@@ -22,7 +22,7 @@ const CreateSendRequest: React.FC = () => {
             nextScreen={NEXT_SCREEN}
             text={t('requestOverview.createButtonDescription')}
             onClick={() => {
-              logEvent(analytics, 'send_1_create_new_button_clicked');
+              logEvent(analytics, 'send_0_overview_createNew_button_click');
             }}
           />
         </div>

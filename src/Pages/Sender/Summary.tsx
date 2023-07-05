@@ -144,20 +144,24 @@ const Summary: React.FC = () => {
         </div>
 
         <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton />
+          <BackButton
+            onClick={() => {
+              logEvent(analytics, 'send_5_summary_back_button_click');
+            }}
+          />
           {uid ? (
             <ConfirmButton
               nextScreen={NEXT_SCREEN}
               onClick={() => {
                 handleConfirm();
-                logEvent(analytics, 'send_6_summary_confirm_clicked');
+                logEvent(analytics, 'send_5_summary_confirm_button_click');
               }}
             />
           ) : (
             <SignInButton
               onClick={() => {
                 showModal();
-                logEvent(analytics, 'send_6_summary_sign_in_clicked');
+                logEvent(analytics, 'send_5_summary_signIn_button_click');
               }}
             />
           )}

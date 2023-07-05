@@ -65,12 +65,18 @@ const Home: React.FC = () => {
     const label = t(`social.${socialLabel}.label`);
     const link = t(`social.${socialLabel}.link`);
     const icon = 'icon ' + t(`social.${socialLabel}.icon`);
+    const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+      logEvent(analytics, `home_${socialLabel}_button_click`);
+      window.open(link, '_blank');
+    };
 
     return (
       <a
         href={link}
         className="button button-border box-shadow box-radius-default box-shadow-effect"
         target="_blank"
+        onClick={handleClick}
       >
         <i className={icon} />
         <span>{label}</span>
@@ -102,14 +108,14 @@ const Home: React.FC = () => {
           <a
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             href="/createSendRequest/enterObjInfo"
-            onClick={() => logEvent(analytics, 'send_button_click')}
+            onClick={() => logEvent(analytics, 'home_send_button_click')}
           >
             {t('general.send')}
           </a>
           <a
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             href="/deliver/enterRoute"
-            onClick={() => logEvent(analytics, 'deliver_button_click')}
+            onClick={() => logEvent(analytics, 'home_drive_button_click')}
           >
             {t('general.deliver')}
           </a>

@@ -56,10 +56,11 @@ const EnterTime: React.FC = () => {
               onChange={handleChangeRange}
               style={{ width: '100%' }}
             />
-            <small>{t('requestTime.rangeHint')}</small>
+            <small>{t('requestTime.dateHint')}</small>
           </Form.Item>
 
           <Form.Item className="input-wrapper" label={t('requestTime.times')}>
+            <small>{t('requestTime.timeHint')}</small>
             <Selector
               options={TIME}
               multiple={true}
@@ -69,11 +70,15 @@ const EnterTime: React.FC = () => {
         </Form>
 
         <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton />
+          <BackButton
+            onClick={() => {
+              logEvent(analytics, 'send_3_time_back_button_click');
+            }}
+          />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_4_next_to_pricing_clicked');
+              logEvent(analytics, 'send_3_time_next_button_click');
             }}
           />
         </div>

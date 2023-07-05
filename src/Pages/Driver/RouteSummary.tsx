@@ -143,20 +143,24 @@ const RouteSummary: React.FC = () => {
           </div>
         </div>
         <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton />
+          <BackButton
+            onClick={() => {
+              logEvent(analytics, 'drive_4_summary_back_button_click');
+            }}
+          />
           {user ? (
             <ConfirmButton
               nextScreen={NEXT_SCREEN}
               onClick={() => {
                 handleConfirm();
-                logEvent(analytics, 'drive_5_summary_confirm_clicked');
+                logEvent(analytics, 'drive_4_summary_confirm_button_click');
               }}
             />
           ) : (
             <SignInButton
               onClick={() => {
                 showModal();
-                logEvent(analytics, 'drive_5_summary_sign_in_clicked');
+                logEvent(analytics, 'drive_4_summary_signIn_button_click');
               }}
             />
           )}

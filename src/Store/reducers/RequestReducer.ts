@@ -7,7 +7,7 @@ const initialState: IRequestInfo = {
   name: '',
   description: '',
   size: 'S',
-  weight: '-5 kg',
+  weight: '0-5 kg',
   price: 0,
   pickup_adress: '',
   delivery_adress: '',

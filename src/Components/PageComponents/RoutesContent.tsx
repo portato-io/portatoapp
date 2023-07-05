@@ -21,7 +21,7 @@ function RoutesContent() {
         nextScreen={NEXT_SCREEN}
         text={t('driveOverview.createButtonDescription')}
         onClick={() => {
-          logEvent(analytics, 'drive_1_create_new_button_clicked');
+          logEvent(analytics, 'drive_0_overview_createNew_button_click');
         }}
       />
       {uid !== 'undefined' ? (

@@ -40,6 +40,7 @@ function RecurrentTripContent(activeTab: any) {
       <div className="spacer-regular"></div>
       <div className="input-wrapper">
         <label>{t('driveTime.weekdayTitle')}</label>
+        <small>{t('driveTime.timeHint')}</small>
         <Selector
           columns={4}
           options={DAYS}
@@ -50,6 +51,7 @@ function RecurrentTripContent(activeTab: any) {
       </div>
       <div className="input-wrapper">
         <label>{t('driveTime.timeTitle')}</label>
+        <small>{t('driveTime.timeHint')}</small>
         <Selector
           options={TIME}
           multiple={true}
