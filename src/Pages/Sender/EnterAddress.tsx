@@ -55,11 +55,15 @@ const EnterAddress: React.FC = () => {
           </Form.Item>
         </Form>
         <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton />
+          <BackButton
+            onClick={() => {
+              logEvent(analytics, 'send_2_address_back_button_click');
+            }}
+          />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_3_next_to_timeframe_clicked');
+              logEvent(analytics, 'send_2_address_next_button_click');
             }}
           />
         </div>

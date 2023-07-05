@@ -99,11 +99,15 @@ const EnterRoute: React.FC = () => {
         </Form>
 
         <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton />
+          <BackButton
+            onClick={() => {
+              logEvent(analytics, 'drive_1_route_back_button_click');
+            }}
+          />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'drive_2_next_to_timeframe_clicked');
+              logEvent(analytics, 'drive_1_route_next_button_click');
             }}
           />
         </div>

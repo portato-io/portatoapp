@@ -80,11 +80,15 @@ const EnterPrice: React.FC = () => {
           </div>
         </Form>
         <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton />
+          <BackButton
+            onClick={() => {
+              logEvent(analytics, 'send_4_price_next_button_click');
+            }}
+          />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_5_next_to_summary_clicked');
+              logEvent(analytics, 'send_4_price_next_button_click');
             }}
           />
         </div>

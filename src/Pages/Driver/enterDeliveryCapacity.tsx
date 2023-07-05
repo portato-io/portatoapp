@@ -53,11 +53,15 @@ const EnterDeliveryCapacity: React.FC = () => {
           />
         </Form>
         <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton />
+          <BackButton
+            onClick={() => {
+              logEvent(analytics, 'drive_3_capacity_back_button_click');
+            }}
+          />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'drive_4_next_to_summary_clicked');
+              logEvent(analytics, 'drive_3_capacity_next_button_click');
             }}
           />
         </div>

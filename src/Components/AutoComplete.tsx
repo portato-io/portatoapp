@@ -66,7 +66,7 @@ const AddressAutocomplete: React.FC<{ type: string; savedAddress: string }> = ({
     if (value.trim() !== '') {
       axios
         .get(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?autocomplete=true&types=address&country=CH&access_token=${mapboxgl.accessToken}`
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?autocomplete=true&types=address,place&country=CH&access_token=${mapboxgl.accessToken}`
         )
         .then((response) => {
           setAddresses(response.data.features);

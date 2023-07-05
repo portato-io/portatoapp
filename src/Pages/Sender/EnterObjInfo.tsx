@@ -120,7 +120,7 @@ const EnterObjInfo: React.FC = () => {
               value={object.weight}
               onChange={handleInputChange}
             >
-              <Radio value="-5 kg">0-5 kg</Radio>
+              <Radio value="0-5 kg">0-5 kg</Radio>
               <Radio value="5-20 kg">5-20 kg</Radio>
               <Radio value="+20 kg">20+ kg</Radio>
             </Radio.Group>
@@ -136,11 +136,15 @@ const EnterObjInfo: React.FC = () => {
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container
           & move buttons out of div, for responsive scrolling! */}
         <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton />
+          <BackButton
+            onClick={() => {
+              logEvent(analytics, 'send_1_objInfo_back_button_click');
+            }}
+          />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_2_next_to_route_clicked');
+              logEvent(analytics, 'send_1_objInfo_next_button_click');
             }}
           />
         </div>

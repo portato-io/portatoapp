@@ -51,6 +51,7 @@ function SingleTripContent(activeTab: any) {
       </div>
       <div className="input-wrapper">
         <label>{t('driveTime.timeTitle')}</label>
+        <small>{t('driveTime.timeHint')}</small>
         <Selector
           options={TIME}
           multiple={true}
