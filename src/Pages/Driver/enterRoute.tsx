@@ -31,7 +31,7 @@ const EnterRoute: React.FC = () => {
   const [routes, setValues] = useState({
     departure_adress: routeInfo.departure_adress,
     destination_adress: routeInfo.destination_adress,
-    acceptable_detour: routeInfo.acceptable_detour,
+    acceptable_detour: routeInfo.acceptable_detour || 5, // Set to 5 if routeInfo.acceptable_detour is undefined
   });
 
   React.useEffect(() => {
