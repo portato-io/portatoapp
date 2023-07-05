@@ -32,7 +32,7 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ehemaliger PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Ein Sportenthusiast mit einem grossen Netzwerk.",
+      "description": "Ehemaliger PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk.",
       "image": "src/Assets/Images/team/conrad.jpg"
     },
     "Hugo": {
@@ -52,7 +52,7 @@
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "Storyboard-Artist und 2D-Künstlerin, die Porato seinen Charme verleiht, ein Strich nach dem anderen.",
+      "description": "Storyboard-Artist und 2D-Künstlerin, die Portato Charme verleiht, ein Strich nach dem anderen.",
       "image": "src/Assets/Images/team/chiara.png"
     }
   },
