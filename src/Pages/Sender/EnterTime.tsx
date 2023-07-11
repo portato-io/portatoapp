@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Typography, Form, DatePicker } from 'antd';
+import { Typography, Form, DatePicker, ConfigProvider } from 'antd';
 import { Selector } from 'antd-mobile';
 import { useDispatch } from 'react-redux';
 import {
@@ -15,6 +15,9 @@ import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 require('../../CSS/Calendar.css');
+import en_US from 'antd/lib/locale/en_US';
+import fr_FR from 'antd/lib/locale/fr_FR';
+import de_DE from 'antd/lib/locale/de_DE';
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -22,6 +25,23 @@ const PROGRESS = 50;
 const NEXT_SCREEN = '/createSendRequest/enter_price';
 
 const EnterTime: React.FC = () => {
+  const { i18n } = useTranslation();
+  const [locale, setLocale] = useState(en_US);
+
+  // Update the antd locale when i18n language changes
+  useEffect(() => {
+    switch (i18n.language) {
+      case 'fr':
+        setLocale(fr_FR);
+        break;
+      case 'de':
+        setLocale(de_DE);
+        break;
+      default:
+        setLocale(en_US);
+    }
+  }, [i18n.language]);
+
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const dispatch = useDispatch();
 
@@ -41,48 +61,50 @@ const EnterTime: React.FC = () => {
 
   return (
     <PageLayout>
-      <section className="section section-form mod-nomargin-top">
-        <ProgressBar progress={PROGRESS} />
-        <Form
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 14 }}
-          layout="horizontal"
-        >
-          <h2>{t('requestTime.title')}</h2>
-          <Form.Item className="input-wrapper" label={t('requestTime.dates')}>
-            <RangePicker
-              name="time"
-              inputReadOnly={true}
-              onChange={handleChangeRange}
-              style={{ width: '100%' }}
-            />
-            <small>{t('requestTime.dateHint')}</small>
-          </Form.Item>
+      <ConfigProvider locale={locale}>
+        <section className="section section-form mod-nomargin-top">
+          <ProgressBar progress={PROGRESS} />
+          <Form
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
+          >
+            <h2>{t('requestTime.title')}</h2>
+            <Form.Item className="input-wrapper" label={t('requestTime.dates')}>
+              <RangePicker
+                name="time"
+                inputReadOnly={true}
+                onChange={handleChangeRange}
+                style={{ width: '100%' }}
+              />
+              <small>{t('requestTime.dateHint')}</small>
+            </Form.Item>
 
-          <Form.Item className="input-wrapper" label={t('requestTime.times')}>
-            <small>{t('requestTime.timeHint')}</small>
-            <Selector
-              options={TIME}
-              multiple={true}
-              onChange={handleTimeChange}
-            />
-          </Form.Item>
-        </Form>
+            <Form.Item className="input-wrapper" label={t('requestTime.times')}>
+              <small>{t('requestTime.timeHint')}</small>
+              <Selector
+                options={TIME}
+                multiple={true}
+                onChange={handleTimeChange}
+              />
+            </Form.Item>
+          </Form>
 
-        <div className="form-button-container mod-display-flex mod-flex-space-between">
-          <BackButton
-            onClick={() => {
-              logEvent(analytics, 'send_3_time_back_button_click');
-            }}
-          />
-          <NextButton
-            nextScreen={NEXT_SCREEN}
-            onClick={() => {
-              logEvent(analytics, 'send_3_time_next_button_click');
-            }}
-          />
-        </div>
-      </section>
+          <div className="form-button-container mod-display-flex mod-flex-space-between">
+            <BackButton
+              onClick={() => {
+                logEvent(analytics, 'send_3_time_back_button_click');
+              }}
+            />
+            <NextButton
+              nextScreen={NEXT_SCREEN}
+              onClick={() => {
+                logEvent(analytics, 'send_3_time_next_button_click');
+              }}
+            />
+          </div>
+        </section>
+      </ConfigProvider>
     </PageLayout>
   );
 };
