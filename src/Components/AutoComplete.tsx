@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
 import { AutoComplete, Input } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRequestInfo, IRouteInfo } from '../type';
@@ -26,6 +27,7 @@ const AddressAutocomplete: React.FC<{ type: string; savedAddress: string }> = ({
   type,
   savedAddress,
 }) => {
+  const { t } = useTranslation<string>();
   const [inputValue, setInputValue] = useState('');
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
@@ -82,7 +84,7 @@ const AddressAutocomplete: React.FC<{ type: string; savedAddress: string }> = ({
     <div>
       <AutoComplete
         showSearch
-        placeholder="Enter an address"
+        placeholder={t('addressField.placeholder')}
         value={savedAddress}
         className="form-input-wrapper"
         options={addresses.map((address) => ({

@@ -12,7 +12,16 @@
     "howItWorks": "Comment ça fonctionne",
     "moreInfo": "En savoir plus",
     "send": "Envoyer",
-    "deliver": "Conduire"
+    "deliver": "Conduire",
+    "delete": "Supprimer",
+    "deleteConfirm": "Êtes-vous sûr de vouloir le supprimer?",
+    "upload": "Télécharger",
+    "yes": "Oui",
+    "no": "Non"
+  },
+
+  "addressField": {
+    "placeholder": "Saisir une adresse"
   },
 
   "dayAbbreviated": {
@@ -132,19 +141,15 @@
     "title": "Quand voulez-vous que l'envoi soit récupéré?",
     "dates": "Dates",
     "times": "Heure",
-    "dateHint": "(Vous pouvez fixer la date de début et de fin le même jour si nécessaire.)",
-    "timeHint": "(Choix multiple possible.)",
-    "|*TBI*|startDatePlaceholder": "Date de début",
-    "|*TBI*|endDatePlaceholder": "Date de fin",
-    "|*TBI*|time": "Heure",
-    "|*TBI*|mornings": "Matinées",
-    "|*TBI*|midDays": "Mi-journées",
-    "|*TBI*|evenings": "Soirées"
+    "dateHint": "(Vous pouvez fixer la date de début et de fin le même jour si nécessaire)",
+    "timeHint": "(Choix multiple possible)",
+    "startDatePlaceholder": "Date de début",
+    "endDatePlaceholder": "Date de fin"
   },
   "requestCost": {
     "title": "Combien vaut pour vous le transport?",
     "label": "Prix (en CHF)",
-    "pricePlaceholder": "par ex., 50",
+    "pricePlaceholder": "par ex. 50",
     "driverReward": "Récompense pour le conducteur:",
     "portatoFee": "Frais de Portato:",
     "vat": "TVA:",
@@ -166,7 +171,8 @@
   "driveOverview": {
     "newTitle": "Souhaitez-vous enregistrer un nouvel itinéraire?",
     "createButtonDescription": "Créer route",
-    "currentTitle": "Vos itinéraires actuels"
+    "currentTitle": "Vos itinéraires actuels",
+    "tripTitle": "Mon voyage"
   },
   "driveAddresses": {
     "createNewRouteTitle": "Créer un nouvel itinéraire",
@@ -184,7 +190,7 @@
     "|*TBI*|startPlaceholder": "Début",
     "|*TBI*|endPlaceholder": "Fin",
     "selectTime": "Sélectionnez l'heure",
-    "timeHint": "(Choix multiple possible.)",
+    "timeHint": "(Choix multiple possible)",
     "|*TBI*|timeMornings": "Matinées",
     "|*TBI*|timeMidDays": "Mi-journées",
     "|*TBI*|timeEvenings": "Soirées",
@@ -227,10 +233,25 @@
     "myAccount": "Mon Compte",
     "profilePicture": "Photo de Profil",
     "name": "Nom",
-    "emailAddress": "Adresse Email"
+    "emailAddress": "Adresse Email",
+    "uploadedImageAlert": "Image téléchargée!"
   },
+
+  "contactSupport": {
+    "nameLabel": "Nom",
+    "nameErrorMessage": "Veuillez saisir votre nom",
+    "emailLabel": "Courriel",
+    "emailErrorMessage": "Veuillez saisir votre adresse e-mail",
+    "messageLabel": "Message",
+    "messageErrorMessage": "Veuillez saisir un message",
+    "sendButtonLabel": "Envoyer"
+  },
+
   "settings": {
     "title": "Paramètres",
-    "languageLabel": "Langue"
+    "languageLabel": "Langue",
+    "english": "Anglais",
+    "french": "Français",
+    "german": "Allemand"
   }
 }

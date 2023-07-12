@@ -14,7 +14,14 @@
     "send": "Ship",
     "deliver": "Drive",
     "delete": "Delete",
-    "deleteConfirm": "Are you sure you want to delete this?"
+    "deleteConfirm": "Are you sure you want to delete this?",
+    "upload": "Upload",
+    "yes": "Yes",
+    "no": "No"
+  },
+
+  "addressField": {
+    "placeholder": "Enter an address"
   },
 
   "dayAbbreviated": {
@@ -130,19 +137,15 @@
     "title": "When do you want the shipment to be picked up?",
     "dates": "Dates",
     "times": "Times",
-    "dateHint": "(You can set the start and end date to the same day if needed.)",
-    "timeHint": "(Multiple selection possible.)",
-    "|*TBI*|startDatePlaceholder": "Start date",
-    "|*TBI*|endDatePlaceholder": "End date",
-    "|*TBI*|time": "Time",
-    "|*TBI*|mornings": "Mornings",
-    "|*TBI*|midDays": "Mid days",
-    "|*TBI*|evenings": "Evenings"
+    "dateHint": "(You can set the start and end date to the same day if needed)",
+    "timeHint": "(Multiple selection possible)",
+    "startDatePlaceholder": "Start date",
+    "endDatePlaceholder": "End date"
   },
   "requestCost": {
     "title": "How much is the transport worth to you?",
     "label": "Price (in CHF)",
-    "pricePlaceholder": "e.g., 50",
+    "pricePlaceholder": "e.g. 50",
     "driverReward": "Reward for driver:",
     "portatoFee": "Portato fee:",
     "vat": "VAT:",
@@ -164,7 +167,8 @@
   "driveOverview": {
     "newTitle": "Want to register a ride?",
     "createButtonDescription": "Create route",
-    "currentTitle": "Your current routes"
+    "currentTitle": "Your current routes",
+    "tripTitle": "My Trip"
   },
   "driveAddresses": {
     "createNewRouteTitle": "Create a new route",
@@ -179,7 +183,7 @@
     "rangeTitle": "Select date",
     "singleTrip": "Single trip",
     "recurringRide": "Recurring ride",
-    "timeHint": "(Multiple selection possible.)",
+    "timeHint": "(Multiple selection possible)",
     "|*TBI*|startPlaceholder": "Start",
     "|*TBI*|endPlaceholder": "End",
     "selectTime": "Select time",
@@ -225,10 +229,25 @@
     "myAccount": "My Account",
     "profilePicture": "Profile Picture",
     "name": "Name",
-    "emailAddress": "Email Address"
+    "emailAddress": "Email Address",
+    "uploadedImageAlert": "Uploaded image!"
   },
+
+  "contactSupport": {
+    "nameLabel": "Name",
+    "nameErrorMessage": "Please enter your name",
+    "emailLabel": "Email",
+    "emailErrorMessage": "Please enter your e-mail address",
+    "messageLabel": "Message",
+    "messageErrorMessage": "Please enter a message",
+    "sendButtonLabel": "Send"
+  },
+
   "settings": {
     "title": "Settings",
-    "languageLabel": "Language"
+    "languageLabel": "Language",
+    "english": "English",
+    "french": "French",
+    "german": "German"
   }
 }
