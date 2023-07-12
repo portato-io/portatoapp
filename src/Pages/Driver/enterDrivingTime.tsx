@@ -1,5 +1,5 @@
 import { Form, Typography } from 'antd';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import SwitchContainer from '../../Components/SwitchContainer';
 import NextButton from '../../Components/Buttons/NextButton';
@@ -11,14 +11,21 @@ import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripC
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
+import { shallowEqual, useSelector } from 'react-redux';
+import { IRouteInfo } from '../../type';
 
 const { Title } = Typography;
 const PROGRESS = 33;
 const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
 const EnterDeliveryTime: React.FC = () => {
+  const routeInfo = useSelector(
+    (state: { route: IRouteInfo }) => state.route,
+    shallowEqual
+  );
+
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const [activeTab, setActiveTab] = useState(t('driveTime.singleTrip'));
+  const [activeTab, setActiveTab] = useState(routeInfo.type);
 
   const handleTabChange = (tab: any) => {
     setActiveTab(tab);
@@ -34,7 +41,7 @@ const EnterDeliveryTime: React.FC = () => {
           layout="horizontal"
         >
           <h2>{t('driveTime.title')}</h2>
-          <Tabs onChange={handleTabChange}>
+          <Tabs onChange={handleTabChange} defaultActiveKey={routeInfo.type}>
             <Tabs.Tab
               title={t('driveTime.singleTrip')}
               key={t('driveTime.singleTrip')}
