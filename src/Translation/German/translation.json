@@ -15,6 +15,36 @@
     "deliver": "Fahren"
   },
 
+  "dayAbbreviated": {
+    "monday": "Mo",
+    "tuesday": "Di",
+    "wednesday": "Mi",
+    "thursday": "Do",
+    "friday": "Fr",
+    "saturday": "Sa",
+    "sunday": "So"
+  },
+  "day": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
+  },
+  "capacity": {
+    "s": "Passt in eine Tasche",
+    "m": "Passt in ein kleines Auto",
+    "l": "Passt in ein großes Auto",
+    "xl": "Passt in einen Van"
+  },
+  "timeOfDay": {
+    "morning": "Morgen",
+    "midDay": "Mittag",
+    "evening": "Abend"
+  },
+
   "social": {
     "heading": "Finde uns auf Social Media",
     "linkedin": {

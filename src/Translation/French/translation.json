@@ -15,6 +15,36 @@
     "deliver": "Conduire"
   },
 
+  "dayAbbreviated": {
+    "monday": "Lun",
+    "tuesday": "Mar",
+    "wednesday": "Mer",
+    "thursday": "Jeu",
+    "friday": "Ven",
+    "saturday": "Sam",
+    "sunday": "Dim"
+  },
+  "day": {
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche"
+  },
+  "capacity": {
+    "s": "Convient dans un sac",
+    "m": "Convient dans une petite voiture",
+    "l": "Convient dans une grande voiture",
+    "xl": "Convient dans une camionnette"
+  },
+  "timeOfDay": {
+    "morning": "Matin",
+    "midDay": "Midi",
+    "evening": "Soir"
+  },
+
   "social": {
     "heading": "Retrouvez-nous sur les réseaux sociaux",
     "linkedin": {

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
 import { Cascader, Form, Button, Switch } from 'antd-mobile';
 import i18next from 'i18next';
-import { LANGUAGE_OPTIONS } from '../../constant';
+import { getConstants } from '../../constant';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { Typography } from 'antd';
 
 const Settings: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+
   const { Title } = Typography;
   const [visible, setVisible] = useState(false);
   const [language, setLanguage] = useState<string>();

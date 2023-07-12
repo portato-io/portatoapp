@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Typography } from 'antd';
 import { Selector } from 'antd-mobile';
-import { DAYS, TIME } from '../../constant';
+import { getConstants } from '../../constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {
@@ -16,6 +16,8 @@ const { Title } = Typography;
 
 function RecurrentTripContent(activeTab: any) {
   const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const dispatch = useDispatch();
 

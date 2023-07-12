@@ -7,7 +7,7 @@ import ProgressBar from '../../Components/ProgressBar';
 import { Selector } from 'antd-mobile';
 import { setCap } from '../../Store/actions/routeActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
-import { CAPACITY_OPTIONS } from '../../constant';
+import { getConstants } from '../../constant';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
@@ -29,6 +29,7 @@ const EnterDeliveryCapacity: React.FC = () => {
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const dispatch = useDispatch();
   const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
   const handleCapChange = (e: any) => {
     dispatch(setCap(e));
   };
