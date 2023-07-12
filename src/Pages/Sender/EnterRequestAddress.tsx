@@ -1,36 +1,35 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Typography, Form, Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Form } from 'antd';
 import { IRequestInfo } from '../../type';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AddressAutocomplete from '../../Components/AutoComplete';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
-const PROGRESS = 25;
-const NEXT_SCREEN = '/createSendRequest/enter_time';
+const PROGRESS = 40;
+const NEXT_SCREEN = '/createSendRequest/enter_request_time';
 
-const EnterAddress: React.FC = () => {
+const EnterRequestAddress: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
-  console.log(objecInfo);
   const { t } = useTranslation<string>(); // Setting the generic type to string
   return (
     <PageLayout>
       <section className="section section-form mod-nomargin-top">
         <ProgressBar progress={PROGRESS} />
+
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
         >
+          <h2>{t('requestAddresses.title')}</h2>
           <Form.Item className="input-wrapper">
             <label> {t('requestAddresses.pickupAddress')}</label>
             <AddressAutocomplete
@@ -40,13 +39,6 @@ const EnterAddress: React.FC = () => {
           </Form.Item>
 
           <Form.Item className="input-wrapper">
-            {/* <Input
-              name="delivery_adress"
-              value={adresses.delivery_adress}
-              onChange={handleInputChange}
-              prefix={<SearchOutlined />}
-              style={{ background: '', width: '90%' }}
-            /> */}
             <label> {t('requestAddresses.deliveryAddress')}</label>
             <AddressAutocomplete
               type={'delivery'}
@@ -72,4 +64,4 @@ const EnterAddress: React.FC = () => {
   );
 };
 
-export default EnterAddress;
+export default EnterRequestAddress;

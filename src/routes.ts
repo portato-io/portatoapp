@@ -8,14 +8,23 @@ import MyAccount from './Pages/Profile/MyAccount';
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
 const Profile = lazy(() => import('./Pages/Menu'));
-const EnterObjInfo = lazy(() => import('./Pages/Sender/EnterObjInfo'));
+const EnterRequestNameDesc = lazy(
+  () => import('./Pages/Sender/EnterRequestNameDesc')
+);
+const EnterRequestSizeWeightImage = lazy(
+  () => import('./Pages/Sender/EnterRequestSizeWeightImage')
+);
 const Deliver = lazy(() => import('./Pages/Driver/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
 const Shipments = lazy(() => import('./Pages/Shipments'));
-const EnterAddress = lazy(() => import('./Pages/Sender/EnterAddress'));
-const EnterTime = lazy(() => import('./Pages/Sender/EnterTime'));
-const EnterPrice = lazy(() => import('./Pages/Sender/EnterPrice'));
-const SummaryRequest = lazy(() => import('./Pages/Sender/Summary'));
+const EnterRequestAddress = lazy(
+  () => import('./Pages/Sender/EnterRequestAddress')
+);
+const EnterRequestTime = lazy(() => import('./Pages/Sender/EnterRequestTime'));
+const EnterRequestPrice = lazy(
+  () => import('./Pages/Sender/EnterRequestPrice')
+);
+const RequestSummary = lazy(() => import('./Pages/Sender/RequestSummary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
 const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
@@ -78,11 +87,18 @@ export const routes: Array<Route> = [
     component: CreateSendRequest,
   },
   {
-    key: 'enterObjInfo-route',
-    title: 'EnterObjInfo',
-    path: '/createSendRequest/enterObjInfo',
+    key: 'EnterRequestNameDesc-route',
+    title: 'EnterRequestNameDesc',
+    path: '/createSendRequest/enter_request_name_desc',
     enabled: true,
-    component: EnterObjInfo,
+    component: EnterRequestNameDesc,
+  },
+  {
+    key: 'EnterRequestSizeWeightImage-route',
+    title: 'EnterRequestSizeWeightImage',
+    path: '/createSendRequest/enter_request_size_weight_image',
+    enabled: true,
+    component: EnterRequestSizeWeightImage,
   },
   {
     key: 'deliver-route',
@@ -106,32 +122,32 @@ export const routes: Array<Route> = [
     component: Shipments,
   },
   {
-    key: 'enterAddress-route',
-    title: 'EnterAddress',
-    path: '/createSendRequest/enter_address',
+    key: 'enterRequestAddress-route',
+    title: 'EnterRequestAddress',
+    path: '/createSendRequest/enter_request_address',
     enabled: true,
-    component: EnterAddress,
+    component: EnterRequestAddress,
   },
   {
-    key: 'enterTime-route',
-    title: 'EnterTime',
-    path: '/createSendRequest/enter_time',
+    key: 'enterRequestTime-route',
+    title: 'EnterRequestTime',
+    path: '/createSendRequest/enter_request_time',
     enabled: true,
-    component: EnterTime,
+    component: EnterRequestTime,
   },
   {
-    key: 'enterPrice-route',
-    title: 'EnterPrice',
-    path: '/createSendRequest/enter_price',
+    key: 'enterRequestPrice-route',
+    title: 'EnterRequestPrice',
+    path: '/createSendRequest/enter_request_price',
     enabled: true,
-    component: EnterPrice,
+    component: EnterRequestPrice,
   },
   {
     key: 'summary-request',
     title: 'SummaryRequest',
-    path: '/createSendRequest/summary',
+    path: '/createSendRequest/request-summary',
     enabled: true,
-    component: SummaryRequest,
+    component: RequestSummary,
   },
   {
     key: 'user-requests',

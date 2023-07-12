@@ -69,19 +69,18 @@
     "createButtonDescription": "Versandauftrag erstellen",
     "currentTitle": "Deine aktuellen Versandaufträge",
     "requestList": {
-        "price": "Preis",
-        "weight": "Gewicht",
-        "pickupAddress":"Abholadresse",
-        "deliveryAddress":"Lieferadresse",
-        "dateRange":"Datum",
-        "from": "Von",
-        "to": "bis",
-        "time": "Tageszeit",
-        "size": "Grösse",
-        "Images": "Bilder",
-        "description": "Beschreibung"
+      "price": "Preis",
+      "weight": "Gewicht",
+      "pickupAddress": "Abholadresse",
+      "deliveryAddress": "Lieferadresse",
+      "dateRange": "Datum",
+      "from": "Von",
+      "to": "bis",
+      "time": "Tageszeit",
+      "size": "Grösse",
+      "Images": "Bilder",
+      "description": "Beschreibung"
     }
-    
   },
 
   "requestInfo": {
@@ -95,6 +94,7 @@
     "uploadImages": "Bilder hochladen"
   },
   "requestAddresses": {
+    "title": "Wo soll die Sendung abgeholt und verschickt werden?",
     "pickupAddress": "Abholadresse",
     "|*TBI*|pickupAddressPlaceholder": "Gib eine Adresse ein",
     "deliveryAddress": "Lieferadresse",

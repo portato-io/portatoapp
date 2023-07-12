@@ -25,7 +25,7 @@ import { analytics } from '../../firebaseConfig';
 const PROGRESS = 100;
 const NEXT_SCREEN = '/createSendRequest';
 
-const Summary: React.FC = () => {
+const RequestSummary: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ const Summary: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
+  console.log(objecInfo);
 
   const { uid } = useAuth();
 
@@ -171,4 +172,4 @@ const Summary: React.FC = () => {
   );
 };
 
-export default Summary;
+export default RequestSummary;
