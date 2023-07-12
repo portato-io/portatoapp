@@ -96,19 +96,18 @@
     "createButtonDescription": "Create request",
     "currentTitle": "Your current delivery requests",
     "requestList": {
-        "price": "Price",
-        "weight": "Weight",
-        "pickupAddress":"Pick-up address",
-        "deliveryAddress":"Delivery address",
-        "dateRange":"Date range",
-        "from": "From",
-        "to": "to",
-        "time": "Time",
-        "size": "Size",
-        "Images": "Images",
-        "description": "Description"
+      "price": "Price",
+      "weight": "Weight",
+      "pickupAddress": "Pick-up address",
+      "deliveryAddress": "Delivery address",
+      "dateRange": "Date range",
+      "from": "From",
+      "to": "to",
+      "time": "Time",
+      "size": "Size",
+      "Images": "Images",
+      "description": "Description"
     }
-
   },
 
   "requestInfo": {
