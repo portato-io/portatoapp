@@ -72,16 +72,16 @@ export const getConstants = (t: TFunction) => ({
 
   LANGUAGE_OPTIONS: [
     {
-      label: 'English',
-      value: 'en-US',
+      label: t('settings.english'),
+      value: 'en_US',
     },
     {
-      label: 'French',
-      value: 'fr',
+      label: t('settings.french'),
+      value: 'fr_FR',
     },
     {
-      label: 'German',
-      value: 'de',
+      label: t('settings.german'),
+      value: 'de_DE',
     },
   ],
 });

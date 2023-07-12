@@ -7,20 +7,20 @@ import translationGerman from './Translation/German/translation.json';
 import translationFrench from './Translation/French/translation.json';
 
 const resources: Resource = {
-  en: {
+  en_US: {
     translation: translationEnglish,
   },
-  de: {
+  de_DE: {
     translation: translationGerman,
   },
-  fr: {
+  fr_FR: {
     translation: translationFrench,
   },
 };
 
 const options: InitOptions = {
   resources,
-  fallbackLng: 'en',
+  fallbackLng: 'en_US',
   detection: {
     order: ['localStorage', 'navigator'],
     caches: ['localStorage'],

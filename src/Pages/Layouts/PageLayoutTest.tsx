@@ -23,10 +23,10 @@ const MainLayout = (props: Props) => {
   // Update the antd locale when i18n language changes
   useEffect(() => {
     switch (i18n.language) {
-      case 'fr':
+      case 'fr_FR':
         setLocale(fr_FR);
         break;
-      case 'de':
+      case 'de_DE':
         setLocale(de_DE);
         break;
       default:
