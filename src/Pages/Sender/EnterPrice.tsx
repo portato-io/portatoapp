@@ -34,15 +34,15 @@ const EnterPrice: React.FC = () => {
   }, [prices]);
 
   const handleInputChange = (e: any) => {
+    if (!Number(e.target.value) && e.target.value.length > 0) {
+      return;
+    }
     setValues({
       ...prices,
       [e.target.name]: e.target.value,
     });
     console.log(e.target.name);
   };
-  // Calculate screen height
-  const containerHeight = window.innerHeight * 0.9;
-  console.log(containerHeight + 'px');
 
   return (
     <PageLayout>
@@ -61,7 +61,6 @@ const EnterPrice: React.FC = () => {
               onChange={handleInputChange}
               placeholder={t('requestCost.pricePlaceholder') || ''}
               suffix="CHF"
-              type="number"
             />
           </Form.Item>
           {/* <Card
