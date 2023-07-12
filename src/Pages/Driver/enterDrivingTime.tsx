@@ -1,11 +1,11 @@
 import { Form, Typography } from 'antd';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import SwitchContainer from '../../Components/SwitchContainer';
+
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Tabs, Calendar, Selector } from 'antd-mobile';
+import { Tabs } from 'antd-mobile';
 import SingleTripContent from '../../Components/PageComponents/SingleTripContent';
 import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripContent';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,6 @@ import { analytics } from '../../firebaseConfig';
 import { shallowEqual, useSelector } from 'react-redux';
 import { IRouteInfo } from '../../type';
 
-const { Title } = Typography;
 const PROGRESS = 33;
 const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
@@ -41,7 +40,12 @@ const EnterDeliveryTime: React.FC = () => {
           layout="horizontal"
         >
           <h2>{t('driveTime.title')}</h2>
-          <Tabs onChange={handleTabChange} defaultActiveKey={routeInfo.type}>
+          <Tabs
+            onChange={handleTabChange}
+            defaultActiveKey={
+              routeInfo.type != '' ? routeInfo.type : t('driveTime.singleTrip')
+            }
+          >
             <Tabs.Tab
               title={t('driveTime.singleTrip')}
               key={t('driveTime.singleTrip')}
