@@ -69,6 +69,9 @@ export const uploadRouteToFirebase = async (uid, dispatch) => {
     dispatch(setRouteUid(uid));
     let state = store.getState();
 
+    // Ensure the days property is an empty array if it is undefined
+    state.route.days = state.route.days ?? [];
+
     if (state.route.id === '0') {
       // Get the database instance and create a reference to the user's routes
       const routesRef = ref(database, `users/${uid}/routes`);

@@ -92,9 +92,7 @@ export function routeReducer(
       };
     }
 
-    case 'SET_ROUTE_': {
-      console.log("Dispatching 'SET_ROUTE' with payload: ", action.payload);
-
+    case 'SET_ROUTE': {
       return {
         ...state,
         routeStatus: action.payload.routeStatus,
