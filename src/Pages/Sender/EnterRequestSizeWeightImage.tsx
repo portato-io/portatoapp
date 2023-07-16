@@ -22,12 +22,13 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_address';
 
 const EnterRequestSizeWeightImage: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+  const { CAPACITY_OPTIONS } = getConstants(t);
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
-
+  // Define a new state
+  const [isUploading, setIsUploading] = useState(false);
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
     description: objecInfo.description,
@@ -95,7 +96,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
             className="input-wrapper"
             label={t('requestInfo.uploadImages')}
           >
-            <UploadImage />
+            <UploadImage onUploadStatusChange={setIsUploading} />
           </Form.Item>
         </Form>
 
@@ -108,6 +109,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
             }}
           />
           <NextButton
+            disabled={isUploading} // Disable the button if an upload is in progress
             nextScreen={NEXT_SCREEN}
             onClick={() => {
               logEvent(analytics, 'send_1_objInfo_next_button_click');

@@ -27,7 +27,15 @@ function getStorageRefFromUrl(url: string) {
   return httpsReference;
 }
 
-const UploadImage = () => {
+interface UploadImageProps {
+  onUploadStatusChange: (uploading: boolean) => void;
+}
+
+const UploadImage: React.FC<UploadImageProps> = ({
+  onUploadStatusChange = () => {
+    /* no-op */
+  },
+}) => {
   const { t } = useTranslation<string>();
   const dispatch = useDispatch();
   const [uploading, setUploading] = useState(false);
@@ -54,6 +62,8 @@ const UploadImage = () => {
     }
 
     setUploading(true);
+    // notify the parent component that upload has started
+    onUploadStatusChange(true);
     const newFile: UploadFile = {
       uid: Date.now().toString(),
       name: file.name,
@@ -105,7 +115,8 @@ const UploadImage = () => {
               console.log('File available at', downloadURL);
               dispatch(addObjectImages([downloadURL]));
               setUploading(false);
-
+              // notify the parent component that upload has finished
+              onUploadStatusChange(false);
               setFileList((prevFileList) =>
                 prevFileList.map((file) =>
                   file.uid === uid
@@ -213,6 +224,7 @@ const UploadImage = () => {
           }
           return originNode;
         }}
+        multiple // Add this line
       >
         {fileList.length >= MAX_FILES ? null : uploadButton}
       </Upload>
