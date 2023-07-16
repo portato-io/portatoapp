@@ -37,7 +37,7 @@ const initialStateDeal: IDealInfo = {
 };
 
 export function dealReducer(
-  state: any = initialStateDeal,
+  state: IDealInfo = initialStateDeal,
   action: AnyAction
 ): IDealInfo {
   switch (action.type) {

@@ -36,8 +36,6 @@ const EnterRequestNameDesc: React.FC = () => {
   });
 
   React.useEffect(() => {
-    console.log('objecInfo', objecInfo);
-
     dispatch(setObject(object));
   }, [object]);
 
@@ -48,7 +46,6 @@ const EnterRequestNameDesc: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleInputChange = (e: any) => {
-    console.log(e);
     setValues({
       ...object,
       [e.target.name]: e.target.value,

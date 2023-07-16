@@ -27,13 +27,18 @@ const EnterRoute: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
 
+  console.log('Redux state routeInfo: ', routeInfo); // Log the routeInfo from Redux state
+
   const [routes, setValues] = useState({
     departure_adress: routeInfo.departure_adress,
     destination_adress: routeInfo.destination_adress,
     acceptable_detour: routeInfo.acceptable_detour || 5, // Set to 5 if routeInfo.acceptable_detour is undefined
   });
 
+  console.log('Local state routes: ', routes); // Log the local state routes
+
   React.useEffect(() => {
+    console.log('Effect triggered with routes change: ', routes); // Log whenever routes state changes
     dispatch(setDetour(routes.acceptable_detour));
   }, [routes]);
 

@@ -16,7 +16,7 @@ const initialStateRoute: IRouteInfo = {
 };
 
 export function routeReducer(
-  state: any = initialStateRoute,
+  state: IRouteInfo = initialStateRoute,
   action: AnyAction
 ): IRouteInfo {
   switch (action.type) {
@@ -81,7 +81,7 @@ export function routeReducer(
     case 'SET_CAP': {
       return {
         ...state,
-        delivery_capacity: Object.values(action.payload)[0],
+        delivery_capacity: Object.values(action.payload)[0] as string,
       };
     }
 
@@ -93,6 +93,8 @@ export function routeReducer(
     }
 
     case 'SET_ROUTE_': {
+      console.log("Dispatching 'SET_ROUTE' with payload: ", action.payload);
+
       return {
         ...state,
         routeStatus: action.payload.routeStatus,

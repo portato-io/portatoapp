@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
-import { useDispatch } from 'react-redux'; // Import useDispatch and useSelector
+import { useDispatch, useStore } from 'react-redux'; // Import useDispatch and useSelector
 import { IRouteInfo } from '../type';
 import { Button, Popconfirm, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -60,9 +60,13 @@ const FetchRoutes: React.FC<{
       setRefreshKey((oldKey) => oldKey + 1); // update the refreshKey state
     });
   };
+  const store = useStore();
 
   const editRoute = (route: IRouteInfo) => {
+    console.log('Dispatching setRoute with the following route data:', route);
     dispatch(setRoute(route));
+    const state = store.getState();
+    console.log('State after dispatching setRoute:', state);
     navigate('/deliver/enterRoute');
   };
 

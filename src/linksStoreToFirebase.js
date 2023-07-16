@@ -79,16 +79,14 @@ export const uploadRouteToFirebase = async (uid, dispatch) => {
       if (newRouteRef.key) {
         dispatch(setRouteId(newRouteRef.key));
         state = store.getState();
-        // Update your data under the new key
-        routeCopy.id = newRouteRef.key;
-        await set(newRouteRef, routeCopy);
+        await set(newRouteRef, state.route);
       } else {
         console.error('Unable to generate a unique key.');
       }
     } else {
       console.log('Route ID already exists, updating route');
       const routesRef = ref(database, `users/${uid}/routes/${state.route.id}`);
-      await update(routesRef, routeCopy);
+      await update(routesRef, state.route);
       console.log('Route updated successfully');
     }
   } catch (error) {

@@ -83,7 +83,10 @@ export const setRouteStatus = (routeStatus: string): AnyAction => ({
   payload: routeStatus,
 });
 
-export const setRoute = (route: IRouteInfo): AnyAction => ({
-  type: actionTypes.SET_ROUTE,
-  payload: route,
-});
+export const setRoute = (route: IRouteInfo): AnyAction => {
+  console.log('Dispatching SET_ROUTE action with payload: ', route);
+  return {
+    type: actionTypes.SET_ROUTE,
+    payload: route,
+  };
+};
