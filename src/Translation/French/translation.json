@@ -132,6 +132,7 @@
     "uploadImages": "Importer des images"
   },
   "requestAddresses": {
+    "title": "Ou voulez-vous que l'envoi soit récupéré et envoyé?",
     "pickupAddress": "Adresse de ramassage",
     "|*TBI*|pickupAddressPlaceholder": "Entrez une adresse",
     "deliveryAddress": "Adresse de livraison",

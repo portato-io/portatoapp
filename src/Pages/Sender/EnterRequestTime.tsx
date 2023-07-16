@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Typography, Form, DatePicker } from 'antd';
+import { Form, DatePicker } from 'antd';
 import { Selector } from 'antd-mobile';
 import { useDispatch } from 'react-redux';
 import {
@@ -16,10 +16,9 @@ import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 require('../../CSS/Calendar.css');
 
-const { Title } = Typography;
 const { RangePicker } = DatePicker;
-const PROGRESS = 50;
-const NEXT_SCREEN = '/createSendRequest/enter_price';
+const PROGRESS = 60;
+const NEXT_SCREEN = '/createSendRequest/enter_request_price';
 
 const EnterTime: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string

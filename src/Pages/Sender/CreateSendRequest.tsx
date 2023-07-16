@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const NEXT_SCREEN = '/createSendRequest/enterObjInfo';
+const NEXT_SCREEN = '/createSendRequest/enter_request_name_desc';
 
 const CreateSendRequest: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string

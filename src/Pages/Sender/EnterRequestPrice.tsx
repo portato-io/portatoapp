@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -7,16 +7,15 @@ import { Typography, Form, InputNumber, Input, Card } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectPrice } from '../../Store/actions/requestActionCreators';
-import { IRequestInfo, ObjectInfoState } from '../../type';
+import { IRequestInfo } from '../../type';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
-const PROGRESS = 75;
-const NEXT_SCREEN = '/createSendRequest/summary';
+const PROGRESS = 80;
+const NEXT_SCREEN = '/createSendRequest/request-summary';
 
-const EnterPrice: React.FC = () => {
+const EnterRequestPrice: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
@@ -34,15 +33,15 @@ const EnterPrice: React.FC = () => {
   }, [prices]);
 
   const handleInputChange = (e: any) => {
+    if (!Number(e.target.value) && e.target.value.length > 0) {
+      return;
+    }
     setValues({
       ...prices,
       [e.target.name]: e.target.value,
     });
     console.log(e.target.name);
   };
-  // Calculate screen height
-  const containerHeight = window.innerHeight * 0.9;
-  console.log(containerHeight + 'px');
 
   return (
     <PageLayout>
@@ -60,6 +59,7 @@ const EnterPrice: React.FC = () => {
               value={objecInfo.price !== 0 ? objecInfo.price : undefined}
               onChange={handleInputChange}
               placeholder={t('requestCost.pricePlaceholder') || ''}
+              suffix="CHF"
             />
           </Form.Item>
           {/* <Card
@@ -97,4 +97,4 @@ const EnterPrice: React.FC = () => {
   );
 };
 
-export default EnterPrice;
+export default EnterRequestPrice;
