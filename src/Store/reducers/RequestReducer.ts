@@ -20,7 +20,7 @@ const initialState: IRequestInfo = {
 };
 
 export function requestReducer(
-  state: any = initialState,
+  state: IRequestInfo = initialState,
   action: AnyAction
 ): IRequestInfo {
   console.log(action.type);
@@ -83,13 +83,33 @@ export function requestReducer(
 
     case 'REMOVE_IMAGE': {
       const updatedImages = state.images.filter(
-        (_: any, index: number) => index !== action.payload
+        (image: unknown, index: number) => index !== action.payload
       );
       return { ...state, images: updatedImages };
     }
-
     case 'SET_DEAL_ID': {
       return { ...state, dealId: action.payload };
+    }
+
+    case 'SET_REQUEST': {
+      return {
+        ...state,
+        name: action.payload.name,
+        description: action.payload.description,
+        size: action.payload.size,
+        weight: action.payload.weight,
+        status: action.payload.status || false,
+        dealId: action.payload.dealId || '',
+        contactTimestamp: action.payload.contactTimestamp || '',
+        id: action.payload.id,
+        uid: action.payload.uid,
+        price: action.payload.price,
+        pickup_adress: action.payload.pickup_adress,
+        delivery_adress: action.payload.delivery_adress,
+        dateRange: action.payload.dateRange,
+        time: action.payload.time,
+        images: action.payload.images,
+      };
     }
 
     case 'EMPTY_STATE':

@@ -17,7 +17,8 @@
     "deleteConfirm": "Êtes-vous sûr de vouloir le supprimer?",
     "upload": "Télécharger",
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+    "edit": "Modifier"
   },
 
   "addressField": {

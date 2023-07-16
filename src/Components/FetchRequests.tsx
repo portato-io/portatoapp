@@ -16,9 +16,8 @@ require('../CSS/Send.css');
 
 const FetchRequests: React.FC<{
   uid?: string | null; // uid is now optional
-  heightPortion?: number;
   admin?: boolean;
-}> = ({ uid, heightPortion = 0.8, admin = false }) => {
+}> = ({ uid, admin = false }) => {
   const [requests, setRequestState] = useState<IRequestInfo[]>([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -137,6 +136,10 @@ const FetchRequests: React.FC<{
       }
     );
   };
+  const editRequest = (request: IRequestInfo) => {
+    setRequest(request);
+    navigate('/createSendRequest/enter_request_name_desc');
+  };
 
   // Return early, if no requests exist; avoid adding the title altogether.
   if (requests.length === 0) {
@@ -175,6 +178,12 @@ const FetchRequests: React.FC<{
                       </span>
                     </Button>
                   </Popconfirm>
+                </div>
+                <div>
+                  <Button type="link" onClick={() => editRequest(request)}>
+                    <i className="icon icon-edit"></i>
+                    <span className="mod-hide-mobile">{t('general.edit')}</span>
+                  </Button>
                 </div>
               </div>
             </div>

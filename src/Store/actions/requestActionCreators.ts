@@ -1,5 +1,5 @@
 import * as actionTypes from '../actionTypes/requestActionTypes';
-import { IFirstObjectInfo } from '../../type';
+import { IFirstObjectInfo, IRequestInfo } from '../../type';
 import { EMPTY_STATE } from '../actionTypes/commonActionTypes';
 import { AnyAction } from 'redux';
 
@@ -65,4 +65,9 @@ export const emptyState = (): AnyAction => ({
 export const setDealId = (id: string): AnyAction => ({
   type: actionTypes.SET_DEAL_ID,
   payload: id,
+});
+
+export const setRequest = (request: IRequestInfo): AnyAction => ({
+  type: actionTypes.SET_REQUEST,
+  payload: request,
 });

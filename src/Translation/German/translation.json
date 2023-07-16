@@ -17,7 +17,8 @@
     "deleteConfirm": "Sind Sie sicher, dass Sie dies löschen wollen?",
     "upload": "Hochladen",
     "yes": "Ja",
-    "no": "Nein"
+    "no": "Nein",
+    "edit": "edit"
   },
 
   "addressField": {
