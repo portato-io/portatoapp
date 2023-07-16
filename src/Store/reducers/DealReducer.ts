@@ -53,7 +53,7 @@ export function dealReducer(
         request: action.payload,
       };
     }
-    case 'SET_ROUTE': {
+    case 'SET_INIT_ROUTE': {
       return {
         ...state,
         route: action.payload,

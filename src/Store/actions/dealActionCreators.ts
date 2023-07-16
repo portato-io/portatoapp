@@ -7,8 +7,8 @@ export const setDealId = (id: string): AnyAction => ({
   payload: id,
 });
 
-export const setRoute = (route: IRouteInfo): AnyAction => ({
-  type: actionTypes.SET_ROUTE,
+export const setInitRoute = (route: IRouteInfo): AnyAction => ({
+  type: actionTypes.SET_INIT_ROUTE,
   payload: route,
 });
 

@@ -1,12 +1,13 @@
 import * as actionTypes from '../actionTypes/routeActionTypes';
 import { AnyAction } from 'redux';
 import { EMPTY_STATE } from '../actionTypes/commonActionTypes';
+import { IRouteInfo } from '../../type';
 
-export const setRoute = (
+export const setInitRoute = (
   departure_adress: string,
   destination_adress: string
 ): AnyAction => ({
-  type: actionTypes.SET_ROUTE,
+  type: actionTypes.SET_INIT_ROUTE,
   payload: {
     departure_adress,
     destination_adress,
@@ -80,4 +81,9 @@ export const emptyState = (): AnyAction => ({
 export const setRouteStatus = (routeStatus: string): AnyAction => ({
   type: actionTypes.SET_ROUTE_STATUS,
   payload: routeStatus,
+});
+
+export const setRoute = (route: IRouteInfo): AnyAction => ({
+  type: actionTypes.SET_ROUTE,
+  payload: route,
 });
