@@ -39,17 +39,23 @@ const EnterRequestNameDesc: React.FC = () => {
     dispatch(setObject(object));
   }, [object]);
 
-  const onFinish = (values: any) => {
+  interface FormValues {
+    [key: string]: string | number | boolean; // Adjust as needed based on your form data
+  }
+
+  const onFinish = (values: FormValues) => {
     console.log({ values });
   };
 
   const dispatch = useDispatch();
 
-  const handleInputChange = (e: any) => {
-    setValues({
-      ...object,
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setValues((prevState: IFirstObjectInfo) => ({
+      ...prevState,
       [e.target.name]: e.target.value,
-    });
+    }));
     console.log(e.target.name);
   };
 
