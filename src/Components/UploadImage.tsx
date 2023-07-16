@@ -35,6 +35,12 @@ const UploadImage = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const beforeUpload = async (file: File) => {
+    // Checks if the file is an image
+    if (!file.type.startsWith('image/')) {
+      void message.error('You can only upload image files.');
+      return false;
+    }
+
     if (fileList.length >= MAX_FILES) {
       void message.error(`You can only upload up to ${MAX_FILES} images.`);
       return false;
