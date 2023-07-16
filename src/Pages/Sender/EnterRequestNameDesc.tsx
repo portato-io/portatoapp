@@ -1,28 +1,24 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import UploadImage from '../../Components/UploadImage';
 
-import { Typography, Form, Input, Radio } from 'antd';
+import { Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { CAPACITY_OPTIONS } from '../../constant';
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
 import { useTranslation } from 'react-i18next';
-import { Selector } from 'antd-mobile';
 
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
 const { TextArea } = Input;
 const PROGRESS = 0;
 
-const NEXT_SCREEN = '/createSendRequest/enter_address';
+const NEXT_SCREEN = '/createSendRequest/enter_request_size_weight_image';
 
-const EnterObjInfo: React.FC = () => {
+const EnterRequestNameDesc: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
 
   const objecInfo = useSelector(
@@ -48,12 +44,6 @@ const EnterObjInfo: React.FC = () => {
   };
 
   const dispatch = useDispatch();
-  const handleCapChange = (e: any) => {
-    setValues({
-      ...object,
-      size: e,
-    });
-  };
 
   const handleInputChange = (e: any) => {
     console.log(e);
@@ -104,33 +94,6 @@ const EnterObjInfo: React.FC = () => {
               placeholder={t('requestInfo.descriptionPlaceholder') || ''}
             />
           </Form.Item>
-
-          <Form.Item className="input-wrapper" label={t('requestInfo.size')}>
-            <Selector
-              columns={2}
-              options={CAPACITY_OPTIONS}
-              onChange={handleCapChange}
-              defaultValue={[object.size[0]]}
-            />
-          </Form.Item>
-
-          <Form.Item className="input-wrapper" label={t('requestInfo.weight')}>
-            <Radio.Group
-              name="weight"
-              value={object.weight}
-              onChange={handleInputChange}
-            >
-              <Radio value="0-5 kg">0-5 kg</Radio>
-              <Radio value="5-20 kg">5-20 kg</Radio>
-              <Radio value="+20 kg">20+ kg</Radio>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item
-            className="input-wrapper"
-            label={t('requestInfo.uploadImages')}
-          >
-            <UploadImage />
-          </Form.Item>
         </Form>
 
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container
@@ -153,4 +116,4 @@ const EnterObjInfo: React.FC = () => {
   );
 };
 
-export default EnterObjInfo;
+export default EnterRequestNameDesc;

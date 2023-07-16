@@ -16,12 +16,12 @@
     "delete": "Delete",
     "deleteConfirm": "Are you sure you want to delete this?"
   },
-  
+
   "timeSelector": {
     "morning": "Morning",
     "midDay": "Mid day",
     "evening": "Evening"
-    },
+  },
 
   "social": {
     "heading": "Find us on social media",
@@ -72,19 +72,18 @@
     "createButtonDescription": "Create request",
     "currentTitle": "Your current delivery requests",
     "requestList": {
-        "price": "Price",
-        "weight": "Weight",
-        "pickupAddress":"Pick-up address",
-        "deliveryAddress":"Delivery address",
-        "dateRange":"Date range",
-        "from": "From",
-        "to": "to",
-        "time": "Time",
-        "size": "Size",
-        "Images": "Images",
-        "description": "Description"
+      "price": "Price",
+      "weight": "Weight",
+      "pickupAddress": "Pick-up address",
+      "deliveryAddress": "Delivery address",
+      "dateRange": "Date range",
+      "from": "From",
+      "to": "to",
+      "time": "Time",
+      "size": "Size",
+      "Images": "Images",
+      "description": "Description"
     }
-
   },
 
   "requestInfo": {
@@ -98,6 +97,7 @@
     "uploadImages": "Upload images"
   },
   "requestAddresses": {
+    "title": "Where do you want the shipment to be picked up and sent?",
     "pickupAddress": "Pick-up address",
     "|*TBI*|pickupAddressPlaceholder": "Enter an address",
     "deliveryAddress": "Delivery address",

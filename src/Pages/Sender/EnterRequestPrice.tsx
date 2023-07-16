@@ -1,22 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Typography, Form, Input, Card } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectPrice } from '../../Store/actions/requestActionCreators';
-import { IRequestInfo, ObjectInfoState } from '../../type';
+import { IRequestInfo } from '../../type';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
-const PROGRESS = 75;
-const NEXT_SCREEN = '/createSendRequest/summary';
+const PROGRESS = 80;
+const NEXT_SCREEN = '/createSendRequest/request-summary';
 
-const EnterPrice: React.FC = () => {
+const EnterRequestPrice: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
@@ -98,4 +96,4 @@ const EnterPrice: React.FC = () => {
   );
 };
 
-export default EnterPrice;
+export default EnterRequestPrice;
