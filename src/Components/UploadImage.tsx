@@ -7,6 +7,7 @@ import {
   addObjectImages,
   removeObjectImages,
 } from '../Store/actions/requestActionCreators';
+import { useTranslation } from 'react-i18next';
 
 import {
   ref,
@@ -27,6 +28,7 @@ function getStorageRefFromUrl(url: string) {
 }
 
 const UploadImage = () => {
+  const { t } = useTranslation<string>();
   const dispatch = useDispatch();
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -118,7 +120,7 @@ const UploadImage = () => {
   const uploadButton = (
     <div>
       <PlusOutlined />
-      <div style={{ marginTop: 2 }}>Upload</div>
+      <div style={{ marginTop: 2 }}>{t('general.upload')}</div>
     </div>
   );
 

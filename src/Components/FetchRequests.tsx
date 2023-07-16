@@ -165,8 +165,8 @@ const FetchRequests: React.FC<{
                     title={t('general.deleteConfirm')}
                     onConfirm={() => deleteRequest(request)}
                     onCancel={() => console.log('Cancelled')}
-                    okText="Yes"
-                    cancelText="No"
+                    okText={t('general.yes')}
+                    cancelText={t('general.no')}
                   >
                     <Button type="link">
                       <i className="icon icon-bin"></i>

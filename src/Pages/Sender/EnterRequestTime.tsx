@@ -10,7 +10,7 @@ import {
   setObjectDateRange,
   setObjectTime,
 } from '../../Store/actions/requestActionCreators';
-import { TIME } from '../../constant';
+import { getConstants } from '../../constant';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
@@ -22,6 +22,8 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_price';
 
 const EnterTime: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+
   const dispatch = useDispatch();
 
   const handleTimeChange = (e: any) => {

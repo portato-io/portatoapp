@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import { Selector } from 'antd-mobile';
 import { DatePicker } from 'antd';
-import { TIME } from '../../constant';
+import { getConstants } from '../../constant';
 import { useEffect } from 'react';
 import {
   setTime,
@@ -17,6 +17,8 @@ const { Title } = Typography;
 function SingleTripContent(activeTab: any) {
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import UploadImage from '../../Components/UploadImage';
 
 import { Form, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { CAPACITY_OPTIONS } from '../../constant';
+import { getConstants } from '../../constant';
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
 import { useTranslation } from 'react-i18next';
@@ -22,6 +22,7 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_address';
 
 const EnterRequestSizeWeightImage: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request

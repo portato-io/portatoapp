@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import '../../../CSS/PortatoStyleSheet.css';
 import PageLayout from '../../Layouts/ProfilePagesLayout';
@@ -11,6 +12,7 @@ interface FormData {
 }
 
 const ContactForm: React.FC = () => {
+  const { t } = useTranslation<string>();
   const [form] = Form.useForm<FormData>(); // <-- Change the type here
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -41,20 +43,29 @@ const ContactForm: React.FC = () => {
       <div className="form-container">
         <Form form={form} onFinish={onFinish} className="centered-form">
           <Form.Item
-            label="Name"
+            label={t('contactSupport.nameLabel')}
             name="name"
-            rules={[{ required: true, message: 'Please input your name!' }]}
+            rules={[
+              {
+                required: true,
+                message:
+                  t('contactSupport.nameErrorMessage') ||
+                  'Please enter your name',
+              },
+            ]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            label="Email"
+            label={t('contactSupport.emailLabel')}
             name="email"
             rules={[
               {
                 required: true,
-                message: 'Please input your email!',
+                message:
+                  t('contactSupport.emailErrorMessage') ||
+                  'Please enter your e-mail address',
                 type: 'email',
               },
             ]}
@@ -63,16 +74,23 @@ const ContactForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            label="Message"
+            label={t('contactSupport.messageLabel')}
             name="message"
-            rules={[{ required: true, message: 'Please input your message!' }]}
+            rules={[
+              {
+                required: true,
+                message:
+                  t('contactSupport.messageErrorMessage') ||
+                  'Please enter a message',
+              },
+            ]}
           >
             <Input.TextArea />
           </Form.Item>
 
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={loading}>
-              Send
+              {t('contactSupport.sendButtonLabel')}
             </Button>
           </Form.Item>
         </Form>

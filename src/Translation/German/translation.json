@@ -12,7 +12,46 @@
     "howItWorks": "So funktioniert's",
     "moreInfo": "Erfahre mehr",
     "send": "Senden",
-    "deliver": "Fahren"
+    "deliver": "Fahren",
+    "delete": "Löschen",
+    "deleteConfirm": "Sind Sie sicher, dass Sie dies löschen wollen?",
+    "upload": "Hochladen",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+
+  "addressField": {
+    "placeholder": "Geben Sie eine Adresse ein"
+  },
+
+  "dayAbbreviated": {
+    "monday": "Mo",
+    "tuesday": "Di",
+    "wednesday": "Mi",
+    "thursday": "Do",
+    "friday": "Fr",
+    "saturday": "Sa",
+    "sunday": "So"
+  },
+  "day": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
+  },
+  "capacity": {
+    "s": "Passt in eine Tasche",
+    "m": "Passt in ein kleines Auto",
+    "l": "Passt in ein großes Auto",
+    "xl": "Passt in einen Van"
+  },
+  "timeOfDay": {
+    "morning": "Morgen",
+    "midDay": "Mittag",
+    "evening": "Abend"
   },
 
   "social": {
@@ -104,14 +143,10 @@
     "title": "Wann soll die Sendung abgeholt werden?",
     "dates": "Daten",
     "times": "Tageszeiten",
-    "dateHint": "(Du kannst das Start- und Enddatum auf den gleichen Tag legen falls nötig.)",
-    "timeHint": "(Mehrfachauswahl möglich.)",
-    "|*TBI*|startDatePlaceholder": "Startdatum",
-    "|*TBI*|endDatePlaceholder": "Enddatum",
-    "|*TBI*|time": "Tageszeit",
-    "|*TBI*|mornings": "Morgens",
-    "|*TBI*|midDays": "Mittags",
-    "|*TBI*|evenings": "Abends"
+    "dateHint": "(Du kannst das Start- und Enddatum auf den gleichen Tag legen falls nötig)",
+    "timeHint": "(Mehrfachauswahl möglich)",
+    "startDatePlaceholder": "Startdatum",
+    "endDatePlaceholder": "Enddatum"
   },
   "requestCost": {
     "title": "Was ist Dir der Transport wert?",
@@ -138,7 +173,8 @@
   "driveOverview": {
     "newTitle": "Möchtest Du eine Route registrieren?",
     "createButtonDescription": "Route registrieren",
-    "currentTitle": "Deine aktuellen Routen"
+    "currentTitle": "Deine aktuellen Routen",
+    "tripTitle": "Meine Reise"
   },
   "driveAddresses": {
     "createNewRouteTitle": "Neue Route erstellen",
@@ -156,7 +192,7 @@
     "|*TBI*|startPlaceholder": "Start",
     "|*TBI*|endPlaceholder": "Ende",
     "selectTime": "Uhrzeit auswählen",
-    "timeHint": "(Mehrfachauswahl möglich.)",
+    "timeHint": "(Mehrfachauswahl möglich)",
     "|*TBI*|timeMornings": "Morgens",
     "|*TBI*|timeMidDays": "Mittags",
     "|*TBI*|timeEvenings": "Abends",
@@ -199,10 +235,25 @@
     "myAccount": "Mein Konto",
     "profilePicture": "Profilbild",
     "name": "Name",
-    "emailAddress": "E-Mail Adresse"
+    "emailAddress": "E-Mail Adresse",
+    "uploadedImageAlert": "Bild hochgeladen!"
   },
+
+  "contactSupport": {
+    "nameLabel": "Name",
+    "nameErrorMessage": "Bitte Ihren Namen eingeben",
+    "emailLabel": "E-Mail",
+    "emailErrorMessage": "Bitte Ihre E-Mail Adresse eingeben",
+    "messageLabel": "Nachricht",
+    "messageErrorMessage": "Bitte eine Nachricht eingeben",
+    "sendButtonLabel": "Senden Sie"
+  },
+
   "settings": {
     "title": "Einstellungen",
-    "languageLabel": "Sprache"
+    "languageLabel": "Sprache",
+    "english": "Englisch",
+    "french": "Französisch",
+    "german": "Deutsch"
   }
 }

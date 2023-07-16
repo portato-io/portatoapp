@@ -1,83 +1,87 @@
-export const DAYS = [
-  {
-    label: 'Mon',
-    value: 'Mon ',
-  },
-  {
-    label: 'Tue',
-    value: 'Tue ',
-  },
-  {
-    label: 'Wed',
-    value: 'Wed ',
-  },
-  {
-    label: 'Thu',
-    value: 'Thu ',
-  },
-  {
-    label: 'Fri',
-    value: 'Fri ',
-  },
-  {
-    label: 'Sa',
-    value: 'Sa ',
-  },
-  {
-    label: 'Sun',
-    value: 'Sun ',
-  },
-];
-export const TIME = [
-  {
-    label: 'Morning',
-    value: 'Morning ',
-  },
-  {
-    label: 'Mid day',
-    value: 'Mid-day ',
-  },
-  {
-    label: 'Evening',
-    value: 'Evening ',
-  },
-];
+import { TFunction } from 'i18next';
 
-export const CAPACITY_OPTIONS = [
-  {
-    label: 'S',
-    description: 'Fits in a bag',
-    value: 'S',
-  },
-  {
-    label: 'M',
-    description: 'Fits in a little car',
-    value: 'M',
-  },
-  {
-    label: 'L',
-    description: 'Fits in a big car',
-    value: 'L',
-  },
-  {
-    label: 'XL',
-    description: 'Fits in a van',
-    value: 'XL',
-  },
-];
+export const getConstants = (t: TFunction) => ({
+  DAYS: [
+    {
+      label: t('dayAbbreviated.monday'),
+      value: 'Mon',
+    },
+    {
+      label: t('dayAbbreviated.tuesday'),
+      value: 'Tue',
+    },
+    {
+      label: t('dayAbbreviated.wednesday'),
+      value: 'Wed',
+    },
+    {
+      label: t('dayAbbreviated.thursday'),
+      value: 'Thu',
+    },
+    {
+      label: t('dayAbbreviated.friday'),
+      value: 'Fri',
+    },
+    {
+      label: t('dayAbbreviated.saturday'),
+      value: 'Sat',
+    },
+    {
+      label: t('dayAbbreviated.sunday'),
+      value: 'Sun',
+    },
+  ],
 
-export const LANGUAGE_OPTIONS = [
-  {
-    label: 'English',
-    value: 'en-US',
-  },
+  TIME: [
+    {
+      label: t('timeOfDay.morning'),
+      value: 'Morning',
+    },
+    {
+      label: t('timeOfDay.midDay'),
+      value: 'Mid-day',
+    },
+    {
+      label: t('timeOfDay.evening'),
+      value: 'Evening',
+    },
+  ],
 
-  {
-    label: 'German',
-    value: 'de',
-  },
-  {
-    label: 'French',
-    value: 'fr',
-  },
-];
+  CAPACITY_OPTIONS: [
+    {
+      label: 'S',
+      description: t('capacity.s'),
+      value: 'S',
+    },
+    {
+      label: 'M',
+      description: t('capacity.m'),
+      value: 'M',
+    },
+    {
+      label: 'L',
+      description: t('capacity.l'),
+      value: 'L',
+    },
+    {
+      label: 'XL',
+      description: t('capacity.xl'),
+      value: 'XL',
+    },
+  ],
+
+  LANGUAGE_OPTIONS: [
+    {
+      label: t('settings.english'),
+      value: 'en_US',
+    },
+    {
+      label: t('settings.french'),
+      value: 'fr_FR',
+    },
+    {
+      label: t('settings.german'),
+      value: 'de_DE',
+    },
+  ],
+});

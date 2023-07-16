@@ -76,7 +76,9 @@ const FetchRoutes: React.FC<{
             }`}
           >
             <div className="send-request-card-header mod-display-flex mod-flex-space-between">
-              <h4>My Trip #{index + 1}</h4>
+              <h4>
+                {t('driveOverview.tripTitle')} #{index + 1}
+              </h4>
 
               <div className="card-actions">
                 <div>
@@ -84,8 +86,8 @@ const FetchRoutes: React.FC<{
                     title={t('general.deleteConfirm')}
                     onConfirm={() => deleteRoute(route)}
                     onCancel={() => console.log('Cancelled')}
-                    okText="Yes"
-                    cancelText="No"
+                    okText={t('general.yes')}
+                    cancelText={t('general.no')}
                   >
                     <Button type="link">
                       <i className="icon icon-bin"></i>

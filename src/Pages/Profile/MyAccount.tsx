@@ -47,7 +47,7 @@ const MyAccount: React.FC = () => {
     updateProfile(currentUser, { photoURL });
 
     setLoading(false);
-    alert('Uploaded file!');
+    alert(t('accountPage.uploadedImageAlert'));
   }
 
   const onFinish = () => {
@@ -73,7 +73,7 @@ const MyAccount: React.FC = () => {
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
+      <div style={{ marginTop: 8 }}>{t('general.upload')}</div>
     </div>
   );
   return (
