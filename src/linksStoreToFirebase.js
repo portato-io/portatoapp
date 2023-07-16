@@ -20,25 +20,43 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
     dispatch(setReqUid(uid));
 
-    // Get the database instance and create a reference to the user's requests
-    const requestsRef = ref(database, `users/${uid}/requests`);
+    let state = store.getState();
 
-    // Generate a new unique key for the request
-    const newRequestRef = firebasePush(requestsRef);
+    // Create a copy of the request and replace undefined values
+    const requestCopy = { ...state.request };
+    if (requestCopy.images === undefined) {
+      requestCopy.images = []; // use an empty array as the default value
+    }
 
-    // The unique key is now available as newRequestRef.key
-    if (newRequestRef.key) {
-      dispatch(setObjectId(newRequestRef.key));
-      const state = store.getState();
+    if (state.request.id === '0') {
+      // Get the database instance and create a reference to the user's requests
+      const requestsRef = ref(database, `users/${uid}/requests`);
+      // Generate a new unique key for the request
+      const newRequestRef = firebasePush(requestsRef);
 
-      // Update your data under the new key
-      await set(newRequestRef, state.request);
+      // The unique key is now available as newRequestRef.key
+      if (newRequestRef.key) {
+        dispatch(setObjectId(newRequestRef.key));
+        state = store.getState();
+        // Update your data under the new key
+        requestCopy.id = newRequestRef.key;
+        await set(newRequestRef, requestCopy);
 
-      console.log('Request uploaded successfully');
-      return true;
+        console.log('Request uploaded successfully');
+        return true;
+      } else {
+        console.error('Unable to generate a unique key.');
+        return false;
+      }
     } else {
-      console.error('Unable to generate a unique key.');
-      return false;
+      console.log('Request ID already exists, updating request');
+      const requestsRef = ref(
+        database,
+        `users/${uid}/requests/${state.request.id}`
+      );
+      await update(requestsRef, requestCopy);
+      console.log('Request updated successfully');
+      return true;
     }
   } catch (error) {
     console.error('Error uploading request:', error);
