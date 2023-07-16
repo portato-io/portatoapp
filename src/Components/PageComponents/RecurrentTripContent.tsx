@@ -20,7 +20,6 @@ function RecurrentTripContent(activeTab: any) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('JESUIS DANS RECURRENT TRIP');
     dispatch(setType(Object.values(activeTab)[0] as string));
 
     return () => {

@@ -32,6 +32,9 @@ const EnterRequestPrice: React.FC = () => {
   }, [prices]);
 
   const handleInputChange = (e: any) => {
+    if (!Number(e.target.value) && e.target.value.length > 0) {
+      return;
+    }
     setValues({
       ...prices,
       [e.target.name]: e.target.value,
@@ -55,6 +58,7 @@ const EnterRequestPrice: React.FC = () => {
               value={objecInfo.price !== 0 ? objecInfo.price : undefined}
               onChange={handleInputChange}
               placeholder={t('requestCost.pricePlaceholder') || ''}
+              suffix="CHF"
             />
           </Form.Item>
           {/* <Card
