@@ -107,7 +107,7 @@ const Home: React.FC = () => {
         <div className="mod-display-flex">
           <a
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            href="/createSendRequest/enterObjInfo"
+            href="/createSendRequest/enter_request_name_desc"
             onClick={() => logEvent(analytics, 'home_send_button_click')}
           >
             {t('general.send')}
