@@ -4,7 +4,8 @@ import { IRequestInfo } from '../type';
 import { Button, message, Popconfirm } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { setStatus, setRequest } from '../Store/actions/dealActionCreators';
+import { setRequest } from '../Store/actions/requestActionCreators';
+import { setStatus, setDealRequest } from '../Store/actions/dealActionCreators';
 import {
   updateObjectStatus,
   fetchRouteUidFromDeal,
@@ -12,7 +13,6 @@ import {
 } from '../linksStoreToFirebase';
 import { useTranslation } from 'react-i18next';
 require('../CSS/Send.css');
-// require('../CSS/PortatoStyleSheet.css');
 
 const FetchRequests: React.FC<{
   uid?: string | null; // uid is now optional
@@ -93,7 +93,7 @@ const FetchRequests: React.FC<{
   };
 
   const noMatch = (request: IRequestInfo) => {
-    dispatch(setRequest(request));
+    dispatch(setDealRequest(request));
     dispatch(setStatus('No Match'));
     uploadDealToFirebase(dispatch);
     updateObjectStatus(request.uid, request.id, 'no match', 'requests');
@@ -137,7 +137,8 @@ const FetchRequests: React.FC<{
     );
   };
   const editRequest = (request: IRequestInfo) => {
-    setRequest(request);
+    console.log('Edit request: ', request);
+    dispatch(setRequest(request));
     navigate('/createSendRequest/enter_request_name_desc');
   };
 

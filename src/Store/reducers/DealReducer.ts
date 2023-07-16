@@ -47,7 +47,7 @@ export function dealReducer(
         id: action.payload,
       };
     }
-    case 'SET_REQ': {
+    case 'SET_DEAL_REQ': {
       return {
         ...state,
         request: action.payload,

@@ -36,6 +36,8 @@ const EnterRequestNameDesc: React.FC = () => {
   });
 
   React.useEffect(() => {
+    console.log('objecInfo', objecInfo);
+
     dispatch(setObject(object));
   }, [object]);
 

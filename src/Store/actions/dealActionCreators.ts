@@ -17,7 +17,7 @@ export const setStatus = (status: string): AnyAction => ({
   payload: status,
 });
 
-export const setRequest = (request: IRequestInfo): AnyAction => ({
-  type: actionTypes.SET_REQ,
+export const setDealRequest = (request: IRequestInfo): AnyAction => ({
+  type: actionTypes.SET_DEAL_REQ,
   payload: request,
 });
