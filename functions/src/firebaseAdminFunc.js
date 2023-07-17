@@ -66,13 +66,15 @@ const sendNotificationEmail = functions
   .https.onRequest((req, res) => {
     cors(req, res, async () => {
       try {
-        const { title, body, uid } = req.body;
+        const { title, body, uid, email } = req.body;
         let targetEmail;
         if (uid) {
           targetEmail = await getUserEmail(uid); // Fetch email address from UID
-        } else {
+        } else if (!email) {
           res.status(500).send('No uid given');
           return;
+        } else {
+          targetEmail = email;
         }
 
         const mailOptions = {
