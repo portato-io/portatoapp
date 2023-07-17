@@ -54,6 +54,11 @@ const EnterTime: React.FC = () => {
     dispatch(setObjectDateRange([start, end]));
   };
 
+  const disabledDate = (current: Dayjs) => {
+    // Disable dates before today (including today)
+    return current.isBefore(dayjs(), 'day');
+  };
+
   return (
     <PageLayout>
       <section className="section section-form mod-nomargin-top">
@@ -71,6 +76,7 @@ const EnterTime: React.FC = () => {
               onChange={handleChangeRange}
               style={{ width: '100%' }}
               defaultValue={defaultValue}
+              disabledDate={disabledDate}
             />
             <small>{t('requestTime.dateHint')}</small>
           </Form.Item>
