@@ -5,7 +5,7 @@ import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Form, DatePicker } from 'antd';
 import { Selector } from 'antd-mobile';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setObjectDateRange,
   setObjectTime,
@@ -14,6 +14,8 @@ import { getConstants } from '../../constant';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
+import { IRequestInfo } from '../../type';
+import dayjs, { Dayjs } from 'dayjs';
 require('../../CSS/Calendar.css');
 
 const { RangePicker } = DatePicker;
@@ -23,6 +25,18 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_price';
 const EnterTime: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+  const objecInfo = useSelector(
+    (state: { request: IRequestInfo }) => state.request
+  );
+
+  let defaultValue: [Dayjs, Dayjs] | undefined = undefined;
+
+  if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
+    defaultValue = [
+      dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
+      dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
+    ];
+  }
 
   const dispatch = useDispatch();
 
@@ -56,6 +70,7 @@ const EnterTime: React.FC = () => {
               inputReadOnly={true}
               onChange={handleChangeRange}
               style={{ width: '100%' }}
+              defaultValue={defaultValue}
             />
             <small>{t('requestTime.dateHint')}</small>
           </Form.Item>
