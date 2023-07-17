@@ -29,10 +29,11 @@ const EnterTime: React.FC = () => {
     (state: { request: IRequestInfo }) => state.request
   );
 
-  let defaultValue: [Dayjs, Dayjs] | undefined = undefined;
+  let defaultDateRange: [Dayjs, Dayjs] | undefined = undefined;
+  const defaultSelector: string[] = Object.values(objecInfo.time);
 
   if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
-    defaultValue = [
+    defaultDateRange = [
       dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
       dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
     ];
@@ -75,7 +76,7 @@ const EnterTime: React.FC = () => {
               inputReadOnly={true}
               onChange={handleChangeRange}
               style={{ width: '100%' }}
-              defaultValue={defaultValue}
+              defaultValue={defaultDateRange}
               disabledDate={disabledDate}
             />
             <small>{t('requestTime.dateHint')}</small>
@@ -87,6 +88,7 @@ const EnterTime: React.FC = () => {
               options={TIME}
               multiple={true}
               onChange={handleTimeChange}
+              defaultValue={defaultSelector}
             />
           </Form.Item>
         </Form>
