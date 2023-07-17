@@ -90,7 +90,6 @@ const RouteSummary: React.FC = () => {
           .then((result) => {
             // Read result of the Cloud Function.
             console.log(result);
-            message.success('Notification email sent successfully');
           })
           .catch((error) => {
             // Getting the error details
