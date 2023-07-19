@@ -3,7 +3,6 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import UploadImage from '../../Components/UploadImage';
 
 import { Form, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -90,12 +89,6 @@ const EnterRequestSizeWeightImage: React.FC = () => {
               <Radio value="5-20 kg">5-20 kg</Radio>
               <Radio value="+20 kg">20+ kg</Radio>
             </Radio.Group>
-          </Form.Item>
-          <Form.Item
-            className="input-wrapper"
-            label={t('requestInfo.uploadImages')}
-          >
-            <UploadImage />
           </Form.Item>
         </Form>
 
