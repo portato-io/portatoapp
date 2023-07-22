@@ -30,6 +30,14 @@
 	top:-2px;
 }
 
+/* Disabled Button */
+.button.disabled {
+    background-color: #999;
+    cursor: not-allowed;
+    color: #fff; /* Change the text color if necessary */
+    border-color: #999; /* Change the border color to match the background color if your button has a border */
+}
+
 button .icon + span {
 	position: relative;
 	top:-3px;

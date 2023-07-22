@@ -21,12 +21,12 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_address';
 
 const EnterRequestSizeWeightImage: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+  const { CAPACITY_OPTIONS } = getConstants(t);
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
-
+  // Define a new state
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
     description: objecInfo.description,
@@ -90,6 +90,10 @@ const EnterRequestSizeWeightImage: React.FC = () => {
               <Radio value="+20 kg">20+ kg</Radio>
             </Radio.Group>
           </Form.Item>
+          <Form.Item
+            className="input-wrapper"
+            label={t('requestInfo.uploadImages')}
+          ></Form.Item>
         </Form>
 
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container
