@@ -50,6 +50,48 @@ const RequestSummary: React.FC = () => {
         const uploadSuccess = await uploadRequestToFirebase(uid, dispatch);
         if (uploadSuccess) {
           message.success('Successfully uploaded request!');
+          // Construct HTML email content
+          const emailContent = `
+          <table>
+            <tr><th>Title</th><td>${objecInfo.name}</td></tr>
+            <tr><th>Pickup Address</th><td>${objecInfo.pickup_adress}</td></tr>
+            <tr><th>Delivery Address</th><td>${objecInfo.delivery_adress}</td></tr>
+            <tr><th>Date Range</th><td>From ${objecInfo.dateRange[0]} to ${objecInfo.dateRange[1]}</td></tr>
+            <tr><th>Time</th><td>${objecInfo.time}</td></tr>
+            <tr><th>Price</th><td>${objecInfo.price} CHF</td></tr>
+            <tr><th>Weight</th><td>${objecInfo.weight}</td></tr>
+            <tr><th>Size</th><td>${objecInfo.size}</td></tr>
+            <tr><th>Description</th><td>${objecInfo.description}</td></tr>
+            <tr><th>Request ID</th><td>${objecInfo.id}</td></tr>
+            <tr><th>Request UID</th><td>${uid}</td></tr>
+          </table>
+        `;
+          // send notification email to support
+          const emailBody = {
+            title: 'New delivery request submitted',
+            body: emailContent,
+            uid: null,
+            email: 'support@portato.io',
+          };
+
+          fetch(
+            'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(emailBody),
+            }
+          )
+            .then((response) => response.json())
+            .then((result) => {
+              // Read result of the Cloud Function.
+              console.log(result);
+            })
+            .catch((error) => {
+              // Getting the error details
+              console.error(`error: ${error}`);
+            });
+
           dispatch(emptyState()); //Free the redux store after uploading
         } else {
           message.error('Failed to upload request!');

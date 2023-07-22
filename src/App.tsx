@@ -5,7 +5,8 @@ import './CSS/Core.css';
 import './CSS/Navigation.css';
 import './CSS/Mediaqueries.css';
 
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState, Component } from 'react';
+import { Crisp } from 'crisp-sdk-web';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNavigator from './Components/SideBarNav';
 import { ConfigProvider, Modal } from 'antd';
@@ -19,6 +20,8 @@ import { TranslationProvider } from './Contexts/TranslationContext';
 import { routes as appRoutes } from './routes';
 
 const App: React.FC = () => {
+  Crisp.configure('d7c9a775-c889-4dfd-ba8c-b78075b2a6ef');
+
   const { uid } = useAuth();
   const [openMenu, setOpenMenu] = useState(false);
   const [visible, setVisible] = useState(false); // for the modal

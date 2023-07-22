@@ -5,7 +5,7 @@ import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Form, DatePicker } from 'antd';
 import { Selector } from 'antd-mobile';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setObjectDateRange,
   setObjectTime,
@@ -14,6 +14,8 @@ import { getConstants } from '../../constant';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
+import { IRequestInfo } from '../../type';
+import dayjs, { Dayjs } from 'dayjs';
 require('../../CSS/Calendar.css');
 
 const { RangePicker } = DatePicker;
@@ -22,7 +24,20 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_price';
 
 const EnterTime: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const { TIME } = getConstants(t);
+  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+  const objecInfo = useSelector(
+    (state: { request: IRequestInfo }) => state.request
+  );
+
+  let defaultDateRange: [Dayjs, Dayjs] | undefined = undefined;
+  const defaultSelector: string[] = Object.values(objecInfo.time);
+
+  if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
+    defaultDateRange = [
+      dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
+      dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
+    ];
+  }
 
   const dispatch = useDispatch();
 
@@ -38,6 +53,11 @@ const EnterTime: React.FC = () => {
     console.log('start date', start);
     console.log('end date', end);
     dispatch(setObjectDateRange([start, end]));
+  };
+
+  const disabledDate = (current: Dayjs) => {
+    // Disable dates before today (including today)
+    return current.isBefore(dayjs(), 'day');
   };
 
   return (
@@ -56,6 +76,8 @@ const EnterTime: React.FC = () => {
               inputReadOnly={true}
               onChange={handleChangeRange}
               style={{ width: '100%' }}
+              defaultValue={defaultDateRange}
+              disabledDate={disabledDate}
             />
             <small>{t('requestTime.dateHint')}</small>
           </Form.Item>
@@ -66,6 +88,7 @@ const EnterTime: React.FC = () => {
               options={TIME}
               multiple={true}
               onChange={handleTimeChange}
+              defaultValue={defaultSelector}
             />
           </Form.Item>
         </Form>

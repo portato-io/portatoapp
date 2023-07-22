@@ -27,7 +27,15 @@ function getStorageRefFromUrl(url: string) {
   return httpsReference;
 }
 
-const UploadImage = () => {
+interface UploadImageProps {
+  onUploadStatusChange: (uploading: boolean) => void;
+}
+
+const UploadImage: React.FC<UploadImageProps> = ({
+  onUploadStatusChange = () => {
+    /* no-op */
+  },
+}) => {
   const { t } = useTranslation<string>();
   const dispatch = useDispatch();
   const [uploading, setUploading] = useState(false);
@@ -35,6 +43,12 @@ const UploadImage = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const beforeUpload = async (file: File) => {
+    // Checks if the file is an image
+    if (!file.type.startsWith('image/')) {
+      void message.error('You can only upload image files.');
+      return false;
+    }
+
     if (fileList.length >= MAX_FILES) {
       void message.error(`You can only upload up to ${MAX_FILES} images.`);
       return false;
@@ -48,6 +62,8 @@ const UploadImage = () => {
     }
 
     setUploading(true);
+    // notify the parent component that upload has started
+    onUploadStatusChange(true);
     const newFile: UploadFile = {
       uid: Date.now().toString(),
       name: file.name,
@@ -99,7 +115,8 @@ const UploadImage = () => {
               console.log('File available at', downloadURL);
               dispatch(addObjectImages([downloadURL]));
               setUploading(false);
-
+              // notify the parent component that upload has finished
+              onUploadStatusChange(false);
               setFileList((prevFileList) =>
                 prevFileList.map((file) =>
                   file.uid === uid
@@ -207,6 +224,7 @@ const UploadImage = () => {
           }
           return originNode;
         }}
+        multiple // Add this line
       >
         {fileList.length >= MAX_FILES ? null : uploadButton}
       </Upload>

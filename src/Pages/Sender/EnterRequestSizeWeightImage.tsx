@@ -3,7 +3,6 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import UploadImage from '../../Components/UploadImage';
 
 import { Form, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +26,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
-
+  // Define a new state
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
     description: objecInfo.description,
@@ -94,9 +93,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
           <Form.Item
             className="input-wrapper"
             label={t('requestInfo.uploadImages')}
-          >
-            <UploadImage />
-          </Form.Item>
+          ></Form.Item>
         </Form>
 
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container

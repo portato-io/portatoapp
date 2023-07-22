@@ -65,7 +65,6 @@ const ContactDriver: React.FC = () => {
       images = request.images;
     }
     // Adding a hardcoded targetEmail
-    // Adding a hardcoded targetEmail
     const valuesWithUid = {
       ...values,
       uid: route_uid,

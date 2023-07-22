@@ -3,6 +3,7 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
+import UploadImage from '../../Components/UploadImage';
 
 import { Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +25,7 @@ const EnterRequestNameDesc: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
+  const [isUploading, setIsUploading] = useState(false);
 
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
@@ -99,6 +101,12 @@ const EnterRequestNameDesc: React.FC = () => {
               placeholder={t('requestInfo.descriptionPlaceholder') || ''}
             />
           </Form.Item>
+          <Form.Item
+            className="input-wrapper"
+            label={t('requestInfo.uploadImages')}
+          >
+            <UploadImage onUploadStatusChange={setIsUploading} />
+          </Form.Item>
         </Form>
 
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container
@@ -110,6 +118,7 @@ const EnterRequestNameDesc: React.FC = () => {
             }}
           />
           <NextButton
+            disabled={isUploading} // Disable the button if an upload is in progress
             nextScreen={NEXT_SCREEN}
             onClick={() => {
               logEvent(analytics, 'send_1_objInfo_next_button_click');
