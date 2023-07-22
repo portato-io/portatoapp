@@ -27,7 +27,6 @@ const EnterRequestSizeWeightImage: React.FC = () => {
     (state: { request: IRequestInfo }) => state.request
   );
   // Define a new state
-  const [isUploading, setIsUploading] = useState(false);
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
     description: objecInfo.description,
@@ -94,9 +93,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
           <Form.Item
             className="input-wrapper"
             label={t('requestInfo.uploadImages')}
-          >
-            <UploadImage onUploadStatusChange={setIsUploading} />
-          </Form.Item>
+          ></Form.Item>
         </Form>
 
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container
@@ -108,7 +105,6 @@ const EnterRequestSizeWeightImage: React.FC = () => {
             }}
           />
           <NextButton
-            disabled={isUploading} // Disable the button if an upload is in progress
             nextScreen={NEXT_SCREEN}
             onClick={() => {
               logEvent(analytics, 'send_1_objInfo_next_button_click');
