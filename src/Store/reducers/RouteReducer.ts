@@ -16,11 +16,11 @@ const initialStateRoute: IRouteInfo = {
 };
 
 export function routeReducer(
-  state: any = initialStateRoute,
+  state: IRouteInfo = initialStateRoute,
   action: AnyAction
 ): IRouteInfo {
   switch (action.type) {
-    case 'SET_ROUTE': {
+    case 'SET_INIT_ROUTE': {
       return {
         ...state,
         departure_adress: action.payload.departure_adress,
@@ -81,7 +81,7 @@ export function routeReducer(
     case 'SET_CAP': {
       return {
         ...state,
-        delivery_capacity: Object.values(action.payload)[0],
+        delivery_capacity: Object.values(action.payload)[0] as string,
       };
     }
 
@@ -89,6 +89,23 @@ export function routeReducer(
       return {
         ...state,
         routeStatus: action.payload.routeStatus,
+      };
+    }
+
+    case 'SET_ROUTE': {
+      return {
+        ...state,
+        routeStatus: action.payload.routeStatus,
+        uid: action.payload.uid,
+        id: action.payload.id,
+        departure_adress: action.payload.departure_adress,
+        destination_adress: action.payload.destination_adress,
+        acceptable_detour: action.payload.acceptable_detour,
+        time: action.payload.time,
+        timeRange: action.payload.timeRange,
+        type: action.payload.type,
+        days: action.payload.days,
+        delivery_capacity: action.payload.delivery_capacity,
       };
     }
 

@@ -147,7 +147,9 @@ const RequestSummary: React.FC = () => {
                   <tr>
                     <th className="th">{t('requestSummary.timeframe')}</th>
                     <td className="td">
-                      {objecInfo.dateRange[0]} - {objecInfo.dateRange[1]}
+                      {objecInfo.dateRange
+                        ? `${objecInfo.dateRange[0]} - ${objecInfo.dateRange[1]}`
+                        : 'Date range not specified'}
                       <br />
                       {Object.values(objecInfo.time).join(', ')}
                     </td>
@@ -156,30 +158,33 @@ const RequestSummary: React.FC = () => {
                     <th className="th">{t('requestSummary.price')}</th>
                     <td className="td">{objecInfo.price} CHF</td>
                   </tr>
-                  <tr>
-                    <th className="th">{t('requestSummary.images')}</th>
-                    <td className="td">
-                      <Image
-                        preview={{ visible: false }}
-                        height={100}
-                        width={100}
-                        src={objecInfo.images[0]}
-                        onClick={() => setVisible(true)}
-                      ></Image>
-                      <div style={{ display: 'none' }}>
-                        <Image.PreviewGroup
-                          preview={{
-                            visible,
-                            onVisibleChange: (vis) => setVisible(vis),
-                          }}
-                        >
-                          {objecInfo.images.map((image) => (
-                            <Image src={image} />
-                          ))}
-                        </Image.PreviewGroup>
-                      </div>
-                    </td>
-                  </tr>
+                  {/*// Only render the images row if the images array is not empty*/}
+                  {objecInfo.images && objecInfo.images.length > 0 ? (
+                    <tr>
+                      <th className="th">{t('requestSummary.images')}</th>
+                      <td className="td">
+                        <Image
+                          preview={{ visible: false }}
+                          height={100}
+                          width={100}
+                          src={objecInfo.images[0]}
+                          onClick={() => setVisible(true)}
+                        ></Image>
+                        <div style={{ display: 'none' }}>
+                          <Image.PreviewGroup
+                            preview={{
+                              visible,
+                              onVisibleChange: (vis) => setVisible(vis),
+                            }}
+                          >
+                            {objecInfo.images.map((image) => (
+                              <Image src={image} />
+                            ))}
+                          </Image.PreviewGroup>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : null}
                 </table>
               </div>
             </div>

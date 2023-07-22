@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Typography, Form } from 'antd';
+import { Form } from 'antd';
 import { IRouteInfo } from '../../type';
-import { setDetour, setRoute } from '../../Store/actions/routeActionCreators';
+import { setDetour } from '../../Store/actions/routeActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from 'antd-mobile';
 import AddressAutocomplete from '../../Components/AutoComplete';
@@ -13,7 +13,6 @@ import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
 const PROGRESS = 0;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
 const MARKS = {
@@ -28,30 +27,48 @@ const EnterRoute: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
 
+  console.log('Redux state routeInfo: ', routeInfo); // Log the routeInfo from Redux state
+
   const [routes, setValues] = useState({
     departure_adress: routeInfo.departure_adress,
     destination_adress: routeInfo.destination_adress,
     acceptable_detour: routeInfo.acceptable_detour || 5, // Set to 5 if routeInfo.acceptable_detour is undefined
   });
 
+  console.log('Local state routes: ', routes); // Log the local state routes
+
   React.useEffect(() => {
+    console.log('Effect triggered with routes change: ', routes); // Log whenever routes state changes
     dispatch(setDetour(routes.acceptable_detour));
   }, [routes]);
 
   const dispatch = useDispatch();
 
-  const handleInputChange = (e: any) => {
-    console.log(e);
-    if (typeof e == 'number') {
-      setValues({
-        ...routes,
-        acceptable_detour: e,
-      });
-    } else {
-      setValues({
-        ...routes,
-        [e.target.name]: e.target.value,
-      });
+  type InputEvent = React.ChangeEvent<HTMLInputElement>;
+  type SliderValue = number | [number, number];
+  type InputValue = SliderValue | InputEvent;
+
+  const handleFormInputChanges = (inputValue: InputValue) => {
+    // For a numerical input.
+    if (typeof inputValue === 'number') {
+      setValues((prevState) => ({
+        ...prevState,
+        acceptable_detour: inputValue,
+      }));
+    }
+    // For a range slider.
+    else if (Array.isArray(inputValue)) {
+      // Handle the array case here.
+      // For simplicity, I'm just taking the first value as the detour.
+      setValues((prevState) => ({
+        ...prevState,
+        acceptable_detour: inputValue[0],
+      }));
+    }
+    // For a standard input field.
+    else if ('target' in inputValue) {
+      const { name, value } = inputValue.target;
+      setValues((prevState) => ({ ...prevState, [name]: value }));
     }
   };
 
@@ -91,7 +108,7 @@ const EnterRoute: React.FC = () => {
               marks={MARKS}
               ticks
               value={routes.acceptable_detour}
-              onChange={handleInputChange}
+              onChange={handleFormInputChanges}
               max={parseInt(MARKS[25])} // Fix for now, will make it more generic in the future
               min={parseInt(MARKS[5])}
             />

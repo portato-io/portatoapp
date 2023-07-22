@@ -7,11 +7,6 @@ import { getStorage, ref } from 'firebase/storage';
 import { addNotificationsToken } from './linksStoreToFirebase';
 import { getAnalytics } from 'firebase/analytics';
 
-const notificationButton = document.getElementById('enableNotifications');
-let swRegistration = null;
-const TokenElem = document.getElementById('token');
-const ErrElem = document.getElementById('err');
-
 // Your Firebase configuration object
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

@@ -3,8 +3,8 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import { useParams } from 'react-router-dom';
 import {
   setStatus,
-  setRequest,
-  setRoute,
+  setDealRequest,
+  setInitRoute,
 } from '../../Store/actions/dealActionCreators';
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
@@ -54,7 +54,7 @@ const DealSuggester: React.FC = () => {
             (request) => request.id === request_id
           );
           if (request) {
-            dispatch(setRequest(request));
+            dispatch(setDealRequest(request));
             setCurrentRequest(request); // update the current request state
           } else {
             console.error('Route not found: ', request_id);
@@ -80,7 +80,7 @@ const DealSuggester: React.FC = () => {
         const routesArray = Object.values(routesObject) as IRouteInfo[];
         const route = routesArray.find((route) => route.id === id);
         if (route) {
-          dispatch(setRoute(route));
+          dispatch(setInitRoute(route));
           setCurrentRoute(route); // update the current route state
         } else {
           console.error('Route not found: ', id);
