@@ -3,6 +3,7 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
+import UploadImage from '../../Components/UploadImage';
 
 import { Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -93,6 +94,12 @@ const EnterRequestNameDesc: React.FC = () => {
               rows={3}
               placeholder={t('requestInfo.descriptionPlaceholder') || ''}
             />
+          </Form.Item>
+          <Form.Item
+            className="input-wrapper"
+            label={t('requestInfo.uploadImages')}
+          >
+            <UploadImage />
           </Form.Item>
         </Form>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { Typography, Modal } from 'antd';
+import { Typography, Modal, message } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
 import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -56,6 +56,45 @@ const RouteSummary: React.FC = () => {
       const uid = auth.currentUser?.uid; // Add the optional chaining operator here
       if (uid) {
         uploadRouteToFirebase(uid, dispatch);
+        // Construct HTML email content
+        const emailContent = `
+        <table>
+          <tr><th>Departure Address</th><td>${routeInfo.departure_adress}</td></tr>
+          <tr><th>Destination Address</th><td>${routeInfo.destination_adress}</td></tr>
+          <tr><th>Trip type</th><td>From ${routeInfo.type} </td></tr>
+          <tr><th>Time Range</th><td>From ${routeInfo.time} </td></tr>
+          <tr><th>Days Range</th><td>From ${routeInfo.days} </td></tr>
+          <tr><th>Time</th><td>${routeInfo.time}</td></tr>
+          <tr><th>delivery_capacity</th><td>${routeInfo.delivery_capacity}</td></tr>
+          <tr><th>Request ID</th><td>${routeInfo.id}</td></tr>
+          <tr><th>Request UID</th><td>${uid}</td></tr>
+        </table>
+      `;
+        // send notification email to support
+        const emailBody = {
+          title: 'New route request submitted',
+          body: emailContent,
+          uid: null,
+          email: 'support@portato.io',
+        };
+
+        fetch(
+          'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailBody),
+          }
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            // Read result of the Cloud Function.
+            console.log(result);
+          })
+          .catch((error) => {
+            // Getting the error details
+            console.error(`error: ${error}`);
+          });
       } else {
         console.log('User UID not found.');
       }

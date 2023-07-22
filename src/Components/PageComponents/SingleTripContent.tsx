@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from 'antd';
 import { Selector } from 'antd-mobile';
 import { DatePicker } from 'antd';
 import { getConstants } from '../../constant';
@@ -13,13 +12,16 @@ import {
 import { useTranslation } from 'react-i18next';
 import { IRouteInfo } from '../../type';
 
-const { Title } = Typography;
 function SingleTripContent(activeTab: any) {
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
 
   const dispatch = useDispatch();
+  let defaultValue = undefined;
+  if (routeInfo.timeRange !== '') {
+    defaultValue = dayjs(routeInfo.timeRange, 'YYYY-MM-DD');
+  }
 
   useEffect(() => {
     dispatch(setType(Object.values(activeTab)[0] as string));
@@ -46,6 +48,7 @@ function SingleTripContent(activeTab: any) {
           name="time"
           inputReadOnly={true}
           onChange={handleChangeRange}
+          defaultValue={defaultValue}
           style={{
             width: '100%',
           }}
