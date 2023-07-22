@@ -57,19 +57,69 @@ const RouteSummary: React.FC = () => {
       if (uid) {
         uploadRouteToFirebase(uid, dispatch);
         // Construct HTML email content
-        const emailContent = `
+        let emailContent;
+        if (routeInfo.type === 'Single trip') {
+          emailContent = `
+        <table>
+          <tr><th>Departure Address</th><td>${
+            routeInfo.departure_adress
+          }</td></tr>
+          <tr><th>Destination Address</th><td>${
+            routeInfo.destination_adress
+          }</td></tr>
+          <tr><th>Trip type</th><td> ${routeInfo.type} </td></tr>
+          <tr><th>Time </th><td>At ${
+            routeInfo.time ? Object.values(routeInfo.time) : 'N/A'
+          } </td></tr>
+          <tr><th>Date</th><td> ${routeInfo.timeRange} </td></tr>
+          <tr><th>Detour</th><td> ${routeInfo.acceptable_detour} Km </td></tr>
+          <tr><th>delivery_capacity</th><td>${
+            routeInfo.delivery_capacity
+          }</td></tr>
+          <tr><th>Request ID</th><td>${routeInfo.id}</td></tr>
+          <tr><th>Request UID</th><td>${uid}</td></tr>
+        </table>
+      `;
+        } else if (routeInfo.type === 'Recurring ride') {
+          emailContent = `
+        <table>
+          <tr><th>Departure Address</th><td>${
+            routeInfo.departure_adress
+          }</td></tr>
+          <tr><th>Destination Address</th><td>${
+            routeInfo.destination_adress
+          }</td></tr>
+          <tr><th>Trip type</th><td> ${routeInfo.type} </td></tr>
+          <tr><th>Time Range</th><td>At ${
+            routeInfo.time ? Object.values(routeInfo.time) : 'N/A'
+          } </td></tr>
+          <tr><th>Days range</th><td>On ${
+            routeInfo.days ? Object.values(routeInfo.days) : 'N/A'
+          } </td></tr>
+          <tr><th>Detour</th><td> ${routeInfo.acceptable_detour} Km</td></tr>
+          <tr><th>delivery_capacity</th><td>${
+            routeInfo.delivery_capacity
+          }</td></tr>
+          <tr><th>Request ID</th><td>${routeInfo.id}</td></tr>
+          <tr><th>Request UID</th><td>${uid}</td></tr>
+        </table>
+      `;
+        } else {
+          emailContent = `
         <table>
           <tr><th>Departure Address</th><td>${routeInfo.departure_adress}</td></tr>
           <tr><th>Destination Address</th><td>${routeInfo.destination_adress}</td></tr>
-          <tr><th>Trip type</th><td>From ${routeInfo.type} </td></tr>
-          <tr><th>Time Range</th><td>From ${routeInfo.time} </td></tr>
-          <tr><th>Days Range</th><td>From ${routeInfo.days} </td></tr>
-          <tr><th>Time</th><td>${routeInfo.time}</td></tr>
+          <tr><th>Trip type</th><td> ${routeInfo.type} </td></tr>
+          <tr><th>Time </th><td> ${routeInfo.time} </td></tr>
+          <tr><th>Day</th><td> ${routeInfo.days} </td></tr>
+          <tr><th>Detour</th><td> ${routeInfo.acceptable_detour} Km</td></tr>
           <tr><th>delivery_capacity</th><td>${routeInfo.delivery_capacity}</td></tr>
           <tr><th>Request ID</th><td>${routeInfo.id}</td></tr>
           <tr><th>Request UID</th><td>${uid}</td></tr>
         </table>
       `;
+        }
+
         // send notification email to support
         const emailBody = {
           title: 'New route request submitted',
@@ -155,7 +205,7 @@ const RouteSummary: React.FC = () => {
                           <Typography>
                             {t('driveSummary.each')}{' '}
                             {routeInfo.days
-                              ? Object.values(routeInfo.days)
+                              ? Object.values(routeInfo.days).join(', ')
                               : 'N/A'}
                             <br />
                             {t('driveSummary.tripTime')}{' '}
@@ -169,7 +219,7 @@ const RouteSummary: React.FC = () => {
                           <Typography>
                             {routeInfo.timeRange} <br />
                             {routeInfo.time
-                              ? Object.values(routeInfo.time)
+                              ? Object.values(routeInfo.time).join(', ')
                               : 'N/A'}{' '}
                           </Typography>
                         </div>

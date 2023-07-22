@@ -9,7 +9,7 @@ const initialStateRoute: IRouteInfo = {
   acceptable_detour: 0,
   time: [],
   timeRange: '',
-  type: '',
+  type: 'Single trip',
   days: [],
   delivery_capacity: '',
   routeStatus: '',
