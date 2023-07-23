@@ -45,6 +45,7 @@ const DealSuggester = lazy(() => import('./Pages/Admin/DealSuggester'));
 const ContactDriver = lazy(
   () => import('./Pages/Profile/Support/ContactDriver')
 );
+const VerifyEmailScreen = lazy(() => import('./Components/VerifyEmailScreen'));
 
 import Settings from './Pages/Profile/Settings';
 
@@ -239,5 +240,12 @@ export const routes: Array<Route> = [
     path: '/profile/my-account',
     enabled: true,
     component: MyAccount,
+  },
+  {
+    key: 'verify-email',
+    title: 'VerifyEmailScreen',
+    path: '/verify-email',
+    enabled: true,
+    component: VerifyEmailScreen,
   },
 ];
