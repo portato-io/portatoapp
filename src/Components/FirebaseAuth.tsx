@@ -1,67 +1,74 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
+  getAuth,
   UserCredential,
   sendEmailVerification,
   EmailAuthProvider,
-  AdditionalUserInfo,
+  onAuthStateChanged,
+  signOut,
 } from 'firebase/auth';
-import { uiInstance } from './firebaseUIInstance';
+import { notification } from 'antd';
+import * as firebaseui from 'firebaseui';
+import 'firebaseui/dist/firebaseui.css';
+
+// Initialize the FirebaseUI Widget using Firebase.
+const ui = new firebaseui.auth.AuthUI(getAuth());
+
+interface FirebaseUIAuthCallbacks {
+  signInSuccessWithAuthResult?: (
+    authResult: UserCredential,
+    redirectUrl: string
+  ) => boolean;
+}
 
 interface FirebaseUIAuthConfig {
-  callbacks?: {
-    signInSuccessWithAuthResult?: (
-      authResult: UserCredential & {
-        additionalUserInfo?: AdditionalUserInfo | null;
-      },
-      redirectUrl: string
-    ) => boolean;
-  };
+  callbacks?: FirebaseUIAuthCallbacks;
   signInOptions?: Array<any>;
 }
 
 const FirebaseAuth: React.FC = () => {
-  const uiRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState('');
+  const auth = getAuth();
+  const uiRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (!user.emailVerified) {
+          sendEmailVerification(user).then(() => {
+            notification.success({
+              message: 'Verification Email Sent',
+              description:
+                'Please check your inbox for the verification email.',
+            });
+            signOut(auth); // Sign out the user after sending the verification email
+            navigate('/verify-email');
+          });
+        }
+      }
+    });
+
+    // Configure FirebaseUI.
     const uiConfig: FirebaseUIAuthConfig = {
       signInOptions: [EmailAuthProvider.PROVIDER_ID],
       callbacks: {
-        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-          const user = authResult.user;
-          if (!user.emailVerified) {
-            setErrorMessage('Email not verified');
-            return false;
-          }
-          return true;
-        },
+        // Avoid redirects after sign-in.
+        signInSuccessWithAuthResult: () => false,
       },
     };
 
-    // On user sign up, send verification email
-    uiConfig.callbacks!.signInSuccessWithAuthResult = (authResult) => {
-      const user = authResult.user;
-      if (authResult.additionalUserInfo?.isNewUser) {
-        sendEmailVerification(user); // Here
-        navigate('/verify-email'); // navigate to verify email page
-        return false; // stop sign-in process to allow email verification
-      }
-      return true; // continue sign-in process
-    };
-
-    uiInstance.start('#firebaseui-auth-container', uiConfig);
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
 
     return () => {
-      uiInstance.reset();
+      ui.reset();
     };
   }, [navigate]);
 
   return (
     <div>
       <div id="firebaseui-auth-container" ref={uiRef}></div>
-      {errorMessage && <div>{errorMessage}</div>}
     </div>
   );
 };
