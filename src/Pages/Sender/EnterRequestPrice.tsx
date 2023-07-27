@@ -3,8 +3,7 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Typography, Form, InputNumber, Input, Card } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObjectPrice } from '../../Store/actions/requestActionCreators';
 import { IRequestInfo } from '../../type';
@@ -20,6 +19,14 @@ const EnterRequestPrice: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
+  const [form] = Form.useForm();
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleFormChange = () => {
+    const formValues = form.getFieldsValue();
+    const isFilled = Object.values(formValues).every((value) => !!value);
+    setIsFormFilled(isFilled);
+  };
 
   const [prices, setValues] = useState({
     price: objecInfo.price,
@@ -51,6 +58,8 @@ const EnterRequestPrice: React.FC = () => {
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
+          form={form}
+          onChange={handleFormChange}
         >
           <h2>{t('requestCost.title')}</h2>
           <Form.Item className="input-wrapper" label={t('requestCost.label')}>
@@ -90,6 +99,7 @@ const EnterRequestPrice: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'send_4_price_next_button_click');
             }}
+            disabled={!isFormFilled}
           />
         </div>
       </section>

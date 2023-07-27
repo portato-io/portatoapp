@@ -28,6 +28,13 @@ const EnterRoute: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
 
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleFormFilledState = (adressfilled: boolean) => {
+    console.log(adressfilled);
+    setIsFormFilled(adressfilled);
+  };
+
   const [routes, setValues] = useState({
     departure_adress: routeInfo.departure_adress,
     destination_adress: routeInfo.destination_adress,
@@ -72,6 +79,7 @@ const EnterRoute: React.FC = () => {
             <AddressAutocomplete
               type={'departure'}
               savedAddress={routeInfo.departure_adress}
+              handleFormFilledState={handleFormFilledState}
             />
           </Form.Item>
           <Form.Item
@@ -81,6 +89,7 @@ const EnterRoute: React.FC = () => {
             <AddressAutocomplete
               type={'destination'}
               savedAddress={routeInfo.destination_adress}
+              handleFormFilledState={handleFormFilledState}
             />
           </Form.Item>
           <Form.Item
@@ -109,6 +118,7 @@ const EnterRoute: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'drive_1_route_next_button_click');
             }}
+            disabled={!isFormFilled}
           />
         </div>
       </section>

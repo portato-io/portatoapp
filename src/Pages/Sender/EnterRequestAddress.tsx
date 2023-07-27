@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -19,6 +19,12 @@ const EnterRequestAddress: React.FC = () => {
     (state: { request: IRequestInfo }) => state.request
   );
   const { t } = useTranslation<string>(); // Setting the generic type to string
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const handleFormFilledState = (adressfilled: boolean) => {
+    console.log('AAAAAAAAAAAAH', adressfilled);
+    setIsFormFilled(adressfilled);
+  };
   return (
     <PageLayout>
       <section className="section section-form mod-nomargin-top">
@@ -35,6 +41,7 @@ const EnterRequestAddress: React.FC = () => {
             <AddressAutocomplete
               type={'pickup'}
               savedAddress={objecInfo.pickup_adress}
+              handleFormFilledState={handleFormFilledState}
             />
           </Form.Item>
 
@@ -43,6 +50,7 @@ const EnterRequestAddress: React.FC = () => {
             <AddressAutocomplete
               type={'delivery'}
               savedAddress={objecInfo.delivery_adress}
+              handleFormFilledState={handleFormFilledState}
             />
           </Form.Item>
         </Form>
@@ -57,6 +65,7 @@ const EnterRequestAddress: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'send_2_address_next_button_click');
             }}
+            disabled={!isFormFilled}
           />
         </div>
       </section>
