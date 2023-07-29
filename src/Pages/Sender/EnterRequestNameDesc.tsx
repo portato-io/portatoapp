@@ -53,20 +53,6 @@ const EnterRequestNameDesc: React.FC = () => {
     description: object.description,
   };
 
-  const handleFormChange = () => {
-    const formValues = form.getFieldsValue(true);
-    const isFilled = Object.values(formValues).every(
-      (value) => value !== undefined && !!value
-    );
-    setIsFormFilled(isFilled);
-    console.log(
-      'JE VAIS PLEURUER',
-      formValues.name,
-      formValues.description,
-      formValues.image,
-      isFilled
-    );
-  };
   const onFinish = (values: any) => {
     console.log('Form values:', values);
     console.log('submitted');
@@ -90,7 +76,7 @@ const EnterRequestNameDesc: React.FC = () => {
         <ProgressBar progress={PROGRESS} />
 
         <Form
-          id="test"
+          id="myForm"
           form={form}
           // onChange={handleFormChange}
           onFinish={onFinish}

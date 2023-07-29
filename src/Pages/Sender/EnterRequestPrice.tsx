@@ -27,6 +27,9 @@ const EnterRequestPrice: React.FC = () => {
     const isFilled = Object.values(formValues).every((value) => !!value);
     setIsFormFilled(isFilled);
   };
+  const initialValues = {
+    price: objecInfo.price,
+  };
 
   const [prices, setValues] = useState({
     price: objecInfo.price,
@@ -49,12 +52,21 @@ const EnterRequestPrice: React.FC = () => {
     });
     console.log(e.target.name);
   };
+  const onFinish = (values: any) => {
+    console.log('Form values:', values);
+    console.log('submitted');
+  };
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
 
   return (
     <PageLayout>
       <section className="section section-form mod-nomargin-top">
         <ProgressBar progress={PROGRESS} />
         <Form
+          id="myForm"
+          initialValues={initialValues}
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
@@ -62,7 +74,14 @@ const EnterRequestPrice: React.FC = () => {
           onChange={handleFormChange}
         >
           <h2>{t('requestCost.title')}</h2>
-          <Form.Item className="input-wrapper" label={t('requestCost.label')}>
+          <Form.Item
+            name="price"
+            className="input-wrapper"
+            label={t('requestCost.label')}
+            rules={[
+              { required: true, message: 'Please input the request price' },
+            ]}
+          >
             <Input
               name="price"
               value={objecInfo.price !== 0 ? objecInfo.price : undefined}
@@ -71,16 +90,7 @@ const EnterRequestPrice: React.FC = () => {
               suffix="CHF"
             />
           </Form.Item>
-          {/* <Card
-              bordered={false}
-              className="centered-card"
-              style={{ margin: 'auto', width: '80%' }}
-            >
-              {t('requestCost.driverReward')} a <br />
-              {t('requestCost.portatoFee')} b <br />
-              {t('requestCost.vat')} c <br />
-              {t('requestCost.insurance')} d
-            </Card> */}
+
           <div className="mod-display-flex box-style-grey box-shadow box-radius-style-2">
             <i className="icon icon-bell"></i>
             <p className="text-hint mod-nomargin-top">
@@ -100,6 +110,9 @@ const EnterRequestPrice: React.FC = () => {
               logEvent(analytics, 'send_4_price_next_button_click');
             }}
             disabled={!isFormFilled}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            form={form}
           />
         </div>
       </section>

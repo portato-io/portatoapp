@@ -30,7 +30,7 @@ const NextButton: React.FC<NextButtonProps> = ({
       formValues = form.getFieldsValue();
       formErrors = form.getFieldsError();
       const allFieldsDefined = Object.values(formValues).every(
-        (value) => value !== undefined
+        (value) => value !== '' && value !== undefined
       );
       for (let i = 0; i < formErrors.length; i++) {
         if (allFieldsDefined && formErrors[i].errors.length === 0) {
@@ -64,7 +64,7 @@ const NextButton: React.FC<NextButtonProps> = ({
         className="button button-solid box-shadow box-radius-default box-shadow-effect"
         onClick={handleNextClick}
         type="submit"
-        form="test"
+        form="myForm"
       >
         {t('navigationButton.next')}
       </button>
