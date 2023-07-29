@@ -37,7 +37,7 @@ const initialStateDeal: IDealInfo = {
 };
 
 export function dealReducer(
-  state: any = initialStateDeal,
+  state: IDealInfo = initialStateDeal,
   action: AnyAction
 ): IDealInfo {
   switch (action.type) {
@@ -47,13 +47,13 @@ export function dealReducer(
         id: action.payload,
       };
     }
-    case 'SET_REQ': {
+    case 'SET_DEAL_REQ': {
       return {
         ...state,
         request: action.payload,
       };
     }
-    case 'SET_ROUTE': {
+    case 'SET_INIT_ROUTE': {
       return {
         ...state,
         route: action.payload,

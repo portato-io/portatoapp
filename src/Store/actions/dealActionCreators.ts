@@ -7,8 +7,8 @@ export const setDealId = (id: string): AnyAction => ({
   payload: id,
 });
 
-export const setRoute = (route: IRouteInfo): AnyAction => ({
-  type: actionTypes.SET_ROUTE,
+export const setInitRoute = (route: IRouteInfo): AnyAction => ({
+  type: actionTypes.SET_INIT_ROUTE,
   payload: route,
 });
 
@@ -17,7 +17,7 @@ export const setStatus = (status: string): AnyAction => ({
   payload: status,
 });
 
-export const setRequest = (request: IRequestInfo): AnyAction => ({
-  type: actionTypes.SET_REQ,
+export const setDealRequest = (request: IRequestInfo): AnyAction => ({
+  type: actionTypes.SET_DEAL_REQ,
   payload: request,
 });

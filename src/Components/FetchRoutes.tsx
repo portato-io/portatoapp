@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDataOnce } from '../linksStoreToFirebase';
+import { useDispatch } from 'react-redux'; // Import useDispatch and useSelector
 import { IRouteInfo } from '../type';
 import { Button, Popconfirm, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
+import { setRoute } from '../Store/actions/routeActionCreators';
 import { updateObjectStatus } from '../linksStoreToFirebase';
 require('../CSS/Send.css');
-const { Title } = Typography;
 
 const FetchRoutes: React.FC<{
   uid: string | null | undefined;
   heightPortion?: number;
   admin?: boolean;
-}> = ({ uid, heightPortion = 0.8, admin = false }) => {
-  const [routes, setRoute] = useState<IRouteInfo[]>([]);
+}> = ({ uid, admin = false }) => {
+  const [routes, setInitRoute] = useState<IRouteInfo[]>([]);
   const [refreshKey, setRefreshKey] = useState(0); // add this line
+  const navigate = useNavigate();
+  const dispatch = useDispatch(); // Define dispatch
+
   const { t } = useTranslation<string>();
 
   useEffect(() => {
@@ -33,14 +38,14 @@ const FetchRoutes: React.FC<{
             routesArray = routesArray.filter(
               (route) => route.routeStatus !== 'deleted'
             );
-            setRoute(routesArray);
+            setInitRoute(routesArray);
           } else {
             console.error('Invalid store array');
-            setRoute([]);
+            setInitRoute([]);
           }
         } else {
           console.log('Data is not an object:', storesObject);
-          setRoute([]);
+          setInitRoute([]);
         }
       } catch (error) {
         console.log('Error fetching data: ', error);
@@ -54,6 +59,11 @@ const FetchRoutes: React.FC<{
     updateObjectStatus(route.uid, route.id, 'deleted', 'routes').then(() => {
       setRefreshKey((oldKey) => oldKey + 1); // update the refreshKey state
     });
+  };
+
+  const editRoute = (route: IRouteInfo) => {
+    dispatch(setRoute(route));
+    navigate('/deliver/enterRoute');
   };
 
   // Return early, if no requests exist; avoid adding the title altogether.
@@ -96,6 +106,12 @@ const FetchRoutes: React.FC<{
                       </span>
                     </Button>
                   </Popconfirm>
+                </div>
+                <div>
+                  <Button type="link" onClick={() => editRoute(route)}>
+                    <i className="icon icon-edit"></i>
+                    <span className="mod-hide-mobile">{t('general.edit')}</span>
+                  </Button>
                 </div>
               </div>
             </div>

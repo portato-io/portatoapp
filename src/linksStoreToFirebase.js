@@ -20,25 +20,43 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
     dispatch(setReqUid(uid));
 
-    // Get the database instance and create a reference to the user's requests
-    const requestsRef = ref(database, `users/${uid}/requests`);
+    let state = store.getState();
 
-    // Generate a new unique key for the request
-    const newRequestRef = firebasePush(requestsRef);
+    // Create a copy of the request and replace undefined values
+    const requestCopy = { ...state.request };
+    if (requestCopy.images === undefined) {
+      requestCopy.images = []; // use an empty array as the default value
+    }
 
-    // The unique key is now available as newRequestRef.key
-    if (newRequestRef.key) {
-      dispatch(setObjectId(newRequestRef.key));
-      const state = store.getState();
+    if (state.request.id === '0') {
+      // Get the database instance and create a reference to the user's requests
+      const requestsRef = ref(database, `users/${uid}/requests`);
+      // Generate a new unique key for the request
+      const newRequestRef = firebasePush(requestsRef);
 
-      // Update your data under the new key
-      await set(newRequestRef, state.request);
+      // The unique key is now available as newRequestRef.key
+      if (newRequestRef.key) {
+        dispatch(setObjectId(newRequestRef.key));
+        state = store.getState();
+        // Update your data under the new key
+        requestCopy.id = newRequestRef.key;
+        await set(newRequestRef, requestCopy);
 
-      console.log('Request uploaded successfully');
-      return true;
+        console.log('Request uploaded successfully');
+        return true;
+      } else {
+        console.error('Unable to generate a unique key.');
+        return false;
+      }
     } else {
-      console.error('Unable to generate a unique key.');
-      return false;
+      console.log('Request ID already exists, updating request');
+      const requestsRef = ref(
+        database,
+        `users/${uid}/requests/${state.request.id}`
+      );
+      await update(requestsRef, requestCopy);
+      console.log('Request updated successfully');
+      return true;
     }
   } catch (error) {
     console.error('Error uploading request:', error);
@@ -46,44 +64,36 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
   }
 };
 
-async function createDirFirebase(name, uid) {
-  // Creata an empty directory where the future matching routes will be stored
-  const requestsRef = ref(database, `users/${uid}/${name}`);
-
-  // Set the directory in the database
-  await set(requestsRef, { dummy: true });
-
-  console.log(
-    'Created the dir successfully with the following adress: ',
-    requestsRef
-  );
-}
-
 export const uploadRouteToFirebase = async (uid, dispatch) => {
   try {
     dispatch(setRouteUid(uid));
+    let state = store.getState();
 
-    createDirFirebase('route_suggestions', uid);
-    createDirFirebase('route_confirmed', uid);
+    // Ensure the days property is an empty array if it is undefined
+    state.route.days = state.route.days ?? [];
 
-    // Get the database instance and create a reference to the user's requests
-    const requestsRef = ref(database, `users/${uid}/routes`);
+    if (state.route.id === '0') {
+      // Get the database instance and create a reference to the user's routes
+      const routesRef = ref(database, `users/${uid}/routes`);
+      // Generate a new unique key for the route
+      const newRouteRef = firebasePush(routesRef);
 
-    // Generate a new unique key for the request
-    const newRequestRef = firebasePush(requestsRef);
-
-    // The unique key is now available as newRequestRef.key
-    if (newRequestRef.key) {
-      dispatch(setRouteId(newRequestRef.key));
-      const state = store.getState();
-
-      // Update your data under the new key
-      await set(newRequestRef, state.route);
+      // The unique key is now available as newRouteRef.key
+      if (newRouteRef.key) {
+        dispatch(setRouteId(newRouteRef.key));
+        state = store.getState();
+        await set(newRouteRef, state.route);
+      } else {
+        console.error('Unable to generate a unique key.');
+      }
     } else {
-      console.error('Unable to generate a unique key.');
+      console.log('Route ID already exists, updating route');
+      const routesRef = ref(database, `users/${uid}/routes/${state.route.id}`);
+      await update(routesRef, state.route);
+      console.log('Route updated successfully');
     }
   } catch (error) {
-    console.error('Error creating suggestions: ', error, 'user: ', uid);
+    console.error('Error uploading route: ', error);
   }
 };
 

@@ -1,11 +1,9 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
-import { AutoComplete, Input } from 'antd';
+import { AutoComplete } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { Select } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { IRequestInfo, IRouteInfo } from '../type';
+import { useDispatch } from 'react-redux';
 import {
   setReqDeliveryAddress,
   setReqPickupAddress,

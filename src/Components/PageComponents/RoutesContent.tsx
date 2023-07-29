@@ -1,6 +1,4 @@
-import React, { useContext } from 'react';
-import { AutoCenter, Button } from 'antd-mobile';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { ButtonToCreateNewReqRoutes } from '../Buttons/ButtonToCreateNewReqRoutes';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
@@ -9,7 +7,6 @@ import { useAuth } from '../AuthProvider';
 import FetchRoutes from '../FetchRoutes';
 
 const NEXT_SCREEN = '/deliver/enterRoute';
-const BUTTON_TEXT = 'Create new route';
 
 function RoutesContent() {
   const { uid } = useAuth();
@@ -26,7 +23,7 @@ function RoutesContent() {
       />
       {uid !== 'undefined' ? (
         <>
-          <FetchRoutes uid={uid} heightPortion={0.5} />
+          <FetchRoutes uid={uid} />
         </>
       ) : null}
     </div>
