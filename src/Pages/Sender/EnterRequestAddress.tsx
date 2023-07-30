@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -21,9 +21,25 @@ const EnterRequestAddress: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const [isFormFilled, setIsFormFilled] = useState(false);
 
-  const handleFormFilledState = (adressfilled: boolean) => {
-    console.log('AAAAAAAAAAAAH', adressfilled);
-    setIsFormFilled(adressfilled);
+  const [pickupFilled, setPickupFilled] = useState(false);
+  const [deliveryFilled, setDeliveryFilled] = useState(false);
+
+  useEffect(() => {
+    // Check if both pickup and delivery addresses are filled
+    const isBothAddressesFilled = pickupFilled && deliveryFilled;
+    console.log(isBothAddressesFilled);
+    setIsFormFilled(isBothAddressesFilled);
+  }, [pickupFilled, deliveryFilled]);
+
+  const handleFormFilledState = (
+    addressType: string,
+    filledStatus: boolean
+  ) => {
+    if (addressType === 'pickup') {
+      setPickupFilled(filledStatus);
+    } else if (addressType === 'delivery') {
+      setDeliveryFilled(filledStatus);
+    }
   };
   return (
     <PageLayout>

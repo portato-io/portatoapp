@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Form } from 'antd';
+import { notification } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 
 interface NextButtonProps {
@@ -12,22 +12,40 @@ interface NextButtonProps {
   form?: FormInstance;
 }
 
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
+
 const NextButton: React.FC<NextButtonProps> = ({
   nextScreen = '/',
   onClick,
   onFinish,
+  disabled = false,
   form,
   onFinishFailed,
 }) => {
   const { t } = useTranslation<string>();
   const navigate = useNavigate();
 
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type: NotificationType) => {
+    api[type]({
+      message: 'Error',
+      description: 'please complete the fields',
+    });
+  };
+
   const handleNextClick = () => {
+    if (!form && disabled) {
+      openNotificationWithIcon('error');
+      return;
+    } // Add this line
+
     let formValues;
     let formErrors;
     let hasErrors = false;
     if (form) {
       formValues = form.getFieldsValue();
+      console.log(formValues);
       formErrors = form.getFieldsError();
       const allFieldsDefined = Object.values(formValues).every(
         (value) => value !== '' && value !== undefined
@@ -58,17 +76,20 @@ const NextButton: React.FC<NextButtonProps> = ({
   };
 
   return (
-    <div className="form-button-right">
-      <button
-        id="nextButton"
-        className="button button-solid box-shadow box-radius-default box-shadow-effect"
-        onClick={handleNextClick}
-        type="submit"
-        form="myForm"
-      >
-        {t('navigationButton.next')}
-      </button>
-    </div>
+    <>
+      {contextHolder}
+      <div className="form-button-right">
+        <button
+          id="nextButton"
+          className="button button-solid box-shadow box-radius-default box-shadow-effect"
+          onClick={handleNextClick}
+          type="submit"
+          form="myForm"
+        >
+          {t('navigationButton.next')}
+        </button>
+      </div>
+    </>
   );
 };
 

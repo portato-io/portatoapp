@@ -22,7 +22,6 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_size_weight_image';
 const EnterRequestNameDesc: React.FC = () => {
   const { t } = useTranslation<string>();
   const [form] = Form.useForm();
-  const [isFormFilled, setIsFormFilled] = useState(false);
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
@@ -43,12 +42,6 @@ const EnterRequestNameDesc: React.FC = () => {
     dispatch(setObject(object));
   }, [object]);
 
-  React.useEffect(() => {
-    if (object.name != '' && object.description != '') {
-      console.log('Je suis dnas le use effect');
-      // setIsFormFilled(true);
-    }
-  }, []);
   const initialValues = {
     name: object.name,
     description: object.description,
@@ -57,6 +50,9 @@ const EnterRequestNameDesc: React.FC = () => {
   const onFinish = (values: any) => {
     console.log('Form values:', values);
     console.log('submitted');
+  };
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
   };
   const dispatch = useDispatch();
 
@@ -68,9 +64,6 @@ const EnterRequestNameDesc: React.FC = () => {
       [e.target.name]: e.target.value,
     }));
     console.log(e.target.name);
-  };
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -30,10 +30,25 @@ const EnterRoute: React.FC = () => {
   console.log('Redux state routeInfo: ', routeInfo); // Log the routeInfo from Redux state
 
   const [isFormFilled, setIsFormFilled] = useState(false);
+  const [departureFilled, setDepartureFilled] = useState(false);
+  const [destinationFilled, setDestinationFilled] = useState(false);
 
-  const handleFormFilledState = (adressfilled: boolean) => {
-    console.log(adressfilled);
-    setIsFormFilled(adressfilled);
+  useEffect(() => {
+    // Check if both pickup and delivery addresses are filled
+    const isBothAddressesFilled = departureFilled && destinationFilled;
+    console.log(isBothAddressesFilled);
+    setIsFormFilled(isBothAddressesFilled);
+  }, [departureFilled, destinationFilled]);
+
+  const handleFormFilledState = (
+    addressType: string,
+    filledStatus: boolean
+  ) => {
+    if (addressType === 'departure') {
+      setDepartureFilled(filledStatus);
+    } else if (addressType === 'destination') {
+      setDestinationFilled(filledStatus);
+    }
   };
 
   const [routes, setValues] = useState({
