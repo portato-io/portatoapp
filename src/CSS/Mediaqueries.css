@@ -22,6 +22,10 @@
   .table tr:last-child .th, .table tr:last-child .td {
     border-bottom-width:0;
   }
+
+  .card-actions .icon::before {
+    margin-right:10px;
+  } 
 }
 
 /* Tablets */

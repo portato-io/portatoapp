@@ -198,6 +198,28 @@ video,
 }
 
 
+/* CARDS ---------------------------------------------- */
+.card-actions {
+    position:relative;
+    top:-3px;
+    right:-5px;
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+.card-actions > div {
+    margin-left:15px;
+}
+.card-actions .icon::before {
+    margin-right:0;
+}
+.card-actions button {
+    padding:0;
+    color:var(--color-grey2);
+
+}
+
+
 /* LOGO & SLOGAN ------------------------------------- */
 .logo-slogan {
   font-family: 'Comfortaa';
