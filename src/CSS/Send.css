@@ -5,8 +5,8 @@
 
 .send-request-card-content th, 
 .send-request-card-content td {
-    padding-left:0;
-    border-bottom:1px solid var(--color-grey3);
+    
+    /* border-bottom:1px solid var(--color-grey3); */
     
 }
 .send-request-card-content tr:last-child th, 
