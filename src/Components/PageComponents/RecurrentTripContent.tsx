@@ -11,8 +11,12 @@ import {
 } from '../../Store/actions/routeActionCreators';
 import { useTranslation } from 'react-i18next';
 import { IRouteInfo } from '../../type';
+import BackButton from '../Buttons/BackButton';
+import NextButton from '../Buttons/NextButton';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../../firebaseConfig';
 
-const { Title } = Typography;
+const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
 function RecurrentTripContent(activeTab: any) {
   const { t } = useTranslation<string>(); // Setting the generic type to string
@@ -20,6 +24,35 @@ function RecurrentTripContent(activeTab: any) {
 
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const dispatch = useDispatch();
+  const [dayTime, setDayTime] = useState([]);
+  const [dayTimeSelected, setDayTimeSelected] = useState(Boolean);
+  const [day, setDay] = useState([]);
+  const [daySelected, setDaySelected] = useState(Boolean);
+  const defaultDay: string[] = Object.values(routeInfo.days);
+  const defaultDayTime: string[] = Object.values(routeInfo.time);
+
+  useEffect(() => {
+    if (dayTime && dayTime.length === 0) {
+      setDayTimeSelected(false);
+    } else setDayTimeSelected(true);
+    console.log(dayTimeSelected);
+  }, [dayTime]);
+
+  useEffect(() => {
+    console.log(day);
+    if (day && day.length === 0) {
+      setDaySelected(false);
+    } else setDaySelected(true);
+  }, [day]);
+
+  useEffect(() => {
+    if (defaultDay.length === 0) {
+      setDaySelected(false);
+    } else setDaySelected(true);
+    if (defaultDayTime.length === 0) {
+      setDayTimeSelected(false);
+    } else setDayTimeSelected(true);
+  }, []);
 
   useEffect(() => {
     dispatch(setType(Object.values(activeTab)[0] as string));
@@ -30,12 +63,15 @@ function RecurrentTripContent(activeTab: any) {
   }, [activeTab]);
 
   const handleDaysChange = (e: any) => {
+    console.log(e.length);
+    setDay(e);
     dispatch(setDays(e));
   };
   const handleTimeChange = (e: any) => {
+    setDayTime(e);
     dispatch(setTime(e));
   };
-  console.log(routeInfo);
+
   return (
     <div>
       <div className="spacer-regular"></div>
@@ -58,6 +94,20 @@ function RecurrentTripContent(activeTab: any) {
           multiple={true}
           onChange={handleTimeChange}
           defaultValue={routeInfo.time}
+        />
+      </div>
+      <div className="form-button-container mod-display-flex mod-flex-space-between">
+        <BackButton
+          onClick={() => {
+            logEvent(analytics, 'drive_2_time_back_button_click');
+          }}
+        />
+        <NextButton
+          nextScreen={NEXT_SCREEN}
+          onClick={() => {
+            logEvent(analytics, 'drive_2_time_next_button_click');
+          }}
+          disabled={!daySelected || !dayTimeSelected}
         />
       </div>
     </div>

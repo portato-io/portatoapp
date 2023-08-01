@@ -30,6 +30,8 @@ const EnterTime: React.FC = () => {
   );
   const [dayTime, setDayTime] = useState([]);
   const [dateTimeSelected, setDateTimeSelected] = useState(Boolean);
+  const [day, setDay] = useState([]);
+  const [daySelected, setDaySelected] = useState(Boolean);
   const [form] = Form.useForm();
 
   let defaultDateRange: [Dayjs, Dayjs] | undefined = undefined;
