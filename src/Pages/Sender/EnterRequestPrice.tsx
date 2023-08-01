@@ -59,6 +59,13 @@ const EnterRequestPrice: React.FC = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+  const greaterThanOneCHFValidator = (_: any, value: any) => {
+    const parsedValue = parseFloat(value); // Convert the value to a numeric format
+    if (isNaN(parsedValue) || parsedValue <= 1) {
+      return Promise.reject('Value must be greater than 1 CHF');
+    }
+    return Promise.resolve();
+  };
 
   return (
     <PageLayout>
@@ -79,7 +86,13 @@ const EnterRequestPrice: React.FC = () => {
             className="input-wrapper"
             label={t('requestCost.label')}
             rules={[
-              { required: true, message: 'Please input the request price' },
+              {
+                required: true,
+                message: 'Please input the request price',
+              },
+              {
+                validator: greaterThanOneCHFValidator, // Use the custom validator
+              },
             ]}
           >
             <Input
