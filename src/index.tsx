@@ -24,7 +24,7 @@ const initialStateRequest: IRequestInfo = {
   description: '',
   size: 'S',
   weight: '0-5 kg',
-  price: 0,
+  price: 10,
   pickup_adress: '',
   delivery_adress: '',
   dateRange: ['', ''],

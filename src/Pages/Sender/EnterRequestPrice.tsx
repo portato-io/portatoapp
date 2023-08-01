@@ -61,6 +61,7 @@ const EnterRequestPrice: React.FC = () => {
   };
   const greaterThanOneCHFValidator = (_: any, value: any) => {
     const parsedValue = parseFloat(value); // Convert the value to a numeric format
+    console.log(parsedValue);
     if (isNaN(parsedValue) || parsedValue <= 1) {
       return Promise.reject('Value must be greater than 1 CHF');
     }

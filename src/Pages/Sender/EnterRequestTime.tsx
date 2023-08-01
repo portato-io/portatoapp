@@ -30,8 +30,8 @@ const EnterTime: React.FC = () => {
   );
   const [dayTime, setDayTime] = useState([]);
   const [dateTimeSelected, setDateTimeSelected] = useState(Boolean);
-  const [day, setDay] = useState([]);
-  const [daySelected, setDaySelected] = useState(Boolean);
+  const [dayRange, setDayRange] = useState([]);
+  const [dayRangeSelected, setDayRangeSelected] = useState(Boolean);
   const [form] = Form.useForm();
 
   let defaultDateRange: [Dayjs, Dayjs] | undefined = undefined;
@@ -40,15 +40,21 @@ const EnterTime: React.FC = () => {
 
   useEffect(() => {
     if (dayTime && dayTime.length === 0) {
-      setDateTimeSelected(true);
-    } else setDateTimeSelected(false);
+      setDateTimeSelected(false);
+    } else setDateTimeSelected(true);
   }, [dayTime]);
+
+  useEffect(() => {
+    if (dayRange == null) {
+      setDayRangeSelected(false);
+    } else setDayRangeSelected(true);
+  }, [dayRange]);
 
   useEffect(() => {
     console.log('default', defaultSelector);
     if (defaultSelector.length === 0) {
-      setDateTimeSelected(true);
-    } else setDateTimeSelected(false);
+      setDateTimeSelected(false);
+    } else setDateTimeSelected(true);
   }, []);
 
   if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
@@ -66,6 +72,8 @@ const EnterTime: React.FC = () => {
   };
 
   const handleChangeRange = (range: any) => {
+    console.log(range);
+    setDayRange(range);
     if (range) {
       const start = range[0].format().substring(0, 10);
       const end = range[1].format().substring(0, 10);
@@ -93,11 +101,7 @@ const EnterTime: React.FC = () => {
           layout="horizontal"
         >
           <h2>{t('requestTime.title')}</h2>
-          <Form.Item
-            name="dateRange"
-            className="input-wrapper"
-            label={t('requestTime.dates')}
-          >
+          <Form.Item className="input-wrapper" label={t('requestTime.dates')}>
             <RangePicker
               name="time"
               inputReadOnly={true}
@@ -110,11 +114,7 @@ const EnterTime: React.FC = () => {
             <small>{t('requestTime.dateHint')}</small>
           </Form.Item>
 
-          <Form.Item
-            name="dayTime"
-            className="input-wrapper"
-            label={t('requestTime.times')}
-          >
+          <Form.Item className="input-wrapper" label={t('requestTime.times')}>
             <small>{t('requestTime.timeHint')}</small>
             <Selector
               options={TIME}
@@ -136,7 +136,7 @@ const EnterTime: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'send_3_time_next_button_click');
             }}
-            disabled={dateTimeSelected}
+            disabled={!dateTimeSelected || !dayRangeSelected}
           />
         </div>
       </section>
