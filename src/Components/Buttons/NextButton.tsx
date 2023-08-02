@@ -35,6 +35,7 @@ const NextButton: React.FC<NextButtonProps> = ({
   };
 
   const handleNextClick = () => {
+    console.log(disabled);
     if (!form && disabled) {
       openNotificationWithIcon('error');
       return;

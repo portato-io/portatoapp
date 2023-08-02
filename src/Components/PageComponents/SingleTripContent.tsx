@@ -26,7 +26,7 @@ function SingleTripContent(activeTab: any) {
   const [dayTimeSelected, setDayTimeSelected] = useState(Boolean);
   const [day, setDay] = useState(String);
   const [daySelected, setDaySelected] = useState(Boolean);
-  const defaultDayTime: string[] = Object.values(routeInfo.time);
+  const defaultDayTime: string[] = Object.values(routeInfo.timeRange);
 
   const dispatch = useDispatch();
   let defaultValue = undefined;
@@ -42,10 +42,10 @@ function SingleTripContent(activeTab: any) {
   }, [day]);
 
   useEffect(() => {
+    console.log(dayTime.length);
     if (dayTime && dayTime.length === 0) {
       setDayTimeSelected(false);
     } else setDayTimeSelected(true);
-    console.log(dayTimeSelected);
   }, [dayTime]);
 
   useEffect(() => {
@@ -75,6 +75,7 @@ function SingleTripContent(activeTab: any) {
       dispatch(setRouteDateRange(travelDate));
     }
   };
+
   return (
     <div>
       <div className="spacer-regular"></div>

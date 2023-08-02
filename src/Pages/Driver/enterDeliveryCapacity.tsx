@@ -30,13 +30,24 @@ const EnterDeliveryCapacity: React.FC = () => {
   const dispatch = useDispatch();
   const [capacity, setCapacity] = useState([]);
   const [capSelected, setCapSelected] = useState(Boolean);
+  const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+
   useEffect(() => {
-    if (capacity && capacity.length === 0) {
+    if (capacity && capacity.length !== 0) {
       setCapSelected(true);
     } else setCapSelected(false);
   }, [capacity]);
-  const { t } = useTranslation<string>(); // Setting the generic type to string
-  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+
+  useEffect(() => {
+    console.log(routeInfo.delivery_capacity);
+    if (
+      routeInfo.delivery_capacity &&
+      routeInfo.delivery_capacity.length !== 0
+    ) {
+      setCapSelected(true);
+    } else setCapSelected(false);
+  }, []);
   const handleCapChange = (e: any) => {
     setCapacity(e);
     dispatch(setCap(e));
@@ -68,7 +79,7 @@ const EnterDeliveryCapacity: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'drive_3_capacity_next_button_click');
             }}
-            disabled={capSelected}
+            disabled={!capSelected}
           />
         </div>
       </section>
