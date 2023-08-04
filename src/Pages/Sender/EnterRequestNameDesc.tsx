@@ -5,7 +5,7 @@ import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import UploadImage from '../../Components/UploadImage';
 
-import { Form, Input } from 'antd';
+import { Form, Input, Upload } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setObject } from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
@@ -13,6 +13,9 @@ import { useTranslation } from 'react-i18next';
 
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
+import { UploadFile } from 'antd/lib/upload/interface';
+import useUserImages from './userUserImages';
+import { useAuth } from '../../Components/AuthProvider';
 
 const { TextArea } = Input;
 const PROGRESS = 0;
@@ -26,6 +29,24 @@ const EnterRequestNameDesc: React.FC = () => {
     (state: { request: IRequestInfo }) => state.request
   );
   const [isUploading, setIsUploading] = useState(false);
+  const [fileList, setFileList] = useState<UploadFile[]>();
+
+  React.useEffect(() => {
+    if (objecInfo.images && objecInfo.images.length > 0) {
+      // Create an array of UploadFile objects from the objecInfo.images array
+      // const uploadedFiles: UploadFile[] = objecInfo.images.map((image) => {
+      const uploadedFiles: UploadFile[] = objecInfo.images.map(
+        (url, index) => ({
+          uid: String(index),
+          name: `image-${index}.png`, // You can customize the name here if needed.
+          status: 'done',
+          url: String(url), // Assuming each element of objecInfo.images is already in "uid:url" format
+        })
+      );
+
+      setFileList(uploadedFiles);
+    }
+  }, [objecInfo.images]);
 
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
@@ -101,12 +122,18 @@ const EnterRequestNameDesc: React.FC = () => {
               placeholder={t('requestInfo.descriptionPlaceholder') || ''}
             />
           </Form.Item>
+
           <Form.Item
             className="input-wrapper"
             label={t('requestInfo.uploadImages')}
           >
             <UploadImage onUploadStatusChange={setIsUploading} />
           </Form.Item>
+          {fileList ? (
+            <Form.Item className="input-wrapper">
+              <Upload fileList={fileList} listType="picture-card"></Upload>
+            </Form.Item>
+          ) : null}
         </Form>
 
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container
