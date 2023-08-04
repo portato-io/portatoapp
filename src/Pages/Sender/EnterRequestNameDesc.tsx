@@ -7,15 +7,17 @@ import UploadImage from '../../Components/UploadImage';
 
 import { Form, Input, Upload } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { setObject } from '../../Store/actions/requestActionCreators';
+import {
+  remove_url_from_images,
+  setObject,
+} from '../../Store/actions/requestActionCreators';
 import { IFirstObjectInfo, IRequestInfo } from '../../type';
 import { useTranslation } from 'react-i18next';
 
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
-import { UploadFile } from 'antd/lib/upload/interface';
-import useUserImages from './userUserImages';
-import { useAuth } from '../../Components/AuthProvider';
+import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
+import type { RcFile, UploadProps } from 'antd/es/upload';
 
 const { TextArea } = Input;
 const PROGRESS = 0;
@@ -46,7 +48,8 @@ const EnterRequestNameDesc: React.FC = () => {
 
       setFileList(uploadedFiles);
     }
-  }, [objecInfo.images]);
+  }, []);
+  console.log(fileList);
 
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
@@ -80,6 +83,14 @@ const EnterRequestNameDesc: React.FC = () => {
       [e.target.name]: e.target.value,
     }));
     console.log(e.target.name);
+  };
+  const handleChange: UploadProps['onChange'] = (
+    info: UploadChangeParam<UploadFile>
+  ) => {
+    const { fileList: newFileList, file } = info;
+    console.log(file);
+    setFileList(newFileList);
+    if (file.url) dispatch(remove_url_from_images(file.url));
   };
 
   return (
@@ -131,7 +142,11 @@ const EnterRequestNameDesc: React.FC = () => {
           </Form.Item>
           {fileList ? (
             <Form.Item className="input-wrapper">
-              <Upload fileList={fileList} listType="picture-card"></Upload>
+              <Upload
+                fileList={fileList}
+                listType="picture-card"
+                onChange={handleChange}
+              ></Upload>
             </Form.Item>
           ) : null}
         </Form>
