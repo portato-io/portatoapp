@@ -113,11 +113,6 @@ export function requestReducer(
     }
 
     case 'REMOVE_URLS_FROM_IMAGES':
-      console.log('BAAAAH', action.payload);
-      console.log(
-        'BRRRRRRR',
-        state.images.some((innerArray) => innerArray.includes(action.payload))
-      );
       return {
         ...state,
         images: state.images.filter(
