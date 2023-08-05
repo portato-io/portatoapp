@@ -109,7 +109,7 @@ const FetchRoutes: React.FC<{
                 </div>
                 <div>
                   <Button type="link" onClick={() => editRoute(route)}>
-                    <i className="icon icon-edit"></i>
+                    <i className="icon icon-pen"></i>
                     <span className="mod-hide-mobile">{t('general.edit')}</span>
                   </Button>
                 </div>

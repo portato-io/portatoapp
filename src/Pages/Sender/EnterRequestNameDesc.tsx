@@ -25,7 +25,8 @@ const PROGRESS = 0;
 const NEXT_SCREEN = '/createSendRequest/enter_request_size_weight_image';
 
 const EnterRequestNameDesc: React.FC = () => {
-  const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { t } = useTranslation<string>();
+  const [form] = Form.useForm();
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
@@ -65,14 +66,18 @@ const EnterRequestNameDesc: React.FC = () => {
     dispatch(setObject(object));
   }, [object]);
 
-  interface FormValues {
-    [key: string]: string | number | boolean; // Adjust as needed based on your form data
-  }
-
-  const onFinish = (values: FormValues) => {
-    console.log({ values });
+  const initialValues = {
+    name: object.name,
+    description: object.description,
   };
 
+  const onFinish = (values: any) => {
+    console.log('Form values:', values);
+    console.log('submitted');
+  };
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
   const dispatch = useDispatch();
 
   const handleInputChange = (
@@ -99,17 +104,23 @@ const EnterRequestNameDesc: React.FC = () => {
         <ProgressBar progress={PROGRESS} />
 
         <Form
+          id="myForm"
+          form={form}
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
+          initialValues={initialValues}
         >
           <h2>{t('requestInfo.title')}</h2>
           <Form.Item
             className="input-wrapper"
             label={t('requestInfo.name')}
-            //name="name"
-            //rules={[{ required: true, message: 'Please input your username!' }]}
+            name="name"
+            rules={[
+              { required: true, message: 'Please input the object name' },
+            ]}
           >
             <Input
               name="name"
@@ -122,8 +133,13 @@ const EnterRequestNameDesc: React.FC = () => {
           <Form.Item
             className="input-wrapper"
             label={t('requestInfo.description')}
-
-            //rules={[{ required: true, message: 'Please input description!' }]}
+            name="description"
+            rules={[
+              {
+                required: true,
+                message: 'Please input the object description',
+              },
+            ]}
           >
             <TextArea
               name="description"
@@ -165,6 +181,9 @@ const EnterRequestNameDesc: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'send_1_objInfo_next_button_click');
             }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            form={form}
           />
         </div>
       </section>

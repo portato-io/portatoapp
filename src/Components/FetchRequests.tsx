@@ -182,7 +182,7 @@ const FetchRequests: React.FC<{
                 </div>
                 <div>
                   <Button type="link" onClick={() => editRequest(request)}>
-                    <i className="icon icon-edit"></i>
+                    <i className="icon icon-pen"></i>
                     <span className="mod-hide-mobile">{t('general.edit')}</span>
                   </Button>
                 </div>
