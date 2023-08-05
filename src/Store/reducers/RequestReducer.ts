@@ -112,6 +112,14 @@ export function requestReducer(
       };
     }
 
+    case 'REMOVE_URLS_FROM_IMAGES':
+      return {
+        ...state,
+        images: state.images.filter(
+          (innerArray) => !innerArray.includes(action.payload)
+        ),
+      };
+
     case 'EMPTY_STATE':
       return initialState;
 
