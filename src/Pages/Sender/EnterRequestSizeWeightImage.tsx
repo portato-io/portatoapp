@@ -14,6 +14,7 @@ import { Selector } from 'antd-mobile';
 
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
+import UploadImage from '../../Components/UploadImage';
 
 const PROGRESS = 20;
 
@@ -22,6 +23,7 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_address';
 const EnterRequestSizeWeightImage: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { CAPACITY_OPTIONS } = getConstants(t);
+  const [isUploading, setIsUploading] = useState(false);
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
@@ -90,10 +92,6 @@ const EnterRequestSizeWeightImage: React.FC = () => {
               <Radio value="+20 kg">20+ kg</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item
-            className="input-wrapper"
-            label={t('requestInfo.uploadImages')}
-          ></Form.Item>
         </Form>
 
         {/* TODO Mischa: Reserve space for Back/Next buttons in general container

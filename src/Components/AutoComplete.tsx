@@ -21,10 +21,20 @@ interface Address {
   center: [number, number];
 }
 
-const AddressAutocomplete: React.FC<{ type: string; savedAddress: string }> = ({
-  type,
-  savedAddress,
-}) => {
+const AddressAutocomplete: React.FC<{
+  type: string;
+  savedAddress: string;
+  handleFormFilledState?: (type: string, adressfilled: boolean) => void;
+}> = ({ type, savedAddress, handleFormFilledState }) => {
+  if (savedAddress == '') {
+    if (handleFormFilledState) {
+      handleFormFilledState(type, false);
+    }
+  } else {
+    if (handleFormFilledState) {
+      handleFormFilledState(type, true);
+    }
+  }
   const { t } = useTranslation<string>();
   const [inputValue, setInputValue] = useState('');
   const [addresses, setAddresses] = useState<Address[]>([]);

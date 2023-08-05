@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -28,9 +28,34 @@ const EnterTime: React.FC = () => {
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
+  const [dayTime, setDayTime] = useState([]);
+  const [dateTimeSelected, setDateTimeSelected] = useState(Boolean);
+  const [dayRange, setDayRange] = useState([]);
+  const [dayRangeSelected, setDayRangeSelected] = useState(Boolean);
+  const [form] = Form.useForm();
 
   let defaultDateRange: [Dayjs, Dayjs] | undefined = undefined;
+
   const defaultSelector: string[] = Object.values(objecInfo.time);
+
+  useEffect(() => {
+    if (dayTime && dayTime.length === 0) {
+      setDateTimeSelected(false);
+    } else setDateTimeSelected(true);
+  }, [dayTime]);
+
+  useEffect(() => {
+    if (dayRange == null) {
+      setDayRangeSelected(false);
+    } else setDayRangeSelected(true);
+  }, [dayRange]);
+
+  useEffect(() => {
+    console.log('default', defaultSelector);
+    if (defaultSelector.length === 0) {
+      setDateTimeSelected(false);
+    } else setDateTimeSelected(true);
+  }, []);
 
   if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
     defaultDateRange = [
@@ -42,17 +67,22 @@ const EnterTime: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleTimeChange = (e: any) => {
+    setDayTime(e);
     dispatch(setObjectTime(e));
   };
 
   const handleChangeRange = (range: any) => {
-    const start = range[0].format().substring(0, 10);
-    const end = range[1].format().substring(0, 10);
+    console.log(range);
+    setDayRange(range);
+    if (range) {
+      const start = range[0].format().substring(0, 10);
+      const end = range[1].format().substring(0, 10);
 
-    //values contains a timestamp, that's why we take the first 10 characters
-    console.log('start date', start);
-    console.log('end date', end);
-    dispatch(setObjectDateRange([start, end]));
+      //values contains a timestamp, that's why we take the first 10 characters
+      console.log('start date', start);
+      console.log('end date', end);
+      dispatch(setObjectDateRange([start, end]));
+    }
   };
 
   const disabledDate = (current: Dayjs) => {
@@ -65,6 +95,7 @@ const EnterTime: React.FC = () => {
       <section className="section section-form mod-nomargin-top">
         <ProgressBar progress={PROGRESS} />
         <Form
+          form={form}
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
@@ -77,6 +108,7 @@ const EnterTime: React.FC = () => {
               onChange={handleChangeRange}
               style={{ width: '100%' }}
               defaultValue={defaultDateRange}
+              // value={defaultDateRange}
               disabledDate={disabledDate}
             />
             <small>{t('requestTime.dateHint')}</small>
@@ -104,6 +136,7 @@ const EnterTime: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'send_3_time_next_button_click');
             }}
+            disabled={!dateTimeSelected || !dayRangeSelected}
           />
         </div>
       </section>
