@@ -132,7 +132,7 @@ const Home: React.FC = () => {
 
       <section className="section mod-text-align-right">
         <h2>{t('about.title')}</h2>
-        <section className="section box-style-color box-radius-style-3 box-shadow mod-text-align-right mod-nomargin-top">
+        <section className="section box-style-color box-radius-style-3 mod-text-align-right mod-nomargin-top">
           <h3>{t('about.visionMissionTitle')}</h3>
           <p>
             {t('about.visionMissionText')

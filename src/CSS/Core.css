@@ -322,7 +322,7 @@ video,
   border-radius: 2vw 2vw 0px 2vw;
 }
 .box-radius-style-3 {
-  border-radius: 5vw 0vw 5vw 5vw;
+  border-radius: 20px 0vw 20px 20px;
 }
 .circle {
   border-radius: 50%;
