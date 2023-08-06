@@ -5,7 +5,7 @@ function ProgressBar({ progress = 0 }: any) {
     <Progress
       percent={progress}
       showInfo={false}
-      strokeColor={'#1677FF'}
+      strokeColor={'#60a353'}
       className="progress-bar-indicator"
     ></Progress>
   );

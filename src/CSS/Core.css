@@ -1,7 +1,7 @@
 :root {
   --main-navigation-bar-height: 55px;
-  --portato-blue: #1875bc;
-  --portato-blue-25: rgba(24, 117, 188, 0.25);
+  --portato-green: #60a353;
+  --portato-green-25: rgba(96, 163, 83, 0.25);
   --progress-bar-margin: 15px;
   --color-black: #000000;
   --color-grey1: #888888;
@@ -10,9 +10,9 @@
   --color-grey4: #e8e9f1;
   --color-grey5: #F8F9FE;
   --color-white: #ffffff;
-  --color-blue: #568bb3;
-  --color-blue-light: #53b2f2;
-  --color-blue-lighter: #b3f3ff;
+  --color-green: #46673f;
+  --color-green-light: #afdc77;
+  --color-green-lighter: #f2fbdb;
   --color-sand: #FFF4E4;
   --color-ok: #adff9e;
   --color-warning: #ffe89e;
@@ -95,7 +95,7 @@ video,
   left: 50%;
   border-style: solid;
   border-width: 60px 100px;
-  border-color: transparent transparent transparent var(--color-blue-lighter);
+  border-color: transparent transparent transparent var(--color-green-lighter);
   transform: translateX(-20%) translateY(-50%);
   z-index: 3;
 }
@@ -103,7 +103,7 @@ video,
   transition: var(--transition-regular);
   top: calc(50% + 17px);
   left: calc(50% + 10px);
-  border-color: transparent transparent transparent var(--color-blue-light);
+  border-color: transparent transparent transparent var(--color-green-light);
   z-index: 2;
 }
 .video-button-play:hover:after {
@@ -224,7 +224,7 @@ video,
 .logo-slogan {
   font-family: 'Comfortaa';
   font-size: 5rem;
-  color: var(--color-blue-light);
+  color: var(--portato-green);
   margin-top: -80px;
   margin-bottom: 20px;
 }
@@ -295,11 +295,11 @@ video,
 
 /* STYLE MODIFIER ------------------------------------ */
 .box-style-color {
-  background: var(--color-blue-lighter);
+  background: var(--color-green-lighter);
   padding: var(--spacing-regular);
 }
 .box-style-color-2 {
-  background:var(--color-blue-lightest);
+  background:var(--color-green-lightest);
   padding:var(--spacing-regular);
 }
 .box-style-grey {
