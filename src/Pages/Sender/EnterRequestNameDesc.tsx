@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
-import type { RcFile, UploadProps } from 'antd/es/upload';
+import type { UploadProps } from 'antd/es/upload';
 
 const { TextArea } = Input;
 const PROGRESS = 0;

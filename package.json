@@ -60,8 +60,8 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts start",
-    "build": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts build",
+    "start": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.development react-scripts start",
+    "build": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.production react-scripts build",
     "test": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
@@ -92,6 +92,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^5.1.26",
+    "env-cmd": "^10.1.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "git-revision-webpack-plugin": "^5.0.0",
