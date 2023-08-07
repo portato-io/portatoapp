@@ -189,7 +189,7 @@ export const addNotificationsToken = async (uid, token) => {
 
       // Update the tokens in the database
       await set(tokensRef, currentTokens);
-      console.log('Successfully added the token: ');
+      console.log('Successfully added the token ');
     }
   } catch (error) {
     console.error('Error adding token: ', error);
