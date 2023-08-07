@@ -3,17 +3,22 @@
   "name": "Portato",
   "icons": [
     {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     },
     {
-      "src": "logo_blue.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "logo_blue.png",
+      "src": "logo_green.png",
       "sizes": "512x512",
       "type": "image/png"
     }

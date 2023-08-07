@@ -32,7 +32,7 @@
 .create-new-plus-button {
     height: auto !important;
     min-width: 50vw;
-    background-color: rgba(24,117,188,0.2);
+    background-color: var(--portato-green-25);
     margin-top: 50px;
 }
 
@@ -46,7 +46,7 @@
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    background: var(--portato-blue);
+    background: var(--portato-green);
     display: flex;
     flex-direction: column;
     align-items: center;

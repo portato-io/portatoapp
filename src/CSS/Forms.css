@@ -10,17 +10,22 @@
 }
 .button:first-child {margin-left:0}
 .button:last-child {right:0}
+.button:hover {
+	color: var(--portato-green);
+}
 
 .button-solid {
-	border: 2px solid var(--color-blue-light);
-	background:var(--color-blue-light);
-	color: var(--color-white);
+	border: 2px solid var(--portato-green) !important;
+	background:var(--portato-green) !important;
+	color: var(--color-white) !important;
 }
-.button-solid:hover {color: var(--color-white); border-color:var(--color-blue)}
+.button-solid:hover {
+	border-color:var(--color-green) !important;
+}
 .button-border {
-	border: 2px solid var(--color-blue);
+	border: 2px solid var(--color-green);
 	background:var(--color-white);
-	color: var(--color-blue);	
+	color: var(--color-green);	
 }
 .button-border-light {
 	border-color:var(--color-grey4);
@@ -72,14 +77,14 @@ textarea.form-input {
 }
 .form-input:hover {
 	border-width: 0 0 2px 0;
-	border-color:var(--color-blue-light);
+	border-color:var(--color-green-light);
 }
 .form-input:focus {
 	border-width: 0 0 2px 0;
 	outline:none;
 	border-inline-end-width: 0px;
 	box-shadow: none;
-	border-color:var(--color-blue-light);
+	border-color:var(--color-green-light);
 }
 .form-input::placeholder {
 	font-size:1.5rem;
