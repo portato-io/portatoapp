@@ -1,15 +1,12 @@
 {
   "projects": {
-    "default": "portatoapp"
+    "default": "portatodev"
   },
   "targets": {
-    "portatoapp": {
+    "portatodev": {
       "hosting": {
-        "portato": [
-          "portato"
-        ],
-        "portatoapp": [
-          "portatoapp"
+        "portatodev": [
+          "portatodev"
         ]
       }
     }
