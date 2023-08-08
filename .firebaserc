@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "portatodev"
+    "default": "portatoapp"
   },
   "targets": {
     "portatoapp": {
