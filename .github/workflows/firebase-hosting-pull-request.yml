@@ -1,28 +1,11 @@
 name: Deploy to Firebase Hosting on PR
-
 'on': pull_request
-
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     environment:
       name: dev
-      
-    # Mapping GitHub secrets to environmental variables
-    env:
-      REACT_APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}
-      REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
-      REACT_APP_FIREBASE_DATABASE_URL: ${{ secrets.REACT_APP_FIREBASE_DATABASE_URL }}
-      REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}
-      REACT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}
-      REACT_APP_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }}
-      REACT_APP_FIREBASE_APP_ID: ${{ secrets.REACT_APP_FIREBASE_APP_ID }}
-      REACT_APP_FIREBASE_MEASUREMENT_ID: ${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID }}
-      REACT_APP_FIREBASE_VAPID_KEY: ${{ secrets.REACT_APP_FIREBASE_VAPID_KEY }}
-      REACT_APP_OPENROUTESERVICE_API_KEY: ${{ secrets.REACT_APP_OPENROUTESERVICE_API_KEY }}
-      REACT_APP_COMMIT_HASH: ${{ secrets.REACT_APP_COMMIT_HASH }}
-
     steps:
       - uses: actions/checkout@v3
       
@@ -42,21 +25,17 @@ jobs:
 
       - name: Setup .env.production
         run: |
-          echo REACT_APP_FIREBASE_AUTH_DOMAIN=${{ env.REACT_APP_FIREBASE_AUTH_DOMAIN }} >> .env.production
-          echo REACT_APP_FIREBASE_API_KEY=${{ env.REACT_APP_FIREBASE_API_KEY }} >> .env.production
-          echo REACT_APP_FIREBASE_DATABASE_URL=${{ env.REACT_APP_FIREBASE_DATABASE_URL }} >> .env.production
-          echo REACT_APP_FIREBASE_PROJECT_ID=${{ env.REACT_APP_FIREBASE_PROJECT_ID }} >> .env.production
-          echo REACT_APP_FIREBASE_STORAGE_BUCKET=${{ env.REACT_APP_FIREBASE_STORAGE_BUCKET }} >> .env.production
-          echo REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${{ env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }} >> .env.production
-          echo REACT_APP_FIREBASE_APP_ID=${{ env.REACT_APP_FIREBASE_APP_ID }} >> .env.production
-          echo REACT_APP_FIREBASE_MEASUREMENT_ID=${{ env.REACT_APP_FIREBASE_MEASUREMENT_ID }} >> .env.production
-          echo REACT_APP_FIREBASE_VAPID_KEY=${{ env.REACT_APP_FIREBASE_VAPID_KEY }} >> .env.production
-          echo REACT_APP_OPENROUTESERVICE_API_KEY=${{ env.REACT_APP_OPENROUTESERVICE_API_KEY }} >> .env.production
-          echo REACT_APP_COMMIT_HASH=${{ env.REACT_APP_COMMIT_HASH }} >> .env.production
-
-      # Displaying the contents of the .env.production for debugging
-      - name: Display .env.production
-        run: cat .env.production
+          echo REACT_APP_FIREBASE_AUTH_DOMAIN=${{ vars.REACT_APP_FIREBASE_AUTH_DOMAIN }} >> .env.production
+          echo REACT_APP_FIREBASE_API_KEY=${{ vars.REACT_APP_FIREBASE_API_KEY }} >> .env.production
+          echo REACT_APP_FIREBASE_DATABASE_URL=${{ vars.REACT_APP_FIREBASE_DATABASE_URL }} >> .env.production
+          echo REACT_APP_FIREBASE_PROJECT_ID=${{ vars.REACT_APP_FIREBASE_PROJECT_ID }} >> .env.production
+          echo REACT_APP_FIREBASE_STORAGE_BUCKET=${{ vars.REACT_APP_FIREBASE_STORAGE_BUCKET }} >> .env.production
+          echo REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${{ vars.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }} >> .env.production
+          echo REACT_APP_FIREBASE_APP_ID=${{ vars.REACT_APP_FIREBASE_APP_ID }} >> .env.production
+          echo REACT_APP_FIREBASE_MEASUREMENT_ID=${{ vars.REACT_APP_FIREBASE_MEASUREMENT_ID }} >> .env.production
+          echo REACT_APP_FIREBASE_VAPID_KEY=${{ vars.REACT_APP_FIREBASE_VAPID_KEY }} >> .env.production
+          echo REACT_APP_OPENROUTESERVICE_API_KEY=${{ vars.REACT_APP_OPENROUTESERVICE_API_KEY }} >> .env.production
+          echo REACT_APP_COMMIT_HASH=${{ vars.REACT_APP_COMMIT_HASH }} >> .env.production
 
       - name: Build Project
         run: npm run build  # or yarn build, adjust based on your build command
