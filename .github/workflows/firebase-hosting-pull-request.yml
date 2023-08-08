@@ -17,6 +17,9 @@ jobs:
       - name: Set up Firebase configuration
         run: cp .firebaserc_dev .firebaserc
 
+      - name: Set up correct firebase.json
+        run: cp firebase.dev.json firebase.json
+
       - name: Install Dependencies
         run: npm install  # or yarn install if you're using Yarn
 
