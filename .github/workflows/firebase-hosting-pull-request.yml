@@ -41,8 +41,11 @@ jobs:
       - name: Display .env.production
         run: cat .env.production
 
+      - name: Test env var
+        run: npm run print-log 
+
       - name: Build Project
-        run: npm run build  # or yarn build, adjust based on your build command
+        run: npm run build 
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
