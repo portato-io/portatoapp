@@ -60,8 +60,8 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "CI=false REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.development react-scripts start",
-    "build": "CI=false REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.production react-scripts build",
+    "start": "CI=false cp .firebaserc_dev .firebaserc & &  REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.development react-scripts start",
+    "build": "CI=false cp .firebaserc_prod .firebaserc &&  REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) env-cmd -f .env.production react-scripts build",
     "test": "REACT_APP_COMMIT_HASH=$(git rev-parse HEAD) react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
