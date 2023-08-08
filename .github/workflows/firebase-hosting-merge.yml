@@ -8,54 +8,55 @@ name: Deploy to Firebase Hosting on merge
       - main
 jobs:
   build_and_deploy:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
-      runs-on: ubuntu-latest
-      environment:
-        name: prod
-      steps:
-        - uses: actions/checkout@v3
-        
-        - name: Set up Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '16.13.0'
+    # This is where the "if" condition should be, directly under the job name
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
 
-        - name: Set up Firebase configuration
-          run: cp .firebaserc_prod .firebaserc
+      - name: Set up Firebase configuration
+        run: cp .firebaserc_prod .firebaserc
 
-        - name: Set up correct firebase.json
-          run: cp firebase.prod.json firebase.json
+      - name: Set up correct firebase.json
+        run: cp firebase.prod.json firebase.json
 
-        - name: Install Dependencies
-          run: npm install  # or yarn install if you're using Yarn
+      - name: Install Dependencies
+        run: npm install  # or yarn install if you're using Yarn
 
-        - name: Setup .env.production
-          run: |
-            echo REACT_APP_FIREBASE_AUTH_DOMAIN=${{ vars.REACT_APP_FIREBASE_AUTH_DOMAIN }} >> .env.production
-            echo REACT_APP_FIREBASE_API_KEY=${{ vars.REACT_APP_FIREBASE_API_KEY }} >> .env.production
-            echo REACT_APP_FIREBASE_DATABASE_URL=${{ vars.REACT_APP_FIREBASE_DATABASE_URL }} >> .env.production
-            echo REACT_APP_FIREBASE_PROJECT_ID=${{ vars.REACT_APP_FIREBASE_PROJECT_ID }} >> .env.production
-            echo REACT_APP_FIREBASE_STORAGE_BUCKET=${{ vars.REACT_APP_FIREBASE_STORAGE_BUCKET }} >> .env.production
-            echo REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${{ vars.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }} >> .env.production
-            echo REACT_APP_FIREBASE_APP_ID=${{ vars.REACT_APP_FIREBASE_APP_ID }} >> .env.production
-            echo REACT_APP_FIREBASE_MEASUREMENT_ID=${{ vars.REACT_APP_FIREBASE_MEASUREMENT_ID }} >> .env.production
-            echo REACT_APP_FIREBASE_VAPID_KEY=${{ vars.REACT_APP_FIREBASE_VAPID_KEY }} >> .env.production
-            echo REACT_APP_OPENROUTESERVICE_API_KEY=${{ vars.REACT_APP_OPENROUTESERVICE_API_KEY }} >> .env.production
-            echo REACT_APP_COMMIT_HASH=${{ vars.REACT_APP_COMMIT_HASH }} >> .env.production
-            
-        # Displaying the contents of the .env.production for debugging
-        - name: Display .env.production
-          run: cat .env.production
+      - name: Setup .env.production
+        run: |
+          echo REACT_APP_FIREBASE_AUTH_DOMAIN=${{ vars.REACT_APP_FIREBASE_AUTH_DOMAIN }} >> .env.production
+          echo REACT_APP_FIREBASE_API_KEY=${{ vars.REACT_APP_FIREBASE_API_KEY }} >> .env.production
+          echo REACT_APP_FIREBASE_DATABASE_URL=${{ vars.REACT_APP_FIREBASE_DATABASE_URL }} >> .env.production
+          echo REACT_APP_FIREBASE_PROJECT_ID=${{ vars.REACT_APP_FIREBASE_PROJECT_ID }} >> .env.production
+          echo REACT_APP_FIREBASE_STORAGE_BUCKET=${{ vars.REACT_APP_FIREBASE_STORAGE_BUCKET }} >> .env.production
+          echo REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${{ vars.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }} >> .env.production
+          echo REACT_APP_FIREBASE_APP_ID=${{ vars.REACT_APP_FIREBASE_APP_ID }} >> .env.production
+          echo REACT_APP_FIREBASE_MEASUREMENT_ID=${{ vars.REACT_APP_FIREBASE_MEASUREMENT_ID }} >> .env.production
+          echo REACT_APP_FIREBASE_VAPID_KEY=${{ vars.REACT_APP_FIREBASE_VAPID_KEY }} >> .env.production
+          echo REACT_APP_OPENROUTESERVICE_API_KEY=${{ vars.REACT_APP_OPENROUTESERVICE_API_KEY }} >> .env.production
+          echo REACT_APP_COMMIT_HASH=${{ vars.REACT_APP_COMMIT_HASH }} >> .env.production
+          
+      # Displaying the contents of the .env.production for debugging
+      - name: Display .env.production
+        run: cat .env.production
 
-        - name: Test env var
-          run: npm run print-log 
+      - name: Test env var
+        run: npm run print-log 
 
-        - name: Build Project
-          run: npm run build 
+      - name: Build Project
+        run: npm run build 
 
-        - uses: FirebaseExtended/action-hosting-deploy@v0
-          with:
-            repoToken: '${{ secrets.GITHUB_TOKEN }}'
-            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATOAPP }}'
-            channelId: live
-            projectId: portatoapp
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATOAPP }}'
+          channelId: live
+          projectId: portatoapp
