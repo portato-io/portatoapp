@@ -36,6 +36,10 @@ jobs:
           echo REACT_APP_FIREBASE_VAPID_KEY=${{ vars.REACT_APP_FIREBASE_VAPID_KEY }} >> .env.production
           echo REACT_APP_OPENROUTESERVICE_API_KEY=${{ vars.REACT_APP_OPENROUTESERVICE_API_KEY }} >> .env.production
           echo REACT_APP_COMMIT_HASH=${{ vars.REACT_APP_COMMIT_HASH }} >> .env.production
+          
+      # Displaying the contents of the .env.production for debugging
+      - name: Display .env.production
+        run: cat .env.production
 
       - name: Build Project
         run: npm run build  # or yarn build, adjust based on your build command
