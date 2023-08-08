@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "portatodev"
+  },
+  "targets": {
+    "portatodev": {
+      "hosting": {
+        "portatodev": [
+          "portatodev"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

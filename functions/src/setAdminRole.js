@@ -1,11 +1,11 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('../portatoapp-firebase-adminsdk-80yy0-bfde2368a4.json');
+const serviceAccount = require('../portatodev-firebase-adminsdk-qaydx-82b9ae166a.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const email = 'mischakolbe@gmail.com';
+const email = 'hugobirch@hotmail.fr';
 
 admin
   .auth()
