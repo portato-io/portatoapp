@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '16.13.0'
 
-      - name: Set up Firebase configuration
+      - name: Set up Firebase configuration 
         run: cp .firebaserc_prod .firebaserc
 
       - name: Set up correct firebase.json
