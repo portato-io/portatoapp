@@ -335,3 +335,12 @@ video,
   background-color: #fff;
   padding-bottom:100px; 
 }
+
+.caption {
+  position: absolute;
+  top: -20px;  /* Adjust this value depending on the desired position and font size. */
+  left: 50%;
+  transform: translateX(-50%);  /* This will center the caption above the button. */
+  font-size: 12px;  /* Adjust font size to your preference. */
+  color: #333;  /* Or any other color you'd like. */
+}

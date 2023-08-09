@@ -206,12 +206,17 @@ const RequestSummary: React.FC = () => {
               }}
             />
           ) : (
-            <SignInButton
-              onClick={() => {
-                showModal();
-                logEvent(analytics, 'send_5_summary_signIn_button_click');
-              }}
-            />
+            <>
+              <div className="caption">
+                Please sign in before submitting your request
+              </div>
+              <SignInButton
+                onClick={() => {
+                  showModal();
+                  logEvent(analytics, 'send_5_summary_signIn_button_click');
+                }}
+              />
+            </>
           )}
         </div>
       </section>
