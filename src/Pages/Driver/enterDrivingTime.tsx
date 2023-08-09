@@ -60,7 +60,7 @@ const EnterDeliveryTime: React.FC = () => {
             </Tabs.Tab>
           </Tabs>
         </Form>
-        <div className="form-button-container mod-display-flex mod-flex-space-between">
+        {/* <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
               logEvent(analytics, 'drive_2_time_back_button_click');
@@ -72,7 +72,7 @@ const EnterDeliveryTime: React.FC = () => {
               logEvent(analytics, 'drive_2_time_next_button_click');
             }}
           />
-        </div>
+        </div> */}
       </section>
     </PageLayout>
   );

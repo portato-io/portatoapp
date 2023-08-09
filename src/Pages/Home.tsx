@@ -1,6 +1,6 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-8.png';
+import headerImage from '../Assets/Images/portato-landing-9.png';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
@@ -132,7 +132,7 @@ const Home: React.FC = () => {
 
       <section className="section mod-text-align-right">
         <h2>{t('about.title')}</h2>
-        <section className="section box-style-color box-radius-style-3 box-shadow mod-text-align-right mod-nomargin-top">
+        <section className="section box-style-color box-radius-style-3 mod-text-align-right mod-nomargin-top">
           <h3>{t('about.visionMissionTitle')}</h3>
           <p>
             {t('about.visionMissionText')

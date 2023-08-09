@@ -191,7 +191,7 @@ const RequestSummary: React.FC = () => {
           </div>
         </div>
 
-        <div className="form-button-container mod-display-flex mod-flex-space-between">
+        <div className="form-button-container mod-display-flex mod-flex-space-between mod-items-align-center">
           <BackButton
             onClick={() => {
               logEvent(analytics, 'send_5_summary_back_button_click');
@@ -206,12 +206,17 @@ const RequestSummary: React.FC = () => {
               }}
             />
           ) : (
-            <SignInButton
-              onClick={() => {
-                showModal();
-                logEvent(analytics, 'send_5_summary_signIn_button_click');
-              }}
-            />
+            <div className="signin-container">
+              <div className="caption">
+                Please sign in before submitting your request
+              </div>
+              <SignInButton
+                onClick={() => {
+                  showModal();
+                  logEvent(analytics, 'send_5_summary_signIn_button_click');
+                }}
+              />
+            </div>
           )}
         </div>
       </section>

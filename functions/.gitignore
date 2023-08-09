@@ -1,4 +1,5 @@
 node_modules/
 portatoapp-firebase-admin*
+portatodev-firebase-admin*
 .env.sh
 .env

@@ -91,7 +91,7 @@ const MyAccount: React.FC = () => {
         <Form
           onFinish={onFinish}
           footer={
-            <Button block type="submit" color="primary" size="large">
+            <Button block type="submit" size="large" className="button-solid">
               {t('accountPage.validate')}
             </Button>
           }

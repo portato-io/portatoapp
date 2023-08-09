@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -28,6 +28,28 @@ const EnterRoute: React.FC = () => {
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
 
   console.log('Redux state routeInfo: ', routeInfo); // Log the routeInfo from Redux state
+
+  const [isFormFilled, setIsFormFilled] = useState(false);
+  const [departureFilled, setDepartureFilled] = useState(false);
+  const [destinationFilled, setDestinationFilled] = useState(false);
+
+  useEffect(() => {
+    // Check if both pickup and delivery addresses are filled
+    const isBothAddressesFilled = departureFilled && destinationFilled;
+    console.log(isBothAddressesFilled);
+    setIsFormFilled(isBothAddressesFilled);
+  }, [departureFilled, destinationFilled]);
+
+  const handleFormFilledState = (
+    addressType: string,
+    filledStatus: boolean
+  ) => {
+    if (addressType === 'departure') {
+      setDepartureFilled(filledStatus);
+    } else if (addressType === 'destination') {
+      setDestinationFilled(filledStatus);
+    }
+  };
 
   const [routes, setValues] = useState({
     departure_adress: routeInfo.departure_adress,
@@ -89,6 +111,7 @@ const EnterRoute: React.FC = () => {
             <AddressAutocomplete
               type={'departure'}
               savedAddress={routeInfo.departure_adress}
+              handleFormFilledState={handleFormFilledState}
             />
           </Form.Item>
           <Form.Item
@@ -98,6 +121,7 @@ const EnterRoute: React.FC = () => {
             <AddressAutocomplete
               type={'destination'}
               savedAddress={routeInfo.destination_adress}
+              handleFormFilledState={handleFormFilledState}
             />
           </Form.Item>
           <Form.Item
@@ -126,6 +150,7 @@ const EnterRoute: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'drive_1_route_next_button_click');
             }}
+            disabled={!isFormFilled}
           />
         </div>
       </section>

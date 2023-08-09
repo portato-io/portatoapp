@@ -17,9 +17,7 @@ const LottieAnimation = () => {
     }
   }, []);
 
-  return (
-    <div className="box-shadow box-radius-style-1" ref={containerRef}></div>
-  );
+  return <div className="box-radius-style-1" ref={containerRef}></div>;
 };
 
 export default LottieAnimation;

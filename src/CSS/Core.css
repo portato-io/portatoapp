@@ -1,7 +1,7 @@
 :root {
   --main-navigation-bar-height: 55px;
-  --portato-blue: #1875bc;
-  --portato-blue-25: rgba(24, 117, 188, 0.25);
+  --portato-green: #60a353;
+  --portato-green-25: rgba(96, 163, 83, 0.25);
   --progress-bar-margin: 15px;
   --color-black: #000000;
   --color-grey1: #888888;
@@ -10,9 +10,9 @@
   --color-grey4: #e8e9f1;
   --color-grey5: #F8F9FE;
   --color-white: #ffffff;
-  --color-blue: #568bb3;
-  --color-blue-light: #53b2f2;
-  --color-blue-lighter: #b3f3ff;
+  --color-green: #46673f;
+  --color-green-light: #afdc77;
+  --color-green-lighter: #f2fbdb;
   --color-sand: #FFF4E4;
   --color-ok: #adff9e;
   --color-warning: #ffe89e;
@@ -95,7 +95,7 @@ video,
   left: 50%;
   border-style: solid;
   border-width: 60px 100px;
-  border-color: transparent transparent transparent var(--color-blue-lighter);
+  border-color: transparent transparent transparent var(--color-green-lighter);
   transform: translateX(-20%) translateY(-50%);
   z-index: 3;
 }
@@ -103,7 +103,7 @@ video,
   transition: var(--transition-regular);
   top: calc(50% + 17px);
   left: calc(50% + 10px);
-  border-color: transparent transparent transparent var(--color-blue-light);
+  border-color: transparent transparent transparent var(--color-green-light);
   z-index: 2;
 }
 .video-button-play:hover:after {
@@ -112,6 +112,8 @@ video,
 }
 
 
+
+/* TABLES ------------------------------------------- */
 .table {
   width:100%;
   border-collapse: collapse;
@@ -119,11 +121,26 @@ video,
 }
 .th, .td {
   text-align: left;
-  padding:10px 10px 10px;
+  padding:10px 10px 10px 0;
   border-spacing: 0;
   border-collapse:collapse;
   border:none;
   vertical-align: top;
+}
+
+.table,
+.table tr ,
+.table tr .th, 
+.table tr .td {
+  display:block;
+}
+
+.table tr .th {
+  margin-top:5px;
+  padding-bottom:0;
+}
+.table tr .td {
+  padding-top:5px;
 }
 
 /* LISTINGS ------------------------------------------ */
@@ -181,11 +198,33 @@ video,
 }
 
 
+/* CARDS ---------------------------------------------- */
+.card-actions {
+    position:relative;
+    top:-3px;
+    right:-5px;
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+.card-actions > div {
+    margin-left:15px;
+}
+.card-actions .icon::before {
+    margin-right:0;
+}
+.card-actions button {
+    padding:0;
+    color:var(--color-grey2);
+
+}
+
+
 /* LOGO & SLOGAN ------------------------------------- */
 .logo-slogan {
   font-family: 'Comfortaa';
   font-size: 5rem;
-  color: var(--color-blue-light);
+  color: var(--portato-green);
   margin-top: -80px;
   margin-bottom: 20px;
 }
@@ -252,15 +291,18 @@ video,
 .mod-hide-mobile {
   display:none!important;
 }
+.mod-items-align-center {
+  align-items: center;
+}
 
 
 /* STYLE MODIFIER ------------------------------------ */
 .box-style-color {
-  background: var(--color-blue-lighter);
+  background: var(--color-green-lighter);
   padding: var(--spacing-regular);
 }
 .box-style-color-2 {
-  background:var(--color-blue-lightest);
+  background:var(--color-green-lightest);
   padding:var(--spacing-regular);
 }
 .box-style-grey {
@@ -283,7 +325,7 @@ video,
   border-radius: 2vw 2vw 0px 2vw;
 }
 .box-radius-style-3 {
-  border-radius: 5vw 0vw 5vw 5vw;
+  border-radius: 20px 0vw 20px 20px;
 }
 .circle {
   border-radius: 50%;
@@ -295,4 +337,22 @@ video,
 
   background-color: #fff;
   padding-bottom:100px; 
+}
+
+.signin-container {
+  /* This will ensure that the caption and the SignInButton 
+     are stacked vertically within the container. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.caption {
+  display: block;
+  text-align: center; /* Center the text */
+  margin-bottom: 5px; /* Space between the caption and the button. Adjust as needed. */
+  font-size: 12px;
+  color: #333;
+  font-family: 'Nunito Bold'; font-size:1.1rem;
 }

@@ -15,6 +15,10 @@
 	flex-direction: row;
 }
 
+.adm-tab-bar-item-active{
+	color: var(--portato-green) !important;
+}
+
 .main-navigation-bar .adm-tab-bar-item-title-with-icon {
 	font-size:1.4rem;
 	display:none;

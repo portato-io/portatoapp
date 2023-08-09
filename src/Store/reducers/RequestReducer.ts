@@ -6,9 +6,9 @@ const initialState: IRequestInfo = {
   uid: '0',
   name: '',
   description: '',
-  size: 'S',
-  weight: '0-5 kg',
-  price: 0,
+  size: '',
+  weight: '',
+  price: 10,
   pickup_adress: '',
   delivery_adress: '',
   dateRange: ['', ''],
@@ -111,6 +111,14 @@ export function requestReducer(
         images: action.payload.images,
       };
     }
+
+    case 'REMOVE_URLS_FROM_IMAGES':
+      return {
+        ...state,
+        images: state.images.filter(
+          (innerArray) => !innerArray.includes(action.payload)
+        ),
+      };
 
     case 'EMPTY_STATE':
       return initialState;

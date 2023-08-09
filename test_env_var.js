@@ -1,0 +1,4 @@
+console.log(
+  'REACT_APP_FIREBASE_AUTH_DOMAIN:',
+  process.env.REACT_APP_FIREBASE_AUTH_DOMAIN
+);

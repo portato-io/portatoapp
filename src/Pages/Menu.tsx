@@ -91,7 +91,11 @@ const Menu: React.FC = () => {
           <List mode="card" style={{ marginTop: '1vh' }}>
             {user ? (
               <>
-                <List.Item arrow={true} onClick={handleMyAccountClick}>
+                <List.Item
+                  arrow={true}
+                  onClick={handleMyAccountClick}
+                  className="settings-list-item"
+                >
                   {t('navigationMenu.myAccount')}
                 </List.Item>
                 {/* <List.Item arrow={true} onClick={handleMySendRequestsClick}>
@@ -99,7 +103,11 @@ const Menu: React.FC = () => {
                 </List.Item> */}
               </>
             ) : (
-              <List.Item arrow={true} onClick={showModal}>
+              <List.Item
+                arrow={true}
+                onClick={showModal}
+                className="settings-list-item"
+              >
                 {t('navigationMenu.signIn')}
               </List.Item>
             )}
@@ -107,14 +115,26 @@ const Menu: React.FC = () => {
             {/* <List.Item arrow={true} onClick={handleMyBlogClick}>
               {t('navigationMenu.blog')}
             </List.Item> */}
-            <List.Item arrow={true} onClick={handleSupportClick}>
+            <List.Item
+              arrow={true}
+              onClick={handleSupportClick}
+              className="settings-list-item"
+            >
               {t('navigationMenu.support')}
             </List.Item>
-            <List.Item arrow={true} onClick={handleSettingsClick}>
+            <List.Item
+              arrow={true}
+              onClick={handleSettingsClick}
+              className="settings-list-item"
+            >
               {t('navigationMenu.settings')}
             </List.Item>
             {isAdmin && (
-              <List.Item arrow={true} onClick={handleAdminClick}>
+              <List.Item
+                arrow={true}
+                onClick={handleAdminClick}
+                className="settings-list-item"
+              >
                 {t('navigationMenu.adminWindow')}
               </List.Item>
             )}
@@ -123,6 +143,7 @@ const Menu: React.FC = () => {
                 arrow={true}
                 onClick={() => signOut(auth)}
                 style={{ color: 'red' }}
+                className="settings-list-item"
               >
                 {t('navigationMenu.signOut')}
               </List.Item>

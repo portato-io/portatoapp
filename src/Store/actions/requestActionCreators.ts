@@ -67,6 +67,11 @@ export const setDealId = (id: string): AnyAction => ({
   payload: id,
 });
 
+export const remove_url_from_images = (url: string): AnyAction => ({
+  type: 'REMOVE_URLS_FROM_IMAGES',
+  payload: url,
+});
+
 export const setRequest = (request: IRequestInfo): AnyAction => ({
   type: actionTypes.SET_REQUEST,
   payload: request,

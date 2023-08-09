@@ -8,7 +8,7 @@ function ButtomHeaderBar({ setOpenMenu }: any) {
       <div
         style={{
           textAlign: 'right',
-          backgroundColor: '#1875BC',
+          backgroundColor: '#60a353',
           height: 50,
           fontSize: 20,
         }}
