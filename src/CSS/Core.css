@@ -291,6 +291,9 @@ video,
 .mod-hide-mobile {
   display:none!important;
 }
+.mod-items-align-center {
+  align-items: center;
+}
 
 
 /* STYLE MODIFIER ------------------------------------ */
@@ -334,4 +337,22 @@ video,
 
   background-color: #fff;
   padding-bottom:100px; 
+}
+
+.signin-container {
+  /* This will ensure that the caption and the SignInButton 
+     are stacked vertically within the container. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.caption {
+  display: block;
+  text-align: center; /* Center the text */
+  margin-bottom: 5px; /* Space between the caption and the button. Adjust as needed. */
+  font-size: 12px;
+  color: #333;
+  font-family: 'Nunito Bold'; font-size:1.1rem;
 }

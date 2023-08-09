@@ -28,7 +28,7 @@ const AdminDashboard: React.FC = () => {
           }}
           onClick={handleAllRequestsClick}
         >
-          All Requests Test dev
+          All Requests
         </Button>
         <Button
           type="default"
