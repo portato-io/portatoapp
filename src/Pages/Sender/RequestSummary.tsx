@@ -70,8 +70,9 @@ const RequestSummary: React.FC = () => {
           const emailBody = {
             title: 'New delivery request submitted',
             body: emailContent,
-            uid: null,
+            uid: uid,
             email: 'support@portato.io',
+            admin: true,
           };
 
           fetch(

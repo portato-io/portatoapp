@@ -68,7 +68,7 @@ const sendNotificationEmail = functions
       try {
         const { title, body, uid, email } = req.body;
         let targetEmail;
-        if (uid) {
+        if (uid && !admin) {
           targetEmail = await getUserEmail(uid); // Fetch email address from UID
         } else if (!email) {
           res.status(500).send('No uid given');
@@ -77,13 +77,29 @@ const sendNotificationEmail = functions
           targetEmail = email;
         }
 
+        let userInfo = null;
+        if (uid && admin) {
+          // Making sure that there's a UID to fetch user info.
+          userInfo = await getUserInfo(uid);
+        }
+
+        // Append userInfo to email body if it exists
+        let modifiedBody = body;
+        if (userInfo) {
+          // Here, you can format userInfo as per your requirements.
+          // For the sake of this example, I'm just appending userInfo as a string.
+          modifiedBody += `\n\nUser Info: ${JSON.stringify(userInfo)}`;
+        }
+
         const mailOptions = {
           from: '"Notifications" <notifications@portato.io>',
-          to: targetEmail, // Use the fetched email address
+          to: targetEmail,
           subject: title,
-          text: body.replace(/<[^>]*>?/gm, ''), // Strip HTML tags for the plain text version
-          html: body, // Also include HTML in your email
+          text: modifiedBody.replace(/<[^>]*>?/gm, ''), // Strip HTML tags for the plain text version
+          html: modifiedBody, // Also include HTML in your email
         };
+
+        // Continue with the sending email logic
 
         console.log('Sending email...');
         const info = await transporter.sendMail(mailOptions);
@@ -107,8 +123,19 @@ async function getUserEmail(uid) {
   }
 }
 
+async function getUserInfo(uid) {
+  try {
+    const userRecord = await admin.auth().getUser(uid);
+    return userRecord;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    return null;
+  }
+}
+
 module.exports = {
   getUserEmail,
+  getUserInfo,
   sendNotification,
   sendNotificationEmail,
 };

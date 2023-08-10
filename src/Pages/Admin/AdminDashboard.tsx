@@ -17,6 +17,11 @@ const AdminDashboard: React.FC = () => {
     navigate('/admin/all_routes');
   };
 
+  const handleInfoFromUid = () => {
+    // Navigate to the "All Routes" page
+    navigate('/admin/info_from_uid');
+  };
+
   return (
     <PageLayout>
       <AutoCenter>
