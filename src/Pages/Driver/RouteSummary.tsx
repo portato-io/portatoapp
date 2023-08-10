@@ -124,8 +124,9 @@ const RouteSummary: React.FC = () => {
         const emailBody = {
           title: 'New route request submitted',
           body: emailContent,
-          uid: null,
+          uid: uid,
           email: 'support@portato.io',
+          admin: true,
         };
 
         fetch(

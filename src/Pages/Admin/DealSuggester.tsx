@@ -160,6 +160,7 @@ const DealSuggester: React.FC = () => {
           title: 'Potential delivery solution',
           body: 'We have found a match for your delivery request. Please go to <a href="https://www.portato.io/profile/user_requests">your send request page</a> to find more information',
           uid: request_uid,
+          admin: false,
         };
 
         fetch(
