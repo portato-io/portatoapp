@@ -72,9 +72,11 @@ const ContactDriver: React.FC = () => {
       images: images,
     };
 
+    const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+
     try {
       const result = await axios.post(
-        'https://us-central1-portatoapp.cloudfunctions.net/sendEmailToUid',
+        `https://us-central1-${projectId}.cloudfunctions.net/sendEmailToUid`,
         valuesWithUid
       );
 

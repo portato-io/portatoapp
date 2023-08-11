@@ -127,6 +127,8 @@ const DealSuggester: React.FC = () => {
         const tokens = await getUserTokens(currentRequest.uid);
 
         console.log('tokens are: ', tokens);
+        const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+
         if (tokens && tokens.length > 0) {
           // Prepare the request body
           const notificationBody = {
@@ -136,9 +138,10 @@ const DealSuggester: React.FC = () => {
           };
 
           // Make a POST request to the Firebase Function
+
           try {
             const response = await fetch(
-              'https://europe-west1-portatoapp.cloudfunctions.net/sendNotification',
+              `https://europe-west1-${projectId}.cloudfunctions.net/sendNotification`,
               {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -164,7 +167,7 @@ const DealSuggester: React.FC = () => {
         };
 
         fetch(
-          'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
+          `https://europe-west1-${projectId}.cloudfunctions.net/sendNotificationEmail`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

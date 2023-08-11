@@ -128,9 +128,9 @@ const RouteSummary: React.FC = () => {
           email: 'support@portato.io',
           admin: true,
         };
-
+        const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
         fetch(
-          'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
+          `https://europe-west1-${projectId}.cloudfunctions.net/sendNotificationEmail`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
