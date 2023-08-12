@@ -19,9 +19,11 @@ const ContactForm: React.FC = () => {
   const onFinish = async (values: FormData) => {
     setLoading(true);
 
+    const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+
     try {
       const result = await axios.post(
-        'https://us-central1-portatoapp.cloudfunctions.net/sendEmailToSupport',
+        `https://us-central1-${projectId}.cloudfunctions.net/sendEmailToSupport`,
         values
       );
 
