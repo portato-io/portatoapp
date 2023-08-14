@@ -20,7 +20,7 @@ const resources: Resource = {
 
 const options: InitOptions = {
   resources,
-  fallbackLng: 'en_US',
+  fallbackLng: 'de_DE',
   detection: {
     order: ['localStorage', 'navigator'],
     caches: ['localStorage'],
