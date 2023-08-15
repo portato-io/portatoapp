@@ -1,14 +1,24 @@
 {
   "about": {
-    "title": "About us",
+    "title": "About",
     "visionMissionTitle": "Portato's mission",
     "visionMissionText": "Swiss individuals drive over 150 million kilometers in their cars per day, often with empty trunks.\n\nOur aim at Portato is to tap into these unused transport capacities. We make ride-sharing for things easy. \n\n Higher convenience for senders, additional income for drivers, less traffic polluting our environment",
     "whoWeAreTitle": "Who we are",
     "whoWeAreText": "At Portato, innovation meets the open road! We are a lively fusion of thinkers, tinkerers, and pioneers with the common goal of revolutionizing transport!"
   },
 
+  "sendSection": {
+    "title": "Send or receive items",
+    "description": "With Portato, you can send or receive items from the comfort of your home."
+  },
+
+  "driveSection": {
+    "title": "Earn money while driving",
+    "description": "Start earning money by offering the empty space in your car."
+  },
+
   "general": {
-    "tagline": "An easy, cheap and eco-friendly transport service for things.",
+    "tagline": "The affordable, convenient and eco-friendly transportation service.",
     "howItWorks": "How it works",
     "moreInfo": "Learn more",
     "send": "Ship",
@@ -131,9 +141,7 @@
   "requestAddresses": {
     "title": "Where do you want the shipment to be picked up and sent?",
     "pickupAddress": "Pick-up address",
-    "|*TBI*|pickupAddressPlaceholder": "Enter an address",
-    "deliveryAddress": "Delivery address",
-    "|*TBI*|deliveryAddressPlaceholder": "Enter an address"
+    "deliveryAddress": "Delivery address"
   },
   "requestTime": {
     "title": "When do you want the shipment to be picked up?",
@@ -175,9 +183,7 @@
   "driveAddresses": {
     "createNewRouteTitle": "Create a new route",
     "departureAddress": "Departure address",
-    "|*TBI*|departureAddressPlaceholder": "Enter an address",
     "destinationAddress": "Destination address",
-    "|*TBI*|destinationAddressPlaceholder": "Enter an address",
     "acceptableDetour": "Acceptable detour"
   },
   "driveTime": {
@@ -186,12 +192,7 @@
     "singleTrip": "Single trip",
     "recurringRide": "Recurring ride",
     "timeHint": "(Multiple selection possible)",
-    "|*TBI*|startPlaceholder": "Start",
-    "|*TBI*|endPlaceholder": "End",
     "selectTime": "Select time",
-    "|*TBI*|timeMornings": "Morning",
-    "|*TBI*|timeMidDays": "Mid day",
-    "|*TBI*|timeEvenings": "Evening",
     "weekdayTitle": "Select days",
     "timeTitle": "Select time"
   },
