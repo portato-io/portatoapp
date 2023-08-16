@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import { hotjar } from 'react-hotjar';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { persistedReducer } from './Store/reducers';
@@ -16,6 +17,11 @@ import { AuthProvider } from './Components/AuthProvider';
 import './i18n';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
+
+// Initialize Hotjar:
+const HOTJAR_ID = 3614898;
+const HOTJAR_VERSION = 6;
+hotjar.initialize(HOTJAR_ID, HOTJAR_VERSION);
 
 const initialStateRequest: IRequestInfo = {
   id: '0',
