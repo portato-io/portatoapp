@@ -1,6 +1,13 @@
 {
-  "lottieText1": "English and sexy",
-  "lottieText2": "veeery sexy!",
+  "howItWorksLottie": {
+    "Driver registers route": "Driver registers route",
+    "Sender/receiver creates request": "Sender/receiver creates request",
+    "Portato connects both": "Portato connects both",
+    "Driver picks up items ...": "Driver picks up items ...",
+    "... delivers them to receiver ...": "... delivers them to receiver ...",
+    "... and gets paid.": "... and gets paid."
+  },
+
   "about": {
     "title": "About",
     "visionMissionTitle": "Portato's mission",

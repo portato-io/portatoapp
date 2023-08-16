@@ -14,7 +14,15 @@ const LottieAnimation = () => {
         ...animationData,
         layers: animationData.layers.map((layer) => {
           if (layer.t && layer.t.d.k[0].s.t) {
-            layer.t.d.k[0].s.t = t(layer.t.d.k[0].s.t);
+            // Try to get the translation. If it doesn't exist, use the original text as fallback.
+            const originalText = layer.t.d.k[0].s.t;
+            const translatedText = t('howItWorksLottie.' + originalText, {
+              defaultValue: originalText,
+            });
+
+            if (translatedText !== originalText) {
+              layer.t.d.k[0].s.t = translatedText;
+            }
           }
           return layer;
         }),
