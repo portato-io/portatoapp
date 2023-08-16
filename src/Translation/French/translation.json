@@ -7,8 +7,18 @@
     "whoWeAreText": "Chez Portato, l'innovation rencontre la route ouverte! Nous sommes une fusion vivante de penseurs, de bricoleurs et de pionniers avec l'objectif commun de révolutionner le transport!"
   },
 
+  "sendSection": {
+    "title": "Envoyer ou recevoir des articles",
+    "description": "Avec Portato, vous pouvez envoyer ou recevoir des articles depuis le confort de votre maison."
+  },
+
+  "driveSection": {
+    "title": "Gagnez de l'argent en conduisant",
+    "description": "Commencez à gagner de l'argent en offrant l'espace libre dans votre voiture."
+  },
+
   "general": {
-    "tagline": "Le service de transport simple, économique et écologique",
+    "tagline": "Le service de transport simple, économique et écologique.",
     "howItWorks": "Comment ça fonctionne",
     "moreInfo": "En savoir plus",
     "send": "Envoyer",
@@ -135,9 +145,7 @@
   "requestAddresses": {
     "title": "Ou voulez-vous que l'envoi soit récupéré et envoyé?",
     "pickupAddress": "Adresse de ramassage",
-    "|*TBI*|pickupAddressPlaceholder": "Entrez une adresse",
-    "deliveryAddress": "Adresse de livraison",
-    "|*TBI*|deliveryAddressPlaceholder": "Entrez une adresse"
+    "deliveryAddress": "Adresse de livraison"
   },
   "requestTime": {
     "title": "Quand voulez-vous que l'envoi soit récupéré?",
@@ -179,9 +187,7 @@
   "driveAddresses": {
     "createNewRouteTitle": "Créer un nouvel itinéraire",
     "departureAddress": "Adresse de départ",
-    "|*TBI*|departureAddressPlaceholder": "Entrez une adresse",
     "destinationAddress": "Adresse de destination",
-    "|*TBI*|destinationAddressPlaceholder": "Entrez une adresse",
     "acceptableDetour": "Détour acceptable"
   },
   "driveTime": {
@@ -189,13 +195,8 @@
     "rangeTitle": "Sélectionner la date",
     "singleTrip": "Voyage unique",
     "recurringRide": "Trajet récurrent",
-    "|*TBI*|startPlaceholder": "Début",
-    "|*TBI*|endPlaceholder": "Fin",
     "selectTime": "Sélectionnez l'heure",
     "timeHint": "(Choix multiple possible)",
-    "|*TBI*|timeMornings": "Matinées",
-    "|*TBI*|timeMidDays": "Mi-journées",
-    "|*TBI*|timeEvenings": "Soirées",
     "weekdayTitle": "Sélectionnez les jours",
     "timeTitle": "Sélectionnez l'heure"
   },

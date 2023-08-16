@@ -115,7 +115,7 @@ const EnterRequestPrice: React.FC = () => {
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
-              logEvent(analytics, 'send_4_price_next_button_click');
+              logEvent(analytics, 'send_4_price_back_button_click');
             }}
           />
           <NextButton
