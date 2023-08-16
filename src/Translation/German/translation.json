@@ -9,6 +9,16 @@
     "whoWeAreText": "Bei Portato trifft Innovation auf freie Strasse! Wir sind eine lebhafte Mischung von Denkern, Bastlern und Pionieren mit dem Ziel den Transport zu revolutionieren!"
   },
 
+  "sendSection": {
+    "title": "Etwas versenden oder geliefert bekommen",
+    "description": "Mit Portato kannst Du ganz einfach etwas versenden oder abholen lassen."
+  },
+
+  "driveSection": {
+    "title": "Verdiene Geld beim Fahren",
+    "description": "Transportiere etwas auf deiner nächsten Autofahrt und verdiene Geld dabei."
+  },
+
   "general": {
     "tagline": "Der einfache, günstige und ökologische Transportdienst.",
     "howItWorks": "So funktioniert's",
@@ -16,7 +26,7 @@
     "send": "Senden",
     "deliver": "Fahren",
     "delete": "Löschen",
-    "deleteConfirm": "Sind Sie sicher, dass Sie dies löschen wollen?",
+    "deleteConfirm": "Bist Du sicher, dass Du dies löschen willst?",
     "upload": "Hochladen",
     "yes": "Ja",
     "no": "Nein",
@@ -48,7 +58,7 @@
   "capacity": {
     "s": "Passt in eine Tasche",
     "m": "Passt in ein kleines Auto",
-    "l": "Passt in ein großes Auto",
+    "l": "Passt in ein grosses Auto",
     "xl": "Passt in einen Van"
   },
   "timeOfDay": {
@@ -138,9 +148,7 @@
   "requestAddresses": {
     "title": "Wo soll die Sendung abgeholt und verschickt werden?",
     "pickupAddress": "Abholadresse",
-    "|*TBI*|pickupAddressPlaceholder": "Gib eine Adresse ein",
-    "deliveryAddress": "Lieferadresse",
-    "|*TBI*|deliveryAddressPlaceholder": "Gib eine Adresse ein"
+    "deliveryAddress": "Lieferadresse"
   },
   "requestTime": {
     "title": "Wann soll die Sendung abgeholt werden?",
@@ -182,9 +190,7 @@
   "driveAddresses": {
     "createNewRouteTitle": "Neue Route erstellen",
     "departureAddress": "Abfahrtsadresse",
-    "|*TBI*|departureAddressPlaceholder": "Gib eine Adresse ein",
     "destinationAddress": "Zieladresse",
-    "|*TBI*|destinationAddressPlaceholder": "Gib eine Adresse ein",
     "acceptableDetour": "Akzeptabler Umweg"
   },
   "driveTime": {
@@ -192,13 +198,8 @@
     "rangeTitle": "Datum auswählen",
     "singleTrip": "Einzelfahrt",
     "recurringRide": "Wiederkehrende Fahrt",
-    "|*TBI*|startPlaceholder": "Start",
-    "|*TBI*|endPlaceholder": "Ende",
     "selectTime": "Uhrzeit auswählen",
     "timeHint": "(Mehrfachauswahl möglich)",
-    "|*TBI*|timeMornings": "Morgens",
-    "|*TBI*|timeMidDays": "Mittags",
-    "|*TBI*|timeEvenings": "Abends",
     "weekdayTitle": "Tage auswählen",
     "timeTitle": "Tageszeit auswählen"
   },
