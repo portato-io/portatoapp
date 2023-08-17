@@ -11,10 +11,6 @@ require('../CSS/InfoPages.css');
 
 const Home: React.FC = () => {
   const { t } = useTranslation<string>();
-  const StyledList = styled.ul``;
-  const StyledListItem = styled.li`
-    font-size: inherit;
-  `;
   const Spacer = styled.div`
     height: 80px;
   `;

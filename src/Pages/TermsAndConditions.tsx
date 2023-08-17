@@ -46,8 +46,8 @@ const Home: React.FC = () => {
         <h4>{t('termsAndConditions.liabilityExclusionTitle')}</h4>
         <p>{t('termsAndConditions.liabilityExclusionText')}</p>
 
-        <h4>{t('termsAndConditions.JurisdictionTitle')}</h4>
-        <p>{t('termsAndConditions.JurisdictionText')}</p>
+        <h4>{t('termsAndConditions.jurisdictionTitle')}</h4>
+        <p>{t('termsAndConditions.jurisdictionText')}</p>
       </section>
     </PageLayout>
   );

@@ -299,8 +299,8 @@
     "pricesAndPaymentsText": "Portato erhebt keine Gebühr für die Nutzung der Plattform. Die Preise für die Transportdienstleistungen werden zwischen Versendern und Fahrern vor Vertragsschluss ausgehandelt. Die Plattform hat keinen Einfluss auf die Preisgestaltung und übernimmt keine Haftung für die Preise. Die Nutzer sind verpflichtet, die vereinbarten Transportkosten vor Vertragsende an den Fahrer zu bezahlen.",
     "liabilityExclusionTitle": "Haftungsausschluss",
     "liabilityExclusionText": "Portato nimmt keine Beanstandungen für Nichterfüllung oder Schlechterfüllung von Transportdienstleistungen an und übernimmt keine Verantwortung oder Haftung für Schäden, die während des Transports von Gegenständen entstehen. Die Nutzer tragen das Risiko für Schäden, Verluste oder Diebstähle selbst. Es wird empfohlen, dass Sender die Gegenstände entsprechend verpacken und versichern, um allfällige Schäden oder Verluste zu minimieren.",
-    "JurisdictionTitle": "Gerichtsstand",
-    "JurisdictionText": "Für alle Streitigkeiten, die sich aus oder im Zusammenhang mit den AGB oder der Nutzung der Plattform ergeben, gilt das schweizerische Recht. Gerichtsstand ist Zürich. Dies gilt auch für Klagen im Wechsel- oder Scheckprozess sowie für Klagen aufgrund von Scheckvorfällen. Die Plattform und der Nutzer verzichten auf das Recht, an einem anderen Gerichtsstand geltend zu machen, dass ein für den Nutzer zuständiges Gericht aufgrund von Ansässigkeit oder internationalem Privatrecht über den Streit zu entscheiden hätte."
+    "jurisdictionTitle": "Gerichtsstand",
+    "jurisdictionText": "Für alle Streitigkeiten, die sich aus oder im Zusammenhang mit den AGB oder der Nutzung der Plattform ergeben, gilt das schweizerische Recht. Gerichtsstand ist Zürich. Dies gilt auch für Klagen im Wechsel- oder Scheckprozess sowie für Klagen aufgrund von Scheckvorfällen. Die Plattform und der Nutzer verzichten auf das Recht, an einem anderen Gerichtsstand geltend zu machen, dass ein für den Nutzer zuständiges Gericht aufgrund von Ansässigkeit oder internationalem Privatrecht über den Streit zu entscheiden hätte."
   },
 
   "privacyPolicy": {

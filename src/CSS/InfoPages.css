@@ -8,19 +8,10 @@
 
 .white-banner {
     position: fixed;
-    top: 0;         /* start from the very top of the screen */
-    left: 0;        /* start from the very left of the screen */
-    width: 100%;    /* stretch across the entire width */
-    height: 120px;  /* adjust as per the height you want for the banner */
+    top: 0;         
+    left: 0;        
+    width: 100%;    
+    height: 120px;  
     background-color: white;
-    z-index: 999;   /* ensure this is below the logo but above other content */
+    z-index: 999;   
 }
-
-ul.custom-list {
-    font-size: 1rem;
-  }
-  
-ul.custom-list li {
-    font-size: 1rem;
-  }
-  
