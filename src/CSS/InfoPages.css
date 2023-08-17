@@ -1,0 +1,26 @@
+.fixed-logo {
+    position: fixed; 
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.white-banner {
+    position: fixed;
+    top: 0;         /* start from the very top of the screen */
+    left: 0;        /* start from the very left of the screen */
+    width: 100%;    /* stretch across the entire width */
+    height: 120px;  /* adjust as per the height you want for the banner */
+    background-color: white;
+    z-index: 999;   /* ensure this is below the logo but above other content */
+}
+
+ul.custom-list {
+    font-size: 1rem;
+  }
+  
+ul.custom-list li {
+    font-size: 1rem;
+  }
+  
