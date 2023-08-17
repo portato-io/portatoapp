@@ -15,9 +15,20 @@ import { checkTokenExists } from './linksStoreToFirebase';
 import { useAuth } from './Components/AuthProvider';
 import { fetchToken, onMessageListener } from './firebaseConfig';
 import { TranslationProvider } from './Contexts/TranslationContext';
+import { useLocation } from 'react-router-dom';
 
 // import routes
 import { routes as appRoutes } from './routes';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const App: React.FC = () => {
   Crisp.configure('d7c9a775-c889-4dfd-ba8c-b78075b2a6ef');
@@ -73,6 +84,7 @@ const App: React.FC = () => {
         >
           <div>
             <Router>
+              <ScrollToTop />
               <SideNavigator openMenu={openMenu} setOpenMenu={setOpenMenu} />
               <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
