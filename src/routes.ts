@@ -7,6 +7,10 @@ import MyAccount from './Pages/Profile/MyAccount';
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
+const TermsAndConditions = lazy(() => import('./Pages/TermsAndConditions'));
+const FAQ = lazy(() => import('./Pages/FAQ'));
+const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy'));
+const Imprint = lazy(() => import('./Pages/Imprint'));
 const Profile = lazy(() => import('./Pages/Menu'));
 const EnterRequestNameDesc = lazy(
   () => import('./Pages/Sender/EnterRequestNameDesc')
@@ -71,6 +75,34 @@ export const routes: Array<Route> = [
     path: '/about',
     enabled: true,
     component: About,
+  },
+  {
+    key: 'FAQ-route',
+    title: 'FAQ',
+    path: '/FAQ',
+    enabled: true,
+    component: FAQ,
+  },
+  {
+    key: 'termsAndConditions-route',
+    title: 'TermsAndConditions',
+    path: '/termsAndConditions',
+    enabled: true,
+    component: TermsAndConditions,
+  },
+  {
+    key: 'privacyPolicy-route',
+    title: 'PrivacyPolicy',
+    path: '/privacyPolicy',
+    enabled: true,
+    component: PrivacyPolicy,
+  },
+  {
+    key: 'imprint-route',
+    title: 'Imprint',
+    path: '/imprint',
+    enabled: true,
+    component: Imprint,
   },
   {
     key: 'profile-route',

@@ -256,5 +256,74 @@
     "english": "Anglais",
     "french": "Français",
     "german": "Allemand"
+  },
+
+  "links": {
+    "heading": "Informations complémentaires",
+    "FAQ": "Questions fréquemment posées",
+    "termsAndConditions": "Conditions générales",
+    "privacyPolicy": "Politique de confidentialité",
+    "imprint": "Mentions légales"
+  },
+
+  "FAQ": {
+    "title": "Questions fréquemment posées",
+    "senderQuestion": "Comment ça marche en tant qu'expéditeur?",
+    "senderAnswer": "Il suffit de fournir les détails de votre demande de transport, y compris des informations sur l'objet, les adresses de collecte et de livraison, et votre plage horaire préférée. Nous vous mettrons ensuite en relation avec un conducteur qui suit un itinéraire similaire. Une fois la correspondance trouvée, vous recevrez une notification par e-mail.",
+    "purchaseQuestion": "J'ai acheté quelque chose sur Tutti ou Ricardo et je dois le récupérer. Puis-je demander une prise en charge via Portato?",
+    "purchaseAnswer": "Absolument! En tant qu'expéditeur, vous êtes celui qui crée la demande de transport. Vous n'avez pas nécessairement besoin d'être la personne au point de collecte. Vous pourriez aussi être le destinataire qui attend la livraison à l'autre bout.",
+    "feeQuestion": "Combien coûte une livraison avec Portato?",
+    "feeAnswer": "Nous ne fixons pas les prix - c'est à vous de décider! En tant qu'expéditeur, vous indiquez la récompense que vous êtes prêt à offrir, ce qui sert de point de départ pour négocier avec le conducteur. Le conducteur pourrait faire un petit détour pour vous, alors proposez un prix qui est un bon incitatif pour qu'il vous aide.",
+    "deliveryGuaranteeQuestion": "Portato peut-il garantir la livraison?",
+    "deliveryGuaranteeAnswer": "Nous en sommes encore à un stade préliminaire et notre communauté de conducteurs est en croissance. Bien que nous ne puissions promettre une couverture pour chaque demande, nous faisons de notre mieux pour répondre à vos besoins. Nous conduisons souvent nous-mêmes avec notre camion Portato pour effectuer des livraisons. Il se pourrait donc que le conducteur que vous rencontrez soit en fait un membre de l'équipe Portato.",
+    "insuranceQuestion": "Mon envoi est-il assuré par Portato?",
+    "insuranceAnswer": "Pas pour le moment via Portato. Si vous souhaitez assurer vos articles, il faudra que vous vous en occupiez vous-même. Cependant, notre priorité est d'intégrer prochainement une assurance et nous sommes actuellement en discussion avec plusieurs assureurs.",
+    "driverQuestion": "Comment ça marche en tant que conducteur?",
+    "driverAnswer": "Nous sommes ravis que vous souhaitiez aider! Enregistrez votre itinéraire, en indiquant les points de départ et d'arrivée, la durée et l'espace disponible dans votre véhicule. Que ce soit pour votre trajet quotidien ou un trajet unique, comme des vacances, vous êtes prêt à gagner de l'argent en chemin.",
+    "paymentQuestion": "Comment fonctionnent les paiements?",
+    "paymentAnswer": "Actuellement, nous ne traitons pas directement les paiements dans l'application. Les arrangements de paiement sont pris directement entre l'expéditeur et le conducteur. Cependant, nous travaillons activement à intégrer un système de paiement pour une expérience plus fluide dans un avenir proche.",
+    "contactQuestion": "Comment puis-je vous contacter?",
+    "contactAnswer": "Nous sommes là pour vous à tout moment! Utilisez simplement le widget en bas à droite de cet écran ou écrivez-nous à info@portato.io. Nous avons hâte d'avoir de vos nouvelles!"
+},
+
+  "termsAndConditions": {
+    "title": "Conditions générales",
+    "definitionOfTermsTitle": "Définition des termes",
+    "definitionOfTermsText": "\"Expéditeur\" dans le contexte de ces CG est tout utilisateur qui crée une demande de services de transport sur cette plateforme (Portato) et en profite pour un prix spécifique, indépendamment du fait que cette personne soit l'expéditeur ou le destinataire des articles à transporter. \"Conducteur\" dans ce contexte désigne toute personne qui fournit des services de transport en utilisant cette plateforme pour un prix spécifique. Le terme \"utilisateur\" dans ce contexte fait référence à la fois aux expéditeurs et aux conducteurs.",
+    "termsOfUseTitle": "Conditions d'utilisation",
+    "termsOfUseText": "La plateforme ne peut être utilisée que pour le transport d'articles autorisés par les lois et règlements en vigueur. L'utilisateur ne doit pas transporter d'articles qui sont illégaux, dangereux, nocifs pour la santé ou inappropriés. La plateforme se réserve le droit de bloquer ou d'exclure les utilisateurs de l'utilisation de la plateforme sans donner de raisons et sans préavis si ces CG ou la loi en vigueur sont violées.",
+    "contractConclusionTitle": "Conclusion du contrat",
+    "contractConclusionText": "Les expéditeurs peuvent créer une demande de transport sur cette plateforme en précisant les articles à transporter, la date de transport, et un lieu de prise en charge et de livraison. Les conducteurs peuvent enregistrer la date et l'itinéraire des voyages prévus et ainsi indiquer leur volonté d'offrir des services de transport en cours de route. Les utilisateurs sont tenus de fournir toutes les informations pertinentes au transport de manière véridique et complète. L'utilisateur est responsable des dommages résultant d'informations fausses ou incomplètes. Ni la création d'une demande d'expédition ni l'offre d'un service de transport ne constituent une offre de contrat juridiquement contraignante. Portato n'est pas tenu de médier une demande de transport ou d'offrir des services de transport lui-même. Cependant, la plateforme fera tout en son pouvoir pour réunir les utilisateurs et les conducteurs ayant un intérêt à effectuer un service de transport. Une demande de transport est considérée comme acceptée dès que l'expéditeur et le conducteur confirment la demande de transport. Le contrat de transport est conclu entre l'utilisateur et le conducteur, et non entre l'utilisateur et la plateforme. Le conducteur est tenu de transporter les articles avec soin, de les livrer à temps, et de s'assurer qu'ils arrivent chez le destinataire en bon état. Le conducteur est responsable des dommages survenus pendant le transport, sauf s'ils sont attribuables à un cas de force majeure ou à des événements imprévus. L'expéditeur doit garantir un transfert fluide des articles de l'expéditeur au conducteur et du conducteur au destinataire. Le contrat de transport prend fin dès que les articles sont arrivés chez le destinataire et que celui-ci a confirmé la réception sans objections à l'expéditeur et à Portato.",
+    "pricesAndPaymentsTitle": "Prix et paiements",
+    "pricesAndPaymentsText": "Portato ne facture pas de frais pour l'utilisation de la plateforme. Les prix des services de transport sont négociés entre les expéditeurs et les conducteurs avant la conclusion du contrat. La plateforme n'a aucune influence sur la tarification et n'assume aucune responsabilité pour les prix. L'expéditeur est tenu de payer les frais de transport convenus au conducteur avant la fin du contrat.",
+    "liabilityExclusionTitle": "Exclusion de responsabilité",
+    "liabilityExclusionText": "Portato n'accepte pas les réclamations pour non-exécution ou mauvaise exécution des services de transport et n'assume aucune responsabilité pour les dommages pouvant survenir lors du transport des marchandises. Les utilisateurs assument eux-mêmes le risque de dommages, pertes ou vols. Il est recommandé aux expéditeurs d'emballer correctement leurs articles et de les assurer pour minimiser les dommages ou pertes éventuels.",
+    "jurisdictionTitle": "Juridiction",
+    "jurisdictionText": "Pour tous les litiges découlant de ou en relation avec les CG ou l'utilisation de la plateforme, le droit suisse est applicable. La juridiction est Zurich. Ceci s'applique également aux actions en justice concernant la lettre de change ou les procédures de chèque ainsi qu'aux actions en justice en raison d'incidents liés aux chèques. La plateforme et l'utilisateur renoncent au droit de revendiquer la juridiction d'un autre tribunal, où un tribunal compétent pour l'utilisateur en fonction de la résidence ou du droit international privé devrait décider du litige."
+  },
+
+  "privacyPolicy": {
+    "title": "Politique de confidentialité",
+    "introductionTitle": "Introduction",
+    "introductionText": "Chez Portato, nous privilégions la confidentialité de nos utilisateurs et nous nous engageons à protéger vos données personnelles. Cette politique de confidentialité décrit nos pratiques en matière de collecte, d'utilisation et de partage de vos informations lorsque vous interagissez avec notre plateforme. En utilisant Portato, vous consentez aux pratiques détaillées dans cette politique.",
+    "collectionTitle": "Collecte de données",
+    "collectionText": "Nous pourrions collecter les types d'informations suivants:\n\nDonnées personnelles: Vos données personnelles sont collectées lorsque vous nous les fournissez volontairement. Cela peut inclure des détails tels que votre nom, adresse e-mail et tout autre détail pertinent lors de la soumission d'une demande de transport ou de l'offre de services de transport.\n\nDonnées d'utilisation: Cela se réfère aux données concernant vos interactions avec notre plateforme. Cela peut fournir des informations sur les fonctionnalités que vous utilisez, la durée de vos visites et toute autre donnée diagnostique pertinente.",
+    "useTitle": "Utilisation des données",
+    "useText": "Vos informations sont essentielles pour nous pour plusieurs raisons: traiter et confirmer les demandes de transport; répondre à vos commentaires, questions et besoins; fournir, maintenir et améliorer notre plateforme; et pour tout autre objectif pour lequel vous avez donné votre consentement.",
+    "sharingTitle": "Partage des données",
+    "sharingText": "Nous adhérons à une politique stricte de non-partage de vos données personnelles avec des tiers sans consentement explicite. Cependant, dans les cas où cela est essentiel à des fins opérationnelles telles que le traitement des paiements, nous pourrions partager les données nécessaires avec des prestataires de services tiers de confiance. Cela est toujours fait avec le plus grand soin et conformément aux lois sur la protection des données.",
+    "cookiesTitle": "Cookies et technologies similaires",
+    "cookiesText": "Nous utilisons des cookies et des technologies analogues pour analyser votre interaction avec notre plateforme et améliorer l'expérience utilisateur. Ils nous aident à comprendre les préférences des utilisateurs et à adapter nos services en conséquence.",
+    "rightsTitle": "Vos droits",
+    "rightsText": "Vous avez le droit d'accéder à toutes les données personnelles que nous avons collectées à votre sujet. De plus, vous pouvez demander la modification ou la suppression de vos données, en gardant à l'esprit certaines exceptions. Si vous souhaitez exercer l'un de ces droits, veuillez nous contacter à info@portato.io.",
+    "updatesTitle": "Mises à jour de la politique",
+    "updatesText": "Nous pourrions réviser périodiquement cette politique de confidentialité. Lorsque des modifications sont apportées, nous veillerons à ce que vous soyez informé en mettant à jour la politique sur notre plateforme. Il est conseillé de consulter régulièrement cette politique de confidentialité pour tout changement.",
+    "contactTitle": "Contactez-nous",
+    "contactText": "Pour toute question relative à cette politique ou pour tout autre souci, vous pouvez nous contacter à info@portato.io."
+  },
+
+  "imprint": {
+    "title": "Mentions légales",
+    "text": "Portato GmbH i.G.\nReprésentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
   }
 }

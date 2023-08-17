@@ -10,6 +10,7 @@ import HugoImage from '../Assets/Images/team/hugo.jpg';
 import MehdiImage from '../Assets/Images/team/mehdi.jpg';
 import MischaImage from '../Assets/Images/team/mischa.jpg';
 import ChiaraImage from '../Assets/Images/team/chiara.jpg';
+import { Link } from 'react-router-dom';
 
 interface Images {
   [key: string]: string;
@@ -192,6 +193,43 @@ const Home: React.FC = () => {
             <SocialChannel socialLabel={label} key={label} />
           ))}
         </div>
+      </section>
+
+      <section className="section">
+        <h2>{t('links.heading')}</h2>
+        <Link
+          to="/FAQ"
+          onClick={() => logEvent(analytics, 'home_moreInfo_FAQ_button_click')}
+        >
+          <p>{t('links.FAQ')}</p>
+        </Link>
+
+        <Link
+          to="/termsAndconditions"
+          onClick={() =>
+            logEvent(analytics, 'home_moreInfo_TandC_button_click')
+          }
+        >
+          <p>{t('links.termsAndConditions')}</p>
+        </Link>
+
+        <Link
+          to="/privacyPolicy"
+          onClick={() =>
+            logEvent(analytics, 'home_moreInfo_privacyPolicy_button_click')
+          }
+        >
+          <p>{t('links.privacyPolicy')}</p>
+        </Link>
+
+        <Link
+          to="/imprint"
+          onClick={() =>
+            logEvent(analytics, 'home_moreInfo_imprint_button_click')
+          }
+        >
+          <p>{t('links.imprint')}</p>
+        </Link>
       </section>
     </PageLayout>
   );
