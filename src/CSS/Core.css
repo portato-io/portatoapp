@@ -365,22 +365,60 @@ video,
   font-size:1.1rem;
 }
 
-.header-image {
-  width: 100%; /* If you want the image to take the full width of the container */
-  display: block; /* Remove any default spacing */
-  vertical-align: top; /* Aligns the image correctly if there's any other inline content */
+
+.header-section {
+  position: relative;
+  overflow: hidden; /* Hide excess width */
+  height: min(600px, 80vw); /* replace [desired height] with your chosen value, e.g., 200px min(600px)*/
 }
 
-.overlay-text {
+.header-image {
+  display: block;
+  width: auto; /* Width will change according to the height */
+  height: 100%; /* This will match the height of the container */
+  position: relative;
+  left: 50%; /* Move the center of the image to the center of the container */
+  transform: translateX(-50%); /* Shift it back by half of its width */
+}
+
+.header-overlay-text {
   position: absolute;
+  font-size: 38px;
+  font-weight: 600;
   top: 0;
   left: 0;
-  right: 0; /* This, combined with left: 0 ensures the text container takes full width of the image/section */
+  right: 0; /* Takes the full width of the container */
   height: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   color: #fff;
   background: rgba(0,0,0,0.3);
   z-index: 2;
+  /* max-width: var(--content-width-regular); */
+  /* padding: var(--spacing-regular); */
+  /* margin-left: auto;
+  margin-right: auto; */
+
+  width: 100%;
+  max-width: var(--content-width-regular);
+  margin: 0 auto;
+  padding: 0 var(--spacing-regular);
+}
+
+
+
+
+.custom-section {
+  background-color: #e5f7bb;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.call-to-action-image {
+  margin-left: calc(-1 * var(--spacing-regular));
+  margin-right: calc(-1 * var(--spacing-regular));
+  width: calc(100% + 2 * var(--spacing-regular)); /* 100% of the container's width plus twice the padding */
+  display: block; /* Ensures the image takes up the full width without any alignment issues */
 }

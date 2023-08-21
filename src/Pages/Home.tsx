@@ -1,6 +1,8 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-10.png';
+import headerImage from '../Assets/Images/portato-landing-12.png';
+import sendImage from '../Assets/Images/send.png';
+import driveImage from '../Assets/Images/drive.png';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
@@ -88,19 +90,77 @@ const Home: React.FC = () => {
   return (
     <PageLayout>
       {/* Landing screen */}
-      <section className="section mod-nopadding mod-nomargin-top mod-relative mod-display-inline-block">
+      {/* <section className="section mod-nopadding mod-nomargin-top mod-relative mod-display-inline-block">
         <img
           src={headerImage}
           alt="portato header image"
           className="image header-image"
         />
         <div className="overlay-text">Your Overlay Text Here</div>
+      </section> */}
+
+      <section className="header-section">
+        <img
+          src={headerImage}
+          alt="portato header image"
+          className="header-image"
+        />
+        <div className="header-overlay-text">{t('general.tagline')}</div>
       </section>
 
+      {/* 
       <section className="section">
+        <div className="spacer-xxl"></div>
         <div className="text-section">
           <h1 className="icon icon-logo icon-big logo-slogan">portato</h1>
-          <h5>{t('general.tagline')}</h5>
+          
+        </div>
+      </section> */}
+
+      {/* <section className="section custom-section mod-relative">
+        <div className="background-container">
+            <div className="color-fill"></div>
+            <div className="image-container">
+                <img src={sendImage} alt="Send Image" className="section-image"/>
+            </div>
+        </div>
+        <h2 className="section-title">Your Title Here</h2>
+        <p className="section-text">Your description or regular text goes here.</p>
+        <button className="section-button">Button Text</button>
+    </section> */}
+
+      <section className="section custom-section mod-relative">
+        <h2 className="mod-text-align-center">Your Title Here</h2>
+        <p className="mod-text-align-center">
+          Your description or regular text goes here. Add as much content as you
+          need, and the section will grow accordingly.
+        </p>
+        <img
+          src={sendImage}
+          alt="send image"
+          className="call-to-action-image"
+        />
+      </section>
+
+      {/* 
+    <section className="section custom-section mod-relative">
+      <div className="image-container">
+          <img src={sendImage} alt="Send Image" className="section-image"/>
+      </div>
+      <h2 className="section-title">Your Title Here</h2>
+      <p className="section-text">Your description or regular text goes here.</p>
+      <button className="section-button">Button Text</button>
+    </section> */}
+
+      {/* <section className="section">
+      <img src={sendImage} alt="send image" className="header-image" />
+      <div className="header-overlay-text">{t('general.tagline')}</div>
+    </section> */}
+
+      <section className="section">
+        <div className="spacer-xxl"></div>
+        <div className="text-section">
+          <h1 className="icon icon-logo icon-big logo-slogan">portato</h1>
         </div>
       </section>
 
