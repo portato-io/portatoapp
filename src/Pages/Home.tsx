@@ -1,6 +1,6 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-9.png';
+import headerImage from '../Assets/Images/portato-landing-10.png';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
@@ -88,12 +88,13 @@ const Home: React.FC = () => {
   return (
     <PageLayout>
       {/* Landing screen */}
-      <section className="section mod-nopadding mod-nomargin-top">
+      <section className="section mod-nopadding mod-nomargin-top mod-relative mod-display-inline-block">
         <img
           src={headerImage}
           alt="portato header image"
           className="image header-image"
         />
+        <div className="overlay-text">Your Overlay Text Here</div>
       </section>
 
       <section className="section">

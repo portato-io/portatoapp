@@ -222,7 +222,8 @@ video,
 
 /* LOGO & SLOGAN ------------------------------------- */
 .logo-slogan {
-  font-family: 'Comfortaa';
+  font-family: 'Lexend';
+  font-weight: 300;
   font-size: 5rem;
   color: var(--portato-green);
   margin-top: -80px;
@@ -294,6 +295,12 @@ video,
 .mod-items-align-center {
   align-items: center;
 }
+.mod-relative {
+  position: relative;
+}
+.mod-fit-content {
+  width: fit-content;
+}
 
 
 /* STYLE MODIFIER ------------------------------------ */
@@ -354,5 +361,26 @@ video,
   margin-bottom: 5px; /* Space between the caption and the button. Adjust as needed. */
   font-size: 12px;
   color: #333;
-  font-family: 'Nunito Bold'; font-size:1.1rem;
+  font-family: 'Lexend';
+  font-size:1.1rem;
+}
+
+.header-image {
+  width: 100%; /* If you want the image to take the full width of the container */
+  display: block; /* Remove any default spacing */
+  vertical-align: top; /* Aligns the image correctly if there's any other inline content */
+}
+
+.overlay-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; /* This, combined with left: 0 ensures the text container takes full width of the image/section */
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  z-index: 2;
 }
