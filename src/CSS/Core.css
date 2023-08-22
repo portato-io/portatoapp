@@ -383,18 +383,18 @@ video,
 
 .header-overlay-text {
   position: absolute;
-  font-size: 38px;
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
   font-weight: 600;
   top: 0;
   left: 0;
   right: 0; /* Takes the full width of the container */
-  height: 30%;
+  height: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: #fff;
-  background: rgba(0,0,0,0.3);
+  /* background: rgba(0,0,0,0.3); */
   z-index: 2;
   /* max-width: var(--content-width-regular); */
   /* padding: var(--spacing-regular); */
@@ -410,15 +410,35 @@ video,
 
 
 
-.custom-section {
+.call-to-action-section {
   background-color: #e5f7bb;
   border-radius: 25px;
   overflow: hidden;
+  margin-left: calc(-1 * var(--spacing-regular));
+  margin-right: calc(-1 * var(--spacing-regular));
+  padding-left: var(--spacing-regular);
+  padding-right: var(--spacing-regular);
+  padding-top: 20px;
 }
 
 .call-to-action-image {
-  margin-left: calc(-1 * var(--spacing-regular));
-  margin-right: calc(-1 * var(--spacing-regular));
-  width: calc(100% + 2 * var(--spacing-regular)); /* 100% of the container's width plus twice the padding */
-  display: block; /* Ensures the image takes up the full width without any alignment issues */
+  width: max(calc(100% + 2 * var(--spacing-regular)), 600px);
+  display: block;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.call-to-action-button {
+  border-radius: 9999px;
+  position: absolute;
+  bottom: 0;
+  left: var(--spacing-regular);
+  right: var(--spacing-regular);
+  z-index: 2;
+  width: calc(100% - 2 * var(--spacing-regular));
+  padding: 10px 20px;
+  transform: translateY(50%);
+	margin: 0;
+  font-weight: 500;
+  font-size: 2.5rem;
 }

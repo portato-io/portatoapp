@@ -129,60 +129,55 @@ const Home: React.FC = () => {
         <button className="section-button">Button Text</button>
     </section> */}
 
-      <section className="section custom-section mod-relative">
-        <h2 className="mod-text-align-center">Your Title Here</h2>
-        <p className="mod-text-align-center">
-          Your description or regular text goes here. Add as much content as you
-          need, and the section will grow accordingly.
-        </p>
-        <img
-          src={sendImage}
-          alt="send image"
-          className="call-to-action-image"
-        />
+      <section className="section mod-relative">
+        <section className="call-to-action-section">
+          <h2 className="mod-text-align-center">{t('sendSection.title')}</h2>
+          <p className="mod-text-align-center">
+            {t('sendSection.description')}
+          </p>
+          <img
+            src={sendImage}
+            alt="send image"
+            className="call-to-action-image"
+          />
+        </section>
+        <a
+          className="button button-solid box-shadow box-shadow-effect call-to-action-button"
+          href="/createSendRequest/enter_request_name_desc"
+          onClick={() => logEvent(analytics, 'home_send_button_click')}
+        >
+          {t('general.send')}
+        </a>
       </section>
 
-      {/* 
-    <section className="section custom-section mod-relative">
-      <div className="image-container">
-          <img src={sendImage} alt="Send Image" className="section-image"/>
-      </div>
-      <h2 className="section-title">Your Title Here</h2>
-      <p className="section-text">Your description or regular text goes here.</p>
-      <button className="section-button">Button Text</button>
-    </section> */}
+      <div className="spacer-big"></div>
 
-      {/* <section className="section">
-      <img src={sendImage} alt="send image" className="header-image" />
-      <div className="header-overlay-text">{t('general.tagline')}</div>
-    </section> */}
+      <section className="section mod-relative">
+        <section className="call-to-action-section">
+          <h2 className="mod-text-align-center">{t('driveSection.title')}</h2>
+          <p className="mod-text-align-center">
+            {t('driveSection.description')}
+          </p>
+          <img
+            src={driveImage}
+            alt="send image"
+            className="call-to-action-image"
+          />
+        </section>
+        <a
+          className="button button-solid box-shadow box-shadow-effect call-to-action-button"
+          href="/deliver/enterRoute"
+          onClick={() => logEvent(analytics, 'home_drive_button_click')}
+        >
+          {t('general.deliver')}
+        </a>
+      </section>
 
       <section className="section">
         <div className="spacer-xxl"></div>
         <div className="text-section">
           <h1 className="icon icon-logo icon-big logo-slogan">portato</h1>
         </div>
-      </section>
-
-      <section className="section ">
-        <div className="spacer-regular"></div>
-        <div className="mod-display-flex">
-          <a
-            className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            href="/createSendRequest/enter_request_name_desc"
-            onClick={() => logEvent(analytics, 'home_send_button_click')}
-          >
-            {t('general.send')}
-          </a>
-          <a
-            className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            href="/deliver/enterRoute"
-            onClick={() => logEvent(analytics, 'home_drive_button_click')}
-          >
-            {t('general.deliver')}
-          </a>
-        </div>
-        <div className="spacer-regular"></div>
       </section>
 
       <section className="section">
