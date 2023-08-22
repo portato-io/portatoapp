@@ -408,7 +408,7 @@ video,
 .header-section {
   position: relative;
   overflow: hidden;
-  height: min(600px, 80vw);
+  height: min(600px, 100vw);
 }
 
 .header-image {
@@ -439,7 +439,7 @@ video,
 
 .header-overlay-text {
   text-align: center;
-  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  font-size: clamp(2.25rem, 6vw, 4.8rem);
   font-weight: 600;
   color: #fff;
   width: 100%;
