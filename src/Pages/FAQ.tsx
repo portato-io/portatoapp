@@ -12,7 +12,7 @@ require('../CSS/InfoPages.css');
 const Home: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const Spacer = styled.div`
-    height: 80px;
+    height: 50px;
   `;
 
   return (

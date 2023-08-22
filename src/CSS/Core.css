@@ -17,8 +17,9 @@
   --color-ok: #adff9e;
   --color-warning: #ffe89e;
   --color-error: #ff9e9e;
-  --spacing-small: 2vw;
-  --spacing-regular: 5vw;
+  --spacing-tiny: min(1vw, 10px);
+  --spacing-small: min(2vw, 20px);
+  --spacing-regular: min(5vw, 50px);
   --spacing-big: 10vw;
   --content-width-regular: 800px;
   --content-width-large: 1200px;
@@ -77,6 +78,8 @@ video,
 }
 .video-wrapper {
   position: relative;
+  background-color: var(--color-white);
+  border-radius: 30px;
 }
 
 .video-button-play {
@@ -170,6 +173,30 @@ video,
   padding:var(--spacing-horizontal-regular);
 }
 
+.listing-entry-content {
+  background-color: #e5f7bb;
+  border-radius: 15px;
+  color: var(--color-black);
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 1px;
+}
+.team-member-image {
+  width: 75%;
+}
+.team-member-grid {
+  row-gap: 20px;
+}
+
+.team-member-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .listing-border-style > * {
   margin:var(--spacing-horizontal-regular);
   border-style:solid;
@@ -182,7 +209,6 @@ video,
   margin-left:calc(-1 * var(--spacing-horizontal-regular));
   margin-top:calc(-1 * var(--spacing-horizontal-regular));
   width: calc(100% + 2 * var(--spacing-horizontal-regular));
-  border-radius: 2vw 2vw 2vw 0vw;
 }
 .listing-background-style > * {
   padding:var(--spacing-horizontal-big);
@@ -224,17 +250,28 @@ video,
 .logo-slogan {
   font-family: 'Lexend';
   font-weight: 300;
-  font-size: 5rem;
+  font-size: 4.8rem;
   color: var(--portato-green);
-  margin-top: -80px;
-  margin-bottom: 20px;
+  /* color: var(--color-white); */
+  margin-bottom: 1rem;
 }
 .logo-slogan:before {
-  font-size: 7rem;
+  font-size: 4.8rem;
   position: relative;
   top: 10px;
   margin-left: -10px;
 }
+
+
+.logo-slogan-landing-page {
+  color: var(--color-white);
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+}
+.logo-slogan-landing-page:before {
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  color: var(--color-white);
+}
+
 
 
 /* SPACERS ------------------------------------------- */
@@ -334,6 +371,9 @@ video,
 .box-radius-style-3 {
   border-radius: 20px 0vw 20px 20px;
 }
+.box-radius-round {
+  border-radius: 9999px;
+}
 .circle {
   border-radius: 50%;
 }
@@ -343,7 +383,7 @@ video,
 .main-page-split {
 
   background-color: #fff;
-  padding-bottom:100px; 
+  padding-bottom:50px; 
 }
 
 .signin-container {
@@ -381,34 +421,31 @@ video,
   transform: translateX(-50%); /* Shift it back by half of its width */
 }
 
-.header-overlay-text {
+
+.header-overlay {
   position: absolute;
-  font-size: clamp(2.8rem, 6vw, 4.8rem);
-  font-weight: 600;
   top: 0;
-  left: 0;
-  right: 0; /* Takes the full width of the container */
+  left: 50%; /* Updated */
+  transform: translateX(-50%); /* Added */
   height: 40%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  color: #fff;
-  /* background: rgba(0,0,0,0.3); */
   z-index: 2;
-  /* max-width: var(--content-width-regular); */
-  /* padding: var(--spacing-regular); */
-  /* margin-left: auto;
-  margin-right: auto; */
-
   width: 100%;
   max-width: var(--content-width-regular);
-  margin: 0 auto;
   padding: 0 var(--spacing-regular);
 }
 
-
-
+.header-overlay-text {
+  text-align: center;
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 600;
+  color: #fff;
+  width: 100%; /* Added to ensure it doesn't become narrower than its parent */
+  max-width: var(--content-width-regular); /* Consistency */
+}
 
 .call-to-action-section {
   background-color: #e5f7bb;
@@ -429,7 +466,6 @@ video,
 }
 
 .call-to-action-button {
-  border-radius: 9999px;
   position: absolute;
   bottom: 0;
   left: var(--spacing-regular);
@@ -441,4 +477,24 @@ video,
 	margin: 0;
   font-weight: 500;
   font-size: 2.5rem;
+}
+
+.green-section {
+  background-color: #60a353;
+  color: var(--color-white);
+  overflow: auto;
+}
+
+.center-flex {
+  justify-content: center;  /* centers items horizontally */
+  align-items: center;      /* centers items vertically */
+  flex-wrap: wrap;          /* allows items to wrap onto the next line */
+  row-gap: 20px;
+}
+
+.link-section-text {
+  color: var(--color-green-lighter);
+}
+.link-section-text:hover {
+  color: var(--color-green-light);
 }
