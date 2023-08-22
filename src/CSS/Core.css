@@ -411,6 +411,35 @@ video,
   height: min(600px, 100vw);
 }
 
+
+.header-section::before, 
+.header-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50vw;  
+  background-repeat: repeat-x;
+  z-index: 0;
+}
+
+
+.header-section::before {
+  left: 0; 
+  background-image: url('../Assets/Images/portato-landing-11-leftSlice.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+
+}
+
+
+.header-section::after {
+  right: 0; 
+  background-image: url('../Assets/Images/portato-landing-11-rightSlice.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
 .header-image {
   display: block;
   width: auto;
@@ -418,6 +447,7 @@ video,
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
 }
 
 
