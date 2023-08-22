@@ -1,4 +1,13 @@
 {
+  "howItWorksLottie": {
+    "Driver registers route": "Fahrer:in registriert route",
+    "Sender/receiver creates request": "Sender:in/Empfänger:in \rerstellt Auftrag",
+    "Portato connects both": "Portato verbindet die beiden",
+    "Driver picks up items ...": "Fahrer:in holt \rdie Gegenstände ab ...",
+    "... delivers them to receiver ...": "... liefert sie ab ...",
+    "... and gets paid.": "... und wird bezahlt."
+  },
+
   "about": {
     "title": "Über uns",
     "visionMissionTitle": "Portatos Mission",
