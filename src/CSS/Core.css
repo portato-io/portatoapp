@@ -388,8 +388,6 @@ video,
 }
 
 .signin-container {
-  /* This will ensure that the caption and the SignInButton 
-     are stacked vertically within the container. */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -398,8 +396,8 @@ video,
 
 .caption {
   display: block;
-  text-align: center; /* Center the text */
-  margin-bottom: 5px; /* Space between the caption and the button. Adjust as needed. */
+  text-align: center;
+  margin-bottom: 5px;
   font-size: 12px;
   color: #333;
   font-family: 'Lexend';
@@ -409,25 +407,25 @@ video,
 
 .header-section {
   position: relative;
-  overflow: hidden; /* Hide excess width */
-  height: min(600px, 80vw); /* replace [desired height] with your chosen value, e.g., 200px min(600px)*/
+  overflow: hidden;
+  height: min(600px, 80vw);
 }
 
 .header-image {
   display: block;
-  width: auto; /* Width will change according to the height */
-  height: 100%; /* This will match the height of the container */
+  width: auto;
+  height: 100%;
   position: relative;
-  left: 50%; /* Move the center of the image to the center of the container */
-  transform: translateX(-50%); /* Shift it back by half of its width */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 
 .header-overlay {
   position: absolute;
   top: 0;
-  left: 50%; /* Updated */
-  transform: translateX(-50%); /* Added */
+  left: 50%;
+  transform: translateX(-50%);
   height: 40%;
   display: flex;
   flex-direction: column;
@@ -441,11 +439,11 @@ video,
 
 .header-overlay-text {
   text-align: center;
-  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
   font-weight: 600;
   color: #fff;
-  width: 100%; /* Added to ensure it doesn't become narrower than its parent */
-  max-width: var(--content-width-regular); /* Consistency */
+  width: 100%;
+  max-width: var(--content-width-regular);
 }
 
 .call-to-action-section {
@@ -487,9 +485,9 @@ video,
 }
 
 .center-flex {
-  justify-content: center;  /* centers items horizontally */
-  align-items: center;      /* centers items vertically */
-  flex-wrap: wrap;          /* allows items to wrap onto the next line */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   row-gap: 20px;
 }
 
