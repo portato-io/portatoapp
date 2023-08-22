@@ -1,17 +1,17 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-12.png';
-import sendImage from '../Assets/Images/send.png';
-import driveImage from '../Assets/Images/drive.png';
+import headerImage from '../Assets/Images/portato-landing-12.webp';
+import sendImage from '../Assets/Images/send.webp';
+import driveImage from '../Assets/Images/drive.webp';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
 import LottieAnimation from '../Assets/Lotties/how-it-works-animation';
-import ConradImage from '../Assets/Images/team/conrad.jpg';
-import HugoImage from '../Assets/Images/team/hugo.jpg';
-import MehdiImage from '../Assets/Images/team/mehdi.jpg';
-import MischaImage from '../Assets/Images/team/mischa.jpg';
-import ChiaraImage from '../Assets/Images/team/chiara.jpg';
+import ConradImage from '../Assets/Images/team/conrad.webp';
+import HugoImage from '../Assets/Images/team/hugo.webp';
+import MehdiImage from '../Assets/Images/team/mehdi.webp';
+import MischaImage from '../Assets/Images/team/mischa.webp';
+import ChiaraImage from '../Assets/Images/team/chiara.webp';
 import { Link } from 'react-router-dom';
 
 interface Images {
