@@ -80,6 +80,7 @@ video,
   position: relative;
   background-color: var(--color-white);
   border-radius: 30px;
+  overflow: hidden;
 }
 
 .video-button-play {
