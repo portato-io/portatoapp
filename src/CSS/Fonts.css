@@ -6,12 +6,68 @@
     font-style: normal;
     font-display: swap;
 }
+
 @font-face {
-    font-family: 'Lexend';
-    src: url('../Fonts/Lexend-VariableFont_wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
 }
 
 html {
@@ -28,7 +84,7 @@ h1 { font-size: 3.6rem; margin: 30px 0; line-height: 1.6;} /* 3.6rem = 36px */
 h2 { font-size: 2.8rem; margin: 20px 0; line-height: 1.4;} /* 2.8rem = 28px */
 h3 { font-size: 2.2rem; margin: 15px 0;}
 h4 { font-size: 2rem; margin: 10px 0 10px 0;}
-h5 { font-size: 2rem; margin: 10px 0 10px 0; font-family: 'Lexend'; font-weight: 400;}
+h5 { font-size: 2rem; margin: 10px 0 10px 0; font-weight: 400;}
 
 p,a {font-size:1.8rem; line-height: 1.4}
 .text-hint {font-size:1.3rem;}
