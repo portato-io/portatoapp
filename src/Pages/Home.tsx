@@ -1,6 +1,6 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-11.png';
+import headerImage from '../Assets/Images/portato-landing-12.png';
 import sendImage from '../Assets/Images/send.webp';
 import driveImage from '../Assets/Images/drive.webp';
 import { useTranslation } from 'react-i18next';
@@ -13,8 +13,6 @@ import MehdiImage from '../Assets/Images/team/mehdi.webp';
 import MischaImage from '../Assets/Images/team/mischa.webp';
 import ChiaraImage from '../Assets/Images/team/chiara.webp';
 import { Link } from 'react-router-dom';
-import leftSlice from '../Assets/Images/portato-landing-11-leftSlice.png';
-import rightSlice from '../Assets/Images/portato-landing-11-rightSlice.png';
 
 interface Images {
   [key: string]: string;

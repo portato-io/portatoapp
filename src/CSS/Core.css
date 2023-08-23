@@ -426,7 +426,7 @@ video,
 
 .header-section::before {
   left: 0; 
-  background-image: url('../Assets/Images/portato-landing-11-leftSlice.png');
+  background-image: url('../Assets/Images/portato-landing-12-leftSlice.png');
   background-repeat: repeat-x;
   background-size: contain;
 
@@ -435,7 +435,7 @@ video,
 
 .header-section::after {
   right: 0; 
-  background-image: url('../Assets/Images/portato-landing-11-rightSlice.png');
+  background-image: url('../Assets/Images/portato-landing-12-rightSlice.png');
   background-repeat: repeat-x;
   background-size: contain;
 }
