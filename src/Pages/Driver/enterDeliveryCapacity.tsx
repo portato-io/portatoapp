@@ -15,6 +15,19 @@ import CustomSelector from '../../Components/CustomSelector';
 import { UserOutlined } from '@ant-design/icons';
 import { IRouteInfo } from '../../type';
 
+import styled from 'styled-components';
+
+const StyledSelector = styled(Selector)`
+  --checked-color: #e5f7bb;
+  --checked-text-color: #43723a;
+  --adm-color-primary: #60a353;
+  .adm-selector-check-mark-wrapper {
+    > svg {
+      stroke: #60a353;
+    }
+  }
+`;
+
 const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
 const PROGRESS = 66;
@@ -59,7 +72,7 @@ const EnterDeliveryCapacity: React.FC = () => {
         <ProgressBar progress={PROGRESS} />
         <Title level={4}>{t('driveCapacity.title')}</Title>
 
-        <Selector
+        <StyledSelector
           columns={1}
           options={CAPACITY_OPTIONS}
           defaultValue={[routeInfo.delivery_capacity[0]]}

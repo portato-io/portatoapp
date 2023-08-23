@@ -172,14 +172,14 @@ const EnterRequestNameDesc: React.FC = () => {
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
-              logEvent(analytics, 'send_1_objInfo_back_button_click');
+              logEvent(analytics, 'send_1_nameDescription_back_button_click');
             }}
           />
           <NextButton
             disabled={isUploading} // Disable the button if an upload is in progress
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_1_objInfo_next_button_click');
+              logEvent(analytics, 'send_1_nameDescription_next_button_click');
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}

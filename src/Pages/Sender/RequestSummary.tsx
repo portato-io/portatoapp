@@ -195,7 +195,7 @@ const RequestSummary: React.FC = () => {
         <div className="form-button-container mod-display-flex mod-flex-space-between mod-items-align-center">
           <BackButton
             onClick={() => {
-              logEvent(analytics, 'send_5_summary_back_button_click');
+              logEvent(analytics, 'send_6_summary_back_button_click');
             }}
           />
           {uid ? (
@@ -203,7 +203,7 @@ const RequestSummary: React.FC = () => {
               nextScreen={NEXT_SCREEN}
               onClick={() => {
                 handleConfirm();
-                logEvent(analytics, 'send_5_summary_confirm_button_click');
+                logEvent(analytics, 'send_6_summary_confirm_button_click');
               }}
             />
           ) : (
@@ -214,7 +214,7 @@ const RequestSummary: React.FC = () => {
               <SignInButton
                 onClick={() => {
                   showModal();
-                  logEvent(analytics, 'send_5_summary_signIn_button_click');
+                  logEvent(analytics, 'send_6_summary_signIn_button_click');
                 }}
               />
             </div>

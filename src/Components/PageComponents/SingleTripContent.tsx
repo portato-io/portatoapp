@@ -15,6 +15,18 @@ import BackButton from '../Buttons/BackButton';
 import NextButton from '../Buttons/NextButton';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
+import styled from 'styled-components';
+
+const StyledSelector = styled(Selector)`
+  --checked-color: #e5f7bb;
+  --checked-text-color: #43723a;
+  --adm-color-primary: #60a353;
+  .adm-selector-check-mark-wrapper {
+    > svg {
+      stroke: #60a353;
+    }
+  }
+`;
 
 const NEXT_SCREEN = '/deliver/enterDeliveryCapacity';
 
@@ -94,7 +106,7 @@ function SingleTripContent(activeTab: any) {
       <div className="input-wrapper">
         <label>{t('driveTime.timeTitle')}</label>
         <small>{t('driveTime.timeHint')}</small>
-        <Selector
+        <StyledSelector
           options={TIME}
           multiple={true}
           onChange={handleTimeChange}

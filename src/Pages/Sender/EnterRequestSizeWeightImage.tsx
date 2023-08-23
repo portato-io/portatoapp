@@ -15,6 +15,18 @@ import { Selector } from 'antd-mobile';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 import UploadImage from '../../Components/UploadImage';
+import styled from 'styled-components';
+
+const StyledSelector = styled(Selector)`
+  --checked-color: #e5f7bb;
+  --checked-text-color: #43723a;
+  --adm-color-primary: #60a353;
+  .adm-selector-check-mark-wrapper {
+    > svg {
+      stroke: #60a353;
+    }
+  }
+`;
 
 const PROGRESS = 20;
 
@@ -73,7 +85,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
           <h2>{t('requestInfo.title')}</h2>
 
           <Form.Item className="input-wrapper" label={t('requestInfo.size')}>
-            <Selector
+            <StyledSelector
               columns={2}
               options={CAPACITY_OPTIONS}
               onChange={handleCapChange}
@@ -99,13 +111,13 @@ const EnterRequestSizeWeightImage: React.FC = () => {
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
-              logEvent(analytics, 'send_1_objInfo_back_button_click');
+              logEvent(analytics, 'send_2_sizeWeight_back_button_click');
             }}
           />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_1_objInfo_next_button_click');
+              logEvent(analytics, 'send_2_sizeWeight_next_button_click');
             }}
           />
         </div>
