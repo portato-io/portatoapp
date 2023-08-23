@@ -82,6 +82,11 @@ video,
   border-radius: 30px;
   overflow: hidden;
 }
+.lottie-text {
+  font-family: "Lexend";
+  font-weight: 300;
+  font-size: 54px;
+}
 
 .video-button-play {
   position: absolute;
