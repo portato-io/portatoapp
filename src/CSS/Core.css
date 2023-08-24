@@ -17,8 +17,9 @@
   --color-ok: #adff9e;
   --color-warning: #ffe89e;
   --color-error: #ff9e9e;
-  --spacing-small: 2vw;
-  --spacing-regular: 5vw;
+  --spacing-tiny: min(1vw, 10px);
+  --spacing-small: min(2vw, 20px);
+  --spacing-regular: min(5vw, 50px);
   --spacing-big: 10vw;
   --content-width-regular: 800px;
   --content-width-large: 1200px;
@@ -77,6 +78,14 @@ video,
 }
 .video-wrapper {
   position: relative;
+  background-color: var(--color-white);
+  border-radius: 30px;
+  overflow: hidden;
+}
+.lottie-text {
+  font-family: "Lexend";
+  font-weight: 300;
+  font-size: 52px;
 }
 
 .video-button-play {
@@ -170,6 +179,30 @@ video,
   padding:var(--spacing-horizontal-regular);
 }
 
+.listing-entry-content {
+  background-color: #e5f7bb;
+  border-radius: 15px;
+  color: var(--color-black);
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 1px;
+}
+.team-member-image {
+  width: 75%;
+}
+.team-member-grid {
+  row-gap: 20px;
+}
+
+.team-member-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .listing-border-style > * {
   margin:var(--spacing-horizontal-regular);
   border-style:solid;
@@ -182,7 +215,6 @@ video,
   margin-left:calc(-1 * var(--spacing-horizontal-regular));
   margin-top:calc(-1 * var(--spacing-horizontal-regular));
   width: calc(100% + 2 * var(--spacing-horizontal-regular));
-  border-radius: 2vw 2vw 2vw 0vw;
 }
 .listing-background-style > * {
   padding:var(--spacing-horizontal-big);
@@ -222,18 +254,30 @@ video,
 
 /* LOGO & SLOGAN ------------------------------------- */
 .logo-slogan {
-  font-family: 'Comfortaa';
-  font-size: 5rem;
+  font-family: 'Lexend';
+  font-weight: 300;
+  font-size: 4.8rem;
   color: var(--portato-green);
-  margin-top: -80px;
-  margin-bottom: 20px;
+  /* color: var(--color-white); */
+  margin-bottom: 1rem;
 }
 .logo-slogan:before {
-  font-size: 7rem;
+  font-size: 4.8rem;
   position: relative;
   top: 10px;
   margin-left: -10px;
 }
+
+
+.logo-slogan-landing-page {
+  color: var(--color-white);
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+}
+.logo-slogan-landing-page:before {
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  color: var(--color-white);
+}
+
 
 
 /* SPACERS ------------------------------------------- */
@@ -294,6 +338,12 @@ video,
 .mod-items-align-center {
   align-items: center;
 }
+.mod-relative {
+  position: relative;
+}
+.mod-fit-content {
+  width: fit-content;
+}
 
 
 /* STYLE MODIFIER ------------------------------------ */
@@ -327,6 +377,9 @@ video,
 .box-radius-style-3 {
   border-radius: 20px 0vw 20px 20px;
 }
+.box-radius-round {
+  border-radius: 9999px;
+}
 .circle {
   border-radius: 50%;
 }
@@ -336,30 +389,151 @@ video,
 .main-page-split {
 
   background-color: #fff;
-  padding-bottom:100px; 
+  padding-bottom:50px; 
 }
 
 .signin-container {
-  /* This will ensure that the caption and the SignInButton 
-     are stacked vertically within the container. */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.info-page-top-spacer {
+  height: 80px;
+}
 
 .caption {
   display: block;
-  text-align: center; /* Center the text */
-  margin-bottom: 5px; /* Space between the caption and the button. Adjust as needed. */
+  text-align: center;
+  margin-bottom: 5px;
   font-size: 12px;
   color: #333;
-  font-family: 'Nunito Bold'; font-size:1.1rem;
+  font-family: 'Lexend';
+  font-size:1.1rem;
 }
 
 
-.info-page-top-spacer {
-  height: 80px;
+.header-section {
+  position: relative;
+  overflow: hidden;
+  height: min(600px, 100vw);
+}
+
+
+.header-section::before, 
+.header-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50vw;  
+  background-repeat: repeat-x;
+  z-index: 0;
+}
+
+
+.header-section::before {
+  left: 0; 
+  background-image: url('../Assets/Images/portato-landing-12-leftSlice.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+
+}
+
+
+.header-section::after {
+  right: 0; 
+  background-image: url('../Assets/Images/portato-landing-12-rightSlice.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+.header-image {
+  display: block;
+  width: auto;
+  height: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--content-width-regular);
+  padding: 0 var(--spacing-regular);
+}
+
+.header-overlay-text {
+  text-align: center;
+  font-size: clamp(2.25rem, 6vw, 4.8rem);
+  font-weight: 600;
+  color: #fff;
+  width: 100%;
+  max-width: var(--content-width-regular);
+}
+
+.call-to-action-section {
+  background-color: #e5f7bb;
+  border-radius: 25px;
+  overflow: hidden;
+  margin-left: calc(-1 * var(--spacing-regular));
+  margin-right: calc(-1 * var(--spacing-regular));
+  padding-left: var(--spacing-regular);
+  padding-right: var(--spacing-regular);
+  padding-top: 20px;
+}
+
+.call-to-action-image {
+  width: max(calc(100% + 2 * var(--spacing-regular)), 600px);
+  display: block;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.call-to-action-button {
+  position: absolute;
+  bottom: 0;
+  left: var(--spacing-regular);
+  right: var(--spacing-regular);
+  z-index: 2;
+  width: calc(100% - 2 * var(--spacing-regular));
+  padding: 10px 20px;
+  transform: translateY(50%);
+	margin: 0;
+  font-weight: 500;
+  font-size: 2.5rem;
+}
+
+.green-section {
+  background-color: #60a353;
+  color: var(--color-white);
+  overflow: auto;
+}
+
+.center-flex {
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 20px;
+}
+
+.link-section-text {
+  color: var(--color-green-lighter);
+}
+.link-section-text:hover {
+  color: var(--color-green-light);
 }
 
 /* FORCED ANTD COLOR CHANGES ---------------------------------------------- */

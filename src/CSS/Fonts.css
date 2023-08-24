@@ -6,60 +6,94 @@
     font-style: normal;
     font-display: swap;
 }
+
 @font-face {
-  font-family: 'Comfortaa';
-  src: url('../Fonts/Comfortaa-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
 }
+
 @font-face {
-    font-family: 'Nunito Regular';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Nunito Regular'), url('../Fonts/Nunito-Regular.woff') format('woff');
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
 }
+
 @font-face {
-    font-family: 'Nunito Light';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Nunito Light'), url('../Fonts/Nunito-Light.woff') format('woff');
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
 }
+
 @font-face {
-    font-family: 'Nunito Bold';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Nunito Bold'), url('../Fonts/Nunito-Bold.woff') format('woff');
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('../Fonts/Lexend-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
 }
 
 html {
-    font-family: 'Nunito Regular', sans-serif;
+    font-family: 'Lexend', sans-serif;
     font-size:62.5%; /* This trick is used to downsize the default browser size to 10px and make the REM unit more readable */
     color: var(--color-black);
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Nunito Bold';
+    font-family: 'Lexend';
 }
 
 h1 { font-size: 3.6rem; margin: 30px 0; line-height: 1.6;} /* 3.6rem = 36px */
 h2 { font-size: 2.8rem; margin: 20px 0; line-height: 1.4;} /* 2.8rem = 28px */
 h3 { font-size: 2.2rem; margin: 15px 0;}
 h4 { font-size: 2rem; margin: 10px 0 10px 0;}
-h5 { font-size: 2rem; margin: 10px 0 10px 0; font-family: 'Nunito Light'}
+h5 { font-size: 2rem; margin: 10px 0 10px 0; font-weight: 400;}
 
 p,a {font-size:1.8rem; line-height: 1.4}
 .text-hint {font-size:1.3rem;}
-.section-form label { font-family: 'Nunito Bold'; font-size: 1.8rem!important;} /*sorry for this one, but it was the easiest for today */
+.section-form label { font-family: 'Lexend'; font-size: 1.8rem!important;} /*sorry for this one, but it was the easiest for today */
 
-.button {font-family: 'Nunito Bold'; font-size:1.8rem;}
+.button {font-family: 'Lexend'; font-size:1.8rem;}
 
 .font-bold {
   font-weight: bold;
-}
-
-.font-comfortaa {
-  font-family: 'Comfortaa', sans-serif;
 }
 
 .font-large {

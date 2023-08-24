@@ -11,7 +11,7 @@
   "about": {
     "title": "Über uns",
     "visionMissionTitle": "Portatos Mission",
-    "visionMissionText": "Schweizer:innen fahren täglich über 150 Mio. Kilometer mit dem Auto, meistens mit leeren Kofferäumen.\n\n​Portato nutzt diese vielen freien Transportkapazitäten. Wir machen Mitfahrgelegenheiten einfach.\n\n Praktisch für Versender:innen. Lukrativ für Fahrer:innen. Gut für die Umwelt.",
+    "visionMissionText": "Schweizer:innen fahren täglich über 150 Mio. Kilometer mit dem Auto, meistens mit leeren Kofferräumen.\n\n​Portato nutzt diese vielen freien Transportkapazitäten. Wir machen Mitfahrgelegenheiten einfach.\n\n Praktisch für Versender:innen. Lukrativ für Fahrer:innen. Gut für die Umwelt.",
     "whoWeAreTitle": "Wer wir sind",
     "whoWeAreText": "Bei Portato trifft Innovation auf freie Strasse! Wir sind eine lebhafte Mischung von Denkern, Bastlern und Pionieren mit dem Ziel den Transport zu revolutionieren!"
   },
@@ -91,7 +91,7 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ehemaliger PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk.",
+      "description": "Ex PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk.",
       "image": "src/Assets/Images/team/conrad.jpg"
     },
     "Hugo": {
