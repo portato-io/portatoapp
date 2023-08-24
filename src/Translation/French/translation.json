@@ -17,8 +17,8 @@
   },
 
   "sendSection": {
-    "title": "Envoyer ou recevoir des articles",
-    "description": "Avec Portato, vous pouvez envoyer ou recevoir des articles depuis le confort de votre maison."
+    "title": "Envoyer ou recevoir des objets",
+    "description": "Le service de transport simple, économique et écologique."
   },
 
   "driveSection": {
@@ -27,11 +27,11 @@
   },
 
   "general": {
-    "tagline": "Le service de transport simple, économique et écologique.",
+    "tagline": "Covoiturage pour les objets",
     "howItWorks": "Comment ça fonctionne",
     "moreInfo": "En savoir plus",
-    "send": "Envoyer",
-    "deliver": "Conduire",
+    "send": "Créer une demande",
+    "deliver": "Enregistrer un trajet",
     "delete": "Supprimer",
     "deleteConfirm": "Êtes-vous sûr de vouloir le supprimer?",
     "upload": "Télécharger",
@@ -293,7 +293,7 @@
     "paymentAnswer": "Actuellement, nous ne traitons pas directement les paiements dans l'application. Les arrangements de paiement sont pris directement entre l'expéditeur et le conducteur. Cependant, nous travaillons activement à intégrer un système de paiement pour une expérience plus fluide dans un avenir proche.",
     "contactQuestion": "Comment puis-je vous contacter?",
     "contactAnswer": "Nous sommes là pour vous à tout moment! Utilisez simplement le widget en bas à droite de cet écran ou écrivez-nous à info@portato.io. Nous avons hâte d'avoir de vos nouvelles!"
-},
+  },
 
   "termsAndConditions": {
     "title": "Conditions générales",

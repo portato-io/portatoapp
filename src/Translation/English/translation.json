@@ -18,7 +18,7 @@
 
   "sendSection": {
     "title": "Send or receive items",
-    "description": "With Portato, you can send or receive items from the comfort of your home."
+    "description": "Your affordable, convenient and eco-friendly transportation service. With Portato, you can send or receive items from the comfort of your home."
   },
 
   "driveSection": {
@@ -27,11 +27,11 @@
   },
 
   "general": {
-    "tagline": "The affordable, convenient and eco-friendly transportation service.",
+    "tagline": "Ride-sharing for things",
     "howItWorks": "How it works",
     "moreInfo": "Learn more",
-    "send": "Ship",
-    "deliver": "Drive",
+    "send": "Create request",
+    "deliver": "Register route",
     "delete": "Delete",
     "deleteConfirm": "Are you sure you want to delete this?",
     "upload": "Upload",
@@ -113,8 +113,8 @@
 
   "navBar": {
     "home": "Home",
-    "send": "Delivery request",
-    "drive": "Register route",
+    "send": "Requests",
+    "drive": "Routes",
     "profile": "Menu"
   },
 
@@ -270,7 +270,7 @@
     "privacyPolicy": "Privacy policy",
     "imprint": "Imprint"
   },
-  
+
   "FAQ": {
     "title": "Frequently Asked Questions",
     "senderQuestion": "How does it work as a sender?",
@@ -289,7 +289,7 @@
     "paymentAnswer": "At present, we don't process payments directly within the app. Payment arrangements are made directly between the sender and the driver. We're actively working on incorporating a payment system for a smoother experience in the near future.",
     "contactQuestion": "How can I get in touch with you?",
     "contactAnswer": "We're here for you anytime! Simply use the widget on the bottom right of this screen or write us an email to info@portato.io. We're looking forward to hearing from you!"
-},
+  },
 
   "termsAndConditions": {
     "title": "Terms and conditions",
@@ -327,9 +327,8 @@
     "contactText": "For inquiries related to this policy or any other concerns, you can contact us at info@portato.io."
   },
 
-    "imprint": {
-      "title": "Imprint",
-      "text": "Portato GmbH i.G.\nRepresentative: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
-    }
-
+  "imprint": {
+    "title": "Imprint",
+    "text": "Portato GmbH i.G.\nRepresentative: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
+  }
 }

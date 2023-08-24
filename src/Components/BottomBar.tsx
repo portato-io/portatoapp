@@ -67,6 +67,15 @@ function BottomBar() {
             className="main-navigation-bar-element"
           />
         ))}
+
+        {/* Add another tab bar item, for when the screen is narrow (otherwise)
+        the crips bubble sits on top of the last icon! */}
+        <TabBar.Item
+          key=""
+          icon=""
+          title=""
+          className="main-navigation-bar-element crisp-bubble-placeholder"
+        />
       </TabBar>
     </div>
   );
