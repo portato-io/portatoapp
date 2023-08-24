@@ -397,6 +397,9 @@ video,
   align-items: center;
 }
 
+.info-page-top-spacer {
+  height: 80px;
+}
 
 .caption {
   display: block;
@@ -533,7 +536,6 @@ video,
   color: var(--color-green-light);
 }
 
-
 .call-to-action-title {
   margin-top: 0px;
   margin-bottom: 10px;
@@ -542,4 +544,56 @@ video,
 .call-to-action-description {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+/* FORCED ANTD COLOR CHANGES ---------------------------------------------- */
+.adm-slider-fill,
+.adm-slider-tick-active {
+  background-color: var(--portato-green) !important;
+}
+
+.adm-slider-thumb-icon rect {
+  fill: var(--portato-green) !important;
+}
+
+/* Deleting the horizontal line */
+.adm-tabs-header {
+  border: none !important;
+}
+
+/* Deleting the indicator line */
+.adm-tabs-tab-line {
+  display: none !important;
+}
+
+/* Flexbox layout*/
+.adm-tabs-tab-wrapper {
+  display: flex !important;
+}
+
+/* Common styles for both active and inactive tabs */
+.adm-tabs-tab {
+  flex: 1 !important; /* This ensures both tabs take up equal width */
+  padding: 10px !important; /* Adjust padding as needed */
+  text-align: center; /* Centers the text horizontally */
+  display: flex !important; /* To use flexbox properties for vertical centering */
+  justify-content: center !important;
+  border-radius: 4px !important;
+  background-color: #f1f1f1;
+  color: #666;
+}
+
+.adm-tabs-tab.adm-tabs-tab-active {
+  background-color: var(--portato-green) !important; /* Active tab background color */
+  color: white; /* Active tab text color */
+}
+
+.adm-selector-item-active, .adm-selector-item-multiple-active {
+  color: var(--color-green) !important;
+  background-color: var(--color-green-lighter) !important;
+}
+
+.adm-selector-check-mark-wrapper {
+  border-bottom-color: var(--portato-green) !important;
+  border-right-color: var(--portato-green) !important;
 }

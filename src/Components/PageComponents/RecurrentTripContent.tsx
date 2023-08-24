@@ -28,8 +28,12 @@ function RecurrentTripContent(activeTab: any) {
   const [dayTimeSelected, setDayTimeSelected] = useState(Boolean);
   const [day, setDay] = useState([]);
   const [daySelected, setDaySelected] = useState(Boolean);
-  const defaultDay: string[] = Object.values(routeInfo.days);
-  const defaultDayTime: string[] = Object.values(routeInfo.time);
+  const defaultDay: string[] = routeInfo.days
+    ? Object.values(routeInfo.days)
+    : [];
+  const defaultDayTime: string[] = routeInfo.time
+    ? Object.values(routeInfo.time)
+    : [];
 
   useEffect(() => {
     if (dayTime && dayTime.length === 0) {

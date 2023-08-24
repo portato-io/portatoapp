@@ -5,15 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 require('../CSS/InfoPages.css');
 
 const Home: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const Spacer = styled.div`
-    height: 50px;
-  `;
 
   return (
     <PageLayout>
@@ -25,7 +21,7 @@ const Home: React.FC = () => {
             </h2>
           </Link>
         </div>
-        <Spacer />
+        <div className="info-page-top-spacer"></div>
       </section>
 
       <section className="section">
