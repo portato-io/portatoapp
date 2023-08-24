@@ -358,6 +358,10 @@ video,
 }
 
 
+.info-page-top-spacer {
+  height: 80px;
+}
+
 /* FORCED ANTD COLOR CHANGES ---------------------------------------------- */
 .adm-slider-fill,
 .adm-slider-tick-active {
