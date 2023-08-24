@@ -15,18 +15,6 @@ import { Selector } from 'antd-mobile';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 import UploadImage from '../../Components/UploadImage';
-import styled from 'styled-components';
-
-const StyledSelector = styled(Selector)`
-  --checked-color: #e5f7bb;
-  --checked-text-color: #43723a;
-  --adm-color-primary: #60a353;
-  .adm-selector-check-mark-wrapper {
-    > svg {
-      stroke: #60a353;
-    }
-  }
-`;
 
 const PROGRESS = 20;
 
@@ -85,7 +73,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
           <h2>{t('requestInfo.title')}</h2>
 
           <Form.Item className="input-wrapper" label={t('requestInfo.size')}>
-            <StyledSelector
+            <Selector
               columns={2}
               options={CAPACITY_OPTIONS}
               onChange={handleCapChange}

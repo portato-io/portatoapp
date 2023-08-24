@@ -399,3 +399,13 @@ video,
   background-color: var(--portato-green) !important; /* Active tab background color */
   color: white; /* Active tab text color */
 }
+
+.adm-selector-item-active, .adm-selector-item-multiple-active {
+  color: var(--color-green) !important;
+  background-color: var(--color-green-lighter) !important;
+}
+
+.adm-selector-check-mark-wrapper {
+  border-bottom-color: var(--portato-green) !important;
+  border-right-color: var(--portato-green) !important;
+}

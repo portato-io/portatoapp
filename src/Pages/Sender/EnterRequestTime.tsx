@@ -16,20 +16,8 @@ import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
 import { IRequestInfo } from '../../type';
 import dayjs, { Dayjs } from 'dayjs';
-import styled from 'styled-components';
 
 require('../../CSS/Calendar.css');
-
-const StyledSelector = styled(Selector)`
-  --checked-color: #e5f7bb;
-  --checked-text-color: #43723a;
-  --adm-color-primary: #60a353;
-  .adm-selector-check-mark-wrapper {
-    > svg {
-      stroke: #60a353;
-    }
-  }
-`;
 
 const { RangePicker } = DatePicker;
 const PROGRESS = 60;
@@ -129,7 +117,7 @@ const EnterTime: React.FC = () => {
 
           <Form.Item className="input-wrapper" label={t('requestTime.times')}>
             <small>{t('requestTime.timeHint')}</small>
-            <StyledSelector
+            <Selector
               options={TIME}
               multiple={true}
               onChange={handleTimeChange}
