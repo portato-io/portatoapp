@@ -356,3 +356,46 @@ video,
   color: #333;
   font-family: 'Nunito Bold'; font-size:1.1rem;
 }
+
+
+/* FORCED ANTD COLOR CHANGES ---------------------------------------------- */
+.adm-slider-fill,
+.adm-slider-tick-active {
+  background-color: var(--portato-green) !important;
+}
+
+.adm-slider-thumb-icon rect {
+  fill: var(--portato-green) !important;
+}
+
+/* Deleting the horizontal line */
+.adm-tabs-header {
+  border: none !important;
+}
+
+/* Deleting the indicator line */
+.adm-tabs-tab-line {
+  display: none !important;
+}
+
+/* Flexbox layout*/
+.adm-tabs-tab-wrapper {
+  display: flex !important;
+}
+
+/* Common styles for both active and inactive tabs */
+.adm-tabs-tab {
+  flex: 1 !important; /* This ensures both tabs take up equal width */
+  padding: 10px !important; /* Adjust padding as needed */
+  text-align: center; /* Centers the text horizontally */
+  display: flex !important; /* To use flexbox properties for vertical centering */
+  justify-content: center !important;
+  border-radius: 4px !important;
+  background-color: #f1f1f1;
+  color: #666;
+}
+
+.adm-tabs-tab.adm-tabs-tab-active {
+  background-color: var(--portato-green) !important; /* Active tab background color */
+  color: white; /* Active tab text color */
+}

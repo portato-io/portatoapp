@@ -12,7 +12,6 @@ import AddressAutocomplete from '../../Components/AutoComplete';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
-import styled from 'styled-components';
 
 const PROGRESS = 0;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
@@ -23,19 +22,6 @@ const MARKS = {
   20: '20 km',
   25: '25 km',
 };
-
-const StyledSlider = styled.div`
-  .adm-slider {
-    .adm-slider-fill,
-    .adm-slider-tick-active {
-      background-color: #60a353;
-    }
-
-    .adm-slider-thumb-icon rect {
-      fill: #60a353;
-    }
-  }
-`;
 
 const EnterRoute: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
@@ -142,16 +128,14 @@ const EnterRoute: React.FC = () => {
             className="input-wrapper"
             label={t('driveAddresses.acceptableDetour')}
           >
-            <StyledSlider>
-              <Slider
-                marks={MARKS}
-                ticks
-                value={routes.acceptable_detour}
-                onChange={handleFormInputChanges}
-                max={parseInt(MARKS[25])} // Fix for now, will make it more generic in the future
-                min={parseInt(MARKS[5])}
-              />
-            </StyledSlider>
+            <Slider
+              marks={MARKS}
+              ticks
+              value={routes.acceptable_detour}
+              onChange={handleFormInputChanges}
+              max={parseInt(MARKS[25])} // Fix for now, will make it more generic in the future
+              min={parseInt(MARKS[5])}
+            />
           </Form.Item>
         </Form>
 
