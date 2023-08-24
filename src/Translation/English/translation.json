@@ -30,8 +30,8 @@
     "tagline": "Ride-sharing for things",
     "howItWorks": "How it works",
     "moreInfo": "Learn more",
-    "send": "Ship",
-    "deliver": "Drive",
+    "send": "Create request",
+    "deliver": "Register route",
     "delete": "Delete",
     "deleteConfirm": "Are you sure you want to delete this?",
     "upload": "Upload",
@@ -113,8 +113,8 @@
 
   "navBar": {
     "home": "Home",
-    "send": "Delivery request",
-    "drive": "Register route",
+    "send": "Requests",
+    "drive": "Routes",
     "profile": "Menu"
   },
 

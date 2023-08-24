@@ -30,8 +30,8 @@
     "tagline": "Mitfahrgelegenheiten für Gegenstände",
     "howItWorks": "So funktioniert's",
     "moreInfo": "Erfahre mehr",
-    "send": "Senden",
-    "deliver": "Fahren",
+    "send": "Auftrag erstellen",
+    "deliver": "Route registrieren",
     "delete": "Löschen",
     "deleteConfirm": "Bist Du sicher, dass Du dies löschen willst?",
     "upload": "Hochladen",
@@ -118,8 +118,8 @@
 
   "navBar": {
     "home": "Home",
-    "send": "Senden",
-    "drive": "Fahren",
+    "send": "Aufträge",
+    "drive": "Routen",
     "profile": "Menu"
   },
 
