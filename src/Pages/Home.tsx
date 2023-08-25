@@ -1,6 +1,6 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-12.png';
+import headerImage from '../Assets/Images/portato-landing-13.png';
 import sendImage from '../Assets/Images/send.webp';
 import driveImage from '../Assets/Images/drive.webp';
 import { useTranslation } from 'react-i18next';

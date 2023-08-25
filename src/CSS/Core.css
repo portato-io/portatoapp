@@ -416,8 +416,8 @@ video,
   position: relative;
   overflow: hidden;
   height: min(600px, 100vw);
+  background-image: radial-gradient(at bottom right, #acc777, #6ba858);
 }
-
 
 .header-section::before, 
 .header-section::after {
@@ -433,7 +433,7 @@ video,
 
 .header-section::before {
   left: 0; 
-  background-image: url('../Assets/Images/portato-landing-12-leftSlice.png');
+  background-image: url('../Assets/Images/portato-landing-13-leftSlice.png');
   background-repeat: repeat-x;
   background-size: contain;
 
@@ -442,7 +442,7 @@ video,
 
 .header-section::after {
   right: 0; 
-  background-image: url('../Assets/Images/portato-landing-12-rightSlice.png');
+  background-image: url('../Assets/Images/portato-landing-13-rightSlice.png');
   background-repeat: repeat-x;
   background-size: contain;
 }
