@@ -42,7 +42,12 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
         requestCopy.id = newRequestRef.key;
         await set(newRequestRef, requestCopy);
 
+        // Write the newRequestRef.key to the request/${uid}/ directory
+        const keyRef = ref(database, `request/${uid}`);
+        await set(keyRef, { key: newRequestRef.key });
+
         console.log('Request uploaded successfully');
+
         return true;
       } else {
         console.error('Unable to generate a unique key.');
@@ -83,6 +88,10 @@ export const uploadRouteToFirebase = async (uid, dispatch) => {
         dispatch(setRouteId(newRouteRef.key));
         state = store.getState();
         await set(newRouteRef, state.route);
+
+        // Write the newRequestRef.key to the request/${uid}/ directory
+        const keyRef = ref(database, `route/${uid}`);
+        await set(keyRef, { key: newRequestRef.key });
       } else {
         console.error('Unable to generate a unique key.');
       }
