@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
-import { Cascader, Form, Button, Switch } from 'antd-mobile';
+import { Cascader, Form, Button } from 'antd-mobile';
 import i18next from 'i18next';
 import { getConstants } from '../../constant';
 import { ArrowRightOutlined } from '@ant-design/icons';
@@ -10,7 +10,7 @@ import { Typography } from 'antd';
 const Settings: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
-
+  const LOTTIE_CACHE_NAME = 'lottie-animations';
   const { Title } = Typography;
   const [visible, setVisible] = useState(false);
   const [language, setLanguage] = useState<string>();
@@ -25,6 +25,14 @@ const Settings: React.FC = () => {
     if (languageOption) {
       setLanguage(languageOption.label);
       changeLanguage(value);
+
+      // Notify the service worker to clear the Lottie animation cache
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: 'CLEAR_LOTTIE_CACHE',
+          cacheName: LOTTIE_CACHE_NAME,
+        });
+      }
     }
   };
 

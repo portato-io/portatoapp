@@ -191,4 +191,15 @@ self.addEventListener('push', function (e: any) {
   e.waitUntil(self.registration.showNotification('Hello world!', options));
 });
 
+self.addEventListener('message', (event) => {
+  if (
+    event.data &&
+    event.data.type === 'CLEAR_LOTTIE_CACHE' &&
+    event.data.cacheName
+  ) {
+    caches.delete(event.data.cacheName).then(() => {
+      console.log('Lottie cache cleared!');
+    });
+  }
+});
 // Any other custom service worker logic can go here.
