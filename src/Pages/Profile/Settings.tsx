@@ -10,7 +10,6 @@ import { Typography } from 'antd';
 const Settings: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
-  const LOTTIE_CACHE_NAME = 'lottie-animations';
   const { Title } = Typography;
   const [visible, setVisible] = useState(false);
   const [language, setLanguage] = useState<string>();
@@ -25,14 +24,6 @@ const Settings: React.FC = () => {
     if (languageOption) {
       setLanguage(languageOption.label);
       changeLanguage(value);
-
-      // Notify the service worker to clear the Lottie animation cache
-      if (navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage({
-          type: 'CLEAR_LOTTIE_CACHE',
-          cacheName: LOTTIE_CACHE_NAME,
-        });
-      }
     }
   };
 
@@ -58,7 +49,6 @@ const Settings: React.FC = () => {
       </Title>
       <Form style={{ position: 'absolute', marginTop: '20vh', width: '100vw' }}>
         <Form.Item label={t('settings.languageLabel')}>
-          {/* <Typography style={{ display: 'inline' }}>Language</Typography> */}
           <Cascader
             placeholder=" "
             cancelText="Cancel"
@@ -89,12 +79,6 @@ const Settings: React.FC = () => {
             <ArrowRightOutlined />
           </Button>
         </Form.Item>
-        {/* <Form.Item label="Notifications">
-          <Switch style={{ position: 'absolute', right: '5vw', top: '1vh' }} />
-        </Form.Item>
-        <Form.Item label="Dark Mode">
-          <Switch style={{ position: 'absolute', right: '5vw', top: '1vh' }} />
-        </Form.Item> */}
       </Form>
     </ProfilePageLayout>
   );
