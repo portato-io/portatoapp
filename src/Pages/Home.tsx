@@ -90,12 +90,11 @@ const Home: React.FC = () => {
     <PageLayout>
       {/* Landing screen */}
       <section className="header-section">
-        <img
-          src={headerImage}
-          alt="portato header image"
-          className="header-image"
-        />
-        <div className="header-overlay">
+        <div className="background-wrapper">
+          <div className="main-image"></div>
+          <div className="background-image"></div>
+        </div>
+        <div className="content-wrapper">
           <h1 className="icon icon-logo icon-big logo-slogan logo-slogan-landing-page">
             portato
           </h1>
