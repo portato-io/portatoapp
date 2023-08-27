@@ -118,13 +118,29 @@ const Home: React.FC = () => {
             className="call-to-action-image"
           />
         </section>
-        <a
-          className="button button-solid box-shadow box-shadow-effect call-to-action-button box-radius-round"
-          href="/createSendRequest/enter_request_name_desc"
-          onClick={() => logEvent(analytics, 'home_send_button_click')}
+        <div
+          className="mod-display-flex"
+          style={{ flexDirection: 'row', justifyContent: 'center' }}
         >
-          {t('general.send')}
-        </a>
+          <div style={{ position: 'relative', flex: 1, margin: '0 5px' }}>
+            <a
+              className="button button-solid box-shadow box-shadow-effect call-to-action-button box-radius-round"
+              href="/createSendRequest/enter_request_name_desc"
+              onClick={() => logEvent(analytics, 'home_send_button_click1')}
+            >
+              {t('general.send')}
+            </a>
+          </div>
+          <div style={{ position: 'relative', flex: 1, margin: '0 5px' }}>
+            <a
+              className="button button-solid box-shadow box-shadow-effect call-to-action-button box-radius-round"
+              href="/createSendRequest/enter_request_name_desc"
+              onClick={() => logEvent(analytics, 'home_send_button_click2')}
+            >
+              {t('general.seeRoutes')}
+            </a>
+          </div>
+        </div>
       </section>
 
       <div className="spacer-big"></div>
