@@ -4,9 +4,9 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import { database } from '../../firebaseConfig';
 import { ref, get } from 'firebase/database';
 
-const ADMIN = true;
+const ADMIN = false;
 
-const AllRoutesAdmin: React.FC = () => {
+const AllRoutes: React.FC = () => {
   const [userIds, setUserIds] = useState<string[]>([]);
 
   const fetchUserIds = async (): Promise<void> => {
@@ -39,4 +39,4 @@ const AllRoutesAdmin: React.FC = () => {
   );
 };
 
-export default AllRoutesAdmin;
+export default AllRoutes;

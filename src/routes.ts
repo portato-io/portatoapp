@@ -32,7 +32,8 @@ const RequestSummary = lazy(() => import('./Pages/Sender/RequestSummary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
 const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
-const AllRoutes = lazy(() => import('./Pages/Admin/AllRoutes'));
+const AllRoutesAdmin = lazy(() => import('./Pages/Admin/AllRoutes'));
+const AllRoutes = lazy(() => import('./Pages/Sender/AllRoutes'));
 const ContactSupport = lazy(
   () => import('./Pages/Profile/Support/ContactSupport')
 );
@@ -231,11 +232,11 @@ export const routes: Array<Route> = [
     component: AdminDashboard,
   },
   {
-    key: 'all-routes',
-    title: 'AllRoutes',
+    key: 'all-routes-admin',
+    title: 'AllRoutesAdmin',
     path: '/admin/all_routes',
     enabled: true,
-    component: AllRoutes,
+    component: AllRoutesAdmin,
   },
   {
     key: 'deal-suggester',
@@ -271,5 +272,12 @@ export const routes: Array<Route> = [
     path: '/profile/my-account',
     enabled: true,
     component: MyAccount,
+  },
+  {
+    key: 'all-routes',
+    title: 'AllRoutes',
+    path: '/sender/all_routes',
+    enabled: true,
+    component: AllRoutes,
   },
 ];

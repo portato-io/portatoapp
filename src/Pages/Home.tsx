@@ -134,7 +134,7 @@ const Home: React.FC = () => {
           <div style={{ position: 'relative', flex: 1, margin: '0 5px' }}>
             <a
               className="button button-solid box-shadow box-shadow-effect call-to-action-button box-radius-round"
-              href="/createSendRequest/enter_request_name_desc"
+              href="/sender/all_routes"
               onClick={() => logEvent(analytics, 'home_send_button_click2')}
             >
               {t('general.seeRoutes')}
