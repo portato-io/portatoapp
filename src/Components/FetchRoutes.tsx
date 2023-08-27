@@ -13,7 +13,8 @@ const FetchRoutes: React.FC<{
   uid: string | null | undefined;
   heightPortion?: number;
   admin?: boolean;
-}> = ({ uid, admin = false }) => {
+  fetcherUid: string | null | undefined;
+}> = ({ uid, admin = false, fetcherUid }) => {
   const [routes, setInitRoute] = useState<IRouteInfo[]>([]);
   const [refreshKey, setRefreshKey] = useState(0); // add this line
   const navigate = useNavigate();
@@ -91,28 +92,34 @@ const FetchRoutes: React.FC<{
               </h4>
 
               <div className="card-actions">
-                <div>
-                  <Popconfirm
-                    title={t('general.deleteConfirm')}
-                    onConfirm={() => deleteRoute(route)}
-                    onCancel={() => console.log('Cancelled')}
-                    okText={t('general.yes')}
-                    cancelText={t('general.no')}
-                  >
-                    <Button type="link">
-                      <i className="icon icon-bin"></i>
-                      <span className="mod-hide-mobile">
-                        {t('general.delete')}
-                      </span>
-                    </Button>
-                  </Popconfirm>
-                </div>
-                <div>
-                  <Button type="link" onClick={() => editRoute(route)}>
-                    <i className="icon icon-pen"></i>
-                    <span className="mod-hide-mobile">{t('general.edit')}</span>
-                  </Button>
-                </div>
+                {fetcherUid === uid && (
+                  <>
+                    <div>
+                      <Popconfirm
+                        title={t('general.deleteConfirm')}
+                        onConfirm={() => deleteRoute(route)}
+                        onCancel={() => console.log('Cancelled')}
+                        okText={t('general.yes')}
+                        cancelText={t('general.no')}
+                      >
+                        <Button type="link">
+                          <i className="icon icon-bin"></i>
+                          <span className="mod-hide-mobile">
+                            {t('general.delete')}
+                          </span>
+                        </Button>
+                      </Popconfirm>
+                    </div>
+                    <div>
+                      <Button type="link" onClick={() => editRoute(route)}>
+                        <i className="icon icon-pen"></i>
+                        <span className="mod-hide-mobile">
+                          {t('general.edit')}
+                        </span>
+                      </Button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
             <div className="send-request-card-content">

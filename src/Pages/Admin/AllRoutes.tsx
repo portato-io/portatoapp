@@ -32,7 +32,7 @@ const AllRoutesAdmin: React.FC = () => {
     <PageLayout>
       <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
         {userIds.map((uid) => (
-          <FetchRoutes key={uid} uid={uid} admin={ADMIN} />
+          <FetchRoutes key={uid} uid={uid} admin={ADMIN} fetcherUid={null} />
         ))}
       </div>
     </PageLayout>

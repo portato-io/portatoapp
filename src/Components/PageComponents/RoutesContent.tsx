@@ -23,7 +23,7 @@ function RoutesContent() {
       />
       {uid !== 'undefined' ? (
         <>
-          <FetchRoutes uid={uid} />
+          <FetchRoutes uid={uid} fetcherUid={uid} />
         </>
       ) : null}
     </div>
