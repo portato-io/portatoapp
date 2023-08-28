@@ -17,8 +17,8 @@
   },
 
   "sendSection": {
-    "title": "Etwas versenden oder geliefert bekommen",
-    "description": "Mit Portato kannst Du ganz einfach etwas versenden oder abholen lassen."
+    "title": "Etwas versenden oder abholen lassen",
+    "description": "Dein einfacher, günstiger und ökologischer Transportdienst."
   },
 
   "driveSection": {
@@ -27,11 +27,11 @@
   },
 
   "general": {
-    "tagline": "Der einfache, günstige und ökologische Transportdienst.",
+    "tagline": "Mitfahrgelegenheiten für Gegenstände",
     "howItWorks": "So funktioniert's",
     "moreInfo": "Erfahre mehr",
-    "send": "Senden",
-    "deliver": "Fahren",
+    "send": "Auftrag erstellen",
+    "deliver": "Route registrieren",
     "delete": "Löschen",
     "deleteConfirm": "Bist Du sicher, dass Du dies löschen willst?",
     "upload": "Hochladen",
@@ -118,8 +118,8 @@
 
   "navBar": {
     "home": "Home",
-    "send": "Senden",
-    "drive": "Fahren",
+    "send": "Aufträge",
+    "drive": "Routen",
     "profile": "Menu"
   },
 
@@ -276,7 +276,7 @@
     "privacyPolicy": "Datenschutzerklärung",
     "imprint": "Impressum"
   },
- 
+
   "FAQ": {
     "title": "Häufig gestellte Fragen",
     "senderQuestion": "Wie erstellt man einen Transportauftrag?",
@@ -295,7 +295,7 @@
     "paymentAnswer": "Die Zahlungsabwicklung erfolgt direkt zwischen Versender:in und Fahrer:in. Wir arbeiten aber aktiv daran, bald eine Zahlungsfunktion in unsere App zu integrieren.",
     "contactQuestion": "Wie kann ich euch kontaktieren?",
     "contactAnswer": "Wir sind jederzeit für dich da! Nutze einfach das Widget unten rechts auf diesem Bildschirm oder schreibe uns eine E-Mail an info@portato.io. Wir freuen uns, von dir zu hören!"
-  }, 
+  },
 
   "termsAndConditions": {
     "title": "Allgemeine Geschäftsbedingungen",
@@ -337,5 +337,4 @@
     "title": "Impressum",
     "text": "Portato GmbH i.G.\nRepräsentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
   }
-  
 }

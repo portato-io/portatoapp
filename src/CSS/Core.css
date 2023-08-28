@@ -268,13 +268,12 @@ video,
   margin-left: -10px;
 }
 
-
 .logo-slogan-landing-page {
   color: var(--color-white);
-  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-size: clamp(3rem, 6vw, 4.8rem);
 }
 .logo-slogan-landing-page:before {
-  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-size: clamp(3.5rem, 6vw, 4.8rem);
   color: var(--color-white);
 }
 
@@ -398,6 +397,9 @@ video,
   align-items: center;
 }
 
+.info-page-top-spacer {
+  height: 80px;
+}
 
 .caption {
   display: block;
@@ -412,73 +414,76 @@ video,
 
 .header-section {
   position: relative;
-  overflow: hidden;
-  height: min(600px, 100vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background-image: radial-gradient(at bottom right, #acc777, #6ba858);
+  padding-bottom: clamp(170px, 52vw, 400px);
 }
 
-
-.header-section::before, 
-.header-section::after {
-  content: "";
+.background-wrapper {
   position: absolute;
-  top: 0;
   bottom: 0;
-  width: 50vw;  
-  background-repeat: repeat-x;
-  z-index: 0;
+  left: 0;
+  right: 0;
+  height: clamp(170px, 52vw, 400px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
-
-.header-section::before {
-  left: 0; 
-  background-image: url('../Assets/Images/portato-landing-12-leftSlice.png');
-  background-repeat: repeat-x;
-  background-size: contain;
-
-}
-
-
-.header-section::after {
-  right: 0; 
-  background-image: url('../Assets/Images/portato-landing-12-rightSlice.png');
-  background-repeat: repeat-x;
-  background-size: contain;
-}
-
-.header-image {
-  display: block;
-  width: auto;
-  height: 100%;
+.main-image {
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  background-image: url('../Assets/Images/portato-landing-13.png');
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  flex-grow: 1;
+  height: 100%;
   z-index: 1;
 }
 
-
-.header-overlay {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--content-width-regular);
-  padding: 0 var(--spacing-regular);
+.background-image::before, 
+.background-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50vw;
 }
 
-.header-overlay-text {
-  text-align: center;
-  font-size: clamp(2.25rem, 6vw, 4.8rem);
-  font-weight: 600;
-  color: #fff;
+.background-image::before {
+  left: 0; 
+  background-image: url('../Assets/Images/portato-landing-13-leftSlice.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+.background-image::after {
+  right: 0; 
+  background-image: url('../Assets/Images/portato-landing-13-rightSlice.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: var(--content-width-regular);
+}
+
+
+.header-overlay-text {
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  color: #fff;
+  margin-top: 0px;
 }
 
 .call-to-action-section {
@@ -493,7 +498,7 @@ video,
 }
 
 .call-to-action-image {
-  width: max(calc(100% + 2 * var(--spacing-regular)), 600px);
+  width: max(calc(100% + 2 * var(--spacing-regular)), 450px);
   display: block;
   margin-left: 50%;
   transform: translateX(-50%);
@@ -511,6 +516,10 @@ video,
 	margin: 0;
   font-weight: 500;
   font-size: 2.5rem;
+  border: 1.5px solid var(--color-green) !important;
+}
+.call-to-action-button:hover {
+  border-width: 5px !important;
 }
 
 .green-section {
@@ -531,4 +540,66 @@ video,
 }
 .link-section-text:hover {
   color: var(--color-green-light);
+}
+
+.call-to-action-title {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.call-to-action-description {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/* FORCED ANTD COLOR CHANGES ---------------------------------------------- */
+.adm-slider-fill,
+.adm-slider-tick-active {
+  background-color: var(--portato-green) !important;
+}
+
+.adm-slider-thumb-icon rect {
+  fill: var(--portato-green) !important;
+}
+
+/* Deleting the horizontal line */
+.adm-tabs-header {
+  border: none !important;
+}
+
+/* Deleting the indicator line */
+.adm-tabs-tab-line {
+  display: none !important;
+}
+
+/* Flexbox layout*/
+.adm-tabs-tab-wrapper {
+  display: flex !important;
+}
+
+/* Common styles for both active and inactive tabs */
+.adm-tabs-tab {
+  flex: 1 !important; /* This ensures both tabs take up equal width */
+  padding: 10px !important; /* Adjust padding as needed */
+  text-align: center; /* Centers the text horizontally */
+  display: flex !important; /* To use flexbox properties for vertical centering */
+  justify-content: center !important;
+  border-radius: 4px !important;
+  background-color: #f1f1f1;
+  color: #666;
+}
+
+.adm-tabs-tab.adm-tabs-tab-active {
+  background-color: var(--portato-green) !important; /* Active tab background color */
+  color: white; /* Active tab text color */
+}
+
+.adm-selector-item-active, .adm-selector-item-multiple-active {
+  color: var(--color-green) !important;
+  background-color: var(--color-green-lighter) !important;
+}
+
+.adm-selector-check-mark-wrapper {
+  border-bottom-color: var(--portato-green) !important;
+  border-right-color: var(--portato-green) !important;
 }

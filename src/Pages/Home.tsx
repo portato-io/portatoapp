@@ -1,6 +1,5 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-12.png';
 import sendImage from '../Assets/Images/send.webp';
 import driveImage from '../Assets/Images/drive.webp';
 import { useTranslation } from 'react-i18next';
@@ -90,24 +89,27 @@ const Home: React.FC = () => {
     <PageLayout>
       {/* Landing screen */}
       <section className="header-section">
-        <img
-          src={headerImage}
-          alt="portato header image"
-          className="header-image"
-        />
-        <div className="header-overlay">
+        <div className="background-wrapper">
+          <div className="main-image"></div>
+          <div className="background-image"></div>
+        </div>
+        <div className="content-wrapper">
           <h1 className="icon icon-logo icon-big logo-slogan logo-slogan-landing-page">
             portato
           </h1>
-          <div className="header-overlay-text">{t('general.tagline')}</div>
+          <h2 className="mod-text-align-center header-overlay-text">
+            {t('general.tagline')}
+          </h2>
         </div>
       </section>
 
       {/* Call to Action */}
       <section className="section mod-relative">
         <section className="call-to-action-section">
-          <h2 className="mod-text-align-center">{t('sendSection.title')}</h2>
-          <p className="mod-text-align-center">
+          <h2 className="mod-text-align-center call-to-action-title">
+            {t('sendSection.title')}
+          </h2>
+          <p className="mod-text-align-center call-to-action-description">
             {t('sendSection.description')}
           </p>
           <img
@@ -129,8 +131,10 @@ const Home: React.FC = () => {
 
       <section className="section mod-relative">
         <section className="call-to-action-section">
-          <h2 className="mod-text-align-center">{t('driveSection.title')}</h2>
-          <p className="mod-text-align-center">
+          <h2 className="mod-text-align-center call-to-action-title">
+            {t('driveSection.title')}
+          </h2>
+          <p className="mod-text-align-center call-to-action-description">
             {t('driveSection.description')}
           </p>
           <img

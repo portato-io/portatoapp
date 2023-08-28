@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
-import { Cascader, Form, Button, Switch } from 'antd-mobile';
+import { Cascader, Form, Button } from 'antd-mobile';
 import i18next from 'i18next';
 import { getConstants } from '../../constant';
 import { ArrowRightOutlined } from '@ant-design/icons';
@@ -10,7 +10,6 @@ import { Typography } from 'antd';
 const Settings: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
-
   const { Title } = Typography;
   const [visible, setVisible] = useState(false);
   const [language, setLanguage] = useState<string>();
@@ -50,7 +49,6 @@ const Settings: React.FC = () => {
       </Title>
       <Form style={{ position: 'absolute', marginTop: '20vh', width: '100vw' }}>
         <Form.Item label={t('settings.languageLabel')}>
-          {/* <Typography style={{ display: 'inline' }}>Language</Typography> */}
           <Cascader
             placeholder=" "
             cancelText="Cancel"
@@ -81,12 +79,6 @@ const Settings: React.FC = () => {
             <ArrowRightOutlined />
           </Button>
         </Form.Item>
-        {/* <Form.Item label="Notifications">
-          <Switch style={{ position: 'absolute', right: '5vw', top: '1vh' }} />
-        </Form.Item>
-        <Form.Item label="Dark Mode">
-          <Switch style={{ position: 'absolute', right: '5vw', top: '1vh' }} />
-        </Form.Item> */}
       </Form>
     </ProfilePageLayout>
   );

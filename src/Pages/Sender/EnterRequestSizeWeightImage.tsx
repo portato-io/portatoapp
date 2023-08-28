@@ -105,7 +105,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_1_sizeWeight_next_button_click');
+              logEvent(analytics, 'send_2_sizeWeight_next_button_click');
             }}
           />
         </div>
