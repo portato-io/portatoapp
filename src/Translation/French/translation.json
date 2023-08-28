@@ -185,7 +185,8 @@
     "possibleDates": "Dates possibles",
     "possibleTimes": "Heures possibles",
     "price": "Prix",
-    "images": "Image(s)"
+    "images": "Image(s)",
+    "signInMessage": "Veuillez vous identifier avant de soumettre votre demande"
   },
   "driveOverview": {
     "newTitle": "Souhaitez-vous enregistrer un nouvel itinéraire?",

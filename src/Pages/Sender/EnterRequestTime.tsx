@@ -128,13 +128,13 @@ const EnterTime: React.FC = () => {
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
-              logEvent(analytics, 'send_3_time_back_button_click');
+              logEvent(analytics, 'send_4_time_back_button_click');
             }}
           />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_3_time_next_button_click');
+              logEvent(analytics, 'send_4_time_next_button_click');
             }}
             disabled={!dateTimeSelected || !dayRangeSelected}
           />

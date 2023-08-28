@@ -8,6 +8,9 @@
 	cursor: pointer;
 	transition: var(--transition-regular);
 }
+.button--fixedHeight {
+    height: 100px;
+}
 .button:first-child {margin-left:0}
 .button:last-child {right:0}
 .button:hover {
