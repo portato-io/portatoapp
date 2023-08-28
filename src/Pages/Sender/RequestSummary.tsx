@@ -208,9 +208,7 @@ const RequestSummary: React.FC = () => {
             />
           ) : (
             <div className="signin-container">
-              <div className="caption">
-                Please sign in before submitting your request
-              </div>
+              <div className="caption">{t('requestSummary.signInMessage')}</div>
               <SignInButton
                 onClick={() => {
                   showModal();

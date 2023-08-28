@@ -186,7 +186,8 @@
     "possibleDates": "Mögliche Daten",
     "possibleTimes": "Mögliche Tageszeiten",
     "price": "Preis",
-    "images": "Bild(er)"
+    "images": "Bild(er)",
+    "signInMessage": "Bitte melde dich an, um den Auftrag zu bestätigen"
   },
   "driveOverview": {
     "newTitle": "Möchtest Du eine Route registrieren?",
