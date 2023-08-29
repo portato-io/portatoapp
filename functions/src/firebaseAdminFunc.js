@@ -70,11 +70,13 @@ const sendNotificationEmail = functions
         let targetEmail;
         if (uid && !admin) {
           targetEmail = await getUserEmail(uid); // Fetch email address from UID
+          console.log(`Sending email to UID: ${targetEmail}`);
         } else if (!email) {
           res.status(500).send('No uid given');
           return;
         } else {
           targetEmail = email;
+          console.log(`Sending email to: ${targetEmail}`);
         }
 
         let userInfo = null;
@@ -91,7 +93,7 @@ const sendNotificationEmail = functions
           modifiedBody += `\n\nUser Info: ${JSON.stringify(userInfo)}`;
         }
 
-        const mailOptions = {
+        let mailOptions = {
           from: '"Notifications" <notifications@portato.io>',
           to: targetEmail,
           subject: title,
@@ -104,6 +106,14 @@ const sendNotificationEmail = functions
         console.log('Sending email...');
         const info = await transporter.sendMail(mailOptions);
         console.log(`Email sent: ${info.messageId}`);
+
+        mailOptions = {
+          from: '"Notifications" <notifications@portato.io>',
+          to: 'support@portato.io',
+          subject: title,
+          text: modifiedBody.replace(/<[^>]*>?/gm, ''), // Strip HTML tags for the plain text version
+          html: modifiedBody, // Also include HTML in your email
+        };
 
         res.status(200).send(info);
       } catch (error) {
