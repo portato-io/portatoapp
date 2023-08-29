@@ -146,8 +146,10 @@
     "title": "Was möchtest Du versenden?",
     "name": "Titel",
     "namePlaceholder": "Gib deiner Sendung einen aussagekräftigen Titel.",
+    "nameMessage": "Bitte gib deinem Lieferauftrag einen Titel.",
     "description": "Beschreibung",
     "descriptionPlaceholder": "z.B. ist es eine gute Idee, die Abmessungen von grossen Gegenständen anzugeben.",
+    "descriptionMessage": "Bitte beschreibe deinen Lieferauftrag etwas näher.",
     "size": "Grösse",
     "weight": "Gewicht",
     "uploadImages": "Bilder hochladen"
@@ -170,10 +172,8 @@
     "title": "Was ist Dir der Transport wert?",
     "label": "Preis (in CHF)",
     "pricePlaceholder": "z.B. 50",
-    "driverReward": "Belohnung für den Fahrer:",
-    "portatoFee": "Gebühr Portato:",
-    "vat": "MwSt:",
-    "insurance": "Versicherung:",
+    "valueMessage": "Betrag muss höher sein als 1 CHF.",
+    "emptyMessage": "Bitte gib einen Betrag ein.",
     "comment": "Gib einen fairen Preis ein, um einen angemessenen Anreiz zu geben. Schliesslich wird dein Fahrer einen Umweg machen, um deine Sendung zu liefern."
   },
   "requestSummary": {
@@ -230,7 +230,8 @@
     "next": "Weiter",
     "back": "Zurück",
     "confirm": "Bestätigen",
-    "signIn": "Anmelden"
+    "signIn": "Anmelden",
+    "error": "Bitte vervollständige deine Angabe(n)."
   },
   "navigationMenu": {
     "myAccount": "Mein Konto",

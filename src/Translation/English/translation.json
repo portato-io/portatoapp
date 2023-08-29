@@ -141,14 +141,16 @@
     "title": "What do you want to ship?",
     "name": "Title",
     "namePlaceholder": "Give your shipment a meaningful title.",
+    "nameMessage": "Please provide a title for your shipment.",
     "description": "Description",
     "descriptionPlaceholder": "E.g., it’s a good idea to specify the dimensions of large items.",
+    "descriptionMessage": "Please provide a meaningful description.",
     "size": "Size",
     "weight": "Weight",
     "uploadImages": "Upload images"
   },
   "requestAddresses": {
-    "title": "Where do you want the shipment to be picked up and sent?",
+    "title": "Where do you want the shipment to be picked up and delivered to?",
     "pickupAddress": "Pick-up address",
     "deliveryAddress": "Delivery address"
   },
@@ -165,10 +167,8 @@
     "title": "How much is the transport worth to you?",
     "label": "Price (in CHF)",
     "pricePlaceholder": "e.g. 50",
-    "driverReward": "Reward for driver:",
-    "portatoFee": "Portato fee:",
-    "vat": "VAT:",
-    "insurance": "Insurance:",
+    "valueMessage": "Value must be greater than 1 CHF.",
+    "emptyMessage": "Please enter an amount.",
     "comment": "Enter a fair price to give an appropriate incentive. After all, your driver will do a detour to deliver your shipment."
   },
   "requestSummary": {
@@ -225,7 +225,8 @@
     "next": "Next",
     "back": "Back",
     "confirm": "Confirm",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "error": "Please complete the input field(s)."
   },
   "navigationMenu": {
     "myAccount": "My Account",

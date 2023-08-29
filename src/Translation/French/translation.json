@@ -145,8 +145,10 @@
     "title": "Que voulez-vous expédier?",
     "name": "Titre",
     "namePlaceholder": "Donnez à votre envoi un titre significatif.",
+    "nameMessage": "Veuillez donner un titre à votre commande de livraison.",
     "description": "Description",
     "descriptionPlaceholder": "Par exemple, il est recommandé de préciser les dimensions des objets volumineux.",
+    "descriptionMessage": "Veuillez décrire un peu plus votre commande de livraison.",
     "size": "Taille",
     "weight": "Poids",
     "uploadImages": "Importer des images"
@@ -169,10 +171,8 @@
     "title": "Combien vaut pour vous le transport?",
     "label": "Prix (en CHF)",
     "pricePlaceholder": "par ex. 50",
-    "driverReward": "Récompense pour le conducteur:",
-    "portatoFee": "Frais de Portato:",
-    "vat": "TVA:",
-    "insurance": "Assurance:",
+    "valueMessage": "Le montant doit être supérieur à 1 CHF.",
+    "emptyMessage": "Veuillez saisir un montant.",
     "comment": "Entrez un prix équitable pour donner une incitation appropriée. Après tout, votre conducteur fera un détour pour livrer votre envoi."
   },
   "requestSummary": {
@@ -229,7 +229,8 @@
     "next": "Suivant",
     "back": "Retour",
     "confirm": "Confirmer",
-    "signIn": "Connexion"
+    "signIn": "Connexion",
+    "error": "Veuillez compléter le(s) champ(s) de saisie."
   },
   "navigationMenu": {
     "myAccount": "Mon Compte",

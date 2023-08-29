@@ -119,7 +119,10 @@ const EnterRequestNameDesc: React.FC = () => {
             label={t('requestInfo.name')}
             name="name"
             rules={[
-              { required: true, message: 'Please input the object name' },
+              {
+                required: true,
+                message: t('requestInfo.nameMessage') as string,
+              },
             ]}
           >
             <Input
@@ -137,7 +140,7 @@ const EnterRequestNameDesc: React.FC = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input the object description',
+                message: t('requestInfo.descriptionMessage') as string,
               },
             ]}
           >

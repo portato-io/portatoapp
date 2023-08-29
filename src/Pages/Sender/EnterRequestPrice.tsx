@@ -63,7 +63,7 @@ const EnterRequestPrice: React.FC = () => {
     const parsedValue = parseFloat(value); // Convert the value to a numeric format
     console.log(parsedValue);
     if (isNaN(parsedValue) || parsedValue <= 1) {
-      return Promise.reject('Value must be greater than 1 CHF');
+      return Promise.reject(t('requestCost.valueMessage') as string);
     }
     return Promise.resolve();
   };
@@ -89,7 +89,7 @@ const EnterRequestPrice: React.FC = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input the request price',
+                message: t('requestCost.emptyMessage') as string,
               },
               {
                 validator: greaterThanOneCHFValidator, // Use the custom validator
