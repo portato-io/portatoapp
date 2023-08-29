@@ -30,7 +30,7 @@ const initialStateRequest: IRequestInfo = {
   description: '',
   size: '',
   weight: '',
-  price: 10,
+  price: 50,
   pickup_adress: '',
   delivery_adress: '',
   dateRange: ['', ''],
