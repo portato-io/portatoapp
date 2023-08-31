@@ -55,30 +55,8 @@ jobs:
 
       - name: Set up Google Cloud SDK Authentication
         run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATODEV }}" > service-account.json
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
-
-      - name: Install Firebase CLI
-        run: |
-          npm install -g firebase-tools
-
-      - name: Install Google Cloud SDK
-        run: |
-          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-          sudo apt-get install apt-transport-https ca-certificates
-          sudo apt-get install -y curl
-          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-          sudo apt-get update && sudo apt-get install google-cloud-sdk
-        
-      - name: Authenticate with Google Cloud
-        run: gcloud auth activate-service-account --key-file=service-account.json
-      
-      - name: Get GCP Access Token
-        id: gcp-token
-        run: echo "::set-output name=token::$(gcloud auth print-access-token)"
-      
-      - name: Use Firebase with token
-        run: firebase use --token "${{ steps.gcp-token.outputs.token }}"
       
       - name: Fetch Firebase Functions Config 
-        run: firebase functions:config:get
+        run: firebase deploy --only funcions
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
