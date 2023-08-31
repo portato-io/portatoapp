@@ -23,6 +23,9 @@ jobs:
       - name: Install Dependencies
         run: npm install  # or yarn install if you're using Yarn
 
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
       - name: Setup .env.production
         run: |
           echo REACT_APP_FIREBASE_AUTH_DOMAIN=${{ vars.REACT_APP_FIREBASE_AUTH_DOMAIN }} >> .env.production
@@ -56,11 +59,10 @@ jobs:
       - name: Set up Google Cloud SDK Authentication
         run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATODEV }}" >> service-account.json
 
-      - name: Install Firebase CLI
-        run: |
-          npm install -g firebase-tools
+      - name: Debug - Display service-account.json
+        run: cat service-account.json
       
       - name: Fetch Firebase Functions Config 
-        run: firebase deploy --only functions
+        run: firebase deploy --debug --only functions
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
