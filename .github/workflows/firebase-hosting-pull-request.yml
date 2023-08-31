@@ -54,7 +54,7 @@ jobs:
           projectId: portatodev
 
       - name: Set up Google Cloud SDK Authentication
-        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATODEV }}" > service-account.json
+        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATODEV }}" >> service-account.json
 
       - name: Install Firebase CLI
         run: |
@@ -63,4 +63,4 @@ jobs:
       - name: Fetch Firebase Functions Config 
         run: firebase deploy --only functions
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: service-account.json
+          GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
