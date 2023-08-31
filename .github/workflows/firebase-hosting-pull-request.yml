@@ -63,4 +63,4 @@ jobs:
       - name: Fetch Firebase Functions Config 
         run: firebase deploy --only functions
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
+          GOOGLE_APPLICATION_CREDENTIALS: service-account.json
