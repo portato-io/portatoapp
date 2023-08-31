@@ -60,12 +60,13 @@ jobs:
           projectId: portatoapp
 
       - name: Set up Google Cloud SDK Authentication
-        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATOAPP   }}" > service-account.json
+        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATOAPP }}" > service-account.json
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
 
       - name: Install Firebase CLI
-        run: npm install -g firebase-tools
-        
+        run: |
+          npm install -g firebase-tools
+
       - name: Fetch Firebase Functions Config 
         run: firebase functions:config:get

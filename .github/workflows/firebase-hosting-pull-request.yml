@@ -57,10 +57,11 @@ jobs:
         run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATODEV }}" > service-account.json
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
-      
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
 
-      - name: Fetch Firebase Functions Config
+      - name: Install Firebase CLI
+        run: |
+          npm install -g firebase-tools
+
+      - name: Fetch Firebase Functions Config 
         run: firebase functions:config:get
   
