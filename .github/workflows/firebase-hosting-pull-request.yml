@@ -60,7 +60,10 @@ jobs:
         run: echo $FIREBASE_CI_TOKEN
         env:
           FIREBASE_CI_TOKEN: ${{ secrets.FIREBASE_CI_TOKEN }}
-  
+
+      - name: Print Firebase token
+        run: echo "${{ secrets.FIREBASE_CI_TOKEN }}"
+
       - name: Deploy Firebase Functions
         run: |
           firebase deploy --debug -m "${GITHUB_REF} (${GITHUB_SHA})" --project ${FIREBASE_PROJECT} --only functions
