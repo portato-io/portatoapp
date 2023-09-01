@@ -57,7 +57,8 @@ jobs:
           projectId: portatodev
 
       - name: Deploy Firebase Functions
-        uses: jsryudev/deploy-firebase-functions@v0.0.2
+        run: |
+          firebase deploy -m "${GITHUB_REF} (${GITHUB_SHA})" --project ${FIREBASE_PROJECT} --only functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_CI_TOKEN }}
           FIREBASE_PROJECT: portatodev
