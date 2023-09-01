@@ -59,5 +59,5 @@ jobs:
       - name: Deploy Firebase Functions
         uses: jsryudev/deploy-firebase-functions@v0.0.2
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_CI_TOKEN }}
           FIREBASE_PROJECT: portatodev
