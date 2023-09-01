@@ -55,10 +55,15 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATODEV }}'
           projectId: portatodev
-
+      
+      - name: Print Firebase token
+        run: echo $FIREBASE_CI_TOKEN
+        env:
+          FIREBASE_CI_TOKEN: ${{ secrets.FIREBASE_CI_TOKEN }}
+  
       - name: Deploy Firebase Functions
         run: |
-          firebase deploy -m "${GITHUB_REF} (${GITHUB_SHA})" --project ${FIREBASE_PROJECT} --only functions
+          firebase deploy --debug -m "${GITHUB_REF} (${GITHUB_SHA})" --project ${FIREBASE_PROJECT} --only functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_CI_TOKEN }}
           FIREBASE_PROJECT: portatodev
