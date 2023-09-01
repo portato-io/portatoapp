@@ -56,13 +56,8 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATODEV }}'
           projectId: portatodev
 
-      - name: Set up Google Cloud SDK Authentication
-        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTATODEV }}" >> service-account.json
-
-      - name: Debug - Display service-account.json
-        run: cat service-account.json
-      
-      - name: Fetch Firebase Functions Config 
-        run: firebase deploy --debug --only functions
+      - name: Deploy Firebase Functions
+        uses: jsryudev/deploy-firebase-functions@v0.0.2
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_PROJECT: portatodev
