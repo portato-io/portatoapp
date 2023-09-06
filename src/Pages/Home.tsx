@@ -91,7 +91,6 @@ const Home: React.FC = () => {
       {/* Landing screen */}
       <section className="section section-bleed box-style-gradient-1 text-align-center mod-nomargin-top section-header-home">
         <section className="section mod-nomargin-top text-color-white">
-          <p className="h1 icon icon-logo icon-big logo-slogan">portato</p>
           <h1 className="text-align-center  mod-nomargin-top">
             {t('general.tagline')}
           </h1>
