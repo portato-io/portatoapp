@@ -21,7 +21,7 @@ const Home: React.FC = () => {
             </h2>
           </Link>
         </div>
-        <div className="info-page-top-spacer"></div>
+        <div className="spacer-big"></div>
       </section>
 
       <section className="section">

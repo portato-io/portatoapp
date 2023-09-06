@@ -1,5 +1,6 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { Layout, ConfigProvider } from 'antd';
+import HeaderBar from '../../Components/HeaderBar';
 import BottomBar from '../../Components/BottomBar';
 import { useTranslation } from 'react-i18next';
 
@@ -38,7 +39,7 @@ const MainLayout = (props: Props) => {
   return (
     <ConfigProvider locale={locale}>
       <Layout style={{ display: display }}>
-        <div className="main-page-split">
+        <div className="layout-wrapper">
           <main className="main-container-split">
             <Content>{children}</Content>
           </main>
