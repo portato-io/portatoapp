@@ -61,6 +61,7 @@ button .icon + span {
 label {
 	padding-bottom:5px;
 	display:block;
+	text-align: left;
 }
 .form-input-wrapper input[type="search"],
 .form-input {

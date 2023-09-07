@@ -32,7 +32,7 @@
   --spacing-horizontal-regular: 15px;
   --spacing-horizontal-big: 25px;
   --spacing-vertical-small: 15px;
-  --spacing-vertical-regular: 5vw; /* 35px; */
+  --spacing-vertical-regular: clamp(20px, 5vw, 35px); /* 35px; */
   --spacing-vertical-big: 55px;
   --transition-regular: all 0.3s ease-in-out 0s;
 }
@@ -335,7 +335,8 @@ video,
 .spacer-fluid-regular {margin-bottom: clamp(15px, 5vw, 30px); }
 .spacer-fluid-medium {margin-bottom: clamp(30px, 10vw, 50px); }
 .spacing-horizontal-regular {margin-left: var(--spacing-horizontal-regular); margin-right: var(--spacing-horizontal-regular)}
-
+.spacing-horizontal-regular:first-child {margin-left: 0;}
+.spacing-horizontal-regular:last-child {margin-right: 0;}
 
 /* MODIFIERS ---------------------------------------- */
 .mod-display-flex {
@@ -393,6 +394,10 @@ video,
   background:var(--portato-green);
   padding-top: var(--spacing-regular);
   padding-bottom: var(--spacing-regular);
+}
+.box-style-color-1 a:hover {
+  color: var(--color-white);
+  text-decoration: underline;
 }
 .box-style-color-2 {
   background:var(--color-green-lightest);
