@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -12,6 +12,7 @@ import AddressAutocomplete from '../../Components/AutoComplete';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../../firebaseConfig';
+import Map from '../../Components/Map';
 
 const PROGRESS = 0;
 const NEXT_SCREEN = '/deliver/enterDrivingTime';
@@ -138,7 +139,7 @@ const EnterRoute: React.FC = () => {
             />
           </Form.Item>
         </Form>
-
+        <Map />
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
