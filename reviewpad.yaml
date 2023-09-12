@@ -1,0 +1,44 @@
+workflows:
+  - name: summarize-on-pull-request-creation
+    run:
+      if: $getEventType() == "opened" || $getEventType() == "synchronize"
+      then: $summarize()
+
+  - name: Add labels based on file patterns
+    run:
+      - if: $containsFilePattern("**/*.css")
+        then:
+          - $addLabel("frontend")
+      - if: $containsFilePattern("**/*.js")
+        then:
+          - $addLabel("backend")
+      - if: $containsFilePattern("**/*.md") # Assuming markdown for documentation
+        then:
+          - $addLabel("documentation")
+      - if: $containsFilePattern("package.json")
+        then:
+          - $addLabel("dependency-update")
+      - if: $containsFilePattern("**/db/**") # Assuming a directory structure for database-related files
+        then:
+          - $addLabel("database")
+
+  - name: PR Size Check
+    run:
+      - if: $getSize() > 1000
+        then:
+          - $addLabel("size XL")
+      - if: $getSize() > 500 && $getSize() <= 1000
+        then:
+          - $addLabel("size L")
+      - if: $getSize() > 100 && $getSize() <= 500
+        then:
+          - $addLabel("size M")
+      - if: $getSize() > 50 && $getSize() <= 100
+        then:
+          - $addLabel("size S")
+      - if: $getSize() <= 50
+        then:
+          - $addLabel("size XS")
+
+
+
