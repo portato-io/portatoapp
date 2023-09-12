@@ -3,12 +3,10 @@ const nodemailer = require('nodemailer');
 const admin = require('firebase-admin');
 const cors = require('cors')({ origin: true });
 
-// initialize firebase admin SDK
 admin.initializeApp();
 
 const { sender, mailing_service } = functions.config();
-
-const transporter = nodemailer.createTransport({
+const TRANSPORT_OPTIONS = {
   service: 'gmail',
   auth: {
     type: 'OAuth2',
@@ -18,23 +16,25 @@ const transporter = nodemailer.createTransport({
     clientSecret: mailing_service.client_secret,
     refreshToken: mailing_service.refresh_token,
   },
-});
+};
+
+const transporter = nodemailer.createTransport(TRANSPORT_OPTIONS);
 
 const sendNotification = functions
   .region('europe-west1')
   .https.onRequest(async (req, res) => {
-    cors(req, res, async () => {
+    return cors(req, res, async () => {
       if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Invalid request method' });
       }
 
-      let data = req.body;
-      console.log('tokens are :', data.tokens);
+      const data = req.body;
+      console.log('tokens are:', data.tokens);
       if (!data.tokens) {
         return res.status(400).json({ error: 'Missing tokens' });
       }
 
-      var message = {
+      const message = {
         data: {
           title: data.title,
           body: data.body,
@@ -45,107 +45,83 @@ const sendNotification = functions
         },
       };
 
-      let responses = [];
+      const responses = [];
       for (let token of data.tokens) {
         message.token = token;
         try {
           let response = await admin.messaging().send(message);
-          responses.push('Successfully sent message: ' + response);
+          responses.push(`Successfully sent message: ${response}`);
         } catch (error) {
-          responses.push(
-            'Error sending message to token ' + token + ': ' + error
-          );
+          responses.push(`Error sending message to token ${token}: ${error}`);
         }
       }
+
       return res.status(200).json({ results: responses });
     });
   });
 
 const sendNotificationEmail = functions
   .region('europe-west1')
-  .https.onRequest((req, res) => {
-    cors(req, res, async () => {
+  .https.onRequest(async (req, res) => {
+    return cors(req, res, async () => {
       try {
-        const { title, body, uid, email } = req.body;
+        const { title, body, uid, email, admin } = req.body;
+
         let targetEmail;
         if (uid && !admin) {
-          targetEmail = await getUserEmail(uid); // Fetch email address from UID
+          targetEmail = await getUserData(uid, 'email');
+          if (!targetEmail) {
+            return res
+              .status(500)
+              .json({ error: 'Could not retrieve email for the given UID' });
+          }
           console.log(`Sending email to UID: ${targetEmail}`);
-        } else if (!email) {
-          res.status(500).send('No uid given');
-          return;
-        } else {
+        } else if (email) {
           targetEmail = email;
           console.log(`Sending email to: ${targetEmail}`);
+        } else {
+          return res.status(500).json({ error: 'No uid or email given' });
         }
 
-        let userInfo = null;
-        if (uid && admin) {
-          // Making sure that there's a UID to fetch user info.
-          userInfo = await getUserInfo(uid);
-        }
+        let userInfo = uid && admin ? await getUserData(uid) : null;
 
-        // Append userInfo to email body if it exists
-        let modifiedBody = body;
-        if (userInfo) {
-          // Here, you can format userInfo as per your requirements.
-          // For the sake of this example, I'm just appending userInfo as a string.
-          modifiedBody += `\n\nUser Info: ${JSON.stringify(userInfo)}`;
-        }
+        const modifiedBody = userInfo
+          ? `${body}\n\nUser Info: ${JSON.stringify(userInfo)}`
+          : body;
 
-        let mailOptions = {
+        const mailOptions = {
           from: '"Notifications" <notifications@portato.io>',
           to: targetEmail,
           subject: title,
-          text: modifiedBody.replace(/<[^>]*>?/gm, ''), // Strip HTML tags for the plain text version
-          html: modifiedBody, // Also include HTML in your email
+          text: modifiedBody.replace(/<[^>]*>?/gm, ''),
+          html: modifiedBody,
         };
-
-        // Continue with the sending email logic
 
         console.log('Sending email...');
         const info = await transporter.sendMail(mailOptions);
         console.log(`Email sent: ${info.messageId}`);
 
-        mailOptions = {
-          from: '"Notifications" <notifications@portato.io>',
-          to: 'support@portato.io',
-          subject: title,
-          text: modifiedBody.replace(/<[^>]*>?/gm, ''), // Strip HTML tags for the plain text version
-          html: modifiedBody, // Also include HTML in your email
-        };
-
-        res.status(200).send(info);
+        return res.status(200).json(info);
       } catch (error) {
         console.error('Error sending email:', error);
-        res.status(500).send(error);
+        return res.status(500).json({ error: error.message });
       }
     });
   });
 
-async function getUserEmail(uid) {
+async function getUserData(uid, field) {
   try {
     const userRecord = await admin.auth().getUser(uid);
-    return userRecord.email;
+    console.log(`${field} for ${uid}: ${userRecord[field]}`);
+    return field ? userRecord[field] : userRecord;
   } catch (error) {
-    console.error('Error fetching user data:', error);
-    return null;
-  }
-}
-
-async function getUserInfo(uid) {
-  try {
-    const userRecord = await admin.auth().getUser(uid);
-    return userRecord;
-  } catch (error) {
-    console.error('Error fetching user data:', error);
+    console.error(`Error fetching user data for UID ${uid}:`, error);
     return null;
   }
 }
 
 module.exports = {
-  getUserEmail,
-  getUserInfo,
+  getUserData,
   sendNotification,
   sendNotificationEmail,
 };
