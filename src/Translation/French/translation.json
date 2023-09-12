@@ -336,5 +336,9 @@
   "imprint": {
     "title": "Mentions légales",
     "text": "Portato GmbH i.G.\nReprésentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
+  },
+  "email": {
+    "requestConfirmationTitle": "Confirmation de votre demande de transport",
+    "requestConfirmationBody": "Voici la confirmation de votre demande de transport récemment soumise"
   }
 }
