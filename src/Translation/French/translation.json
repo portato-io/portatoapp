@@ -339,6 +339,8 @@
   },
   "email": {
     "requestConfirmationTitle": "Confirmation de votre demande de transport",
-    "requestConfirmationBody": "Voici la confirmation de votre demande de transport récemment soumise"
-  }
+    "requestConfirmationBody": "Nous vous remercions pour votre demande d'envoi. Vous trouverez ci-dessous un résumé de celle-ci.<br><br>Nous vous contacterons bientôt pour vous suggérer un chauffeur qui va dans votre direction. Vous pouvez gérer votre demande à tout moment sous ce <a href=\"http://localhost:3000/createSendRequest\">lien</a>.",
+    "greetings": "Cher(e)",
+    "salutations": "Cordialement,<br><br>L'équipe Portato"
+  }  
 }

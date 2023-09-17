@@ -81,33 +81,40 @@ const RequestSummary: React.FC = () => {
     uid: string
   ): { userContent: string; supportContent: string } => {
     const baseContent = `
-    Here is the confirmation of your recently submited transportation request:
-      <table>
-        <tr><th>${t('requestInfo.name')}</th><td>${requestInfo.name}</td></tr>
-        <tr><th>${t('requestAddresses.pickupAddress')}</th><td>${
-      requestInfo.pickup_adress
+    ${t('email.requestConfirmationBody')}
+      <table style="text-align:left;">
+        <tr><th style="text-align:left;">${t('requestInfo.name')}</th><td>${
+      requestInfo.name
     }</td></tr>
-        <tr><th>${t('requestAddresses.deliveryAddress')}</th><td>${
-      requestInfo.delivery_adress
+        <tr><th style="text-align:left;">${t(
+          'requestAddresses.pickupAddress'
+        )}</th><td>${requestInfo.pickup_adress}</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'requestAddresses.deliveryAddress'
+        )}</th><td>${requestInfo.delivery_adress}</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'requestTime.dates'
+        )}</th><td>From ${requestInfo.dateRange[0]} to ${
+      requestInfo.dateRange[1]
     }</td></tr>
-        <tr><th>${t('requestTime.dates')}</th><td>From ${
-      requestInfo.dateRange[0]
-    } to ${requestInfo.dateRange[1]}</td></tr>
-        <tr><th>${t('requestTime.time')}</th><td>${requestInfo.time}</td></tr>
-        <tr><th>${t('requestCost.label')}</th><td>${
+        <tr><th style="text-align:left;">${t('requestTime.times')}</th><td>${
+      requestInfo.time
+    }</td></tr>
+        <tr><th style="text-align:left;">${t('requestCost.label')}</th><td>${
       requestInfo.price
     } CHF</td></tr>
-        <tr><th>${t('requestSummary.weight')}</th><td>${
-      requestInfo.weight
-    }</td></tr>
-        <tr><th>${t('requestSummary.size')}</th><td>${
+        <tr><th style="text-align:left;">${t(
+          'requestSummary.weight'
+        )}</th><td>${requestInfo.weight}</td></tr>
+        <tr><th style="text-align:left;">${t('requestSummary.size')}</th><td>${
       requestInfo.size
     }</td></tr>
-        <tr><th>${t('requestInfo.description')}</th><td>${
-      requestInfo.description
-    }</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'requestInfo.description'
+        )}</th><td>${requestInfo.description}</td></tr>
       </table>
-    `;
+    <br><br>
+    ${t('email.salutations')}`;
 
     const supportAdditionalContent = `
       <tr><th>requestID</th><td>${requestInfo.id}</td></tr>
@@ -127,6 +134,7 @@ const RequestSummary: React.FC = () => {
   ): Promise<void> => {
     const emailBody = {
       title: t('email.requestConfirmationTitle'),
+      greetings: t('email.greetings'),
       body: emailContent,
       uid: senderUid,
       email: recipientEmail,

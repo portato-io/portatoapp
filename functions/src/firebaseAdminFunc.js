@@ -65,7 +65,7 @@ const sendNotificationEmail = functions
   .https.onRequest(async (req, res) => {
     return cors(req, res, async () => {
       try {
-        const { title, body, uid, email, admin } = req.body;
+        const { title, body, uid, email, admin, greetings } = req.body;
 
         let targetEmail;
         if (uid && !admin) {
@@ -85,12 +85,22 @@ const sendNotificationEmail = functions
 
         let userInfo = uid && admin ? await getUserData(uid) : null;
 
-        const modifiedBody = userInfo
-          ? `${body}\n\nUser Info: ${JSON.stringify(userInfo)}`
-          : body;
+        let displayName = '';
+        if (uid) {
+          displayName = (await getUserData(uid, 'displayName')) || '';
+        }
+
+        const greeting = displayName
+          ? greetings + ` ${displayName},<br><br>`
+          : '';
+        const modifiedBody =
+          greeting +
+          (userInfo
+            ? `${body}\n\nUser Info: ${JSON.stringify(userInfo)}`
+            : body);
 
         const mailOptions = {
-          from: '"Notifications" <notifications@portato.io>',
+          from: '"Portato" <notifications@portato.io>',
           to: targetEmail,
           subject: title,
           text: modifiedBody.replace(/<[^>]*>?/gm, ''),

@@ -339,7 +339,9 @@
     "text": "Portato GmbH i.G.\nRepräsentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
   },
   "email": {
-    "requestConfirmationTitle": "Bestätigung Ihrer Transportanfrage",
-    "requestConfirmationBody": "Hier ist die Bestätigung Ihrer kürzlich eingereichten Transportanfrage"
-  }
+    "requestConfirmationTitle": "Bestätigung deines Transportauftrages",
+    "requestConfirmationBody": "Vielen Dank für deinen Transportauftrag. Wir melden uns bei Dir sobald wie möglich mit Fahrer:innen, die in deine Richtung fahren und den Transport übernehmen können. <br><br>Deinen Auftrag kannst du unter diesem <a href=\"http://localhost:3000/createSendRequest\">Link</a> jederzeit aufrufen, editieren oder löschen.",
+    "greetings": "Liebe/r",
+    "salutations": "Vielen Dank,<br><br>Dein Portato Team"
+  }  
 }
