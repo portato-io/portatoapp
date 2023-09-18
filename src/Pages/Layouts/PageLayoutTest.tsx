@@ -1,11 +1,13 @@
 import { ReactNode, useState, useEffect } from 'react';
-import { Layout, ConfigProvider } from 'antd';
+import { Layout, ConfigProvider, Avatar } from 'antd';
 import BottomBar from '../../Components/BottomBar';
 import { useTranslation } from 'react-i18next';
+import { UserOutlined } from '@ant-design/icons';
 
 import en_US from 'antd/lib/locale/en_US';
 import fr_FR from 'antd/lib/locale/fr_FR';
 import de_DE from 'antd/lib/locale/de_DE';
+import { Header } from 'antd/es/layout/layout';
 
 require('../../CSS/FillOutForms.css');
 

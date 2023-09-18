@@ -12,6 +12,7 @@ import MehdiImage from '../Assets/Images/team/mehdi.webp';
 import MischaImage from '../Assets/Images/team/mischa.webp';
 import ChiaraImage from '../Assets/Images/team/chiara.webp';
 import { Link } from 'react-router-dom';
+import ProfileButton from '../Components/ProfileButton';
 
 interface Images {
   [key: string]: string;
@@ -100,6 +101,7 @@ const Home: React.FC = () => {
           <h2 className="mod-text-align-center header-overlay-text">
             {t('general.tagline')}
           </h2>
+          <ProfileButton />
         </div>
       </section>
 

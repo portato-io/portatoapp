@@ -30,11 +30,6 @@ function BottomBar() {
       title: t('navBar.drive'),
       icon: <i className="icon icon-big icon-drive" />,
     },
-    {
-      key: '/profile',
-      title: t('navBar.profile'),
-      icon: <i className="icon icon-big icon-profile" />,
-    },
   ];
 
   const location = useLocation();
