@@ -91,28 +91,23 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ex PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk.",
-      "image": "src/Assets/Images/team/conrad.jpg"
+      "description": "Ex PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk."
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "Franko-britisches Genie, der das Backend in mindestens genauso vielen Sprachen jongliert.",
-      "image": "src/Assets/Images/team/hugo.jpg"
+      "description": "Franko-britisches Genie, der das Backend in mindestens genauso vielen Sprachen jongliert."
     },
     "Mehdi": {
       "name": "Mehdi",
-      "description": "Hip-Hop-Liebhaber, der das Frontend genauso gut aussehen lässt wie seine Frisuren.",
-      "image": "src/Assets/Images/team/mehdi.jpg"
+      "description": "Hip-Hop-Liebhaber, der das Frontend genauso gut aussehen lässt wie seine Frisuren."
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Hansdampf in allen Gassen. Multitalent mit einem Händchen für Code, Design und Animation.",
-      "image": "src/Assets/Images/team/mischa.jpg"
+      "description": "Hansdampf in allen Gassen. Multitalent mit einem Händchen für Code, Design und Animation."
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "Storyboard-Artist und 2D-Künstlerin, die Portato Charme verleiht, ein Strich nach dem anderen.",
-      "image": "src/Assets/Images/team/chiara.png"
+      "description": "Storyboard-Artist und 2D-Künstlerin, die Portato Charme verleiht, ein Strich nach dem anderen."
     }
   },
 
@@ -187,8 +182,15 @@
     "possibleTimes": "Mögliche Tageszeiten",
     "price": "Preis",
     "images": "Bild(er)",
-    "signInMessage": "Bitte melde dich an, um den Auftrag zu bestätigen"
+    "signInMessage": "Bitte melde dich an, um den Auftrag zu bestätigen",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Bestätigung deines Transportauftrages",
+      "requestConfirmationBody": "Vielen Dank für deinen Transportauftrag. Wir melden uns bei dir sobald wie möglich mit Fahrer:innen, die in deine Richtung fahren und den Transport übernehmen können.<br>Deinen Auftrag kannst Du unter diesem <a href=\"https://portato.io/createSendRequest\">Link</a> jederzeit einsehen, editieren oder löschen.<br>",
+      "greetings": "Liebe/r",
+      "salutations": "Vielen Dank,<br>Dein Portato Team"
+  }
   },
+
   "driveOverview": {
     "newTitle": "Möchtest Du eine Route registrieren?",
     "createButtonDescription": "Route registrieren",
@@ -337,11 +339,5 @@
   "imprint": {
     "title": "Impressum",
     "text": "Portato GmbH i.G.\nRepräsentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
-  },
-  "email": {
-    "requestConfirmationTitle": "Bestätigung deines Transportauftrages",
-    "requestConfirmationBody": "Vielen Dank für deinen Transportauftrag. Wir melden uns bei Dir sobald wie möglich mit Fahrer:innen, die in deine Richtung fahren und den Transport übernehmen können. <br><br>Deinen Auftrag kannst du unter diesem <a href=\"http://localhost:3000/createSendRequest\">Link</a> jederzeit aufrufen, editieren oder löschen.",
-    "greetings": "Liebe/r",
-    "salutations": "Vielen Dank,<br><br>Dein Portato Team"
   }  
 }

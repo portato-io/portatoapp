@@ -81,7 +81,8 @@ const RequestSummary: React.FC = () => {
     uid: string
   ): { userContent: string; supportContent: string } => {
     const baseContent = `
-    ${t('email.requestConfirmationBody')}
+    ${t('requestSummary.notificationEmail.requestConfirmationBody')}
+      <br>
       <table style="text-align:left;">
         <tr><th style="text-align:left;">${t('requestInfo.name')}</th><td>${
       requestInfo.name
@@ -113,8 +114,8 @@ const RequestSummary: React.FC = () => {
           'requestInfo.description'
         )}</th><td>${requestInfo.description}</td></tr>
       </table>
-    <br><br>
-    ${t('email.salutations')}`;
+    <br>
+    ${t('requestSummary.notificationEmail.salutations')}`;
 
     const supportAdditionalContent = `
       <tr><th>requestID</th><td>${requestInfo.id}</td></tr>
@@ -133,8 +134,8 @@ const RequestSummary: React.FC = () => {
     recipientEmail: string
   ): Promise<void> => {
     const emailBody = {
-      title: t('email.requestConfirmationTitle'),
-      greetings: t('email.greetings'),
+      title: t('requestSummary.notificationEmail.requestConfirmationTitle'),
+      greetings: t('requestSummary.notificationEmail.greetings'),
       body: emailContent,
       uid: senderUid,
       email: recipientEmail,
