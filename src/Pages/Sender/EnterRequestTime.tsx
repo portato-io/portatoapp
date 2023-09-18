@@ -78,7 +78,11 @@ const EnterRequestTime: React.FC = () => {
   };
 
   const handleChangeDate = (date: any) => {
-    console.log('AAAH', date.day);
+    console.log(date.$d);
+    const selectedDate = new Date(date.$d);
+    const formattedDate = selectedDate.toLocaleDateString('en-GB'); // Format: dd-mm-yyyy
+    console.log(`Selected Date: ${formattedDate}`);
+    dispatch(setObjectDateRange([formattedDate, '']));
   };
 
   const handleChangeRange = (range: any) => {
