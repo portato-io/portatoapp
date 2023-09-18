@@ -1,16 +1,11 @@
 import { Form } from 'antd';
 import React, { useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-
-import NextButton from '../../Components/Buttons/NextButton';
-import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
 import { Tabs } from 'antd-mobile';
 import SingleTripContent from '../../Components/PageComponents/SingleTripContent';
 import RecurrentTripContent from '../../Components/PageComponents/RecurrentTripContent';
 import { useTranslation } from 'react-i18next';
-import { logEvent } from 'firebase/analytics';
-import { analytics } from '../../firebaseConfig';
 import { shallowEqual, useSelector } from 'react-redux';
 import { IRouteInfo } from '../../type';
 

@@ -161,7 +161,9 @@
   },
   "requestTime": {
     "title": "Wann soll die Sendung abgeholt werden?",
-    "dates": "Daten",
+    "flexibleDates": "Flexible Daten",
+    "specificDates": "Bestimmtes Datum",
+    "specificTime": "Möchten Sie an einem bestimmten Tag beliefert werden?",
     "times": "Tageszeiten",
     "dateHint": "(Du kannst das Start- und Enddatum auf den gleichen Tag legen falls nötig)",
     "timeHint": "(Mehrfachauswahl möglich)",

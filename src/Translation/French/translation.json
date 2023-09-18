@@ -160,7 +160,9 @@
   },
   "requestTime": {
     "title": "Quand voulez-vous que l'envoi soit récupéré?",
-    "dates": "Dates",
+    "flexibleDates": "Dates Flexibles",
+    "specificDates": "Date Spécifique",
+    "specificTime": "Souhaitez-vous être livré un jour précis?",
     "times": "Heure",
     "dateHint": "(Vous pouvez fixer la date de début et de fin le même jour si nécessaire)",
     "timeHint": "(Choix multiple possible)",
