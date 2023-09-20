@@ -182,8 +182,15 @@
     "possibleTimes": "Possible times",
     "price": "Price",
     "images": "Image(s)",
-    "signInMessage": "Please sign in before submitting your request"
+    "signInMessage": "Please sign in before submitting your request",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Confirmation of your transport request",
+      "requestConfirmationBody": "Thank you very much for your shipment request. Please find a summary of it below. <br>We will reach out to you soon with a suggestion for a driver who is going your way. You can manage your request at any time using this <a href=\"https://portato.io/createSendRequest\">link</a>.<br>",
+      "greetings": "Dear",
+      "salutations": "Kind regards,<br>Your Portato Team"
+    }
   },
+  
   "driveOverview": {
     "newTitle": "Want to register a ride?",
     "createButtonDescription": "Create route",
