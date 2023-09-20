@@ -1,31 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import 'firebaseui/dist/firebaseui.css';
-import { GoogleAuthProvider, EmailAuthProvider } from 'firebase/auth';
-import { uiInstance, uiConfig } from './firebaseUIInstance';
+import React from 'react';
+import Userfront, { SignupForm } from '@userfront/react';
 
 const FirebaseAuth: React.FC = () => {
-  const uiRef = useRef<HTMLDivElement | null>(null);
+  // Initialize Userfront
+  Userfront.init('yourUserfrontTenantId'); // Replace with your actual Userfront tenant ID
 
-  useEffect(() => {
-    // Update the signInSuccessUrl and callbacks in uiConfig
-    uiConfig.signInOptions = [EmailAuthProvider.PROVIDER_ID];
-    uiConfig.callbacks = {
-      signInSuccessWithAuthResult: () => {
-        window.location.replace(window.location.pathname);
-        return false;
-      },
-    };
-
-    // Start the FirebaseUI widget
-    uiInstance.start('#firebaseui-auth-container', uiConfig);
-
-    // Cleanup on unmount
-    return () => {
-      uiInstance.reset();
-    };
-  }, []);
-
-  return <div id="firebaseui-auth-container" ref={uiRef}></div>;
+  return <Userfront.Login toolId="yourLoginToolId" />; // Replace with your actual Userfront login tool ID
 };
 
 export default FirebaseAuth;
