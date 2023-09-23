@@ -256,5 +256,11 @@
     "english": "Englisch",
     "french": "Französisch",
     "german": "Deutsch"
+  },
+  "additionalInfo": {
+    "title": "Bitte geben Sie diese zusätzlichen Informationen an",
+    "address": "Adresse",
+    "phoneNum": "Telefonnummer",
+    "birthday": "Geburtstag"
   }
 }

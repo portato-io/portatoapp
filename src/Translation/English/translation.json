@@ -251,5 +251,11 @@
     "english": "English",
     "french": "French",
     "german": "German"
+  },
+  "additionalInfo": {
+    "title": "Please provide these additional information",
+    "address": "Address",
+    "phoneNum": "Phone Number",
+    "birthday": "Birthday"
   }
 }

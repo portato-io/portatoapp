@@ -255,5 +255,11 @@
     "english": "Anglais",
     "french": "Français",
     "german": "Allemand"
+  },
+  "additionalInfo": {
+    "title": "Veuillez entrer les informations suivantes",
+    "address": "Votre Adresse",
+    "phoneNum": "Votre numéro de téléphone",
+    "birthday": "Votre date de naissance"
   }
 }
