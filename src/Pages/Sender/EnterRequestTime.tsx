@@ -82,7 +82,7 @@ const EnterRequestTime: React.FC = () => {
     const selectedDate = new Date(date.$d);
     const formattedDate = selectedDate.toLocaleDateString('en-GB'); // Format: dd-mm-yyyy
     console.log(`Selected Date: ${formattedDate}`);
-    dispatch(setObjectDateRange([formattedDate, '']));
+    dispatch(setObjectDateRange([formattedDate, formattedDate]));
   };
 
   const handleChangeRange = (range: any) => {
@@ -134,6 +134,9 @@ const EnterRequestTime: React.FC = () => {
                 inputReadOnly={true}
                 onChange={handleChangeDate}
                 style={{ width: '100%' }}
+                defaultValue={
+                  defaultDateRange ? defaultDateRange[0] : undefined
+                }
               />
             </Form.Item>
           ) : (
