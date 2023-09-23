@@ -16,13 +16,23 @@ const resources: Resource = {
   fr_FR: {
     translation: translationFrench,
   },
+  en: {
+    translation: translationEnglish,
+  },
+  de: {
+    translation: translationGerman,
+  },
+  fr: {
+    translation: translationFrench,
+  },
 };
 
 const options: InitOptions = {
+  debug: true,
   resources,
-  fallbackLng: 'en_US',
+  fallbackLng: 'de_DE',
   detection: {
-    order: ['localStorage', 'navigator'],
+    order: ['navigator', 'localStorage'],
     caches: ['localStorage'],
   },
   interpolation: {

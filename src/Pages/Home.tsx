@@ -1,15 +1,17 @@
 import React from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import headerImage from '../Assets/Images/portato-landing-9.png';
+import sendImage from '../Assets/Images/send.webp';
+import driveImage from '../Assets/Images/drive.webp';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
 import LottieAnimation from '../Assets/Lotties/how-it-works-animation';
-import ConradImage from '../Assets/Images/team/conrad.jpg';
-import HugoImage from '../Assets/Images/team/hugo.jpg';
-import MehdiImage from '../Assets/Images/team/mehdi.jpg';
-import MischaImage from '../Assets/Images/team/mischa.jpg';
-import ChiaraImage from '../Assets/Images/team/chiara.jpg';
+import ConradImage from '../Assets/Images/team/conrad.webp';
+import HugoImage from '../Assets/Images/team/hugo.webp';
+import MehdiImage from '../Assets/Images/team/mehdi.webp';
+import MischaImage from '../Assets/Images/team/mischa.webp';
+import ChiaraImage from '../Assets/Images/team/chiara.webp';
+import { Link } from 'react-router-dom';
 
 interface Images {
   [key: string]: string;
@@ -42,13 +44,11 @@ const Home: React.FC = () => {
     const image = getTeamMemberImage(memberName);
 
     return (
-      <div className="listing-entry">
-        <div className="listing-entry-header">
-          <img className="image circle" src={image} />
-          <h4>{name}</h4>
-        </div>
+      <div className="team-member-entry">
+        <img className="image circle team-member-image" src={image} />
         <div className="listing-entry-content">
-          <p>
+          <h4 className="mod-text-align-center">{name}</h4>
+          <p className="mod-text-align-center">
             <small>{description}</small>
           </p>
           <div className="spacer-small"></div>
@@ -74,7 +74,8 @@ const Home: React.FC = () => {
     return (
       <a
         href={link}
-        className="button button-border box-shadow box-radius-default box-shadow-effect"
+        // className="button button-border box-shadow box-radius-default box-shadow-effect"
+        className="button button-solid box-shadow box-shadow-effect box-radius-round"
         target="_blank"
         onClick={handleClick}
       >
@@ -87,83 +88,88 @@ const Home: React.FC = () => {
   return (
     <PageLayout>
       {/* Landing screen */}
-      <section className="section mod-nopadding mod-nomargin-top">
-        <img
-          src={headerImage}
-          alt="portato header image"
-          className="image header-image"
-        />
-      </section>
-
-      <section className="section">
-        <div className="text-section">
-          <h1 className="icon icon-logo icon-big logo-slogan">portato</h1>
-          <h5>{t('general.tagline')}</h5>
+      <section className="header-section">
+        <div className="background-wrapper">
+          <div className="main-image"></div>
+          <div className="background-image"></div>
+        </div>
+        <div className="content-wrapper">
+          <h1 className="icon icon-logo icon-big logo-slogan logo-slogan-landing-page">
+            portato
+          </h1>
+          <h2 className="mod-text-align-center header-overlay-text">
+            {t('general.tagline')}
+          </h2>
         </div>
       </section>
 
-      <section className="section ">
-        <div className="spacer-regular"></div>
-        <div className="mod-display-flex">
-          <a
-            className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            href="/createSendRequest/enter_request_name_desc"
-            onClick={() => logEvent(analytics, 'home_send_button_click')}
-          >
-            {t('general.send')}
-          </a>
-          <a
-            className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            href="/deliver/enterRoute"
-            onClick={() => logEvent(analytics, 'home_drive_button_click')}
-          >
-            {t('general.deliver')}
-          </a>
-        </div>
-        <div className="spacer-regular"></div>
-      </section>
-
-      <section className="section">
-        <h2>{t('general.howItWorks')}</h2>
-        <div className="video-wrapper">
-          <LottieAnimation />
-        </div>
-      </section>
-
-      <section className="section mod-text-align-right">
-        <h2>{t('about.title')}</h2>
-        <section className="section box-style-color box-radius-style-3 mod-text-align-right mod-nomargin-top">
-          <h3>{t('about.visionMissionTitle')}</h3>
-          <p>
-            {t('about.visionMissionText')
-              .split('\n')
-              .map((line: string, i: number) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
+      {/* Call to Action */}
+      <section className="section mod-relative">
+        <section className="call-to-action-section">
+          <h2 className="mod-text-align-center call-to-action-title">
+            {t('sendSection.title')}
+          </h2>
+          <p className="mod-text-align-center call-to-action-description">
+            {t('sendSection.description')}
           </p>
-          <div className="spacer-small"></div>
-          {/*
-          <div>
-            <a
-              href="/about-us"
-              className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            >
-              {t('general.moreInfo')}
-            </a>
-          </div>
-          */}
+          <img
+            src={sendImage}
+            alt="send image"
+            className="call-to-action-image"
+          />
         </section>
+        <a
+          className="button button-solid box-shadow box-shadow-effect call-to-action-button box-radius-round"
+          href="/createSendRequest/enter_request_name_desc"
+          onClick={() => logEvent(analytics, 'home_send_button_click')}
+        >
+          {t('general.send')}
+        </a>
       </section>
 
       <div className="spacer-big"></div>
 
-      <section className="section">
-        <h2>{t('about.whoWeAreTitle')}</h2>
-        <p>
-          {t('about.whoWeAreText')
+      <section className="section mod-relative">
+        <section className="call-to-action-section">
+          <h2 className="mod-text-align-center call-to-action-title">
+            {t('driveSection.title')}
+          </h2>
+          <p className="mod-text-align-center call-to-action-description">
+            {t('driveSection.description')}
+          </p>
+          <img
+            src={driveImage}
+            alt="send image"
+            className="call-to-action-image"
+          />
+        </section>
+        <a
+          className="button button-solid box-shadow box-shadow-effect call-to-action-button box-radius-round"
+          href="/deliver/enterRoute"
+          onClick={() => logEvent(analytics, 'home_drive_button_click')}
+        >
+          {t('general.deliver')}
+        </a>
+      </section>
+
+      {/* How it works */}
+      <div className="spacer-big"></div>
+      <section className="section-bleed green-section">
+        <section className="section">
+          <h1 className="mod-text-align-center">{t('general.howItWorks')}</h1>
+          <div className="video-wrapper">
+            <LottieAnimation />
+          </div>
+        </section>
+      </section>
+
+      {/* Portato's mission */}
+      <section className="section mod-text-align-right">
+        <h1 className="mod-text-align-center">
+          {t('about.visionMissionTitle')}
+        </h1>
+        <p className="mod-text-align-center">
+          {t('about.visionMissionText')
             .split('\n')
             .map((line: string, i: number) => (
               <span key={i}>
@@ -174,24 +180,94 @@ const Home: React.FC = () => {
         </p>
       </section>
 
-      <section className="section">
-        <div className="listing listing-3 listing-boxes">
-          {teamMemberNames.map((name) => (
-            <TeamMember memberName={name} key={name} />
-          ))}
-          <div className="entry-filler"></div>
-          <div className="entry-filler"></div>
-          <div className="entry-filler"></div>
-        </div>
+      {/* Who we are */}
+      <div className="spacer-big"></div>
+      <section className="section-bleed green-section">
+        <section className="section">
+          <h1 className="mod-text-align-center">{t('about.whoWeAreTitle')}</h1>
+          <p className="mod-text-align-center">
+            {t('about.whoWeAreText')
+              .split('\n')
+              .map((line: string, i: number) => (
+                <span key={i}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+          </p>
+        </section>
+
+        {/* Team */}
+        <section className="section">
+          <div className="listing listing-3 listing-boxes team-member-grid">
+            {teamMemberNames.map((name) => (
+              <TeamMember memberName={name} key={name} />
+            ))}
+            <div className="entry-filler"></div>
+            <div className="entry-filler"></div>
+            <div className="entry-filler"></div>
+          </div>
+        </section>
       </section>
 
+      {/* Social media */}
       <section className="section">
-        <h2>{t('social.heading')}</h2>
-        <div className="mod-display-flex">
+        <h1 className="mod-text-align-center">{t('social.heading')}</h1>
+        <div className="mod-display-flex center-flex">
           {socialChannelTypes.map((label) => (
             <SocialChannel socialLabel={label} key={label} />
           ))}
         </div>
+      </section>
+
+      {/* Links */}
+      <section className="section-bleed green-section link-section">
+        <section className="section">
+          <h1 className="mod-text-align-center">{t('links.heading')}</h1>
+          <Link
+            to="/FAQ"
+            onClick={() =>
+              logEvent(analytics, 'home_moreInfo_FAQ_button_click')
+            }
+          >
+            <p className="mod-text-align-center link-section-text">
+              {t('links.FAQ')}
+            </p>
+          </Link>
+
+          <Link
+            to="/termsAndconditions"
+            onClick={() =>
+              logEvent(analytics, 'home_moreInfo_TandC_button_click')
+            }
+          >
+            <p className="mod-text-align-center link-section-text">
+              {t('links.termsAndConditions')}
+            </p>
+          </Link>
+
+          <Link
+            to="/privacyPolicy"
+            onClick={() =>
+              logEvent(analytics, 'home_moreInfo_privacyPolicy_button_click')
+            }
+          >
+            <p className="mod-text-align-center link-section-text">
+              {t('links.privacyPolicy')}
+            </p>
+          </Link>
+
+          <Link
+            to="/imprint"
+            onClick={() =>
+              logEvent(analytics, 'home_moreInfo_imprint_button_click')
+            }
+          >
+            <p className="mod-text-align-center link-section-text">
+              {t('links.imprint')}
+            </p>
+          </Link>
+        </section>
       </section>
     </PageLayout>
   );

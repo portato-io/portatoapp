@@ -34,74 +34,128 @@ const RequestSummary: React.FC = () => {
     setIsModalVisible(true);
   };
 
-  const objecInfo = useSelector(
+  const requestInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
   );
-  console.log(objecInfo);
+  console.log(requestInfo);
 
   const { uid } = useAuth();
 
   const handleConfirm = async () => {
     dispatch(setStatus('unmatched'));
     console.log('About to upload request');
-    if (uid) {
-      console.log('valid uid');
-      try {
-        const uploadSuccess = await uploadRequestToFirebase(uid, dispatch);
-        if (uploadSuccess) {
-          message.success('Successfully uploaded request!');
-          // Construct HTML email content
-          const emailContent = `
-          <table>
-            <tr><th>Title</th><td>${objecInfo.name}</td></tr>
-            <tr><th>Pickup Address</th><td>${objecInfo.pickup_adress}</td></tr>
-            <tr><th>Delivery Address</th><td>${objecInfo.delivery_adress}</td></tr>
-            <tr><th>Date Range</th><td>From ${objecInfo.dateRange[0]} to ${objecInfo.dateRange[1]}</td></tr>
-            <tr><th>Time</th><td>${objecInfo.time}</td></tr>
-            <tr><th>Price</th><td>${objecInfo.price} CHF</td></tr>
-            <tr><th>Weight</th><td>${objecInfo.weight}</td></tr>
-            <tr><th>Size</th><td>${objecInfo.size}</td></tr>
-            <tr><th>Description</th><td>${objecInfo.description}</td></tr>
-            <tr><th>Request ID</th><td>${objecInfo.id}</td></tr>
-            <tr><th>Request UID</th><td>${uid}</td></tr>
-          </table>
-        `;
-          // send notification email to support
-          const emailBody = {
-            title: 'New delivery request submitted',
-            body: emailContent,
-            uid: null,
-            email: 'support@portato.io',
-          };
 
-          fetch(
-            'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
-            {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(emailBody),
-            }
-          )
-            .then((response) => response.json())
-            .then((result) => {
-              // Read result of the Cloud Function.
-              console.log(result);
-            })
-            .catch((error) => {
-              // Getting the error details
-              console.error(`error: ${error}`);
-            });
-
-          dispatch(emptyState()); //Free the redux store after uploading
-        } else {
-          message.error('Failed to upload request!');
-        }
-      } catch (error) {
-        console.error('Error uploading request: ', error);
-        message.error('Failed to upload request due to an error!');
-      }
-    } else {
+    if (!uid) {
       console.log('User UID not found.');
+      return;
+    }
+
+    console.log('Valid uid');
+
+    try {
+      const uploadSuccess = await uploadRequestToFirebase(uid, dispatch);
+
+      if (!uploadSuccess) {
+        message.error('Failed to upload request!');
+        return;
+      }
+
+      message.success('Successfully uploaded request!');
+
+      const { userContent, supportContent } = constructEmailContent(
+        requestInfo,
+        uid
+      );
+      await sendEmailNotification(userContent, uid, '');
+      await sendEmailNotification(supportContent, uid, 'support@portato.io');
+
+      dispatch(emptyState()); // Free the redux store after uploading
+    } catch (error) {
+      console.error('Error uploading request:', error);
+      message.error('Failed to upload request due to an error!');
+    }
+  };
+
+  const constructEmailContent = (
+    requestInfo: IRequestInfo,
+    uid: string
+  ): { userContent: string; supportContent: string } => {
+    const baseContent = `
+    ${t('requestSummary.notificationEmail.requestConfirmationBody')}
+      <br>
+      <table style="text-align:left;">
+        <tr><th style="text-align:left;">${t('requestInfo.name')}</th><td>${
+      requestInfo.name
+    }</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'requestAddresses.pickupAddress'
+        )}</th><td>${requestInfo.pickup_adress}</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'requestAddresses.deliveryAddress'
+        )}</th><td>${requestInfo.delivery_adress}</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'requestTime.dates'
+        )}</th><td>From ${requestInfo.dateRange[0]} to ${
+      requestInfo.dateRange[1]
+    }</td></tr>
+        <tr><th style="text-align:left;">${t('requestTime.times')}</th><td>${
+      requestInfo.time
+    }</td></tr>
+        <tr><th style="text-align:left;">${t('requestCost.label')}</th><td>${
+      requestInfo.price
+    } CHF</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'requestSummary.weight'
+        )}</th><td>${requestInfo.weight}</td></tr>
+        <tr><th style="text-align:left;">${t('requestSummary.size')}</th><td>${
+      requestInfo.size
+    }</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'requestInfo.description'
+        )}</th><td>${requestInfo.description}</td></tr>
+      </table>
+    <br>
+    ${t('requestSummary.notificationEmail.salutations')}`;
+
+    const supportAdditionalContent = `
+      <tr><th>requestID</th><td>${requestInfo.id}</td></tr>
+      <tr><th>requestUID</th><td>${uid}</td></tr>
+    `;
+
+    return {
+      userContent: baseContent,
+      supportContent: baseContent + supportAdditionalContent,
+    };
+  };
+
+  const sendEmailNotification = async (
+    emailContent: string,
+    senderUid: string,
+    recipientEmail: string
+  ): Promise<void> => {
+    const emailBody = {
+      title: t('requestSummary.notificationEmail.requestConfirmationTitle'),
+      greetings: t('requestSummary.notificationEmail.greetings'),
+      body: emailContent,
+      uid: senderUid,
+      email: recipientEmail,
+      admin: recipientEmail === 'support@portato.io',
+    };
+
+    const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+    try {
+      const response = await fetch(
+        `https://europe-west1-${projectId}.cloudfunctions.net/sendNotificationEmail`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(emailBody),
+        }
+      );
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(`Error sending email notification: ${error}`);
     }
   };
 
@@ -123,7 +177,7 @@ const RequestSummary: React.FC = () => {
         <div className="current-send-requests-list listing listing-boxes listing-vertical listing-background-style">
           <div className="send-request-card box-shadow">
             <div className="send-request-card-header">
-              <h4>{objecInfo.name}</h4>
+              <h4>{requestInfo.name}</h4>
             </div>
             <div className="send-request-card-content">
               <div className="table-wrapper">
@@ -132,34 +186,34 @@ const RequestSummary: React.FC = () => {
                     <th className="th">
                       {t('requestOverview.requestList.description')}
                     </th>
-                    <td className="td">{objecInfo.description}</td>
+                    <td className="td">{requestInfo.description}</td>
                   </tr>
                   <tr>
                     <th className="th">{t('requestSummary.pickupAddress')}</th>
-                    <td className="td">{objecInfo.pickup_adress}</td>
+                    <td className="td">{requestInfo.pickup_adress}</td>
                   </tr>
                   <tr>
                     <th className="th">
                       {t('requestSummary.deliveryAddress')}
                     </th>
-                    <td className="td">{objecInfo.delivery_adress}</td>
+                    <td className="td">{requestInfo.delivery_adress}</td>
                   </tr>
                   <tr>
                     <th className="th">{t('requestSummary.timeframe')}</th>
                     <td className="td">
-                      {objecInfo.dateRange
-                        ? `${objecInfo.dateRange[0]} - ${objecInfo.dateRange[1]}`
+                      {requestInfo.dateRange
+                        ? `${requestInfo.dateRange[0]} - ${requestInfo.dateRange[1]}`
                         : 'Date range not specified'}
                       <br />
-                      {Object.values(objecInfo.time).join(', ')}
+                      {Object.values(requestInfo.time).join(', ')}
                     </td>
                   </tr>
                   <tr>
                     <th className="th">{t('requestSummary.price')}</th>
-                    <td className="td">{objecInfo.price} CHF</td>
+                    <td className="td">{requestInfo.price} CHF</td>
                   </tr>
                   {/*// Only render the images row if the images array is not empty*/}
-                  {objecInfo.images && objecInfo.images.length > 0 ? (
+                  {requestInfo.images && requestInfo.images.length > 0 ? (
                     <tr>
                       <th className="th">{t('requestSummary.images')}</th>
                       <td className="td">
@@ -167,7 +221,7 @@ const RequestSummary: React.FC = () => {
                           preview={{ visible: false }}
                           height={100}
                           width={100}
-                          src={objecInfo.images[0]}
+                          src={requestInfo.images[0]}
                           onClick={() => setVisible(true)}
                         ></Image>
                         <div style={{ display: 'none' }}>
@@ -177,7 +231,7 @@ const RequestSummary: React.FC = () => {
                               onVisibleChange: (vis) => setVisible(vis),
                             }}
                           >
-                            {objecInfo.images.map((image) => (
+                            {requestInfo.images.map((image) => (
                               <Image src={image} />
                             ))}
                           </Image.PreviewGroup>
@@ -194,7 +248,7 @@ const RequestSummary: React.FC = () => {
         <div className="form-button-container mod-display-flex mod-flex-space-between mod-items-align-center">
           <BackButton
             onClick={() => {
-              logEvent(analytics, 'send_5_summary_back_button_click');
+              logEvent(analytics, 'send_6_summary_back_button_click');
             }}
           />
           {uid ? (
@@ -202,18 +256,16 @@ const RequestSummary: React.FC = () => {
               nextScreen={NEXT_SCREEN}
               onClick={() => {
                 handleConfirm();
-                logEvent(analytics, 'send_5_summary_confirm_button_click');
+                logEvent(analytics, 'send_6_summary_confirm_button_click');
               }}
             />
           ) : (
             <div className="signin-container">
-              <div className="caption">
-                Please sign in before submitting your request
-              </div>
+              <div className="caption">{t('requestSummary.signInMessage')}</div>
               <SignInButton
                 onClick={() => {
                   showModal();
-                  logEvent(analytics, 'send_5_summary_signIn_button_click');
+                  logEvent(analytics, 'send_6_summary_signIn_button_click');
                 }}
               />
             </div>

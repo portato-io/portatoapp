@@ -100,7 +100,7 @@ textarea.form-input::placeholder {
     margin:var(--spacing-vertical-big) 0;
 }
 .form-button-right .button {
-	min-width:160px;
+	min-width:150px;
 }
 
 /* OVERWRITING EXISTING ---------------------------------*/

@@ -24,7 +24,7 @@ const EnterDeliveryTime: React.FC = () => {
   );
 
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const [activeTab, setActiveTab] = useState(routeInfo.type);
+  const [activeTab, setActiveTab] = useState(routeInfo.type || 'single');
 
   const handleTabChange = (tab: any) => {
     setActiveTab(tab);

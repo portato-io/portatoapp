@@ -1,20 +1,39 @@
 {
+  "howItWorksLottie": {
+    "Driver registers route": "Fahrer:in registriert route",
+    "Sender/receiver creates request": "Sender:in/Empfänger:in \rerstellt Auftrag",
+    "Portato connects both": "Portato verbindet die beiden",
+    "Driver picks up items ...": "Fahrer:in holt \rdie Gegenstände ab ...",
+    "... delivers them to receiver ...": "... liefert sie ab ...",
+    "... and gets paid.": "... und wird bezahlt."
+  },
+
   "about": {
     "title": "Über uns",
     "visionMissionTitle": "Portatos Mission",
-    "visionMissionText": "Schweizer:innen fahren täglich über 150 Mio. Kilometer mit dem Auto, meistens mit leeren Kofferäumen.\n\n​Portato nutzt diese vielen freien Transportkapazitäten. Wir machen Mitfahrgelegenheiten einfach.\n\n Praktisch für Versender:innen. Lukrativ für Fahrer:innen. Gut für die Umwelt.",
+    "visionMissionText": "Schweizer:innen fahren täglich über 150 Mio. Kilometer mit dem Auto, meistens mit leeren Kofferräumen.\n\n​Portato nutzt diese vielen freien Transportkapazitäten. Wir machen Mitfahrgelegenheiten einfach.\n\n Praktisch für Versender:innen. Lukrativ für Fahrer:innen. Gut für die Umwelt.",
     "whoWeAreTitle": "Wer wir sind",
     "whoWeAreText": "Bei Portato trifft Innovation auf freie Strasse! Wir sind eine lebhafte Mischung von Denkern, Bastlern und Pionieren mit dem Ziel den Transport zu revolutionieren!"
   },
 
+  "sendSection": {
+    "title": "Etwas versenden oder abholen lassen",
+    "description": "Dein einfacher, günstiger und ökologischer Transportdienst."
+  },
+
+  "driveSection": {
+    "title": "Verdiene Geld beim Fahren",
+    "description": "Transportiere etwas auf deiner nächsten Autofahrt und verdiene Geld dabei."
+  },
+
   "general": {
-    "tagline": "Der einfache, günstige und ökologische Transportdienst.",
+    "tagline": "Mitfahrgelegenheiten für Gegenstände",
     "howItWorks": "So funktioniert's",
     "moreInfo": "Erfahre mehr",
-    "send": "Senden",
-    "deliver": "Fahren",
+    "send": "Auftrag erstellen",
+    "deliver": "Route registrieren",
     "delete": "Löschen",
-    "deleteConfirm": "Sind Sie sicher, dass Sie dies löschen wollen?",
+    "deleteConfirm": "Bist Du sicher, dass Du dies löschen willst?",
     "upload": "Hochladen",
     "yes": "Ja",
     "no": "Nein",
@@ -46,7 +65,7 @@
   "capacity": {
     "s": "Passt in eine Tasche",
     "m": "Passt in ein kleines Auto",
-    "l": "Passt in ein großes Auto",
+    "l": "Passt in ein grosses Auto",
     "xl": "Passt in einen Van"
   },
   "timeOfDay": {
@@ -72,35 +91,30 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ehemaliger PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk.",
-      "image": "src/Assets/Images/team/conrad.jpg"
+      "description": "Ex PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk."
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "Franko-britisches Genie, der das Backend in mindestens genauso vielen Sprachen jongliert.",
-      "image": "src/Assets/Images/team/hugo.jpg"
+      "description": "Franko-britisches Genie, der das Backend in mindestens genauso vielen Sprachen jongliert."
     },
     "Mehdi": {
       "name": "Mehdi",
-      "description": "Hip-Hop-Liebhaber, der das Frontend genauso gut aussehen lässt wie seine Frisuren.",
-      "image": "src/Assets/Images/team/mehdi.jpg"
+      "description": "Hip-Hop-Liebhaber, der das Frontend genauso gut aussehen lässt wie seine Frisuren."
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Hansdampf in allen Gassen. Multitalent mit einem Händchen für Code, Design und Animation.",
-      "image": "src/Assets/Images/team/mischa.jpg"
+      "description": "Hansdampf in allen Gassen. Multitalent mit einem Händchen für Code, Design und Animation."
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "Storyboard-Artist und 2D-Künstlerin, die Portato Charme verleiht, ein Strich nach dem anderen.",
-      "image": "src/Assets/Images/team/chiara.png"
+      "description": "Storyboard-Artist und 2D-Künstlerin, die Portato Charme verleiht, ein Strich nach dem anderen."
     }
   },
 
   "navBar": {
     "home": "Home",
-    "send": "Senden",
-    "drive": "Fahren",
+    "send": "Aufträge",
+    "drive": "Routen",
     "profile": "Menu"
   },
 
@@ -127,8 +141,10 @@
     "title": "Was möchtest Du versenden?",
     "name": "Titel",
     "namePlaceholder": "Gib deiner Sendung einen aussagekräftigen Titel.",
+    "nameMessage": "Bitte gib deinem Lieferauftrag einen Titel.",
     "description": "Beschreibung",
     "descriptionPlaceholder": "z.B. ist es eine gute Idee, die Abmessungen von grossen Gegenständen anzugeben.",
+    "descriptionMessage": "Bitte beschreibe deinen Lieferauftrag etwas näher.",
     "size": "Grösse",
     "weight": "Gewicht",
     "uploadImages": "Bilder hochladen"
@@ -136,9 +152,7 @@
   "requestAddresses": {
     "title": "Wo soll die Sendung abgeholt und verschickt werden?",
     "pickupAddress": "Abholadresse",
-    "|*TBI*|pickupAddressPlaceholder": "Gib eine Adresse ein",
-    "deliveryAddress": "Lieferadresse",
-    "|*TBI*|deliveryAddressPlaceholder": "Gib eine Adresse ein"
+    "deliveryAddress": "Lieferadresse"
   },
   "requestTime": {
     "title": "Wann soll die Sendung abgeholt werden?",
@@ -153,10 +167,8 @@
     "title": "Was ist Dir der Transport wert?",
     "label": "Preis (in CHF)",
     "pricePlaceholder": "z.B. 50",
-    "driverReward": "Belohnung für den Fahrer:",
-    "portatoFee": "Gebühr Portato:",
-    "vat": "MwSt:",
-    "insurance": "Versicherung:",
+    "valueMessage": "Betrag muss höher sein als 1 CHF.",
+    "emptyMessage": "Bitte gib einen Betrag ein.",
     "comment": "Gib einen fairen Preis ein, um einen angemessenen Anreiz zu geben. Schliesslich wird dein Fahrer einen Umweg machen, um deine Sendung zu liefern."
   },
   "requestSummary": {
@@ -169,8 +181,16 @@
     "possibleDates": "Mögliche Daten",
     "possibleTimes": "Mögliche Tageszeiten",
     "price": "Preis",
-    "images": "Bild(er)"
+    "images": "Bild(er)",
+    "signInMessage": "Bitte melde dich an, um den Auftrag zu bestätigen",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Bestätigung deines Transportauftrages",
+      "requestConfirmationBody": "Vielen Dank für deinen Transportauftrag. Wir melden uns bei dir sobald wie möglich mit Fahrer:innen, die in deine Richtung fahren und den Transport übernehmen können.<br>Deinen Auftrag kannst Du unter diesem <a href=\"https://portato.io/createSendRequest\">Link</a> jederzeit einsehen, editieren oder löschen.<br>",
+      "greetings": "Liebe/r",
+      "salutations": "Vielen Dank,<br>Dein Portato Team"
+  }
   },
+
   "driveOverview": {
     "newTitle": "Möchtest Du eine Route registrieren?",
     "createButtonDescription": "Route registrieren",
@@ -180,9 +200,7 @@
   "driveAddresses": {
     "createNewRouteTitle": "Neue Route erstellen",
     "departureAddress": "Abfahrtsadresse",
-    "|*TBI*|departureAddressPlaceholder": "Gib eine Adresse ein",
     "destinationAddress": "Zieladresse",
-    "|*TBI*|destinationAddressPlaceholder": "Gib eine Adresse ein",
     "acceptableDetour": "Akzeptabler Umweg"
   },
   "driveTime": {
@@ -190,13 +208,8 @@
     "rangeTitle": "Datum auswählen",
     "singleTrip": "Einzelfahrt",
     "recurringRide": "Wiederkehrende Fahrt",
-    "|*TBI*|startPlaceholder": "Start",
-    "|*TBI*|endPlaceholder": "Ende",
     "selectTime": "Uhrzeit auswählen",
     "timeHint": "(Mehrfachauswahl möglich)",
-    "|*TBI*|timeMornings": "Morgens",
-    "|*TBI*|timeMidDays": "Mittags",
-    "|*TBI*|timeEvenings": "Abends",
     "weekdayTitle": "Tage auswählen",
     "timeTitle": "Tageszeit auswählen"
   },
@@ -219,7 +232,8 @@
     "next": "Weiter",
     "back": "Zurück",
     "confirm": "Bestätigen",
-    "signIn": "Anmelden"
+    "signIn": "Anmelden",
+    "error": "Bitte vervollständige deine Angabe(n)."
   },
   "navigationMenu": {
     "myAccount": "Mein Konto",
@@ -256,5 +270,74 @@
     "english": "Englisch",
     "french": "Französisch",
     "german": "Deutsch"
-  }
+  },
+
+  "links": {
+    "heading": "Weiterführende Informationen",
+    "FAQ": "Häufig gestellte Fragen",
+    "termsAndConditions": "Allgemeine Geschäftsbedingungen",
+    "privacyPolicy": "Datenschutzerklärung",
+    "imprint": "Impressum"
+  },
+
+  "FAQ": {
+    "title": "Häufig gestellte Fragen",
+    "senderQuestion": "Wie erstellt man einen Transportauftrag?",
+    "senderAnswer": "Gib einfach die Details deiner Transportanfrage an, inklusive Informationen zum Artikel, die Abhol- und Lieferadressen und dein gewünschtes Lieferdatum. Wir verbinden dich dann mit Fahrer:innen, die eine ähnliche Strecke fahren. Sobald ein Match gefunden ist, wirst Du per E-Mail benachrichtigt.",
+    "purchaseQuestion": "Ich habe etwas auf Tutti oder Ricardo gekauft und muss es abholen. Kann ich bei Portato eine Abholung anfordern?",
+    "purchaseAnswer": "Natürlich! Als 'Versender:in' erstellst Du die Transportanfrage. Du musst nicht unbedingt am Abholort sein. Du kannst auch die Person sein, die am anderen Ende die Lieferung empfängt.",
+    "feeQuestion": "Wie viel kostet eine Lieferung mit Portato?",
+    "feeAnswer": "Wir legen die Preise nicht fest - Du entscheidest, was dir der Transport wert ist! Dein Angebot dient als Verhandlungsbasis für die Fahrer:in. Er/Sie wird sicherlich einen kleinen Umweg für dich machen, also lege einen Preis fest, der einen guten Anreiz darestellt.",
+    "deliveryGuaranteeQuestion": "Kann Portato mir die Lieferung garantieren?",
+    "deliveryGuaranteeAnswer": "Wir sind noch in einem frühen Stadium und unsere Fahrergemeinschaft wächst stetig. Obwohl wir nicht jede Anfrage abdecken können, tun wir unser Bestes, um deinen Anforderungen gerecht zu werden. Oft sind wir selbst mit unserem Portato-Bus unterwegs und liefern selbst aus. Es könnte also sein, dass dein/e Fahrer:in jemand aus dem Portato-Team ist.",
+    "insuranceQuestion": "Ist meine Sendung über Portato versichert?",
+    "insuranceAnswer": "Momentan nicht direkt über Portato. Wenn Du deine Artikel versichern möchtest, musst Du das selbst organisieren. Es ist für uns aber eine Priorität, diesen Service bald anzubieten. Derzeit sind wir aktiv auf der Suche nach Partnerschaften mit Versicherungsanbietern und werden die Option schon bald in unsere App integrieren.",
+    "driverQuestion": "Wie funktioniert es als Fahrer?",
+    "driverAnswer": "Es freut uns, dass Du helfen möchtest! Registriere deine Route, inklusive Start- und Endpunkt, Zeitpunkt und verfügbarem Platz in deinem Fahrzeug. Egal ob es sich um deinen täglichen Arbeitsweg oder eine einmalige Fahrt handelt, z.B. einen Urlaubstrip, so kannst Du unterwegs Geld verdienen.",
+    "paymentQuestion": "Wie funktioniert die Bezahlung?",
+    "paymentAnswer": "Die Zahlungsabwicklung erfolgt direkt zwischen Versender:in und Fahrer:in. Wir arbeiten aber aktiv daran, bald eine Zahlungsfunktion in unsere App zu integrieren.",
+    "contactQuestion": "Wie kann ich euch kontaktieren?",
+    "contactAnswer": "Wir sind jederzeit für dich da! Nutze einfach das Widget unten rechts auf diesem Bildschirm oder schreibe uns eine E-Mail an info@portato.io. Wir freuen uns, von dir zu hören!"
+  },
+
+  "termsAndConditions": {
+    "title": "Allgemeine Geschäftsbedingungen",
+    "definitionOfTermsTitle": "Geltung und Begriffserklärung",
+    "definitionOfTermsText": "In den vorliegenden allgemeinen Geschäftsbedingungen (AGB) wird aus Gründen der besseren Lesbarkeit und zur Vermeidung von unnötiger Wiederholung ausschliesslich die männliche Form verwendet. Sämtliche personenbezogenen Bezeichnungen gelten jedoch gleichermassen für alle Geschlechter. \"Sender\" im Sinne dieser AGB ist jeder Nutzer, der auf dieser Plattform (\"Portato\") eine Anfrage für eine Transportleistung erfasst und diese gegen einen bestimmten Preis in Anspruch nimmt, unabhängig davon, ob diese Person der Versender oder der Empfänger der zu transportierenden Gegenstände ist. \"Fahrer\" im Sinne dieser AGB ist jede Person, die eine Transportleistung durch die Nutzung dieser Plattform gegen einen bestimmten Preis zur Verfügung stellt. Unter dem Begriff \"Nutzer\" im Sinne dieser AGB werden sowohl Sender als auch Fahrer verstanden.",
+    "termsOfUseTitle": "Nutzungsbedingungen",
+    "termsOfUseText": "Die Plattform darf nur für den Transport von Gegenständen genutzt werden, die nach den geltenden Gesetzen und Vorschriften zulässig sind. Der Nutzer darf keine Gegenstände transportieren, die illegal, gefährlich, gesundheitsgefährdend oder anderweitig unangemessen sind. Die Plattform behält sich das Recht vor, Nutzer ohne Angabe von Gründen und ohne Vorankündigung zu sperren oder von der Nutzung der Plattform auszuschliessen, wenn gegen diese AGB oder gegen anwendbares Recht verstossen wird.",
+    "contractConclusionTitle": "Vertragsschluss",
+    "contractConclusionText": "Sender können auf dieser Plattform einen Transportauftrag erstellen, indem sie die von ihnen zu transportierenden Gegenstände, das Datum für den Transport sowie einen Abhol- und Lieferort angeben. Fahrer können Datum und Route von geplanten Fahrten registrieren und damit die Bereitschaft signalisieren, auf ihrem Weg eine Transportdienstleistungen anzubieten. Nutzer sind verpflichtet, alle Informationen, die für den Transport relevant sind, wahrheitsgemäss und vollständig anzugeben. Der Nutzer haftet für Schäden, die aufgrund von falschen oder unvollständigen Angaben entstehen. Weder das Erfassen eines Sendeauftrags noch das Anbieten einer Transportdienstleistung stellen ein rechtlich bindendes Vertragsangebot dar. Portato ist nicht verpflichtet, einen Transportauftrag zu vermitteln oder eine Transportdienstleistung selbst anzubieten. Die Plattform unternimmt jedoch alles in ihrer Macht stehende, um Nutzer und Fahrer zusammenzubringen, die ein Interesse an der Durchführung einer Transportdienstleistung haben. Ein Transportauftrag gilt als angenommen, sobald sowohl Versender als auch Fahrer den Transportauftrag bestätigt haben. Der Transportvertrag kommt zwischen dem Nutzer und dem Fahrer zustande, nicht zwischen dem Nutzer und der Plattform.Der Fahrer ist verpflichtet, die Gegenstände sorgfältig zu transportieren, pünktlich abzuliefern und sicherzustellen, dass sie beim Empfänger in einwandfreiem Zustand ankommen. Der Fahrer haftet für Schäden, die während des Transports entstehen, sofern diese nicht auf höhere Gewalt oder unvorhersehbare Ereignisse zurückzuführen sind. Der Sender ist dazu verpflichtet, eine reibungslose Übergabe der Gegenstände sowohl vom Versender an den Fahrer als auch vom Fahrer an den Empfänger sicherzustellen. Der Transportvertrag endet, sobald die Gegenstände beim Empfänger angekommen sind und dieser Gegenüber dem Versender und gegenüber Portato den Empfang ohne Beanstandungen bestätigt hat.",
+    "pricesAndPaymentsTitle": "Preise und Zahlungen",
+    "pricesAndPaymentsText": "Portato erhebt keine Gebühr für die Nutzung der Plattform. Die Preise für die Transportdienstleistungen werden zwischen Versendern und Fahrern vor Vertragsschluss ausgehandelt. Die Plattform hat keinen Einfluss auf die Preisgestaltung und übernimmt keine Haftung für die Preise. Die Nutzer sind verpflichtet, die vereinbarten Transportkosten vor Vertragsende an den Fahrer zu bezahlen.",
+    "liabilityExclusionTitle": "Haftungsausschluss",
+    "liabilityExclusionText": "Portato nimmt keine Beanstandungen für Nichterfüllung oder Schlechterfüllung von Transportdienstleistungen an und übernimmt keine Verantwortung oder Haftung für Schäden, die während des Transports von Gegenständen entstehen. Die Nutzer tragen das Risiko für Schäden, Verluste oder Diebstähle selbst. Es wird empfohlen, dass Sender die Gegenstände entsprechend verpacken und versichern, um allfällige Schäden oder Verluste zu minimieren.",
+    "jurisdictionTitle": "Gerichtsstand",
+    "jurisdictionText": "Für alle Streitigkeiten, die sich aus oder im Zusammenhang mit den AGB oder der Nutzung der Plattform ergeben, gilt das schweizerische Recht. Gerichtsstand ist Zürich. Dies gilt auch für Klagen im Wechsel- oder Scheckprozess sowie für Klagen aufgrund von Scheckvorfällen. Die Plattform und der Nutzer verzichten auf das Recht, an einem anderen Gerichtsstand geltend zu machen, dass ein für den Nutzer zuständiges Gericht aufgrund von Ansässigkeit oder internationalem Privatrecht über den Streit zu entscheiden hätte."
+  },
+
+  "privacyPolicy": {
+    "title": "Datenschutzrichtlinie",
+    "introductionTitle": "Einführung",
+    "introductionText": "Bei Portato steht deine Privatsphäre an erster Stelle, und wir setzen uns dafür ein, deine persönlichen Daten zu schützen. Diese Datenschutzrichtlinie beschreibt unsere Praktiken bezüglich der Erhebung, Verwendung und Weitergabe deiner Informationen, wenn Du unsere Plattform nutzt. Durch die Nutzung von Portato stimmst Du den in dieser Richtlinie beschriebenen Praktiken zu.",
+    "collectionTitle": "Datenerhebung",
+    "collectionText": "Wir können die folgenden Arten von Informationen sammeln:\n\nPersönliche Daten: Deine persönlichen Daten werden erfasst, wenn Du sie uns freiwillig zur Verfügung stellst. Dies kann Angaben wie deinen Namen, deine E-Mail-Adresse und andere relevante Daten umfassen, wenn Du eine Transportanfrage stellst oder Transportdienste anbietest.\n\nNutzungsdaten: Dabei handelt es sich um Daten über deine Interaktionen mit unserer Plattform. Diese können Aufschluss geben über die von dir genutzten Funktionen, die Dauer deiner Besuche und andere relevante diagnostische Daten.",
+    "useTitle": "Verwendung von Daten",
+    "useText": "Deine Informationen sind für uns aus mehreren Gründen wichtig: Zur Verarbeitung und Bestätigung von Transportanfragen; Zur Beantwortung deiner Rückmeldungen, Anfragen und Bedürfnisse; Zur Bereitstellung, Aufrechterhaltung und Verbesserung unserer Plattform; Und für jeden anderen Zweck, für den Du deine Zustimmung gegeben hast.",
+    "sharingTitle": "Weitergabe von Daten",
+    "sharingText": "Wir geben deine persönlichen Daten nicht ohne ausdrückliche Zustimmung an Dritte weiter. In Fällen, in denen dies aus betrieblichen Gründen, wie z.B. für die Zahlungsabwicklung, erforderlich ist, könnten wir notwendige Daten mit vertrauenswürdigen Drittanbietern teilen. Dies geschieht immer mit grösster Sorgfalt und unter Einhaltung der Datenschutzgesetze.",
+    "cookiesTitle": "Cookies und ähnliche Technologien",
+    "cookiesText": "Wir verwenden Cookies und ähnliche Technologien, um deine Interaktion mit unserer Plattform zu analysieren und das Benutzererlebnis zu verbessern. Diese helfen uns, die Vorlieben der Benutzer zu verstehen und unsere Dienstleistungen entsprechend anzupassen.",
+    "rightsTitle": "Deine Rechte",
+    "rightsText": "Du hast das Recht, auf alle persönlichen Daten zuzugreifen, die wir über dich gesammelt haben. Darüber hinaus kannst Du die Änderung oder Löschung deiner Daten beantragen, wobei bestimmte Ausnahmen zu beachten sind. Wenn Du eines dieser Rechte ausüben möchtest, wende dich bitte an uns unter info@portato.io.",
+    "updatesTitle": "Änderungen der Datenschutzerklärung",
+    "updatesText": "Wir könnten diese Datenschutzrichtlinie von Zeit zu Zeit überarbeiten. Wenn Änderungen vorgenommen werden, werden wir sicherstellen, dass Du durch Aktualisierung der Richtlinie auf unserer Plattform informiert wirst. Es ist ratsam, diese Datenschutzrichtlinie regelmässig auf Änderungen zu überprüfen.",
+    "contactTitle": "Kontaktiere uns",
+    "contactText": "Für Anfragen in Bezug auf diese Richtlinie oder andere Anliegen kannst Du uns unter info@portato.io kontaktieren."
+  },
+
+  "imprint": {
+    "title": "Impressum",
+    "text": "Portato GmbH i.G.\nRepräsentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
+  }  
 }
