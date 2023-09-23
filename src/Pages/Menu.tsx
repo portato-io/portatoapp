@@ -9,13 +9,12 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../Components/AuthProvider';
-
-require('../CSS/Profile.css');
+import '../CSS/Profile.css';
 
 const Menu: React.FC = () => {
-  const { t } = useTranslation<string>(); // Setting the generic type to string
+  const { t } = useTranslation<string>();
   const navigate = useNavigate();
-  const { user, isAdmin, loading } = useAuth();
+  const { user, isAdmin, loading, emailVerified } = useAuth();
 
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
@@ -25,59 +24,29 @@ const Menu: React.FC = () => {
     } else {
       console.log('user not fully signed in');
     }
-  }, [user]); // Make sure to include 'user' in your dependency array, so useEffect re-runs when 'user' changes.
+  }, [user]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
-  const handleMyAccountClick = () => {
-    navigate('/profile/my-account');
-  };
+  const showModal = () => setIsModalVisible(true);
+  const handleCancel = () => setIsModalVisible(false);
+  const handleAuthSuccess = () => setIsModalVisible(false); // Close the popup when authentication is successful
 
-  const handleMyBlogClick = () => {
-    // navigate to My Payment Methods screen
-  };
+  const handleNavigation = (path: string) => navigate(path);
 
-  const handleMySendRequestsClick = () => {
-    navigate('/profile/user_requests');
-  };
-
-  const handleAdminClick = () => {
-    navigate('/admin/admin_dashboard');
-  };
-  // display prop should be managed appropriately
-  const display = 'block';
-
-  const handleSupportClick = () => {
-    navigate('/contact_support');
-  };
-
-  const handleSettingsClick = () => {
-    navigate('/profile/settings');
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading) return <div>Loading...</div>;
 
   return (
-    <PageLayout display={display}>
-      <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
-        <div>
-          <FirebaseAuth />
-        </div>
+    <PageLayout display="block">
+      <Modal visible={isModalVisible} onCancel={handleCancel} footer={null}>
+        <FirebaseAuth onAuthSuccess={handleAuthSuccess} />
       </Modal>
       <div className="profile-screen-background">
         <div className="profile-image-container">
           <div className="profile-image-bubble">
             {user && imageUrl ? (
               <img
-                src={new URL(imageUrl).href}
+                src={imageUrl}
                 alt="avatar"
                 style={{ width: '100%', height: '100%', borderRadius: '50%' }}
               />
@@ -86,21 +55,28 @@ const Menu: React.FC = () => {
             )}
           </div>
         </div>
-
         <Card className="settings-card">
           <List mode="card" style={{ marginTop: '1vh' }}>
             {user ? (
               <>
-                <List.Item
-                  arrow={true}
-                  onClick={handleMyAccountClick}
-                  className="settings-list-item"
-                >
-                  {t('navigationMenu.myAccount')}
-                </List.Item>
-                {/* <List.Item arrow={true} onClick={handleMySendRequestsClick}>
-                  {t('navigationMenu.mySendRequests')}
-                </List.Item> */}
+                {user.emailVerified && (
+                  <List.Item
+                    arrow={true}
+                    onClick={() => handleNavigation('/profile/my-account')}
+                    className="settings-list-item"
+                  >
+                    {t('navigationMenu.myAccount')}
+                  </List.Item>
+                )}
+                {!user.emailVerified && (
+                  <List.Item
+                    arrow={true}
+                    onClick={showModal}
+                    className="settings-list-item"
+                  >
+                    {t('navigationMenu.signIn')}
+                  </List.Item>
+                )}
               </>
             ) : (
               <List.Item
@@ -111,20 +87,16 @@ const Menu: React.FC = () => {
                 {t('navigationMenu.signIn')}
               </List.Item>
             )}
-
-            {/* <List.Item arrow={true} onClick={handleMyBlogClick}>
-              {t('navigationMenu.blog')}
-            </List.Item> */}
             <List.Item
               arrow={true}
-              onClick={handleSupportClick}
+              onClick={() => handleNavigation('/contact_support')}
               className="settings-list-item"
             >
               {t('navigationMenu.support')}
             </List.Item>
             <List.Item
               arrow={true}
-              onClick={handleSettingsClick}
+              onClick={() => handleNavigation('/profile/settings')}
               className="settings-list-item"
             >
               {t('navigationMenu.settings')}
@@ -132,13 +104,13 @@ const Menu: React.FC = () => {
             {isAdmin && (
               <List.Item
                 arrow={true}
-                onClick={handleAdminClick}
+                onClick={() => handleNavigation('/admin/admin_dashboard')}
                 className="settings-list-item"
               >
                 {t('navigationMenu.adminWindow')}
               </List.Item>
             )}
-            {user ? (
+            {emailVerified && (
               <List.Item
                 arrow={true}
                 onClick={() => signOut(auth)}
@@ -147,7 +119,7 @@ const Menu: React.FC = () => {
               >
                 {t('navigationMenu.signOut')}
               </List.Item>
-            ) : null}
+            )}
           </List>
         </Card>
       </div>

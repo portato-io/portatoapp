@@ -29,6 +29,7 @@ const RequestSummary: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
+  const handleAuthSuccess = () => setIsModalVisible(false); // Close the popup when authentication is successful
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -38,8 +39,7 @@ const RequestSummary: React.FC = () => {
     (state: { request: IRequestInfo }) => state.request
   );
   console.log(requestInfo);
-
-  const { uid } = useAuth();
+  const { uid, emailVerified } = useAuth();
 
   const handleConfirm = async () => {
     dispatch(setStatus('unmatched'));
@@ -170,7 +170,7 @@ const RequestSummary: React.FC = () => {
         <ProgressBar progress={PROGRESS} />
         <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
           <div>
-            <FirebaseAuth />
+            <FirebaseAuth onAuthSuccess={handleAuthSuccess} />
           </div>
         </Modal>
         <h2>{t('requestSummary.title')}</h2>
@@ -251,7 +251,7 @@ const RequestSummary: React.FC = () => {
               logEvent(analytics, 'send_6_summary_back_button_click');
             }}
           />
-          {uid ? (
+          {uid && emailVerified ? (
             <ConfirmButton
               nextScreen={NEXT_SCREEN}
               onClick={() => {

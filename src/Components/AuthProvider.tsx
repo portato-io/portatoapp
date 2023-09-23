@@ -6,6 +6,7 @@ interface AuthState {
   uid: string | undefined;
   isAdmin: boolean | undefined;
   user: User | null;
+  emailVerified: boolean | undefined; // Added emailVerified here
   loading: boolean;
 }
 
@@ -13,6 +14,7 @@ const initialState: AuthState = {
   uid: undefined,
   isAdmin: undefined,
   user: null,
+  emailVerified: undefined, // And initialize here
   loading: true,
 };
 
@@ -28,6 +30,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     initialState.isAdmin
   );
   const [user, setUser] = useState<User | null>(initialState.user);
+  const [emailVerified, setEmailVerified] = useState<boolean | undefined>(
+    initialState.emailVerified
+  ); // Added useState for emailVerified
   const [loading, setLoading] = useState<boolean>(initialState.loading);
 
   useEffect(() => {
@@ -35,12 +40,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (user) {
         setUid(user.uid);
         setUser(user);
+        setEmailVerified(user.emailVerified); // Set emailVerified here
         const token = await getIdTokenResult(user);
         setIsAdmin(!!token.claims.admin);
       } else {
         setUid(undefined);
         setIsAdmin(undefined);
         setUser(null);
+        setEmailVerified(undefined); // Reset to undefined when user logs out
       }
       setLoading(false);
     });
@@ -53,7 +60,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ uid, isAdmin, user, loading }}>
+    <AuthContext.Provider
+      value={{ uid, isAdmin, user, emailVerified, loading }} // Added emailVerified here
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -69,4 +78,9 @@ export const checkAdmin = () => {
 export const getUser = () => {
   const { user } = useAuth();
   return user;
+};
+
+export const isEmailVerified = () => {
+  const { emailVerified } = useAuth(); // Get emailVerified from context
+  return emailVerified;
 };
