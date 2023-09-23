@@ -29,7 +29,10 @@ const RequestSummary: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const handleAuthSuccess = () => setIsModalVisible(false); // Close the popup when authentication is successful
+  const handleAuthSuccess = () => {
+    setIsModalVisible(false); // Close the popup when authentication is successful
+    console.log(uid, emailVerified); // Add this line to log the values
+  };
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -40,6 +43,7 @@ const RequestSummary: React.FC = () => {
   );
   console.log(requestInfo);
   const { uid, emailVerified } = useAuth();
+  console.log(uid, emailVerified); // Add this line to log the values
 
   const handleConfirm = async () => {
     dispatch(setStatus('unmatched'));

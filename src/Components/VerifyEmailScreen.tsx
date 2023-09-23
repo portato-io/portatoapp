@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { Result, Button, Space, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
+import { useAuth } from '../Components/AuthProvider'; // Adjust import to your file structure
 
 const { Text, Link } = Typography;
 
 const VerifyEmailScreen: React.FC = () => {
   const navigate = useNavigate();
+  const { recheckEmailVerification } = useAuth(); // Destructure recheckEmailVerification from useAuth
 
   useEffect(() => {
     const auth = getAuth();
@@ -19,7 +21,11 @@ const VerifyEmailScreen: React.FC = () => {
           .reload()
           .then(() => {
             if (user.emailVerified) {
-              console.log('User email is verified. Navigating back.');
+              console.log(
+                'User email is verified. Rechecking and navigating back.'
+              );
+
+              if (recheckEmailVerification) recheckEmailVerification(); // Invoke recheckEmailVerification here
               navigate(-1); // Navigate back in history
             } else {
               console.log('User email not yet verified.');
@@ -38,7 +44,7 @@ const VerifyEmailScreen: React.FC = () => {
       console.log('Cleaning up verification check interval.');
       clearInterval(intervalId);
     };
-  }, [navigate]);
+  }, [navigate, recheckEmailVerification]); // Added recheckEmailVerification as a dependency
 
   const resendEmail = () => {
     // Implement resend email logic here

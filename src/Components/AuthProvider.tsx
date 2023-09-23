@@ -1,4 +1,10 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+} from 'react';
 import { onAuthStateChanged, getIdTokenResult, User } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 
@@ -6,16 +12,19 @@ interface AuthState {
   uid: string | undefined;
   isAdmin: boolean | undefined;
   user: User | null;
-  emailVerified: boolean | undefined; // Added emailVerified here
+  emailVerified: boolean | undefined;
   loading: boolean;
+  recheckEmailVerification: () => void;
 }
 
 const initialState: AuthState = {
   uid: undefined,
   isAdmin: undefined,
   user: null,
-  emailVerified: undefined, // And initialize here
+  emailVerified: undefined,
   loading: true,
+  recheckEmailVerification: () =>
+    console.warn('recheckEmailVerification has not been initialized yet'),
 };
 
 const AuthContext = createContext<AuthState>(initialState);
@@ -25,47 +34,44 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [uid, setUid] = useState<string | undefined>(initialState.uid);
-  const [isAdmin, setIsAdmin] = useState<boolean | undefined>(
-    initialState.isAdmin
-  );
-  const [user, setUser] = useState<User | null>(initialState.user);
-  const [emailVerified, setEmailVerified] = useState<boolean | undefined>(
-    initialState.emailVerified
-  ); // Added useState for emailVerified
-  const [loading, setLoading] = useState<boolean>(initialState.loading);
+  const [state, setState] = useState<AuthState>(initialState);
+
+  const recheckEmailVerification = useCallback(async () => {
+    if (state.user) {
+      const token = await getIdTokenResult(state.user);
+      setState((prev) => ({
+        ...prev,
+        emailVerified: state.user?.emailVerified,
+        isAdmin: !!token.claims.admin,
+      }));
+    }
+  }, [state.user]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setUid(user.uid);
-        setUser(user);
-        setEmailVerified(user.emailVerified); // Set emailVerified here
         const token = await getIdTokenResult(user);
-        setIsAdmin(!!token.claims.admin);
+        setState({
+          uid: user.uid,
+          user,
+          emailVerified: user.emailVerified,
+          isAdmin: !!token.claims.admin,
+          loading: false,
+          recheckEmailVerification,
+        });
       } else {
-        setUid(undefined);
-        setIsAdmin(undefined);
-        setUser(null);
-        setEmailVerified(undefined); // Reset to undefined when user logs out
+        setState({ ...initialState, loading: false, recheckEmailVerification });
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [recheckEmailVerification]);
 
-  if (loading) {
+  if (state.loading) {
     return <div>Loading...</div>;
   }
 
-  return (
-    <AuthContext.Provider
-      value={{ uid, isAdmin, user, emailVerified, loading }} // Added emailVerified here
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
@@ -81,6 +87,6 @@ export const getUser = () => {
 };
 
 export const isEmailVerified = () => {
-  const { emailVerified } = useAuth(); // Get emailVerified from context
+  const { emailVerified } = useAuth();
   return emailVerified;
 };
