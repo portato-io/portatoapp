@@ -1,124 +1,133 @@
 /* BUTTONS -------------------------------------------- */
 .button {
-	display:inline-block;
-	padding:7px 15px;
-	min-width: 130px;
-	text-align: center;
-	margin:0 var(--spacing-horizontal-regular);
-	cursor: pointer;
-	transition: var(--transition-regular);
+  display: inline-block;
+  padding: 7px 15px;
+  min-width: 130px;
+  text-align: center;
+  margin: 0 var(--spacing-horizontal-regular);
+  cursor: pointer;
+  transition: var(--transition-regular);
 }
-.button:first-child {margin-left:0}
-.button:last-child {right:0}
+.button:first-child {
+  margin-left: 0;
+}
+.button:last-child {
+  right: 0;
+}
 .button:hover {
-	color: var(--portato-green);
+  color: var(--portato-green);
 }
 
 .button-solid {
-	border: 2px solid var(--portato-green) !important;
-	background:var(--portato-green) !important;
-	color: var(--color-white) !important;
+  border: 2px solid var(--portato-green) !important;
+  background: var(--portato-green) !important;
+  color: var(--color-white) !important;
 }
 .button-solid:hover {
-	border-color:var(--color-green) !important;
+  border-color: var(--color-green) !important;
 }
 .button-border {
-	border: 2px solid var(--color-green);
-	background:var(--color-white);
-	color: var(--color-green);	
+  border: 2px solid var(--color-green);
+  background: var(--color-white);
+  color: var(--color-green);
 }
 .button-border-light {
-	border-color:var(--color-grey4);
+  border-color: var(--color-grey4);
 }
 .button span {
-	position:relative;
-	top:-2px;
+  position: relative;
+  top: -2px;
 }
 
 /* Disabled Button */
 .button.disabled {
-    background-color: #999;
-    cursor: not-allowed;
-    color: #fff; /* Change the text color if necessary */
-    border-color: #999; /* Change the border color to match the background color if your button has a border */
+  background-color: #999;
+  cursor: not-allowed;
+  color: #fff; /* Change the text color if necessary */
+  border-color: #999; /* Change the border color to match the background color if your button has a border */
 }
 
 button .icon + span {
-	position: relative;
-	top:-3px;
+  position: relative;
+  top: -3px;
 }
-
 
 /* FORM ELEMENTS ---------------------------------------- */
 .section-form .progress-bar-indicator {
-	left:0;
-	width: 100%;
+  left: 0;
+  width: 100%;
 }
 .input-wrapper {
-	margin-bottom:var(--spacing-vertical-regular)
+  margin-bottom: var(--spacing-vertical-regular);
 }
 
 label {
-	padding-bottom:5px;
-	display:block;
+  padding-bottom: 5px;
+  display: block;
 }
-.form-input-wrapper input[type="search"],
+.form-input-wrapper input[type='search'],
 .form-input {
-	border-style: solid;
-	border-width: 0 0 2px 0;
-	border-color:var(--color-grey3);
-	border-radius:0;
-	padding:0 0 5px 0;
-	font-size:1.6rem;
-	width:100%;
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  border-color: var(--color-grey3);
+  border-radius: 0;
+  padding: 0 0 5px 0;
+  font-size: 1.6rem;
+  width: 100%;
 }
 textarea.form-input {
-	padding-top:3px;
+  padding-top: 3px;
 }
 .form-input:hover {
-	border-width: 0 0 2px 0;
-	border-color:var(--color-green-light);
+  border-width: 0 0 2px 0;
+  border-color: var(--color-green-light);
 }
 .form-input:focus {
-	border-width: 0 0 2px 0;
-	outline:none;
-	border-inline-end-width: 0px;
-	box-shadow: none;
-	border-color:var(--color-green-light);
+  border-width: 0 0 2px 0;
+  outline: none;
+  border-inline-end-width: 0px;
+  box-shadow: none;
+  border-color: var(--color-green-light);
 }
 .form-input::placeholder {
-	font-size:1.5rem;
+  font-size: 1.5rem;
 }
 textarea.form-input::placeholder {
-	font-size:1.25rem;
-	line-height:1.4;
+  font-size: 1.25rem;
+  line-height: 1.4;
 }
 .form-input-radio {
-	display:flex;
+  display: flex;
 }
 .form-button-container {
-    margin:var(--spacing-vertical-big) 0;
+  margin: var(--spacing-vertical-big) 0;
 }
 .form-button-right .button {
-	min-width:150px;
+  min-width: 150px;
+}
+.form-switch-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-bottom: 16vw;
 }
 
 /* OVERWRITING EXISTING ---------------------------------*/
 .ant-modal-root .ant-modal {
-	margin-left:auto;
-	margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .ant-form-item-row {
-	display:block;
+  display: block;
 }
 .ant-form-item .ant-form-item-control {
-	display:block;
-	max-width:100%;
+  display: block;
+  max-width: 100%;
 }
 .ant-form-item .ant-form-item-label {
-	overflow: visible;
+  overflow: visible;
 }
 .ant-form-item .ant-form-item-label > label {
-	display:block;
-	height:auto;
+  display: block;
+  height: auto;
 }

@@ -3,7 +3,7 @@ import PageLayout from '../Layouts/PageLayoutTest';
 import NextButton from '../../Components/Buttons/NextButton';
 import BackButton from '../../Components/Buttons/BackButton';
 import ProgressBar from '../../Components/ProgressBar';
-import { Form, DatePicker } from 'antd';
+import { Form, DatePicker, Switch } from 'antd';
 import { Selector } from 'antd-mobile';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -23,7 +23,7 @@ const { RangePicker } = DatePicker;
 const PROGRESS = 60;
 const NEXT_SCREEN = '/createSendRequest/enter_request_price';
 
-const EnterTime: React.FC = () => {
+const EnterRequestTime: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { TIME } = getConstants(t);
   const objecInfo = useSelector(
@@ -34,6 +34,11 @@ const EnterTime: React.FC = () => {
   const [dayRange, setDayRange] = useState([]);
   const [dayRangeSelected, setDayRangeSelected] = useState(Boolean);
   const [form] = Form.useForm();
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+
+  const handleSwitchChange = (checked: boolean) => {
+    setDatePickerVisible(checked);
+  };
 
   let defaultDateRange: [Dayjs, Dayjs] | undefined = undefined;
 
@@ -72,6 +77,14 @@ const EnterTime: React.FC = () => {
     dispatch(setObjectTime(e));
   };
 
+  const handleChangeDate = (date: any) => {
+    console.log(date.$d);
+    const selectedDate = new Date(date.$d);
+    const formattedDate = selectedDate.toLocaleDateString('en-GB'); // Format: dd-mm-yyyy
+    console.log(`Selected Date: ${formattedDate}`);
+    dispatch(setObjectDateRange([formattedDate, formattedDate]));
+  };
+
   const handleChangeRange = (range: any) => {
     console.log(range);
     setDayRange(range);
@@ -102,18 +115,47 @@ const EnterTime: React.FC = () => {
           layout="horizontal"
         >
           <h2>{t('requestTime.title')}</h2>
-          <Form.Item className="input-wrapper" label={t('requestTime.dates')}>
-            <RangePicker
-              name="time"
-              inputReadOnly={true}
-              onChange={handleChangeRange}
-              style={{ width: '100%' }}
-              defaultValue={defaultDateRange}
-              // value={defaultDateRange}
-              disabledDate={disabledDate}
-            />
-            <small>{t('requestTime.dateHint')}</small>
+          <Form.Item label={t('requestTime.specificTime')}>
+            <div className="form-switch-container">
+              <Switch
+                checkedChildren="Yes"
+                unCheckedChildren="No"
+                onChange={handleSwitchChange}
+              />
+            </div>
           </Form.Item>
+          {isDatePickerVisible ? (
+            <Form.Item
+              className="input-wrapper"
+              label={t('requestTime.specificDates')}
+            >
+              <DatePicker
+                name="time"
+                inputReadOnly={true}
+                onChange={handleChangeDate}
+                style={{ width: '100%' }}
+                defaultValue={
+                  defaultDateRange ? defaultDateRange[0] : undefined
+                }
+              />
+            </Form.Item>
+          ) : (
+            <Form.Item
+              className="input-wrapper"
+              label={t('requestTime.flexibleDates')}
+            >
+              <RangePicker
+                name="time"
+                inputReadOnly={true}
+                onChange={handleChangeRange}
+                style={{ width: '100%' }}
+                defaultValue={defaultDateRange}
+                // value={defaultDateRange}
+                disabledDate={disabledDate}
+              />{' '}
+            </Form.Item>
+          )}
+          <small>{t('requestTime.dateHint')}</small>
 
           <Form.Item className="input-wrapper" label={t('requestTime.times')}>
             <small>{t('requestTime.timeHint')}</small>
@@ -145,4 +187,4 @@ const EnterTime: React.FC = () => {
   );
 };
 
-export default EnterTime;
+export default EnterRequestTime;
