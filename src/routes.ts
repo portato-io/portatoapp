@@ -16,6 +16,9 @@ const EnterRequestSizeWeightImage = lazy(
 );
 const Deliver = lazy(() => import('./Pages/Driver/Deliver'));
 const Chat = lazy(() => import('./Pages/Chat'));
+const AdditionalInformation = lazy(
+  () => import('./Pages/Authentification/AdditionalInfo')
+);
 const Shipments = lazy(() => import('./Pages/Shipments'));
 const EnterRequestAddress = lazy(
   () => import('./Pages/Sender/EnterRequestAddress')
@@ -67,11 +70,11 @@ export const routes: Array<Route> = [
     component: Home,
   },
   {
-    key: 'about-route',
-    title: 'About',
-    path: '/about',
+    key: 'additionalInfo-route',
+    title: 'Additional Information',
+    path: '/additionalInfo',
     enabled: true,
-    component: About,
+    component: AdditionalInformation,
   },
   {
     key: 'profile-route',
