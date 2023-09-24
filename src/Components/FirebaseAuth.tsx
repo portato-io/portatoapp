@@ -1,76 +1,70 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   getAuth,
   UserCredential,
   sendEmailVerification,
-  EmailAuthProvider,
   onAuthStateChanged,
-  signOut,
+  EmailAuthProvider,
 } from 'firebase/auth';
 import { notification } from 'antd';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 
-// Initialize the FirebaseUI Widget using Firebase.
 const ui = new firebaseui.auth.AuthUI(getAuth());
 
-interface FirebaseUIAuthCallbacks {
-  signInSuccessWithAuthResult?: (
-    authResult: UserCredential,
-    redirectUrl: string
-  ) => boolean;
+interface FirebaseAuthProps {
+  onAuthSuccess?: () => void;
 }
 
-interface FirebaseUIAuthConfig {
-  callbacks?: FirebaseUIAuthCallbacks;
-  signInOptions?: Array<any>;
-}
-
-const FirebaseAuth: React.FC = () => {
+const FirebaseAuth: React.FC<FirebaseAuthProps> = ({ onAuthSuccess }) => {
   const navigate = useNavigate();
-  const auth = getAuth();
-  const uiRef = useRef<HTMLDivElement | null>(null);
+  const auth = getAuth(); // Initialize auth appropriately
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (!user.emailVerified) {
-          sendEmailVerification(user).then(() => {
-            notification.success({
-              message: 'Verification Email Sent',
-              description:
-                'Please check your inbox for the verification email.',
-            });
-            signOut(auth); // Sign out the user after sending the verification email
-            navigate('/verify-email');
-          });
-        }
-      }
-    });
-
-    // Configure FirebaseUI.
-    const uiConfig: FirebaseUIAuthConfig = {
+    const uiConfig = {
       signInOptions: [EmailAuthProvider.PROVIDER_ID],
       callbacks: {
-        // Avoid redirects after sign-in.
-        signInSuccessWithAuthResult: () => false,
+        signInSuccessWithAuthResult: (authResult: UserCredential) => {
+          onAuthSuccess?.(); // Invoke the onAuthSuccess callback if provided
+          return false; // Handle the post-sign-in tasks manually
+        },
       },
     };
 
-    // The start method will wait until the DOM is loaded.
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        user.reload().then(() => {
+          if (!user.emailVerified) {
+            sendEmailVerification(user)
+              .then(() => {
+                notification.success({
+                  message: 'Verification Email Sent',
+                  description:
+                    'Please check your inbox for the verification email.',
+                });
+                navigate('/verify-email');
+              })
+              .catch((error) => {
+                notification.error({
+                  message: 'Error',
+                  description: error.message,
+                });
+              });
+          }
+        });
+      }
+    });
+
     ui.start('#firebaseui-auth-container', uiConfig);
 
     return () => {
+      unsubscribe();
       ui.reset();
     };
-  }, [navigate]);
+  }, [navigate, auth, onAuthSuccess]);
 
-  return (
-    <div>
-      <div id="firebaseui-auth-container" ref={uiRef}></div>
-    </div>
-  );
+  return <div id="firebaseui-auth-container"></div>;
 };
 
 export default FirebaseAuth;

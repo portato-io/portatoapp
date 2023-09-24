@@ -119,7 +119,10 @@ const EnterRequestNameDesc: React.FC = () => {
             label={t('requestInfo.name')}
             name="name"
             rules={[
-              { required: true, message: 'Please input the object name' },
+              {
+                required: true,
+                message: t('requestInfo.nameMessage') as string,
+              },
             ]}
           >
             <Input
@@ -137,7 +140,7 @@ const EnterRequestNameDesc: React.FC = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input the object description',
+                message: t('requestInfo.descriptionMessage') as string,
               },
             ]}
           >
@@ -172,14 +175,20 @@ const EnterRequestNameDesc: React.FC = () => {
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
-              logEvent(analytics, 'send_1_objInfo_back_button_click');
+              logEvent(
+                analytics,
+                'send_1_nameDescriptionImage_back_button_click'
+              );
             }}
           />
           <NextButton
             disabled={isUploading} // Disable the button if an upload is in progress
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_1_objInfo_next_button_click');
+              logEvent(
+                analytics,
+                'send_1_nameDescriptionImage_next_button_click'
+              );
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PageLayout from '../Layouts/PageLayoutTest';
-import { Typography, Modal, message } from 'antd';
+import { Typography, Modal } from 'antd';
 import ProgressBar from '../../Components/ProgressBar';
 import ConfirmButton from '../../Components/Buttons/ConfirmButton';
 import BackButton from '../../Components/Buttons/BackButton';
@@ -13,6 +13,7 @@ import { uploadRouteToFirebase } from '../../linksStoreToFirebase';
 import { IRouteInfo } from '../../type';
 import { useSelector, useDispatch } from 'react-redux';
 import { emptyState } from '../../Store/actions/requestActionCreators';
+import { useAuth } from '../../Components/AuthProvider';
 import { useTranslation } from 'react-i18next';
 require('../../CSS/Send.css');
 import { logEvent } from 'firebase/analytics';
@@ -26,12 +27,14 @@ const RouteSummary: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const dispatch = useDispatch();
+  const handleAuthSuccess = () => setIsModalVisible(false); // Close the popup when authentication is successful
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const [user, setUser] = useState<User | null>(null);
+  const { emailVerified } = useAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -124,12 +127,13 @@ const RouteSummary: React.FC = () => {
         const emailBody = {
           title: 'New route request submitted',
           body: emailContent,
-          uid: null,
+          uid: uid,
           email: 'support@portato.io',
+          admin: true,
         };
-
+        const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
         fetch(
-          'https://europe-west1-portatoapp.cloudfunctions.net/sendNotificationEmail',
+          `https://europe-west1-${projectId}.cloudfunctions.net/sendNotificationEmail`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -163,7 +167,7 @@ const RouteSummary: React.FC = () => {
         <ProgressBar progress={PROGRESS} />
         <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
           <div>
-            <FirebaseAuth />
+            <FirebaseAuth onAuthSuccess={handleAuthSuccess} />
           </div>
         </Modal>
         <h2>{t('driveSummary.title')}</h2>
@@ -237,7 +241,7 @@ const RouteSummary: React.FC = () => {
               logEvent(analytics, 'drive_4_summary_back_button_click');
             }}
           />
-          {user ? (
+          {user && emailVerified ? (
             <ConfirmButton
               nextScreen={NEXT_SCREEN}
               onClick={() => {
@@ -246,12 +250,15 @@ const RouteSummary: React.FC = () => {
               }}
             />
           ) : (
-            <SignInButton
-              onClick={() => {
-                showModal();
-                logEvent(analytics, 'drive_4_summary_signIn_button_click');
-              }}
-            />
+            <div className="signin-container">
+              <div className="caption">{t('requestSummary.signInMessage')}</div>
+              <SignInButton
+                onClick={() => {
+                  showModal();
+                  logEvent(analytics, 'drive_4_summary_signIn_button_click');
+                }}
+              />
+            </div>
           )}
         </div>
       </section>

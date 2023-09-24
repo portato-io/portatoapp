@@ -63,7 +63,7 @@ const EnterRequestPrice: React.FC = () => {
     const parsedValue = parseFloat(value); // Convert the value to a numeric format
     console.log(parsedValue);
     if (isNaN(parsedValue) || parsedValue <= 1) {
-      return Promise.reject('Value must be greater than 1 CHF');
+      return Promise.reject(t('requestCost.valueMessage') as string);
     }
     return Promise.resolve();
   };
@@ -89,7 +89,7 @@ const EnterRequestPrice: React.FC = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input the request price',
+                message: t('requestCost.emptyMessage') as string,
               },
               {
                 validator: greaterThanOneCHFValidator, // Use the custom validator
@@ -115,13 +115,13 @@ const EnterRequestPrice: React.FC = () => {
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
-              logEvent(analytics, 'send_4_price_next_button_click');
+              logEvent(analytics, 'send_5_price_back_button_click');
             }}
           />
           <NextButton
             nextScreen={NEXT_SCREEN}
             onClick={() => {
-              logEvent(analytics, 'send_4_price_next_button_click');
+              logEvent(analytics, 'send_5_price_next_button_click');
             }}
             disabled={!isFormFilled}
             onFinish={onFinish}
