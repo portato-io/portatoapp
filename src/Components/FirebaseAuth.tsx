@@ -25,7 +25,7 @@ const FirebaseAuth: React.FC<FirebaseAuthProps> = ({ onAuthSuccess }) => {
     const uiConfig = {
       signInOptions: [EmailAuthProvider.PROVIDER_ID],
       callbacks: {
-        signInSuccessWithAuthResult: (authResult: UserCredential) => {
+        signInSuccessWithAuthResult: () => {
           onAuthSuccess?.(); // Invoke the onAuthSuccess callback if provided
           return false; // Handle the post-sign-in tasks manually
         },
