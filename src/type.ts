@@ -67,3 +67,16 @@ export type DealInfoAction = {
   type: string;
   route: IDealInfo;
 };
+
+export type MapMarker = {
+  type: string;
+  lat: string;
+  lng: string;
+  infoWindow: MapMarkerInfoWindow;
+};
+
+export type MapMarkerInfoWindow = {
+  title: string;
+  description: string;
+  url: string;
+};

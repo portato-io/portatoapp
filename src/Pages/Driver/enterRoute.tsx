@@ -139,7 +139,7 @@ const EnterRoute: React.FC = () => {
             />
           </Form.Item>
         </Form>
-        <Map />
+
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {

@@ -113,6 +113,28 @@ export const fetchDataOnce = async (uid, directory) => {
   }
 };
 
+export const fetchGeoData = async (uid, directory) => {
+  try {
+    const geoDataRef = ref(database, `users/${uid}/${directory}`);
+    const snapshot = await get(geoDataRef);
+    if (snapshot.exists()) {
+      console.log('Data: ', snapshot.val());
+      /*
+      const parsedData = [];
+      const dataObject = snapshot.val();
+      console.log(typeof dataObject)
+      for(let data in )
+      return parsedData;
+      */
+    } else {
+      console.log('No data found.', geoDataRef);
+      return {};
+    }
+  } catch (error) {
+    console.error('Error fetching data from Firebase:', error);
+  }
+};
+
 export const checkData = async (uid, directory, data_id) => {
   try {
     const userRequestsRef = ref(

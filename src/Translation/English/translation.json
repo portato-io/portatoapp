@@ -115,7 +115,8 @@
     "home": "Home",
     "send": "Requests",
     "drive": "Routes",
-    "profile": "Menu"
+    "profile": "Menu",
+    "map": "Map"
   },
 
   "requestOverview": {

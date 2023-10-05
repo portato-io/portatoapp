@@ -120,7 +120,8 @@
     "home": "Home",
     "send": "Aufträge",
     "drive": "Routen",
-    "profile": "Menu"
+    "profile": "Menu",
+    "map": "Karte"
   },
 
   "requestOverview": {

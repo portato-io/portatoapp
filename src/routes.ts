@@ -7,11 +7,13 @@ import MyAccount from './Pages/Profile/MyAccount';
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
+const PortatoMap = lazy(() => import('./Pages/PortatoMap'));
 const TermsAndConditions = lazy(() => import('./Pages/TermsAndConditions'));
 const FAQ = lazy(() => import('./Pages/FAQ'));
 const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy'));
 const Imprint = lazy(() => import('./Pages/Imprint'));
 const Profile = lazy(() => import('./Pages/Menu'));
+
 const EnterRequestNameDesc = lazy(
   () => import('./Pages/Sender/EnterRequestNameDesc')
 );
@@ -51,6 +53,7 @@ const ContactDriver = lazy(
 );
 
 import Settings from './Pages/Profile/Settings';
+import Map from './Components/Map';
 
 // interface
 interface Route {
@@ -271,5 +274,12 @@ export const routes: Array<Route> = [
     path: '/profile/my-account',
     enabled: true,
     component: MyAccount,
+  },
+  {
+    key: 'portato-map',
+    title: 'PortatoMap',
+    path: '/PortatoMap',
+    enabled: true,
+    component: PortatoMap,
   },
 ];

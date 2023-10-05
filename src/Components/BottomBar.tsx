@@ -31,9 +31,9 @@ function BottomBar() {
       icon: <i className="icon icon-big icon-drive" />,
     },
     {
-      key: '/profile',
-      title: t('navBar.profile'),
-      icon: <i className="icon icon-big icon-profile" />,
+      key: '/PortatoMap',
+      title: t('navBar.map'),
+      icon: <i className="icon icon-big icon-map" />,
     },
   ];
 
