@@ -90,34 +90,67 @@ const RouteSummary: React.FC = () => {
     routeInfo: IRouteInfo,
     uid: string
   ): { userContent: string; supportContent: string } => {
+    let daysDisplay = 'N/A';
+    let timeDisplay = 'N/A';
+
+    if (routeInfo.days) {
+      daysDisplay = Object.values(routeInfo.days).join(', ');
+    }
+
+    if (routeInfo.time) {
+      timeDisplay = Object.values(routeInfo.time).join(', ');
+    }
+
+    const recurringRideContent = `
+      <tr><th style="text-align:left;">${t(
+        'driveSummary.each'
+      )} </th><td>${daysDisplay}<br />
+      <tr><th style="text-align:left;">${t(
+        'driveSummary.tripTime'
+      )} </th><td>${timeDisplay}
+    `;
+
+    const nonRecurringRideContent = `
+      <tr><th style="text-align:left;">${t('driveSummary.tripDate')} </th><td>${
+      routeInfo.timeRange
+    } <br />
+      <tr><th style="text-align:left;">${t(
+        'driveSummary.tripTime'
+      )} </th><td>${timeDisplay}
+    `;
+
+    const rideSpecificContent =
+      routeInfo.type === t('driveTime.recurringRide')
+        ? recurringRideContent
+        : nonRecurringRideContent;
+
     const baseContent = `
-    ${t('driveSummary.notificationEmail.requestConfirmationBody')}
+      ${t('driveSummary.notificationEmail.requestConfirmationBody')}
       <br>  
+      <table>
         <tr><th style="text-align:left;">${t(
           'driveSummary.departureAddress'
-        )}</th><td>${routeInfo.departure_adress}</td></tr>
+        )}:</th><td>${routeInfo.departure_adress}</td></tr>
         <tr><th style="text-align:left;">${t(
           'driveSummary.destinationAddress'
-        )}</th><td>${routeInfo.destination_adress}</td></tr>
-        <tr><th style="text-align:left;">${t(
-          'driveSummary.tripDate'
-        )}</th><td>From ${routeInfo.days[0]} to ${routeInfo.days[1]}</td></tr>
-        <tr><th style="text-align:left;">${t(
-          'driveSummary.tripTime'
-        )}</th><td> From ${routeInfo.time[0]} to ${routeInfo.time[1]}</td></tr>
+        )}:</th><td>${routeInfo.destination_adress}</td></tr>
         <tr><th style="text-align:left;">${t('requestSummary.size')}</th><td>${
       routeInfo.delivery_capacity
     }</td></tr>
         <tr><th style="text-align:left;">${t(
           'driveSummary.acceptableDetour'
-        )}</th><td>${routeInfo.acceptable_detour}</td></tr>
+        )}:</th><td>${routeInfo.acceptable_detour} Km</td></tr>
+        <tr><td colspan="2">${rideSpecificContent}</td></tr>
       </table>
-    <br>
-    ${t('driveSummary.notificationEmail.salutations')}`;
+      <br>
+      ${t('driveSummary.notificationEmail.salutations')}
+    `;
 
     const supportAdditionalContent = `
-      <tr><th>requestID</th><td>${routeInfo.id}</td></tr>
-      <tr><th>requestUID</th><td>${uid}</td></tr>
+      <table>
+        <tr><th>requestID</th><td>${routeInfo.id}</td></tr>
+        <tr><th>requestUID</th><td>${uid}</td></tr>
+      </table>
     `;
 
     return {
