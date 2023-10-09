@@ -228,7 +228,7 @@
     "each": "Wiederkehrend jeden:",
     "driveCapacity": "Kapazität",
     "notificationEmail": {
-      "requestConfirmationTitle": "Bestätigung Ihrer Fahrt",
+      "requestConfirmationTitle": "Danke für das Registrieren deiner Fahrt",
       "requestConfirmationBody": "Vielen Dank, dass Du deine Fahrt bei uns registriert hast! Hier ist eine kurze Zusammenfassung deiner Angaben.<br>Wir melden uns bei dir, sobald wir Pakete finden, die zu deiner Route passen. In der Zwischenzeit kannst Du deine Fahrtangaben über diesen <a href=\"https://portato.io/deliver\">Link</a> verwalten oder ändern.<br>",
       "greetings": "Liebe/r",
       "salutations": "Mit freundlichen Grüssen,<br>Dein Portato Team"
