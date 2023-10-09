@@ -80,11 +80,20 @@ export const uploadRouteToFirebase = async (uid, dispatch) => {
       // Generate a new unique key for the route
       const newRouteRef = firebasePush(routesRef);
 
+      console.log('Generated new route reference:', newRouteRef);
+
       // The unique key is now available as newRouteRef.key
       if (newRouteRef.key) {
         dispatch(setRouteId(newRouteRef.key));
         state = store.getState();
         await set(newRouteRef, state.route);
+        const routesRef = ref(
+          database,
+          `users/${uid}/routes/${state.route.id}`
+        );
+        await update(routesRef, state.route);
+        console.log('Route updated successfully');
+        return true;
       } else {
         console.error('Unable to generate a unique key.');
         return false;
