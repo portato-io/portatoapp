@@ -229,7 +229,7 @@
     "driveCapacity": "Capacité",
     "notificationEmail": {
       "requestConfirmationTitle": "Confirmation de votre trajet",
-      "requestConfirmationBody": "Merci de nous avoir soumis votre trajet. Vous trouverez ci-dessous un résumé de celui-ci.<br>Nous vous contacterons bientôt pour vous suggérer des colis à recuperer sur votre chemim. Vous pouvez gérer votre demande à tout moment sous ce <a href=\"https://portato.io/deliver\">link</a>.<br>",
+      "requestConfirmationBody": "Merci d'avoir partagé votre trajet avec nous. Voici un bref résumé de votre itinéraire.<br>Si nous trouvons des colis correspondant à votre route, nous vous contacterons. Entre-temps, vous pouvez gérer ou modifier votre trajet à l'aide de ce <a href=\"https://portato.io/deliver\">lien</a>.<br>",
       "greetings": "Cher(e)",
       "salutations": "Cordialement,<br>L'équipe Portato"
     }
