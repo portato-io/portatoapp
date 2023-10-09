@@ -73,27 +73,41 @@ export const uploadRouteToFirebase = async (uid, dispatch) => {
     state.route.days = state.route.days ?? [];
 
     if (state.route.id === '0') {
+      console.log('Route ID is undefined, creating new route');
+
       // Get the database instance and create a reference to the user's routes
       const routesRef = ref(database, `users/${uid}/routes`);
       // Generate a new unique key for the route
       const newRouteRef = firebasePush(routesRef);
+
+      console.log('Generated new route reference:', newRouteRef);
 
       // The unique key is now available as newRouteRef.key
       if (newRouteRef.key) {
         dispatch(setRouteId(newRouteRef.key));
         state = store.getState();
         await set(newRouteRef, state.route);
+        const routesRef = ref(
+          database,
+          `users/${uid}/routes/${state.route.id}`
+        );
+        await update(routesRef, state.route);
+        console.log('Route updated successfully');
+        return true;
       } else {
         console.error('Unable to generate a unique key.');
+        return false;
       }
     } else {
       console.log('Route ID already exists, updating route');
       const routesRef = ref(database, `users/${uid}/routes/${state.route.id}`);
       await update(routesRef, state.route);
       console.log('Route updated successfully');
+      return true;
     }
   } catch (error) {
     console.error('Error uploading route: ', error);
+    return false;
   }
 };
 

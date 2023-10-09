@@ -187,7 +187,7 @@
       "requestConfirmationTitle": "Bestätigung deines Transportauftrages",
       "requestConfirmationBody": "Vielen Dank für deinen Transportauftrag. Wir melden uns bei dir sobald wie möglich mit Fahrer:innen, die in deine Richtung fahren und den Transport übernehmen können.<br>Deinen Auftrag kannst Du unter diesem <a href=\"https://portato.io/createSendRequest\">Link</a> jederzeit einsehen, editieren oder löschen.<br>",
       "greetings": "Liebe/r",
-      "salutations": "Vielen Dank,<br>Dein Portato Team"
+      "salutations": "Mit freundlichen Grüssen,<br>Dein Portato Team"
   }
   },
 
@@ -226,7 +226,13 @@
     "tripDate": "Datum:",
     "tripTime": "Tageszeit:",
     "each": "Wiederkehrend jeden:",
-    "driveCapacity": "Kapazität"
+    "driveCapacity": "Kapazität",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Danke für das Registrieren deiner Fahrt",
+      "requestConfirmationBody": "Vielen Dank, dass Du deine Fahrt bei uns registriert hast! Hier ist eine kurze Zusammenfassung deiner Angaben.<br>Wir melden uns bei dir, sobald wir Pakete finden, die zu deiner Route passen. In der Zwischenzeit kannst Du deine Fahrtangaben über diesen <a href=\"https://portato.io/deliver\">Link</a> verwalten oder ändern.<br>",
+      "greetings": "Liebe/r",
+      "salutations": "Mit freundlichen Grüssen,<br>Dein Portato Team"
+    }
   },
   "navigationButton": {
     "next": "Weiter",
