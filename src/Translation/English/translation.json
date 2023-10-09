@@ -226,7 +226,14 @@
     "tripDate": "Date:",
     "tripTime": "Time:",
     "each": "Recurring each:",
-    "driveCapacity": "Capacity"
+    "driveCapacity": "Capacity",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Confirmation of your trip",
+      "requestConfirmationBody": "Thank you for submitting your trip. Below you will find a summary of it.<br>We will contact you soon to suggest packages to retrieve along your way. You can manage your request at any time under this <a href=\"https://portato.io/deliver\">link</a>.<br>",
+      "greetings": "Dear",
+      "salutations": "Kind regards,<br>The Portato Team"
+    }
+
   },
   "navigationButton": {
     "next": "Next",

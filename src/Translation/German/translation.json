@@ -226,7 +226,13 @@
     "tripDate": "Datum:",
     "tripTime": "Tageszeit:",
     "each": "Wiederkehrend jeden:",
-    "driveCapacity": "Kapazität"
+    "driveCapacity": "Kapazität",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Bestätigung Ihrer Fahrt",
+      "requestConfirmationBody": "Vielen Dank, dass Sie uns Ihre Fahrt mitgeteilt haben. Unten finden Sie eine Zusammenfassung davon.<br>Wir werden uns bald mit Ihnen in Verbindung setzen, um Ihnen Pakete vorzuschlagen, die Sie auf Ihrem Weg abholen können. Sie können Ihre Anfrage jederzeit unter diesem <a href=\"https://portato.io/deliver\">Link</a> verwalten.<br>",
+      "greetings": "Sehr geehrte(r)",
+      "salutations": "Mit freundlichen Grüßen,<br>Das Portato Team"
+    }
   },
   "navigationButton": {
     "next": "Weiter",

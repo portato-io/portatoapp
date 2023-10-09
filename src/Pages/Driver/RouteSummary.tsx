@@ -91,7 +91,7 @@ const RouteSummary: React.FC = () => {
     uid: string
   ): { userContent: string; supportContent: string } => {
     const baseContent = `
-    ${t('requestSummary.notificationEmail.requestConfirmationBody')}
+    ${t('driveSummary.notificationEmail.requestConfirmationBody')}
       <br>  
         <tr><th style="text-align:left;">${t(
           'driveSummary.departureAddress'
@@ -113,7 +113,7 @@ const RouteSummary: React.FC = () => {
         )}</th><td>${routeInfo.acceptable_detour}</td></tr>
       </table>
     <br>
-    ${t('requestSummary.notificationEmail.salutations')}`;
+    ${t('driveSummary.notificationEmail.salutations')}`;
 
     const supportAdditionalContent = `
       <tr><th>requestID</th><td>${routeInfo.id}</td></tr>
@@ -132,8 +132,8 @@ const RouteSummary: React.FC = () => {
     recipientEmail: string
   ): Promise<void> => {
     const emailBody = {
-      title: t('requestSummary.notificationEmail.requestConfirmationTitle'),
-      greetings: t('requestSummary.notificationEmail.greetings'),
+      title: t('driveSummary.notificationEmail.requestConfirmationTitle'),
+      greetings: t('driveSummary.notificationEmail.greetings'),
       body: emailContent,
       uid: senderUid,
       email: recipientEmail,

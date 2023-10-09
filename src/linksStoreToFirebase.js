@@ -73,6 +73,8 @@ export const uploadRouteToFirebase = async (uid, dispatch) => {
     state.route.days = state.route.days ?? [];
 
     if (state.route.id === '0') {
+      console.log('Route ID is undefined, creating new route');
+
       // Get the database instance and create a reference to the user's routes
       const routesRef = ref(database, `users/${uid}/routes`);
       // Generate a new unique key for the route

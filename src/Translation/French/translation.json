@@ -226,7 +226,13 @@
     "tripDate": "Date:",
     "tripTime": "Heure:",
     "each": "Récurrent chaque:",
-    "driveCapacity": "Capacité"
+    "driveCapacity": "Capacité",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Confirmation de votre trajet",
+      "requestConfirmationBody": "Merci de nous avoir soumis votre trajet. Vous trouverez ci-dessous un résumé de celui-ci.<br>Nous vous contacterons bientôt pour vous suggérer des colis à recuperer sur votre chemim. Vous pouvez gérer votre demande à tout moment sous ce <a href=\"https://portato.io/deliver\">link</a>.<br>",
+      "greetings": "Cher(e)",
+      "salutations": "Cordialement,<br>L'équipe Portato"
+    }
   },
   "navigationButton": {
     "next": "Suivant",
