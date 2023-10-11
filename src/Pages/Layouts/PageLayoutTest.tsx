@@ -39,6 +39,7 @@ const MainLayout = (props: Props) => {
   return (
     <ConfigProvider locale={locale}>
       <Layout style={{ display: display }}>
+        <HeaderBar />
         <div className="layout-wrapper">
           <main className="main-container-split">
             <Content>{children}</Content>

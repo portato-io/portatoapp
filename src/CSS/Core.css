@@ -42,6 +42,13 @@
   padding-bottom: var(--main-navigation-bar-height);
   background: var(--color-white);
 }
+.layout-header {
+  border-width:0 0 3px 0;
+  border-style:solid;
+  border-color:var(--color-grey4);
+  background:var(--color-white);
+  padding:10px calc(var(--spacing-regular) / 2) 10px;
+}
 
 /* LAYOUT TWERKS -------------------------------------- */
 *:first-child {
@@ -266,16 +273,17 @@ video,
 /* LOGO & SLOGAN ------------------------------------- */
 .logo-slogan {
   font-family: 'Lexend-Light';
-  font-size: clamp(3rem, 6vw, 4.8rem);
-  margin-top: 0;
-  padding-top: 10px;
-  margin-bottom: 1rem;
+  font-size: clamp(3.5rem, 3.5vw, 4.8rem);
+  line-height: 1.1;
+  position: relative;
+  top:-7px;
+  
 }
 .logo-slogan:before {
-  font-size: clamp(3.5rem, 6vw, 4.8rem);
+  font-size: clamp(3.8rem, 3.5vw, 4.8rem);
   position: relative;
-  top: 10px;
-  margin-left: -10px;
+  left:5px;
+  top: 8px;
 }
 
 
@@ -394,6 +402,7 @@ video,
 
 /* STYLE MODIFIER ------------------------------------ */
 .box-style-gradient-1 {
+  padding-top: clamp(30px, 10vw, 50px); ;
   background-image:radial-gradient(at bottom right, var(--color-green-2), var(--color-green-1))
 }
 .box-style-color-1 {
@@ -451,6 +460,8 @@ video,
   margin-left: calc(-1 * var(--spacing-regular));
   width: calc(100% + 2 * var(--spacing-regular)) }
 .text-color-white { color: var(--color-white) }
+.text-color-black { color: var(--color-black) }
+.text-color-green { color: var(--portato-green) }
 
 
 /* TO BE CHECKED --------------------------------------- */
