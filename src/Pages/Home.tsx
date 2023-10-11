@@ -174,7 +174,7 @@ const Home: React.FC = () => {
         <section className="section text-color-white mod-nomargin-top mod-nomargin-bottom">
           <h2 className="h1 text-align-center">{t('about.whoWeAreTitle')}</h2>
 
-          <p className="">
+          <p>
             {t('about.whoWeAreText')
               .split('\n')
               .map((line: string, i: number) => (
@@ -214,45 +214,45 @@ const Home: React.FC = () => {
         <section className="section text-color-white">
           <h3>{t('links.heading')}</h3>
           <div className="spacer-fluid-regular"></div>
-          <div className="mod-display-flex">
+          <div>
             <Link
-              className="mod-display-block mod-nomargin-top text-color-white spacing-horizontal-regular"
+              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top"
               to="/FAQ"
               onClick={() =>
                 logEvent(analytics, 'home_moreInfo_FAQ_button_click')
               }
             >
-              {t('links.FAQ')}
+              <small>{t('links.FAQ')}</small>
             </Link>
 
             <Link
-              className="mod-display-block mod-nomargin-top text-color-white spacing-horizontal-regular"
+              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top"
               to="/termsAndconditions"
               onClick={() =>
                 logEvent(analytics, 'home_moreInfo_TandC_button_click')
               }
             >
-              {t('links.termsAndConditions')}
+              <small>{t('links.termsAndConditions')}</small>
             </Link>
 
             <Link
-              className="mod-display-block mod-nomargin-top text-color-white spacing-horizontal-regular"
+              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top"
               to="/privacyPolicy"
               onClick={() =>
                 logEvent(analytics, 'home_moreInfo_privacyPolicy_button_click')
               }
             >
-              {t('links.privacyPolicy')}
+              <small>{t('links.privacyPolicy')}</small>
             </Link>
 
             <Link
-              className="mod-display-block mod-nomargin-top text-color-white spacing-horizontal-regular"
+              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top"
               to="/imprint"
               onClick={() =>
                 logEvent(analytics, 'home_moreInfo_imprint_button_click')
               }
             >
-              {t('links.imprint')}
+              <small>{t('links.imprint')}</small>
             </Link>
           </div>
         </section>

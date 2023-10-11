@@ -366,6 +366,12 @@ video,
 .mod-nomargin-top {
   margin-top: 0;
 }
+.mod-small-margin-bottom {
+  margin-bottom: 5px;
+}
+.mod-small-margin-top {
+  margin-top: 5px;
+}
 .mod-nopadding {
   padding: 0;
 }
