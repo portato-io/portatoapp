@@ -1,10 +1,10 @@
 /* BUTTONS -------------------------------------------- */
 .button {
 	display:inline-block;
-	padding:7px 15px;
+	padding:0px 20px 0px;
+	line-height: 2;
 	min-width: 130px;
 	text-align: center;
-	margin:0 var(--spacing-horizontal-regular);
 	cursor: pointer;
 	transition: var(--transition-regular);
 }
@@ -61,6 +61,7 @@ button .icon + span {
 label {
 	padding-bottom:5px;
 	display:block;
+	text-align: left;
 }
 .form-input-wrapper input[type="search"],
 .form-input {
@@ -98,6 +99,13 @@ textarea.form-input::placeholder {
 }
 .form-button-container {
     margin:var(--spacing-vertical-big) 0;
+}
+.form-button-container .text-hint {
+	padding-top:10px;
+	max-width:140px;
+}
+.form-button-container .text-hint::before {
+	content: '! ';
 }
 .form-button-right .button {
 	min-width:150px;

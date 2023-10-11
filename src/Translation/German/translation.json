@@ -91,11 +91,13 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ex PowerPoint- und Excel-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk."
+      "description": "Ex PPT- und XLS-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk.",
+      "image": "src/Assets/Images/team/conrad.jpg"
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "Franko-britisches Genie, der das Backend in mindestens genauso vielen Sprachen jongliert."
+      "description": "Franko-britisches Genie, jongliert in mindestens so vielen Sprachen das Backend.",
+      "image": "src/Assets/Images/team/hugo.jpg"
     },
     "Mehdi": {
       "name": "Mehdi",
@@ -103,7 +105,8 @@
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Hansdampf in allen Gassen. Multitalent mit einem Händchen für Code, Design und Animation."
+      "description": "Hansdampf in allen (Produkt-)Gassen. Multitalentiert in Coding, Design und Animation.",
+      "image": "src/Assets/Images/team/mischa.jpg"
     },
     "Chiara": {
       "name": "Chiara",

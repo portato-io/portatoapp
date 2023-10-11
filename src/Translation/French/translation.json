@@ -91,7 +91,8 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ancien ingénieur PowerPoint et Excel, maintenant CEO de Portato. Un passionné de sport avec un grand réseau."
+      "description": "Ancien ingénieur PPT et XLS, maintenant CEO de Portato. Passionné de sport avec un grand réseau.",
+      "image": "../src/Assets/Images/team/conrad.jpg"
     },
     "Hugo": {
       "name": "Hugo",
@@ -103,11 +104,13 @@
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Touche-à-tout, maître du produit. Multitalent avec un talent pour la programmation, le design et l'animation."
+      "description": "Touche-à-tout, maître du produit. Multitalent pour la programmation, le design et l'animation.",
+      "image": "src/Assets/Images/team/mischa.jpg"
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "Artiste story-board et animatrice 2D qui donne à Portato son charme."
+      "description": "Artiste story-board et animatrice 2D qui donne à Portato son charme, un trait à la fois.",
+      "image": "src/Assets/Images/team/chiara.png"
     }
   },
 

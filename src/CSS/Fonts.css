@@ -8,35 +8,35 @@
 }
 
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Lexend-Black';
   src: url('../Fonts/Lexend-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Lexend-ExtraBold';
   src: url('../Fonts/Lexend-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Lexend-Bold';
   src: url('../Fonts/Lexend-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Lexend-SemiBold';
   src: url('../Fonts/Lexend-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Lexend-Medium';
   src: url('../Fonts/Lexend-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
@@ -50,47 +50,76 @@
 }
 
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Lexend-Light';
   src: url('../Fonts/Lexend-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Lexend-ExtraThin';
   src: url('../Fonts/Lexend-ExtraLight.ttf') format('truetype');
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Lexend';
+  font-family: 'Lexend-Thin';
   src: url('../Fonts/Lexend-Thin.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
 }
 
-html {
+html, body {
     font-family: 'Lexend', sans-serif;
     font-size:62.5%; /* This trick is used to downsize the default browser size to 10px and make the REM unit more readable */
     color: var(--color-black);
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Lexend';
+    font-family: 'Lexend-Medium';
 }
 
-h1 { font-size: 3.6rem; margin: 30px 0; line-height: 1.6;} /* 3.6rem = 36px */
-h2 { font-size: 2.8rem; margin: 20px 0; line-height: 1.4;} /* 2.8rem = 28px */
-h3 { font-size: 2.2rem; margin: 15px 0;}
+h1,.h1 { 
+  font-size: clamp(3.6rem, 5.8vw, 6.5rem);  /* 3.6rem = 36px */
+  margin: clamp(15px, 5vw, 40px) 0; 
+  line-height: 1.3;
+  hyphens: auto;
+}
+h2,.h2 { 
+  font-family: 'Lexend-SemiBold'; 
+  font-size: clamp(2.8rem, 3.6vw, 4rem); /* 2.8rem = 28px */
+  margin: clamp(10px, 4vw, 30px) 0; 
+  line-height: 1.15;
+} 
+h3,.h3 { 
+  font-family: 'Lexend-Bold'; 
+  margin: clamp(5px, 3vw, 15px) 0;
+  font-size: clamp(2.4rem, 3.1vw, 3.4rem);
+}
 h4 { font-size: 2rem; margin: 10px 0 10px 0;}
-h5 { font-size: 2rem; margin: 10px 0 10px 0; font-weight: 400;}
 
-p,a {font-size:1.8rem; line-height: 1.4}
-.text-hint {font-size:1.3rem;}
-.section-form label { font-family: 'Lexend'; font-size: 1.8rem!important;} /*sorry for this one, but it was the easiest for today */
+p, a, label {
+  font-size:1.8rem;
+  line-height: 1.3;
+  margin-top:clamp(10px, 1.5vw, 20px);
+  margin-bottom:clamp(10px, 1.5vw, 20px);
+  color:inherit;
+}
 
-.button {font-family: 'Lexend'; font-size:1.8rem;}
+a:hover {
+  color:var(--portato-green);
+}
+
+.text-note {font-size:1.4rem; line-height:1.4}
+.text-hint {font-size:1.1rem;}
+
+/*.section-form label { font-family: 'Lexend'; font-size: 1.8rem!important;} /*sorry for this one, but it was the easiest for today */
+
+.button {
+  font-family: 'Lexend-SemiBold'; 
+  font-size:2rem;
+}
 
 .font-bold {
   font-weight: bold;
@@ -100,10 +129,7 @@ p,a {font-size:1.8rem; line-height: 1.4}
   font-size: 20px;
 }
 
-.text-align-left {
-  text-align: left;
-}
+.text-align-left { text-align: left; }
+.text-align-right { text-align: right;}
+.text-align-center { text-align: center;}
 
-.text-align-right {
-  text-align: right;
-}
