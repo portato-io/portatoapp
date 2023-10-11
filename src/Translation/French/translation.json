@@ -96,13 +96,11 @@
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "Génie franco-britannique jonglant avec le backend dans au moins autant de langues.",
-      "image": "../../src/Assets/Images/team/hugo.jpg"
+      "description": "Génie franco-britannique jonglant avec le backend dans au moins autant de langues."
     },
     "Mehdi": {
       "name": "Mehdi",
-      "description": "Amoureux du hip-hop qui rend le frontend aussi beau que ses coupes de cheveux.",
-      "image": "./src/Assets/Images/team/mehdi.jpg"
+      "description": "Amoureux du hip-hop qui rend le frontend aussi beau que ses coupes de cheveux."
     },
     "Mischa": {
       "name": "Mischa",
@@ -115,6 +113,7 @@
       "image": "src/Assets/Images/team/chiara.png"
     }
   },
+
   "navBar": {
     "home": "Accueil",
     "send": "Envoyer",
@@ -186,8 +185,15 @@
     "possibleTimes": "Heures possibles",
     "price": "Prix",
     "images": "Image(s)",
-    "signInMessage": "Veuillez vous identifier avant de soumettre votre demande"
+    "signInMessage": "Veuillez vous identifier avant de soumettre votre demande",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Confirmation de votre demande de transport",
+      "requestConfirmationBody": "Merci pour votre demande d'envoi. Vous trouverez ci-dessous un résumé de celle-ci.<br>Nous vous contacterons bientôt pour vous suggérer un chauffeur qui va dans votre direction. Vous pouvez gérer votre demande à tout moment sous ce <a href=\"https://portato.io/createSendRequest\">link</a>.<br>",
+      "greetings": "Cher(e)",
+      "salutations": "Cordialement,<br>L'équipe Portato"
+    }
   },
+
   "driveOverview": {
     "newTitle": "Souhaitez-vous enregistrer un nouvel itinéraire?",
     "createButtonDescription": "Créer route",
@@ -223,7 +229,13 @@
     "tripDate": "Date:",
     "tripTime": "Heure:",
     "each": "Récurrent chaque:",
-    "driveCapacity": "Capacité"
+    "driveCapacity": "Capacité",
+    "notificationEmail": {
+      "requestConfirmationTitle": "Confirmation de votre trajet",
+      "requestConfirmationBody": "Merci d'avoir partagé votre trajet avec nous. Voici un bref résumé de votre itinéraire.<br>Si nous trouvons des colis correspondant à votre route, nous vous contacterons. Entre-temps, vous pouvez gérer ou modifier votre trajet à l'aide de ce <a href=\"https://portato.io/deliver\">lien</a>.<br>",
+      "greetings": "Cher(e)",
+      "salutations": "Cordialement,<br>L'équipe Portato"
+    }
   },
   "navigationButton": {
     "next": "Suivant",
@@ -335,6 +347,6 @@
 
   "imprint": {
     "title": "Mentions légales",
-    "text": "Portato GmbH i.G.\nReprésentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
+    "text": "Dachsbau GmbH\nReprésentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
   }
 }

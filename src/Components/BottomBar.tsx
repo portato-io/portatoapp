@@ -8,6 +8,8 @@ import {
   TruckOutline,
 } from 'antd-mobile-icons';
 import { useTranslation } from 'react-i18next';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../firebaseConfig';
 
 function BottomBar() {
   const { t } = useTranslation<string>(); // Setting the generic type to string
@@ -18,22 +20,26 @@ function BottomBar() {
       title: t('navBar.home'),
       icon: <i className="icon icon-big icon-home" />,
       badge: Badge.dot,
+      eventName: 'navbar_home_button_click',
     },
     {
       key: '/createSendRequest',
       title: t('navBar.send'),
       icon: <i className="icon icon-big icon-send" />,
       badge: '5',
+      eventName: 'navbar_send_button_click',
     },
     {
       key: '/deliver',
       title: t('navBar.drive'),
       icon: <i className="icon icon-big icon-drive" />,
+      eventName: 'navbar_drive_button_click',
     },
     {
       key: '/profile',
       title: t('navBar.profile'),
       icon: <i className="icon icon-big icon-profile" />,
+      eventName: 'navbar_profile_button_click',
     },
   ];
 
@@ -41,6 +47,9 @@ function BottomBar() {
   const { pathname } = location;
   const navigate = useNavigate();
   const setRouteActive = (value: string) => {
+    const tabEventName =
+      tabs.find((tab) => tab.key === value)?.eventName || 'navbar_unknown';
+    logEvent(analytics, tabEventName, { screen: value });
     navigate(value);
   };
   const firstSlashIndex: number = pathname.indexOf('/');
