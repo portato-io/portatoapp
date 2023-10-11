@@ -48,8 +48,8 @@ const Home: React.FC = () => {
       <div className="team-member-entry">
         <img className="image circle team-member-image" src={image} />
         <div className="listing-entry-content">
-          <h4 className="text-align-center">{name}</h4>
-          <p className="text-align-center">
+          <h4 className="">{name}</h4>
+          <p className="">
             <small>{description}</small>
           </p>
           <div className="spacer-small"></div>
@@ -76,7 +76,7 @@ const Home: React.FC = () => {
       <a
         href={link}
         // className="button button-border box-shadow box-radius-default box-shadow-effect"
-        className="button button-solid box-shadow box-shadow-effect box-radius-round mod-nomargin-top mod-nomargin-bottom spacing-horizontal-regular spacing-horizontal-regular"
+        className="button button-solid box-shadow box-shadow-effect box-radius-round mod-nomargin-top mod-nomargin-bottom spacing-horizontal-regular"
         target="_blank"
         onClick={handleClick}
       >
@@ -102,7 +102,7 @@ const Home: React.FC = () => {
       <section className="section">
         <div className="spacer-fluid-medium"></div>
         {/* call to action 1 */}
-        <div className="box-style-color-3 text-align-center mod-overflow-hidden">
+        <div className="box-style-color-3 mod-overflow-hidden">
           <h3>{t('sendSection.title')}</h3>
           <p>{t('sendSection.description')}</p>
           <img
@@ -122,7 +122,7 @@ const Home: React.FC = () => {
         <div className="spacer-fluid-small"></div>
 
         {/* call to action 2 */}
-        <div className="box-style-color-3 text-align-center mod-overflow-hidden">
+        <div className="box-style-color-3 mod-overflow-hidden">
           <h3>{t('driveSection.title')}</h3>
           <p>{t('driveSection.description')}</p>
           <img
@@ -142,8 +142,8 @@ const Home: React.FC = () => {
 
       {/* How it works */}
       <section className="section-bleed box-style-color-1">
-        <section className="section text-align-center text-color-white mod-nomargin-top">
-          <h2 className="h1">{t('general.howItWorks')}</h2>
+        <section className="section text-color-white mod-nomargin-top">
+          <h2 className="h1 text-align-center">{t('general.howItWorks')}</h2>
           <div className="video-wrapper">
             <LottieAnimation />
           </div>
@@ -151,8 +151,10 @@ const Home: React.FC = () => {
       </section>
 
       {/* Portato's mission */}
-      <section className="section text-align-center">
-        <h2 className="h1">{t('about.visionMissionTitle')}</h2>
+      <section className="section">
+        <h2 className="h1 text-align-center">
+          {t('about.visionMissionTitle')}
+        </h2>
         <p>
           {t('about.visionMissionText')
             .split('\n')
@@ -168,10 +170,10 @@ const Home: React.FC = () => {
       {/* Who we are */}
       <div className="spacer-fluid-medium"></div>
       <section className="section-bleed box-style-color-1">
-        <section className="section text-align-center text-color-white mod-nomargin-top mod-nomargin-bottom">
-          <h2 className="h1">{t('about.whoWeAreTitle')}</h2>
+        <section className="section text-color-white mod-nomargin-top mod-nomargin-bottom">
+          <h2 className="h1 text-align-center">{t('about.whoWeAreTitle')}</h2>
 
-          <p className="">
+          <p>
             {t('about.whoWeAreText')
               .split('\n')
               .map((line: string, i: number) => (
@@ -196,9 +198,9 @@ const Home: React.FC = () => {
       {/* Social media */}
       <section className="section">
         <div className="spacer-fluid-regular"></div>
-        <h3 className="text-align-center">{t('social.heading')}</h3>
+        <h3 className="">{t('social.heading')}</h3>
         <div className="spacer-fluid-regular"></div>
-        <div className="mod-display-flex mod-flex-center">
+        <div className="mod-display-flex">
           {socialChannelTypes.map((label) => (
             <SocialChannel socialLabel={label} key={label} />
           ))}
@@ -208,47 +210,50 @@ const Home: React.FC = () => {
 
       {/* Links */}
       <section className="section-bleed box-style-color-1">
-        <section className="section text-align-center text-color-white">
+        <section className="section text-color-white">
           <h3>{t('links.heading')}</h3>
-          <Link
-            className="mod-display-block text-color-white "
-            to="/FAQ"
-            onClick={() =>
-              logEvent(analytics, 'home_moreInfo_FAQ_button_click')
-            }
-          >
-            {t('links.FAQ')}
-          </Link>
+          <div className="spacer-fluid-regular"></div>
+          <div>
+            <Link
+              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top"
+              to="/FAQ"
+              onClick={() =>
+                logEvent(analytics, 'home_moreInfo_FAQ_button_click')
+              }
+            >
+              <small>{t('links.FAQ')}</small>
+            </Link>
 
-          <Link
-            className="mod-display-block text-color-white"
-            to="/termsAndconditions"
-            onClick={() =>
-              logEvent(analytics, 'home_moreInfo_TandC_button_click')
-            }
-          >
-            {t('links.termsAndConditions')}
-          </Link>
+            <Link
+              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top"
+              to="/termsAndconditions"
+              onClick={() =>
+                logEvent(analytics, 'home_moreInfo_TandC_button_click')
+              }
+            >
+              <small>{t('links.termsAndConditions')}</small>
+            </Link>
 
-          <Link
-            className="mod-display-block text-color-white"
-            to="/privacyPolicy"
-            onClick={() =>
-              logEvent(analytics, 'home_moreInfo_privacyPolicy_button_click')
-            }
-          >
-            {t('links.privacyPolicy')}
-          </Link>
+            <Link
+              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top"
+              to="/privacyPolicy"
+              onClick={() =>
+                logEvent(analytics, 'home_moreInfo_privacyPolicy_button_click')
+              }
+            >
+              <small>{t('links.privacyPolicy')}</small>
+            </Link>
 
-          <Link
-            className="mod-display-block text-color-white"
-            to="/imprint"
-            onClick={() =>
-              logEvent(analytics, 'home_moreInfo_imprint_button_click')
-            }
-          >
-            {t('links.imprint')}
-          </Link>
+            <Link
+              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top"
+              to="/imprint"
+              onClick={() =>
+                logEvent(analytics, 'home_moreInfo_imprint_button_click')
+              }
+            >
+              <small>{t('links.imprint')}</small>
+            </Link>
+          </div>
         </section>
       </section>
     </PageLayout>

@@ -106,8 +106,8 @@ const EnterRequestPrice: React.FC = () => {
           </Form.Item>
 
           <div className="mod-display-flex box-style-grey box-shadow box-radius-style-2">
-            <i className="icon icon-bell"></i>
-            <p className="text-hint mod-nomargin-top">
+            <i className="icon icon-bell icon-big"></i>
+            <p className="text-note mod-nomargin-top">
               {t('requestCost.comment')}
             </p>
           </div>

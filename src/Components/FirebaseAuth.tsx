@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import 'firebaseui/dist/firebaseui.css';
-import { GoogleAuthProvider, EmailAuthProvider } from 'firebase/auth';
+import { EmailAuthProvider } from 'firebase/auth';
 import { uiInstance, uiConfig } from './firebaseUIInstance';
 
 const FirebaseAuth: React.FC = () => {
