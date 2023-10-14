@@ -3,10 +3,13 @@ import FetchRoutes from '../../Components/FetchRoutes';
 import PageLayout from '../Layouts/PageLayoutTest';
 import { database } from '../../firebaseConfig';
 import { ref, get } from 'firebase/database';
+import { useAuth } from '../../Components/AuthProvider';
 
-const ADMIN = true;
+const ADMIN = false;
 
-const AllRoutesAdmin: React.FC = () => {
+const AllRoutes: React.FC = () => {
+  const { uid } = useAuth();
+  const fetcherUid = uid;
   const [userIds, setUserIds] = useState<string[]>([]);
 
   const fetchUserIds = async (): Promise<void> => {
@@ -32,11 +35,16 @@ const AllRoutesAdmin: React.FC = () => {
     <PageLayout>
       <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
         {userIds.map((uid) => (
-          <FetchRoutes key={uid} uid={uid} admin={ADMIN} fetcherUid={null} />
+          <FetchRoutes
+            key={uid}
+            uid={uid}
+            admin={ADMIN}
+            fetcherUid={fetcherUid}
+          />
         ))}
       </div>
     </PageLayout>
   );
 };
 
-export default AllRoutesAdmin;
+export default AllRoutes;

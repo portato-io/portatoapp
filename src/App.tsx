@@ -5,13 +5,12 @@ import './CSS/Core.css';
 import './CSS/Navigation.css';
 import './CSS/Mediaqueries.css';
 
-import React, { Suspense, useEffect, useState, Component } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Crisp } from 'crisp-sdk-web';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNavigator from './Components/SideBarNav';
-import { ConfigProvider, Modal } from 'antd';
+import { ConfigProvider } from 'antd';
 import { AuthProvider } from './Components/AuthProvider';
-import { checkTokenExists } from './linksStoreToFirebase';
 import { useAuth } from './Components/AuthProvider';
 import { fetchToken, onMessageListener } from './firebaseConfig';
 import { TranslationProvider } from './Contexts/TranslationContext';
@@ -35,7 +34,6 @@ const App: React.FC = () => {
 
   const { uid } = useAuth();
   const [openMenu, setOpenMenu] = useState(false);
-  const [visible, setVisible] = useState(false); // for the modal
   useEffect(() => {
     if (uid) {
       fetchToken(setTokenFound, uid);
