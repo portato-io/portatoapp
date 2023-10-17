@@ -15,7 +15,6 @@ import CustomSelector from '../../Components/CustomSelector';
 import { UserOutlined } from '@ant-design/icons';
 import { IRouteInfo } from '../../type';
 
-const { Title } = Typography;
 const NEXT_SCREEN = '/deliver/routeSummary';
 const PROGRESS = 66;
 // const icons = [
@@ -57,7 +56,7 @@ const EnterDeliveryCapacity: React.FC = () => {
     <PageLayout>
       <section className="section section-form mod-nomargin-top">
         <ProgressBar progress={PROGRESS} />
-        <Title level={4}>{t('driveCapacity.title')}</Title>
+        <h2>{t('driveCapacity.title')}</h2>
 
         <Selector
           columns={1}

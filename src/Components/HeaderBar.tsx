@@ -38,7 +38,7 @@ function HeaderBar({ isInline = false, setOpenMenu }: any) {
       >
         <span>portato</span>
       </Link>
-      <nav className="header-navigation-bar">
+      {/* <nav className="header-navigation-bar">
         <Link
           className="text-color-black"
           to="/profile"
@@ -48,7 +48,7 @@ function HeaderBar({ isInline = false, setOpenMenu }: any) {
         >
           <i className="icon icon-profile" />
         </Link>
-      </nav>
+      </nav> */}
     </header>
   );
 }

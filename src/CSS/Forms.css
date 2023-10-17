@@ -57,7 +57,11 @@ button .icon + span {
 .input-wrapper {
 	margin-bottom:var(--spacing-vertical-regular)
 }
-
+.input-wrapper label {
+	font-size: 1.8rem!important;
+	margin-top: 10px;
+	margin-bottom: 0
+  }
 label {
 	padding-bottom:5px;
 	display:block;
