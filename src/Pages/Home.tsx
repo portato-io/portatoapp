@@ -195,7 +195,6 @@ const Home: React.FC = () => {
 
       {/* Social media */}
       <section className="section">
-        <div className="spacer-fluid-regular"></div>
         <h3 className="text-align-center">{t('social.heading')}</h3>
         <div className="spacer-fluid-regular"></div>
         <div className="mod-display-flex mod-flex-center">
@@ -203,56 +202,53 @@ const Home: React.FC = () => {
             <SocialChannel socialLabel={label} key={label} />
           ))}
         </div>
-        <div className="spacer-fluid-medium"></div>
       </section>
 
       {/* Links */}
-      <section className="section-bleed box-style-color-1">
-        <section className="section text-color-white">
-          <h3 className="text-align-center">{t('links.heading')}</h3>
-          <div className="spacer-fluid-small"></div>
-          <div>
-            <Link
-              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
-              to="/FAQ"
-              onClick={() =>
-                logEvent(analytics, 'home_moreInfo_FAQ_button_click')
-              }
-            >
-              <small>{t('links.FAQ')}</small>
-            </Link>
+      <section className="section-bleed box-style-color-1 text-color-white mod-nomargin-top">
+        <h3 className="text-align-center">{t('links.heading')}</h3>
+        <div className="spacer-fluid-small"></div>
+        <div>
+          <Link
+            className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
+            to="/FAQ"
+            onClick={() =>
+              logEvent(analytics, 'home_moreInfo_FAQ_button_click')
+            }
+          >
+            <small>{t('links.FAQ')}</small>
+          </Link>
 
-            <Link
-              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
-              to="/termsAndconditions"
-              onClick={() =>
-                logEvent(analytics, 'home_moreInfo_TandC_button_click')
-              }
-            >
-              <small>{t('links.termsAndConditions')}</small>
-            </Link>
+          <Link
+            className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
+            to="/termsAndconditions"
+            onClick={() =>
+              logEvent(analytics, 'home_moreInfo_TandC_button_click')
+            }
+          >
+            <small>{t('links.termsAndConditions')}</small>
+          </Link>
 
-            <Link
-              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
-              to="/privacyPolicy"
-              onClick={() =>
-                logEvent(analytics, 'home_moreInfo_privacyPolicy_button_click')
-              }
-            >
-              <small>{t('links.privacyPolicy')}</small>
-            </Link>
+          <Link
+            className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
+            to="/privacyPolicy"
+            onClick={() =>
+              logEvent(analytics, 'home_moreInfo_privacyPolicy_button_click')
+            }
+          >
+            <small>{t('links.privacyPolicy')}</small>
+          </Link>
 
-            <Link
-              className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
-              to="/imprint"
-              onClick={() =>
-                logEvent(analytics, 'home_moreInfo_imprint_button_click')
-              }
-            >
-              <small>{t('links.imprint')}</small>
-            </Link>
-          </div>
-        </section>
+          <Link
+            className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
+            to="/imprint"
+            onClick={() =>
+              logEvent(analytics, 'home_moreInfo_imprint_button_click')
+            }
+          >
+            <small>{t('links.imprint')}</small>
+          </Link>
+        </div>
       </section>
     </PageLayout>
   );
