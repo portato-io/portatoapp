@@ -43,6 +43,11 @@
   background: var(--color-white);
 }
 .layout-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  z-index: 1000;
   border-width:0 0 3px 0;
   border-style:solid;
   border-color:var(--color-grey4);
@@ -66,7 +71,7 @@ body {
   width: 100%;
   margin: 0;
   background-color: var(--color-white);
-
+  padding-top: clamp(3.4rem, 3.0vw, 4.0rem);
 }
 .section {
   width: 100%;
