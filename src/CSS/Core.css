@@ -25,7 +25,7 @@
   --spacing-small: min(2vw, 20px);
   --spacing-regular: min(5vw, 50px);
   --spacing-big: 10vw;
-  --content-width-regular: 800px;
+  --content-width-regular: 900px;
   --content-width-large: 1200px;
   --content-width-bleed: initial;
   --spacing-horizontal-small: 5px;
@@ -297,11 +297,11 @@ video,
   position: absolute;
   left:0;
   bottom:0;
-  height:17.8vw;
-  max-height:139px;
+  height:17.2vw;
+  max-height:160px;
   width:100%;
   background:var(--color-green-3);
-  border-top:4px solid var(--portato-green);
+  border-top:clamp(2.5px, 0.65vw, 4px) solid var(--portato-green);
 }
 .section-header-home::before {
   content: '';
@@ -310,7 +310,7 @@ video,
   left:0;
   bottom:0;
   height:6vw;
-  max-height:46.5px;
+  max-height:53px;
   width:50%;
   background: var(--portato-green);
   z-index: 1;
