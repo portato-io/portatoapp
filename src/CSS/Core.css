@@ -35,6 +35,7 @@
   --spacing-vertical-regular: clamp(20px, 5vw, 35px); /* 35px; */
   --spacing-vertical-big: 55px;
   --transition-regular: all 0.3s ease-in-out 0s;
+  --spacing-header-vertical: clamp(5rem, 6.7vw, 7.0rem);
 }
 
 /* PAGE LAYOUT -----------------------------------------*/
@@ -49,6 +50,7 @@
   width: 100%; 
   z-index: 1000;
   border-width:0 0 3px 0;
+  height: var(--spacing-header-vertical);
   border-style:solid;
   border-color:var(--color-grey4);
   background:var(--color-white);
@@ -71,7 +73,7 @@ body {
   width: 100%;
   margin: 0;
   background-color: var(--color-white);
-  padding-top: clamp(3.4rem, 3.0vw, 4.0rem);
+  padding-top: calc(var(--spacing-header-vertical) / 2);
 }
 .section {
   width: 100%;
@@ -278,17 +280,17 @@ video,
 /* LOGO & SLOGAN ------------------------------------- */
 .logo-slogan {
   font-family: 'Lexend-Light';
-  font-size: clamp(3.5rem, 3.5vw, 4.8rem);
-  line-height: 1.1;
+  font-size: clamp(2.5rem, 3.5vw, 3.6rem);
   position: relative;
-  top:-7px;
-  
+  margin-top: -2.5px !important;
+  margin-bottom: 0;
+  vertical-align: middle;
 }
 .logo-slogan:before {
-  font-size: clamp(3.8rem, 3.5vw, 4.8rem);
+  font-size: clamp(2.8rem, 3.8vw, 4rem);
   position: relative;
   left:5px;
-  top: 8px;
+  vertical-align: middle;
 }
 
 
