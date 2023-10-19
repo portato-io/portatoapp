@@ -54,7 +54,10 @@
   border-style:solid;
   border-color:var(--color-grey4);
   background:var(--color-white);
-  padding:10px calc(var(--spacing-regular) / 2) 10px;
+  padding-top: calc(10px + env(safe-area-inset-top));
+  padding-top: 10px;
+  padding-left: calc(var(--spacing-regular) / 2);
+  padding-right: calc(var(--spacing-regular) / 2);
 }
 
 /* LAYOUT TWERKS -------------------------------------- */
@@ -66,6 +69,11 @@
   margin-bottom: 0;
   margin-right: 0;
 }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 
 /* GENERAL ELEMENTS------------------------------------ */
 html,
@@ -304,8 +312,8 @@ video,
   position: absolute;
   left:0;
   bottom:0;
-  height:17.2vw;
-  max-height:160px;
+  height:18.2vw;
+  max-height:164px;
   width:100%;
   background:var(--color-green-3);
   border-top:clamp(2.5px, 0.65vw, 4px) solid var(--portato-green);
