@@ -46,6 +46,9 @@ jobs:
       - name: Display .env.production
         run: cat .env.production
 
+      - name: Increment CACHE_VERSION
+        run: node increment-version.js
+
       - name: Test env var
         run: npm run print-log 
 
