@@ -56,7 +56,7 @@ jobs:
           git add src/service-worker.ts
           git commit -m "Increment CACHE_VERSION to the latest value"
           git remote set-url origin https://x-access-token:${{ secrets.PORTATO_APP_ACTION }}@github.com/portato-io/portatoapp.git
-          git push --set-upstream origin main
+          git push
 
       - name: Test env var
         run: npm run print-log 
