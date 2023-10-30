@@ -53,11 +53,10 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
-          git add . # You might want to specify the exact file you want to add
+          git add .
           git commit -m "Increment CACHE_VERSION to the latest value"
+          git remote set-url origin https://x-access-token:${{ secrets.YOUR_PERSONAL_ACCESS_TOKEN_SECRET_NAME }}@github.com/hugo2410/portatoapp.git
           git push --set-upstream origin main
-        env:
-          GIT_TOKEN: ${{ secrets.PORTATO_APP_ACTION }}
 
       - name: Test env var
         run: npm run print-log 
