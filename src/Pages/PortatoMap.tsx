@@ -22,8 +22,6 @@ import {
 } from 'react-geocode';
 import { features } from 'process';
 
-setKey('AIzaSyAE3IxTyHt4PIQ1t4PB1rAr0ZMTIpJd0DE');
-
 interface Coordinates {
   type: 'Point';
   coordinates: [number, number];
