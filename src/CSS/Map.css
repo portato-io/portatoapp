@@ -6,3 +6,21 @@
 .portato-map {
     height:calc(100vh - 120px);
 }
+
+.box-marker {
+    background-image: url('../Assets/Icons/box.svg');
+    background-size: cover;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+}
+
+.car-marker {
+    background-image: url('../Assets/Icons/car.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}

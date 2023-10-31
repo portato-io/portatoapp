@@ -42,6 +42,7 @@ function Map() {
   const features: Array<{
     type: 'Feature';
     geometry: Coordinates;
+    class: string;
   }> = [
     {
       type: 'Feature',
@@ -49,6 +50,7 @@ function Map() {
         type: 'Point',
         coordinates: [6.6322734, 46.5196535],
       },
+      class: 'box-marker',
     },
     {
       type: 'Feature',
@@ -56,6 +58,7 @@ function Map() {
         type: 'Point',
         coordinates: [6.6522778, 46.5196535],
       },
+      class: 'car-marker',
     },
     {
       type: 'Feature',
@@ -63,6 +66,7 @@ function Map() {
         type: 'Point',
         coordinates: [6.7022785, 46.5196535],
       },
+      class: 'box-marker',
     },
   ];
 
@@ -81,8 +85,7 @@ function Map() {
           console.log(longitude, latitude);
           map.current = new mapboxgl.Map({
             container: mapContainer.current!,
-            // style: 'mapbox://styles/portato/clmeuwu9s01by01qu4r1v5cru',
-            style: 'mapbox://styles/mapbox/streets-v11',
+            style: '/map/style.json',
             center: [longitude, latitude],
             zoom: 9,
           });
@@ -91,9 +94,10 @@ function Map() {
               console.log(feature);
               // create a HTML element for each feature
               const el = document.createElement('div');
-              el.className = 'marker';
               // make a marker for each feature and add to the map
-              new mapboxgl.Marker()
+              el.className = feature.class;
+
+              new mapboxgl.Marker(el)
                 .setLngLat(feature.geometry.coordinates)
                 .setPopup(
                   new mapboxgl.Popup({ offset: 25 }) // add popups
