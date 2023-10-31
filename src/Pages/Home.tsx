@@ -46,9 +46,13 @@ const Home: React.FC = () => {
 
     return (
       <div className="team-member-entry">
-        <img className="image circle team-member-image" src={image} />
+        <img
+          className="image circle team-member-image"
+          src={image}
+          alt={`Portrait of ${name}`}
+        />
         <div className="listing-entry-content">
-          <h4 className="">{name}</h4>
+          <h3 className="">{name}</h3>
           <p className="">
             <small>{description}</small>
           </p>
@@ -95,7 +99,7 @@ const Home: React.FC = () => {
             {t('general.tagline')}
           </h1>
 
-          <img src={headerImage} />
+          <img src={headerImage} alt="Portato header image" />
         </section>
       </section>
 
@@ -103,7 +107,7 @@ const Home: React.FC = () => {
         <div className="spacer-fluid-small"></div>
         {/* call to action 1 */}
         <div className="box-style-color-3 mod-overflow-hidden">
-          <h3 className="text-align-center">{t('sendSection.title')}</h3>
+          <h2 className="text-align-center">{t('sendSection.title')}</h2>
           <p>{t('sendSection.description')}</p>
           <img
             src={sendImage}
@@ -123,7 +127,7 @@ const Home: React.FC = () => {
 
         {/* call to action 2 */}
         <div className="box-style-color-3 mod-overflow-hidden">
-          <h3 className="text-align-center">{t('driveSection.title')}</h3>
+          <h2 className="text-align-center">{t('driveSection.title')}</h2>
           <p>{t('driveSection.description')}</p>
           <img
             src={driveImage}
@@ -195,7 +199,7 @@ const Home: React.FC = () => {
 
       {/* Social media */}
       <section className="section">
-        <h3 className="text-align-center">{t('social.heading')}</h3>
+        <h2 className="text-align-center">{t('social.heading')}</h2>
         <div className="spacer-fluid-regular"></div>
         <div className="mod-display-flex mod-flex-center">
           {socialChannelTypes.map((label) => (
@@ -206,47 +210,47 @@ const Home: React.FC = () => {
 
       {/* Links */}
       <section className="section-bleed box-style-color-1 text-color-white mod-nomargin-top">
-        <h3 className="text-align-center">{t('links.heading')}</h3>
+        <h2 className="text-align-center">{t('links.heading')}</h2>
         <div className="spacer-fluid-small"></div>
         <div>
           <Link
-            className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
+            className="mod-display-block text-color-white mod-small-margin-top text-align-center"
             to="/FAQ"
             onClick={() =>
               logEvent(analytics, 'home_moreInfo_FAQ_button_click')
             }
           >
-            <small>{t('links.FAQ')}</small>
+            {t('links.FAQ')}
           </Link>
 
           <Link
-            className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
+            className="mod-display-block text-color-white mod-small-margin-top text-align-center"
             to="/termsAndconditions"
             onClick={() =>
               logEvent(analytics, 'home_moreInfo_TandC_button_click')
             }
           >
-            <small>{t('links.termsAndConditions')}</small>
+            {t('links.termsAndConditions')}
           </Link>
 
           <Link
-            className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
+            className="mod-display-block text-color-white mod-small-margin-top text-align-center"
             to="/privacyPolicy"
             onClick={() =>
               logEvent(analytics, 'home_moreInfo_privacyPolicy_button_click')
             }
           >
-            <small>{t('links.privacyPolicy')}</small>
+            {t('links.privacyPolicy')}
           </Link>
 
           <Link
-            className="mod-display-block text-color-white mod-small-margin-bottom mod-small-margin-top text-align-center"
+            className="mod-display-block text-color-white mod-small-margin-top text-align-center"
             to="/imprint"
             onClick={() =>
               logEvent(analytics, 'home_moreInfo_imprint_button_click')
             }
           >
-            <small>{t('links.imprint')}</small>
+            {t('links.imprint')}
           </Link>
         </div>
       </section>
