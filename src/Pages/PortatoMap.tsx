@@ -22,6 +22,8 @@ import {
 } from 'react-geocode';
 import { features } from 'process';
 
+if (process.env.GOOGLE_MAP_API_KEY) setKey(process.env.GOOGLE_MAP_API_KEY);
+console.log(process.env.GOOGLE_MAP_API_KEY);
 interface Coordinates {
   type: 'Point';
   coordinates: [number, number];
@@ -29,9 +31,11 @@ interface Coordinates {
 
 const PortatoMap: React.FC = () => {
   const { user } = useAuth();
-  const [geoData, setGeoData] = useState<string>();
+  const [geoData, setGeoData] = useState<string[]>();
+  const [lat, setLat] = useState();
+  const [lng, setLng] = useState();
 
-  const test = [
+  const [test, setTest] = useState([
     {
       type: 'Feature',
       geometry: {
@@ -40,23 +44,7 @@ const PortatoMap: React.FC = () => {
       },
       class: 'box-marker',
     },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [6.6522778, 46.5196535],
-      },
-      class: 'car-marker',
-    },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [6.7022785, 46.5196535],
-      },
-      class: 'box-marker',
-    },
-  ];
+  ]);
 
   const fetchData = async () => {
     if (!user) {
@@ -65,18 +53,17 @@ const PortatoMap: React.FC = () => {
     }
     try {
       const fetchData = await fetchDataOnce(user.uid, 'requests');
-      // console.log('AAAH', Object.values(fetchData));
       let geoDataArray: IRequestInfo[] = [];
 
       // Check if fetchData is not null or undefined before returning it
       if (fetchData) {
-        // geoDataArray = Object.values(fetchData) as IRequestInfo[];
-        // console.log('MAAAAAAM', geoDataArray);
         // Check if fetchData is an object before returning it
         if (fetchData && typeof fetchData === 'object') {
           geoDataArray = Object.values(fetchData) as IRequestInfo[];
-          console.log('PAAAAAAAAAAP', geoDataArray[0].delivery_adress);
-          setGeoData(geoDataArray[0].delivery_adress);
+          const delivery_adresses = geoDataArray.map(
+            (item) => item.pickup_adress
+          );
+          if (delivery_adresses) setGeoData(delivery_adresses);
         } else {
           console.log('Data is not an object:', fetchData);
         }
@@ -85,16 +72,47 @@ const PortatoMap: React.FC = () => {
       console.log('Error fetching data: ', error);
     }
   };
+
   useEffect(() => {
     fetchData();
-    console.log(geoData);
+    const latitudes: number[] = [];
+    const longitudes = [];
     if (geoData)
-      fromAddress(geoData)
-        .then(({ results }) => {
-          const { lat, lng } = results[0].geometry.location;
-          console.log('MAMAN', lat, lng);
-        })
-        .catch(console.error);
+      // Iterate through the geoData array
+      geoData.forEach((address) => {
+        fromAddress(address)
+          .then(({ results }) => {
+            if (
+              results[0] &&
+              results[0].geometry &&
+              results[0].geometry.location
+            ) {
+              const { lat, lng } = results[0].geometry.location;
+              latitudes.push(lat);
+              longitudes.push(lng);
+            }
+          })
+          .catch(console.error);
+      });
+    console.log('PAAP', latitudes);
+    // if (lat && lng) {
+    //   const newDataFromDatabase = [
+    //     {
+    //       type: 'Feature',
+    //       geometry: {
+    //         type: 'Point',
+    //         coordinates: [lng, lat],
+    //       },
+    //       class: 'box-marker',
+    //     },
+    //     // Add more data as needed
+    //   ];
+
+    //   // Append the new data to the existing array
+    //   test.push(...newDataFromDatabase);
+    //   setTest(test);
+    //   console.log(newDataFromDatabase, test);
+    // }
   }, [user?.uid]);
 
   return (
