@@ -71,7 +71,7 @@ function Map({ geoDatas }: any) {
     }
 
     // if (map.current) return; // Initialize map only once
-  }, []);
+  }, [geoDatas]);
 
   return <div ref={mapContainer} className="map-wrapper" />;
 }

@@ -22,8 +22,10 @@ import {
 } from 'react-geocode';
 import { features } from 'process';
 
-if (process.env.GOOGLE_MAP_API_KEY) setKey(process.env.GOOGLE_MAP_API_KEY);
-console.log(process.env.GOOGLE_MAP_API_KEY);
+if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
+  setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
+console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
+//setKey('AIzaSyC-PMx8EbunvBrNvmg2n-Ey0Bm_FBoZYqw')
 interface Coordinates {
   type: 'Point';
   coordinates: [number, number];
@@ -75,12 +77,15 @@ const PortatoMap: React.FC = () => {
 
   useEffect(() => {
     fetchData();
+  }, [user?.uid]); // Fetch geoData when the user's UID changes
+
+  useEffect(() => {
     const latitudes: number[] = [];
-    const longitudes = [];
-    if (geoData)
-      // Iterate through the geoData array
-      geoData.forEach((address) => {
-        fromAddress(address)
+    const longitudes: number[] = [];
+
+    if (geoData && geoData.length > 0) {
+      const promises = geoData.map((address) => {
+        return fromAddress(address)
           .then(({ results }) => {
             if (
               results[0] &&
@@ -94,26 +99,29 @@ const PortatoMap: React.FC = () => {
           })
           .catch(console.error);
       });
-    console.log('PAAP', latitudes);
-    // if (lat && lng) {
-    //   const newDataFromDatabase = [
-    //     {
-    //       type: 'Feature',
-    //       geometry: {
-    //         type: 'Point',
-    //         coordinates: [lng, lat],
-    //       },
-    //       class: 'box-marker',
-    //     },
-    //     // Add more data as needed
-    //   ];
 
-    //   // Append the new data to the existing array
-    //   test.push(...newDataFromDatabase);
-    //   setTest(test);
-    //   console.log(newDataFromDatabase, test);
-    // }
-  }, [user?.uid]);
+      Promise.all(promises).then(() => {
+        console.log('PAAP', latitudes);
+        const newDataFromDatabase = [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [latitudes[0], longitudes[0]],
+            },
+            class: 'box-marker',
+          },
+        ];
+
+        // Use the previous state to generate a new array and set the state
+        setTest((prevTest) => [...prevTest, ...newDataFromDatabase]);
+        console.log('ALD', test);
+      });
+    }
+  }, [geoData]);
+  useEffect(() => {
+    console.log('Updated test:', test);
+  }, [test]);
 
   return (
     <PageLayout>
