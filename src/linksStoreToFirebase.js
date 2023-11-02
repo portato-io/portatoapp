@@ -455,7 +455,7 @@ export const fetchAllUserIds = async () => {
   }
 };
 
-export const fetchAllRequestsForMultipleUsers = async () => {
+export const fetchAllRequests = async () => {
   const allRequests = [];
   userIds = fetchAllUserIds();
   for (let uid of userIds) {

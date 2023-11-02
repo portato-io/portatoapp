@@ -54,7 +54,7 @@ const RequestSummary: React.FC = () => {
           const emailContent = `
           <table>
             <tr><th>Title</th><td>${objecInfo.name}</td></tr>
-            <tr><th>Pickup Address</th><td>${objecInfo.pickup_adress}</td></tr>
+            <tr><th>Pickup Address</th><td>${objecInfo.pickup_address}</td></tr>
             <tr><th>Delivery Address</th><td>${objecInfo.delivery_adress}</td></tr>
             <tr><th>Date Range</th><td>From ${objecInfo.dateRange[0]} to ${objecInfo.dateRange[1]}</td></tr>
             <tr><th>Time</th><td>${objecInfo.time}</td></tr>
@@ -137,7 +137,7 @@ const RequestSummary: React.FC = () => {
                   </tr>
                   <tr>
                     <th className="th">{t('requestSummary.pickupAddress')}</th>
-                    <td className="td">{objecInfo.pickup_adress}</td>
+                    <td className="td">{objecInfo.pickup_address}</td>
                   </tr>
                   <tr>
                     <th className="th">

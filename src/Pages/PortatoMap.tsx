@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import { fetchDataOnce, fetchGeoData } from '../linksStoreToFirebase';
+import {
+  fetchDataOnce,
+  fetchGeoData,
+  fetchAllRequests,
+} from '../linksStoreToFirebase';
 import { useAuth } from '../Components/AuthProvider';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
@@ -54,21 +58,18 @@ const PortatoMap: React.FC = () => {
       return;
     }
     try {
-      const fetchData = await fetchDataOnce(user.uid, 'requests');
-      let geoDataArray: IRequestInfo[] = [];
+      const fetchData = await fetchAllRequests();
+      let geoDataArray: { userId: string; requests: IRequestInfo }[] = [];
 
-      // Check if fetchData is not null or undefined before returning it
-      if (fetchData) {
-        // Check if fetchData is an object before returning it
-        if (fetchData && typeof fetchData === 'object') {
-          geoDataArray = Object.values(fetchData) as IRequestInfo[];
-          const delivery_adresses = geoDataArray.map(
-            (item) => item.pickup_adress
-          );
-          if (delivery_adresses) setGeoData(delivery_adresses);
-        } else {
-          console.log('Data is not an object:', fetchData);
-        }
+      if (fetchData && fetchData.length > 0) {
+        geoDataArray = fetchData; // Assign directly since the structure matches
+
+        // Extracting delivery_addresses from the requests
+        const delivery_addresses = geoDataArray.map(
+          (item) => item.requests.pickup_address
+        );
+
+        if (delivery_addresses) setGeoData(delivery_addresses);
       }
     } catch (error) {
       console.log('Error fetching data: ', error);

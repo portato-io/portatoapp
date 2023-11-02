@@ -9,7 +9,7 @@ const initialState: IRequestInfo = {
   size: '',
   weight: '',
   price: 50,
-  pickup_adress: '',
+  pickup_address: '',
   delivery_adress: '',
   dateRange: ['', ''],
   time: '',
@@ -52,7 +52,7 @@ export function requestReducer(
     case 'SET_REQ_PICKUP_ADDRESS': {
       return {
         ...state,
-        pickup_adress: action.payload,
+        pickup_address: action.payload,
       };
     }
     case 'SET_REQ_DELIVERY_ADDRESS': {
@@ -104,7 +104,7 @@ export function requestReducer(
         id: action.payload.id,
         uid: action.payload.uid,
         price: action.payload.price,
-        pickup_adress: action.payload.pickup_adress,
+        pickup_address: action.payload.pickup_address,
         delivery_adress: action.payload.delivery_adress,
         dateRange: action.payload.dateRange,
         time: action.payload.time,

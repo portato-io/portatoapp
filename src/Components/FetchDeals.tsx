@@ -101,7 +101,7 @@ const FetchDeals: React.FC<{
                     : []
                 }
               >
-                {deal.request.pickup_adress} / {deal.request.delivery_adress}
+                {deal.request.pickup_address} / {deal.request.delivery_adress}
               </Card>
             </div>
           ))}

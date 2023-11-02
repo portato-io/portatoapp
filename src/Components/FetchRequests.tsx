@@ -195,7 +195,7 @@ const FetchRequests: React.FC<{
                     <th className="th">
                       {t('requestOverview.requestList.pickupAddress')}
                     </th>
-                    <td className="td">{request.pickup_adress}</td>
+                    <td className="td">{request.pickup_address}</td>
                   </tr>
                   <tr>
                     <th className="th">
