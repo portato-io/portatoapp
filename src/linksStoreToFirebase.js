@@ -438,3 +438,39 @@ export const fetchSpecificObjects = async (objectPath) => {
     console.error('Error fetching data from Firebase:', error);
   }
 };
+
+export const fetchAllUserIds = async () => {
+  try {
+    const usersRef = ref(database, 'users');
+    const snapshot = await get(usersRef);
+    if (snapshot.exists()) {
+      return Object.keys(snapshot.val());
+    } else {
+      console.log('No users found.');
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching user IDs from Firebase:', error);
+    return [];
+  }
+};
+
+export const fetchAllRequestsForMultipleUsers = async () => {
+  const allRequests = [];
+  userIds = fetchAllUserIds();
+  for (let uid of userIds) {
+    try {
+      const userRequests = await fetchDataOnce(uid, 'requests');
+      if (userRequests && Object.keys(userRequests).length > 0) {
+        allRequests.push({
+          userId: uid,
+          requests: userRequests,
+        });
+      }
+    } catch (error) {
+      console.error(`Error fetching requests for user ${uid}:`, error);
+    }
+  }
+
+  return allRequests;
+};
