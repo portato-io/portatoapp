@@ -41,6 +41,11 @@ function BottomBar() {
       icon: <i className="icon icon-big icon-profile" />,
       eventName: 'navbar_profile_button_click',
     },
+    {
+      key: '/PortatoMap',
+      title: t('navBar.map'),
+      icon: <i className="icon icon-big icon-map" />,
+    },
   ];
 
   const location = useLocation();
