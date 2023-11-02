@@ -9,6 +9,7 @@ import SignInButton from '../../Components/Buttons/SignInButton';
 import { auth } from '../../firebaseConfig';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import FirebaseAuth from '../../Components/FirebaseAuth';
+import { useAuth } from '../../Components/AuthProvider';
 import { uploadRouteToFirebase } from '../../linksStoreToFirebase';
 import { IRouteInfo } from '../../type';
 import { useSelector, useDispatch } from 'react-redux';
@@ -49,112 +50,146 @@ const RouteSummary: React.FC = () => {
     };
   }, []);
 
-  const handleConfirm = () => {
-    console.log('In handle confirm.');
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-      const uid = auth.currentUser?.uid; // Add the optional chaining operator here
-      if (uid) {
-        uploadRouteToFirebase(uid, dispatch);
-        // Construct HTML email content
-        let emailContent;
-        if (routeInfo.type === 'Single trip') {
-          emailContent = `
-        <table>
-          <tr><th>Departure Address</th><td>${
-            routeInfo.departure_adress
-          }</td></tr>
-          <tr><th>Destination Address</th><td>${
-            routeInfo.destination_adress
-          }</td></tr>
-          <tr><th>Trip type</th><td> ${routeInfo.type} </td></tr>
-          <tr><th>Time </th><td>At ${
-            routeInfo.time ? Object.values(routeInfo.time) : 'N/A'
-          } </td></tr>
-          <tr><th>Date</th><td> ${routeInfo.timeRange} </td></tr>
-          <tr><th>Detour</th><td> ${routeInfo.acceptable_detour} Km </td></tr>
-          <tr><th>delivery_capacity</th><td>${
-            routeInfo.delivery_capacity
-          }</td></tr>
-          <tr><th>Request ID</th><td>${routeInfo.id}</td></tr>
-          <tr><th>Request UID</th><td>${uid}</td></tr>
-        </table>
-      `;
-        } else if (routeInfo.type === 'Recurring ride') {
-          emailContent = `
-        <table>
-          <tr><th>Departure Address</th><td>${
-            routeInfo.departure_adress
-          }</td></tr>
-          <tr><th>Destination Address</th><td>${
-            routeInfo.destination_adress
-          }</td></tr>
-          <tr><th>Trip type</th><td> ${routeInfo.type} </td></tr>
-          <tr><th>Time Range</th><td>At ${
-            routeInfo.time ? Object.values(routeInfo.time) : 'N/A'
-          } </td></tr>
-          <tr><th>Days range</th><td>On ${
-            routeInfo.days ? Object.values(routeInfo.days) : 'N/A'
-          } </td></tr>
-          <tr><th>Detour</th><td> ${routeInfo.acceptable_detour} Km</td></tr>
-          <tr><th>delivery_capacity</th><td>${
-            routeInfo.delivery_capacity
-          }</td></tr>
-          <tr><th>Request ID</th><td>${routeInfo.id}</td></tr>
-          <tr><th>Request UID</th><td>${uid}</td></tr>
-        </table>
-      `;
-        } else {
-          emailContent = `
-        <table>
-          <tr><th>Departure Address</th><td>${routeInfo.departure_adress}</td></tr>
-          <tr><th>Destination Address</th><td>${routeInfo.destination_adress}</td></tr>
-          <tr><th>Trip type</th><td> ${routeInfo.type} </td></tr>
-          <tr><th>Time </th><td> ${routeInfo.time} </td></tr>
-          <tr><th>Day</th><td> ${routeInfo.days} </td></tr>
-          <tr><th>Detour</th><td> ${routeInfo.acceptable_detour} Km</td></tr>
-          <tr><th>delivery_capacity</th><td>${routeInfo.delivery_capacity}</td></tr>
-          <tr><th>Request ID</th><td>${routeInfo.id}</td></tr>
-          <tr><th>Request UID</th><td>${uid}</td></tr>
-        </table>
-      `;
-        }
+  const { uid } = useAuth();
 
-        // send notification email to support
-        const emailBody = {
-          title: 'New route request submitted',
-          body: emailContent,
-          uid: uid,
-          email: 'support@portato.io',
-          admin: true,
-        };
-        const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
-        fetch(
-          `https://europe-west1-${projectId}.cloudfunctions.net/sendNotificationEmail`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(emailBody),
-          }
-        )
-          .then((response) => response.json())
-          .then((result) => {
-            // Read result of the Cloud Function.
-            console.log(result);
-          })
-          .catch((error) => {
-            // Getting the error details
-            console.error(`error: ${error}`);
-          });
-      } else {
-        console.log('User UID not found.');
-      }
-    } else {
-      // Handle the case when no user is signed in
-      console.log('No user is signed in.');
+  const handleConfirm = async () => {
+    console.log('About to upload route');
+
+    if (!uid) {
+      console.log('User UID not found.');
+      return;
     }
-    dispatch(emptyState()); //Free the redux store after uploading
+
+    console.log('Valid uid');
+
+    try {
+      const uploadSuccess = await uploadRouteToFirebase(uid, dispatch);
+
+      if (!uploadSuccess) {
+        message.error('Failed to upload request!');
+        return;
+      }
+
+      message.success('Successfully uploaded request!');
+
+      const { userContent, supportContent } = constructEmailContent(
+        routeInfo,
+        uid
+      );
+      await sendEmailNotification(userContent, uid, '');
+      await sendEmailNotification(supportContent, uid, 'support@portato.io');
+
+      dispatch(emptyState()); // Free the redux store after uploading
+    } catch (error) {
+      console.error('Error uploading request:', error);
+      message.error('Failed to upload request due to an error!');
+    }
   };
+
+  const constructEmailContent = (
+    routeInfo: IRouteInfo,
+    uid: string
+  ): { userContent: string; supportContent: string } => {
+    let daysDisplay = 'N/A';
+    let timeDisplay = 'N/A';
+
+    if (routeInfo.days) {
+      daysDisplay = Object.values(routeInfo.days).join(', ');
+    }
+
+    if (routeInfo.time) {
+      timeDisplay = Object.values(routeInfo.time).join(', ');
+    }
+
+    const recurringRideContent = `
+      <tr><th style="text-align:left;">${t(
+        'driveSummary.each'
+      )} </th><td>${daysDisplay}<br />
+      <tr><th style="text-align:left;">${t(
+        'driveSummary.tripTime'
+      )} </th><td>${timeDisplay}
+    `;
+
+    const nonRecurringRideContent = `
+      <tr><th style="text-align:left;">${t('driveSummary.tripDate')} </th><td>${
+      routeInfo.timeRange
+    } <br />
+      <tr><th style="text-align:left;">${t(
+        'driveSummary.tripTime'
+      )} </th><td>${timeDisplay}
+    `;
+
+    const rideSpecificContent =
+      routeInfo.type === t('driveTime.recurringRide')
+        ? recurringRideContent
+        : nonRecurringRideContent;
+
+    const baseContent = `
+      ${t('driveSummary.notificationEmail.requestConfirmationBody')}
+      <br>  
+      <table>
+        <tr><th style="text-align:left;">${t(
+          'driveSummary.departureAddress'
+        )}:</th><td>${routeInfo.departure_adress}</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'driveSummary.destinationAddress'
+        )}:</th><td>${routeInfo.destination_adress}</td></tr>
+        <tr><th style="text-align:left;">${t('requestSummary.size')}</th><td>${
+      routeInfo.delivery_capacity
+    }</td></tr>
+        <tr><th style="text-align:left;">${t(
+          'driveSummary.acceptableDetour'
+        )}:</th><td>${routeInfo.acceptable_detour} Km</td></tr>
+        <tr><td colspan="2">${rideSpecificContent}</td></tr>
+      </table>
+      <br>
+      ${t('driveSummary.notificationEmail.salutations')}
+    `;
+
+    const supportAdditionalContent = `
+      <table>
+        <tr><th>requestID</th><td>${routeInfo.id}</td></tr>
+        <tr><th>requestUID</th><td>${uid}</td></tr>
+      </table>
+    `;
+
+    return {
+      userContent: baseContent,
+      supportContent: baseContent + supportAdditionalContent,
+    };
+  };
+
+  const sendEmailNotification = async (
+    emailContent: string,
+    senderUid: string,
+    recipientEmail: string
+  ): Promise<void> => {
+    const emailBody = {
+      title: t('driveSummary.notificationEmail.requestConfirmationTitle'),
+      greetings: t('driveSummary.notificationEmail.greetings'),
+      body: emailContent,
+      uid: senderUid,
+      email: recipientEmail,
+      admin: recipientEmail === 'support@portato.io',
+    };
+
+    const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+    try {
+      const response = await fetch(
+        `https://europe-west1-${projectId}.cloudfunctions.net/sendNotificationEmail`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(emailBody),
+        }
+      );
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(`Error sending email notification: ${error}`);
+    }
+  };
+
   const handleCancel = () => {
     setIsModalVisible(false);
   };

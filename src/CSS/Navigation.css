@@ -29,3 +29,16 @@
 	position:relative;
 	top:-3px;
 }
+
+.header-navigation-bar {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+}
+
+.header-navigation-bar .icon::before {
+	position:relative;
+	top:-1px;
+	font-size: clamp(25px, 3.2vw, 25px);
+}

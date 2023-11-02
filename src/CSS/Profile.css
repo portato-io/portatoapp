@@ -32,4 +32,6 @@
 
 .settings-list-item {
     background-color: var(--color-green-lighter);
+    margin-top: 0;
+    margin-bottom: 0;
 }

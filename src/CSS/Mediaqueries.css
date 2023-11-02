@@ -37,11 +37,13 @@
 .crisp-bubble-placeholder {
   display: flex !important;
 }
+
 /* Desktops and laptops */
 @media only screen and (min-width: 1024px) {
   .crisp-bubble-placeholder {
     display: none !important;  /* Hiding the placeholder when the screen is wide enough */
   }
+  .spacer-fluid-medium { margin-bottom: 5vw; }
 }
 
 
