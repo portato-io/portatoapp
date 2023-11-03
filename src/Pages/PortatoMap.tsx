@@ -4,13 +4,14 @@ import {
   fetchDataOnce,
   fetchGeoData,
   fetchAllRequests,
+  fetchAllRoutes,
 } from '../linksStoreToFirebase';
 import { useAuth } from '../Components/AuthProvider';
 import { useTranslation } from 'react-i18next';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../firebaseConfig';
 import Map from '../Components/Map';
-import { IRequestInfo, MapMarker } from '../type';
+import { IRequestInfo, IRouteInfo, MapMarker } from '../type';
 import AllRequests from './Admin/AllRequests';
 import {
   setKey,
@@ -36,11 +37,14 @@ interface Coordinates {
 
 const PortatoMap: React.FC = () => {
   const { user } = useAuth();
-  const [geoData, setGeoData] = useState<
+  const [geoRequestData, setGeoRequestData] = useState<
     Array<{ address: string; description: string; name: string }>
   >([]);
+  const [geoRouteData, setGeoRouteData] = useState<
+    Array<{ address: string; destination: string }>
+  >([]);
 
-  const [test, setTest] = useState([
+  const [requests, setRequests] = useState([
     {
       type: 'Feature',
       geometry: {
@@ -53,29 +57,41 @@ const PortatoMap: React.FC = () => {
     },
   ]);
 
-  const fetchData = async () => {
+  const [routes, setRoutes] = useState([
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [6.8322734, 46.8196535] as [number, number],
+      },
+      class: 'car-marker',
+      name: 'test marker',
+      description: 'test description',
+    },
+  ]);
+
+  const fetchRequestData = async () => {
     if (!user) {
       console.log('user is undefined');
       return;
     }
     try {
-      const fetchData = await fetchAllRequests();
-      console.log(fetchData);
-      let geoDataArray: { userId: any; requests: IRequestInfo }[] = [];
+      const fetchRequests = await fetchAllRequests();
+      let requestDataArray: { userId: any; requests: IRequestInfo }[] = [];
 
-      if (fetchData && fetchData.length > 0) {
-        geoDataArray = fetchData; // Assign directly since the structure matches
+      if (fetchRequests && fetchRequests.length > 0) {
+        requestDataArray = fetchRequests; // Assign directly since the structure matches
 
         // Extracting delivery_addresses from the requests
-        const delivery_addresses: {
+        const pickup_addresses: {
           address: string;
           description: string;
           name: string;
         }[] = [];
 
-        geoDataArray.forEach((item) => {
+        requestDataArray.forEach((item) => {
           Object.values(item.requests).forEach((request) => {
-            delivery_addresses.push({
+            pickup_addresses.push({
               address: request.pickup_address,
               description: request.description,
               name: request.name,
@@ -84,12 +100,12 @@ const PortatoMap: React.FC = () => {
         });
 
         console.log(
-          'Extracting delivery_addresses from requests: ',
-          delivery_addresses
+          'Extracting pickup_addresses from requests: ',
+          pickup_addresses
         );
 
-        if (delivery_addresses.length > 0) {
-          setGeoData(delivery_addresses);
+        if (pickup_addresses.length > 0) {
+          setGeoRequestData(pickup_addresses);
         }
       }
     } catch (error) {
@@ -97,8 +113,49 @@ const PortatoMap: React.FC = () => {
     }
   };
 
+  const fetchRouteData = async () => {
+    if (!user) {
+      console.log('user is undefined');
+      return;
+    }
+    try {
+      const fetchRoutes = await fetchAllRoutes();
+      let routeDataArray: { userId: any; routes: IRouteInfo }[] = [];
+
+      if (fetchRoutes && fetchRoutes.length > 0) {
+        routeDataArray = fetchRoutes; // Assign directly since the structure matches
+
+        // Extracting departure from the requests
+        const departure_addresses: {
+          address: string;
+          destination: string;
+        }[] = [];
+
+        routeDataArray.forEach((item) => {
+          Object.values(item.routes).forEach((route) => {
+            departure_addresses.push({
+              address: route.departure_adress,
+              destination: route.destination_adress,
+            });
+          });
+        });
+
+        console.log(
+          'Extracting departure_addresses from requests: ',
+          departure_addresses
+        );
+
+        if (departure_addresses.length > 0) {
+          setGeoRouteData(departure_addresses);
+        }
+      }
+    } catch (error) {
+      console.log('Error fetching data: ', error);
+    }
+  };
   useEffect(() => {
-    fetchData();
+    fetchRequestData();
+    fetchRouteData();
   }, [user?.uid]); // Fetch geoData when the user's UID changes
 
   useEffect(() => {
@@ -133,13 +190,13 @@ const PortatoMap: React.FC = () => {
       }
     };
 
-    if (geoData && geoData.length > 0) {
+    if (geoRequestData && geoRequestData.length > 0) {
       (async () => {
-        for (const address of geoData) {
+        for (const address of geoRequestData) {
           await handleAddress(address);
         }
 
-        const newDataFromDatabase = latitudes.map((lng, idx) => ({
+        const newRequestsFromDatabase = latitudes.map((lng, idx) => ({
           type: 'Feature',
           geometry: {
             type: 'Point',
@@ -150,14 +207,17 @@ const PortatoMap: React.FC = () => {
           name: names[idx],
         }));
 
-        setTest((prevTest) => [...prevTest, ...newDataFromDatabase]);
+        setRequests((prevRequests) => [
+          ...prevRequests,
+          ...newRequestsFromDatabase,
+        ]);
       })();
     }
-  }, [geoData]);
+  }, [geoRequestData]);
 
   useEffect(() => {
-    console.log('Updated test:', test);
-  }, [test]);
+    console.log('Updated test:', requests);
+  }, [requests]);
 
   return (
     <PageLayout>
@@ -165,7 +225,7 @@ const PortatoMap: React.FC = () => {
         <h1>Map</h1>
       </section>
       <section className="section section-bleed portato-map">
-        <Map geoDatas={test} />
+        <Map geoDatas={requests} />
       </section>
     </PageLayout>
   );

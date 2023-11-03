@@ -492,3 +492,27 @@ export const fetchAllRequests = async () => {
   }
   return allRequests;
 };
+
+export const fetchAllRoutes = async () => {
+  const allRoutes = [];
+
+  // Call the function to get the userIds
+  const userIds = await fetchAllUserIds();
+
+  for (let uid of userIds) {
+    try {
+      const userRoutes = await fetchDataOnce(uid, 'routes');
+
+      // Check if userRequests is not empty before adding to allRequests
+      if (userRoutes && Object.keys(userRoutes).length > 0) {
+        allRoutes.push({
+          userId: uid,
+          routes: userRoutes,
+        });
+      }
+    } catch (error) {
+      console.error(`Error fetching routes for user ${uid}:`, error);
+    }
+  }
+  return allRoutes;
+};
