@@ -2,6 +2,9 @@ import mapboxgl from 'mapbox-gl';
 import { useEffect, useRef } from 'react';
 import { MapMarker } from '../type';
 
+require('../CSS/Map.css');
+import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox GL JS CSS
+
 mapboxgl.accessToken =
   'pk.eyJ1IjoicG9ydGF0byIsImEiOiJjbG05OXgweWMwZTc1M2d0Zm5oNWJsMWJoIn0.jv7429nwZERiVl1f6xY3QA';
 
