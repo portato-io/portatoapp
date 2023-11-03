@@ -37,18 +37,20 @@ interface Coordinates {
 
 const PortatoMap: React.FC = () => {
   const { user } = useAuth();
-  const [geoData, setGeoData] = useState<string[]>();
-  const [lat, setLat] = useState();
-  const [lng, setLng] = useState();
+  const [geoData, setGeoData] = useState<
+    Array<{ address: string; description: string; name: string }>
+  >([]);
 
   const [test, setTest] = useState([
     {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [6.6322734, 46.5196535],
+        coordinates: [6.6322734, 46.5196535] as [number, number],
       },
       class: 'box-marker',
+      name: 'test marker',
+      description: 'test description',
     },
   ]);
 
@@ -66,11 +68,19 @@ const PortatoMap: React.FC = () => {
         geoDataArray = fetchData; // Assign directly since the structure matches
 
         // Extracting delivery_addresses from the requests
-        const delivery_addresses: string[] = [];
+        const delivery_addresses: {
+          address: string;
+          description: string;
+          name: string;
+        }[] = [];
 
         geoDataArray.forEach((item) => {
           Object.values(item.requests).forEach((request) => {
-            delivery_addresses.push(request.pickup_address);
+            delivery_addresses.push({
+              address: request.pickup_address,
+              description: request.description,
+              name: request.name,
+            });
           });
         });
 
@@ -95,11 +105,17 @@ const PortatoMap: React.FC = () => {
   useEffect(() => {
     const latitudes: number[] = [];
     const longitudes: number[] = [];
+    const descriptions: string[] = [];
+    const names: string[] = [];
 
     // Helper function to handle each address
-    const handleAddress = async (address: string) => {
+    const handleAddress = async (requestObj: {
+      address: string;
+      description: string;
+      name: string;
+    }) => {
       try {
-        const { results } = await fromAddress(address);
+        const { results } = await fromAddress(requestObj.address);
         if (
           results &&
           results.length > 0 &&
@@ -107,11 +123,14 @@ const PortatoMap: React.FC = () => {
           results[0].geometry.location
         ) {
           const { lat, lng } = results[0].geometry.location;
+
           latitudes.push(lng);
           longitudes.push(lat);
+          descriptions.push(requestObj.description);
+          names.push(requestObj.name);
         }
       } catch (error) {
-        console.error(`Error geocoding address: ${address}`, error);
+        console.error(`Error geocoding address: ${requestObj.address}`, error);
       }
     };
 
@@ -125,9 +144,11 @@ const PortatoMap: React.FC = () => {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [lng, longitudes[idx]],
+            coordinates: [latitudes[idx], longitudes[idx]] as [number, number], // Use "as [number, number]" for casting
           },
           class: 'box-marker',
+          description: descriptions[idx],
+          name: names[idx],
         }));
 
         setTest((prevTest) => [...prevTest, ...newDataFromDatabase]);
