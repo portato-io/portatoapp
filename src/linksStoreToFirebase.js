@@ -471,10 +471,15 @@ export const fetchAllUserIds = async () => {
 
 export const fetchAllRequests = async () => {
   const allRequests = [];
-  userIds = fetchAllUserIds();
+
+  // Call the function to get the userIds
+  const userIds = await fetchAllUserIds();
+
   for (let uid of userIds) {
     try {
       const userRequests = await fetchDataOnce(uid, 'requests');
+
+      // Check if userRequests is not empty before adding to allRequests
       if (userRequests && Object.keys(userRequests).length > 0) {
         allRequests.push({
           userId: uid,
@@ -485,6 +490,5 @@ export const fetchAllRequests = async () => {
       console.error(`Error fetching requests for user ${uid}:`, error);
     }
   }
-
   return allRequests;
 };

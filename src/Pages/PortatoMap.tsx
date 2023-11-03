@@ -59,17 +59,29 @@ const PortatoMap: React.FC = () => {
     }
     try {
       const fetchData = await fetchAllRequests();
-      let geoDataArray: { userId: string; requests: IRequestInfo }[] = [];
+      console.log(fetchData);
+      let geoDataArray: { userId: any; requests: IRequestInfo }[] = [];
 
       if (fetchData && fetchData.length > 0) {
         geoDataArray = fetchData; // Assign directly since the structure matches
 
         // Extracting delivery_addresses from the requests
-        const delivery_addresses = geoDataArray.map(
-          (item) => item.requests.pickup_address
+        const delivery_addresses: string[] = [];
+
+        geoDataArray.forEach((item) => {
+          Object.values(item.requests).forEach((request) => {
+            delivery_addresses.push(request.pickup_address);
+          });
+        });
+
+        console.log(
+          'Extracting delivery_addresses from requests: ',
+          delivery_addresses
         );
 
-        if (delivery_addresses) setGeoData(delivery_addresses);
+        if (delivery_addresses.length > 0) {
+          setGeoData(delivery_addresses);
+        }
       }
     } catch (error) {
       console.log('Error fetching data: ', error);
@@ -84,42 +96,45 @@ const PortatoMap: React.FC = () => {
     const latitudes: number[] = [];
     const longitudes: number[] = [];
 
+    // Helper function to handle each address
+    const handleAddress = async (address: string) => {
+      try {
+        const { results } = await fromAddress(address);
+        if (
+          results &&
+          results.length > 0 &&
+          results[0].geometry &&
+          results[0].geometry.location
+        ) {
+          const { lat, lng } = results[0].geometry.location;
+          latitudes.push(lng);
+          longitudes.push(lat);
+        }
+      } catch (error) {
+        console.error(`Error geocoding address: ${address}`, error);
+      }
+    };
+
     if (geoData && geoData.length > 0) {
-      const promises = geoData.map((address) => {
-        return fromAddress(address)
-          .then(({ results }) => {
-            if (
-              results[0] &&
-              results[0].geometry &&
-              results[0].geometry.location
-            ) {
-              const { lat, lng } = results[0].geometry.location;
-              latitudes.push(lat);
-              longitudes.push(lng);
-            }
-          })
-          .catch(console.error);
-      });
+      (async () => {
+        for (const address of geoData) {
+          await handleAddress(address);
+        }
 
-      Promise.all(promises).then(() => {
-        console.log('PAAP', latitudes);
-        const newDataFromDatabase = [
-          {
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: [latitudes[0], longitudes[0]],
-            },
-            class: 'box-marker',
+        const newDataFromDatabase = latitudes.map((lng, idx) => ({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [lng, longitudes[idx]],
           },
-        ];
+          class: 'box-marker',
+        }));
 
-        // Use the previous state to generate a new array and set the state
         setTest((prevTest) => [...prevTest, ...newDataFromDatabase]);
-        console.log('ALD', test);
-      });
+      })();
     }
   }, [geoData]);
+
   useEffect(() => {
     console.log('Updated test:', test);
   }, [test]);
