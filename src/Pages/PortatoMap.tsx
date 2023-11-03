@@ -28,8 +28,7 @@ import { features } from 'process';
 
 if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
   setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
-console.log(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
-//setKey('AIzaSyC-PMx8EbunvBrNvmg2n-Ey0Bm_FBoZYqw')
+
 interface Coordinates {
   type: 'Point';
   coordinates: [number, number];
