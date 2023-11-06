@@ -44,14 +44,31 @@ const PortatoMap: React.FC = () => {
     Array<{ address: string; destination: string }>
   >([]);
 
+  const [lineCoordinates, setLineCoordinates] = useState<
+    [[number, number], [number, number]]
+  >([
+    [9.1708408, 47.2472705], // Example start coordinate
+    [8.7, 47.42705], // Example end coordinate
+  ]);
+
   const [requests, setRequests] = useState([
     {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [6.6322734, 46.5196535] as [number, number],
+        coordinates: [9.1708408, 47.2472705] as [number, number],
       },
       class: 'box-marker',
+      name: 'test marker',
+      description: 'test description',
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [8.7, 47.42705] as [number, number],
+      },
+      class: 'box-drop-marker',
       name: 'test marker',
       description: 'test description',
     },
@@ -225,7 +242,7 @@ const PortatoMap: React.FC = () => {
         <h1>Map</h1>
       </section>
       <section className="section section-bleed portato-map">
-        <Map geoDatas={requests} />
+        <Map geoDatas={requests} lineCoordinates={lineCoordinates} />
       </section>
     </PageLayout>
   );

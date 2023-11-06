@@ -15,6 +15,35 @@
     cursor: pointer;
 }
 
+.box-drop-marker {
+    /* Set the dimensions of the marker to 0 */
+    width: 0;
+    height: 0;
+    /* Hide the original marker element */
+    visibility: hidden;
+    cursor: pointer;
+    position: absolute;
+}
+
+.box-drop-marker::after {
+    content: '';
+    background-image: url('../Assets/Icons/box_drop.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 45px;
+    height: 45px;
+    /* Position the pseudo-element visually below the marker */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* Adjust these values to position the image exactly where you want it */
+    transform: translate(-50%, -100%);
+    /* Now the image is visible */
+    visibility: visible;
+}
+
+
 .car-marker {
     background-image: url('../Assets/Icons/car.svg');
     background-size: contain;
