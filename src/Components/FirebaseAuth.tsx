@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import 'firebaseui/dist/firebaseui.css';
 import {
   EmailAuthProvider,
@@ -11,10 +11,11 @@ import { Button, message } from 'antd';
 import { ConfirmationResult } from 'firebase/auth'; // Import the type
 import { linkWithCredential } from 'firebase/auth';
 
-const FirebaseAuth: React.FC = () => {
+const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
+  onAuthSuccess,
+}) => {
   const [mynumber, setnumber] = useState('');
   const [otp, setotp] = useState('');
-  const [show, setshow] = useState(false);
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -22,53 +23,111 @@ const FirebaseAuth: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmationResult, setConfirmationResult] =
     useState<ConfirmationResult | null>(null);
-  const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false);
   const recaptchaVerifierRef = useRef<RecaptchaVerifier | null>(null);
 
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [step, setStep] = useState('initial'); // 'initial', 'captchaVerified', 'smsSent', 'otpEntered', 'signedUp'
 
   // Initialize the reCAPTCHA verifier in useEffect when the sign-up process begins
-
   useEffect(() => {
-    if (step === 'signUp' && !recaptchaVerifierRef.current) {
-      recaptchaVerifierRef.current = new RecaptchaVerifier(
-        'recaptcha-container',
-        {
-          size: 'normal',
-          callback: (response: string) => {
-            setIsCaptchaVerified(true);
-            message.success('Captcha verification successful');
-          },
-        },
-        auth
-      );
-      recaptchaVerifierRef.current.render();
+    setStep('initial');
+    setnumber('');
+    setotp('');
+    setEmail('');
+    setPassword('');
+    setIsCaptchaVerified(false);
+    setConfirmationResult(null);
+
+    // Reset reCAPTCHA if needed
+    if (recaptchaVerifierRef.current) {
+      recaptchaVerifierRef.current.clear();
+      recaptchaVerifierRef.current = null;
     }
 
-    // Cleanup function to reset reCAPTCHA
+    // Cleanup function
     return () => {
-      if (window.recaptchaWidgetId !== undefined) {
-        recaptchaVerifierRef.current?.clear();
+      // Reset all states to their initial values
+      setStep('initial');
+      setnumber('');
+      setotp('');
+      setEmail('');
+      setPassword('');
+      setIsCaptchaVerified(false);
+      setConfirmationResult(null);
+
+      // Clear and reset reCAPTCHA if needed
+      if (recaptchaVerifierRef.current) {
+        recaptchaVerifierRef.current.clear();
         recaptchaVerifierRef.current = null;
       }
     };
-  }, [step]);
+  }, []); // Empty dependency array to run only once on mount
+
+  useEffect(() => {
+    if (step === 'signUp') {
+      if (!recaptchaVerifierRef.current) {
+        recaptchaVerifierRef.current = new RecaptchaVerifier(
+          'recaptcha-container',
+          {
+            size: 'normal',
+            callback: () => {
+              setIsCaptchaVerified(true);
+              message.success('Captcha verification successful');
+            },
+          },
+          auth
+        );
+      }
+      recaptchaVerifierRef.current.render();
+    } else {
+      // Clear the reCAPTCHA when leaving the signUp step
+      if (recaptchaVerifierRef.current) {
+        recaptchaVerifierRef.current.clear();
+        recaptchaVerifierRef.current = null;
+      }
+    }
+  }, [step]); // Dependency array includes step
 
   const signIn = async () => {
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+
+    if (!email || !password) {
+      message.error('Please enter both email and password');
+      return;
+    }
+
     try {
-      await signInWithEmailAndPassword(
-        auth,
-        emailRef.current!.value,
-        passwordRef.current!.value
-      );
+      await signInWithEmailAndPassword(auth, email, password);
+      message.success('Sign in successful!');
+      handleAuthSuccess();
     } catch (error) {
       console.error(error);
+      message.error('Sign in failed');
     }
   };
 
-  const signOut = async () => {
-    await auth.signOut();
+  const handleAuthSuccess = () => {
+    if (onAuthSuccess) {
+      onAuthSuccess();
+    }
+  };
+
+  const goBack = () => {
+    switch (step) {
+      case 'signUp':
+      case 'signIn':
+        setStep('initial');
+        break;
+      case 'smsSent':
+        setIsCaptchaVerified(false); // Reset captcha verification state
+        setStep('signUp');
+
+        break;
+      // Add other cases as necessary
+      default:
+        break;
+    }
   };
 
   const onSendSMS = async () => {
@@ -112,6 +171,7 @@ const FirebaseAuth: React.FC = () => {
         }
         setStep('signedUp');
         message.success('Sign up successful!');
+        handleAuthSuccess();
       }
     } catch (error) {
       console.error('OTP verification error:', error);
@@ -122,6 +182,12 @@ const FirebaseAuth: React.FC = () => {
   return (
     <div style={{ marginTop: '200px' }}>
       <center>
+        {/* Include back button for each step except 'initial' */}
+        {step !== 'initial' && (
+          <Button onClick={goBack} style={{ marginBottom: '20px' }}>
+            Back
+          </Button>
+        )}
         {step === 'initial' && (
           <>
             <button onClick={() => setStep('signUp')}>Sign Up</button>
@@ -163,6 +229,14 @@ const FirebaseAuth: React.FC = () => {
           <div style={{ color: 'green', marginTop: '20px' }}>
             Sign up successful!
           </div>
+        )}
+        {step === 'signIn' && (
+          // Render the sign-in UI here
+          <>
+            <input ref={emailRef} type="email" placeholder="Email" />
+            <input ref={passwordRef} type="password" placeholder="Password" />
+            <Button onClick={signIn}>Sign In</Button>
+          </>
         )}
       </center>
     </div>
