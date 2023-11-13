@@ -9,7 +9,9 @@ import {
 } from 'firebase/auth';
 import { uiInstance, uiConfig } from './firebaseUIInstance';
 import { auth } from '../firebaseConfig';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import { ConfirmationResult } from 'firebase/auth'; // Import the type
+import { linkWithCredential } from 'firebase/auth';
 
 const configureCaptcha = () => {
   const test = document.getElementById('grecaptcha-button');
@@ -61,23 +63,38 @@ const FirebaseAuth: React.FC = () => {
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [confirmationResult, setConfirmationResult] =
+    useState<ConfirmationResult | null>(null);
+  const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false);
+
   const createAccount = async () => {
     const verify = new RecaptchaVerifier('recaptcha-container', {}, auth);
     try {
-      await signInWithPhoneNumber(auth, mynumber, verify);
-      alert('code sent');
+      const result = await signInWithPhoneNumber(auth, mynumber, verify);
+      setConfirmationResult(result); // Save the confirmation result
+      alert('Code sent');
       setshow(true);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const ValidateOtp = async () => {
+    if (otp === null || otp === '') return;
     try {
-      await createUserWithEmailAndPassword(
-        auth,
-        emailRef.current!.value,
-        passwordRef.current!.value
-      );
+      const result = await confirmationResult?.confirm(otp);
+      const email = emailRef.current?.value || ''; // Fallback to empty string if undefined
+      const password = passwordRef.current?.value || ''; // Fallback to empty string if undefined
+
+      const credential = EmailAuthProvider.credential(email, password);
+      if (result?.user) {
+        await linkWithCredential(result.user, credential);
+        // Handle successful link here
+        setIsSignUpSuccessful(true);
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Error during OTP validation or account linking:', error);
+      // Handle errors here
     }
   };
 
@@ -97,33 +114,64 @@ const FirebaseAuth: React.FC = () => {
     await auth.signOut();
   };
 
-  const ValidateOtp = () => {
-    if (otp === null || final === null) return;
+  const [showSignUp, setShowSignUp] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+
+  const handleShowSignUp = () => {
+    setShowSignUp(true);
+    setShowSignIn(false);
+  };
+
+  const handleShowSignIn = () => {
+    setShowSignIn(true);
+    setShowSignUp(false);
+  };
+
+  const handleBack = () => {
+    setShowSignUp(false);
+    setShowSignIn(false);
   };
 
   return (
     <div style={{ marginTop: '200px' }}>
       <center>
-        <div
-          style={{
-            display: !show ? 'block' : 'none',
-          }}
-        >
-          <input ref={emailRef} type="email" placeholder="email" />
-          <input ref={passwordRef} type="password" placeholder="password" />
-          <input
-            value={mynumber}
-            onChange={(e) => {
-              setnumber(e.target.value);
-            }}
-            placeholder="phone number"
-          />
-          <br />
-          <br />
-          <div id="recaptcha-container"></div>
-          <button onClick={createAccount}>Sign up</button>
-          <button onClick={signIn}>Sign in</button>
-        </div>
+        {!showSignUp && !showSignIn && (
+          <>
+            <button onClick={handleShowSignUp}>Sign Up</button>
+            <button onClick={handleShowSignIn}>Sign In</button>
+          </>
+        )}
+
+        {(showSignUp || showSignIn) && (
+          <button onClick={handleBack}>Back</button>
+        )}
+
+        {showSignUp && (
+          <div>
+            <input ref={emailRef} type="email" placeholder="Email" />
+            <input ref={passwordRef} type="password" placeholder="Password" />
+            <input
+              value={mynumber}
+              onChange={(e) => setnumber(e.target.value)}
+              placeholder="Phone Number"
+            />
+            <br />
+            <br />
+            <div id="recaptcha-container"></div>
+            <button onClick={createAccount}>Send SMS</button>
+          </div>
+        )}
+
+        {showSignIn && (
+          <div>
+            <input ref={emailRef} type="email" placeholder="Email" />
+            <input ref={passwordRef} type="password" placeholder="Password" />
+            <br />
+            <br />
+            <button onClick={signIn}>Sign in</button>
+          </div>
+        )}
+
         <div
           style={{
             display: show ? 'block' : 'none',
@@ -141,6 +189,11 @@ const FirebaseAuth: React.FC = () => {
           <br />
           <button onClick={ValidateOtp}>Verify</button>
         </div>
+        {isSignUpSuccessful && (
+          <div style={{ color: 'green', marginTop: '20px' }}>
+            Sign up successful!
+          </div>
+        )}
       </center>
     </div>
   );
