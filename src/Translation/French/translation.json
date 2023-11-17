@@ -348,5 +348,29 @@
   "imprint": {
     "title": "Mentions légales",
     "text": "Dachsbau GmbH\nReprésentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
+  },
+
+  "signIn": {
+    "back": "Zurück",
+    "signUp":"Sign up",
+    "existingUserTitle": "Anmelden bei Portato",
+    "existingUserText": "Melde Dich mit Deiner E-Mail Adresse und Deinem Passwort bei Portato an.",
+    "nonExistingUserTitle": "Noch kein Profil?",
+    "nonExistingUserText": "Erstelle in nur wenigen Schritten ein Profil und werde Teil der Portato Community.",
+    "nonExistingUserLink": "Jetzt Profil erstellen",
+    "placeholderEmail": "Deine E-Mail Adresse",
+    "placeholderPassword": "Dein Passwort",
+    "placeholderPhone": "Deine Telefonnummer",
+    "placeholderHintPhone": "Bitte denke an den Ländercode, z.B.: +41 78 333 22 11",
+    "placeholderSMS": "Der SMS code",
+    "registrationTitle": "Erstelle Dein Portato Profil",
+    "registrationText": "Wir benötigen die folgenden Daten. Keine Sorgen, wir gehen sorgvoll damit um.",
+    "registrationButton": "Sign up",
+    "smsConfirmationTitle": "Prüfe Deine SMS",
+    "smsConfirmationText": "Wir haben Dir eine SMS mit einem Nummerncode geschickt. Bitte übertrage diesen in das anfgezeigte Feld, um Deine Nummer zu verifizieren.",
+    "smsConfirmationButton": "Nummer verifizieren",
+    "smsConfirmationResend": "SMS erneut versenden",
+    "signupSuccessTitle": "Profil erfolgreich erstellt",
+    "signupSuccessText": "Du kannst Dich jetzt mit Deiner E-Mail Adresse und Deinem Passwort anmelden."
   }
 }

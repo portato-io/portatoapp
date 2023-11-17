@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import 'firebaseui/dist/firebaseui.css';
+import { useTranslation } from 'react-i18next';
 import {
   EmailAuthProvider,
   RecaptchaVerifier,
@@ -14,6 +15,7 @@ import { linkWithCredential } from 'firebase/auth';
 const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   onAuthSuccess,
 }) => {
+  const { t } = useTranslation<string>();
   const [mynumber, setnumber] = useState('');
   const [otp, setotp] = useState('');
 
@@ -180,65 +182,171 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   };
 
   return (
-    <div style={{ marginTop: '200px' }}>
-      <center>
-        {/* Include back button for each step except 'initial' */}
-        {step !== 'initial' && (
-          <Button onClick={goBack} style={{ marginBottom: '20px' }}>
-            Back
-          </Button>
-        )}
-        {step === 'initial' && (
-          <>
-            <button onClick={() => setStep('signUp')}>Sign Up</button>
-            <button onClick={() => setStep('signIn')}>Sign In</button>
-          </>
-        )}
-
-        {step === 'signUp' && (
-          <>
-            <input ref={emailRef} type="email" placeholder="Email" />
-            <input ref={passwordRef} type="password" placeholder="Password" />
-            <input
-              value={mynumber}
-              onChange={(e) => setnumber(e.target.value)}
-              placeholder="Phone Number"
-            />
-            <div id="recaptcha-container"></div>
-            {isCaptchaVerified && (
-              <Button type="primary" onClick={onSendSMS}>
-                Send SMS
-              </Button>
-            )}
-          </>
-        )}
-
-        {step === 'smsSent' && (
-          <>
-            <input
-              type="text"
-              placeholder="Enter your OTP"
-              onChange={(e) => setotp(e.target.value)}
-            />
-            <Button onClick={onVerifyOtp}>Verify</Button>
-            <Button onClick={onSendSMS}>Resend SMS</Button>
-          </>
-        )}
-
-        {step === 'signedUp' && (
-          <div style={{ color: 'green', marginTop: '20px' }}>
-            Sign up successful!
+    <div className="modal-content-wrapper">
+      {/* Include back button for each step except 'initial' */}
+      {step !== 'initial' && step !== 'signedUp' && (
+        <div>
+          <a onClick={goBack} className="text-link icon-link">
+            <i className="icon icon-arrow-left"></i>
+            <small>{t('signIn.back')}</small>
+          </a>
+          <div className="spacer-regular"></div>
+        </div>
+      )}
+      {/*
+      {step === 'initial' && (
+        <>
+          
+            <h4 className='title title-h4'>{t('signin.existingUserTitle')}</h4>
+            <p className="text">{t('signin.existingUserText')}</p>
+            <button className="button button-solid box-shadow box-radius-default box-shadow-effect" onClick={() => setStep('signIn')}>Sign In</button>
+            <div className='spacer-regular'></div>
+            <h4 className='title title-h4'>{t('signin.nonExistingUserTitle')}</h4>
+            <p className="text">{t('signin.nonExistingUserText')}</p>
+            <button className="button button-border button-border-light box-shadow box-radius-default box-shadow-effect" onClick={() => setStep('signUp')}>Sign Up</button>
+        </>
+      )}
+      */}
+      {step === 'initial' && (
+        // Render the sign-in UI here
+        <>
+          <h4 className="title title-h4">{t('signIn.existingUserTitle')}</h4>
+          <p className="text">{t('signIn.existingUserText')}</p>
+          <div className="section section-form section-bleed">
+            <div className="input-wrapper">
+              <input
+                className="form-input"
+                ref={emailRef}
+                type="email"
+                placeholder="{t('signIn.placeholderEmail')}"
+              />
+            </div>
+            <div className="input-wrapper">
+              <input
+                className="form-input"
+                ref={passwordRef}
+                type="password"
+                placeholder="*!{t('signIn.placeholderPassword')}!*"
+              />
+            </div>
+            <div className="text-align-right">
+              <button
+                className="button button-solid box-shadow box-radius-default box-shadow-effect"
+                onClick={signIn}
+              >
+                {t('navigationButton.signIn')}
+              </button>
+            </div>
           </div>
-        )}
-        {step === 'signIn' && (
-          // Render the sign-in UI here
-          <>
-            <input ref={emailRef} type="email" placeholder="Email" />
-            <input ref={passwordRef} type="password" placeholder="Password" />
-            <Button onClick={signIn}>Sign In</Button>
-          </>
-        )}
-      </center>
+
+          <p className="text-note mod-nomargin-top">
+            <strong>{t('signIn.nonExistingUserTitle')}</strong>
+            <br />
+            {t('signIn.nonExistingUserText')}
+            <a className="text-link" onClick={() => setStep('signUp')}>
+              {' '}
+              {t('signIn.nonExistingUserLink')}
+            </a>
+          </p>
+        </>
+      )}
+
+      {step === 'signUp' && (
+        <>
+          <h4 className="title title-h4">{t('signIn.registrationTitle')}</h4>
+          <p className="text">{t('signIn.registrationText')}</p>
+          <div className="section section-form section-bleed">
+            <div className="input-wrapper">
+              <input
+                className="form-input"
+                ref={emailRef}
+                type="email"
+                placeholder="{t('signIn.placeholderEmail')}"
+              />
+            </div>
+            <div className="input-wrapper">
+              <input
+                className="form-input"
+                ref={passwordRef}
+                type="password"
+                placeholder="{t('signIn.placeholderPassword')}"
+              />
+            </div>
+            <div className="input-wrapper">
+              <input
+                className="form-input"
+                value={mynumber}
+                type="tel"
+                onChange={(e) => setnumber(e.target.value)}
+                placeholder="{t('signIn.placeholdePhone')}"
+              />
+              <p className="text-hint">{t('signIn.placeholderHintPhone')}</p>
+            </div>
+            <div id="recaptcha-container"></div>
+            <div className="spacer-small"></div>
+            <div className="text-align-right">
+              {isCaptchaVerified && (
+                <button
+                  className="button button-solid box-shadow box-radius-default box-shadow-effect"
+                  onClick={onSendSMS}
+                >
+                  {t('signIn.registrationButton')}
+                </button>
+                /* 
+                <Button type="primary" onClick={onSendSMS}>
+                  {t('signIn.registrationButton')}
+                </Button>
+                */
+              )}
+            </div>
+          </div>
+        </>
+      )}
+
+      {step === 'smsSent' && (
+        <>
+          <h4 className="title title-h4">{t('signIn.smsConfirmationTitle')}</h4>
+          <p className="text">{t('signIn.smsConfirmationText')}</p>
+          <div className="section section-form section-bleed">
+            <div className="input-wrapper">
+              <input
+                className="form-input"
+                type="number"
+                placeholder="{t('signIn.placeholderSMS')}"
+                onChange={(e) => setotp(e.target.value)}
+              />
+            </div>
+            <div className="mod-display-flex mod-flex-space-between">
+              <p className="text-note mod-nomargin-top">
+                <a className="text-link" onClick={onSendSMS}>
+                  {' '}
+                  {t('signIn.smsConfirmationResend')}
+                </a>
+              </p>
+              <button
+                className="button button-solid box-shadow box-radius-default box-shadow-effect"
+                onClick={onVerifyOtp}
+              >
+                {t('signIn.smsConfirmationButton')}
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {step === 'signedUp' && (
+        <>
+          <h4 className="title title-h4">{t('signIn.signupSuccessTitle')}</h4>
+          <p className="text">{t('signIn.signupSuccessText')}</p>
+          <div className="spacer-small"></div>
+          <button
+            className="button button-solid box-shadow box-radius-default box-shadow-effect"
+            onClick={() => setStep('initial')}
+          >
+            Sign In
+          </button>
+        </>
+      )}
     </div>
   );
 };

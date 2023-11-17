@@ -480,6 +480,12 @@ video,
 .text-color-green { color: var(--portato-green) }
 
 
+/* POPUPS, MODALS, etc. --------------------------------------- */
+.modal-content-wrapper {
+  position: relative;
+  padding:25px 0 20px;
+}
+
 /* TO BE CHECKED --------------------------------------- */
 
 

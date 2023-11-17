@@ -29,6 +29,7 @@
 }
 .button-border-light {
 	border-color:var(--color-grey4);
+	background: var(--color-white);
 }
 .button span {
 	position:relative;
@@ -62,6 +63,9 @@ button .icon + span {
 	margin-top: 10px;
 	margin-bottom: 0
   }
+.input-wrapper .text-hint {
+	padding-left:5px;
+}
 label {
 	padding-bottom:5px;
 	display:block;
@@ -73,9 +77,10 @@ label {
 	border-width: 0 0 2px 0;
 	border-color:var(--color-grey3);
 	border-radius:0;
-	padding:0 0 5px 0;
-	font-size:1.6rem;
+	padding:10px;
+	font-size:1.8rem;
 	width:100%;
+	background:var(--color-grey5);
 }
 textarea.form-input {
 	padding-top:3px;
