@@ -74,7 +74,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
             size: 'normal',
             callback: () => {
               setIsCaptchaVerified(true);
-              message.success('Captcha verification successful');
+              message.success(t('signIn.captchaSuccessMessage'));
             },
           },
           auth
@@ -95,17 +95,17 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
     const password = passwordRef.current?.value;
 
     if (!email || !password) {
-      message.error('Please enter both email and password');
+      message.error(t('signIn.missingEmailOrPassword'));
       return;
     }
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      message.success('Sign in successful!');
+      message.success(t('signIn.signInSuccessMessage'));
       handleAuthSuccess();
     } catch (error) {
       console.error(error);
-      message.error('Sign in failed');
+      message.error(t('signIn.signInFailedMessage'));
     }
   };
 
@@ -139,7 +139,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
     setPassword(currentPassword);
     console.log('Trying to send SMS');
     if (!isCaptchaVerified || !recaptchaVerifierRef.current) {
-      message.error('Please complete the reCAPTCHA challenge.');
+      message.error(t('signIn.captchaMissingMessage'));
       return;
     }
     try {
@@ -150,10 +150,9 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
       );
       setConfirmationResult(result);
       setStep('smsSent');
-      message.success('SMS sent successfully. Please enter the OTP.');
     } catch (error) {
       console.error('SMS sending error:', error);
-      message.error('Failed to send SMS');
+      message.error(t('signIn.smsSendingFailedMessage'));
     }
   };
 
@@ -167,17 +166,15 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           const credential = EmailAuthProvider.credential(email, password);
           await linkWithCredential(result.user, credential);
         } else {
-          message.success(
-            'Failed to sign up due to missing email adress or password !'
-          );
+          message.error(t('signIn.missingEmailOrPassword'));
         }
         setStep('signedUp');
-        message.success('Sign up successful!');
+        message.success(t('signIn.signupSuccessTitle'));
         handleAuthSuccess();
       }
     } catch (error) {
       console.error('OTP verification error:', error);
-      message.error('Failed to verify OTP');
+      message.error(t('signIn.otpVerificationFailedMessage'));
     }
   };
 
@@ -218,7 +215,9 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
                 className="form-input"
                 ref={emailRef}
                 type="email"
-                placeholder="{t('signIn.placeholderEmail')}"
+                placeholder={
+                  t('signIn.placeholderEmail') || 'Your email address'
+                }
               />
             </div>
             <div className="input-wrapper">
@@ -226,7 +225,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
                 className="form-input"
                 ref={passwordRef}
                 type="password"
-                placeholder="*!{t('signIn.placeholderPassword')}!*"
+                placeholder={t('signIn.placeholderPassword') || 'Your password'}
               />
             </div>
             <div className="text-align-right">
@@ -261,7 +260,9 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
                 className="form-input"
                 ref={emailRef}
                 type="email"
-                placeholder="{t('signIn.placeholderEmail')}"
+                placeholder={
+                  t('signIn.placeholderEmail') || 'Your email address'
+                }
               />
             </div>
             <div className="input-wrapper">
@@ -269,7 +270,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
                 className="form-input"
                 ref={passwordRef}
                 type="password"
-                placeholder="{t('signIn.placeholderPassword')}"
+                placeholder={t('signIn.placeholderPassword') || 'Your password'}
               />
             </div>
             <div className="input-wrapper">
@@ -278,7 +279,9 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
                 value={mynumber}
                 type="tel"
                 onChange={(e) => setnumber(e.target.value)}
-                placeholder="{t('signIn.placeholdePhone')}"
+                placeholder={
+                  t('signIn.placeholderPhone') || 'Your phone number'
+                }
               />
               <p className="text-hint">{t('signIn.placeholderHintPhone')}</p>
             </div>
@@ -312,7 +315,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
               <input
                 className="form-input"
                 type="number"
-                placeholder="{t('signIn.placeholderSMS')}"
+                placeholder={t('signIn.placeholderSMS') || 'The SMS code'}
                 onChange={(e) => setotp(e.target.value)}
               />
             </div>
