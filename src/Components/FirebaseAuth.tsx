@@ -238,15 +238,20 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
             </div>
           </div>
 
-          <p className="text-note mod-nomargin-top">
-            <strong>{t('signIn.nonExistingUserTitle')}</strong>
-            <br />
-            {t('signIn.nonExistingUserText')}
-            <a className="text-link" onClick={() => setStep('signUp')}>
-              {' '}
+          <h4 className="title title-h4">{t('signIn.nonExistingUserTitle')}</h4>
+          <p>{t('signIn.nonExistingUserText')}</p>
+          <div className="text-align-right">
+            <a
+              className="text-link icon-link"
+              onClick={() => setStep('signUp')}
+            >
+              <i className="icon icon-arrow-right"></i>
               {t('signIn.nonExistingUserLink')}
             </a>
-          </p>
+            {/*
+            <a className="button button-border button-border-light box-shadow box-radius-default box-shadow-effect" onClick={() => setStep('signUp')}>{t('signIn.nonExistingUserLink')}</a>
+            */}
+          </div>
         </>
       )}
 
