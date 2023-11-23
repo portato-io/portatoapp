@@ -8,9 +8,13 @@ import {
   signInWithPhoneNumber,
 } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import { Button, message } from 'antd';
+import { message } from 'antd';
 import { ConfirmationResult } from 'firebase/auth'; // Import the type
 import { linkWithCredential } from 'firebase/auth';
+import InitialStep from './authentification/initialStep';
+import SignUpStep from './authentification/signUpStep';
+import SmsSentStep from './authentification/smsSent';
+import SignedUpStep from './authentification/signedUpStep';
 
 const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   onAuthSuccess,
@@ -29,6 +33,8 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
 
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [step, setStep] = useState('initial'); // 'initial', 'captchaVerified', 'smsSent', 'otpEntered', 'signedUp'
+  // New state for the timer and button disabled state
+  const [timer, setTimer] = useState<number | null>(null);
 
   // Initialize the reCAPTCHA verifier in useEffect when the sign-up process begins
   useEffect(() => {
@@ -90,6 +96,74 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
     }
   }, [step]); // Dependency array includes step
 
+  useEffect(() => {
+    // Start the countdown when the smsSent step is reached
+    if (step === 'smsSent' && timer === null) {
+      setTimer(30);
+      const intervalId = setInterval(() => {
+        setTimer((prevTimer) =>
+          prevTimer && prevTimer > 0 ? prevTimer - 1 : 0
+        );
+      }, 1000);
+
+      // Cleanup interval on component unmount or when leaving the smsSent step
+      return () => clearInterval(intervalId);
+    }
+  }, [step, timer]);
+
+  // Enable the button by resetting the timer when it reaches 0
+  useEffect(() => {
+    if (timer === 0) {
+      setTimer(null); // Reset the timer to null to allow resending
+    }
+  }, [timer]);
+
+  const onVerifyOtp = async () => {
+    if (otp === null || otp === '') return;
+    try {
+      const result = await confirmationResult?.confirm(otp);
+      if (result?.user) {
+        // Link email and password if provided
+        if (email && password) {
+          const credential = EmailAuthProvider.credential(email, password);
+          await linkWithCredential(result.user, credential);
+        } else {
+          message.error(t('signIn.missingEmailOrPassword'));
+        }
+        setStep('signedUp');
+        message.success(t('signIn.signupSuccessTitle'));
+        handleAuthSuccess();
+      }
+    } catch (error) {
+      console.error('OTP verification error:', error);
+      message.error(t('signIn.otpVerificationFailedMessage'));
+    }
+  };
+
+  const onSendSMS = async () => {
+    const currentEmail = emailRef.current?.value || '';
+    const currentPassword = passwordRef.current?.value || '';
+    setEmail(currentEmail);
+    setPassword(currentPassword);
+    console.log('Trying to send SMS');
+    if (!isCaptchaVerified || !recaptchaVerifierRef.current) {
+      message.error(t('signIn.captchaMissingMessage'));
+      return;
+    }
+    try {
+      const result = await signInWithPhoneNumber(
+        auth,
+        mynumber,
+        recaptchaVerifierRef.current
+      );
+      setConfirmationResult(result);
+      setStep('smsSent');
+    } catch (error) {
+      console.error('SMS sending error:', error);
+      message.error(t('signIn.smsSendingFailedMessage'));
+    }
+  };
+
   const signIn = async () => {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
@@ -132,52 +206,6 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
     }
   };
 
-  const onSendSMS = async () => {
-    const currentEmail = emailRef.current?.value || '';
-    const currentPassword = passwordRef.current?.value || '';
-    setEmail(currentEmail);
-    setPassword(currentPassword);
-    console.log('Trying to send SMS');
-    if (!isCaptchaVerified || !recaptchaVerifierRef.current) {
-      message.error(t('signIn.captchaMissingMessage'));
-      return;
-    }
-    try {
-      const result = await signInWithPhoneNumber(
-        auth,
-        mynumber,
-        recaptchaVerifierRef.current
-      );
-      setConfirmationResult(result);
-      setStep('smsSent');
-    } catch (error) {
-      console.error('SMS sending error:', error);
-      message.error(t('signIn.smsSendingFailedMessage'));
-    }
-  };
-
-  const onVerifyOtp = async () => {
-    if (otp === null || otp === '') return;
-    try {
-      const result = await confirmationResult?.confirm(otp);
-      if (result?.user) {
-        // Link email and password if provided
-        if (email && password) {
-          const credential = EmailAuthProvider.credential(email, password);
-          await linkWithCredential(result.user, credential);
-        } else {
-          message.error(t('signIn.missingEmailOrPassword'));
-        }
-        setStep('signedUp');
-        message.success(t('signIn.signupSuccessTitle'));
-        handleAuthSuccess();
-      }
-    } catch (error) {
-      console.error('OTP verification error:', error);
-      message.error(t('signIn.otpVerificationFailedMessage'));
-    }
-  };
-
   return (
     <div className="modal-content-wrapper">
       {/* Include back button for each step except 'initial' */}
@@ -190,166 +218,37 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           <div className="spacer-regular"></div>
         </div>
       )}
-      {/*
       {step === 'initial' && (
-        <>
-          
-            <h4 className='title title-h4'>{t('signin.existingUserTitle')}</h4>
-            <p className="text">{t('signin.existingUserText')}</p>
-            <button className="button button-solid box-shadow box-radius-default box-shadow-effect" onClick={() => setStep('signIn')}>Sign In</button>
-            <div className='spacer-regular'></div>
-            <h4 className='title title-h4'>{t('signin.nonExistingUserTitle')}</h4>
-            <p className="text">{t('signin.nonExistingUserText')}</p>
-            <button className="button button-border button-border-light box-shadow box-radius-default box-shadow-effect" onClick={() => setStep('signUp')}>Sign Up</button>
-        </>
+        <InitialStep
+          setStep={setStep}
+          emailRef={emailRef}
+          passwordRef={passwordRef}
+          signIn={signIn}
+          t={t}
+        />
       )}
-      */}
-      {step === 'initial' && (
-        // Render the sign-in UI here
-        <>
-          <h4 className="title title-h4">{t('signIn.existingUserTitle')}</h4>
-          <p className="text">{t('signIn.existingUserText')}</p>
-          <div className="section section-form section-bleed">
-            <div className="input-wrapper">
-              <input
-                className="form-input"
-                ref={emailRef}
-                type="email"
-                placeholder={
-                  t('signIn.placeholderEmail') || 'Your email address'
-                }
-              />
-            </div>
-            <div className="input-wrapper">
-              <input
-                className="form-input"
-                ref={passwordRef}
-                type="password"
-                placeholder={t('signIn.placeholderPassword') || 'Your password'}
-              />
-            </div>
-            <div className="text-align-right">
-              <button
-                className="button button-solid box-shadow box-radius-default box-shadow-effect"
-                onClick={signIn}
-              >
-                {t('navigationButton.signIn')}
-              </button>
-            </div>
-          </div>
-
-          <p className="text-note mod-nomargin-top">
-            <strong>{t('signIn.nonExistingUserTitle')}</strong>
-            <br />
-            {t('signIn.nonExistingUserText')}
-            <a className="text-link" onClick={() => setStep('signUp')}>
-              {' '}
-              {t('signIn.nonExistingUserLink')}
-            </a>
-          </p>
-        </>
-      )}
-
       {step === 'signUp' && (
-        <>
-          <h4 className="title title-h4">{t('signIn.registrationTitle')}</h4>
-          <p className="text">{t('signIn.registrationText')}</p>
-          <div className="section section-form section-bleed">
-            <div className="input-wrapper">
-              <input
-                className="form-input"
-                ref={emailRef}
-                type="email"
-                placeholder={
-                  t('signIn.placeholderEmail') || 'Your email address'
-                }
-              />
-            </div>
-            <div className="input-wrapper">
-              <input
-                className="form-input"
-                ref={passwordRef}
-                type="password"
-                placeholder={t('signIn.placeholderPassword') || 'Your password'}
-              />
-            </div>
-            <div className="input-wrapper">
-              <input
-                className="form-input"
-                value={mynumber}
-                type="tel"
-                onChange={(e) => setnumber(e.target.value)}
-                placeholder={
-                  t('signIn.placeholderPhone') || 'Your phone number'
-                }
-              />
-              <p className="text-hint">{t('signIn.placeholderHintPhone')}</p>
-            </div>
-            <div id="recaptcha-container"></div>
-            <div className="spacer-small"></div>
-            <div className="text-align-right">
-              {isCaptchaVerified && (
-                <button
-                  className="button button-solid box-shadow box-radius-default box-shadow-effect"
-                  onClick={onSendSMS}
-                >
-                  {t('signIn.registrationButton')}
-                </button>
-                /* 
-                <Button type="primary" onClick={onSendSMS}>
-                  {t('signIn.registrationButton')}
-                </Button>
-                */
-              )}
-            </div>
-          </div>
-        </>
+        <SignUpStep
+          setStep={setStep}
+          emailRef={emailRef}
+          passwordRef={passwordRef}
+          mynumber={mynumber}
+          setnumber={setnumber}
+          onSendSMS={onSendSMS}
+          isCaptchaVerified={isCaptchaVerified}
+          t={t}
+        />
       )}
-
       {step === 'smsSent' && (
-        <>
-          <h4 className="title title-h4">{t('signIn.smsConfirmationTitle')}</h4>
-          <p className="text">{t('signIn.smsConfirmationText')}</p>
-          <div className="section section-form section-bleed">
-            <div className="input-wrapper">
-              <input
-                className="form-input"
-                type="number"
-                placeholder={t('signIn.placeholderSMS') || 'The SMS code'}
-                onChange={(e) => setotp(e.target.value)}
-              />
-            </div>
-            <div className="mod-display-flex mod-flex-space-between">
-              <p className="text-note mod-nomargin-top">
-                <a className="text-link" onClick={onSendSMS}>
-                  {' '}
-                  {t('signIn.smsConfirmationResend')}
-                </a>
-              </p>
-              <button
-                className="button button-solid box-shadow box-radius-default box-shadow-effect"
-                onClick={onVerifyOtp}
-              >
-                {t('signIn.smsConfirmationButton')}
-              </button>
-            </div>
-          </div>
-        </>
+        <SmsSentStep
+          onSendSMS={onSendSMS}
+          onVerifyOtp={onVerifyOtp}
+          setotp={setotp}
+          timer={timer}
+          t={t}
+        />
       )}
-
-      {step === 'signedUp' && (
-        <>
-          <h4 className="title title-h4">{t('signIn.signupSuccessTitle')}</h4>
-          <p className="text">{t('signIn.signupSuccessText')}</p>
-          <div className="spacer-small"></div>
-          <button
-            className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            onClick={() => setStep('initial')}
-          >
-            Sign In
-          </button>
-        </>
-      )}
+      {step === 'signedUp' && <SignedUpStep setStep={setStep} t={t} />}
     </div>
   );
 };
