@@ -4,6 +4,7 @@
 	padding:0px 20px 0px;
 	line-height: 2;
 	min-width: 130px;
+	height:auto;
 	text-align: center;
 	cursor: pointer;
 	transition: var(--transition-regular);
@@ -61,7 +62,7 @@ button .icon + span {
 .input-wrapper label {
 	font-size: 1.8rem!important;
 	margin-top: 10px;
-	margin-bottom: 0
+	
   }
 .input-wrapper .text-hint {
 	padding-left:5px;
@@ -84,6 +85,7 @@ label {
 }
 textarea.form-input {
 	padding-top:3px;
+	min-height:200px;
 }
 .form-input:hover {
 	border-width: 0 0 2px 0;
@@ -100,7 +102,8 @@ textarea.form-input {
 	font-size:1.5rem;
 }
 textarea.form-input::placeholder {
-	font-size:1.25rem;
+	padding-top:10px;
+	font-size:1.5rem;
 	line-height:1.4;
 }
 .form-input-radio {
@@ -138,4 +141,24 @@ textarea.form-input::placeholder {
 .ant-form-item .ant-form-item-label > label {
 	display:block;
 	height:auto;
+}
+
+.portato-form .adm-list-default .adm-list-body {
+	border-top:0;
+	border-bottom:0;
+}
+.portato-form .adm-list-item {
+	padding-left:0;
+}
+.portato-form .adm-list-item-content {
+	border:none;
+}
+.avatar-uploader {
+	text-align:center;
+}
+.portato-form .avatar-uploader .ant-upload.ant-upload-select {
+	margin-inline-end:0;
+}
+.portato-form.adm-form .adm-form-footer {
+	padding-left:0;
 }

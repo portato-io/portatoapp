@@ -115,6 +115,9 @@ p, a, label, .text {
   color:var(--grey0);
   border-radius: 3px;
 }
+.text-link-warning {
+  background: var(--color-warning);
+}
 
 .icon-link {
   padding:0px 10px 6px;
@@ -123,9 +126,6 @@ p, a, label, .text {
 }
 .icon-link .icon {
   position: relative;
-}
-.icon-link .icon-arrow-left,
-.icon-link .icon-arrow-right {
   top:3px;
 }
 

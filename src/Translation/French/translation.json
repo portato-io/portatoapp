@@ -37,7 +37,9 @@
     "upload": "Télécharger",
     "yes": "Oui",
     "no": "Non",
-    "edit": "Modifier"
+    "edit": "Modifier",
+    "back": "Retour"
+    
   },
 
   "addressField": {

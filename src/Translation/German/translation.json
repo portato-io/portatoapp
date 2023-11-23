@@ -37,7 +37,8 @@
     "upload": "Hochladen",
     "yes": "Ja",
     "no": "Nein",
-    "edit": "edit"
+    "edit": "edit",
+    "back": "Zurück"
   },
 
   "addressField": {
@@ -270,7 +271,7 @@
     "emailErrorMessage": "Bitte Ihre E-Mail Adresse eingeben",
     "messageLabel": "Nachricht",
     "messageErrorMessage": "Bitte eine Nachricht eingeben",
-    "sendButtonLabel": "Senden Sie"
+    "sendButtonLabel": "Senden"
   },
 
   "settings": {

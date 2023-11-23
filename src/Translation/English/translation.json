@@ -37,7 +37,8 @@
     "upload": "Upload",
     "yes": "Yes",
     "edit": "Edit",
-    "no": "No"
+    "no": "No",
+    "back": "Back"
   },
 
   "addressField": {

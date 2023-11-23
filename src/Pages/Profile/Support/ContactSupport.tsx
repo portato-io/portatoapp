@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import '../../../CSS/PortatoStyleSheet.css';
 import PageLayout from '../../Layouts/ProfilePagesLayout';
+import BackButton from '../../../Components/Buttons/BackButton';
 
 interface FormData {
   name: string;
@@ -42,10 +43,11 @@ const ContactForm: React.FC = () => {
 
   return (
     <PageLayout>
-      <div className="form-container">
-        <Form form={form} onFinish={onFinish} className="centered-form">
+      <div className="section">
+        <h4 className="title title-h4">{t('navigationMenu.support')}</h4>
+        <div className="spacer-regular"></div>
+        <Form form={form} onFinish={onFinish} className="portato-form">
           <Form.Item
-            label={t('contactSupport.nameLabel')}
             name="name"
             rules={[
               {
@@ -56,11 +58,13 @@ const ContactForm: React.FC = () => {
               },
             ]}
           >
-            <Input />
+            <Input
+              className="form-input"
+              placeholder={t('contactSupport.nameLabel') || 'Your name'}
+            />
           </Form.Item>
 
           <Form.Item
-            label={t('contactSupport.emailLabel')}
             name="email"
             rules={[
               {
@@ -72,11 +76,13 @@ const ContactForm: React.FC = () => {
               },
             ]}
           >
-            <Input />
+            <Input
+              className="form-input"
+              placeholder={t('contactSupport.emailLabel') || 'Your email'}
+            />
           </Form.Item>
 
           <Form.Item
-            label={t('contactSupport.messageLabel')}
             name="message"
             rules={[
               {
@@ -87,13 +93,23 @@ const ContactForm: React.FC = () => {
               },
             ]}
           >
-            <Input.TextArea />
+            <Input.TextArea
+              className="form-input"
+              placeholder={t('contactSupport.messageLabel') || 'Your message'}
+            />
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading}>
-              {t('contactSupport.sendButtonLabel')}
-            </Button>
+            <div className="mod-display-flex mod-flex-space-between">
+              <BackButton />
+              <Button
+                className="button button-solid box-shadow box-radius-default box-shadow-effect"
+                htmlType="submit"
+                loading={loading}
+              >
+                {t('contactSupport.sendButtonLabel')}
+              </Button>
+            </div>
           </Form.Item>
         </Form>
       </div>
