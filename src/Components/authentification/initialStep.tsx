@@ -37,13 +37,16 @@ const InitialStep: React.FC<InitialStepProps> = ({
             placeholder={t('signIn.placeholderPassword') || 'Your password'}
           />
         </div>
-        <div className="text-align-right">
-          <button
-            className="button button-plain"
-            onClick={() => setStep('resetPassword')}
-          >
-            {t('signIn.forgotPassword')}
-          </button>
+        <div className="mod-display-flex mod-flex-space-between">
+          <div>
+            <a
+              className="text-link icon-link"
+              onClick={() => setStep('resetPassword')}
+            >
+              <i className="icon icon-help"></i>
+              {t('signIn.forgotPassword')}
+            </a>
+          </div>
           <button
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             onClick={signIn}
