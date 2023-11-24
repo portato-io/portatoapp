@@ -1,11 +1,10 @@
 import React from 'react';
 import { TFunction } from 'i18next'; // If you are using i18next for t function
-
+import { useEffect, useState } from 'react';
 interface SmsSentStepProps {
   onSendSMS: () => Promise<void>; // Assuming onSendSMS is an async function without parameters
   onVerifyOtp: () => Promise<void>; // Similarly, assuming onVerifyOtp is an async function without parameters
   setotp: React.Dispatch<React.SetStateAction<string>>; // If setotp is a setState function from useState hook
-  timer: number | null;
   t: TFunction; // If you are using the t function from 'react-i18next', otherwise type accordingly
 }
 
@@ -13,9 +12,20 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
   onSendSMS,
   onVerifyOtp,
   setotp,
-  timer,
   t,
 }) => {
+  const [resendTimer, setResendTimer] = useState<number>(30);
+
+  useEffect(() => {
+    // Start the countdown immediately on component mount
+    const interval = setInterval(() => {
+      setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array to run only on mount
+
   return (
     <>
       <h4 className="title title-h4">{t('signIn.smsConfirmationTitle')}</h4>
@@ -31,8 +41,8 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
         </div>
         <div className="mod-display-flex mod-flex-space-between">
           <p className="text-note mod-nomargin-top">
-            {timer !== null ? (
-              <span>Resend available in {timer}s</span>
+            {resendTimer > 0 ? (
+              <span>Resend available in {resendTimer}s</span>
             ) : (
               <a className="text-link" onClick={onSendSMS}>
                 {t('signIn.smsConfirmationResend')}
@@ -42,7 +52,6 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
           <button
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             onClick={onVerifyOtp}
-            disabled={timer !== null}
           >
             {t('signIn.smsConfirmationButton')}
           </button>
@@ -51,4 +60,5 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
     </>
   );
 };
+
 export default SmsSentStep;

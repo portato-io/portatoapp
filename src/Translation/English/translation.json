@@ -373,10 +373,17 @@
     "captchaSuccessMessage": "Captcha verification successful",
     "missingEmailOrPassword": "Please enter both email and password",
     "signInSuccessMessage": "Sign in successful!",
-    "signInFailedMessage": "Sign in failed",
+    "signInFailedMessage": "Sign in failed, wrong email address or password",
     "captchaMissingMessage": "Please complete the reCAPTCHA challenge.",
     "smsSendingFailedMessage": "Failed to send SMS.",
-    "otpVerificationFailedMessage": "Failed to verify OTP."
+    "otpVerificationFailedMessage": "Failed to verify OTP.",
+    "forgotPassword": "Password forgotten",
+    "forgotPasswordText": " blbabalabala",
+    "forgotPasswordTitle": "title of forgot password",
+    "resetPasswordButton": "Reset password",
+    "resetPasswordConfirmation": "Reset password successfully",
+    "resetPasswordError": "No account correspond to this email address",
+    "enterEmailError": "Please enter your email address"
 
   }
   

@@ -15,6 +15,7 @@ import InitialStep from './authentification/initialStep';
 import SignUpStep from './authentification/signUpStep';
 import SmsSentStep from './authentification/smsSent';
 import SignedUpStep from './authentification/signedUpStep';
+import PasswordReset from './authentification/passwordReset';
 
 const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   onAuthSuccess,
@@ -119,7 +120,11 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   }, [timer]);
 
   const onVerifyOtp = async () => {
-    if (otp === null || otp === '') return;
+    console.log('Verifying OTP');
+    if (otp === null || otp === '') {
+      console.log('otp null');
+      return;
+    }
     try {
       const result = await confirmationResult?.confirm(otp);
       if (result?.user) {
@@ -128,6 +133,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           const credential = EmailAuthProvider.credential(email, password);
           await linkWithCredential(result.user, credential);
         } else {
+          console.log('Issue linking email and password to account');
           message.error(t('signIn.missingEmailOrPassword'));
         }
         setStep('signedUp');
@@ -200,6 +206,9 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         setStep('signUp');
 
         break;
+      case 'resetPassword':
+        setStep('initial');
+        break;
       // Add other cases as necessary
       default:
         break;
@@ -239,12 +248,12 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           t={t}
         />
       )}
+      {step === 'resetPassword' && <PasswordReset t={t} />}
       {step === 'smsSent' && (
         <SmsSentStep
           onSendSMS={onSendSMS}
           onVerifyOtp={onVerifyOtp}
           setotp={setotp}
-          timer={timer}
           t={t}
         />
       )}

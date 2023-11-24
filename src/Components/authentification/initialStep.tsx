@@ -39,6 +39,12 @@ const InitialStep: React.FC<InitialStepProps> = ({
         </div>
         <div className="text-align-right">
           <button
+            className="button button-plain"
+            onClick={() => setStep('resetPassword')}
+          >
+            {t('signIn.forgotPassword')}
+          </button>
+          <button
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             onClick={signIn}
           >
@@ -52,11 +58,11 @@ const InitialStep: React.FC<InitialStepProps> = ({
         <br />
         {t('signIn.nonExistingUserText')}
         <a className="text-link" onClick={() => setStep('signUp')}>
-          {' '}
           {t('signIn.nonExistingUserLink')}
         </a>
       </p>
     </>
   );
 };
+
 export default InitialStep;

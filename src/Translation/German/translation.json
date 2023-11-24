@@ -378,6 +378,13 @@
     "signInFailedMessage": "Anmeldung fehlgeschlagen",
     "captchaMissingMessage": "Bitte schließe die reCAPTCHA-Herausforderung ab.",
     "smsSendingFailedMessage": "SMS konnte nicht gesendet werden.",
-    "otpVerificationFailedMessage": "Verifizierung der OTP fehlgeschlagen."
+    "otpVerificationFailedMessage": "Verifizierung der OTP fehlgeschlagen.",
+    "forgotPassword": "Password forgotten",
+    "forgotPasswordText": " blbabalabala",
+    "forgotPasswordTitle": "title of forgot password",
+    "resetPasswordButton": "Reset password",
+    "resetPasswordConfirmation": "Reset password successfully",
+    "resetPasswordError": "No account correspond to this email address",
+    "enterEmailError": "Please enter your email address"
   }
 }

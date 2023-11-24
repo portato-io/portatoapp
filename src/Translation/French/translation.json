@@ -375,10 +375,17 @@
     "captchaSuccessMessage": "Vérification du Captcha réussie",
     "missingEmailOrPassword": "Veuillez entrer à la fois l'e-mail et le mot de passe",
     "signInSuccessMessage": "Connexion réussie !",
-    "signInFailedMessage": "Échec de la connexion",
+    "signInFailedMessage": "Échec de la connexion, mot de passe ou adresse mail erronée",
     "captchaMissingMessage": "Veuillez compléter le défi reCAPTCHA.",
     "smsSendingFailedMessage": "Échec de l'envoi du SMS.",
-    "otpVerificationFailedMessage": "Échec de la vérification de l'OTP."
+    "otpVerificationFailedMessage": "Échec de la vérification de l'OTP.",
+    "forgotPassword": "Password forgotten",
+    "forgotPasswordText": " blbabalabala",
+    "forgotPasswordTitle": "title of forgot password",
+    "resetPasswordButton": "Reset password",
+    "resetPasswordConfirmation": "Reset password successfully",
+    "resetPasswordError": "No account correspond to this email address",
+    "enterEmailError": "Please enter your email address"
   }
   
 }
