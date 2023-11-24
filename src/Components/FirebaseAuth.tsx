@@ -208,7 +208,6 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         // Render the sign-in UI here
         <>
           <h4 className="title title-h4">{t('signIn.existingUserTitle')}</h4>
-          <p className="text">{t('signIn.existingUserText')}</p>
           <div className="section section-form section-bleed">
             <div className="input-wrapper">
               <input
@@ -258,7 +257,6 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
       {step === 'signUp' && (
         <>
           <h4 className="title title-h4">{t('signIn.registrationTitle')}</h4>
-          <p className="text">{t('signIn.registrationText')}</p>
           <div className="section section-form section-bleed">
             <div className="input-wrapper">
               <input

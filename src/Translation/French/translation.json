@@ -91,8 +91,7 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ancien ingénieur PPT et XLS, maintenant CEO de Portato. Passionné de sport avec un grand réseau.",
-      "image": "../src/Assets/Images/team/conrad.jpg"
+      "description": "Ancien ingénieur PPT et XLS, maintenant CEO de Portato. Passionné de sport avec un grand réseau."
     },
     "Hugo": {
       "name": "Hugo",
@@ -104,13 +103,11 @@
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Touche-à-tout, maître du produit. Multitalent pour la programmation, le design et l'animation.",
-      "image": "src/Assets/Images/team/mischa.jpg"
+      "description": "Touche-à-tout, maître du produit. Multitalent pour la programmation, le design et l'animation."    
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "Artiste story-board et animatrice 2D qui donne à Portato son charme, un trait à la fois.",
-      "image": "src/Assets/Images/team/chiara.png"
+      "description": "Artiste story-board et animatrice 2D qui donne à Portato son charme, un trait à la fois."    
     }
   },
 
@@ -247,7 +244,7 @@
   "navigationMenu": {
     "myAccount": "Mon Compte",
     "mySendRequests": "Mes Demandes d'Envoi",
-    "signIn": "Se Connecter",
+    "signIn": "Se connecter",
     "blog": "Blog",
     "support": "Contactez-nous",
     "adminWindow": "Fenêtre d'Admin",
@@ -353,21 +350,19 @@
   "signIn": {
     "back": "Retour",
     "signUp": "S'inscrire",
-    "existingUserTitle": "Se connecter à Portato",
-    "existingUserText": "Connectez-vous avec votre adresse e-mail et mot de passe chez Portato.",
-    "nonExistingUserTitle": "Pas encore de profil ?",
+    "existingUserTitle": "Se connecter",
+    "nonExistingUserTitle": "Pas encore de profil?",
     "nonExistingUserText": "Créez un profil en quelques étapes et rejoignez la communauté Portato.",
     "nonExistingUserLink": "Créer un profil maintenant",
-    "placeholderEmail": "Votre adresse e-mail",
-    "placeholderPassword": "Votre mot de passe",
-    "placeholderPhone": "Votre numéro de téléphone",
-    "placeholderHintPhone": "N'oubliez pas d'inclure l'indicatif du pays, par ex. : +41 78 333 22 11",
-    "placeholderSMS": "Le code SMS",
-    "registrationTitle": "Créez votre profil Portato",
-    "registrationText": "Nous avons besoin des informations suivantes. Ne vous inquiétez pas, nous en prendrons soin.",
+    "placeholderEmail": "Adresse e-mail",
+    "placeholderPassword": "Mot de passe",
+    "placeholderPhone": "Numéro de téléphone",
+    "placeholderHintPhone": "Veuillez inclure l'indicatif pays, par ex. : +41 79 333 22 11",
+    "placeholderSMS": "Code SMS",
+    "registrationTitle": "Créez votre profil",
     "registrationButton": "S'inscrire",
-    "smsConfirmationTitle": "Code de vérification envoyé avec succès, veuillez vérifier vos SMS",
-    "smsConfirmationText": "Nous vous avons envoyé un SMS avec un code numérique. Veuillez le saisir dans le champ affiché pour vérifier votre numéro.",
+    "smsConfirmationTitle": "Entrez le code SMS",
+    "smsConfirmationText": "Nous vous avons envoyé un SMS avec un code numérique. Veuillez l'entrer ci-dessous pour vérifier votre numéro.",
     "smsConfirmationButton": "Vérifier le numéro",
     "smsConfirmationResend": "Renvoyer le SMS",
     "signupSuccessTitle": "Profil créé avec succès",
@@ -379,6 +374,5 @@
     "captchaMissingMessage": "Veuillez compléter le défi reCAPTCHA.",
     "smsSendingFailedMessage": "Échec de l'envoi du SMS.",
     "otpVerificationFailedMessage": "Échec de la vérification de l'OTP."
-  }
-  
+  }  
 }
