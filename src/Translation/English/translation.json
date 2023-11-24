@@ -242,8 +242,8 @@
     "error": "Please complete the input field(s)."
   },
   "navigationMenu": {
-    "myAccount": "My Account",
-    "mySendRequests": "My Send Requests",
+    "myAccount": "My account",
+    "mySendRequests": "My send requests",
     "signIn": "Sign in",
     "blog": "Blog",
     "support": "Support / feedback",
