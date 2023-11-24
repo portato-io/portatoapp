@@ -381,6 +381,10 @@ video,
 .mod-flex-wrap {
   flex-wrap: wrap;
 }
+.mod-flex-mobile-column-reverse {
+  flex-direction: column-reverse;
+  align-items: flex-end;
+}
 .mod-nomargin {
   margin: 0;
 }
