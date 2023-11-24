@@ -242,13 +242,13 @@
     "error": "Veuillez compléter le(s) champ(s) de saisie."
   },
   "navigationMenu": {
-    "myAccount": "Mon Compte",
-    "mySendRequests": "Mes Demandes d'Envoi",
+    "myAccount": "Mon compte",
+    "mySendRequests": "Mes demandes d'envoi",
     "signIn": "Se connecter",
     "blog": "Blog",
     "support": "Contactez-nous",
-    "adminWindow": "Fenêtre d'Admin",
-    "signOut": "Se Déconnecter",
+    "adminWindow": "Fenêtre d'admin",
+    "signOut": "Se déconnecter",
     "settings": "Paramètres"
   },
   "accountPage": {
@@ -352,7 +352,7 @@
     "signUp": "S'inscrire",
     "existingUserTitle": "Se connecter",
     "nonExistingUserTitle": "Pas encore de profil?",
-    "nonExistingUserText": "Créez un profil en quelques étapes et rejoignez la communauté Portato.",
+    "nonExistingUserText": "Créez un profil et rejoignez la communauté Portato.",
     "nonExistingUserLink": "Créer un profil maintenant",
     "placeholderEmail": "Adresse e-mail",
     "placeholderPassword": "Mot de passe",

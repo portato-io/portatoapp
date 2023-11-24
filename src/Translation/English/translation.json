@@ -247,7 +247,7 @@
     "signIn": "Sign in",
     "blog": "Blog",
     "support": "Support / feedback",
-    "adminWindow": "Admin Window",
+    "adminWindow": "Admin window",
     "signOut": "Sign out",
     "settings": "Settings"
   },
@@ -352,7 +352,7 @@
     "signUp": "Sign up",
     "existingUserTitle": "Log in",
     "nonExistingUserTitle": "Don't have a profile yet?",
-    "nonExistingUserText": "Create a profile in just a few steps and become part of the Portato community.",
+    "nonExistingUserText": "Create a profile and join the Portato community.",
     "nonExistingUserLink": "Create profile now",
     "placeholderEmail": "Email address",
     "placeholderPassword": "Password",
