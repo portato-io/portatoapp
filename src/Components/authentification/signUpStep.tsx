@@ -11,6 +11,8 @@ interface SignUpStepProps {
   onSendSMS: () => Promise<void>; // Assuming onSendSMS is an async function without parameters
   isCaptchaVerified: boolean;
   t: TFunction; // If you are using the t function from 'react-i18next', otherwise type accordingly
+  firstNameRef: RefObject<HTMLInputElement>;
+  lastNameRef: RefObject<HTMLInputElement>;
 }
 
 // Define your component with typed props
@@ -23,12 +25,30 @@ const SignUpStep: React.FC<SignUpStepProps> = ({
   onSendSMS,
   isCaptchaVerified,
   t,
+  firstNameRef,
+  lastNameRef,
 }) => {
   return (
     <>
       <h4 className="title title-h4">{t('signIn.registrationTitle')}</h4>
       <p className="text">{t('signIn.registrationText')}</p>
       <div className="section section-form section-bleed">
+        <div className="input-wrapper">
+          <input
+            className="form-input"
+            ref={firstNameRef}
+            type="text"
+            placeholder={t('signIn.placeholderFirstName') || 'First Name'}
+          />
+        </div>
+        <div className="input-wrapper">
+          <input
+            className="form-input"
+            ref={lastNameRef}
+            type="text"
+            placeholder={t('signIn.placeholderLastName') || 'Last Name'}
+          />
+        </div>
         <div className="input-wrapper">
           <input
             className="form-input"

@@ -6,6 +6,7 @@ import {
   RecaptchaVerifier,
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
+  updateProfile,
 } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { message } from 'antd';
@@ -36,6 +37,11 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   const [step, setStep] = useState('initial'); // 'initial', 'captchaVerified', 'smsSent', 'otpEntered', 'signedUp'
   // New state for the timer and button disabled state
   const [timer, setTimer] = useState<number | null>(null);
+
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   // Initialize the reCAPTCHA verifier in useEffect when the sign-up process begins
   useEffect(() => {
@@ -136,6 +142,10 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           console.log('Issue linking email and password to account');
           message.error(t('signIn.missingEmailOrPassword'));
         }
+        // Update user's profile with first and last name
+        await updateProfile(result.user, {
+          displayName: `${firstName} ${lastName}`,
+        });
         setStep('signedUp');
         message.success(t('signIn.signupSuccessTitle'));
         handleAuthSuccess();
@@ -151,6 +161,10 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
     const currentPassword = passwordRef.current?.value || '';
     setEmail(currentEmail);
     setPassword(currentPassword);
+    const currentFirstName = firstNameRef.current?.value || '';
+    const currentLastName = lastNameRef.current?.value || '';
+    setFirstName(currentFirstName);
+    setLastName(currentLastName);
     console.log('Trying to send SMS');
     if (!isCaptchaVerified || !recaptchaVerifierRef.current) {
       message.error(t('signIn.captchaMissingMessage'));
@@ -246,6 +260,8 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           onSendSMS={onSendSMS}
           isCaptchaVerified={isCaptchaVerified}
           t={t}
+          firstNameRef={firstNameRef}
+          lastNameRef={lastNameRef}
         />
       )}
       {step === 'resetPassword' && <PasswordReset t={t} />}
