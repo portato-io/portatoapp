@@ -26,6 +26,12 @@
   .card-actions .icon::before {
     margin-right:10px;
   } 
+
+  .mod-flex-mobile-column {
+    flex-direction: initial;
+    flex-wrap: initial;
+    align-items: initial;
+  }
 }
 
 /* Tablets */

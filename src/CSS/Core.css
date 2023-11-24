@@ -362,6 +362,8 @@ video,
 .spacing-horizontal-regular:first-child {margin-left: 0;}
 .spacing-horizontal-regular:last-child {margin-right: 0;}
 
+
+
 /* MODIFIERS ---------------------------------------- */
 .mod-display-flex {
   display: flex;
@@ -413,6 +415,15 @@ video,
 }
 .mod-overflow-hidden {
   overflow:hidden;
+}
+.mod-flex-mobile-column {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+.mod-flex-mobile-column > * {
+  margin-bottom:25px;
 }
 
 

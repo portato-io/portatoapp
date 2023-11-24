@@ -222,7 +222,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         <div>
           <a onClick={goBack} className="text-link icon-link">
             <i className="icon icon-arrow-left"></i>
-            <small>{t('signIn.back')}</small>
+            {t('signIn.back')}
           </a>
           <div className="spacer-regular"></div>
         </div>

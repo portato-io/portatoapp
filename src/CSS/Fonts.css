@@ -114,10 +114,12 @@ p, a, label, .text {
   background: var(--color-green-4);
   color:var(--grey0);
   border-radius: 3px;
+  font-family: 'Lexend-Medium';
+  font-size: 1.6rem;
 }
 
 .icon-link {
-  padding:0px 10px 3px;
+  padding:0px 10px 7px;
 }
 .icon-link .icon {
   position: relative;
