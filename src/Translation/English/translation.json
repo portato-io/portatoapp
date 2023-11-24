@@ -233,23 +233,22 @@
       "greetings": "Dear",
       "salutations": "Kind regards,<br>Your Portato Team"
     }
-
   },
   "navigationButton": {
     "next": "Next",
     "back": "Back",
     "confirm": "Confirm",
-    "signIn": "Sign In",
+    "signIn": "Sign in",
     "error": "Please complete the input field(s)."
   },
   "navigationMenu": {
-    "myAccount": "My Account",
-    "mySendRequests": "My Send Requests",
-    "signIn": "Sign In",
+    "myAccount": "My account",
+    "mySendRequests": "My send requests",
+    "signIn": "Sign in",
     "blog": "Blog",
-    "support": "Support / Feedback",
-    "adminWindow": "Admin Window",
-    "signOut": "Sign Out",
+    "support": "Support / feedback",
+    "adminWindow": "Admin window",
+    "signOut": "Sign out",
     "settings": "Settings"
   },
   "accountPage": {
@@ -351,21 +350,19 @@
   "signIn": {
     "back": "Back",
     "signUp": "Sign up",
-    "existingUserTitle": "Log in to Portato",
-    "existingUserText": "Log in with your email address and password at Portato.",
+    "existingUserTitle": "Log in",
     "nonExistingUserTitle": "Don't have a profile yet?",
-    "nonExistingUserText": "Create a profile in just a few steps and become part of the Portato community.",
+    "nonExistingUserText": "Create a profile and join the Portato community.",
     "nonExistingUserLink": "Create profile now",
-    "placeholderEmail": "Your email address",
-    "placeholderPassword": "Your password",
-    "placeholderPhone": "Your phone number",
-    "placeholderHintPhone": "Please remember to include the country code, e.g.: +41 78 333 22 11",
-    "placeholderSMS": "The SMS code",
-    "registrationTitle": "Create your Portato profile",
-    "registrationText": "We need the following information. Don't worry, we handle it with care.",
+    "placeholderEmail": "Email address",
+    "placeholderPassword": "Password",
+    "placeholderPhone": "Phone number",
+    "placeholderHintPhone": "Please include the country code, e.g.: +41 79 333 22 11",
+    "placeholderSMS": "SMS code",
+    "registrationTitle": "Create your profile",
     "registrationButton": "Sign up",
-    "smsConfirmationTitle": "Verification code sent successfully, please check your SMS",
-    "smsConfirmationText": "We have sent you an SMS with a numeric code. Please enter it into the displayed field to verify your number.",
+    "smsConfirmationTitle": "Enter SMS code",
+    "smsConfirmationText": "We have sent you an SMS with a numeric code. Please enter it below to verify your number.",
     "smsConfirmationButton": "Verify number",
     "smsConfirmationResend": "Resend SMS",
     "signupSuccessTitle": "Profile created successfully",
@@ -377,7 +374,5 @@
     "captchaMissingMessage": "Please complete the reCAPTCHA challenge.",
     "smsSendingFailedMessage": "Failed to send SMS.",
     "otpVerificationFailedMessage": "Failed to verify OTP."
-
   }
-  
 }

@@ -91,13 +91,11 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ex PPT- und XLS-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk.",
-      "image": "src/Assets/Images/team/conrad.jpg"
+      "description": "Ex PPT- und XLS-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk."
     },
     "Hugo": {
       "name": "Hugo",
-      "description": "Franko-britisches Genie, jongliert in mindestens so vielen Sprachen das Backend.",
-      "image": "src/Assets/Images/team/hugo.jpg"
+      "description": "Franko-britisches Genie, jongliert in mindestens so vielen Sprachen das Backend."
     },
     "Mehdi": {
       "name": "Mehdi",
@@ -105,8 +103,7 @@
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Hansdampf in allen (Produkt-)Gassen. Multitalentiert in Coding, Design und Animation.",
-      "image": "src/Assets/Images/team/mischa.jpg"
+      "description": "Hansdampf in allen (Produkt-)Gassen. Multitalentiert in Coding, Design und Animation."
     },
     "Chiara": {
       "name": "Chiara",
@@ -353,21 +350,19 @@
   "signIn": {
     "back": "Zurück",
     "signUp": "Registrieren",
-    "existingUserTitle": "Bei Portato anmelden",
-    "existingUserText": "Melde dich mit deiner E-Mail-Adresse und deinem Passwort bei Portato an.",
-    "nonExistingUserTitle": "Noch kein Profil?",
-    "nonExistingUserText": "Erstelle in nur wenigen Schritten ein Profil und werde Teil der Portato-Gemeinschaft.",
+    "existingUserTitle": "Anmelden",
+    "nonExistingUserTitle": "Du hast noch kein Profil?",
+    "nonExistingUserText": "Erstelle ein Profil und werde Teil der Portato-Community.",
     "nonExistingUserLink": "Jetzt Profil erstellen",
-    "placeholderEmail": "Deine E-Mail-Adresse",
-    "placeholderPassword": "Dein Passwort",
-    "placeholderPhone": "Deine Telefonnummer",
-    "placeholderHintPhone": "Bitte denke an die Ländervorwahl, z.B.: +41 78 333 22 11",
-    "placeholderSMS": "Der SMS-Code",
-    "registrationTitle": "Erstelle dein Portato-Profil",
-    "registrationText": "Wir benötigen die folgenden Informationen. Keine Sorge, wir gehen sorgfältig damit um.",
+    "placeholderEmail": "E-Mail-Adresse",
+    "placeholderPassword": "Passwort",
+    "placeholderPhone": "Telefonnummer",
+    "placeholderHintPhone": "Bitte gib deine Nummer inkl. Ländervorwahl an, z.B.: +41 79 333 22 11",
+    "placeholderSMS": "SMS-Code",
+    "registrationTitle": "Erstelle dein Profil",
     "registrationButton": "Registrieren",
-    "smsConfirmationTitle": "Verifizierungscode wurde erfolgreich gesendet, bitte überprüfe deine SMS",
-    "smsConfirmationText": "Wir haben dir eine SMS mit einem numerischen Code gesendet. Bitte gib ihn in das angezeigte Feld ein, um deine Nummer zu verifizieren.",
+    "smsConfirmationTitle": "SMS Code eingeben",
+    "smsConfirmationText": "Wir haben dir eine SMS mit einem numerischen Code gesendet. Bitte gib ihn in unten ein, um deine Nummer zu verifizieren.",
     "smsConfirmationButton": "Nummer verifizieren",
     "smsConfirmationResend": "SMS erneut senden",
     "signupSuccessTitle": "Profil erfolgreich erstellt",
@@ -376,8 +371,8 @@
     "missingEmailOrPassword": "Bitte gib sowohl E-Mail als auch Passwort ein",
     "signInSuccessMessage": "Anmeldung erfolgreich!",
     "signInFailedMessage": "Anmeldung fehlgeschlagen",
-    "captchaMissingMessage": "Bitte schließe die reCAPTCHA-Herausforderung ab.",
+    "captchaMissingMessage": "Bitte schliesse die reCAPTCHA-Verifizierung ab.",
     "smsSendingFailedMessage": "SMS konnte nicht gesendet werden.",
-    "otpVerificationFailedMessage": "Verifizierung der OTP fehlgeschlagen."
+    "otpVerificationFailedMessage": "Verifizierung des SMS Codes fehlgeschlagen."
   }
 }
