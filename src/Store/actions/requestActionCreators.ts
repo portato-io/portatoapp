@@ -8,14 +8,20 @@ export const setObject = (variable: IFirstObjectInfo): AnyAction => ({
   payload: variable,
 });
 
-export const setReqPickupAddress = (pickup_address: string): AnyAction => ({
+export const setReqPickupAddress = (
+  pickup_address: string,
+  pickup_lat_long: number[]
+): AnyAction => ({
   type: actionTypes.SET_REQ_PICKUP_ADDRESS,
-  payload: pickup_address,
+  payload: { pickup_address, pickup_lat_long },
 });
 
-export const setReqDeliveryAddress = (delivery_address: string): AnyAction => ({
+export const setReqDeliveryAddress = (
+  delivery_address: string,
+  delivery_lat_long: number[]
+): AnyAction => ({
   type: actionTypes.SET_REQ_DELIVERY_ADDRESS,
-  payload: delivery_address,
+  payload: { delivery_address, delivery_lat_long },
 });
 
 export const setObjectPrice = (price: number): AnyAction => ({

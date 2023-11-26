@@ -13,6 +13,22 @@ import {
   setRouteDestinationAddress,
 } from '../Store/actions/routeActionCreators';
 
+import {
+  setKey,
+  setDefaults,
+  setLanguage,
+  setRegion,
+  fromAddress,
+  fromLatLng,
+  fromPlaceId,
+  setLocationType,
+  geocode,
+  RequestType,
+} from 'react-geocode';
+
+if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
+  setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
+
 mapboxgl.accessToken =
   'pk.eyJ1IjoiaGFuemF6ZmlhIiwiYSI6ImNsaWFxcHcyNDA2NWIzanAzYndnNmp2bWgifQ.gybdLCNw_Wmysr5s9Ww51Q';
 
@@ -20,6 +36,24 @@ interface Address {
   place_name: string;
   center: [number, number];
 }
+
+const handleAddress = async (address: string) => {
+  try {
+    const { results } = await fromAddress(address);
+    if (
+      results &&
+      results.length > 0 &&
+      results[0].geometry &&
+      results[0].geometry.location
+    ) {
+      const { lat, lng } = results[0].geometry.location;
+      return [lat, lng];
+    }
+  } catch (error) {
+    console.error(`Error geocoding address: ${address}`, error);
+    return [];
+  }
+};
 
 const AddressAutocomplete: React.FC<{
   type: string;
@@ -39,28 +73,40 @@ const AddressAutocomplete: React.FC<{
   const [inputValue, setInputValue] = useState('');
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
+  const [lat_lng, setLatLng] = useState<any[]>();
 
   const dispatch = useDispatch();
 
   const onChange = (value: string) => {
     //setSelectedAddress(value || null);
-    switch (type) {
-      case 'pickup':
-        dispatch(setReqPickupAddress(value));
-        break;
-      case 'delivery':
-        dispatch(setReqDeliveryAddress(value));
-        break;
-      case 'departure':
-        dispatch(setRouteDepartureAddress(value));
-        break;
-      case 'destination':
-        dispatch(setRouteDestinationAddress(value));
-        break;
-      default:
+    handleAddress(value).then((coordinates) => {
+      if (coordinates) {
+        const lat_lng = coordinates;
+        console.log(lat_lng);
+        setLatLng(lat_lng);
+      }
+    });
+    if (lat_lng) {
+      console.log('dans le switch', lat_lng);
+      switch (type) {
+        case 'pickup':
+          dispatch(setReqPickupAddress(value, lat_lng));
+          break;
+        case 'delivery':
+          dispatch(setReqDeliveryAddress(value, lat_lng));
+          break;
+        case 'departure':
+          dispatch(setRouteDepartureAddress(value));
+          break;
+        case 'destination':
+          dispatch(setRouteDestinationAddress(value));
+          break;
+        default:
+      }
     }
     console.log(`selected ${value}`);
   };
+
   const handleAddressSelect = (value: string) => {
     const selected = addresses.find((address) => address.place_name === value);
     setSelectedAddress(selected?.place_name || null);

@@ -13,23 +13,7 @@ import { analytics } from '../firebaseConfig';
 import Map from '../Components/Map';
 import { IRequestInfo, IRouteInfo, MapMarker } from '../type';
 import AllRequests from './Admin/AllRequests';
-import {
-  setKey,
-  setDefaults,
-  setLanguage,
-  setRegion,
-  fromAddress,
-  fromLatLng,
-  fromPlaceId,
-  setLocationType,
-  geocode,
-  RequestType,
-} from 'react-geocode';
 import { features } from 'process';
-
-if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
-  setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
-
 interface Coordinates {
   type: 'Point';
   coordinates: [number, number];
@@ -38,7 +22,7 @@ interface Coordinates {
 const PortatoMap: React.FC = () => {
   const { user } = useAuth();
   const [geoRequestData, setGeoRequestData] = useState<
-    Array<{ address: string; description: string; name: string }>
+    Array<{ address: number[]; description: string; name: string }>
   >([]);
   const [geoRouteData, setGeoRouteData] = useState<
     Array<{ address: string; destination: string }>
@@ -84,7 +68,7 @@ const PortatoMap: React.FC = () => {
 
         // Extracting delivery_addresses from the requests
         const pickup_addresses: {
-          address: string;
+          address: number[];
           description: string;
           name: string;
         }[] = [];
@@ -92,7 +76,7 @@ const PortatoMap: React.FC = () => {
         requestDataArray.forEach((item) => {
           Object.values(item.requests).forEach((request) => {
             pickup_addresses.push({
-              address: request.pickup_address,
+              address: request.pickup_lat_lng,
               description: request.description,
               name: request.name,
             });
@@ -164,36 +148,20 @@ const PortatoMap: React.FC = () => {
     const descriptions: string[] = [];
     const names: string[] = [];
 
-    // Helper function to handle each address
-    const handleAddress = async (requestObj: {
-      address: string;
-      description: string;
-      name: string;
-    }) => {
-      try {
-        const { results } = await fromAddress(requestObj.address);
-        if (
-          results &&
-          results.length > 0 &&
-          results[0].geometry &&
-          results[0].geometry.location
-        ) {
-          const { lat, lng } = results[0].geometry.location;
-
-          latitudes.push(lng);
-          longitudes.push(lat);
-          descriptions.push(requestObj.description);
-          names.push(requestObj.name);
-        }
-      } catch (error) {
-        console.error(`Error geocoding address: ${requestObj.address}`, error);
-      }
-    };
+    //       latitudes.push(lng);
+    //       longitudes.push(lat);
+    //       descriptions.push(requestObj.description);
+    //       names.push(requestObj.name);
+    //     }
+    //   } catch (error) {
+    //     console.error(`Error geocoding address: ${requestObj.address}`, error);
+    //   }
+    // };
 
     if (geoRequestData && geoRequestData.length > 0) {
       (async () => {
         for (const address of geoRequestData) {
-          await handleAddress(address);
+          // await handleAddress(address);
         }
 
         const newRequestsFromDatabase = latitudes.map((lng, idx) => ({

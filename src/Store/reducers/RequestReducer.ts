@@ -17,6 +17,8 @@ const initialState: IRequestInfo = {
   status: 'unmatched',
   dealId: '',
   contactTimestamp: '',
+  pickup_lat_long: [],
+  delivery_lat_long: [],
 };
 
 export function requestReducer(
@@ -52,13 +54,16 @@ export function requestReducer(
     case 'SET_REQ_PICKUP_ADDRESS': {
       return {
         ...state,
-        pickup_address: action.payload,
+        pickup_address: action.payload.pickup_address,
+        pickup_lat_long: action.payload.pickup_lat_long,
       };
     }
     case 'SET_REQ_DELIVERY_ADDRESS': {
+      console.log(action.payload);
       return {
         ...state,
-        delivery_adress: action.payload,
+        delivery_adress: action.payload.delivery_address,
+        delivery_lat_long: action.payload.delivery_lat_long,
       };
     }
     case 'SET_PRICE': {

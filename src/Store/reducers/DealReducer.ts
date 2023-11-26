@@ -19,6 +19,8 @@ const initialStateDeal: IDealInfo = {
     status: 'unmatched',
     dealId: '',
     contactTimestamp: '',
+    pickup_lat_long: [],
+    delivery_lat_long: [],
   },
   route: {
     id: '0',

@@ -77,7 +77,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
               columns={2}
               options={CAPACITY_OPTIONS}
               onChange={handleCapChange}
-              defaultValue={[object.size[0]]}
+              defaultValue={[object.size]}
             />
           </Form.Item>
 
