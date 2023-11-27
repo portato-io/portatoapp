@@ -42,6 +42,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   const lastNameRef = useRef<HTMLInputElement>(null);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [smsStepKey, setSmsStepKey] = useState<number>(Date.now());
 
   // Initialize the reCAPTCHA verifier in useEffect when the sign-up process begins
   useEffect(() => {
@@ -94,7 +95,8 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         );
       }
       recaptchaVerifierRef.current.render();
-    } else if (step !== 'smsSent') {
+    } else {
+      console.log('clearing captcha');
       // Clear the reCAPTCHA when leaving the signUp step
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear();
@@ -179,11 +181,47 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         recaptchaVerifierRef.current
       );
       setConfirmationResult(result);
-      setStep('smsSent');
+      message.success(t('signIn.successSmsSent'));
+      console.log('sms sent successfully');
+      setTimeout(() => {
+        if (recaptchaVerifierRef.current) {
+          recaptchaVerifierRef.current.clear();
+          recaptchaVerifierRef.current = null;
+        }
+        setStep('smsSent');
+        resetSmsSentStep(); // Reset the SmsSentStep component state
+      }, 0);
     } catch (error) {
       console.error('SMS sending error:', error);
       message.error(t('signIn.smsSendingFailedMessage'));
     }
+  };
+
+  const resetSmsSentStep = () => {
+    setSmsStepKey(Date.now()); // This will change the stepKey, causing SmsSentStep to reset
+  };
+
+  const onResendSms = async () => {
+    console.log('in resends SMS');
+    if (recaptchaVerifierRef.current) {
+      recaptchaVerifierRef.current.clear();
+      recaptchaVerifierRef.current = null;
+    }
+    if (!recaptchaVerifierRef.current) {
+      recaptchaVerifierRef.current = new RecaptchaVerifier(
+        'recaptcha-container',
+        {
+          size: 'normal',
+          callback: () => {
+            setIsCaptchaVerified(true);
+            onSendSMS();
+            message.success(t('signIn.captchaSuccessMessage'));
+          },
+        },
+        auth
+      );
+    }
+    recaptchaVerifierRef.current.render(); // Render the reCAPTCHA widget
   };
 
   const signIn = async () => {
@@ -269,10 +307,11 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
       {step === 'resetPassword' && <PasswordReset t={t} />}
       {step === 'smsSent' && (
         <SmsSentStep
-          onSendSMS={onSendSMS}
+          onResendSms={onResendSms}
           onVerifyOtp={onVerifyOtp}
           setotp={setotp}
           t={t}
+          stepKey={smsStepKey}
         />
       )}
       {step === 'signedUp' && <SignedUpStep setStep={setStep} t={t} />}

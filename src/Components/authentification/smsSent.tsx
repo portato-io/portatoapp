@@ -2,29 +2,34 @@ import React from 'react';
 import { TFunction } from 'i18next'; // If you are using i18next for t function
 import { useEffect, useState } from 'react';
 interface SmsSentStepProps {
-  onSendSMS: () => Promise<void>; // Assuming onSendSMS is an async function without parameters
+  onResendSms: () => Promise<void>; // Assuming onSendSMS is an async function without parameters
   onVerifyOtp: () => Promise<void>; // Similarly, assuming onVerifyOtp is an async function without parameters
   setotp: React.Dispatch<React.SetStateAction<string>>; // If setotp is a setState function from useState hook
   t: TFunction; // If you are using the t function from 'react-i18next', otherwise type accordingly
+  stepKey: number; // Define the type of stepKey as number
 }
 
 const SmsSentStep: React.FC<SmsSentStepProps> = ({
-  onSendSMS,
+  onResendSms,
   onVerifyOtp,
   setotp,
   t,
+  stepKey, // Use stepKey instead of key to avoid conflict with React's key prop
 }) => {
   const [resendTimer, setResendTimer] = useState<number>(5);
 
   useEffect(() => {
-    // Start the countdown immediately on component mount
+    // Reset the timer to 5 whenever the key prop changes
+    setResendTimer(5);
+
+    // Start the countdown
     const interval = setInterval(() => {
       setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
     // Clear interval on component unmount
     return () => clearInterval(interval);
-  }, []); // Empty dependency array to run only on mount
+  }, [stepKey]); // Now the effect depends on the key prop
 
   return (
     <>
@@ -44,11 +49,13 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
             {resendTimer > 0 ? (
               <span>Resend available in {resendTimer}s</span>
             ) : (
-              <a className="text-link" onClick={onSendSMS}>
+              <a className="text-link" onClick={onResendSms}>
                 {t('signIn.smsConfirmationResend')}
               </a>
             )}
           </p>
+
+          <div id="recaptcha-container"></div>
           <button
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             onClick={onVerifyOtp}

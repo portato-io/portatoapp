@@ -383,7 +383,10 @@
     "resetPasswordButton": "Reset password",
     "resetPasswordConfirmation": "Reset password successfully",
     "resetPasswordError": "No account correspond to this email address",
-    "enterEmailError": "Please enter your email address"
+    "enterEmailError": "Please enter your email address",
+    "placeholderFirstName": "First Name",
+    "placeholderLastName": "Last Name",
+    "successSmsSent":"SMS sent successfully"
 
   }
   
