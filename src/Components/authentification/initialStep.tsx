@@ -37,30 +37,33 @@ const InitialStep: React.FC<InitialStepProps> = ({
             placeholder={t('signIn.placeholderPassword') || 'Your password'}
           />
         </div>
-        <div className="text-align-right">
-          <button
-            className="button button-plain"
-            onClick={() => setStep('resetPassword')}
-          >
-            {t('signIn.forgotPassword')}
-          </button>
-          <button
-            className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            onClick={signIn}
-          >
-            {t('navigationButton.signIn')}
-          </button>
+        <div className="mod-display-flex mod-flex-space-between mod-flex-mobile-column-reverse">
+          <div>
+            <a
+              className="text-link icon-link"
+              onClick={() => setStep('resetPassword')}
+            >
+              <i className="icon icon-help"></i>
+              {t('signIn.forgotPassword')}
+            </a>
+          </div>
+          <div>
+            <button
+              className="button button-solid box-shadow box-radius-default box-shadow-effect"
+              onClick={signIn}
+            >
+              {t('navigationButton.signIn')}
+            </button>
+            <div className="spacer-small"></div>
+          </div>
         </div>
       </div>
-
-      <p className="text-note mod-nomargin-top">
-        <strong>{t('signIn.nonExistingUserTitle')}</strong>
-        <br />
-        {t('signIn.nonExistingUserText')}
-        <a className="text-link" onClick={() => setStep('signUp')}>
-          {t('signIn.nonExistingUserLink')}
-        </a>
-      </p>
+      <h4 className="title title-h4">{t('signIn.nonExistingUserTitle')}</h4>
+      <p>{t('signIn.nonExistingUserText')}</p>
+      <a className="text-link icon-link" onClick={() => setStep('signUp')}>
+        <i className="icon icon-arrow-right"></i>
+        {t('signIn.nonExistingUserLink')}
+      </a>
     </>
   );
 };

@@ -48,4 +48,7 @@
 .icon-arrow-left:before {
 	content: 'L';
 }
+.icon-arrow-right:before {
+	content: 'R';
+}
 
