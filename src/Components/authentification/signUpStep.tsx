@@ -1,94 +1,110 @@
-import React, { RefObject } from 'react';
-import { TFunction } from 'i18next'; // If you are using i18next for t function
+import React from 'react';
+import { Form, Input, Button } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { SignUpFormValues } from './formDefinition';
 
-// Define the interface for your component's props
-interface SignUpStepProps {
-  setStep: (step: string) => void;
-  emailRef: RefObject<HTMLInputElement>; // Assuming emailRef is a ref to an input element
-  passwordRef: RefObject<HTMLInputElement>; // Assuming passwordRef is a ref to an input element
-  mynumber: string;
-  setnumber: React.Dispatch<React.SetStateAction<string>>; // If setnumber is a setState function from useState hook
-  onSendSMS: () => Promise<void>; // Assuming onSendSMS is an async function without parameters
-  isCaptchaVerified: boolean;
-  t: TFunction; // If you are using the t function from 'react-i18next', otherwise type accordingly
-  firstNameRef: RefObject<HTMLInputElement>;
-  lastNameRef: RefObject<HTMLInputElement>;
-}
+const SignUpStep: React.FC<{
+  onSendSMS: (values: SignUpFormValues) => void;
+}> = ({ onSendSMS }) => {
+  const [form] = Form.useForm<SignUpFormValues>();
+  const { t } = useTranslation();
 
-// Define your component with typed props
-const SignUpStep: React.FC<SignUpStepProps> = ({
-  setStep,
-  emailRef,
-  passwordRef,
-  mynumber,
-  setnumber,
-  onSendSMS,
-  isCaptchaVerified,
-  t,
-  firstNameRef,
-  lastNameRef,
-}) => {
+  const onFinish = (values: SignUpFormValues) => {
+    console.log('Success:', values);
+    onSendSMS(values); // pass the form values to the SMS handler
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
     <>
       <h4 className="title title-h4">{t('signIn.registrationTitle')}</h4>
-      <p className="text">{t('signIn.registrationText')}</p>
-      <div className="section section-form section-bleed">
-        <div className="input-wrapper">
-          <input
-            className="form-input"
-            ref={firstNameRef}
-            type="text"
+      <Form
+        form={form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        layout="vertical"
+        initialValues={{
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          phone: '',
+        }}
+      >
+        <Form.Item
+          name="firstName"
+          rules={[
+            {
+              required: true,
+              message:
+                t('signIn.placeholderFirstName') || 'First Name is required',
+            },
+          ]}
+        >
+          <Input
             placeholder={t('signIn.placeholderFirstName') || 'First Name'}
           />
-        </div>
-        <div className="input-wrapper">
-          <input
-            className="form-input"
-            ref={lastNameRef}
-            type="text"
-            placeholder={t('signIn.placeholderLastName') || 'Last Name'}
+        </Form.Item>
+        <Form.Item
+          name="lastName"
+          rules={[
+            {
+              required: true,
+              message:
+                t('signIn.placeholderLastName') || 'Last Name is required',
+            },
+          ]}
+        >
+          <Input placeholder={t('signIn.placeholderLastName') || 'Last Name'} />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              type: 'email',
+              message: t('signIn.placeholderEmail') || 'Email is required',
+            },
+          ]}
+        >
+          <Input placeholder={t('signIn.placeholderEmail') || 'Email'} />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message:
+                t('signIn.placeholderPassword') || 'Password is required',
+            },
+          ]}
+        >
+          <Input.Password
+            placeholder={t('signIn.placeholderPassword') || 'Password'}
           />
-        </div>
-        <div className="input-wrapper">
-          <input
-            className="form-input"
-            ref={emailRef}
-            type="email"
-            placeholder={t('signIn.placeholderEmail') || 'Your email address'}
-          />
-        </div>
-        <div className="input-wrapper">
-          <input
-            className="form-input"
-            ref={passwordRef}
-            type="password"
-            placeholder={t('signIn.placeholderPassword') || 'Your password'}
-          />
-        </div>
-        <div className="input-wrapper">
-          <input
-            className="form-input"
-            value={mynumber}
-            type="tel"
-            onChange={(e) => setnumber(e.target.value)}
-            placeholder={t('signIn.placeholderPhone') || 'Your phone number'}
-          />
-          <p className="text-hint">{t('signIn.placeholderHintPhone')}</p>
-        </div>
-        <div id="recaptcha-container"></div>
-        <div className="spacer-small"></div>
-        <div className="text-align-right">
-          {isCaptchaVerified && (
-            <button
-              className="button button-solid box-shadow box-radius-default box-shadow-effect"
-              onClick={onSendSMS}
-            >
-              {t('signIn.registrationButton')}
-            </button>
-          )}
-        </div>
-      </div>
+        </Form.Item>
+        <Form.Item
+          name="phone"
+          rules={[
+            {
+              required: true,
+              message: t('signIn.placeholderPhone') || 'Phone is required',
+            },
+          ]}
+        >
+          <Input placeholder={t('signIn.placeholderPhone') || 'Phone'} />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            {t('signIn.registrationButton')}
+          </Button>
+        </Form.Item>
+      </Form>
     </>
   );
 };
+
 export default SignUpStep;

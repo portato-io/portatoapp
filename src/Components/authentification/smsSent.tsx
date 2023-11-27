@@ -19,6 +19,14 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
   const [resendTimer, setResendTimer] = useState<number>(5);
 
   useEffect(() => {
+    const container = document.getElementById('recaptcha-container');
+    if (!container) {
+      // Create the container if it's not there
+      const newContainer = document.createElement('div');
+      newContainer.id = 'recaptcha-container';
+      document.body.appendChild(newContainer);
+    }
+
     // Reset the timer to 5 whenever the key prop changes
     setResendTimer(5);
 
@@ -26,10 +34,15 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
     const interval = setInterval(() => {
       setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
-
-    // Clear interval on component unmount
-    return () => clearInterval(interval);
-  }, [stepKey]); // Now the effect depends on the key prop
+    return () => {
+      clearInterval(interval);
+      // Remove the reCAPTCHA container element from the DOM
+      const reCaptchaEl = document.getElementById('recaptcha-container');
+      if (reCaptchaEl) {
+        reCaptchaEl.remove();
+      }
+    };
+  }, [stepKey]); // Dependency array includes the key prop
 
   return (
     <>
