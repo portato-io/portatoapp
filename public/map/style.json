@@ -1,6 +1,6 @@
 {
     "version": 8,
-    "name": "Frank",
+    "name": "Frank-copy",
     "metadata": {
         "mapbox:type": "default",
         "mapbox:origin": "basic-v1",
@@ -88,7 +88,7 @@
         "mapbox:uiParadigm": "components",
         "mapbox:trackposition": false,
         "mapbox:decompiler": {
-            "id": "ckshxkppe0gge18nz20i0nrwq",
+            "id": "cloe473sd001o01qqcdnngf7m",
             "componentVersion": "0.4.0",
             "strata": [
                 {
@@ -125,11 +125,18 @@
             ],
             "overrides": {
                 "buildings": {
-                    "building": {"paint": {"fill-color": "#e3d6c4"}},
+                    "building": {
+                        "paint": {"fill-color": "#e3d6c4"},
+                        "layout": {"visibility": "none"}
+                    },
                     "building-outline": {"layout": {"visibility": "none"}},
                     "building-extrusion": {
-                        "paint": {"fill-extrusion-color": "hsl(35, 46%, 69%)"}
-                    }
+                        "paint": {"fill-extrusion-color": "hsl(35, 46%, 69%)"},
+                        "layout": {"visibility": "none"}
+                    },
+                    "building-number-label": {"layout": {"visibility": "none"}},
+                    "building-underground": {"layout": {"visibility": "none"}},
+                    "block-number-label": {"layout": {"visibility": "none"}}
                 },
                 "land-and-water": {
                     "landuse": {
@@ -174,10 +181,7 @@
                     }
                 },
                 "transit": {
-                    "aeroway-polygon": {
-                        "paint": {"fill-color": "#cecaca"},
-                        "layout": {"visibility": "visible"}
-                    },
+                    "aeroway-polygon": {"paint": {"fill-color": "#cecaca"}},
                     "aeroway-line": {"paint": {"line-color": "#cecaca"}}
                 },
                 "point-of-interest-labels": {
@@ -192,8 +196,20 @@
                                     ["image", ["get", "maki"]]
                                 ],
                                 ["image", ["get", "maki"]]
-                            ]
+                            ],
+                            "visibility": "none"
                         }
+                    }
+                },
+                "admin-boundaries": {
+                    "admin-2-boundary-bg": {"layout": {"visibility": "none"}},
+                    "admin-1-boundary-bg": {"layout": {"visibility": "none"}},
+                    "admin-0-boundary-bg": {"layout": {"visibility": "none"}},
+                    "admin-2-boundary": {"layout": {"visibility": "none"}},
+                    "admin-1-boundary": {"layout": {"visibility": "none"}},
+                    "admin-0-boundary": {"layout": {"visibility": "none"}},
+                    "admin-0-boundary-disputed": {
+                        "layout": {"visibility": "none"}
                     }
                 }
             },
@@ -302,7 +318,7 @@
                 "buildings": {
                     "color-base": "#ffffff",
                     "houseNumbers": false,
-                    "3D": true,
+                    "3D": false,
                     "houseNumbersFont": [
                         "Source Sans Pro Light Italic",
                         "Arial Unicode MS Regular"
@@ -321,7 +337,7 @@
             "type": "vector"
         }
     },
-    "sprite": "mapbox://sprites/mischakolbe/cloe473sd001o01qqcdnngf7m/3vrtwcunx9i39igg2871z4olr",
+    "sprite": "mapbox://sprites/mischakolbe/cloil55kp004801qo8f26ch8a/3vrtwcunx9i39igg2871z4olr",
     "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
     "layers": [
         {
@@ -485,11 +501,11 @@
             "type": "fill",
             "source": "composite",
             "source-layer": "water",
-            "layout": {},
+            "layout": {"visibility": "none"},
             "paint": {
                 "fill-color": "hsl(210, 22%, 80%)",
                 "fill-pattern": "bank2-01",
-                "fill-opacity": 0.5
+                "fill-opacity": 0
             }
         },
         {
@@ -597,6 +613,74 @@
                     18,
                     ["match", ["get", "type"], "runway", 80, 20]
                 ]
+            }
+        },
+        {
+            "id": "building-outline",
+            "type": "line",
+            "metadata": {
+                "mapbox:featureComponent": "buildings",
+                "mapbox:group": "Buildings, built"
+            },
+            "source": "composite",
+            "source-layer": "building",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["!=", ["get", "type"], "building:part"],
+                ["==", ["get", "underground"], "false"]
+            ],
+            "layout": {"visibility": "none"},
+            "paint": {
+                "line-color": "rgb(227, 227, 227)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.5],
+                    ["zoom"],
+                    15,
+                    0.75,
+                    20,
+                    3
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    15,
+                    0,
+                    16,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "building",
+            "type": "fill",
+            "metadata": {
+                "mapbox:featureComponent": "buildings",
+                "mapbox:group": "Buildings, built"
+            },
+            "source": "composite",
+            "source-layer": "building",
+            "minzoom": 15,
+            "filter": [
+                "all",
+                ["!=", ["get", "type"], "building:part"],
+                ["==", ["get", "underground"], "false"]
+            ],
+            "layout": {"visibility": "none"},
+            "paint": {
+                "fill-color": "#e3d6c4",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    15,
+                    0,
+                    16,
+                    1
+                ],
+                "fill-outline-color": "rgb(227, 227, 227)"
             }
         },
         {
@@ -1156,28 +1240,6 @@
             }
         },
         {
-            "id": "building-extrusion",
-            "type": "fill-extrusion",
-            "metadata": {
-                "mapbox:featureComponent": "buildings",
-                "mapbox:group": "Buildings, extruded"
-            },
-            "source": "composite",
-            "source-layer": "building",
-            "minzoom": 15,
-            "filter": [
-                "all",
-                ["==", ["get", "underground"], "false"],
-                ["!=", ["get", "extrude"], "false"]
-            ],
-            "layout": {},
-            "paint": {
-                "fill-extrusion-color": "hsl(35, 46%, 69%)",
-                "fill-extrusion-height": ["get", "height"],
-                "fill-extrusion-opacity": 0.3
-            }
-        },
-        {
             "id": "admin-1-boundary-bg",
             "type": "line",
             "metadata": {
@@ -1193,7 +1255,7 @@
                 ["==", ["get", "maritime"], "false"],
                 ["match", ["get", "worldview"], ["all", "US"], true, false]
             ],
-            "layout": {"line-join": "bevel"},
+            "layout": {"line-join": "bevel", "visibility": "none"},
             "paint": {
                 "line-color": [
                     "interpolate",
@@ -1242,7 +1304,7 @@
                 ["==", ["get", "maritime"], "false"],
                 ["match", ["get", "worldview"], ["all", "US"], true, false]
             ],
-            "layout": {},
+            "layout": {"visibility": "none"},
             "paint": {
                 "line-width": [
                     "interpolate",
@@ -1290,7 +1352,11 @@
                 ["==", ["get", "maritime"], "false"],
                 ["match", ["get", "worldview"], ["all", "US"], true, false]
             ],
-            "layout": {"line-join": "round", "line-cap": "round"},
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round",
+                "visibility": "none"
+            },
             "paint": {
                 "line-dasharray": [
                     "step",
@@ -1345,7 +1411,11 @@
                 ["==", ["get", "maritime"], "false"],
                 ["match", ["get", "worldview"], ["all", "US"], true, false]
             ],
-            "layout": {"line-join": "round", "line-cap": "round"},
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round",
+                "visibility": "none"
+            },
             "paint": {
                 "line-color": "hsl(53, 5%, 51%)",
                 "line-width": [
@@ -1377,7 +1447,7 @@
                 ["==", ["get", "maritime"], "false"],
                 ["match", ["get", "worldview"], ["all", "US"], true, false]
             ],
-            "layout": {"line-join": "round"},
+            "layout": {"line-join": "round", "visibility": "none"},
             "paint": {
                 "line-color": "hsl(53, 5%, 51%)",
                 "line-width": [
@@ -1948,7 +2018,8 @@
                     17,
                     ["step", ["get", "sizerank"], "center", 13, "top"]
                 ],
-                "text-field": ["coalesce", ["get", "name_en"], ["get", "name"]]
+                "text-field": ["coalesce", ["get", "name_en"], ["get", "name"]],
+                "visibility": "none"
             },
             "paint": {
                 "icon-opacity": [
@@ -2670,9 +2741,9 @@
             }
         }
     ],
-    "created": "2023-10-31T09:16:38.509Z",
-    "modified": "2023-10-31T09:16:38.509Z",
-    "id": "cloe473sd001o01qqcdnngf7m",
+    "created": "2023-11-03T12:22:05.689Z",
+    "modified": "2023-11-03T12:22:05.689Z",
+    "id": "cloil55kp004801qo8f26ch8a",
     "owner": "mischakolbe",
     "visibility": "private",
     "protected": false,
