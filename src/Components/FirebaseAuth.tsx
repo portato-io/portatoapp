@@ -94,7 +94,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         );
       }
       recaptchaVerifierRef.current.render();
-    } else {
+    } else if (step !== 'smsSent') {
       // Clear the reCAPTCHA when leaving the signUp step
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear();
@@ -167,6 +167,8 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
     setLastName(currentLastName);
     console.log('Trying to send SMS');
     if (!isCaptchaVerified || !recaptchaVerifierRef.current) {
+      console.log('isCaptchaVerified:', isCaptchaVerified);
+
       message.error(t('signIn.captchaMissingMessage'));
       return;
     }

@@ -14,7 +14,7 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
   setotp,
   t,
 }) => {
-  const [resendTimer, setResendTimer] = useState<number>(30);
+  const [resendTimer, setResendTimer] = useState<number>(5);
 
   useEffect(() => {
     // Start the countdown immediately on component mount
