@@ -97,6 +97,7 @@ const SignUpStep: React.FC<{
         >
           <Input placeholder={t('signIn.placeholderPhone') || 'Phone'} />
         </Form.Item>
+        <div id="recaptcha-container"></div>
         <Form.Item>
           <Button type="primary" htmlType="submit">
             {t('signIn.registrationButton')}

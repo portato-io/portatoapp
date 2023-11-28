@@ -156,44 +156,46 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
       message.error(t('signIn.otpVerificationFailedMessage'));
     }
   };
+  const sendSMS = async () => {
+    if (mynumber && isCaptchaVerified && recaptchaVerifierRef.current) {
+      try {
+        const result = await signInWithPhoneNumber(
+          auth,
+          mynumber,
+          recaptchaVerifierRef.current
+        );
+        setConfirmationResult(result);
+        message.success(t('signIn.successSmsSent'));
+        console.log('sms sent successfully');
+        setTimeout(() => {
+          if (recaptchaVerifierRef.current) {
+            recaptchaVerifierRef.current.clear();
+            recaptchaVerifierRef.current = null;
+          }
+          setStep('smsSent');
+          resetSmsSentStep(); // Reset the SmsSentStep component state
+        }, 500);
+      } catch (error) {
+        console.error('SMS sending error:', error);
+        message.error(t('signIn.smsSendingFailedMessage'));
+      }
+    }
+  };
+  // useEffect to watch for changes in mynumber and send SMS if it's set
+  useEffect(() => {
+    sendSMS();
+  }, [mynumber, isCaptchaVerified]); // Add isCaptchaVerified to the dependency array if it's relevant for sending the SMS
 
-  const onSendSMS = async (values: SignUpFormValues) => {
+  // Update your onSendSMS function to just set the state
+  const onSendSMS = (values: SignUpFormValues) => {
     // Now use the values from the form directly
     setFormValues(values);
     setEmail(values.email);
     setPassword(values.password);
     setFirstName(values.firstName);
     setLastName(values.lastName);
-    setnumber(values.phone);
-
-    console.log('Trying to send SMS');
-    if (!isCaptchaVerified || !recaptchaVerifierRef.current) {
-      console.log('isCaptchaVerified:', isCaptchaVerified);
-
-      message.error(t('signIn.captchaMissingMessage'));
-      return;
-    }
-    try {
-      const result = await signInWithPhoneNumber(
-        auth,
-        mynumber,
-        recaptchaVerifierRef.current
-      );
-      setConfirmationResult(result);
-      message.success(t('signIn.successSmsSent'));
-      console.log('sms sent successfully');
-      setTimeout(() => {
-        if (recaptchaVerifierRef.current) {
-          recaptchaVerifierRef.current.clear();
-          recaptchaVerifierRef.current = null;
-        }
-        setStep('smsSent');
-        resetSmsSentStep(); // Reset the SmsSentStep component state
-      }, 500);
-    } catch (error) {
-      console.error('SMS sending error:', error);
-      message.error(t('signIn.smsSendingFailedMessage'));
-    }
+    setnumber(values.phone); // This will trigger the useEffect above
+    console.log('Phone number set for SMS:', values.phone);
   };
 
   const resetSmsSentStep = () => {
@@ -227,7 +229,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
       .then(() => {
         // After reCAPTCHA is rendered and verified, send SMS
         if (isCaptchaVerified) {
-          onSendSMS(formValues);
+          sendSMS();
         }
       })
       .catch((error) => {
