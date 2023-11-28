@@ -61,40 +61,40 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
 
     let state = store.getState();
 
+    // Handle the pickup address and update coordinates
+    const pickupCoordinates = await handleAddress(state.request.pickup_address);
+    if (pickupCoordinates) {
+      console.log('ALED', pickupCoordinates);
+      dispatch(setReqPickupAddressCoordinates(pickupCoordinates));
+    }
+
+    // Handle the delivery address and update coordinates
+    const deliveryCoordinates = await handleAddress(
+      state.request.delivery_adress
+    );
+    if (deliveryCoordinates) {
+      console.log('ALED', deliveryCoordinates);
+      dispatch(setReqDeliveryAddressCoordinates(deliveryCoordinates));
+    }
+
+    // Refresh state after coordinate updates
+    state = store.getState();
+
+    console.log(state);
+
     // Create a copy of the request and replace undefined values
     const requestCopy = { ...state.request };
     if (requestCopy.images === undefined) {
       requestCopy.images = []; // use an empty array as the default value
     }
 
-    handleAddress(state.request.pickup_address).then((coordinates) => {
-      if (coordinates) {
-        console.log('ALED', coordinates);
-        dispatch(setReqDeliveryAddressCoordinates(coordinates));
-      }
-
-      handleAddress(state.request.delivery_adress).then((coordinates) => {
-        if (coordinates) {
-          console.log('ALED', coordinates);
-          dispatch(setReqPickupAddressCoordinates(coordinates));
-        }
-      });
-    });
-
-    state = store.getState();
-    console.log(state);
-
     if (state.request.id === '0') {
-      // Get the database instance and create a reference to the user's requests
       const requestsRef = ref(database, `users/${uid}/requests`);
-      // Generate a new unique key for the request
       const newRequestRef = firebasePush(requestsRef);
 
-      // The unique key is now available as newRequestRef.key
       if (newRequestRef.key) {
         dispatch(setObjectId(newRequestRef.key));
         state = store.getState();
-        // Update your data under the new key
         requestCopy.id = newRequestRef.key;
         await set(newRequestRef, requestCopy);
 
