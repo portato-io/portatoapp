@@ -10,11 +10,50 @@ import {
   serverTimestamp,
 } from 'firebase/database';
 import { database } from './firebaseConfig';
-import { setObjectId, setReqUid } from './Store/actions/requestActionCreators';
+import {
+  setObjectId,
+  setReqUid,
+  setReqDeliveryAddressCoordinates,
+  setReqPickupAddressCoordinates,
+} from './Store/actions/requestActionCreators';
 import { setRouteId, setRouteUid } from './Store/actions/routeActionCreators';
 import { setDealId } from './Store/actions/dealActionCreators';
 import { store } from './index';
 import { push as firebasePush } from 'firebase/database';
+
+import {
+  setKey,
+  setDefaults,
+  setLanguage,
+  setRegion,
+  fromAddress,
+  fromLatLng,
+  fromPlaceId,
+  setLocationType,
+  geocode,
+  RequestType,
+} from 'react-geocode';
+
+if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
+  setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
+
+const handleAddress = async (address) => {
+  try {
+    const { results } = await fromAddress(address);
+    if (
+      results &&
+      results.length > 0 &&
+      results[0].geometry &&
+      results[0].geometry.location
+    ) {
+      const { lat, lng } = results[0].geometry.location;
+      return [lat, lng];
+    }
+  } catch (error) {
+    console.error(`Error geocoding address: ${address}`, error);
+    return [];
+  }
+};
 
 export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
@@ -27,6 +66,23 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
     if (requestCopy.images === undefined) {
       requestCopy.images = []; // use an empty array as the default value
     }
+
+    handleAddress(state.request.pickup_address).then((coordinates) => {
+      if (coordinates) {
+        console.log('ALED', coordinates);
+        dispatch(setReqDeliveryAddressCoordinates(coordinates));
+      }
+
+      handleAddress(state.request.delivery_adress).then((coordinates) => {
+        if (coordinates) {
+          console.log('ALED', coordinates);
+          dispatch(setReqPickupAddressCoordinates(coordinates));
+        }
+      });
+    });
+
+    state = store.getState();
+    console.log(state);
 
     if (state.request.id === '0') {
       // Get the database instance and create a reference to the user's requests

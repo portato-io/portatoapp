@@ -17,6 +17,8 @@ const initialState: IRequestInfo = {
   status: 'unmatched',
   dealId: '',
   contactTimestamp: '',
+  delivery_coordinates: [0, 0],
+  pickup_coordinates: [0, 0],
 };
 
 export function requestReducer(
@@ -59,6 +61,19 @@ export function requestReducer(
       return {
         ...state,
         delivery_adress: action.payload,
+      };
+    }
+    case 'SET_REQ_DELIVERY_ADDRESS_COORDINATES': {
+      return {
+        ...state,
+        delivery_coordinates: action.payload,
+      };
+    }
+    case 'SET_REQ_PICKUP_ADDRESS_COORDINATES': {
+      console.log('ALED2', action.payload);
+      return {
+        ...state,
+        pickup_coordinates: action.payload,
       };
     }
     case 'SET_PRICE': {

@@ -14,6 +14,8 @@ export interface IRequestInfo {
   status: string;
   dealId: string;
   contactTimestamp: string;
+  delivery_coordinates: [0, 0];
+  pickup_coordinates: [0, 0];
 }
 
 export interface IFirstObjectInfo {
