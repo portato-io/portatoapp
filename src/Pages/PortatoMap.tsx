@@ -30,15 +30,15 @@ import { features } from 'process';
 if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
   setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
 
-interface Coordinates {
-  type: 'Point';
-  coordinates: [number, number];
-}
-
 const PortatoMap: React.FC = () => {
   const { user } = useAuth();
   const [geoRequestData, setGeoRequestData] = useState<
-    Array<{ coordinates: number[]; description: string; name: string }>
+    Array<{
+      coordinates_pickup: number[];
+      coordinates_delivery: number[];
+      description: string;
+      name: string;
+    }>
   >([]);
   const [geoRouteData, setGeoRouteData] = useState<
     Array<{ address: string; destination: string }>
@@ -49,7 +49,8 @@ const PortatoMap: React.FC = () => {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [6.6322734, 46.5196535] as [number, number],
+        pickup_coordinates: [6.6322734, 46.5196535] as [number, number],
+        delivery_coordinates: [6.822734, 46.5196535] as [number, number],
       },
       class: 'box-marker',
       name: 'test marker',
@@ -84,16 +85,21 @@ const PortatoMap: React.FC = () => {
 
         // Extracting delivery_addresses from the requests
         const pickup_addresses: {
-          coordinates: number[];
+          coordinates_pickup: number[];
+          coordinates_delivery: number[];
           description: string;
           name: string;
         }[] = [];
 
         requestDataArray.forEach((item) => {
           Object.values(item.requests).forEach((request) => {
-            if (request.pickup_coordinates != undefined)
+            if (
+              request.pickup_coordinates != undefined &&
+              request.delivery_coordinates != undefined
+            )
               pickup_addresses.push({
-                coordinates: request.pickup_coordinates,
+                coordinates_pickup: request.pickup_coordinates,
+                coordinates_delivery: request.delivery_coordinates,
                 description: request.description,
                 name: request.name,
               });
@@ -160,25 +166,36 @@ const PortatoMap: React.FC = () => {
   }, [user?.uid]); // Fetch geoData when the user's UID changes
 
   useEffect(() => {
-    const latitudes: number[] = [];
-    const longitudes: number[] = [];
+    const pickup_latitudes: number[] = [];
+    const pickup_longitudes: number[] = [];
+    const delivery_latitudes: number[] = [];
+    const delivery_longitudes: number[] = [];
     const descriptions: string[] = [];
     const names: string[] = [];
 
     if (geoRequestData && geoRequestData.length > 0) {
       (async () => {
         for (const address of geoRequestData) {
-          latitudes.push(address.coordinates[1]);
-          longitudes.push(address.coordinates[0]);
+          pickup_latitudes.push(address.coordinates_pickup[1]);
+          pickup_longitudes.push(address.coordinates_pickup[0]);
+          delivery_latitudes.push(address.coordinates_delivery[1]);
+          delivery_longitudes.push(address.coordinates_delivery[0]);
           descriptions.push(address.description);
           names.push(address.name);
         }
 
-        const newRequestsFromDatabase = latitudes.map((lng, idx) => ({
+        const newRequestsFromDatabase = pickup_latitudes.map((lng, idx) => ({
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [latitudes[idx], longitudes[idx]] as [number, number], // Use "as [number, number]" for casting
+            pickup_coordinates: [
+              pickup_latitudes[idx],
+              pickup_longitudes[idx],
+            ] as [number, number],
+            delivery_coordinates: [
+              delivery_latitudes[idx],
+              delivery_longitudes[idx],
+            ] as [number, number],
           },
           class: 'box-marker',
           description: descriptions[idx],

@@ -12,7 +12,8 @@ type GeoData = {
   type: string;
   geometry: {
     type: string;
-    coordinates: [number, number]; // Note the use of [number, number] instead of number[]
+    pickup_coordinates: [number, number]; // Note the use of [number, number] instead of number[]
+    delivery_coordinates: [number, number];
   };
   class: string;
   name: string;
@@ -44,7 +45,7 @@ function Map({ geoDatas }: MapProps) {
               el.className = geoData.class;
 
               new mapboxgl.Marker(el)
-                .setLngLat(geoData.geometry.coordinates)
+                .setLngLat(geoData.geometry.pickup_coordinates)
                 .setPopup(
                   new mapboxgl.Popup({ offset: 25 }).setHTML(
                     `<h3>${geoData.name}</h3><p>${geoData.description}</p>`
