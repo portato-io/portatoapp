@@ -38,7 +38,7 @@ interface Coordinates {
 const PortatoMap: React.FC = () => {
   const { user } = useAuth();
   const [geoRequestData, setGeoRequestData] = useState<
-    Array<{ address: string; description: string; name: string }>
+    Array<{ coordinates: number[]; description: string; name: string }>
   >([]);
   const [geoRouteData, setGeoRouteData] = useState<
     Array<{ address: string; destination: string }>
@@ -84,18 +84,19 @@ const PortatoMap: React.FC = () => {
 
         // Extracting delivery_addresses from the requests
         const pickup_addresses: {
-          address: string;
+          coordinates: number[];
           description: string;
           name: string;
         }[] = [];
 
         requestDataArray.forEach((item) => {
           Object.values(item.requests).forEach((request) => {
-            pickup_addresses.push({
-              address: request.pickup_address,
-              description: request.description,
-              name: request.name,
-            });
+            if (request.pickup_coordinates != undefined)
+              pickup_addresses.push({
+                coordinates: request.pickup_coordinates,
+                description: request.description,
+                name: request.name,
+              });
           });
         });
 
@@ -155,7 +156,7 @@ const PortatoMap: React.FC = () => {
   };
   useEffect(() => {
     fetchRequestData();
-    fetchRouteData();
+    // fetchRouteData();
   }, [user?.uid]); // Fetch geoData when the user's UID changes
 
   useEffect(() => {
@@ -164,36 +165,13 @@ const PortatoMap: React.FC = () => {
     const descriptions: string[] = [];
     const names: string[] = [];
 
-    // Helper function to handle each address
-    const handleAddress = async (requestObj: {
-      address: string;
-      description: string;
-      name: string;
-    }) => {
-      try {
-        const { results } = await fromAddress(requestObj.address);
-        if (
-          results &&
-          results.length > 0 &&
-          results[0].geometry &&
-          results[0].geometry.location
-        ) {
-          const { lat, lng } = results[0].geometry.location;
-
-          latitudes.push(lng);
-          longitudes.push(lat);
-          descriptions.push(requestObj.description);
-          names.push(requestObj.name);
-        }
-      } catch (error) {
-        console.error(`Error geocoding address: ${requestObj.address}`, error);
-      }
-    };
-
     if (geoRequestData && geoRequestData.length > 0) {
       (async () => {
         for (const address of geoRequestData) {
-          await handleAddress(address);
+          latitudes.push(address.coordinates[1]);
+          longitudes.push(address.coordinates[0]);
+          descriptions.push(address.description);
+          names.push(address.name);
         }
 
         const newRequestsFromDatabase = latitudes.map((lng, idx) => ({
