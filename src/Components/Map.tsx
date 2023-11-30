@@ -34,54 +34,59 @@ function Map({ geoDatas }: MapProps) {
   const lastClickedMarker = useRef<string | null>(null);
 
   const fixedPoint: [number, number] = [6.8322734, 46.8196535];
-  const drawLine = (coordinates: [number, number]) => {
+  const drawLine = (
+    pickup_coordinates: [number, number],
+    delivery_coordinates: [number, number]
+  ) => {
     if (!map.current) return;
 
-    const coordinatesString = coordinates.join(',');
+    const coordinatesString = pickup_coordinates.join(',');
+    const isSameMarkerClicked = lastClickedMarker.current === coordinatesString;
 
-    // Temporarily simplify the logic to see if the condition works
-    if (lastClickedMarker.current === coordinatesString) {
-      console.log('Clicked the same marker');
+    // If the same marker is clicked and the line is currently drawn, remove it
+    if (isSameMarkerClicked && map.current.getLayer('route')) {
+      map.current.removeLayer('route');
+      map.current.removeSource('route');
+      lastClickedMarker.current = null; // Reset the last clicked marker reference
+      console.log('Line removed');
     } else {
-      console.log('Clicked a different marker');
-    }
-
-    lastClickedMarker.current = coordinatesString;
-    const sourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
-      type: 'Feature',
-      properties: {},
-      geometry: {
-        type: 'LineString',
-        coordinates: [coordinates, fixedPoint],
-      },
-    };
-
-    if (map.current.getSource('route')) {
-      const routeSource = map.current.getSource(
-        'route'
-      ) as mapboxgl.GeoJSONSource;
-      routeSource.setData(sourceData);
-    } else {
-      map.current.addSource('route', {
-        type: 'geojson',
-        data: sourceData,
-      });
-
-      map.current.addLayer({
-        id: 'route',
-        type: 'line',
-        source: 'route',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round',
+      // If a different marker is clicked or no line is drawn, draw the line
+      lastClickedMarker.current = coordinatesString; // Set the last clicked marker reference
+      const sourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: [pickup_coordinates, delivery_coordinates],
         },
-        paint: {
-          'line-color': '#888',
-          'line-width': 8,
-        },
-      });
+      };
+
+      if (map.current.getSource('route')) {
+        const routeSource = map.current.getSource(
+          'route'
+        ) as mapboxgl.GeoJSONSource;
+        routeSource.setData(sourceData);
+      } else {
+        map.current.addSource('route', {
+          type: 'geojson',
+          data: sourceData,
+        });
+        map.current.addLayer({
+          id: 'route',
+          type: 'line',
+          source: 'route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#888',
+            'line-width': 8,
+          },
+        });
+      }
+      console.log('Line drawn');
     }
-    setLineVisible(true);
   };
 
   useEffect(() => {
@@ -111,8 +116,11 @@ function Map({ geoDatas }: MapProps) {
 
               el.addEventListener('click', () => {
                 console.log('click');
-                setSelectedPoint(geoData.geometry.coordinates);
-                drawLine(geoData.geometry.coordinates); // Example: draw line to same point for now
+                setSelectedPoint(geoData.geometry.pickup_coordinates);
+                drawLine(
+                  geoData.geometry.pickup_coordinates,
+                  geoData.geometry.delivery_coordinates
+                ); // Example: draw line to same point for now
               });
 
               map.current.setZoom(12);
