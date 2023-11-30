@@ -104,21 +104,6 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
     }
   }, [step]); // Dependency array includes step
 
-  useEffect(() => {
-    // Start the countdown when the smsSent step is reached
-    if (step === 'smsSent' && timer === null) {
-      setTimer(30);
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) =>
-          prevTimer && prevTimer > 0 ? prevTimer - 1 : 0
-        );
-      }, 1000);
-
-      // Cleanup interval on component unmount or when leaving the smsSent step
-      return () => clearInterval(intervalId);
-    }
-  }, [step, timer]);
-
   // Enable the button by resetting the timer when it reaches 0
   useEffect(() => {
     if (timer === 0) {
@@ -156,8 +141,17 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
       message.error(t('signIn.otpVerificationFailedMessage'));
     }
   };
-  const sendSMS = async () => {
-    if (mynumber && isCaptchaVerified && recaptchaVerifierRef.current) {
+
+  // Update your onSendSMS function to just set the state
+  const onSendSMS = async (values: SignUpFormValues) => {
+    // Now use the values from the form directly
+    setFormValues(values);
+    setEmail(values.email);
+    setPassword(values.password);
+    setFirstName(values.firstName);
+    setLastName(values.lastName);
+    setnumber(values.phone); // This will trigger the useEffect above
+    if (isCaptchaVerified && recaptchaVerifierRef.current) {
       try {
         const result = await signInWithPhoneNumber(
           auth,
@@ -167,74 +161,23 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         setConfirmationResult(result);
         message.success(t('signIn.successSmsSent'));
         console.log('sms sent successfully');
-        setTimeout(() => {
-          if (recaptchaVerifierRef.current) {
-            recaptchaVerifierRef.current.clear();
-            recaptchaVerifierRef.current = null;
-          }
-          setStep('smsSent');
-          resetSmsSentStep(); // Reset the SmsSentStep component state
-        }, 500);
+        if (recaptchaVerifierRef.current) {
+          recaptchaVerifierRef.current.clear();
+          recaptchaVerifierRef.current = null;
+        }
+        setStep('smsSent');
+        resetSmsSentStep(); // Reset the SmsSentStep component state
       } catch (error) {
         console.error('SMS sending error:', error);
         message.error(t('signIn.smsSendingFailedMessage'));
       }
     }
-  };
-  // useEffect to watch for changes in mynumber and send SMS if it's set
-  useEffect(() => {
-    sendSMS();
-  }, [mynumber, isCaptchaVerified]); // Add isCaptchaVerified to the dependency array if it's relevant for sending the SMS
 
-  // Update your onSendSMS function to just set the state
-  const onSendSMS = (values: SignUpFormValues) => {
-    // Now use the values from the form directly
-    setFormValues(values);
-    setEmail(values.email);
-    setPassword(values.password);
-    setFirstName(values.firstName);
-    setLastName(values.lastName);
-    setnumber(values.phone); // This will trigger the useEffect above
     console.log('Phone number set for SMS:', values.phone);
   };
 
   const resetSmsSentStep = () => {
     setSmsStepKey(Date.now()); // This will change the stepKey, causing SmsSentStep to reset
-  };
-
-  const onResendSms = async () => {
-    if (!formValues) {
-      console.error('Form values are not available for resending SMS.');
-      return;
-    }
-    console.log('in resends SMS');
-    if (recaptchaVerifierRef.current) {
-      recaptchaVerifierRef.current.clear();
-      recaptchaVerifierRef.current = null;
-    }
-    recaptchaVerifierRef.current = new RecaptchaVerifier(
-      'recaptcha-container',
-      {
-        size: 'normal',
-        callback: () => {
-          setIsCaptchaVerified(true);
-          message.success(t('signIn.captchaSuccessMessage'));
-        },
-      },
-      auth
-    );
-
-    recaptchaVerifierRef.current
-      .render()
-      .then(() => {
-        // After reCAPTCHA is rendered and verified, send SMS
-        if (isCaptchaVerified) {
-          sendSMS();
-        }
-      })
-      .catch((error) => {
-        console.error('Error rendering reCAPTCHA:', error);
-      });
   };
 
   const signIn = async () => {
@@ -307,7 +250,6 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
       {step === 'resetPassword' && <PasswordReset t={t} />}
       {step === 'smsSent' && (
         <SmsSentStep
-          onResendSms={onResendSms}
           onVerifyOtp={onVerifyOtp}
           setotp={setotp}
           t={t}
