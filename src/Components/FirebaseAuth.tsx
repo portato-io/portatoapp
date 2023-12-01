@@ -79,7 +79,8 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   }, []); // Empty dependency array to run only once on mount
 
   useEffect(() => {
-    if (step === 'signUp') {
+    // Function to initialize reCAPTCHA
+    const initializeRecaptcha = () => {
       if (!recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current = new RecaptchaVerifier(
           'recaptcha-container',
@@ -92,24 +93,28 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           },
           auth
         );
+        recaptchaVerifierRef.current.render();
       }
-      recaptchaVerifierRef.current.render();
+    };
+
+    // Only initialize reCAPTCHA on the 'signUp' step and not on every render
+    if (step === 'signUp') {
+      initializeRecaptcha();
     } else {
-      console.log('clearing captcha');
-      // Clear the reCAPTCHA when leaving the signUp step
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear();
         recaptchaVerifierRef.current = null;
       }
     }
-  }, [step]); // Dependency array includes step
 
-  // Enable the button by resetting the timer when it reaches 0
-  useEffect(() => {
-    if (timer === 0) {
-      setTimer(null); // Reset the timer to null to allow resending
-    }
-  }, [timer]);
+    // Cleanup function to clear reCAPTCHA, this runs only when the component unmounts
+    return () => {
+      if (recaptchaVerifierRef.current) {
+        recaptchaVerifierRef.current.clear();
+        recaptchaVerifierRef.current = null;
+      }
+    };
+  }, [step, t]); // Dependency array includes step and t
 
   const onVerifyOtp = async () => {
     console.log('Verifying OTP');
