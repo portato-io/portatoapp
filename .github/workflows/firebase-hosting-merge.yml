@@ -41,6 +41,10 @@ jobs:
           echo REACT_APP_FIREBASE_VAPID_KEY=${{ vars.REACT_APP_FIREBASE_VAPID_KEY }} >> .env.production
           echo REACT_APP_OPENROUTESERVICE_API_KEY=${{ vars.REACT_APP_OPENROUTESERVICE_API_KEY }} >> .env.production
           echo REACT_APP_COMMIT_HASH=${{ vars.REACT_APP_COMMIT_HASH }} >> .env.production
+          echo REACT_APP_GOOGLE_MAP_API_KEY=${{ vars.REACT_APP_GOOGLE_MAP_API_KEY }} >> .env.production
+          echo REACT_APP_MAPBOX_KEY=${{ vars.REACT_APP_MAPBOX_KEY }} >> .env.production
+          echo REACT_APP_CHAT_ENGINE_PROJECT_ID=${{ vars.REACT_APP_CHAT_ENGINE_PROJECT_ID }} >> .env.production
+          echo REACT_APP_CHAT_ENGINE_PRIVATE_KEY=${{ vars.REACT_APP_CHAT_ENGINE_PRIVATE_KEY }} >> .env.production
           
       # Displaying the contents of the .env.production for debugging
       - name: Display .env.production
