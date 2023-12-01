@@ -30,10 +30,7 @@ function Map({ geoDatas }: MapProps) {
   const [selectedPoint, setSelectedPoint] = useState<[number, number] | null>(
     null
   );
-  const [lineVisible, setLineVisible] = useState(false);
   const lastClickedMarker = useRef<string | null>(null);
-
-  const fixedPoint: [number, number] = [6.8322734, 46.8196535];
   const drawLine = (
     pickup_coordinates: [number, number],
     delivery_coordinates: [number, number]
@@ -90,49 +87,56 @@ function Map({ geoDatas }: MapProps) {
   };
 
   useEffect(() => {
+    const defaultCoordinates = { longitude: 8.5417, latitude: 47.3769 }; // Coordinates of Zurich
+
+    const initializeMap = (coords: any) => {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current!,
+        style: '/map/style.json',
+        center: [coords.longitude, coords.latitude],
+        zoom: 9,
+      });
+      if (map.current) {
+        for (const geoData of geoDatas) {
+          const el = document.createElement('div');
+          el.className = geoData.class;
+
+          new mapboxgl.Marker(el)
+            .setLngLat(geoData.geometry.pickup_coordinates)
+            .setPopup(
+              new mapboxgl.Popup({ offset: 25 }).setHTML(
+                `<h3>${geoData.name}</h3><p>${geoData.description}</p>`
+              )
+            )
+            .addTo(map.current);
+
+          el.addEventListener('click', () => {
+            console.log('click');
+            setSelectedPoint(geoData.geometry.pickup_coordinates);
+            drawLine(
+              geoData.geometry.pickup_coordinates,
+              geoData.geometry.delivery_coordinates
+            ); // Example: draw line to same point for now
+          });
+
+          map.current.setZoom(12);
+        }
+      }
+    };
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { longitude, latitude } = position.coords;
-          map.current = new mapboxgl.Map({
-            container: mapContainer.current!,
-            style: '/map/style.json',
-            center: [longitude, latitude],
-            zoom: 9,
-          });
-          if (map.current) {
-            for (const geoData of geoDatas) {
-              const el = document.createElement('div');
-              el.className = geoData.class;
-
-              new mapboxgl.Marker(el)
-                .setLngLat(geoData.geometry.pickup_coordinates)
-                .setPopup(
-                  new mapboxgl.Popup({ offset: 25 }).setHTML(
-                    `<h3>${geoData.name}</h3><p>${geoData.description}</p>`
-                  )
-                )
-                .addTo(map.current);
-
-              el.addEventListener('click', () => {
-                console.log('click');
-                setSelectedPoint(geoData.geometry.pickup_coordinates);
-                drawLine(
-                  geoData.geometry.pickup_coordinates,
-                  geoData.geometry.delivery_coordinates
-                ); // Example: draw line to same point for now
-              });
-
-              map.current.setZoom(12);
-            }
-          }
+          initializeMap({ longitude, latitude });
         },
         (error) => {
           console.error('Error getting geolocation:', error);
+          initializeMap(defaultCoordinates); // Initialize map with Zurich coordinates
         }
       );
     } else {
       console.error('Geolocation is not available in your browser.');
+      initializeMap(defaultCoordinates); // Initialize map with Zurich coordinates
     }
   }, [geoDatas]);
 

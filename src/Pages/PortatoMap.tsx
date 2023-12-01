@@ -1,31 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import {
-  fetchDataOnce,
-  fetchGeoData,
-  fetchAllRequests,
-  fetchAllRoutes,
-} from '../linksStoreToFirebase';
+import { fetchAllRequests, fetchAllRoutes } from '../linksStoreToFirebase';
 import { useAuth } from '../Components/AuthProvider';
-import { useTranslation } from 'react-i18next';
-import { logEvent } from 'firebase/analytics';
-import { analytics } from '../firebaseConfig';
+
 import Map from '../Components/Map';
-import { IRequestInfo, IRouteInfo, MapMarker } from '../type';
-import AllRequests from './Admin/AllRequests';
-import {
-  setKey,
-  setDefaults,
-  setLanguage,
-  setRegion,
-  fromAddress,
-  fromLatLng,
-  fromPlaceId,
-  setLocationType,
-  geocode,
-  RequestType,
-} from 'react-geocode';
-import { features } from 'process';
+import { IRequestInfo, IRouteInfo } from '../type';
+import { setKey } from 'react-geocode';
 
 if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
   setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
