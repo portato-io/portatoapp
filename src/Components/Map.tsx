@@ -1,4 +1,4 @@
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from '!mapbox-gl';
 import { useEffect, useRef, useState } from 'react';
 import { MapMarker } from '../type';
 

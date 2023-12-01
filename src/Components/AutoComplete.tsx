@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from '!mapbox-gl';
 import { AutoComplete } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
