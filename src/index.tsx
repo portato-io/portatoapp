@@ -39,6 +39,8 @@ const initialStateRequest: IRequestInfo = {
   status: 'unmatched',
   dealId: '',
   contactTimestamp: '',
+  delivery_coordinates: [0, 0],
+  pickup_coordinates: [0, 0],
 };
 console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 

@@ -23,6 +23,11 @@ function BottomBar() {
       eventName: 'navbar_home_button_click',
     },
     {
+      key: '/PortatoMap',
+      title: t('navBar.map'),
+      icon: <i className="icon icon-big icon-map" />,
+    },
+    {
       key: '/createSendRequest',
       title: t('navBar.send'),
       icon: <i className="icon icon-big icon-send" />,
@@ -34,17 +39,6 @@ function BottomBar() {
       title: t('navBar.drive'),
       icon: <i className="icon icon-big icon-drive" />,
       eventName: 'navbar_drive_button_click',
-    },
-    {
-      key: '/profile',
-      title: t('navBar.profile'),
-      icon: <i className="icon icon-big icon-profile" />,
-      eventName: 'navbar_profile_button_click',
-    },
-    {
-      key: '/PortatoMap',
-      title: t('navBar.map'),
-      icon: <i className="icon icon-big icon-map" />,
     },
   ];
 

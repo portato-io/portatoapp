@@ -10,17 +10,77 @@ import {
   serverTimestamp,
 } from 'firebase/database';
 import { database } from './firebaseConfig';
-import { setObjectId, setReqUid } from './Store/actions/requestActionCreators';
+import {
+  setObjectId,
+  setReqUid,
+  setReqDeliveryAddressCoordinates,
+  setReqPickupAddressCoordinates,
+} from './Store/actions/requestActionCreators';
 import { setRouteId, setRouteUid } from './Store/actions/routeActionCreators';
 import { setDealId } from './Store/actions/dealActionCreators';
 import { store } from './index';
 import { push as firebasePush } from 'firebase/database';
+
+import {
+  setKey,
+  setDefaults,
+  setLanguage,
+  setRegion,
+  fromAddress,
+  fromLatLng,
+  fromPlaceId,
+  setLocationType,
+  geocode,
+  RequestType,
+} from 'react-geocode';
+
+if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
+  setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
+
+const handleAddress = async (address) => {
+  try {
+    const { results } = await fromAddress(address);
+    if (
+      results &&
+      results.length > 0 &&
+      results[0].geometry &&
+      results[0].geometry.location
+    ) {
+      const { lat, lng } = results[0].geometry.location;
+      return [lat, lng];
+    }
+  } catch (error) {
+    console.error(`Error geocoding address: ${address}`, error);
+    return [];
+  }
+};
 
 export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
     dispatch(setReqUid(uid));
 
     let state = store.getState();
+
+    // Handle the pickup address and update coordinates
+    const pickupCoordinates = await handleAddress(state.request.pickup_address);
+    if (pickupCoordinates) {
+      console.log('ALED', pickupCoordinates);
+      dispatch(setReqPickupAddressCoordinates(pickupCoordinates));
+    }
+
+    // Handle the delivery address and update coordinates
+    const deliveryCoordinates = await handleAddress(
+      state.request.delivery_adress
+    );
+    if (deliveryCoordinates) {
+      console.log('ALED', deliveryCoordinates);
+      dispatch(setReqDeliveryAddressCoordinates(deliveryCoordinates));
+    }
+
+    // Refresh state after coordinate updates
+    state = store.getState();
+
+    console.log(state);
 
     // Create a copy of the request and replace undefined values
     const requestCopy = { ...state.request };
@@ -29,16 +89,12 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
     }
 
     if (state.request.id === '0') {
-      // Get the database instance and create a reference to the user's requests
       const requestsRef = ref(database, `users/${uid}/requests`);
-      // Generate a new unique key for the request
       const newRequestRef = firebasePush(requestsRef);
 
-      // The unique key is now available as newRequestRef.key
       if (newRequestRef.key) {
         dispatch(setObjectId(newRequestRef.key));
         state = store.getState();
-        // Update your data under the new key
         requestCopy.id = newRequestRef.key;
         await set(newRequestRef, requestCopy);
 

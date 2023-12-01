@@ -1,44 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
-import {
-  fetchDataOnce,
-  fetchGeoData,
-  fetchAllRequests,
-  fetchAllRoutes,
-} from '../linksStoreToFirebase';
+import { fetchAllRequests, fetchAllRoutes } from '../linksStoreToFirebase';
 import { useAuth } from '../Components/AuthProvider';
-import { useTranslation } from 'react-i18next';
-import { logEvent } from 'firebase/analytics';
-import { analytics } from '../firebaseConfig';
+
 import Map from '../Components/Map';
-import { IRequestInfo, IRouteInfo, MapMarker } from '../type';
-import AllRequests from './Admin/AllRequests';
-import {
-  setKey,
-  setDefaults,
-  setLanguage,
-  setRegion,
-  fromAddress,
-  fromLatLng,
-  fromPlaceId,
-  setLocationType,
-  geocode,
-  RequestType,
-} from 'react-geocode';
-import { features } from 'process';
+import { IRequestInfo, IRouteInfo } from '../type';
+import { setKey } from 'react-geocode';
 
 if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
   setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
 
-interface Coordinates {
-  type: 'Point';
-  coordinates: [number, number];
-}
-
 const PortatoMap: React.FC = () => {
   const { user } = useAuth();
   const [geoRequestData, setGeoRequestData] = useState<
-    Array<{ address: string; description: string; name: string }>
+    Array<{
+      coordinates_pickup: number[];
+      coordinates_delivery: number[];
+      description: string;
+      name: string;
+    }>
   >([]);
   const [geoRouteData, setGeoRouteData] = useState<
     Array<{ address: string; destination: string }>
@@ -49,7 +29,8 @@ const PortatoMap: React.FC = () => {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [6.6322734, 46.5196535] as [number, number],
+        pickup_coordinates: [6.6322734, 46.5196535] as [number, number],
+        delivery_coordinates: [6.822734, 46.5196535] as [number, number],
       },
       class: 'box-marker',
       name: 'test marker',
@@ -84,18 +65,24 @@ const PortatoMap: React.FC = () => {
 
         // Extracting delivery_addresses from the requests
         const pickup_addresses: {
-          address: string;
+          coordinates_pickup: number[];
+          coordinates_delivery: number[];
           description: string;
           name: string;
         }[] = [];
 
         requestDataArray.forEach((item) => {
           Object.values(item.requests).forEach((request) => {
-            pickup_addresses.push({
-              address: request.pickup_address,
-              description: request.description,
-              name: request.name,
-            });
+            if (
+              request.pickup_coordinates != undefined &&
+              request.delivery_coordinates != undefined
+            )
+              pickup_addresses.push({
+                coordinates_pickup: request.pickup_coordinates,
+                coordinates_delivery: request.delivery_coordinates,
+                description: request.description,
+                name: request.name,
+              });
           });
         });
 
@@ -155,52 +142,40 @@ const PortatoMap: React.FC = () => {
   };
   useEffect(() => {
     fetchRequestData();
-    fetchRouteData();
+    // fetchRouteData();
   }, [user?.uid]); // Fetch geoData when the user's UID changes
 
   useEffect(() => {
-    const latitudes: number[] = [];
-    const longitudes: number[] = [];
+    const pickup_latitudes: number[] = [];
+    const pickup_longitudes: number[] = [];
+    const delivery_latitudes: number[] = [];
+    const delivery_longitudes: number[] = [];
     const descriptions: string[] = [];
     const names: string[] = [];
-
-    // Helper function to handle each address
-    const handleAddress = async (requestObj: {
-      address: string;
-      description: string;
-      name: string;
-    }) => {
-      try {
-        const { results } = await fromAddress(requestObj.address);
-        if (
-          results &&
-          results.length > 0 &&
-          results[0].geometry &&
-          results[0].geometry.location
-        ) {
-          const { lat, lng } = results[0].geometry.location;
-
-          latitudes.push(lng);
-          longitudes.push(lat);
-          descriptions.push(requestObj.description);
-          names.push(requestObj.name);
-        }
-      } catch (error) {
-        console.error(`Error geocoding address: ${requestObj.address}`, error);
-      }
-    };
 
     if (geoRequestData && geoRequestData.length > 0) {
       (async () => {
         for (const address of geoRequestData) {
-          await handleAddress(address);
+          pickup_latitudes.push(address.coordinates_pickup[1]);
+          pickup_longitudes.push(address.coordinates_pickup[0]);
+          delivery_latitudes.push(address.coordinates_delivery[1]);
+          delivery_longitudes.push(address.coordinates_delivery[0]);
+          descriptions.push(address.description);
+          names.push(address.name);
         }
 
-        const newRequestsFromDatabase = latitudes.map((lng, idx) => ({
+        const newRequestsFromDatabase = pickup_latitudes.map((lng, idx) => ({
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [latitudes[idx], longitudes[idx]] as [number, number], // Use "as [number, number]" for casting
+            pickup_coordinates: [
+              pickup_latitudes[idx],
+              pickup_longitudes[idx],
+            ] as [number, number],
+            delivery_coordinates: [
+              delivery_latitudes[idx],
+              delivery_longitudes[idx],
+            ] as [number, number],
           },
           class: 'box-marker',
           description: descriptions[idx],
