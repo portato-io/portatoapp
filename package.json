@@ -81,7 +81,11 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not safari < 10",
+      "not chrome < 51",
+      "not android < 5",
+      "not ie < 12"
     ],
     "development": [
       "last 1 chrome version",
@@ -104,7 +108,8 @@
     "lint-staged": "^13.2.2",
     "lottie-web": "^5.12.2",
     "pret": "^0.0.2",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "worker-loader": "^3.0.8"
   },
   "lint-staged": {
     "**/*{ts,tsx,js,jsx}": [

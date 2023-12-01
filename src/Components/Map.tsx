@@ -1,9 +1,14 @@
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl'; // This is a dependency of react-map-gl even if you didn't explicitly install it
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+mapboxgl.workerClass =
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 import { useEffect, useRef, useState } from 'react';
 import { MapMarker } from '../type';
 
 require('../CSS/Map.css');
-import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox GL JS CSS
 
 if (process.env.REACT_APP_MAPBOX_KEY)
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
