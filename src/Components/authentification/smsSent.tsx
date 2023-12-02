@@ -18,32 +18,6 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
 }) => {
   const [resendTimer, setResendTimer] = useState<number>(5);
 
-  useEffect(() => {
-    const container = document.getElementById('recaptcha-container');
-    if (!container) {
-      // Create the container if it's not there
-      const newContainer = document.createElement('div');
-      newContainer.id = 'recaptcha-container';
-      document.body.appendChild(newContainer);
-    }
-
-    // Reset the timer to 5 whenever the key prop changes
-    setResendTimer(5);
-
-    // Start the countdown
-    const interval = setInterval(() => {
-      setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-      // Remove the reCAPTCHA container element from the DOM
-      const reCaptchaEl = document.getElementById('recaptcha-container');
-      if (reCaptchaEl) {
-        reCaptchaEl.remove();
-      }
-    };
-  }, [stepKey]); // Dependency array includes the key prop
-
   return (
     <>
       <h4 className="title title-h4">{t('signIn.smsConfirmationTitle')}</h4>
@@ -58,17 +32,6 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
           />
         </div>
         <div className="mod-display-flex mod-flex-space-between">
-          <p className="text-note mod-nomargin-top">
-            {resendTimer > 0 ? (
-              <span>Resend available in {resendTimer}s</span>
-            ) : (
-              <a className="text-link" onClick={onResendSms}>
-                {t('signIn.smsConfirmationResend')}
-              </a>
-            )}
-          </p>
-
-          <div id="recaptcha-container"></div>
           <button
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
             onClick={onVerifyOtp}

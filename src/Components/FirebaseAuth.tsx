@@ -167,13 +167,14 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         setConfirmationResult(result);
         message.success(t('signIn.successSmsSent'));
         console.log('sms sent successfully');
+        setStep('smsSent');
+
         setTimeout(() => {
           if (recaptchaVerifierRef.current) {
             recaptchaVerifierRef.current.clear();
             recaptchaVerifierRef.current = null;
           }
-          setStep('smsSent');
-          resetSmsSentStep(); // Reset the SmsSentStep component state
+          //resetSmsSentStep(); // Reset the SmsSentStep component state
         }, 500);
       } catch (error) {
         console.error('SMS sending error:', error);
