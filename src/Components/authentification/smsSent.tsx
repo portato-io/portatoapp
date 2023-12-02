@@ -1,12 +1,12 @@
-import React from 'react';
-import { TFunction } from 'i18next'; // If you are using i18next for t function
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { TFunction } from 'i18next';
+
 interface SmsSentStepProps {
-  onResendSms: () => Promise<void>; // Assuming onSendSMS is an async function without parameters
-  onVerifyOtp: () => Promise<void>; // Similarly, assuming onVerifyOtp is an async function without parameters
-  setotp: React.Dispatch<React.SetStateAction<string>>; // If setotp is a setState function from useState hook
-  t: TFunction; // If you are using the t function from 'react-i18next', otherwise type accordingly
-  stepKey: number; // Define the type of stepKey as number
+  onResendSms: () => Promise<void>;
+  onVerifyOtp: () => Promise<void>;
+  setotp: React.Dispatch<React.SetStateAction<string>>;
+  t: TFunction;
+  stepKey: number;
 }
 
 const SmsSentStep: React.FC<SmsSentStepProps> = ({
@@ -14,9 +14,21 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
   onVerifyOtp,
   setotp,
   t,
-  stepKey, // Use stepKey instead of key to avoid conflict with React's key prop
+  stepKey,
 }) => {
-  const [resendTimer, setResendTimer] = useState<number>(5);
+  const spinnerUrl = '/loading-spinner.png'; // Update with the actual path
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleVerifyOtp = async () => {
+    setLoading(true);
+    try {
+      await onVerifyOtp();
+    } catch (error) {
+      console.error('OTP Verification Error:', error);
+    }
+    setLoading(false);
+  };
 
   return (
     <>
@@ -34,9 +46,14 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
         <div className="mod-display-flex mod-flex-space-between">
           <button
             className="button button-solid box-shadow box-radius-default box-shadow-effect"
-            onClick={onVerifyOtp}
+            onClick={handleVerifyOtp}
+            disabled={loading}
           >
-            {t('signIn.smsConfirmationButton')}
+            {loading ? (
+              <img src={spinnerUrl} alt="Loading" className="loading-spinner" />
+            ) : (
+              t('signIn.smsConfirmationButton')
+            )}
           </button>
         </div>
       </div>

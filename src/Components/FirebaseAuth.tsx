@@ -7,6 +7,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
   updateProfile,
+  fetchSignInMethodsForEmail,
+  AuthError,
 } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { message } from 'antd';
@@ -159,6 +161,19 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   const sendSMS = async () => {
     if (mynumber && isCaptchaVerified && recaptchaVerifierRef.current) {
       try {
+        // Check if the email is already linked to an account.
+        const isLinked = await checkEmail(email);
+        if (isLinked) {
+          message.error(t('signIn.emailAlreadyUsed'));
+          console.log('Email is already linked to an account.');
+          // Return early if email is linked to an account.
+          return;
+        }
+        console.log(
+          'Email is not linked to any account, proceed with sending SMS.'
+        );
+
+        // If email is not linked, then proceed with sending an SMS.
         const result = await signInWithPhoneNumber(
           auth,
           mynumber,
@@ -166,9 +181,10 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
         );
         setConfirmationResult(result);
         message.success(t('signIn.successSmsSent'));
-        console.log('sms sent successfully');
+        console.log('SMS sent successfully');
         setStep('smsSent');
 
+        // Clear the reCAPTCHA after a delay
         setTimeout(() => {
           if (recaptchaVerifierRef.current) {
             recaptchaVerifierRef.current.clear();
@@ -177,11 +193,23 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           //resetSmsSentStep(); // Reset the SmsSentStep component state
         }, 500);
       } catch (error) {
-        console.error('SMS sending error:', error);
+        console.error('Error in sendSMS:', error);
         message.error(t('signIn.smsSendingFailedMessage'));
       }
     }
   };
+
+  const checkEmail = async (email: string): Promise<boolean> => {
+    try {
+      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      return signInMethods.length > 0;
+    } catch (error) {
+      const e = error as AuthError;
+      console.error(e.message);
+      return false;
+    }
+  };
+
   // useEffect to watch for changes in mynumber and send SMS if it's set
   useEffect(() => {
     sendSMS();

@@ -386,7 +386,8 @@
     "enterEmailError": "Please enter your email address",
     "placeholderFirstName": "First Name",
     "placeholderLastName": "Last Name",
-    "successSmsSent":"SMS sent successfully"
+    "successSmsSent":"SMS sent successfully",
+    "emailAlreadyUsed": "Email already used"
 
   }
   
