@@ -52,10 +52,6 @@ const PortatoMap: React.FC = () => {
   ]);
 
   const fetchRequestData = async () => {
-    if (!user) {
-      console.log('user is undefined');
-      return;
-    }
     try {
       const fetchRequests = await fetchAllRequests();
       let requestDataArray: { userId: any; requests: IRequestInfo }[] = [];
