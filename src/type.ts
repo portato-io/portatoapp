@@ -67,3 +67,11 @@ export type DealInfoAction = {
   type: string;
   route: IDealInfo;
 };
+
+export {};
+
+// declare global {
+//   interface Window {
+//     recaptchaVerifier: any;
+//   }
+// }

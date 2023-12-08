@@ -37,7 +37,8 @@
     "upload": "Hochladen",
     "yes": "Ja",
     "no": "Nein",
-    "edit": "edit"
+    "edit": "edit",
+    "loading": "Loading ...."
   },
 
   "addressField": {
@@ -192,7 +193,7 @@
       "requestConfirmationBody": "Vielen Dank für deinen Transportauftrag. Wir melden uns bei dir sobald wie möglich mit Fahrer:innen, die in deine Richtung fahren und den Transport übernehmen können.<br>Deinen Auftrag kannst Du unter diesem <a href=\"https://portato.io/createSendRequest\">Link</a> jederzeit einsehen, editieren oder löschen.<br>",
       "greetings": "Liebe/r",
       "salutations": "Mit freundlichen Grüssen,<br>Dein Portato Team"
-  }
+    }
   },
 
   "driveOverview": {
@@ -349,5 +350,48 @@
   "imprint": {
     "title": "Impressum",
     "text": "Dachsbau GmbH\nRepräsentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
-  }  
+  },
+
+  "signIn": {
+    "back": "Zurück",
+    "signUp": "Registrieren",
+    "existingUserTitle": "Bei Portato anmelden",
+    "existingUserText": "Melde dich mit deiner E-Mail-Adresse und deinem Passwort bei Portato an.",
+    "nonExistingUserTitle": "Noch kein Profil?",
+    "nonExistingUserText": "Erstelle in nur wenigen Schritten ein Profil und werde Teil der Portato-Gemeinschaft.",
+    "nonExistingUserLink": "Jetzt Profil erstellen",
+    "placeholderEmail": "Deine E-Mail-Adresse",
+    "placeholderPassword": "Dein Passwort",
+    "placeholderPhone": "Deine Telefonnummer",
+    "placeholderHintPhone": "Bitte denke an die Ländervorwahl, z.B.: +41 78 333 22 11",
+    "placeholderSMS": "Der SMS-Code",
+    "registrationTitle": "Erstelle dein Portato-Profil",
+    "registrationText": "Wir benötigen die folgenden Informationen. Keine Sorge, wir gehen sorgfältig damit um.",
+    "registrationButton": "Registrieren",
+    "smsConfirmationTitle": "Verifizierungscode wurde erfolgreich gesendet, bitte überprüfe deine SMS",
+    "smsConfirmationText": "Wir haben dir eine SMS mit einem numerischen Code gesendet. Bitte gib ihn in das angezeigte Feld ein, um deine Nummer zu verifizieren.",
+    "smsConfirmationButton": "Nummer verifizieren",
+    "smsConfirmationResend": "SMS erneut senden",
+    "signupSuccessTitle": "Profil erfolgreich erstellt",
+    "signupSuccessText": "Du kannst dich jetzt mit deiner E-Mail-Adresse und deinem Passwort anmelden.",
+    "captchaSuccessMessage": "Captcha-Verifizierung erfolgreich",
+    "missingEmailOrPassword": "Bitte gib sowohl E-Mail als auch Passwort ein",
+    "signInSuccessMessage": "Anmeldung erfolgreich!",
+    "signInFailedMessage": "Anmeldung fehlgeschlagen",
+    "captchaMissingMessage": "Bitte schließe die reCAPTCHA-Herausforderung ab.",
+    "smsSendingFailedMessage": "SMS konnte nicht gesendet werden.",
+    "otpVerificationFailedMessage": "Verifizierung der OTP fehlgeschlagen.",
+    "forgotPassword": "Password forgotten",
+    "forgotPasswordText": " blbabalabala",
+    "forgotPasswordTitle": "title of forgot password",
+    "resetPasswordButton": "Reset password",
+    "resetPasswordConfirmation": "Reset password successfully",
+    "resetPasswordError": "No account correspond to this email address",
+    "enterEmailError": "Please enter your email address",
+    "placeholderFirstName": "First Name",
+    "placeholderLastName": "Last Name",
+    "successSmsSent": "SMS sent successfully",
+    "emailAlreadyUsed": "Email already used",
+    "errorPhoneCountryCode": "PLease enter the country code of the phone number"
+  }
 }

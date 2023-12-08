@@ -24,6 +24,9 @@
 .icon-profile:before {
 	content: 'u';
 }
+.icon-phone:before {
+	content: 'p';
+}
 .icon-logo:before {
 	content: 'o';
 }
@@ -41,5 +44,11 @@
 }
 .icon-pen:before {
 	content: 'H';
+}
+.icon-arrow-left:before {
+	content: 'L';
+}
+.icon-arrow-right:before {
+	content: 'R';
 }
 

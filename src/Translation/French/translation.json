@@ -37,7 +37,9 @@
     "upload": "Télécharger",
     "yes": "Oui",
     "no": "Non",
-    "edit": "Modifier"
+    "edit": "Modifier",
+    "loading": "Chargement en cours ...."
+
   },
 
   "addressField": {
@@ -349,5 +351,49 @@
   "imprint": {
     "title": "Mentions légales",
     "text": "Dachsbau GmbH\nReprésentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
+  },
+
+  "signIn": {
+    "back": "Retour",
+    "signUp": "S'inscrire",
+    "existingUserTitle": "Se connecter à Portato",
+    "existingUserText": "Connectez-vous avec votre adresse e-mail et mot de passe chez Portato.",
+    "nonExistingUserTitle": "Pas encore de profil ?",
+    "nonExistingUserText": "Créez un profil en quelques étapes et rejoignez la communauté Portato.",
+    "nonExistingUserLink": "Créer un profil maintenant",
+    "placeholderEmail": "Votre adresse e-mail",
+    "placeholderPassword": "Votre mot de passe",
+    "placeholderPhone": "Votre numéro de téléphone",
+    "placeholderHintPhone": "N'oubliez pas d'inclure l'indicatif du pays, par ex. : +41 78 333 22 11",
+    "placeholderSMS": "Le code SMS",
+    "registrationTitle": "Créez votre profil Portato",
+    "registrationText": "Nous avons besoin des informations suivantes. Ne vous inquiétez pas, nous en prendrons soin.",
+    "registrationButton": "S'inscrire",
+    "smsConfirmationTitle": "Code de vérification envoyé avec succès, veuillez vérifier vos SMS",
+    "smsConfirmationText": "Nous vous avons envoyé un SMS avec un code numérique. Veuillez le saisir dans le champ affiché pour vérifier votre numéro.",
+    "smsConfirmationButton": "Vérifier le numéro",
+    "smsConfirmationResend": "Renvoyer le SMS",
+    "signupSuccessTitle": "Profil créé avec succès",
+    "signupSuccessText": "Vous pouvez maintenant vous connecter avec votre adresse e-mail et votre mot de passe.",
+    "captchaSuccessMessage": "Vérification du Captcha réussie",
+    "missingEmailOrPassword": "Veuillez entrer à la fois l'e-mail et le mot de passe",
+    "signInSuccessMessage": "Connexion réussie !",
+    "signInFailedMessage": "Échec de la connexion, mot de passe ou adresse mail erronée",
+    "captchaMissingMessage": "Veuillez compléter le défi reCAPTCHA.",
+    "smsSendingFailedMessage": "Échec de l'envoi du SMS.",
+    "otpVerificationFailedMessage": "Échec de la vérification de l'OTP.",
+    "forgotPassword": "Password forgotten",
+    "forgotPasswordText": " blbabalabala",
+    "forgotPasswordTitle": "title of forgot password",
+    "resetPasswordButton": "Reset password",
+    "resetPasswordConfirmation": "Reset password successfully",
+    "resetPasswordError": "No account correspond to this email address",
+    "enterEmailError": "Please enter your email address",
+    "placeholderFirstName": "First Name",
+    "placeholderLastName": "Last Name",
+    "successSmsSent":"SMS sent successfully",
+    "emailAlreadyUsed": "Email already used",
+    "errorPhoneCountryCode": "Veuillez saisr le code du pays dans votre numero de telephone"
   }
+  
 }
