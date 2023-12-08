@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { SignUpFormValues } from './formDefinition';
+import { message } from 'antd';
 
 const SignUpStep: React.FC<{
   onSendSMS: (values: SignUpFormValues) => void;
@@ -16,6 +17,19 @@ const SignUpStep: React.FC<{
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
+  };
+
+  const validatePhoneNumber = (_: any, value: string) => {
+    if (value && !value.startsWith('+')) {
+      message.error('Invalid phone number');
+      const errorMessage = t(
+        'signIn.errorPhoneCountryCode',
+        'Phone number must include the country code'
+      ); // Provide a default message
+      message.error(errorMessage);
+      return Promise.reject(new Error(errorMessage));
+    }
+    return Promise.resolve();
   };
 
   return (
@@ -93,10 +107,40 @@ const SignUpStep: React.FC<{
               required: true,
               message: t('signIn.placeholderPhone') || 'Phone is required',
             },
+            // Other validation rules as needed
           ]}
         >
-          <Input placeholder={t('signIn.placeholderPhone') || 'Phone'} />
+          <Input
+            placeholder={t('signIn.placeholderPhone') || 'Phone'}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value && !value.startsWith('+')) {
+                // Manually setting the error
+                form.setFields([
+                  {
+                    name: 'phone',
+                    errors: [
+                      t(
+                        'signIn.errorPhoneCountryCode',
+                        'Phone number must include the country code'
+                      ),
+                    ],
+                  },
+                ]);
+              } else {
+                // Clearing the error when the value is valid
+                form.setFields([
+                  {
+                    name: 'phone',
+                    errors: [],
+                  },
+                ]);
+              }
+            }}
+          />
+          <p className="text-hint">{t('signIn.placeholderHintPhone')}</p>
         </Form.Item>
+
         <div id="recaptcha-container"></div>
         <Form.Item>
           <Button type="primary" htmlType="submit">
