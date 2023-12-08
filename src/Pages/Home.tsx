@@ -11,6 +11,7 @@ import HugoImage from '../Assets/Images/team/hugo.webp';
 import MehdiImage from '../Assets/Images/team/mehdi.webp';
 import MischaImage from '../Assets/Images/team/mischa.webp';
 import ChiaraImage from '../Assets/Images/team/chiara.webp';
+import MoritzImage from '../Assets/Images/team/moritz.webp';
 import headerImage from '../Assets/Images/portato-landing-14.svg';
 import { Link } from 'react-router-dom';
 
@@ -24,13 +25,21 @@ const teamMemberImages: Images = {
   Mehdi: MehdiImage,
   Mischa: MischaImage,
   Chiara: ChiaraImage,
+  Moritz: MoritzImage,
 };
 
 require('../CSS/Home.css');
 
 const Home: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const teamMemberNames = ['Conrad', 'Mischa', 'Chiara', 'Hugo', 'Mehdi'];
+  const teamMemberNames = [
+    'Conrad',
+    'Mischa',
+    'Chiara',
+    'Hugo',
+    'Mehdi',
+    'Moritz',
+  ];
 
   function getTeamMemberImage(memberName: string): string {
     return (
