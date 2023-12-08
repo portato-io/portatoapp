@@ -49,7 +49,7 @@ const SmsSentStep: React.FC<SmsSentStepProps> = ({
             onClick={handleVerifyOtp}
             disabled={loading}
           >
-            {loading ? t('signIn.loading') : t('signIn.smsConfirmationButton')}
+            {loading ? t('general.loading') : t('signIn.smsConfirmationButton')}
           </button>
         </div>
       </div>
