@@ -19,19 +19,6 @@ const SignUpStep: React.FC<{
     console.log('Failed:', errorInfo);
   };
 
-  const validatePhoneNumber = (_: any, value: string) => {
-    if (value && !value.startsWith('+')) {
-      message.error('Invalid phone number');
-      const errorMessage = t(
-        'signIn.errorPhoneCountryCode',
-        'Phone number must include the country code'
-      ); // Provide a default message
-      message.error(errorMessage);
-      return Promise.reject(new Error(errorMessage));
-    }
-    return Promise.resolve();
-  };
-
   return (
     <>
       <h4 className="title title-h4">{t('signIn.registrationTitle')}</h4>
@@ -114,8 +101,10 @@ const SignUpStep: React.FC<{
             placeholder={t('signIn.placeholderPhone') || 'Phone'}
             onChange={(e) => {
               const value = e.target.value;
-              if (value && !value.startsWith('+')) {
-                // Manually setting the error
+              // Regex to check if the phone number starts with "+" and is followed by digits
+              const phoneRegex = /^\+\d+$/;
+              if (value && !phoneRegex.test(value)) {
+                // Manually setting the error if the phone number is invalid
                 form.setFields([
                   {
                     name: 'phone',
@@ -128,11 +117,12 @@ const SignUpStep: React.FC<{
                   },
                 ]);
               } else {
-                // Clearing the error when the value is valid
+                // Clearing the error when the value is valid or empty
                 form.setFields([
                   {
                     name: 'phone',
                     errors: [],
+                    value: value,
                   },
                 ]);
               }
