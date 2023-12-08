@@ -37,7 +37,8 @@
     "upload": "Upload",
     "yes": "Yes",
     "edit": "Edit",
-    "no": "No"
+    "no": "No",
+    "loading": "Loading ...."
   },
 
   "addressField": {
@@ -391,8 +392,8 @@
     "placeholderFirstName": "First Name",
     "placeholderLastName": "Last Name",
     "successSmsSent":"SMS sent successfully",
-    "emailAlreadyUsed": "Email already used"
-
+    "emailAlreadyUsed": "Email already used",
+    "errorPhoneCountryCode": "PLease enter the country code of the phone number"
   }
   
 }

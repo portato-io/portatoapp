@@ -37,7 +37,9 @@
     "upload": "Télécharger",
     "yes": "Oui",
     "no": "Non",
-    "edit": "Modifier"
+    "edit": "Modifier",
+    "loading": "Chargement en cours ...."
+
   },
 
   "addressField": {
@@ -390,7 +392,8 @@
     "placeholderFirstName": "First Name",
     "placeholderLastName": "Last Name",
     "successSmsSent":"SMS sent successfully",
-    "emailAlreadyUsed": "Email already used"
+    "emailAlreadyUsed": "Email already used",
+    "errorPhoneCountryCode": "Veuillez saisr le code du pays dans votre numero de telephone"
   }
   
 }

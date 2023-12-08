@@ -37,7 +37,8 @@
     "upload": "Hochladen",
     "yes": "Ja",
     "no": "Nein",
-    "edit": "edit"
+    "edit": "edit",
+    "loading": "Loading ...."
   },
 
   "addressField": {
@@ -192,7 +193,7 @@
       "requestConfirmationBody": "Vielen Dank für deinen Transportauftrag. Wir melden uns bei dir sobald wie möglich mit Fahrer:innen, die in deine Richtung fahren und den Transport übernehmen können.<br>Deinen Auftrag kannst Du unter diesem <a href=\"https://portato.io/createSendRequest\">Link</a> jederzeit einsehen, editieren oder löschen.<br>",
       "greetings": "Liebe/r",
       "salutations": "Mit freundlichen Grüssen,<br>Dein Portato Team"
-  }
+    }
   },
 
   "driveOverview": {
@@ -350,7 +351,7 @@
     "title": "Impressum",
     "text": "Dachsbau GmbH\nRepräsentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
   },
-  
+
   "signIn": {
     "back": "Zurück",
     "signUp": "Registrieren",
@@ -389,7 +390,8 @@
     "enterEmailError": "Please enter your email address",
     "placeholderFirstName": "First Name",
     "placeholderLastName": "Last Name",
-    "successSmsSent":"SMS sent successfully",
-    "emailAlreadyUsed": "Email already used"
+    "successSmsSent": "SMS sent successfully",
+    "emailAlreadyUsed": "Email already used",
+    "errorPhoneCountryCode": "PLease enter the country code of the phone number"
   }
 }
