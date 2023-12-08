@@ -7,6 +7,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
   updateProfile,
+  fetchSignInMethodsForEmail,
+  AuthError,
 } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { message } from 'antd';
@@ -17,6 +19,7 @@ import SignUpStep from './authentification/signUpStep';
 import SmsSentStep from './authentification/smsSent';
 import SignedUpStep from './authentification/signedUpStep';
 import PasswordReset from './authentification/passwordReset';
+import { SignUpFormValues } from './authentification/formDefinition';
 
 const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   onAuthSuccess,
@@ -37,9 +40,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   const [step, setStep] = useState('initial'); // 'initial', 'captchaVerified', 'smsSent', 'otpEntered', 'signedUp'
   // New state for the timer and button disabled state
   const [timer, setTimer] = useState<number | null>(null);
-
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
+  const [formValues, setFormValues] = useState<SignUpFormValues | null>(null);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [smsStepKey, setSmsStepKey] = useState<number>(Date.now());
@@ -157,44 +158,73 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
       message.error(t('signIn.otpVerificationFailedMessage'));
     }
   };
-
-  const onSendSMS = async () => {
-    const currentEmail = emailRef.current?.value || '';
-    const currentPassword = passwordRef.current?.value || '';
-    setEmail(currentEmail);
-    setPassword(currentPassword);
-    const currentFirstName = firstNameRef.current?.value || '';
-    const currentLastName = lastNameRef.current?.value || '';
-    setFirstName(currentFirstName);
-    setLastName(currentLastName);
-    console.log('Trying to send SMS');
-    if (!isCaptchaVerified || !recaptchaVerifierRef.current) {
-      console.log('isCaptchaVerified:', isCaptchaVerified);
-
-      message.error(t('signIn.captchaMissingMessage'));
-      return;
-    }
-    try {
-      const result = await signInWithPhoneNumber(
-        auth,
-        mynumber,
-        recaptchaVerifierRef.current
-      );
-      setConfirmationResult(result);
-      message.success(t('signIn.successSmsSent'));
-      console.log('sms sent successfully');
-      setTimeout(() => {
-        if (recaptchaVerifierRef.current) {
-          recaptchaVerifierRef.current.clear();
-          recaptchaVerifierRef.current = null;
+  const sendSMS = async () => {
+    if (mynumber && isCaptchaVerified && recaptchaVerifierRef.current) {
+      try {
+        // Check if the email is already linked to an account.
+        const isLinked = await checkEmail(email);
+        if (isLinked) {
+          message.error(t('signIn.emailAlreadyUsed'));
+          console.log('Email is already linked to an account.');
+          // Return early if email is linked to an account.
+          return;
         }
+        console.log(
+          'Email is not linked to any account, proceed with sending SMS.'
+        );
+
+        // If email is not linked, then proceed with sending an SMS.
+        const result = await signInWithPhoneNumber(
+          auth,
+          mynumber,
+          recaptchaVerifierRef.current
+        );
+        setConfirmationResult(result);
+        message.success(t('signIn.successSmsSent'));
+        console.log('SMS sent successfully');
         setStep('smsSent');
-        resetSmsSentStep(); // Reset the SmsSentStep component state
-      }, 0);
-    } catch (error) {
-      console.error('SMS sending error:', error);
-      message.error(t('signIn.smsSendingFailedMessage'));
+
+        // Clear the reCAPTCHA after a delay
+        setTimeout(() => {
+          if (recaptchaVerifierRef.current) {
+            recaptchaVerifierRef.current.clear();
+            recaptchaVerifierRef.current = null;
+          }
+          //resetSmsSentStep(); // Reset the SmsSentStep component state
+        }, 500);
+      } catch (error) {
+        console.error('Error in sendSMS:', error);
+        message.error(t('signIn.smsSendingFailedMessage'));
+      }
     }
+  };
+
+  const checkEmail = async (email: string): Promise<boolean> => {
+    try {
+      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      return signInMethods.length > 0;
+    } catch (error) {
+      const e = error as AuthError;
+      console.error(e.message);
+      return false;
+    }
+  };
+
+  // useEffect to watch for changes in mynumber and send SMS if it's set
+  useEffect(() => {
+    sendSMS();
+  }, [mynumber, isCaptchaVerified]); // Add isCaptchaVerified to the dependency array if it's relevant for sending the SMS
+
+  // Update your onSendSMS function to just set the state
+  const onSendSMS = (values: SignUpFormValues) => {
+    // Now use the values from the form directly
+    setFormValues(values);
+    setEmail(values.email);
+    setPassword(values.password);
+    setFirstName(values.firstName);
+    setLastName(values.lastName);
+    setnumber(values.phone); // This will trigger the useEffect above
+    console.log('Phone number set for SMS:', values.phone);
   };
 
   const resetSmsSentStep = () => {
@@ -202,26 +232,38 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
   };
 
   const onResendSms = async () => {
+    if (!formValues) {
+      console.error('Form values are not available for resending SMS.');
+      return;
+    }
     console.log('in resends SMS');
     if (recaptchaVerifierRef.current) {
       recaptchaVerifierRef.current.clear();
       recaptchaVerifierRef.current = null;
     }
-    if (!recaptchaVerifierRef.current) {
-      recaptchaVerifierRef.current = new RecaptchaVerifier(
-        'recaptcha-container',
-        {
-          size: 'normal',
-          callback: () => {
-            setIsCaptchaVerified(true);
-            onSendSMS();
-            message.success(t('signIn.captchaSuccessMessage'));
-          },
+    recaptchaVerifierRef.current = new RecaptchaVerifier(
+      'recaptcha-container',
+      {
+        size: 'normal',
+        callback: () => {
+          setIsCaptchaVerified(true);
+          message.success(t('signIn.captchaSuccessMessage'));
         },
-        auth
-      );
-    }
-    recaptchaVerifierRef.current.render(); // Render the reCAPTCHA widget
+      },
+      auth
+    );
+
+    recaptchaVerifierRef.current
+      .render()
+      .then(() => {
+        // After reCAPTCHA is rendered and verified, send SMS
+        if (isCaptchaVerified) {
+          sendSMS();
+        }
+      })
+      .catch((error) => {
+        console.error('Error rendering reCAPTCHA:', error);
+      });
   };
 
   const signIn = async () => {
@@ -290,20 +332,7 @@ const FirebaseAuth: React.FC<{ onAuthSuccess?: () => void }> = ({
           t={t}
         />
       )}
-      {step === 'signUp' && (
-        <SignUpStep
-          setStep={setStep}
-          emailRef={emailRef}
-          passwordRef={passwordRef}
-          mynumber={mynumber}
-          setnumber={setnumber}
-          onSendSMS={onSendSMS}
-          isCaptchaVerified={isCaptchaVerified}
-          t={t}
-          firstNameRef={firstNameRef}
-          lastNameRef={lastNameRef}
-        />
-      )}
+      {step === 'signUp' && <SignUpStep onSendSMS={onSendSMS} />}
       {step === 'resetPassword' && <PasswordReset t={t} />}
       {step === 'smsSent' && (
         <SmsSentStep

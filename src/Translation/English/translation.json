@@ -378,15 +378,16 @@
     "smsSendingFailedMessage": "Failed to send SMS.",
     "otpVerificationFailedMessage": "Failed to verify OTP.",
     "forgotPassword": "Password forgotten",
-    "forgotPasswordText": " blbabalabala",
-    "forgotPasswordTitle": "title of forgot password",
+    "forgotPasswordText": " Please enter your email address and we will send you a recovery link.",
+    "forgotPasswordTitle": "Password recovery",
     "resetPasswordButton": "Reset password",
-    "resetPasswordConfirmation": "Reset password successfully",
+    "resetPasswordConfirmation": "Reset password mail sent successfully",
     "resetPasswordError": "No account correspond to this email address",
     "enterEmailError": "Please enter your email address",
     "placeholderFirstName": "First Name",
     "placeholderLastName": "Last Name",
-    "successSmsSent":"SMS sent successfully"
+    "successSmsSent":"SMS sent successfully",
+    "emailAlreadyUsed": "Email already used"
 
   }
   
