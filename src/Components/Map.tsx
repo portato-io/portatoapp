@@ -1,9 +1,10 @@
 import mapboxgl from 'mapbox-gl';
 import { useEffect, useRef, useState } from 'react';
-import { MapMarker } from '../type';
 
 require('../CSS/Map.css');
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox GL JS CSS
+import { Popup } from 'antd-mobile';
+import { MAP_ZOOM_OFFSET } from '../constant';
 
 if (process.env.REACT_APP_MAPBOX_KEY)
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
@@ -25,6 +26,7 @@ interface MapProps {
 }
 
 function Map({ geoDatas }: MapProps) {
+  const [visible, setVisible] = useState(false);
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [selectedPoint, setSelectedPoint] = useState<[number, number] | null>(
@@ -113,7 +115,7 @@ function Map({ geoDatas }: MapProps) {
         map.current.addLayer({
           id: 'marker',
           type: 'circle',
-          source: 'marker',
+          source: 'marker', // TODO MISCHA: Marker icon :)
           paint: {
             'circle-radius': 10,
             'circle-color': '#FF0000', // Red color for the marker
@@ -125,22 +127,25 @@ function Map({ geoDatas }: MapProps) {
       // Calculate bounding box from line coordinates
       const bounds: mapboxgl.LngLatBoundsLike = [
         [
-          Math.min(pickup_coordinates[0], delivery_coordinates[0]),
-          Math.min(pickup_coordinates[1], delivery_coordinates[1]),
+          Math.min(pickup_coordinates[0], delivery_coordinates[0]) -
+            MAP_ZOOM_OFFSET,
+          Math.min(pickup_coordinates[1], delivery_coordinates[1]) -
+            MAP_ZOOM_OFFSET,
         ],
         [
-          Math.max(pickup_coordinates[0], delivery_coordinates[0]),
-          Math.max(pickup_coordinates[1], delivery_coordinates[1]),
+          Math.max(pickup_coordinates[0], delivery_coordinates[0]) +
+            MAP_ZOOM_OFFSET,
+          Math.max(pickup_coordinates[1], delivery_coordinates[1]) +
+            MAP_ZOOM_OFFSET,
         ],
       ];
 
       // Fit map to the bounding box
       map.current.fitBounds(bounds, { padding: 20 });
-
+      setVisible(true);
       console.log('Line and marker drawn');
     }
   };
-
   useEffect(() => {
     const defaultCoordinates = { longitude: 8.5417, latitude: 47.3769 }; // Coordinates of Zurich
 
@@ -158,11 +163,15 @@ function Map({ geoDatas }: MapProps) {
 
           new mapboxgl.Marker(el)
             .setLngLat(geoData.geometry.pickup_coordinates)
-            .setPopup(
-              new mapboxgl.Popup({ offset: 25 }).setHTML(
-                `<h3>${geoData.name}</h3><p>${geoData.description}</p>`
-              )
-            )
+            // .setPopup(
+            //   new mapboxgl.Popup({ offset: 25 }).setHTML(
+            //     `<div>
+            //     <h3>${geoData.name}</h3>
+            //     <p>${geoData.description}</p>
+            //     <button onclick="handleButtonClick()">Click Me</button>
+            //     </div>`
+            //   )
+            // )
             .addTo(map.current);
 
           el.addEventListener('click', () => {
@@ -195,7 +204,24 @@ function Map({ geoDatas }: MapProps) {
     }
   }, [geoDatas]);
 
-  return <div ref={mapContainer} className="map-wrapper" />;
+  return (
+    <div className="map-wrapper">
+      <div ref={mapContainer} className="map-wrapper" />
+      <Popup
+        visible={visible}
+        onMaskClick={() => {
+          setVisible(false);
+        }}
+        bodyStyle={{
+          borderTopLeftRadius: '8px',
+          borderTopRightRadius: '8px',
+          minHeight: '20vh',
+        }}
+      >
+        {'ADD INFO HERE ?'}
+      </Popup>
+    </div>
+  );
 }
 
 export default Map;
