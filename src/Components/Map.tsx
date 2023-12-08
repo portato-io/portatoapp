@@ -31,6 +31,7 @@ function Map({ geoDatas }: MapProps) {
     null
   );
   const lastClickedMarker = useRef<string | null>(null);
+
   const drawLine = (
     pickup_coordinates: [number, number],
     delivery_coordinates: [number, number]
@@ -43,13 +44,16 @@ function Map({ geoDatas }: MapProps) {
     // If the same marker is clicked and the line is currently drawn, remove it
     if (isSameMarkerClicked && map.current.getLayer('route')) {
       map.current.removeLayer('route');
+      map.current.removeLayer('marker');
       map.current.removeSource('route');
+      map.current.removeSource('marker');
       lastClickedMarker.current = null; // Reset the last clicked marker reference
-      console.log('Line removed');
+      console.log('Line and marker removed');
     } else {
-      // If a different marker is clicked or no line is drawn, draw the line
+      // If a different marker is clicked or no line is drawn, draw the line and add the marker
       lastClickedMarker.current = coordinatesString; // Set the last clicked marker reference
-      const sourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
+
+      const lineSourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
         type: 'Feature',
         properties: {},
         geometry: {
@@ -58,16 +62,27 @@ function Map({ geoDatas }: MapProps) {
         },
       };
 
+      const markerSourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Point',
+          coordinates: delivery_coordinates,
+        },
+      };
+
+      // Draw or update the line
       if (map.current.getSource('route')) {
         const routeSource = map.current.getSource(
           'route'
         ) as mapboxgl.GeoJSONSource;
-        routeSource.setData(sourceData);
+        routeSource.setData(lineSourceData);
       } else {
         map.current.addSource('route', {
           type: 'geojson',
-          data: sourceData,
+          data: lineSourceData,
         });
+
         map.current.addLayer({
           id: 'route',
           type: 'line',
@@ -82,7 +97,47 @@ function Map({ geoDatas }: MapProps) {
           },
         });
       }
-      console.log('Line drawn');
+
+      // Add or update the marker
+      if (map.current.getSource('marker')) {
+        const markerSource = map.current.getSource(
+          'marker'
+        ) as mapboxgl.GeoJSONSource;
+        markerSource.setData(markerSourceData);
+      } else {
+        map.current.addSource('marker', {
+          type: 'geojson',
+          data: markerSourceData,
+        });
+
+        map.current.addLayer({
+          id: 'marker',
+          type: 'circle',
+          source: 'marker',
+          paint: {
+            'circle-radius': 10,
+            'circle-color': '#FF0000', // Red color for the marker
+          },
+        });
+      }
+
+      // Calculate bounding box from line coordinates
+      // Calculate bounding box from line coordinates
+      const bounds: mapboxgl.LngLatBoundsLike = [
+        [
+          Math.min(pickup_coordinates[0], delivery_coordinates[0]),
+          Math.min(pickup_coordinates[1], delivery_coordinates[1]),
+        ],
+        [
+          Math.max(pickup_coordinates[0], delivery_coordinates[0]),
+          Math.max(pickup_coordinates[1], delivery_coordinates[1]),
+        ],
+      ];
+
+      // Fit map to the bounding box
+      map.current.fitBounds(bounds, { padding: 20 });
+
+      console.log('Line and marker drawn');
     }
   };
 
