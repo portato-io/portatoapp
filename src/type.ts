@@ -7,7 +7,7 @@ export interface IRequestInfo {
   weight: string;
   price: number;
   pickup_address: string;
-  delivery_adress: string;
+  delivery_address: string;
   dateRange: string[];
   time: string;
   images: string[];

@@ -1,88 +1,46 @@
+import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { useEffect, useRef, useState } from 'react';
-
-require('../CSS/Map.css');
-import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox GL JS CSS
 import { Popup } from 'antd-mobile';
-import { MAP_ZOOM_OFFSET } from '../constant';
+import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox GL JS CSS
+import '../CSS/Map.css'; // Make sure this path is correct
+import { IRequestInfo } from '../type'; // Make sure this path is correct
 
-if (process.env.REACT_APP_MAPBOX_KEY)
-  mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY || '';
 
-type GeoData = {
-  type: string;
-  geometry: {
-    type: string;
-    pickup_coordinates: [number, number]; // Note the use of [number, number] instead of number[]
-    delivery_coordinates: [number, number];
-  };
-  class: string;
-  name: string;
-  description: string;
-};
-
-interface MapProps {
-  geoDatas: GeoData[];
-}
-
-function Map({ geoDatas }: MapProps) {
-  const [visible, setVisible] = useState(false);
+const Map: React.FC<{ requests: IRequestInfo[] }> = ({ requests }) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
-  const [selectedPoint, setSelectedPoint] = useState<[number, number] | null>(
+  const [visible, setVisible] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<IRequestInfo | null>(
     null
   );
-  const lastClickedMarker = useRef<string | null>(null);
 
   const drawLine = (
     pickup_coordinates: [number, number],
     delivery_coordinates: [number, number]
   ) => {
-    if (!map.current) return;
-
-    const coordinatesString = pickup_coordinates.join(',');
-    const isSameMarkerClicked = lastClickedMarker.current === coordinatesString;
-
-    // If the same marker is clicked and the line is currently drawn, remove it
-    if (isSameMarkerClicked && map.current.getLayer('route')) {
-      map.current.removeLayer('route');
-      map.current.removeLayer('marker');
-      map.current.removeSource('route');
-      map.current.removeSource('marker');
-      lastClickedMarker.current = null; // Reset the last clicked marker reference
-      console.log('Line and marker removed');
-    } else {
-      // If a different marker is clicked or no line is drawn, draw the line and add the marker
-      lastClickedMarker.current = coordinatesString; // Set the last clicked marker reference
-
-      const lineSourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
+    if (map.current) {
+      // Define the source data for the line
+      const lineData: GeoJSON.Feature<GeoJSON.LineString> = {
         type: 'Feature',
-        properties: {},
         geometry: {
           type: 'LineString',
           coordinates: [pickup_coordinates, delivery_coordinates],
         },
-      };
-
-      const markerSourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
-        type: 'Feature',
         properties: {},
-        geometry: {
-          type: 'Point',
-          coordinates: delivery_coordinates,
-        },
       };
 
-      // Draw or update the line
+      // Check if the map already has a source and layer for the route
       if (map.current.getSource('route')) {
-        const routeSource = map.current.getSource(
-          'route'
-        ) as mapboxgl.GeoJSONSource;
-        routeSource.setData(lineSourceData);
+        // Update the data if it exists
+        (map.current.getSource('route') as mapboxgl.GeoJSONSource).setData(
+          lineData
+        );
       } else {
+        // Add the source and layer if it doesn't exist
         map.current.addSource('route', {
           type: 'geojson',
-          data: lineSourceData,
+          data: lineData,
         });
 
         map.current.addLayer({
@@ -94,134 +52,108 @@ function Map({ geoDatas }: MapProps) {
             'line-cap': 'round',
           },
           paint: {
-            'line-color': '#888',
-            'line-width': 8,
+            'line-color': '#ff0000',
+            'line-width': 4,
           },
         });
       }
-
-      // Add or update the marker
-      if (map.current.getSource('marker')) {
-        const markerSource = map.current.getSource(
-          'marker'
-        ) as mapboxgl.GeoJSONSource;
-        markerSource.setData(markerSourceData);
-      } else {
-        map.current.addSource('marker', {
-          type: 'geojson',
-          data: markerSourceData,
-        });
-
-        map.current.addLayer({
-          id: 'marker',
-          type: 'circle',
-          source: 'marker', // TODO MISCHA: Marker icon :)
-          paint: {
-            'circle-radius': 10,
-            'circle-color': '#FF0000', // Red color for the marker
-          },
-        });
-      }
-
-      // Calculate bounding box from line coordinates
-      // Calculate bounding box from line coordinates
-      const bounds: mapboxgl.LngLatBoundsLike = [
-        [
-          Math.min(pickup_coordinates[0], delivery_coordinates[0]) -
-            MAP_ZOOM_OFFSET,
-          Math.min(pickup_coordinates[1], delivery_coordinates[1]) -
-            MAP_ZOOM_OFFSET,
-        ],
-        [
-          Math.max(pickup_coordinates[0], delivery_coordinates[0]) +
-            MAP_ZOOM_OFFSET,
-          Math.max(pickup_coordinates[1], delivery_coordinates[1]) +
-            MAP_ZOOM_OFFSET,
-        ],
-      ];
-
-      // Fit map to the bounding box
-      map.current.fitBounds(bounds, { padding: 20 });
-      setVisible(true);
-      console.log('Line and marker drawn');
     }
   };
-  useEffect(() => {
-    const defaultCoordinates = { longitude: 8.5417, latitude: 47.3769 }; // Coordinates of Zurich
 
-    const initializeMap = (coords: any) => {
+  // Initialize the map and add markers for each request
+  useEffect(() => {
+    const mapInstance = map.current; // Handle the map instance separately to please TypeScript
+    if (!mapInstance && mapContainer.current) {
+      // Initialize the map
       map.current = new mapboxgl.Map({
-        container: mapContainer.current!,
-        style: '/map/style.json',
-        center: [coords.longitude, coords.latitude],
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [8.5417, 47.3769],
         zoom: 9,
       });
-      if (map.current) {
-        for (const geoData of geoDatas) {
-          const el = document.createElement('div');
-          el.className = geoData.class;
+    }
 
-          new mapboxgl.Marker(el)
-            .setLngLat(geoData.geometry.pickup_coordinates)
-            // .setPopup(
-            //   new mapboxgl.Popup({ offset: 25 }).setHTML(
-            //     `<div>
-            //     <h3>${geoData.name}</h3>
-            //     <p>${geoData.description}</p>
-            //     <button onclick="handleButtonClick()">Click Me</button>
-            //     </div>`
-            //   )
-            // )
-            .addTo(map.current);
+    if (mapInstance) {
+      // Add markers to the map for each request
+      requests.forEach((request) => {
+        const el = document.createElement('div');
+        el.className = 'marker';
 
-          el.addEventListener('click', () => {
-            console.log('click');
-            setSelectedPoint(geoData.geometry.pickup_coordinates);
-            drawLine(
-              geoData.geometry.pickup_coordinates,
-              geoData.geometry.delivery_coordinates
-            ); // Example: draw line to same point for now
-          });
+        new mapboxgl.Marker(el)
+          .setLngLat(request.pickup_coordinates)
+          .addTo(mapInstance);
 
-          map.current.setZoom(12);
-        }
+        el.addEventListener('click', () => {
+          setSelectedRequest(request);
+          setVisible(true);
+          drawLine(request.pickup_coordinates, request.delivery_coordinates);
+        });
+      });
+    }
+
+    // Clean up the map instance on unmount
+    return () => {
+      if (mapInstance) {
+        mapInstance.remove();
       }
     };
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { longitude, latitude } = position.coords;
-          initializeMap({ longitude, latitude });
-        },
-        (error) => {
-          console.error('Error getting geolocation:', error);
-          initializeMap(defaultCoordinates); // Initialize map with Zurich coordinates
-        }
-      );
-    } else {
-      console.error('Geolocation is not available in your browser.');
-      initializeMap(defaultCoordinates); // Initialize map with Zurich coordinates
-    }
-  }, [geoDatas]);
+  }, [requests]);
 
   return (
     <div className="map-wrapper">
-      <div ref={mapContainer} className="map-wrapper" />
-      <Popup
-        visible={visible}
-        onMaskClick={() => {
-          setVisible(false);
-        }}
-        bodyStyle={{
-          borderTopLeftRadius: '8px',
-          borderTopRightRadius: '8px',
-          minHeight: '20vh',
-        }}
-      >
-        {'ADD INFO HERE ?'}
-      </Popup>
+      <div ref={mapContainer} className="map-container" />
+      {selectedRequest && (
+        <Popup
+          visible={visible}
+          onMaskClick={() => {
+            setVisible(false);
+            setSelectedRequest(null); // Reset the selected request when closing the popup
+          }}
+          bodyStyle={{
+            borderTopLeftRadius: '8px',
+            borderTopRightRadius: '8px',
+            minHeight: '20vh',
+            padding: '10px',
+          }}
+        >
+          <div>
+            <strong>Name:</strong> {selectedRequest.name}
+            <br />
+            <strong>Description:</strong> {selectedRequest.description}
+            <br />
+            <strong>Size:</strong> {selectedRequest.size}
+            <br />
+            <strong>Weight:</strong> {selectedRequest.weight}
+            <br />
+            <strong>Price:</strong> {selectedRequest.price}
+            <br />
+            <strong>Pickup Address:</strong> {selectedRequest.pickup_address}
+            <br />
+            <strong>Delivery Address:</strong>{' '}
+            {selectedRequest.delivery_address}
+            <br />
+            <strong>Date Range:</strong>{' '}
+            {selectedRequest.dateRange.join(' to ')}
+            <br />
+            <strong>Time:</strong> {selectedRequest.time}
+            <br />
+            {selectedRequest.images && selectedRequest.images.length > 0 && (
+              <div>
+                {selectedRequest.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Request Image ${index + 1}`}
+                    style={{ maxWidth: '100%', marginTop: '5px' }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </Popup>
+      )}
     </div>
   );
-}
+};
 
 export default Map;
