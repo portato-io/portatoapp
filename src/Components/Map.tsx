@@ -79,27 +79,31 @@ function Map({ requests }: MapProps) {
     }
   };
 
-  // Function to add markers to the map
-  const addMarkers = (mapInstance: mapboxgl.Map, requests: IRequestInfo[]) => {
-    requests.forEach((request) => {
-      const el = document.createElement('div');
-      el.className = 'box-marker'; // Use the CSS class for styling
-
-      new mapboxgl.Marker(el)
-        .setLngLat(request.pickup_coordinates)
-        .addTo(mapInstance);
-
-      el.addEventListener('click', () => {
-        setSelectedRequest(request);
-        setVisible(true);
-        drawLine(request.pickup_coordinates, request.delivery_coordinates);
-      });
-    });
-  };
-
   // Initialize the map
   useEffect(() => {
     const defaultCoordinates = { longitude: 8.5417, latitude: 47.3769 }; //
+    // Function to add markers to the map
+    const addMarkers = (
+      mapInstance: mapboxgl.Map,
+      requests: IRequestInfo[]
+    ) => {
+      console.log('Adding markers', requests);
+      requests.forEach((request) => {
+        console.log('adding marker for ' + request.pickup_coordinates);
+        const el = document.createElement('div');
+        el.className = 'box-marker'; // Use the CSS class for styling
+
+        new mapboxgl.Marker(el)
+          .setLngLat(request.pickup_coordinates)
+          .addTo(mapInstance);
+
+        el.addEventListener('click', () => {
+          setSelectedRequest(request);
+          setVisible(true);
+          drawLine(request.pickup_coordinates, request.delivery_coordinates);
+        });
+      });
+    };
     const initializeMap = (coords: any) => {
       map.current = new mapboxgl.Map({
         container: mapContainer.current!,
@@ -108,6 +112,7 @@ function Map({ requests }: MapProps) {
         zoom: 9,
       });
       if (map.current) {
+        console.log(map.current);
         addMarkers(map.current!, requests);
       }
     };
@@ -135,7 +140,7 @@ function Map({ requests }: MapProps) {
   }, [requests]); // Empty dependencies array to ensure this effect runs once after the component mounts
 
   return (
-    <div className="portato-map">
+    <div className="map-wrapper">
       <div ref={mapContainer} className="map-wrapper" />
       {selectedRequest && (
         <Popup

@@ -14,8 +14,12 @@ const PortatoMap: React.FC = () => {
     try {
       const fetchedData = await fetchAllRequests();
       if (fetchedData && fetchedData.length > 0) {
-        // Combine all requests from all users into a single array
-        const allRequests = fetchedData.flatMap((item) => item.requests);
+        // Assume that fetchedData is an array of objects, where each object has a 'requests' property
+        const allRequests = fetchedData.flatMap((item) =>
+          Object.values(item.requests as Record<string, IRequestInfo>).filter(
+            (request) => request && request.pickup_coordinates
+          )
+        );
         setRequests(allRequests);
       }
     } catch (error) {
@@ -24,10 +28,8 @@ const PortatoMap: React.FC = () => {
   };
 
   useEffect(() => {
-    if (user?.uid) {
-      fetchRequestData();
-    }
-  }, [user?.uid]); // Fetch requests when the user's UID is available
+    fetchRequestData();
+  }, []); // Fetch requests when the user's UID is available
 
   return (
     <PageLayout>
