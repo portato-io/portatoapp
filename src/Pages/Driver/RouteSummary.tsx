@@ -28,8 +28,14 @@ const RouteSummary: React.FC = () => {
   const routeInfo = useSelector((state: { route: IRouteInfo }) => state.route);
   const dispatch = useDispatch();
 
+  const [modalKey, setModalKey] = useState(0); // State to hold the key for FirebaseAuth
   const showModal = () => {
     setIsModalVisible(true);
+    setModalKey((prevKey) => prevKey + 1); // Update key each time the modal is opened
+  };
+
+  const handleAuthSuccess = () => {
+    setIsModalVisible(false); // Close the modal
   };
 
   const [user, setUser] = useState<User | null>(null);
@@ -199,7 +205,7 @@ const RouteSummary: React.FC = () => {
         <ProgressBar progress={PROGRESS} />
         <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
           <div>
-            <FirebaseAuth />
+            <FirebaseAuth key={modalKey} onAuthSuccess={handleAuthSuccess} />
           </div>
         </Modal>
         <h2>{t('driveSummary.title')}</h2>

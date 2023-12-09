@@ -82,3 +82,11 @@ export type MapMarkerInfoWindow = {
   description: string;
   url: string;
 };
+
+export {};
+
+// declare global {
+//   interface Window {
+//     recaptchaVerifier: any;
+//   }
+// }
