@@ -5,6 +5,8 @@ require('../CSS/Map.css');
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox GL JS CSS
 import { Popup } from 'antd-mobile';
 import { MAP_ZOOM_OFFSET } from '../constant';
+import { IRequestInfo } from '../type';
+import { Image } from 'antd';
 
 if (process.env.REACT_APP_MAPBOX_KEY)
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
@@ -22,13 +24,18 @@ type GeoData = {
 };
 
 interface MapProps {
-  geoDatas: GeoData[];
+  requests: IRequestInfo[];
 }
 
-function Map({ geoDatas }: MapProps) {
-  const [visible, setVisible] = useState(false);
+function Map({ requests }: MapProps) {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const [visible, setVisible] = useState(false);
+  const [imagePreviewVisible, setImagePreviewVisible] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<IRequestInfo | null>(
+    null
+  );
+
   const [selectedPoint, setSelectedPoint] = useState<[number, number] | null>(
     null
   );
@@ -146,9 +153,44 @@ function Map({ geoDatas }: MapProps) {
       console.log('Line and marker drawn');
     }
   };
-  useEffect(() => {
-    const defaultCoordinates = { longitude: 8.5417, latitude: 47.3769 }; // Coordinates of Zurich
 
+  // Initialize the map
+  useEffect(() => {
+    const defaultCoordinates = { longitude: 8.5417, latitude: 47.3769 }; //
+    // Function to add markers to the map
+    const addMarkers = (
+      mapInstance: mapboxgl.Map,
+      requests: IRequestInfo[]
+    ) => {
+      requests.forEach((request) => {
+        console.log('adding marker for ' + request.pickup_coordinates);
+        const el = document.createElement('div');
+        el.className = 'box-marker'; // Use the CSS class for styling
+
+        // Reverse the coordinates to [longitude, latitude] order
+        const pickupCoordinates = [
+          request.pickup_coordinates[1],
+          request.pickup_coordinates[0],
+        ];
+        const deliveryCoordinates = [
+          request.delivery_coordinates[1],
+          request.delivery_coordinates[0],
+        ];
+
+        new mapboxgl.Marker(el)
+          .setLngLat(pickupCoordinates as [number, number])
+          .addTo(mapInstance);
+
+        el.addEventListener('click', () => {
+          setSelectedRequest(request);
+          setVisible(true);
+          drawLine(
+            pickupCoordinates as [number, number],
+            deliveryCoordinates as [number, number]
+          );
+        });
+      });
+    };
     const initializeMap = (coords: any) => {
       map.current = new mapboxgl.Map({
         container: mapContainer.current!,
@@ -157,34 +199,8 @@ function Map({ geoDatas }: MapProps) {
         zoom: 9,
       });
       if (map.current) {
-        for (const geoData of geoDatas) {
-          const el = document.createElement('div');
-          el.className = geoData.class;
-
-          new mapboxgl.Marker(el)
-            .setLngLat(geoData.geometry.pickup_coordinates)
-            // .setPopup(
-            //   new mapboxgl.Popup({ offset: 25 }).setHTML(
-            //     `<div>
-            //     <h3>${geoData.name}</h3>
-            //     <p>${geoData.description}</p>
-            //     <button onclick="handleButtonClick()">Click Me</button>
-            //     </div>`
-            //   )
-            // )
-            .addTo(map.current);
-
-          el.addEventListener('click', () => {
-            console.log('click');
-            setSelectedPoint(geoData.geometry.pickup_coordinates);
-            drawLine(
-              geoData.geometry.pickup_coordinates,
-              geoData.geometry.delivery_coordinates
-            ); // Example: draw line to same point for now
-          });
-
-          map.current.setZoom(12);
-        }
+        console.log(map.current);
+        addMarkers(map.current!, requests);
       }
     };
     if ('geolocation' in navigator) {
@@ -202,24 +218,77 @@ function Map({ geoDatas }: MapProps) {
       console.error('Geolocation is not available in your browser.');
       initializeMap(defaultCoordinates); // Initialize map with Zurich coordinates
     }
-  }, [geoDatas]);
+
+    return () => {
+      if (map.current) {
+        map.current.remove();
+      }
+    };
+  }, [requests]); // Empty dependencies array to ensure this effect runs once after the component mounts
 
   return (
     <div className="map-wrapper">
       <div ref={mapContainer} className="map-wrapper" />
-      <Popup
-        visible={visible}
-        onMaskClick={() => {
-          setVisible(false);
-        }}
-        bodyStyle={{
-          borderTopLeftRadius: '8px',
-          borderTopRightRadius: '8px',
-          minHeight: '20vh',
-        }}
-      >
-        {'ADD INFO HERE ?'}
-      </Popup>
+      {selectedRequest && (
+        <Popup
+          visible={visible}
+          onMaskClick={() => {
+            setVisible(false);
+            setSelectedRequest(null); // Reset the selected request when closing the popup
+          }}
+          bodyStyle={{
+            borderTopLeftRadius: '8px',
+            borderTopRightRadius: '8px',
+            minHeight: '20vh',
+            padding: '10px',
+          }}
+        >
+          <div>
+            <strong>Name:</strong> {selectedRequest.name}
+            <br />
+            <strong>Description:</strong> {selectedRequest.description}
+            <br />
+            <strong>Size:</strong> {selectedRequest.size}
+            <br />
+            <strong>Weight:</strong> {selectedRequest.weight}
+            <br />
+            <strong>Price:</strong> {selectedRequest.price}
+            <br />
+            <strong>Pickup Address:</strong> {selectedRequest.pickup_address}
+            <br />
+            <strong>Delivery Address:</strong>{' '}
+            {selectedRequest.delivery_address}
+            <br />
+            <strong>Date Range:</strong>{' '}
+            {selectedRequest.dateRange.join(' to ')}
+            <br />
+            <strong>Time:</strong> {selectedRequest.time}
+            <br />
+            {selectedRequest.images && selectedRequest.images.length > 0 && (
+              <>
+                <Image
+                  preview={false}
+                  src={selectedRequest.images[0]}
+                  style={{ width: 100, height: 100, cursor: 'pointer' }}
+                  onClick={() => setImagePreviewVisible(true)}
+                />
+                {imagePreviewVisible && (
+                  <Image.PreviewGroup
+                    preview={{
+                      visible: imagePreviewVisible,
+                      onVisibleChange: (vis) => setImagePreviewVisible(vis),
+                    }}
+                  >
+                    {selectedRequest.images.map((image, index) => (
+                      <Image key={index} src={image} />
+                    ))}
+                  </Image.PreviewGroup>
+                )}
+              </>
+            )}
+          </div>
+        </Popup>
+      )}
     </div>
   );
 }

@@ -201,7 +201,7 @@ const FetchRequests: React.FC<{
                     <th className="th">
                       {t('requestOverview.requestList.deliveryAddress')}
                     </th>
-                    <td className="td">{request.delivery_adress}</td>
+                    <td className="td">{request.delivery_address}</td>
                   </tr>
                   <tr>
                     <th className="th">

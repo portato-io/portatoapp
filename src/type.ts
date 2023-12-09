@@ -7,7 +7,7 @@ export interface IRequestInfo {
   weight: string;
   price: number;
   pickup_address: string;
-  delivery_adress: string;
+  delivery_address: string;
   dateRange: string[];
   time: string;
   images: string[];
@@ -82,3 +82,11 @@ export type MapMarkerInfoWindow = {
   description: string;
   url: string;
 };
+
+export {};
+
+// declare global {
+//   interface Window {
+//     recaptchaVerifier: any;
+//   }
+// }

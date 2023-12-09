@@ -50,7 +50,7 @@ const ContactDriver: React.FC = () => {
     const emailContent = `
       <table>
         <tr><th>Pickup Address</th><td>${request.pickup_address}</td></tr>
-        <tr><th>Delivery Address</th><td>${request.delivery_adress}</td></tr>
+        <tr><th>Delivery Address</th><td>${request.delivery_address}</td></tr>
         <tr><th>Date Range</th><td>From ${request.dateRange[0]} to ${request.dateRange[1]}</td></tr>
         <tr><th>Time</th><td>${request.time}</td></tr>
         <tr><th>Price</th><td>${request.price} CHF</td></tr>

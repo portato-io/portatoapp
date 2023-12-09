@@ -70,7 +70,7 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
 
     // Handle the delivery address and update coordinates
     const deliveryCoordinates = await handleAddress(
-      state.request.delivery_adress
+      state.request.delivery_address
     );
     if (deliveryCoordinates) {
       console.log('ALED', deliveryCoordinates);

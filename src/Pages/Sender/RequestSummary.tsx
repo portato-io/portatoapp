@@ -30,8 +30,14 @@ const RequestSummary: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
 
+  const [modalKey, setModalKey] = useState(0); // State to hold the key for FirebaseAuth
   const showModal = () => {
     setIsModalVisible(true);
+    setModalKey((prevKey) => prevKey + 1); // Update key each time the modal is opened
+  };
+
+  const handleAuthSuccess = () => {
+    setIsModalVisible(false); // Close the modal
   };
 
   const requestInfo = useSelector(
@@ -92,7 +98,7 @@ const RequestSummary: React.FC = () => {
         )}</th><td>${requestInfo.pickup_address}</td></tr>
         <tr><th style="text-align:left;">${t(
           'requestAddresses.deliveryAddress'
-        )}</th><td>${requestInfo.delivery_adress}</td></tr>
+        )}</th><td>${requestInfo.delivery_address}</td></tr>
         <tr><th style="text-align:left;">${t(
           'requestTime.dates'
         )}</th><td>From ${requestInfo.dateRange[0]} to ${
@@ -170,7 +176,7 @@ const RequestSummary: React.FC = () => {
         <ProgressBar progress={PROGRESS} />
         <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
           <div>
-            <FirebaseAuth />
+            <FirebaseAuth key={modalKey} onAuthSuccess={handleAuthSuccess} />
           </div>
         </Modal>
         <h2>{t('requestSummary.title')}</h2>
@@ -196,7 +202,7 @@ const RequestSummary: React.FC = () => {
                     <th className="th">
                       {t('requestSummary.deliveryAddress')}
                     </th>
-                    <td className="td">{requestInfo.delivery_adress}</td>
+                    <td className="td">{requestInfo.delivery_address}</td>
                   </tr>
                   <tr>
                     <th className="th">{t('requestSummary.timeframe')}</th>

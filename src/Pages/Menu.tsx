@@ -28,9 +28,16 @@ const Menu: React.FC = () => {
   }, [user]); // Make sure to include 'user' in your dependency array, so useEffect re-runs when 'user' changes.
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalKey, setModalKey] = useState(0); // State to hold the key for FirebaseAuth
   const showModal = () => {
     setIsModalVisible(true);
+    setModalKey((prevKey) => prevKey + 1); // Update key each time the modal is opened
   };
+
+  const handleAuthSuccess = () => {
+    setIsModalVisible(false); // Close the modal
+  };
+
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -69,7 +76,7 @@ const Menu: React.FC = () => {
     <PageLayout display={display}>
       <Modal open={isModalVisible} onCancel={handleCancel} footer={null}>
         <div>
-          <FirebaseAuth />
+          <FirebaseAuth key={modalKey} onAuthSuccess={handleAuthSuccess} />
         </div>
       </Modal>
       <div className="profile-screen-background">

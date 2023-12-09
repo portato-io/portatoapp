@@ -12,7 +12,7 @@ const initialStateDeal: IDealInfo = {
     weight: '',
     price: 10,
     pickup_address: '',
-    delivery_adress: '',
+    delivery_address: '',
     dateRange: [],
     time: '',
     images: [],
