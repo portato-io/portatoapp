@@ -39,6 +39,7 @@
     "no": "Nein",
     "edit": "edit",
     "back": "Zurück"
+    "loading": "Loading ...."
   },
 
   "addressField": {
@@ -92,26 +93,27 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ex PPT- und XLS-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk.",
-      "image": "src/Assets/Images/team/conrad.jpg"
-    },
-    "Hugo": {
-      "name": "Hugo",
-      "description": "Franko-britisches Genie, jongliert in mindestens so vielen Sprachen das Backend.",
-      "image": "src/Assets/Images/team/hugo.jpg"
-    },
-    "Mehdi": {
-      "name": "Mehdi",
-      "description": "Hip-Hop-Liebhaber, der das Frontend genauso gut aussehen lässt wie seine Frisuren."
+      "description": "Ex PPT- und XLS-Ingenieur, jetzt CEO von Portato. Sportenthusiast mit grossem Netzwerk."
     },
     "Mischa": {
       "name": "Mischa",
-      "description": "Hansdampf in allen (Produkt-)Gassen. Multitalentiert in Coding, Design und Animation.",
-      "image": "src/Assets/Images/team/mischa.jpg"
+      "description": "Hansdampf in allen (Produkt-)Gassen. Multitalentiert in Coding, Design und Animation."
     },
     "Chiara": {
       "name": "Chiara",
       "description": "Storyboard-Artist und 2D-Künstlerin, die Portato Charme verleiht, ein Strich nach dem anderen."
+    },
+    "Hugo": {
+      "name": "Hugo",
+      "description": "Franko-britisches Genie, jongliert in mindestens so vielen Sprachen das Backend."
+    },
+    "Mehdi": {
+      "name": "Mehdi",
+      "description": "Hip-Hop-Liebhaber und Modeikone, näht Frontend und Backend nach Mass zusammen."
+    },
+    "Moritz": {
+      "name": "Moritz",
+      "description": "Frontend Guru, der im Internet geboren ist und dessen AGB gelesen und verstanden hat."
     }
   },
 
@@ -192,7 +194,7 @@
       "requestConfirmationBody": "Vielen Dank für deinen Transportauftrag. Wir melden uns bei dir sobald wie möglich mit Fahrer:innen, die in deine Richtung fahren und den Transport übernehmen können.<br>Deinen Auftrag kannst Du unter diesem <a href=\"https://portato.io/createSendRequest\">Link</a> jederzeit einsehen, editieren oder löschen.<br>",
       "greetings": "Liebe/r",
       "salutations": "Mit freundlichen Grüssen,<br>Dein Portato Team"
-  }
+    }
   },
 
   "driveOverview": {
@@ -350,7 +352,7 @@
     "title": "Impressum",
     "text": "Dachsbau GmbH\nRepräsentant: Conrad Bielitz \nRötelstrasse 4 | 8006 Zürich | Switzerland\n\ninfo@portato.io"
   },
-  
+
   "signIn": {
     "back": "Zurück",
     "signUp": "Registrieren",
@@ -379,6 +381,18 @@
     "signInFailedMessage": "Anmeldung fehlgeschlagen",
     "captchaMissingMessage": "Bitte schließe die reCAPTCHA-Herausforderung ab.",
     "smsSendingFailedMessage": "SMS konnte nicht gesendet werden.",
-    "otpVerificationFailedMessage": "Verifizierung der OTP fehlgeschlagen."
+    "otpVerificationFailedMessage": "Verifizierung der OTP fehlgeschlagen.",
+    "forgotPassword": "Password forgotten",
+    "forgotPasswordText": " blbabalabala",
+    "forgotPasswordTitle": "title of forgot password",
+    "resetPasswordButton": "Reset password",
+    "resetPasswordConfirmation": "Reset password successfully",
+    "resetPasswordError": "No account correspond to this email address",
+    "enterEmailError": "Please enter your email address",
+    "placeholderFirstName": "First Name",
+    "placeholderLastName": "Last Name",
+    "successSmsSent": "SMS sent successfully",
+    "emailAlreadyUsed": "Email already used",
+    "errorPhoneCountryCode": "PLease enter the country code of the phone number"
   }
 }

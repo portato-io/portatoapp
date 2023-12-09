@@ -37,8 +37,9 @@
     "upload": "Upload",
     "yes": "Yes",
     "edit": "Edit",
+    "back": "Back",
     "no": "No",
-    "back": "Back"
+    "loading": "Loading ...."
   },
 
   "addressField": {
@@ -94,21 +95,25 @@
       "name": "Conrad",
       "description": "Former PPT and XLS engineer, now Portato's CEO. A sports enthusiast with a vast network."
     },
-    "Hugo": {
-      "name": "Hugo",
-      "description": "Franco-British engineering maestro juggling the backend in at least as many languages."
-    },
-    "Mehdi": {
-      "name": "Mehdi",
-      "description": "Hip-hop lover and fashionista, making the frontend look as good as his haircuts."
-    },
     "Mischa": {
       "name": "Mischa",
       "description": "Jack of all trades, master of product. Multitalented in coding, design and animation."
     },
     "Chiara": {
       "name": "Chiara",
-      "description": "2D animation whizz moonlighting as a princess, infusing charm into Portato one frame at a time."
+      "description": "2D animation whizz doubling as a princess, infusing charm into Portato one frame at a time."
+    },
+    "Hugo": {
+      "name": "Hugo",
+      "description": "Franco-British engineering maestro, juggling the backend in at least as many languages."
+    },
+    "Mehdi": {
+      "name": "Mehdi",
+      "description": "Hip-hop lover and fashionista, stitching frontend and backend together like a tailor with code."
+    },
+    "Moritz": {
+      "name": "Moritz",
+      "description": "Frontend guru that was born in the internet and has read and understood its T&Cs."
     }
   },
 
@@ -374,11 +379,22 @@
     "captchaSuccessMessage": "Captcha verification successful",
     "missingEmailOrPassword": "Please enter both email and password",
     "signInSuccessMessage": "Sign in successful!",
-    "signInFailedMessage": "Sign in failed",
+    "signInFailedMessage": "Sign in failed, wrong email address or password",
     "captchaMissingMessage": "Please complete the reCAPTCHA challenge.",
     "smsSendingFailedMessage": "Failed to send SMS.",
-    "otpVerificationFailedMessage": "Failed to verify OTP."
-
+    "otpVerificationFailedMessage": "Failed to verify OTP.",
+    "forgotPassword": "Password forgotten",
+    "forgotPasswordText": " Please enter your email address and we will send you a recovery link.",
+    "forgotPasswordTitle": "Password recovery",
+    "resetPasswordButton": "Reset password",
+    "resetPasswordConfirmation": "Reset password mail sent successfully",
+    "resetPasswordError": "No account correspond to this email address",
+    "enterEmailError": "Please enter your email address",
+    "placeholderFirstName": "First Name",
+    "placeholderLastName": "Last Name",
+    "successSmsSent":"SMS sent successfully",
+    "emailAlreadyUsed": "Email already used",
+    "errorPhoneCountryCode": "PLease enter the country code of the phone number"
   }
   
 }

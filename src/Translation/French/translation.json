@@ -38,8 +38,9 @@
     "yes": "Oui",
     "no": "Non",
     "edit": "Modifier",
+    "loading": "Chargement en cours ....",
     "back": "Retour"
-    
+
   },
 
   "addressField": {
@@ -93,8 +94,15 @@
   "team": {
     "Conrad": {
       "name": "Conrad",
-      "description": "Ancien ingénieur PPT et XLS, maintenant CEO de Portato. Passionné de sport avec un grand réseau.",
-      "image": "../src/Assets/Images/team/conrad.jpg"
+      "description": "Ancien ingénieur PPT et XLS, maintenant CEO de Portato. Passionné de sport avec un grand réseau."
+    },
+    "Mischa": {
+      "name": "Mischa",
+      "description": "Touche-à-tout, maître du produit. Multitalent pour la programmation, le design et l'animation."
+    },
+    "Chiara": {
+      "name": "Chiara",
+      "description": "Artiste story-board et animatrice 2D qui donne à Portato son charme, un trait à la fois."
     },
     "Hugo": {
       "name": "Hugo",
@@ -102,17 +110,11 @@
     },
     "Mehdi": {
       "name": "Mehdi",
-      "description": "Amoureux du hip-hop qui rend le frontend aussi beau que ses coupes de cheveux."
+      "description": "Amoureux du hip-hop et fashionista, tissant à travers le frontend et le backend comme un tailleur."
     },
-    "Mischa": {
-      "name": "Mischa",
-      "description": "Touche-à-tout, maître du produit. Multitalent pour la programmation, le design et l'animation.",
-      "image": "src/Assets/Images/team/mischa.jpg"
-    },
-    "Chiara": {
-      "name": "Chiara",
-      "description": "Artiste story-board et animatrice 2D qui donne à Portato son charme, un trait à la fois.",
-      "image": "src/Assets/Images/team/chiara.png"
+    "Moritz": {
+      "name": "Moritz",
+      "description": "Gourou du frontend, né sur Internet et ayant lu et compris ses conditions générales d'utilisation."
     }
   },
 
@@ -377,10 +379,22 @@
     "captchaSuccessMessage": "Vérification du Captcha réussie",
     "missingEmailOrPassword": "Veuillez entrer à la fois l'e-mail et le mot de passe",
     "signInSuccessMessage": "Connexion réussie !",
-    "signInFailedMessage": "Échec de la connexion",
+    "signInFailedMessage": "Échec de la connexion, mot de passe ou adresse mail erronée",
     "captchaMissingMessage": "Veuillez compléter le défi reCAPTCHA.",
     "smsSendingFailedMessage": "Échec de l'envoi du SMS.",
-    "otpVerificationFailedMessage": "Échec de la vérification de l'OTP."
+    "otpVerificationFailedMessage": "Échec de la vérification de l'OTP.",
+    "forgotPassword": "Password forgotten",
+    "forgotPasswordText": " blbabalabala",
+    "forgotPasswordTitle": "title of forgot password",
+    "resetPasswordButton": "Reset password",
+    "resetPasswordConfirmation": "Reset password successfully",
+    "resetPasswordError": "No account correspond to this email address",
+    "enterEmailError": "Please enter your email address",
+    "placeholderFirstName": "First Name",
+    "placeholderLastName": "Last Name",
+    "successSmsSent":"SMS sent successfully",
+    "emailAlreadyUsed": "Email already used",
+    "errorPhoneCountryCode": "Veuillez saisr le code du pays dans votre numero de telephone"
   }
   
 }
