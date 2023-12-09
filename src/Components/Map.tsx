@@ -6,6 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox GL JS CSS
 import { Popup } from 'antd-mobile';
 import { MAP_ZOOM_OFFSET } from '../constant';
 import { IRequestInfo } from '../type';
+import { Image } from 'antd';
 
 if (process.env.REACT_APP_MAPBOX_KEY)
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
@@ -263,16 +264,28 @@ function Map({ requests }: MapProps) {
             <strong>Time:</strong> {selectedRequest.time}
             <br />
             {selectedRequest.images && selectedRequest.images.length > 0 && (
-              <div>
-                {selectedRequest.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Request Image ${index + 1}`}
-                    style={{ maxWidth: '100%', marginTop: '5px' }}
-                  />
-                ))}
-              </div>
+              <>
+                {/* Thumbnail image */}
+                <Image
+                  preview={false}
+                  src={selectedRequest.images[0]}
+                  style={{ width: 100, height: 100, cursor: 'pointer' }} // Set thumbnail size
+                  onClick={() => setVisible(true)}
+                />
+                {/* Full-size image preview */}
+                {!visible && (
+                  <Image.PreviewGroup
+                    preview={{
+                      visible,
+                      onVisibleChange: (vis) => setVisible(vis),
+                    }}
+                  >
+                    {selectedRequest.images.map((image, index) => (
+                      <Image key={index} src={image} />
+                    ))}
+                  </Image.PreviewGroup>
+                )}
+              </>
             )}
           </div>
         </Popup>
