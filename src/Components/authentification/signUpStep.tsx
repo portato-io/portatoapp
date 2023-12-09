@@ -1,5 +1,5 @@
-import React from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { SignUpFormValues } from './formDefinition';
 import { message } from 'antd';
@@ -9,7 +9,7 @@ const SignUpStep: React.FC<{
 }> = ({ onSendSMS }) => {
   const [form] = Form.useForm<SignUpFormValues>();
   const { t } = useTranslation();
-
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const onFinish = (values: SignUpFormValues) => {
     console.log('Success:', values);
     onSendSMS(values); // pass the form values to the SMS handler
@@ -131,9 +131,31 @@ const SignUpStep: React.FC<{
           <p className="text-hint">{t('signIn.placeholderHintPhone')}</p>
         </Form.Item>
 
+        <Form.Item>
+          <Checkbox
+            checked={termsAccepted}
+            onChange={(e) => setTermsAccepted(e.target.checked)}
+            style={{ fontSize: '16px' }}
+          >
+            {t('signIn.acceptTermsText')}
+            <a
+              href="https://portato.io/termsAndconditions"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: 'black',
+                fontSize: '16px',
+                textDecoration: 'underline',
+              }} // Inline CSS for the link
+            >
+              {t('signIn.acceptTermsLink')}
+            </a>
+          </Checkbox>
+        </Form.Item>
+
         <div id="recaptcha-container"></div>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled={!termsAccepted}>
             {t('signIn.registrationButton')}
           </Button>
         </Form.Item>

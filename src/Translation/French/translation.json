@@ -39,7 +39,6 @@
     "no": "Non",
     "edit": "Modifier",
     "loading": "Chargement en cours ...."
-
   },
 
   "addressField": {
@@ -382,18 +381,19 @@
     "captchaMissingMessage": "Veuillez compléter le défi reCAPTCHA.",
     "smsSendingFailedMessage": "Échec de l'envoi du SMS.",
     "otpVerificationFailedMessage": "Échec de la vérification de l'OTP.",
-    "forgotPassword": "Password forgotten",
-    "forgotPasswordText": " blbabalabala",
-    "forgotPasswordTitle": "title of forgot password",
-    "resetPasswordButton": "Reset password",
-    "resetPasswordConfirmation": "Reset password successfully",
-    "resetPasswordError": "No account correspond to this email address",
-    "enterEmailError": "Please enter your email address",
-    "placeholderFirstName": "First Name",
-    "placeholderLastName": "Last Name",
-    "successSmsSent":"SMS sent successfully",
-    "emailAlreadyUsed": "Email already used",
-    "errorPhoneCountryCode": "Veuillez saisr le code du pays dans votre numero de telephone"
+    "forgotPassword": "Mot de passe oublié",
+    "forgotPasswordText": "Veuillez saisir votre adresse e-mail et nous vous enverrons un lien de récupération.",
+    "forgotPasswordTitle": "Récupération de mot de passe",
+    "resetPasswordButton": "Réinitialiser le mot de passe",
+    "resetPasswordConfirmation": "E-mail de réinitialisation du mot de passe envoyé avec succès",
+    "resetPasswordError": "Aucun compte ne correspond à cette adresse e-mail",
+    "enterEmailError": "Veuillez saisir votre adresse e-mail",
+    "placeholderFirstName": "Prénom",
+    "placeholderLastName": "Nom de famille",
+    "successSmsSent": "SMS envoyé avec succès",
+    "emailAlreadyUsed": "E-mail déjà utilisé",
+    "errorPhoneCountryCode": "Veuillez saisir l'indicatif du pays dans votre numéro de téléphone",  
+    "acceptTermsText": "Veuillez accepter ces ",
+    "acceptTermsLink": "conditions générales"
   }
-  
 }
