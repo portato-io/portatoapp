@@ -34,32 +34,60 @@ function Map({ requests }: MapProps) {
     null
   );
 
+  const [selectedPoint, setSelectedPoint] = useState<[number, number] | null>(
+    null
+  );
+  const lastClickedMarker = useRef<string | null>(null);
+
   const drawLine = (
     pickup_coordinates: [number, number],
     delivery_coordinates: [number, number]
   ) => {
-    if (map.current) {
-      // Define the source data for the line
-      const lineData: GeoJSON.Feature<GeoJSON.LineString> = {
+    if (!map.current) return;
+
+    const coordinatesString = pickup_coordinates.join(',');
+    const isSameMarkerClicked = lastClickedMarker.current === coordinatesString;
+
+    // If the same marker is clicked and the line is currently drawn, remove it
+    if (isSameMarkerClicked && map.current.getLayer('route')) {
+      map.current.removeLayer('route');
+      map.current.removeLayer('marker');
+      map.current.removeSource('route');
+      map.current.removeSource('marker');
+      lastClickedMarker.current = null; // Reset the last clicked marker reference
+      console.log('Line and marker removed');
+    } else {
+      // If a different marker is clicked or no line is drawn, draw the line and add the marker
+      lastClickedMarker.current = coordinatesString; // Set the last clicked marker reference
+
+      const lineSourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
         type: 'Feature',
+        properties: {},
         geometry: {
           type: 'LineString',
           coordinates: [pickup_coordinates, delivery_coordinates],
         },
-        properties: {},
       };
 
-      // Check if the map already has a source and layer for the route
+      const markerSourceData: GeoJSON.Feature<GeoJSON.Geometry> = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Point',
+          coordinates: delivery_coordinates,
+        },
+      };
+
+      // Draw or update the line
       if (map.current.getSource('route')) {
-        // Update the data if it exists
-        (map.current.getSource('route') as mapboxgl.GeoJSONSource).setData(
-          lineData
-        );
+        const routeSource = map.current.getSource(
+          'route'
+        ) as mapboxgl.GeoJSONSource;
+        routeSource.setData(lineSourceData);
       } else {
-        // Add the source and layer if it doesn't exist
         map.current.addSource('route', {
           type: 'geojson',
-          data: lineData,
+          data: lineSourceData,
         });
 
         map.current.addLayer({
@@ -71,11 +99,56 @@ function Map({ requests }: MapProps) {
             'line-cap': 'round',
           },
           paint: {
-            'line-color': '#ff0000',
-            'line-width': 4,
+            'line-color': '#888',
+            'line-width': 8,
           },
         });
       }
+
+      // Add or update the marker
+      if (map.current.getSource('marker')) {
+        const markerSource = map.current.getSource(
+          'marker'
+        ) as mapboxgl.GeoJSONSource;
+        markerSource.setData(markerSourceData);
+      } else {
+        map.current.addSource('marker', {
+          type: 'geojson',
+          data: markerSourceData,
+        });
+
+        map.current.addLayer({
+          id: 'marker',
+          type: 'circle',
+          source: 'marker', // TODO MISCHA: Marker icon :)
+          paint: {
+            'circle-radius': 10,
+            'circle-color': '#FF0000', // Red color for the marker
+          },
+        });
+      }
+
+      // Calculate bounding box from line coordinates
+      // Calculate bounding box from line coordinates
+      const bounds: mapboxgl.LngLatBoundsLike = [
+        [
+          Math.min(pickup_coordinates[0], delivery_coordinates[0]) -
+            MAP_ZOOM_OFFSET,
+          Math.min(pickup_coordinates[1], delivery_coordinates[1]) -
+            MAP_ZOOM_OFFSET,
+        ],
+        [
+          Math.max(pickup_coordinates[0], delivery_coordinates[0]) +
+            MAP_ZOOM_OFFSET,
+          Math.max(pickup_coordinates[1], delivery_coordinates[1]) +
+            MAP_ZOOM_OFFSET,
+        ],
+      ];
+
+      // Fit map to the bounding box
+      map.current.fitBounds(bounds, { padding: 20 });
+      setVisible(true);
+      console.log('Line and marker drawn');
     }
   };
 
