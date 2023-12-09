@@ -135,8 +135,21 @@ const SignUpStep: React.FC<{
           <Checkbox
             checked={termsAccepted}
             onChange={(e) => setTermsAccepted(e.target.checked)}
+            style={{ fontSize: '16px' }}
           >
-            {t('signIn.acceptTerms')}
+            {t('signIn.acceptTermsText')}
+            <a
+              href="https://portato.io/termsAndconditions"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: 'black',
+                fontSize: '16px',
+                textDecoration: 'underline',
+              }} // Inline CSS for the link
+            >
+              {t('signIn.acceptTermsLink')}
+            </a>
           </Checkbox>
         </Form.Item>
 

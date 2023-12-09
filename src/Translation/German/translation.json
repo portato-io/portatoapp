@@ -392,6 +392,8 @@
     "placeholderLastName": "Last Name",
     "successSmsSent": "SMS sent successfully",
     "emailAlreadyUsed": "Email already used",
-    "errorPhoneCountryCode": "PLease enter the country code of the phone number"
+    "errorPhoneCountryCode": "PLease enter the country code of the phone number",
+    "acceptTermsText": "Bitte akzeptieren Sie diese ",
+    "acceptTermsLink": "Geschäftsbedingungen"
   }
 }
