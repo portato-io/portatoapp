@@ -87,20 +87,32 @@ function Map({ requests }: MapProps) {
       mapInstance: mapboxgl.Map,
       requests: IRequestInfo[]
     ) => {
-      console.log('Adding markers', requests);
       requests.forEach((request) => {
         console.log('adding marker for ' + request.pickup_coordinates);
         const el = document.createElement('div');
         el.className = 'box-marker'; // Use the CSS class for styling
 
+        // Reverse the coordinates to [longitude, latitude] order
+        const pickupCoordinates = [
+          request.pickup_coordinates[1],
+          request.pickup_coordinates[0],
+        ];
+        const deliveryCoordinates = [
+          request.delivery_coordinates[1],
+          request.delivery_coordinates[0],
+        ];
+
         new mapboxgl.Marker(el)
-          .setLngLat(request.pickup_coordinates)
+          .setLngLat(pickupCoordinates as [number, number])
           .addTo(mapInstance);
 
         el.addEventListener('click', () => {
           setSelectedRequest(request);
           setVisible(true);
-          drawLine(request.pickup_coordinates, request.delivery_coordinates);
+          drawLine(
+            pickupCoordinates as [number, number],
+            deliveryCoordinates as [number, number]
+          );
         });
       });
     };
