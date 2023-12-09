@@ -31,6 +31,7 @@ function Map({ requests }: MapProps) {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [visible, setVisible] = useState(false);
+  const [imagePreviewVisible, setImagePreviewVisible] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<IRequestInfo | null>(
     null
   );
@@ -265,19 +266,17 @@ function Map({ requests }: MapProps) {
             <br />
             {selectedRequest.images && selectedRequest.images.length > 0 && (
               <>
-                {/* Thumbnail image */}
                 <Image
                   preview={false}
                   src={selectedRequest.images[0]}
-                  style={{ width: 100, height: 100, cursor: 'pointer' }} // Set thumbnail size
-                  onClick={() => setVisible(true)}
+                  style={{ width: 100, height: 100, cursor: 'pointer' }}
+                  onClick={() => setImagePreviewVisible(true)}
                 />
-                {/* Full-size image preview */}
-                {!visible && (
+                {imagePreviewVisible && (
                   <Image.PreviewGroup
                     preview={{
-                      visible,
-                      onVisibleChange: (vis) => setVisible(vis),
+                      visible: imagePreviewVisible,
+                      onVisibleChange: (vis) => setImagePreviewVisible(vis),
                     }}
                   >
                     {selectedRequest.images.map((image, index) => (
