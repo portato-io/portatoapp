@@ -10,6 +10,18 @@ import { IRequestInfo } from '../type';
 if (process.env.REACT_APP_MAPBOX_KEY)
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
+type GeoData = {
+  type: string;
+  geometry: {
+    type: string;
+    pickup_coordinates: [number, number]; // Note the use of [number, number] instead of number[]
+    delivery_coordinates: [number, number];
+  };
+  class: string;
+  name: string;
+  description: string;
+};
+
 interface MapProps {
   requests: IRequestInfo[];
 }
@@ -87,33 +99,32 @@ function Map({ requests }: MapProps) {
 
   // Initialize the map
   useEffect(() => {
-    if (mapContainer.current && !map.current) {
+    const defaultCoordinates = { longitude: 8.5417, latitude: 47.3769 }; //
+    const initializeMap = (coords: any) => {
       map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [8.5417, 47.3769], // Default center: Zurich
+        container: mapContainer.current!,
+        style: '/map/style.json',
+        center: [coords.longitude, coords.latitude],
         zoom: 9,
       });
-
-      map.current.on('load', () => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { longitude, latitude } = position.coords;
-              map.current!.setCenter([longitude, latitude]);
-              map.current!.setZoom(12);
-              addMarkers(map.current!, requests); // Add markers after setting center
-            },
-            (error) => {
-              console.error('Error getting geolocation:', error);
-              addMarkers(map.current!, requests); // Add markers with default center
-            }
-          );
-        } else {
-          console.error('Geolocation is not available in your browser.');
-          addMarkers(map.current!, requests); // Add markers with default center
+      if (map.current) {
+        addMarkers(map.current!, requests);
+      }
+    };
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { longitude, latitude } = position.coords;
+          initializeMap({ longitude, latitude });
+        },
+        (error) => {
+          console.error('Error getting geolocation:', error);
+          initializeMap(defaultCoordinates); // Initialize map with Zurich coordinates
         }
-      });
+      );
+    } else {
+      console.error('Geolocation is not available in your browser.');
+      initializeMap(defaultCoordinates); // Initialize map with Zurich coordinates
     }
 
     return () => {
@@ -121,7 +132,7 @@ function Map({ requests }: MapProps) {
         map.current.remove();
       }
     };
-  }, []); // Empty dependencies array to ensure this effect runs once after the component mounts
+  }, [requests]); // Empty dependencies array to ensure this effect runs once after the component mounts
 
   return (
     <div className="portato-map">
