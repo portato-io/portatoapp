@@ -195,7 +195,7 @@
       "salutations": "Kind regards,<br>Your Portato Team"
     }
   },
-  
+
   "driveOverview": {
     "newTitle": "Want to register a ride?",
     "createButtonDescription": "Create route",
@@ -238,7 +238,6 @@
       "greetings": "Dear",
       "salutations": "Kind regards,<br>Your Portato Team"
     }
-
   },
   "navigationButton": {
     "next": "Next",
@@ -382,18 +381,17 @@
     "captchaMissingMessage": "Please complete the reCAPTCHA challenge.",
     "smsSendingFailedMessage": "Failed to send SMS.",
     "otpVerificationFailedMessage": "Failed to verify OTP.",
-    "forgotPassword": "Password forgotten",
-    "forgotPasswordText": " Please enter your email address and we will send you a recovery link.",
-    "forgotPasswordTitle": "Password recovery",
-    "resetPasswordButton": "Reset password",
-    "resetPasswordConfirmation": "Reset password mail sent successfully",
-    "resetPasswordError": "No account correspond to this email address",
-    "enterEmailError": "Please enter your email address",
-    "placeholderFirstName": "First Name",
-    "placeholderLastName": "Last Name",
-    "successSmsSent":"SMS sent successfully",
-    "emailAlreadyUsed": "Email already used",
-    "errorPhoneCountryCode": "PLease enter the country code of the phone number"
+    "forgotPassword": "Mot de passe oublié",
+    "forgotPasswordText": "Veuillez saisir votre adresse e-mail et nous vous enverrons un lien de récupération.",
+    "forgotPasswordTitle": "Récupération de mot de passe",
+    "resetPasswordButton": "Réinitialiser le mot de passe",
+    "resetPasswordConfirmation": "E-mail de réinitialisation du mot de passe envoyé avec succès",
+    "resetPasswordError": "Aucun compte ne correspond à cette adresse e-mail",
+    "enterEmailError": "Veuillez saisir votre adresse e-mail",
+    "placeholderFirstName": "Prénom",
+    "placeholderLastName": "Nom de famille",
+    "successSmsSent": "SMS envoyé avec succès",
+    "emailAlreadyUsed": "E-mail déjà utilisé",
+    "errorPhoneCountryCode": "Veuillez saisir l'indicatif du pays dans votre numéro de téléphone"
   }
-  
 }
