@@ -392,6 +392,8 @@
   "placeholderLastName": "Nachname",
   "successSmsSent": "SMS erfolgreich gesendet",
   "emailAlreadyUsed": "E-Mail bereits verwendet",
-  "errorPhoneCountryCode": "Bitte geben Sie die Landesvorwahl in Ihrer Telefonnummer ein"
+  "errorPhoneCountryCode": "Bitte geben Sie die Landesvorwahl in Ihrer Telefonnummer ein",
+    "acceptTermsText": "Bitte akzeptieren Sie diese ",
+    "acceptTermsLink": "Geschäftsbedingungen"
   }
 }
