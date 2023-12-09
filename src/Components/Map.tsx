@@ -1,13 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { Popup } from 'antd-mobile';
+import { useEffect, useRef, useState } from 'react';
+
+require('../CSS/Map.css');
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox GL JS CSS
-import '../CSS/Map.css'; // Make sure this path is correct
-import { IRequestInfo } from '../type'; // Make sure this path is correct
+import { Popup } from 'antd-mobile';
+import { MAP_ZOOM_OFFSET } from '../constant';
+import { IRequestInfo } from '../type';
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY || '';
+if (process.env.REACT_APP_MAPBOX_KEY)
+  mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
-const Map: React.FC<{ requests: IRequestInfo[] }> = ({ requests }) => {
+interface MapProps {
+  requests: IRequestInfo[];
+}
+
+function Map({ requests }: MapProps) {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [visible, setVisible] = useState(false);
@@ -60,48 +67,65 @@ const Map: React.FC<{ requests: IRequestInfo[] }> = ({ requests }) => {
     }
   };
 
-  // Initialize the map and add markers for each request
+  // Function to add markers to the map
+  const addMarkers = (mapInstance: mapboxgl.Map, requests: IRequestInfo[]) => {
+    requests.forEach((request) => {
+      const el = document.createElement('div');
+      el.className = 'box-marker'; // Use the CSS class for styling
+
+      new mapboxgl.Marker(el)
+        .setLngLat(request.pickup_coordinates)
+        .addTo(mapInstance);
+
+      el.addEventListener('click', () => {
+        setSelectedRequest(request);
+        setVisible(true);
+        drawLine(request.pickup_coordinates, request.delivery_coordinates);
+      });
+    });
+  };
+
+  // Initialize the map
   useEffect(() => {
-    const mapInstance = map.current; // Handle the map instance separately to please TypeScript
-    if (!mapInstance && mapContainer.current) {
-      // Initialize the map
+    if (mapContainer.current && !map.current) {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [8.5417, 47.3769],
+        center: [8.5417, 47.3769], // Default center: Zurich
         zoom: 9,
       });
-    }
 
-    if (mapInstance) {
-      // Add markers to the map for each request
-      requests.forEach((request) => {
-        const el = document.createElement('div');
-        el.className = 'marker';
-
-        new mapboxgl.Marker(el)
-          .setLngLat(request.pickup_coordinates)
-          .addTo(mapInstance);
-
-        el.addEventListener('click', () => {
-          setSelectedRequest(request);
-          setVisible(true);
-          drawLine(request.pickup_coordinates, request.delivery_coordinates);
-        });
+      map.current.on('load', () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { longitude, latitude } = position.coords;
+              map.current!.setCenter([longitude, latitude]);
+              map.current!.setZoom(12);
+              addMarkers(map.current!, requests); // Add markers after setting center
+            },
+            (error) => {
+              console.error('Error getting geolocation:', error);
+              addMarkers(map.current!, requests); // Add markers with default center
+            }
+          );
+        } else {
+          console.error('Geolocation is not available in your browser.');
+          addMarkers(map.current!, requests); // Add markers with default center
+        }
       });
     }
 
-    // Clean up the map instance on unmount
     return () => {
-      if (mapInstance) {
-        mapInstance.remove();
+      if (map.current) {
+        map.current.remove();
       }
     };
-  }, [requests]);
+  }, []); // Empty dependencies array to ensure this effect runs once after the component mounts
 
   return (
-    <div className="map-wrapper">
-      <div ref={mapContainer} className="map-container" />
+    <div className="portato-map">
+      <div ref={mapContainer} className="map-wrapper" />
       {selectedRequest && (
         <Popup
           visible={visible}
@@ -154,6 +178,6 @@ const Map: React.FC<{ requests: IRequestInfo[] }> = ({ requests }) => {
       )}
     </div>
   );
-};
+}
 
 export default Map;

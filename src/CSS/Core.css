@@ -534,8 +534,3 @@ video,
   border-bottom-color: var(--portato-green) !important;
   border-right-color: var(--portato-green) !important;
 }
-
-.map-container {
-  height: 800px; /* Adjust as needed */
-  width: 100%;
-}
