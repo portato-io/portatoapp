@@ -7,6 +7,8 @@ import { Popup } from 'antd-mobile';
 import { MAP_ZOOM_OFFSET } from '../constant';
 import { IRequestInfo } from '../type';
 import { Image } from 'antd';
+import SignInButton from '../Components/Buttons/SignInButton';
+import { useAuth } from './AuthProvider';
 
 if (process.env.REACT_APP_MAPBOX_KEY)
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
@@ -28,6 +30,18 @@ interface MapProps {
 }
 
 function Map({ requests }: MapProps) {
+  const [modalKey, setModalKey] = useState(0); // State to hold the key for FirebaseAuth
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+    setModalKey((prevKey) => prevKey + 1); // Update key each time the modal is opened
+  };
+
+  const handleAuthSuccess = () => {
+    setIsModalVisible(false); // Close the modal
+  };
+  const { uid } = useAuth();
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [visible, setVisible] = useState(false);
@@ -36,9 +50,6 @@ function Map({ requests }: MapProps) {
     null
   );
 
-  const [selectedPoint, setSelectedPoint] = useState<[number, number] | null>(
-    null
-  );
   const lastClickedMarker = useRef<string | null>(null);
 
   const drawLine = (
@@ -264,30 +275,51 @@ function Map({ requests }: MapProps) {
             <br />
             <strong>Time:</strong> {selectedRequest.time}
             <br />
-            {selectedRequest.images && selectedRequest.images.length > 0 && (
-              <>
-                <Image
-                  preview={false}
-                  src={selectedRequest.images[0]}
-                  style={{ width: 100, height: 100, cursor: 'pointer' }}
-                  onClick={() => setImagePreviewVisible(true)}
-                />
-                {imagePreviewVisible && (
-                  <Image.PreviewGroup
-                    preview={{
-                      visible: imagePreviewVisible,
-                      onVisibleChange: (vis) => setImagePreviewVisible(vis),
-                    }}
-                  >
-                    {selectedRequest.images.map((image, index) => (
-                      <Image key={index} src={image} />
-                    ))}
-                  </Image.PreviewGroup>
-                )}
-              </>
-            )}
+            {selectedRequest.images &&
+              selectedRequest.images.length > 0 &&
+              $(
+                <>
+                  <Image
+                    preview={false}
+                    src={selectedRequest.images[0]}
+                    style={{ width: 100, height: 100, cursor: 'pointer' }}
+                    onClick={() => setImagePreviewVisible(true)}
+                  />
+                  {imagePreviewVisible && (
+                    <Image.PreviewGroup
+                      preview={{
+                        visible: imagePreviewVisible,
+                        onVisibleChange: (vis) => setImagePreviewVisible(vis),
+                      }}
+                    >
+                      {selectedRequest.images.map((image, index) => (
+                        <Image key={index} src={image} />
+                      ))}
+                    </Image.PreviewGroup>
+                  )}
+                </>
+              )}
           </div>
         </Popup>
+      )}
+      {uid ? (
+        <ConfirmButton
+          nextScreen={NEXT_SCREEN}
+          onClick={() => {
+            handleConfirm();
+            logEvent(analytics, 'send_6_summary_confirm_button_click');
+          }}
+        />
+      ) : (
+        <div className="signin-container">
+          <SignInButton
+            onClick={() => {
+              showModal();
+              logEvent(analytics, 'send_6_summary_signIn_button_click');
+            }}
+          />
+          <p className="text-hint">{t('requestSummary.signInMessage')}</p>
+        </div>
       )}
     </div>
   );
