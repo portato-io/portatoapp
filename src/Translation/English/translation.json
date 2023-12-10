@@ -397,5 +397,11 @@
     "errorPhoneCountryCode": "PLease enter the country code of the phone number",
     "acceptTermsText": "Please accept these ",
     "acceptTermsLink": "terms and conditions"
+  },
+
+  "email": {
+    "emailSentSuccesfully": "Email sent successfully",
+    "emailFailedToSend": "Failed to send email"
+
   }
 }

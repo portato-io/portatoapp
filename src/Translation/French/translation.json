@@ -396,5 +396,11 @@
     "errorPhoneCountryCode": "Veuillez saisir l'indicatif du pays dans votre numéro de téléphone",  
     "acceptTermsText": "Veuillez accepter ces ",
     "acceptTermsLink": "conditions générales"
+  },
+
+  "email": {
+    "emailSentSuccesfully": "Email sent successfully",
+    "emailFailedToSend": "Failed to send email"
+
   }
 }

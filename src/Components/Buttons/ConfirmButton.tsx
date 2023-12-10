@@ -1,6 +1,4 @@
-import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ConfirmButton = ({ nextScreen = '/', onClick }: any) => {

@@ -8,6 +8,7 @@ import { MAP_ZOOM_OFFSET } from '../constant';
 import { IRequestInfo } from '../type';
 import { Image } from 'antd';
 import SignInButton from '../Components/Buttons/SignInButton';
+import ContactButton from './Buttons/ContactButton';
 import { useAuth } from './AuthProvider';
 
 if (process.env.REACT_APP_MAPBOX_KEY)
@@ -302,20 +303,17 @@ function Map({ requests }: MapProps) {
           </div>
         </Popup>
       )}
-      {uid ? (
-        <ConfirmButton
-          nextScreen={NEXT_SCREEN}
-          onClick={() => {
-            handleConfirm();
-            logEvent(analytics, 'send_6_summary_confirm_button_click');
-          }}
+      {selectedRequest && uid ? (
+        <ContactButton
+          requestId={selectedRequest.id}
+          senderUid={selectedRequest.uid}
+          driverUid={uid}
         />
       ) : (
         <div className="signin-container">
           <SignInButton
             onClick={() => {
               showModal();
-              logEvent(analytics, 'send_6_summary_signIn_button_click');
             }}
           />
           <p className="text-hint">{t('requestSummary.signInMessage')}</p>

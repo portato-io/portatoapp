@@ -104,3 +104,30 @@ function sendEmailToSupport(req, res) {
 }
 
 exports.sendEmailToSupport = functions.https.onRequest(sendEmailToSupport);
+
+function sendEmailToSender(req, res) {
+  cors(req, res, async () => {
+    try {
+      const { requestId, senderUid, driverUid, message } = req.body;
+      const senderEmail = await getUserEmail(senderUid); // Fetch email address from UID
+      const driverEmail = await getUserEmail(driverUid); // Fetch email address from UID
+      const mailOptions = {
+        from: '"Notifications" <notifications@portato.io>',
+        to: senderEmail,
+        driverEmail,
+        subject: 'Interest in transporting your shipment ID  $(requestId)',
+        text: `${name} (${email}) says: ${message}`,
+      };
+
+      console.log('Sending email...');
+      const info = await transporter.sendMail(mailOptions);
+      console.log(`Email sent: ${info.messageId}`);
+
+      res.status(200).send(info);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).send(error);
+    }
+  });
+}
+exports.sendEmailToSender = functions.https.onRequest(sendEmailToSender);
