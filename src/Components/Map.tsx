@@ -9,6 +9,7 @@ import { IRequestInfo } from '../type';
 import { Image } from 'antd';
 import SignInButton from '../Components/Buttons/SignInButton';
 import ContactButton from './Buttons/ContactButton';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from './AuthProvider';
 
 if (process.env.REACT_APP_MAPBOX_KEY)
@@ -31,6 +32,7 @@ interface MapProps {
 }
 
 function Map({ requests }: MapProps) {
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const [modalKey, setModalKey] = useState(0); // State to hold the key for FirebaseAuth
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -276,30 +278,28 @@ function Map({ requests }: MapProps) {
             <br />
             <strong>Time:</strong> {selectedRequest.time}
             <br />
-            {selectedRequest.images &&
-              selectedRequest.images.length > 0 &&
-              $(
-                <>
-                  <Image
-                    preview={false}
-                    src={selectedRequest.images[0]}
-                    style={{ width: 100, height: 100, cursor: 'pointer' }}
-                    onClick={() => setImagePreviewVisible(true)}
-                  />
-                  {imagePreviewVisible && (
-                    <Image.PreviewGroup
-                      preview={{
-                        visible: imagePreviewVisible,
-                        onVisibleChange: (vis) => setImagePreviewVisible(vis),
-                      }}
-                    >
-                      {selectedRequest.images.map((image, index) => (
-                        <Image key={index} src={image} />
-                      ))}
-                    </Image.PreviewGroup>
-                  )}
-                </>
-              )}
+            {selectedRequest.images && selectedRequest.images.length > 0 && (
+              <>
+                <Image
+                  preview={false}
+                  src={selectedRequest.images[0]}
+                  style={{ width: 100, height: 100, cursor: 'pointer' }}
+                  onClick={() => setImagePreviewVisible(true)}
+                />
+                {imagePreviewVisible && (
+                  <Image.PreviewGroup
+                    preview={{
+                      visible: imagePreviewVisible,
+                      onVisibleChange: (vis) => setImagePreviewVisible(vis),
+                    }}
+                  >
+                    {selectedRequest.images.map((image, index) => (
+                      <Image key={index} src={image} />
+                    ))}
+                  </Image.PreviewGroup>
+                )}
+              </>
+            )}
           </div>
         </Popup>
       )}
