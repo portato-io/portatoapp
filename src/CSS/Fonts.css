@@ -119,10 +119,15 @@ p, a, label, .text {
 }
 
 .icon-link {
-  padding:0px 10px 7px;
+  padding:0px 10px 6px;
+  font-family: 'Lexend-Medium';
+  font-size:1.6rem;
 }
 .icon-link .icon {
   position: relative;
+}
+.icon-link .icon-arrow-left,
+.icon-link .icon-arrow-right {
   top:3px;
 }
 

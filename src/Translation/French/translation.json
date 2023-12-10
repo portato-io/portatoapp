@@ -39,6 +39,7 @@
     "no": "Non",
     "edit": "Modifier",
     "loading": "Chargement en cours ...."
+
   },
 
   "addressField": {
@@ -94,14 +95,6 @@
       "name": "Conrad",
       "description": "Ancien ingénieur PPT et XLS, maintenant CEO de Portato. Passionné de sport avec un grand réseau."
     },
-    "Mischa": {
-      "name": "Mischa",
-      "description": "Touche-à-tout, maître du produit. Multitalent pour la programmation, le design et l'animation."
-    },
-    "Chiara": {
-      "name": "Chiara",
-      "description": "Artiste story-board et animatrice 2D qui donne à Portato son charme, un trait à la fois."
-    },
     "Hugo": {
       "name": "Hugo",
       "description": "Génie franco-britannique jonglant avec le backend dans au moins autant de langues."
@@ -110,9 +103,13 @@
       "name": "Mehdi",
       "description": "Amoureux du hip-hop et fashionista, tissant à travers le frontend et le backend comme un tailleur."
     },
-    "Moritz": {
-      "name": "Moritz",
-      "description": "Gourou du frontend, né sur Internet et ayant lu et compris ses conditions générales d'utilisation."
+    "Mischa": {
+      "name": "Mischa",
+      "description": "Touche-à-tout, maître du produit. Multitalent pour la programmation, le design et l'animation."
+    },
+    "Chiara": {
+      "name": "Chiara",
+      "description": "Artiste story-board et animatrice 2D qui donne à Portato son charme, un trait à la fois."
     }
   },
 
@@ -247,13 +244,13 @@
     "error": "Veuillez compléter le(s) champ(s) de saisie."
   },
   "navigationMenu": {
-    "myAccount": "Mon Compte",
-    "mySendRequests": "Mes Demandes d'Envoi",
-    "signIn": "Se Connecter",
+    "myAccount": "Mon compte",
+    "mySendRequests": "Mes demandes d'envoi",
+    "signIn": "Se connecter",
     "blog": "Blog",
     "support": "Contactez-nous",
-    "adminWindow": "Fenêtre d'Admin",
-    "signOut": "Se Déconnecter",
+    "adminWindow": "Fenêtre d'admin",
+    "signOut": "Se déconnecter",
     "settings": "Paramètres"
   },
   "accountPage": {
@@ -355,21 +352,19 @@
   "signIn": {
     "back": "Retour",
     "signUp": "S'inscrire",
-    "existingUserTitle": "Se connecter à Portato",
-    "existingUserText": "Connectez-vous avec votre adresse e-mail et mot de passe chez Portato.",
-    "nonExistingUserTitle": "Pas encore de profil ?",
-    "nonExistingUserText": "Créez un profil en quelques étapes et rejoignez la communauté Portato.",
+    "existingUserTitle": "Se connecter",
+    "nonExistingUserTitle": "Pas encore de profil?",
+    "nonExistingUserText": "Créez un profil et rejoignez la communauté Portato.",
     "nonExistingUserLink": "Créer un profil maintenant",
-    "placeholderEmail": "Votre adresse e-mail",
-    "placeholderPassword": "Votre mot de passe",
-    "placeholderPhone": "Votre numéro de téléphone",
-    "placeholderHintPhone": "N'oubliez pas d'inclure l'indicatif du pays, par ex. : +41 78 333 22 11",
-    "placeholderSMS": "Le code SMS",
-    "registrationTitle": "Créez votre profil Portato",
-    "registrationText": "Nous avons besoin des informations suivantes. Ne vous inquiétez pas, nous en prendrons soin.",
+    "placeholderEmail": "Adresse e-mail",
+    "placeholderPassword": "Mot de passe",
+    "placeholderPhone": "Numéro de téléphone",
+    "placeholderHintPhone": "Veuillez inclure l'indicatif pays, par ex. : +41 79 333 22 11",
+    "placeholderSMS": "Code SMS",
+    "registrationTitle": "Créez votre profil",
     "registrationButton": "S'inscrire",
-    "smsConfirmationTitle": "Code de vérification envoyé avec succès, veuillez vérifier vos SMS",
-    "smsConfirmationText": "Nous vous avons envoyé un SMS avec un code numérique. Veuillez le saisir dans le champ affiché pour vérifier votre numéro.",
+    "smsConfirmationTitle": "Entrez le code SMS",
+    "smsConfirmationText": "Nous vous avons envoyé un SMS avec un code numérique. Veuillez l'entrer ci-dessous pour vérifier votre numéro.",
     "smsConfirmationButton": "Vérifier le numéro",
     "smsConfirmationResend": "Renvoyer le SMS",
     "signupSuccessTitle": "Profil créé avec succès",
@@ -392,7 +387,7 @@
     "placeholderLastName": "Nom de famille",
     "successSmsSent": "SMS envoyé avec succès",
     "emailAlreadyUsed": "E-mail déjà utilisé",
-    "errorPhoneCountryCode": "Veuillez saisir l'indicatif du pays dans votre numéro de téléphone",  
+    "errorPhoneCountryCode": "Veuillez saisir l'indicatif du pays dans votre numéro de téléphone",
     "acceptTermsText": "Veuillez accepter ces ",
     "acceptTermsLink": "conditions générales"
   }
