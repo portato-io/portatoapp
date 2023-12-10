@@ -10,17 +10,77 @@ import {
   serverTimestamp,
 } from 'firebase/database';
 import { database } from './firebaseConfig';
-import { setObjectId, setReqUid } from './Store/actions/requestActionCreators';
+import {
+  setObjectId,
+  setReqUid,
+  setReqDeliveryAddressCoordinates,
+  setReqPickupAddressCoordinates,
+} from './Store/actions/requestActionCreators';
 import { setRouteId, setRouteUid } from './Store/actions/routeActionCreators';
 import { setDealId } from './Store/actions/dealActionCreators';
 import { store } from './index';
 import { push as firebasePush } from 'firebase/database';
+
+import {
+  setKey,
+  setDefaults,
+  setLanguage,
+  setRegion,
+  fromAddress,
+  fromLatLng,
+  fromPlaceId,
+  setLocationType,
+  geocode,
+  RequestType,
+} from 'react-geocode';
+
+if (process.env.REACT_APP_GOOGLE_MAP_API_KEY)
+  setKey(process.env.REACT_APP_GOOGLE_MAP_API_KEY);
+
+const handleAddress = async (address) => {
+  try {
+    const { results } = await fromAddress(address);
+    if (
+      results &&
+      results.length > 0 &&
+      results[0].geometry &&
+      results[0].geometry.location
+    ) {
+      const { lat, lng } = results[0].geometry.location;
+      return [lat, lng];
+    }
+  } catch (error) {
+    console.error(`Error geocoding address: ${address}`, error);
+    return [];
+  }
+};
 
 export const uploadRequestToFirebase = async (uid, dispatch) => {
   try {
     dispatch(setReqUid(uid));
 
     let state = store.getState();
+
+    // Handle the pickup address and update coordinates
+    const pickupCoordinates = await handleAddress(state.request.pickup_address);
+    if (pickupCoordinates) {
+      console.log('ALED', pickupCoordinates);
+      dispatch(setReqPickupAddressCoordinates(pickupCoordinates));
+    }
+
+    // Handle the delivery address and update coordinates
+    const deliveryCoordinates = await handleAddress(
+      state.request.delivery_address
+    );
+    if (deliveryCoordinates) {
+      console.log('ALED', deliveryCoordinates);
+      dispatch(setReqDeliveryAddressCoordinates(deliveryCoordinates));
+    }
+
+    // Refresh state after coordinate updates
+    state = store.getState();
+
+    console.log(state);
 
     // Create a copy of the request and replace undefined values
     const requestCopy = { ...state.request };
@@ -29,16 +89,12 @@ export const uploadRequestToFirebase = async (uid, dispatch) => {
     }
 
     if (state.request.id === '0') {
-      // Get the database instance and create a reference to the user's requests
       const requestsRef = ref(database, `users/${uid}/requests`);
-      // Generate a new unique key for the request
       const newRequestRef = firebasePush(requestsRef);
 
-      // The unique key is now available as newRequestRef.key
       if (newRequestRef.key) {
         dispatch(setObjectId(newRequestRef.key));
         state = store.getState();
-        // Update your data under the new key
         requestCopy.id = newRequestRef.key;
         await set(newRequestRef, requestCopy);
 
@@ -121,6 +177,28 @@ export const fetchDataOnce = async (uid, directory) => {
     } else {
       console.log('No data found.', userRequestsRef);
       return {}; // return an empty object if no data is found
+    }
+  } catch (error) {
+    console.error('Error fetching data from Firebase:', error);
+  }
+};
+
+export const fetchGeoData = async (uid, directory) => {
+  try {
+    const geoDataRef = ref(database, `users/${uid}/${directory}`);
+    const snapshot = await get(geoDataRef);
+    if (snapshot.exists()) {
+      console.log('Data: ', snapshot.val());
+      /*
+      const parsedData = [];
+      const dataObject = snapshot.val();
+      console.log(typeof dataObject)
+      for(let data in )
+      return parsedData;
+      */
+    } else {
+      console.log('No data found.', geoDataRef);
+      return {};
     }
   } catch (error) {
     console.error('Error fetching data from Firebase:', error);
@@ -429,4 +507,68 @@ export const fetchSpecificObjects = async (objectPath) => {
   } catch (error) {
     console.error('Error fetching data from Firebase:', error);
   }
+};
+
+export const fetchAllUserIds = async () => {
+  try {
+    const usersRef = ref(database, 'users');
+    const snapshot = await get(usersRef);
+    if (snapshot.exists()) {
+      return Object.keys(snapshot.val());
+    } else {
+      console.log('No users found.');
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching user IDs from Firebase:', error);
+    return [];
+  }
+};
+
+export const fetchAllRequests = async () => {
+  const allRequests = [];
+
+  // Call the function to get the userIds
+  const userIds = await fetchAllUserIds();
+
+  for (let uid of userIds) {
+    try {
+      const userRequests = await fetchDataOnce(uid, 'requests');
+
+      // Check if userRequests is not empty before adding to allRequests
+      if (userRequests && Object.keys(userRequests).length > 0) {
+        allRequests.push({
+          userId: uid,
+          requests: userRequests,
+        });
+      }
+    } catch (error) {
+      console.error(`Error fetching requests for user ${uid}:`, error);
+    }
+  }
+  return allRequests;
+};
+
+export const fetchAllRoutes = async () => {
+  const allRoutes = [];
+
+  // Call the function to get the userIds
+  const userIds = await fetchAllUserIds();
+
+  for (let uid of userIds) {
+    try {
+      const userRoutes = await fetchDataOnce(uid, 'routes');
+
+      // Check if userRequests is not empty before adding to allRequests
+      if (userRoutes && Object.keys(userRoutes).length > 0) {
+        allRoutes.push({
+          userId: uid,
+          routes: userRoutes,
+        });
+      }
+    } catch (error) {
+      console.error(`Error fetching routes for user ${uid}:`, error);
+    }
+  }
+  return allRoutes;
 };

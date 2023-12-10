@@ -6,14 +6,16 @@ export interface IRequestInfo {
   size: string;
   weight: string;
   price: number;
-  pickup_adress: string;
-  delivery_adress: string;
+  pickup_address: string;
+  delivery_address: string;
   dateRange: string[];
   time: string;
   images: string[];
   status: string;
   dealId: string;
   contactTimestamp: string;
+  delivery_coordinates: [0, 0];
+  pickup_coordinates: [0, 0];
 }
 
 export interface IFirstObjectInfo {
@@ -66,6 +68,19 @@ export interface IDealInfo {
 export type DealInfoAction = {
   type: string;
   route: IDealInfo;
+};
+
+export type MapMarker = {
+  type: string;
+  lat: string;
+  lng: string;
+  infoWindow: MapMarkerInfoWindow;
+};
+
+export type MapMarkerInfoWindow = {
+  title: string;
+  description: string;
+  url: string;
 };
 
 export {};

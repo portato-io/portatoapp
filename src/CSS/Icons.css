@@ -45,6 +45,9 @@
 .icon-pen:before {
 	content: 'H';
 }
+.icon-map:before {
+	content: 'F';
+}
 .icon-arrow-left:before {
 	content: 'L';
 }

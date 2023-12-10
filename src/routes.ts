@@ -7,11 +7,13 @@ import MyAccount from './Pages/Profile/MyAccount';
 // pages
 const About = lazy(() => import('./Pages/About'));
 const Home = lazy(() => import('./Pages/Home'));
+const PortatoMap = lazy(() => import('./Pages/PortatoMap'));
 const TermsAndConditions = lazy(() => import('./Pages/TermsAndConditions'));
 const FAQ = lazy(() => import('./Pages/FAQ'));
 const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy'));
 const Imprint = lazy(() => import('./Pages/Imprint'));
 const Profile = lazy(() => import('./Pages/Menu'));
+
 const EnterRequestNameDesc = lazy(
   () => import('./Pages/Sender/EnterRequestNameDesc')
 );
@@ -32,7 +34,8 @@ const RequestSummary = lazy(() => import('./Pages/Sender/RequestSummary'));
 const UserRequests = lazy(() => import('./Pages/UserRequestsScreen'));
 const AdminDashboard = lazy(() => import('./Pages/Admin/AdminDashboard'));
 const AllRequests = lazy(() => import('./Pages/Admin/AllRequests'));
-const AllRoutes = lazy(() => import('./Pages/Admin/AllRoutes'));
+const AllRoutesAdmin = lazy(() => import('./Pages/Admin/AllRoutes'));
+const AllRoutes = lazy(() => import('./Pages/Sender/AllRoutes'));
 const ContactSupport = lazy(
   () => import('./Pages/Profile/Support/ContactSupport')
 );
@@ -51,6 +54,7 @@ const ContactDriver = lazy(
 );
 
 import Settings from './Pages/Profile/Settings';
+import Map from './Components/Map';
 
 // interface
 interface Route {
@@ -231,11 +235,11 @@ export const routes: Array<Route> = [
     component: AdminDashboard,
   },
   {
-    key: 'all-routes',
-    title: 'AllRoutes',
+    key: 'all-routes-admin',
+    title: 'AllRoutesAdmin',
     path: '/admin/all_routes',
     enabled: true,
-    component: AllRoutes,
+    component: AllRoutesAdmin,
   },
   {
     key: 'deal-suggester',
@@ -271,5 +275,19 @@ export const routes: Array<Route> = [
     path: '/profile/my-account',
     enabled: true,
     component: MyAccount,
+  },
+  {
+    key: 'all-routes',
+    title: 'AllRoutes',
+    path: '/sender/all_routes',
+    enabled: true,
+    component: AllRoutes,
+  },
+  {
+    key: 'portato-map',
+    title: 'PortatoMap',
+    path: '/PortatoMap',
+    enabled: true,
+    component: PortatoMap,
   },
 ];

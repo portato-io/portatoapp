@@ -9,14 +9,16 @@ const initialState: IRequestInfo = {
   size: '',
   weight: '',
   price: 50,
-  pickup_adress: '',
-  delivery_adress: '',
+  pickup_address: '',
+  delivery_address: '',
   dateRange: ['', ''],
   time: '',
   images: [],
   status: 'unmatched',
   dealId: '',
   contactTimestamp: '',
+  delivery_coordinates: [0, 0],
+  pickup_coordinates: [0, 0],
 };
 
 export function requestReducer(
@@ -52,13 +54,26 @@ export function requestReducer(
     case 'SET_REQ_PICKUP_ADDRESS': {
       return {
         ...state,
-        pickup_adress: action.payload,
+        pickup_address: action.payload,
       };
     }
     case 'SET_REQ_DELIVERY_ADDRESS': {
       return {
         ...state,
-        delivery_adress: action.payload,
+        delivery_address: action.payload,
+      };
+    }
+    case 'SET_REQ_DELIVERY_ADDRESS_COORDINATES': {
+      return {
+        ...state,
+        delivery_coordinates: action.payload,
+      };
+    }
+    case 'SET_REQ_PICKUP_ADDRESS_COORDINATES': {
+      console.log('ALED2', action.payload);
+      return {
+        ...state,
+        pickup_coordinates: action.payload,
       };
     }
     case 'SET_PRICE': {
@@ -104,8 +119,8 @@ export function requestReducer(
         id: action.payload.id,
         uid: action.payload.uid,
         price: action.payload.price,
-        pickup_adress: action.payload.pickup_adress,
-        delivery_adress: action.payload.delivery_adress,
+        pickup_address: action.payload.pickup_address,
+        delivery_address: action.payload.delivery_address,
         dateRange: action.payload.dateRange,
         time: action.payload.time,
         images: action.payload.images,
