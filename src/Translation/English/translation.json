@@ -197,7 +197,7 @@
       "salutations": "Kind regards,<br>Your Portato Team"
     }
   },
-  
+
   "driveOverview": {
     "newTitle": "Want to register a ride?",
     "createButtonDescription": "Create route",
@@ -240,7 +240,6 @@
       "greetings": "Dear",
       "salutations": "Kind regards,<br>Your Portato Team"
     }
-
   },
   "navigationButton": {
     "next": "Next",
@@ -393,9 +392,10 @@
     "enterEmailError": "Please enter your email address",
     "placeholderFirstName": "First Name",
     "placeholderLastName": "Last Name",
-    "successSmsSent":"SMS sent successfully",
+    "successSmsSent": "SMS sent successfully",
     "emailAlreadyUsed": "Email already used",
-    "errorPhoneCountryCode": "PLease enter the country code of the phone number"
+    "errorPhoneCountryCode": "PLease enter the country code of the phone number",
+    "acceptTermsText": "Please accept these ",
+    "acceptTermsLink": "terms and conditions"
   }
-  
 }
