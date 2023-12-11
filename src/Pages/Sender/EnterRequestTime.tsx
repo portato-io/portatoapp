@@ -53,18 +53,23 @@ const EnterTime: React.FC = () => {
   }, [dayRange]);
 
   useEffect(() => {
-    console.log('default', defaultSelector);
+    console.log('default', defaultSelector, objecInfo.dateRange);
+
     if (defaultSelector.length === 0) {
       setDateTimeSelected(false);
     } else setDateTimeSelected(true);
-  }, []);
 
-  if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
-    defaultDateRange = [
-      dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
-      dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
-    ];
-  }
+    if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
+      defaultDateRange = [
+        dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
+        dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
+      ];
+      setDayRangeSelected(true);
+    } else {
+      setDayRangeSelected(false);
+    }
+    console.log(defaultDateRange);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -103,16 +108,27 @@ const EnterTime: React.FC = () => {
           layout="horizontal"
         >
           <h2>{t('requestTime.title')}</h2>
-          <Form.Item className="input-wrapper" label={t('requestTime.dates')}>
+          <Form.Item
+            name="test"
+            className="input-wrapper"
+            label={t('requestTime.dates')}
+          >
             <RangePicker
               name="time"
               inputReadOnly={true}
               onChange={handleChangeRange}
               style={{ width: '100%' }}
-              defaultValue={defaultDateRange}
-              // value={defaultDateRange}
+              defaultValue={
+                objecInfo.dateRange[0] && objecInfo.dateRange[1]
+                  ? [
+                      dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
+                      dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
+                    ]
+                  : undefined
+              }
               disabledDate={disabledDate}
             />
+
             <small>{t('requestTime.dateHint')}</small>
           </Form.Item>
 

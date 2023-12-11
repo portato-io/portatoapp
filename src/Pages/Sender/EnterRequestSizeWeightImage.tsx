@@ -23,7 +23,8 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_address';
 const EnterRequestSizeWeightImage: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { CAPACITY_OPTIONS } = getConstants(t);
-  const [isUploading, setIsUploading] = useState(false);
+  const [weightSelected, setWeightSelected] = useState(Boolean);
+  const [sizeSelected, setSizeSelected] = useState(Boolean);
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
@@ -39,11 +40,26 @@ const EnterRequestSizeWeightImage: React.FC = () => {
     contactTimestamp: objecInfo.contactTimestamp,
   });
 
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
-    dispatch(setObject(object));
+    if (weightSelected && sizeSelected) dispatch(setObject(object));
   }, [object]);
 
-  const dispatch = useDispatch();
+  React.useEffect(() => {
+    console.log(object.size[0]);
+    if (object.size[0] == undefined) {
+      setSizeSelected(false);
+    } else setSizeSelected(true);
+  }, [object.size[0]]);
+
+  React.useEffect(() => {
+    console.log(object.weight);
+    if (object.weight == undefined) {
+      setWeightSelected(false);
+    } else setWeightSelected(true);
+  }, [object.weight]);
+
   const handleCapChange = (e: any) => {
     setValues({
       ...object,
@@ -107,6 +123,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'send_2_sizeWeight_next_button_click');
             }}
+            disabled={!weightSelected || !sizeSelected}
           />
         </div>
       </section>
