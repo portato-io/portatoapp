@@ -35,23 +35,28 @@ function SingleTripContent(activeTab: any) {
   }
 
   useEffect(() => {
-    console.log(day);
+    console.log('ALORS', day);
     if (day != null) {
       setDaySelected(true);
     } else setDaySelected(false);
   }, [day]);
 
   useEffect(() => {
-    console.log(dayTime.length);
+    console.log(dayTime);
     if (dayTime && dayTime.length === 0) {
       setDayTimeSelected(false);
     } else setDayTimeSelected(true);
   }, [dayTime]);
 
   useEffect(() => {
-    if (defaultDayTime.length === 0) {
+    console.log(routeInfo.time);
+    if (routeInfo.time.length === 0) {
       setDayTimeSelected(false);
     } else setDayTimeSelected(true);
+    console.log('ALed', routeInfo.timeRange);
+    if (routeInfo.timeRange == '') {
+      setDaySelected(false);
+    } else setDaySelected(true);
   }, []);
 
   useEffect(() => {
