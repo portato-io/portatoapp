@@ -46,7 +46,8 @@ const EnterTime: React.FC = () => {
   }, [dayTime]);
 
   useEffect(() => {
-    if (dayRange == null) {
+    if (dayRange == null || dayRange.length === 0) {
+      console.log(dayRange);
       setDayRangeSelected(false);
     } else setDayRangeSelected(true);
   }, [dayRange]);
