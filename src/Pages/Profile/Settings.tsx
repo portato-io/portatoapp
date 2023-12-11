@@ -6,6 +6,8 @@ import { getConstants } from '../../constant';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { Typography } from 'antd';
+import { Selector } from 'antd-mobile';
+import BackButton from '../../Components/Buttons/BackButton';
 
 const Settings: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
@@ -36,50 +38,22 @@ const Settings: React.FC = () => {
 
   return (
     <ProfilePageLayout>
-      <Title
-        level={2}
-        style={{
-          display: 'inline',
-          position: 'absolute',
-          marginTop: '12vh',
-          marginLeft: '5vw',
-        }}
-      >
-        {t('settings.title')}
-      </Title>
-      <Form style={{ position: 'absolute', marginTop: '20vh', width: '100vw' }}>
-        <Form.Item label={t('settings.languageLabel')}>
-          <Cascader
-            placeholder=" "
-            cancelText="Cancel"
-            confirmText="Confirm"
-            options={LANGUAGE_OPTIONS}
-            visible={visible}
-            onSelect={onSelectLanguage}
-            onClose={() => {
-              setVisible(false);
-            }}
-          />
-          <Typography
-            style={{
-              position: 'absolute',
-              right: '25vw',
-              display: 'inline',
-              top: '2vh',
-            }}
-          >
-            {language}
-          </Typography>
-          <Button
-            style={{ position: 'absolute', right: '5vw', top: '0.7vh' }}
-            onClick={() => {
-              setVisible(true);
-            }}
-          >
-            <ArrowRightOutlined />
-          </Button>
-        </Form.Item>
-      </Form>
+      <div className="section">
+        <h4 className="title title-h4">{t('settings.title')}</h4>
+        <div className="spacer-regular"></div>
+        <Form className="portato-form">
+          <div className="input-wrapper">
+            <label>{t('settings.languageLabel')}</label>
+            <Selector
+              options={LANGUAGE_OPTIONS}
+              multiple={false}
+              onChange={onSelectLanguage}
+            />
+          </div>
+        </Form>
+        <div className="spacer-big"></div>
+        <BackButton />
+      </div>
     </ProfilePageLayout>
   );
 };

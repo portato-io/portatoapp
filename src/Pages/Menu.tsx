@@ -79,84 +79,69 @@ const Menu: React.FC = () => {
           <FirebaseAuth key={modalKey} onAuthSuccess={handleAuthSuccess} />
         </div>
       </Modal>
-      <div className="profile-screen-background">
-        <div className="profile-image-container">
-          <div className="profile-image-bubble">
-            {user && imageUrl ? (
-              <img
-                src={new URL(imageUrl).href}
-                alt="avatar"
-                style={{ width: '100%', height: '100%', borderRadius: '50%' }}
-              />
-            ) : (
-              <UserOutlined style={{ fontSize: '48px' }} />
-            )}
+      <div className="section">
+        <div className="profile-screen-background">
+          <div className="profile-image-container">
+            <div className="profile-image-bubble">
+              {user && imageUrl ? (
+                <>
+                  <div className="spacer-small"></div>
+                  <img
+                    src={new URL(imageUrl).href}
+                    alt="avatar"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '50%',
+                    }}
+                  />
+                </>
+              ) : (
+                <UserOutlined style={{ fontSize: '48px' }} />
+              )}
+            </div>
           </div>
         </div>
 
-        <Card className="settings-card">
-          <List mode="card" style={{ marginTop: '1vh' }}>
+        <div className="section">
+          <nav className="profile-navigation text-align-center">
             {user ? (
               <>
-                <List.Item
-                  arrow={true}
+                <div className="spacer-small"></div>
+                <a
+                  className="text-link icon-link"
                   onClick={handleMyAccountClick}
-                  className="settings-list-item"
                 >
+                  <i className="icon icon-profile"></i>
                   {t('navigationMenu.myAccount')}
-                </List.Item>
-                {/* <List.Item arrow={true} onClick={handleMySendRequestsClick}>
-                  {t('navigationMenu.mySendRequests')}
-                </List.Item> */}
+                </a>
               </>
             ) : (
-              <List.Item
-                arrow={true}
-                onClick={showModal}
-                className="settings-list-item"
-              >
+              <a className="text-link icon-link" onClick={showModal}>
+                <i className="icon icon-lock-open"></i>
                 {t('navigationMenu.signIn')}
-              </List.Item>
+              </a>
             )}
-
-            {/* <List.Item arrow={true} onClick={handleMyBlogClick}>
-              {t('navigationMenu.blog')}
-            </List.Item> */}
-            <List.Item
-              arrow={true}
-              onClick={handleSupportClick}
-              className="settings-list-item"
-            >
+            <a className="text-link icon-link" onClick={handleSupportClick}>
+              <i className="icon icon-help"></i>
               {t('navigationMenu.support')}
-            </List.Item>
-            <List.Item
-              arrow={true}
-              onClick={handleSettingsClick}
-              className="settings-list-item"
-            >
+            </a>
+            <a className="text-link icon-link" onClick={handleSettingsClick}>
+              <i className="icon icon-pen"></i>
               {t('navigationMenu.settings')}
-            </List.Item>
-            {isAdmin && (
-              <List.Item
-                arrow={true}
-                onClick={handleAdminClick}
-                className="settings-list-item"
-              >
-                {t('navigationMenu.adminWindow')}
-              </List.Item>
-            )}
+            </a>
+
             {user ? (
-              <List.Item
-                arrow={true}
+              <a
+                className="text-link icon-link text-link-warning"
                 onClick={() => signOut(auth)}
-                style={{ color: 'red' }}
-                className="settings-list-item"
               >
+                <i className="icon icon-lock-close"></i>
                 {t('navigationMenu.signOut')}
-              </List.Item>
+              </a>
             ) : null}
-          </List>
-        </Card>
+          </nav>
+        </div>
       </div>
     </PageLayout>
   );

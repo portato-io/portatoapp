@@ -7,8 +7,10 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { updateProfile, updateEmail } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
+import BackArrow from '../../Components/Buttons/BackArrow';
 import { Button, Form } from 'antd-mobile';
 import { Upload, Input, message } from 'antd';
+import BackButton from '../../Components/Buttons/BackButton';
 
 const MyAccount: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
@@ -78,35 +80,33 @@ const MyAccount: React.FC = () => {
   );
   return (
     <ProfilePageLayout>
-      <div
-        className="container"
-        style={{
-          height: '80vh',
-          position: 'absolute',
-          marginTop: '10vh',
-          width: '100vw',
-          overflowY: 'scroll',
-        }}
-      >
+      <div className="section ">
+        <h4 className="title title-h4">{t('accountPage.myAccount')}</h4>
         <Form
+          className="portato-form"
           onFinish={onFinish}
           footer={
-            <Button block type="submit" size="large" className="button-solid">
-              {t('accountPage.validate')}
-            </Button>
+            <div className="mod-display-flex mod-flex-space-between">
+              <BackButton />
+              <Button
+                type="submit"
+                className="button button-solid box-shadow box-radius-default box-shadow-effect"
+              >
+                {t('accountPage.validate')}
+              </Button>
+            </div>
           }
         >
-          <Form.Header>{t('accountPage.myAccount')}</Form.Header>
           <Form.Item
             label={
-              <label className="item-form-label">
+              <label className="item-form-label text-align-center">
                 {t('accountPage.profilePicture')}
               </label>
             }
           >
             <Upload
               name="avatar"
-              listType="picture-card"
+              listType="picture-circle"
               className="avatar-uploader"
               showUploadList={false}
               //action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -117,29 +117,28 @@ const MyAccount: React.FC = () => {
                 return false; // Prevent default upload behavior
               }}
             >
-              {' '}
               {imageUrl ? (
-                <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+                <img src={imageUrl} alt="avatar" className="profile-image" />
               ) : (
                 uploadButton
-              )}
+              )}{' '}
             </Upload>
           </Form.Item>
-          <Form.Item
-            label={
-              <label className="item-form-label">{t('accountPage.name')}</label>
-            }
-          >
-            <Input onChange={onNameChange} value={name || ''} />
+          <Form.Item>
+            <Input
+              onChange={onNameChange}
+              value={name || ''}
+              className="form-input"
+              placeholder={t('accountPage.name') || 'Your name'}
+            />
           </Form.Item>
-          <Form.Item
-            label={
-              <label className="item-form-label">
-                {t('accountPage.emailAddress')}
-              </label>
-            }
-          >
-            <Input onChange={onEmailChange} value={email || ''} />
+          <Form.Item>
+            <Input
+              onChange={onEmailChange}
+              value={email || ''}
+              className="form-input"
+              placeholder={t('accountPage.name') || 'Your name'}
+            />
           </Form.Item>
         </Form>
       </div>

@@ -117,6 +117,9 @@ p, a, label, .text {
   font-family: 'Lexend-Medium';
   font-size: 1.6rem;;
 }
+.text-link-warning {
+  background: var(--color-warning);
+}
 
 .icon-link {
   padding:0px 10px 6px;

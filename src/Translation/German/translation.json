@@ -38,6 +38,7 @@
     "yes": "Ja",
     "no": "Nein",
     "edit": "edit",
+    "back": "Zurück",
     "loading": "Loading ...."
   },
 
@@ -280,7 +281,7 @@
     "emailErrorMessage": "Bitte Ihre E-Mail Adresse eingeben",
     "messageLabel": "Nachricht",
     "messageErrorMessage": "Bitte eine Nachricht eingeben",
-    "sendButtonLabel": "Senden Sie"
+    "sendButtonLabel": "Senden"
   },
 
   "settings": {

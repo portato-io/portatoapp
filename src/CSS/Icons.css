@@ -51,4 +51,10 @@
 .icon-arrow-right:before {
 	content: 'R';
 }
+.icon-lock-close:before {
+	content: 'E';
+}
+.icon-lock-open:before {
+	content: 'J';
+}
 

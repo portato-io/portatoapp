@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const BackArrow = () => {
+  const { t } = useTranslation<string>(); // Setting the generic type to string
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -10,27 +12,10 @@ const BackArrow = () => {
   };
 
   return (
-    <Button
-      type="primary"
-      icon={<ArrowLeftOutlined />}
-      onClick={handleBackClick}
-      style={{
-        position: 'fixed',
-        top: '20px',
-        left: '20px',
-        zIndex: 999,
-        padding: '0',
-        width: '40px',
-        height: '40px',
-        borderRadius: '50%',
-        backgroundColor: 'transparent',
-        border: 'none',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: '#000',
-      }}
-    />
+    <a className="text-link icon-link back-link" onClick={handleBackClick}>
+      <i className="icon icon-arrow-left"></i>
+      {t('general.back')}
+    </a>
   );
 };
 

@@ -1,6 +1,3 @@
-.profile-screen-background {
-    min-height: calc(100vh - var(--main-navigation-bar-height));
-}
 
 .profile-image-container {
     display: flex;
@@ -21,9 +18,32 @@
 .profile-image-bubble > img {
     object-fit: cover;
 }
+.profile-image {
+    border-radius: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+.profile-navigation {
+    width:80%;
+    max-width:280px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items: flex-start;
+}
+
+.profile-navigation > a {
+    margin:5px 0;
+}
+.profile-navigation > .text-link-warning {
+    margin-top:25px;
+}
+
+
 
 .settings-card {
-    background-color: var(--color-green-lighter);
+    /*background-color: var(--color-green-lighter);*/
     border-radius: 20px;
     height: 100%;
     width: min(80%, 350px);
@@ -31,7 +51,7 @@
 }
 
 .settings-list-item {
-    background-color: var(--color-green-lighter);
+    /*background-color: var(--color-green-lighter);*/
     margin-top: 0;
     margin-bottom: 0;
 }
