@@ -39,7 +39,6 @@
     "no": "Non",
     "edit": "Modifier",
     "loading": "Chargement en cours ...."
-
   },
 
   "addressField": {
@@ -353,6 +352,7 @@
     "back": "Retour",
     "signUp": "S'inscrire",
     "existingUserTitle": "Se connecter",
+    "existingUserText": "Connectez-vous avec votre adresse e-mail et mot de passe chez Portato.",
     "nonExistingUserTitle": "Pas encore de profil?",
     "nonExistingUserText": "Créez un profil et rejoignez la communauté Portato.",
     "nonExistingUserLink": "Créer un profil maintenant",

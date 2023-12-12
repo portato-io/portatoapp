@@ -356,6 +356,7 @@
     "back": "Back",
     "signUp": "Sign up",
     "existingUserTitle": "Log in",
+    "existingUserText": "Log in with your email address and password at Portato.",
     "nonExistingUserTitle": "Don't have a profile yet?",
     "nonExistingUserText": "Create a profile and join the Portato community.",
     "nonExistingUserLink": "Create profile now",
