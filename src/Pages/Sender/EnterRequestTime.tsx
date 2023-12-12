@@ -47,14 +47,11 @@ const EnterTime: React.FC = () => {
 
   useEffect(() => {
     if (dayRange == null || dayRange.length === 0) {
-      console.log(dayRange);
       setDayRangeSelected(false);
     } else setDayRangeSelected(true);
   }, [dayRange]);
 
   useEffect(() => {
-    console.log('default', defaultSelector, objecInfo.dateRange);
-
     if (defaultSelector.length === 0) {
       setDateTimeSelected(false);
     } else setDateTimeSelected(true);
@@ -68,7 +65,6 @@ const EnterTime: React.FC = () => {
     } else {
       setDayRangeSelected(false);
     }
-    console.log(defaultDateRange);
   }, []);
 
   const dispatch = useDispatch();
@@ -79,15 +75,12 @@ const EnterTime: React.FC = () => {
   };
 
   const handleChangeRange = (range: any) => {
-    console.log(range);
     setDayRange(range);
     if (range) {
       const start = range[0].format().substring(0, 10);
       const end = range[1].format().substring(0, 10);
 
       //values contains a timestamp, that's why we take the first 10 characters
-      console.log('start date', start);
-      console.log('end date', end);
       dispatch(setObjectDateRange([start, end]));
     }
   };

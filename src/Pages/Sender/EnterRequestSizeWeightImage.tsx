@@ -43,38 +43,50 @@ const EnterRequestSizeWeightImage: React.FC = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (weightSelected && sizeSelected) dispatch(setObject(object));
+    if (weightSelected && sizeSelected) {
+      dispatch(setObject(object));
+    }
   }, [object]);
 
-  React.useEffect(() => {
-    console.log(object.size[0]);
-    if (object.size[0] == undefined) {
-      setSizeSelected(false);
-    } else setSizeSelected(true);
-  }, [object.size[0]]);
-
-  React.useEffect(() => {
-    console.log(object.weight);
-    if (object.weight == undefined) {
-      setWeightSelected(false);
-    } else setWeightSelected(true);
-  }, [object.weight]);
-
   const handleCapChange = (e: any) => {
-    setValues({
-      ...object,
-      size: e,
+    setValues((prevObject) => {
+      const updatedObject = {
+        ...prevObject,
+        size: e,
+      };
+
+      // Assuming that `setSizeSelected` is a synchronous function
+      setSizeSelected(updatedObject.size[0] !== undefined);
+
+      return updatedObject;
     });
   };
+  React.useEffect(() => {
+    if (object.size[0] === undefined) {
+      setSizeSelected(false);
+    } else {
+      setSizeSelected(true);
+    }
+  }, [object.size]);
 
   const handleInputChange = (e: any) => {
-    console.log(e);
-    setValues({
-      ...object,
-      [e.target.name]: e.target.value,
+    setValues((prevObject) => {
+      const updatedObject = {
+        ...prevObject,
+        [e.target.name]: e.target.value,
+      };
+      // Assuming that `setWeightSelected` is a synchronous function
+      setWeightSelected(
+        updatedObject.weight !== undefined && updatedObject.weight !== ''
+      );
+
+      return updatedObject;
     });
-    console.log(e.target.name);
   };
+
+  React.useEffect(() => {
+    setWeightSelected(object.weight !== undefined && object.weight !== '');
+  }, [object.weight]);
 
   return (
     <PageLayout>
@@ -109,9 +121,6 @@ const EnterRequestSizeWeightImage: React.FC = () => {
             </Radio.Group>
           </Form.Item>
         </Form>
-
-        {/* TODO Mischa: Reserve space for Back/Next buttons in general container
-          & move buttons out of div, for responsive scrolling! */}
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {

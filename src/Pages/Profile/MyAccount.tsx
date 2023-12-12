@@ -21,7 +21,6 @@ const MyAccount: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       setName(user.displayName);
       setEmail(user.email);
       setImageUrl(user.photoURL);
@@ -132,22 +131,13 @@ const MyAccount: React.FC = () => {
           >
             <Input onChange={onNameChange} value={name || ''} />
           </Form.Item>
-          <Form.Item
-            label={<label className="item-form-label">{'First name'}</label>}
-          >
-            <Input onChange={onNameChange} value={name || ''} />
-          </Form.Item>
+
           <Form.Item
             label={
               <label className="item-form-label">
                 {t('accountPage.emailAddress')}
               </label>
             }
-          >
-            <Input onChange={onEmailChange} value={email || ''} />
-          </Form.Item>
-          <Form.Item
-            label={<label className="item-form-label">{'Phone number'}</label>}
           >
             <Input onChange={onEmailChange} value={email || ''} />
           </Form.Item>

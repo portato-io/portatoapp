@@ -35,25 +35,21 @@ function SingleTripContent(activeTab: any) {
   }
 
   useEffect(() => {
-    console.log('ALORS', day);
     if (day != null) {
       setDaySelected(true);
     } else setDaySelected(false);
   }, [day]);
 
   useEffect(() => {
-    console.log(dayTime);
     if (dayTime && dayTime.length === 0) {
       setDayTimeSelected(false);
     } else setDayTimeSelected(true);
   }, [dayTime]);
 
   useEffect(() => {
-    console.log(routeInfo.time);
     if (routeInfo.time.length === 0) {
       setDayTimeSelected(false);
     } else setDayTimeSelected(true);
-    console.log('ALed', routeInfo.timeRange);
     if (routeInfo.timeRange == '') {
       setDaySelected(false);
     } else setDaySelected(true);
@@ -73,7 +69,6 @@ function SingleTripContent(activeTab: any) {
   };
 
   const handleChangeRange = (date: any) => {
-    console.log(date);
     setDay(date);
     if (date) {
       const travelDate = date.format().substring(0, 10);
