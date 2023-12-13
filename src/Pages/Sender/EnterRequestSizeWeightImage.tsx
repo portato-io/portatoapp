@@ -23,7 +23,8 @@ const NEXT_SCREEN = '/createSendRequest/enter_request_address';
 const EnterRequestSizeWeightImage: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
   const { CAPACITY_OPTIONS } = getConstants(t);
-  const [isUploading, setIsUploading] = useState(false);
+  const [weightSelected, setWeightSelected] = useState(Boolean);
+  const [sizeSelected, setSizeSelected] = useState(Boolean);
 
   const objecInfo = useSelector(
     (state: { request: IRequestInfo }) => state.request
@@ -39,26 +40,53 @@ const EnterRequestSizeWeightImage: React.FC = () => {
     contactTimestamp: objecInfo.contactTimestamp,
   });
 
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
-    dispatch(setObject(object));
+    if (weightSelected && sizeSelected) {
+      dispatch(setObject(object));
+    }
   }, [object]);
 
-  const dispatch = useDispatch();
   const handleCapChange = (e: any) => {
-    setValues({
-      ...object,
-      size: e,
+    setValues((prevObject) => {
+      const updatedObject = {
+        ...prevObject,
+        size: e,
+      };
+
+      // Assuming that `setSizeSelected` is a synchronous function
+      setSizeSelected(updatedObject.size[0] !== undefined);
+
+      return updatedObject;
+    });
+  };
+  React.useEffect(() => {
+    if (object.size[0] === undefined) {
+      setSizeSelected(false);
+    } else {
+      setSizeSelected(true);
+    }
+  }, [object.size]);
+
+  const handleInputChange = (e: any) => {
+    setValues((prevObject) => {
+      const updatedObject = {
+        ...prevObject,
+        [e.target.name]: e.target.value,
+      };
+      // Assuming that `setWeightSelected` is a synchronous function
+      setWeightSelected(
+        updatedObject.weight !== undefined && updatedObject.weight !== ''
+      );
+
+      return updatedObject;
     });
   };
 
-  const handleInputChange = (e: any) => {
-    console.log(e);
-    setValues({
-      ...object,
-      [e.target.name]: e.target.value,
-    });
-    console.log(e.target.name);
-  };
+  React.useEffect(() => {
+    setWeightSelected(object.weight !== undefined && object.weight !== '');
+  }, [object.weight]);
 
   return (
     <PageLayout>
@@ -93,9 +121,6 @@ const EnterRequestSizeWeightImage: React.FC = () => {
             </Radio.Group>
           </Form.Item>
         </Form>
-
-        {/* TODO Mischa: Reserve space for Back/Next buttons in general container
-          & move buttons out of div, for responsive scrolling! */}
         <div className="form-button-container mod-display-flex mod-flex-space-between">
           <BackButton
             onClick={() => {
@@ -107,6 +132,7 @@ const EnterRequestSizeWeightImage: React.FC = () => {
             onClick={() => {
               logEvent(analytics, 'send_2_sizeWeight_next_button_click');
             }}
+            disabled={!weightSelected || !sizeSelected}
           />
         </div>
       </section>

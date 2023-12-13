@@ -46,24 +46,26 @@ const EnterTime: React.FC = () => {
   }, [dayTime]);
 
   useEffect(() => {
-    if (dayRange == null) {
+    if (dayRange == null || dayRange.length === 0) {
       setDayRangeSelected(false);
     } else setDayRangeSelected(true);
   }, [dayRange]);
 
   useEffect(() => {
-    console.log('default', defaultSelector);
     if (defaultSelector.length === 0) {
       setDateTimeSelected(false);
     } else setDateTimeSelected(true);
-  }, []);
 
-  if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
-    defaultDateRange = [
-      dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
-      dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
-    ];
-  }
+    if (objecInfo.dateRange[0] !== '' && objecInfo.dateRange[1] !== '') {
+      defaultDateRange = [
+        dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
+        dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
+      ];
+      setDayRangeSelected(true);
+    } else {
+      setDayRangeSelected(false);
+    }
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -73,15 +75,12 @@ const EnterTime: React.FC = () => {
   };
 
   const handleChangeRange = (range: any) => {
-    console.log(range);
     setDayRange(range);
     if (range) {
       const start = range[0].format().substring(0, 10);
       const end = range[1].format().substring(0, 10);
 
       //values contains a timestamp, that's why we take the first 10 characters
-      console.log('start date', start);
-      console.log('end date', end);
       dispatch(setObjectDateRange([start, end]));
     }
   };
@@ -102,16 +101,27 @@ const EnterTime: React.FC = () => {
           layout="horizontal"
         >
           <h2>{t('requestTime.title')}</h2>
-          <Form.Item className="input-wrapper" label={t('requestTime.dates')}>
+          <Form.Item
+            name="test"
+            className="input-wrapper"
+            label={t('requestTime.dates')}
+          >
             <RangePicker
               name="time"
               inputReadOnly={true}
               onChange={handleChangeRange}
               style={{ width: '100%' }}
-              defaultValue={defaultDateRange}
-              // value={defaultDateRange}
+              defaultValue={
+                objecInfo.dateRange[0] && objecInfo.dateRange[1]
+                  ? [
+                      dayjs(objecInfo.dateRange[0], 'YYYY-MM-DD'),
+                      dayjs(objecInfo.dateRange[1], 'YYYY-MM-DD'),
+                    ]
+                  : undefined
+              }
               disabledDate={disabledDate}
             />
+
             <small>{t('requestTime.dateHint')}</small>
           </Form.Item>
 

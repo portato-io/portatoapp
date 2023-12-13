@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
-import { Cascader, Form, Button } from 'antd-mobile';
+import { Cascader, Form, Button, Switch, Space } from 'antd-mobile';
 import i18next from 'i18next';
 import { getConstants } from '../../constant';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { Typography } from 'antd';
+import { messaging } from '../../firebaseConfig';
 
 const Settings: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
@@ -13,6 +14,7 @@ const Settings: React.FC = () => {
   const { Title } = Typography;
   const [visible, setVisible] = useState(false);
   const [language, setLanguage] = useState<string>();
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const changeLanguage = (language: string) => {
     i18next.changeLanguage(language);
   };
@@ -33,6 +35,13 @@ const Settings: React.FC = () => {
     );
     setLanguage(languageOption?.label);
   }, []);
+
+  // Listen for changes in the Notifications switch status
+  useEffect(() => {
+    if (!notificationsEnabled) {
+      // If Notifications switch is turned off, deactivate Firebase notifications
+    }
+  }, [notificationsEnabled]);
 
   return (
     <ProfilePageLayout>
@@ -78,6 +87,14 @@ const Settings: React.FC = () => {
           >
             <ArrowRightOutlined />
           </Button>
+        </Form.Item>
+        <Form.Item label={'Notifications'}>
+          <Space>
+            <Switch
+              checked={notificationsEnabled}
+              onChange={(checked) => setNotificationsEnabled(checked)}
+            />
+          </Space>
         </Form.Item>
       </Form>
     </ProfilePageLayout>

@@ -35,23 +35,24 @@ function SingleTripContent(activeTab: any) {
   }
 
   useEffect(() => {
-    console.log(day);
     if (day != null) {
       setDaySelected(true);
     } else setDaySelected(false);
   }, [day]);
 
   useEffect(() => {
-    console.log(dayTime.length);
     if (dayTime && dayTime.length === 0) {
       setDayTimeSelected(false);
     } else setDayTimeSelected(true);
   }, [dayTime]);
 
   useEffect(() => {
-    if (defaultDayTime.length === 0) {
+    if (routeInfo.time.length === 0) {
       setDayTimeSelected(false);
     } else setDayTimeSelected(true);
+    if (routeInfo.timeRange == '') {
+      setDaySelected(false);
+    } else setDaySelected(true);
   }, []);
 
   useEffect(() => {
@@ -68,7 +69,6 @@ function SingleTripContent(activeTab: any) {
   };
 
   const handleChangeRange = (date: any) => {
-    console.log(date);
     setDay(date);
     if (date) {
       const travelDate = date.format().substring(0, 10);

@@ -109,7 +109,6 @@ const MyAccount: React.FC = () => {
               listType="picture-card"
               className="avatar-uploader"
               showUploadList={false}
-              //action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               beforeUpload={(file: File) => {
                 setPhoto(file);
                 const imgURL = URL.createObjectURL(file);
@@ -132,6 +131,7 @@ const MyAccount: React.FC = () => {
           >
             <Input onChange={onNameChange} value={name || ''} />
           </Form.Item>
+
           <Form.Item
             label={
               <label className="item-form-label">
