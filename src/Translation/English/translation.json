@@ -260,7 +260,8 @@
     "validate": "Validate",
     "myAccount": "My Account",
     "profilePicture": "Profile Picture",
-    "name": "Name",
+    "firstName": "First Name",
+    "lastName": "Last Name",
     "emailAddress": "Email Address",
     "uploadedImageAlert": "Uploaded image!"
   },

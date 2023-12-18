@@ -17,6 +17,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/react-router-dom": "^5.3.3",
     "antd": "^5.4.0",
+    "antd-img-crop": "^4.18.0",
     "antd-mobile": "^5.29.0",
     "axios": "^1.4.0",
     "cors": "^2.8.5",

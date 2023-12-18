@@ -260,7 +260,8 @@
     "validate": "Valider",
     "myAccount": "Mon Compte",
     "profilePicture": "Photo de Profil",
-    "name": "Nom",
+    "firstName": "Prénom",
+    "lastName": "Nom",
     "emailAddress": "Adresse Email",
     "uploadedImageAlert": "Image téléchargée!"
   },
@@ -392,7 +393,7 @@
     "placeholderLastName": "Nom de famille",
     "successSmsSent": "SMS envoyé avec succès",
     "emailAlreadyUsed": "E-mail déjà utilisé",
-    "errorPhoneCountryCode": "Veuillez saisir l'indicatif du pays dans votre numéro de téléphone",  
+    "errorPhoneCountryCode": "Veuillez saisir l'indicatif du pays dans votre numéro de téléphone",
     "acceptTermsText": "Veuillez accepter ces ",
     "acceptTermsLink": "conditions générales"
   }

@@ -9,10 +9,12 @@ import { useTranslation } from 'react-i18next';
 import ProfilePageLayout from '../Layouts/ProfilePagesLayout';
 import { Button, Form } from 'antd-mobile';
 import { Upload, Input, message } from 'antd';
+import ImgCrop from 'antd-img-crop';
 
 const MyAccount: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const [name, setName] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState<string | null>(null);
+  const [lastName, setLastName] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [photo, setPhoto] = useState<File | null>(null);
@@ -21,17 +23,37 @@ const MyAccount: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      setName(user.displayName);
+      if (user.displayName) {
+        const nameRegex = /^(?<firstName>\S+)\s+(?<lastName>\S+)$/;
+        const match = user.displayName.match(nameRegex);
+
+        if (match) {
+          const firstName: string = match.groups?.firstName || '';
+          const lastName: string = match.groups?.lastName || '';
+
+          console.log('First Name:', firstName);
+          setFirstName(firstName);
+          console.log('Last Name:', lastName);
+          setLastName(lastName);
+        } else {
+          console.log('Invalid name format');
+        }
+      }
+      // setName(user.displayName);
       setEmail(user.email);
       setImageUrl(user.photoURL);
+      console.log(user.phoneNumber);
     }
   }, []);
 
   const uploadProfilePicture = async (imgURL: any) => {
     setImageUrl(imgURL);
   };
-  const onNameChange = (e: any) => {
-    setName(e.target.value);
+  const onFirstNameChange = (e: any) => {
+    setFirstName(e.target.value);
+  };
+  const onLastNameChange = (e: any) => {
+    setLastName(e.target.value);
   };
 
   const onEmailChange = (e: any) => {
@@ -47,11 +69,11 @@ const MyAccount: React.FC = () => {
     updateProfile(currentUser, { photoURL });
 
     setLoading(false);
-    alert(t('accountPage.uploadedImageAlert'));
   }
 
   const onFinish = () => {
     if (user && photo) {
+      const name: string = firstName + ' ' + lastName;
       upload(photo, user, setLoading);
       updateProfile(user, {
         displayName: name,
@@ -104,33 +126,52 @@ const MyAccount: React.FC = () => {
               </label>
             }
           >
-            <Upload
-              name="avatar"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={false}
-              //action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              beforeUpload={(file: File) => {
-                setPhoto(file);
-                const imgURL = URL.createObjectURL(file);
-                uploadProfilePicture(imgURL);
-                return false; // Prevent default upload behavior
-              }}
+            <ImgCrop
+              cropShape="round"
+              modalTitle=" "
+              quality={0.6}
+              showReset
+              showGrid
             >
-              {' '}
-              {imageUrl ? (
-                <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
-              ) : (
-                uploadButton
-              )}
-            </Upload>
+              <Upload
+                name="avatar"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                //action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                beforeUpload={(file: File) => {
+                  setPhoto(file);
+                  const imgURL = URL.createObjectURL(file);
+                  uploadProfilePicture(imgURL);
+                  return false; // Prevent default upload behavior
+                }}
+              >
+                {' '}
+                {imageUrl ? (
+                  <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+                ) : (
+                  uploadButton
+                )}
+              </Upload>
+            </ImgCrop>
           </Form.Item>
           <Form.Item
             label={
-              <label className="item-form-label">{t('accountPage.name')}</label>
+              <label className="item-form-label">
+                {t('accountPage.firstName')}
+              </label>
             }
           >
-            <Input onChange={onNameChange} value={name || ''} />
+            <Input onChange={onFirstNameChange} value={firstName || ''} />
+          </Form.Item>
+          <Form.Item
+            label={
+              <label className="item-form-label">
+                {t('accountPage.lastName')}
+              </label>
+            }
+          >
+            <Input onChange={onLastNameChange} value={lastName || ''} />
           </Form.Item>
           <Form.Item
             label={
@@ -140,6 +181,15 @@ const MyAccount: React.FC = () => {
             }
           >
             <Input onChange={onEmailChange} value={email || ''} />
+          </Form.Item>
+          <Form.Item
+            label={
+              <label className="item-form-label">
+                {t('signIn.placeholderPhone')}
+              </label>
+            }
+          >
+            <Input value={user?.phoneNumber || ''} disabled />
           </Form.Item>
         </Form>
       </div>
