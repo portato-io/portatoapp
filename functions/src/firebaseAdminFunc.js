@@ -84,6 +84,7 @@ const sendNotificationEmail = functions
         }
 
         let userInfo = uid && admin ? await getUserData(uid) : null;
+        let userPhone = admin && userInfo ? userInfo.phone : '';
 
         let displayName = '';
         if (uid) {

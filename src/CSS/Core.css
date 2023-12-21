@@ -544,3 +544,8 @@ video,
   border-bottom-color: var(--portato-green) !important;
   border-right-color: var(--portato-green) !important;
 }
+
+/* Add this to your CSS file */
+.am-popup-mask {
+  background: transparent !important; /* Override background to make it transparent */
+}
