@@ -40,7 +40,6 @@ const MyAccount: React.FC = () => {
       // setName(user.displayName);
       setEmail(user.email);
       setImageUrl(user.photoURL);
-      console.log(user.phoneNumber);
     }
   }, []);
 
