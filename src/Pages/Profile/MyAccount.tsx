@@ -31,7 +31,6 @@ const MyAccount: React.FC = () => {
           const firstName: string = match.groups?.firstName || '';
           const lastName: string = match.groups?.lastName || '';
 
-          console.log('First Name:', firstName);
           setFirstName(firstName);
           console.log('Last Name:', lastName);
           setLastName(lastName);
