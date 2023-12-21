@@ -32,7 +32,6 @@ const MyAccount: React.FC = () => {
           const lastName: string = match.groups?.lastName || '';
 
           setFirstName(firstName);
-          console.log('Last Name:', lastName);
           setLastName(lastName);
         } else {
           console.log('Invalid name format');
