@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// const LazyLoadedApp = lazy(() => import('./App'));
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -11,12 +11,15 @@ import { Provider } from 'react-redux';
 import { persistedReducer } from './Store/reducers';
 import { persistStore } from 'redux-persist';
 import { IRequestInfo, IRouteInfo } from './type';
-import { AuthProvider } from './Components/AuthProvider';
+// const LazyAuthProvider = lazy(() => import('./Components/AuthProvider'));
 
 //Import i18n.ts
 import './i18n';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
+import { Suspense, lazy } from 'react';
+import LogoPage from './Components/loading';
+import App from './App';
 
 // Initialize Hotjar:
 const HOTJAR_ID = 3614898;
@@ -67,16 +70,21 @@ const persistor = persistStore(store);
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+function Loading() {
+  return <div></div>;
+}
 root.render(
-  <AuthProvider>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <I18nextProvider i18n={i18n}>
+  <Provider store={store}>
+    <PersistGate loading={<LogoPage />} persistor={persistor}>
+      <I18nextProvider i18n={i18n}>
+        <Suspense fallback={<Loading />}>
+          {/* <LazyAuthProvider> */}
           <App />
-        </I18nextProvider>
-      </PersistGate>
-    </Provider>
-  </AuthProvider>
+          {/* </LazyAuthProvider> */}
+        </Suspense>
+      </I18nextProvider>
+    </PersistGate>
+  </Provider>
 );
 
 // Mehdi: If we want the app to work offline, we need register,

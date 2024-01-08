@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { onAuthStateChanged, getIdTokenResult, User } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
+import LogoPage from './loading';
 
 interface AuthState {
   uid: string | undefined;
@@ -22,7 +23,7 @@ interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [uid, setUid] = useState<string | undefined>(initialState.uid);
   const [isAdmin, setIsAdmin] = useState<boolean | undefined>(
     initialState.isAdmin
@@ -49,7 +50,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    console.log('DES BARRES');
+    return (
+      // <div>
+      //   <h2>🌀 HUGO EST UN BATARD...</h2>
+      // </div>
+      <LogoPage />
+    );
   }
 
   return (
@@ -58,6 +65,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;
 
 export const useAuth = () => useContext(AuthContext);
 

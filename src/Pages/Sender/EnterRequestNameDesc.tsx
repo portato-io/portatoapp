@@ -50,7 +50,6 @@ const EnterRequestNameDesc: React.FC = () => {
       setFileList(uploadedFiles);
     }
   }, []);
-  console.log(fileList);
 
   const [object, setValues] = useState<IFirstObjectInfo>({
     name: objecInfo.name,
@@ -71,13 +70,6 @@ const EnterRequestNameDesc: React.FC = () => {
     description: object.description,
   };
 
-  const onFinish = (values: any) => {
-    console.log('Form values:', values);
-    console.log('submitted');
-  };
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
   const dispatch = useDispatch();
 
   const handleInputChange = (
@@ -87,13 +79,11 @@ const EnterRequestNameDesc: React.FC = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(e.target.name);
   };
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
   ) => {
     const { fileList: newFileList, file } = info;
-    console.log(file);
     setFileList(newFileList);
     if (file.url) dispatch(remove_url_from_images(file.url));
   };
@@ -106,8 +96,6 @@ const EnterRequestNameDesc: React.FC = () => {
         <Form
           id="myForm"
           form={form}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
@@ -190,8 +178,6 @@ const EnterRequestNameDesc: React.FC = () => {
                 'send_1_nameDescriptionImage_next_button_click'
               );
             }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             form={form}
           />
         </div>

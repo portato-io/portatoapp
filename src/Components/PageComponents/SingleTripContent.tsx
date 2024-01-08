@@ -47,7 +47,7 @@ function SingleTripContent(activeTab: any) {
   }, [dayTime]);
 
   useEffect(() => {
-    if (routeInfo.time.length === 0) {
+    if (routeInfo.time && routeInfo.time.length === 0) {
       setDayTimeSelected(false);
     } else setDayTimeSelected(true);
     if (routeInfo.timeRange == '') {

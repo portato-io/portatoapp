@@ -90,6 +90,7 @@ const RequestSummary: React.FC = () => {
     ${t('requestSummary.notificationEmail.requestConfirmationBody')}
       <br>
       <table style="text-align:left;">
+      <tbody>
         <tr><th style="text-align:left;">${t('requestInfo.name')}</th><td>${
       requestInfo.name
     }</td></tr>
@@ -119,6 +120,7 @@ const RequestSummary: React.FC = () => {
         <tr><th style="text-align:left;">${t(
           'requestInfo.description'
         )}</th><td>${requestInfo.description}</td></tr>
+        </tbody>
       </table>
     <br>
     ${t('requestSummary.notificationEmail.salutations')}`;
@@ -188,63 +190,67 @@ const RequestSummary: React.FC = () => {
             <div className="send-request-card-content">
               <div className="table-wrapper">
                 <table className="table">
-                  <tr>
-                    <th className="th">
-                      {t('requestOverview.requestList.description')}
-                    </th>
-                    <td className="td">{requestInfo.description}</td>
-                  </tr>
-                  <tr>
-                    <th className="th">{t('requestSummary.pickupAddress')}</th>
-                    <td className="td">{requestInfo.pickup_adress}</td>
-                  </tr>
-                  <tr>
-                    <th className="th">
-                      {t('requestSummary.deliveryAddress')}
-                    </th>
-                    <td className="td">{requestInfo.delivery_adress}</td>
-                  </tr>
-                  <tr>
-                    <th className="th">{t('requestSummary.timeframe')}</th>
-                    <td className="td">
-                      {requestInfo.dateRange
-                        ? `${requestInfo.dateRange[0]} - ${requestInfo.dateRange[1]}`
-                        : 'Date range not specified'}
-                      <br />
-                      {Object.values(requestInfo.time).join(', ')}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th className="th">{t('requestSummary.price')}</th>
-                    <td className="td">{requestInfo.price} CHF</td>
-                  </tr>
-                  {/*// Only render the images row if the images array is not empty*/}
-                  {requestInfo.images && requestInfo.images.length > 0 ? (
+                  <tbody>
                     <tr>
-                      <th className="th">{t('requestSummary.images')}</th>
+                      <th className="th">
+                        {t('requestOverview.requestList.description')}
+                      </th>
+                      <td className="td">{requestInfo.description}</td>
+                    </tr>
+                    <tr>
+                      <th className="th">
+                        {t('requestSummary.pickupAddress')}
+                      </th>
+                      <td className="td">{requestInfo.pickup_adress}</td>
+                    </tr>
+                    <tr>
+                      <th className="th">
+                        {t('requestSummary.deliveryAddress')}
+                      </th>
+                      <td className="td">{requestInfo.delivery_adress}</td>
+                    </tr>
+                    <tr>
+                      <th className="th">{t('requestSummary.timeframe')}</th>
                       <td className="td">
-                        <Image
-                          preview={{ visible: false }}
-                          height={100}
-                          width={100}
-                          src={requestInfo.images[0]}
-                          onClick={() => setVisible(true)}
-                        ></Image>
-                        <div style={{ display: 'none' }}>
-                          <Image.PreviewGroup
-                            preview={{
-                              visible,
-                              onVisibleChange: (vis) => setVisible(vis),
-                            }}
-                          >
-                            {requestInfo.images.map((image) => (
-                              <Image src={image} />
-                            ))}
-                          </Image.PreviewGroup>
-                        </div>
+                        {requestInfo.dateRange
+                          ? `${requestInfo.dateRange[0]} - ${requestInfo.dateRange[1]}`
+                          : 'Date range not specified'}
+                        <br />
+                        {Object.values(requestInfo.time).join(', ')}
                       </td>
                     </tr>
-                  ) : null}
+                    <tr>
+                      <th className="th">{t('requestSummary.price')}</th>
+                      <td className="td">{requestInfo.price} CHF</td>
+                    </tr>
+                    {/*// Only render the images row if the images array is not empty*/}
+                    {requestInfo.images && requestInfo.images.length > 0 ? (
+                      <tr>
+                        <th className="th">{t('requestSummary.images')}</th>
+                        <td className="td">
+                          <Image
+                            preview={{ visible: false }}
+                            height={100}
+                            width={100}
+                            src={requestInfo.images[0]}
+                            onClick={() => setVisible(true)}
+                          ></Image>
+                          <div style={{ display: 'none' }}>
+                            <Image.PreviewGroup
+                              preview={{
+                                visible,
+                                onVisibleChange: (vis) => setVisible(vis),
+                              }}
+                            >
+                              {requestInfo.images.map((image) => (
+                                <Image src={image} />
+                              ))}
+                            </Image.PreviewGroup>
+                          </div>
+                        </td>
+                      </tr>
+                    ) : null}
+                  </tbody>
                 </table>
               </div>
             </div>

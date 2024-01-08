@@ -9,7 +9,7 @@ interface TranslationContextProps {
 export const TranslationContext = createContext<any>(null);
 
 // Create a provider component that wraps the translation context and provides the translation values
-export const TranslationProvider: React.FC<TranslationContextProps> = ({
+const TranslationProvider: React.FC<TranslationContextProps> = ({
   children,
 }) => {
   const { t, i18n } = useTranslation(['home', 'main']);
@@ -20,3 +20,4 @@ export const TranslationProvider: React.FC<TranslationContextProps> = ({
     </TranslationContext.Provider>
   );
 };
+export default TranslationProvider;
