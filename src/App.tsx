@@ -5,20 +5,23 @@ import './CSS/Core.css';
 import './CSS/Navigation.css';
 import './CSS/Mediaqueries.css';
 
-import React, { Suspense, useEffect, useState, Component } from 'react';
+import React, { Suspense, useEffect, useState, Component, lazy } from 'react';
 import { Crisp } from 'crisp-sdk-web';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SideNavigator from './Components/SideBarNav';
 import { ConfigProvider, Modal } from 'antd';
-import { AuthProvider } from './Components/AuthProvider';
+// import { AuthProvider } from './Components/AuthProvider';
 import { checkTokenExists } from './linksStoreToFirebase';
 import { useAuth } from './Components/AuthProvider';
 import { fetchToken, onMessageListener } from './firebaseConfig';
-import { TranslationProvider } from './Contexts/TranslationContext';
+// import { TranslationProvider } from './Contexts/TranslationContext';
+
 import { useLocation } from 'react-router-dom';
 
 // import routes
 import { routes as appRoutes } from './routes';
+const LazyAuthProvider = lazy(() => import('./Components/AuthProvider'));
+const LazyTransProvider = lazy(() => import('./Contexts/TranslationContext'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -31,6 +34,8 @@ function ScrollToTop() {
 }
 
 const App: React.FC = () => {
+  const [loading, setLoading] = useState(true);
+
   Crisp.configure('d7c9a775-c889-4dfd-ba8c-b78075b2a6ef');
 
   const { uid } = useAuth();
@@ -73,8 +78,8 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <TranslationProvider>
-      <AuthProvider>
+    <LazyTransProvider>
+      <LazyAuthProvider>
         <ConfigProvider
           theme={{
             token: {
@@ -86,23 +91,20 @@ const App: React.FC = () => {
             <Router>
               <ScrollToTop />
               <SideNavigator openMenu={openMenu} setOpenMenu={setOpenMenu} />
-              <Suspense fallback={<div>Loading...</div>}>
-                <Routes>
-                  {appRoutes.map((route) => (
-                    <Route
-                      key={route.key}
-                      path={route.path}
-                      element={<route.component />}
-                    />
-                  ))}
-                </Routes>
-              </Suspense>
+              <Routes>
+                {appRoutes.map((route) => (
+                  <Route
+                    key={route.key}
+                    path={route.path}
+                    element={<route.component />}
+                  />
+                ))}
+              </Routes>
             </Router>
           </div>
         </ConfigProvider>
-      </AuthProvider>
-    </TranslationProvider>
+      </LazyAuthProvider>
+    </LazyTransProvider>
   );
 };
-
 export default App;

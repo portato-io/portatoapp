@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import PageLayout from './Layouts/PageLayoutTest';
 import sendImage from '../Assets/Images/send.webp';
 import driveImage from '../Assets/Images/drive.webp';
@@ -154,6 +154,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* How it works */}
+
       <section className="section-bleed box-style-color-1">
         <section className="section text-color-white mod-nomargin-top">
           <h2 className="text-align-center">{t('general.howItWorks')}</h2>

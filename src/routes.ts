@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 // other
 import { FC } from 'react';
-import MyAccount from './Pages/Profile/MyAccount';
+const MyAccount = lazy(() => import('./Pages/Profile/MyAccount'));
 
 // pages
 const About = lazy(() => import('./Pages/About'));

@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@dotlottie/react-player": "^1.6.8",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@lottiefiles/dotlottie-react": "^0.0.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -100,7 +102,6 @@
     "git-revision-webpack-plugin": "^5.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
-    "lottie-web": "^5.12.2",
     "pret": "^0.0.2",
     "prettier": "^2.8.8"
   },

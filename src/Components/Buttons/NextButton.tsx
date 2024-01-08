@@ -35,7 +35,6 @@ const NextButton: React.FC<NextButtonProps> = ({
   };
 
   const handleNextClick = () => {
-    console.log(disabled);
     if (!form && disabled) {
       openNotificationWithIcon('error');
       return;
@@ -46,19 +45,17 @@ const NextButton: React.FC<NextButtonProps> = ({
     let hasErrors = false;
     if (form) {
       formValues = form.getFieldsValue();
-      console.log(formValues);
+
       formErrors = form.getFieldsError();
       const allFieldsDefined = Object.values(formValues).every(
         (value) => value !== '' && value !== undefined
       );
       for (let i = 0; i < formErrors.length; i++) {
         if (allFieldsDefined && formErrors[i].errors.length === 0) {
-          console.log(`No errors for field ${formErrors[i].name}`);
+          // do nothing
         } else {
           hasErrors = true;
-          console.log(
-            `Errors found for field ${formErrors[i].name}: ${formErrors[i].errors}`
-          );
+
           if (onFinishFailed) {
             onFinishFailed(formErrors);
             break;

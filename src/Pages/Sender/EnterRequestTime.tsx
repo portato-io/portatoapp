@@ -101,11 +101,7 @@ const EnterTime: React.FC = () => {
           layout="horizontal"
         >
           <h2>{t('requestTime.title')}</h2>
-          <Form.Item
-            name="test"
-            className="input-wrapper"
-            label={t('requestTime.dates')}
-          >
+          <Form.Item className="input-wrapper" label={t('requestTime.dates')}>
             <RangePicker
               name="time"
               inputReadOnly={true}

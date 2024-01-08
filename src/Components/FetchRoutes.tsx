@@ -118,71 +118,79 @@ const FetchRoutes: React.FC<{
             <div className="send-request-card-content">
               <div className="table-wrapper">
                 <table className="table">
-                  <tr>
-                    <th className="th">{t('driveSummary.departureAddress')}</th>
-                    <td className="td">{route.departure_adress}</td>
-                  </tr>
-                  <tr>
-                    <th className="th">
-                      {t('driveSummary.destinationAddress')}
-                    </th>
-                    <td className="td">{route.destination_adress}</td>
-                  </tr>
-                  <tr>
-                    <th className="th">{t('driveSummary.acceptableDetour')}</th>
-                    <td className="td">{route.acceptable_detour} Km </td>
-                  </tr>
-                  <tr>
-                    <th className="th">{t('driveSummary.driveCapacity')}</th>
-                    <td className="td">{route.delivery_capacity}</td>
-                  </tr>
-                  <tr>
-                    <th className="th">{t('driveSummary.tripType')}</th>
-                    <td className="td">{route.type}</td>
-                  </tr>
-                  {admin ? (
+                  <tbody>
                     <tr>
-                      <th className="th">Uid</th>
-                      <td className="td">{route.uid}</td>
+                      <th className="th">
+                        {t('driveSummary.departureAddress')}
+                      </th>
+                      <td className="td">{route.departure_adress}</td>
                     </tr>
-                  ) : null}
-                  {admin ? (
+
                     <tr>
-                      <th className="th">id</th>
-                      <td className="td">{route.id}</td>
+                      <th className="th">
+                        {t('driveSummary.destinationAddress')}
+                      </th>
+                      <td className="td">{route.destination_adress}</td>
                     </tr>
-                  ) : null}
-                  <tr>
-                    <th className="th">{t('driveSummary.timing')}</th>
-                    <td className="td">
-                      {route.type == t('driveTime.recurringRide') ? (
-                        <div>
-                          <Typography>
-                            {t('driveSummary.each')}{' '}
-                            {route.days && typeof route.days === 'object'
-                              ? Object.values(route.days)
-                              : 'No data for days'}
-                            <br />
-                            {t('driveSummary.tripTime')}{' '}
-                            {route.time && typeof route.time === 'object'
-                              ? Object.values(route.time)
-                              : 'No data for time'}{' '}
-                          </Typography>
-                        </div>
-                      ) : (
-                        <div>
-                          <Typography>
-                            {t('driveSummary.tripDate')} {route.timeRange}{' '}
-                            <br />
-                            {t('driveSummary.tripTime')}{' '}
-                            {route.time && typeof route.time === 'object'
-                              ? Object.values(route.time)
-                              : 'No data for time'}
-                          </Typography>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
+                    <tr>
+                      <th className="th">
+                        {t('driveSummary.acceptableDetour')}
+                      </th>
+                      <td className="td">{route.acceptable_detour} Km </td>
+                    </tr>
+                    <tr>
+                      <th className="th">{t('driveSummary.driveCapacity')}</th>
+                      <td className="td">{route.delivery_capacity}</td>
+                    </tr>
+                    <tr>
+                      <th className="th">{t('driveSummary.tripType')}</th>
+                      <td className="td">{route.type}</td>
+                    </tr>
+
+                    {admin ? (
+                      <tr>
+                        <th className="th">Uid</th>
+                        <td className="td">{route.uid}</td>
+                      </tr>
+                    ) : null}
+                    {admin ? (
+                      <tr>
+                        <th className="th">id</th>
+                        <td className="td">{route.id}</td>
+                      </tr>
+                    ) : null}
+                    <tr>
+                      <th className="th">{t('driveSummary.timing')}</th>
+                      <td className="td">
+                        {route.type == t('driveTime.recurringRide') ? (
+                          <div>
+                            <Typography>
+                              {t('driveSummary.each')}{' '}
+                              {route.days && typeof route.days === 'object'
+                                ? Object.values(route.days)
+                                : 'No data for days'}
+                              <br />
+                              {t('driveSummary.tripTime')}{' '}
+                              {route.time && typeof route.time === 'object'
+                                ? Object.values(route.time)
+                                : 'No data for time'}{' '}
+                            </Typography>
+                          </div>
+                        ) : (
+                          <div>
+                            <Typography>
+                              {t('driveSummary.tripDate')} {route.timeRange}{' '}
+                              <br />
+                              {t('driveSummary.tripTime')}{' '}
+                              {route.time && typeof route.time === 'object'
+                                ? Object.values(route.time)
+                                : 'No data for time'}
+                            </Typography>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>

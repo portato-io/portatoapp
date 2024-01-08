@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import lottie from 'lottie-web';
 import animationData from './how-it-works-animation.json';
 import { useTranslation } from 'react-i18next';
+import { DotLottiePlayer, Controls } from '@dotlottie/react-player';
 
 const LottieAnimation = () => {
   const containerRef = useRef(null);
