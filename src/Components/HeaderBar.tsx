@@ -38,17 +38,19 @@ function HeaderBar({ isInline = false, setOpenMenu }: any) {
       >
         <span>portato</span>
       </Link>
-      {/* <nav className="header-navigation-bar">
-        <Link
-          className="text-color-black"
-          to="/profile"
-          onClick={() =>
-            logEvent(analytics, 'header_menu_profile_button_click')
-          }
-        >
-          <i className="icon icon-profile" />
-        </Link>
-      </nav> */}
+      {
+        <nav className="header-navigation-bar">
+          <Link
+            className="text-color-black"
+            to="/profile"
+            onClick={() =>
+              logEvent(analytics, 'header_menu_profile_button_click')
+            }
+          >
+            <i className="icon icon-profile" />
+          </Link>
+        </nav>
+      }
     </header>
   );
 }

@@ -35,8 +35,10 @@
     "react": "^18.2.0",
     "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
+    "react-geocode": "^1.0.0-alpha.1",
     "react-hotjar": "^6.1.0",
     "react-i18next": "^12.3.1",
+    "react-map-gl": "^5.2.11",
     "react-redux": "^8.0.5",
     "react-router": "^6.8.2",
     "react-router-dom": "^6.8.2",
@@ -75,18 +77,10 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    "defaults",
+    "not ie 11"
+  ],
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/mapbox-gl": "^2.7.11",

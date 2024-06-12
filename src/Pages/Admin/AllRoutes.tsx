@@ -6,7 +6,7 @@ import { ref, get } from 'firebase/database';
 
 const ADMIN = true;
 
-const AllRoutes: React.FC = () => {
+const AllRoutesAdmin: React.FC = () => {
   const [userIds, setUserIds] = useState<string[]>([]);
 
   const fetchUserIds = async (): Promise<void> => {
@@ -32,11 +32,11 @@ const AllRoutes: React.FC = () => {
     <PageLayout>
       <div style={{ height: containerHeight + 'px', overflowY: 'scroll' }}>
         {userIds.map((uid) => (
-          <FetchRoutes key={uid} uid={uid} admin={ADMIN} />
+          <FetchRoutes key={uid} uid={uid} admin={ADMIN} fetcherUid={null} />
         ))}
       </div>
     </PageLayout>
   );
 };
 
-export default AllRoutes;
+export default AllRoutesAdmin;

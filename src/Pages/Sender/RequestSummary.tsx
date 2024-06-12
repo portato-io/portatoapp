@@ -95,10 +95,10 @@ const RequestSummary: React.FC = () => {
     }</td></tr>
         <tr><th style="text-align:left;">${t(
           'requestAddresses.pickupAddress'
-        )}</th><td>${requestInfo.pickup_adress}</td></tr>
+        )}</th><td>${requestInfo.pickup_address}</td></tr>
         <tr><th style="text-align:left;">${t(
           'requestAddresses.deliveryAddress'
-        )}</th><td>${requestInfo.delivery_adress}</td></tr>
+        )}</th><td>${requestInfo.delivery_address}</td></tr>
         <tr><th style="text-align:left;">${t(
           'requestTime.dates'
         )}</th><td>From ${requestInfo.dateRange[0]} to ${
@@ -196,13 +196,13 @@ const RequestSummary: React.FC = () => {
                   </tr>
                   <tr>
                     <th className="th">{t('requestSummary.pickupAddress')}</th>
-                    <td className="td">{requestInfo.pickup_adress}</td>
+                    <td className="td">{requestInfo.pickup_address}</td>
                   </tr>
                   <tr>
                     <th className="th">
                       {t('requestSummary.deliveryAddress')}
                     </th>
-                    <td className="td">{requestInfo.delivery_adress}</td>
+                    <td className="td">{requestInfo.delivery_address}</td>
                   </tr>
                   <tr>
                     <th className="th">{t('requestSummary.timeframe')}</th>

@@ -85,3 +85,5 @@ export const getConstants = (t: TFunction) => ({
     },
   ],
 });
+
+export const MAP_ZOOM_OFFSET = 0.01;

@@ -18,6 +18,20 @@ export const setReqDeliveryAddress = (delivery_address: string): AnyAction => ({
   payload: delivery_address,
 });
 
+export const setReqDeliveryAddressCoordinates = (
+  coordinates: number[]
+): AnyAction => ({
+  type: actionTypes.SET_REQ_DELIVERY_ADDRESS_COORDINATES,
+  payload: coordinates,
+});
+
+export const setReqPickupAddressCoordinates = (
+  coordinates: number[]
+): AnyAction => ({
+  type: actionTypes.SET_REQ_PICKUP_ADDRESS_COORDINATES,
+  payload: coordinates,
+});
+
 export const setObjectPrice = (price: number): AnyAction => ({
   type: actionTypes.SET_PRICE,
   payload: price,

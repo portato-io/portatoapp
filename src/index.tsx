@@ -31,14 +31,16 @@ const initialStateRequest: IRequestInfo = {
   size: '',
   weight: '',
   price: 50,
-  pickup_adress: '',
-  delivery_adress: '',
+  pickup_address: '',
+  delivery_address: '',
   dateRange: ['', ''],
   time: '',
   images: [],
   status: 'unmatched',
   dealId: '',
   contactTimestamp: '',
+  delivery_coordinates: [0, 0],
+  pickup_coordinates: [0, 0],
 };
 console.log('Commit Hash:', process.env.REACT_APP_COMMIT_HASH);
 

@@ -10,7 +10,7 @@ import { messaging } from '../../firebaseConfig';
 
 const Settings: React.FC = () => {
   const { t } = useTranslation<string>(); // Setting the generic type to string
-  const { DAYS, TIME, CAPACITY_OPTIONS, LANGUAGE_OPTIONS } = getConstants(t);
+  const { LANGUAGE_OPTIONS } = getConstants(t);
   const { Title } = Typography;
   const [visible, setVisible] = useState(false);
   const [language, setLanguage] = useState<string>();
@@ -19,13 +19,16 @@ const Settings: React.FC = () => {
     i18next.changeLanguage(language);
   };
 
-  const onSelectLanguage = (value: any) => {
-    const languageOption = LANGUAGE_OPTIONS.find(
-      (option) => option.value == value
-    );
-    if (languageOption) {
-      setLanguage(languageOption.label);
-      changeLanguage(value);
+  const onSelectLanguage = (value: string[]) => {
+    if (value.length > 0) {
+      const selectedValue = value[0]; // assuming you're only interested in the first value
+      const languageOption = LANGUAGE_OPTIONS.find(
+        (option) => option.value === selectedValue
+      );
+      if (languageOption) {
+        setLanguage(languageOption.label);
+        changeLanguage(selectedValue);
+      }
     }
   };
 

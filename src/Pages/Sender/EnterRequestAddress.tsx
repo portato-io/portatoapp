@@ -56,7 +56,7 @@ const EnterRequestAddress: React.FC = () => {
             <label> {t('requestAddresses.pickupAddress')}</label>
             <AddressAutocomplete
               type={'pickup'}
-              savedAddress={objecInfo.pickup_adress}
+              savedAddress={objecInfo.pickup_address}
               handleFormFilledState={handleFormFilledState}
             />
           </Form.Item>
@@ -65,7 +65,7 @@ const EnterRequestAddress: React.FC = () => {
             <label> {t('requestAddresses.deliveryAddress')}</label>
             <AddressAutocomplete
               type={'delivery'}
-              savedAddress={objecInfo.delivery_adress}
+              savedAddress={objecInfo.delivery_address}
               handleFormFilledState={handleFormFilledState}
             />
           </Form.Item>
